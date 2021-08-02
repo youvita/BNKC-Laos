@@ -1,0 +1,22 @@
+<resources>
+    <!-- comment -->
+    <string name="comment_email">Email</string>
+    <string name="comment_body">Comment</string>
+
+    <!-- login -->
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="user_login">Login</string>
+    <string name="forget_password">Forget Password</string>
+
+    <!-- description -->
+    <string name="desc_logo">email image for login</string>
+    <string name="desc_email">email image for login</string>
+    <string name="desc_password">password image for login</string>
+
+    <!-- language -->
+    <string name="choose_language">Choose Language</string>
+    <string name="english_language">English</string>
+    <string name="chinese_language">中文</string>
+
+</resources>

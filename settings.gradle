@@ -1,0 +1,6 @@
+include ':dealermodule'
+include ':employeemodule'
+include ':applibrary'
+include ':sourcemodule'
+include ':customer'
+rootProject.name = "BNKC_LAOS"

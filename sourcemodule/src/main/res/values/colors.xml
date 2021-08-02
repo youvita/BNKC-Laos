@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Default-->
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#2196f3</color>
+    <color name="colorAccent">#2196f3</color>
+
+    <!-- white -->
+    <color name="colorWhite">#ffff</color>
+
+    <!-- gray -->
+    <color name="colorGray808080">#808080</color>
+
+    <!--black-->
+    <color name="colorBlackPercent0">#000000</color>
+    <color name="colorBlackPercent5">#0D000000</color>
+    <color name="colorBlackPercent10">#1A000000</color>
+    <color name="colorBlackPercent15">#26000000</color>
+    <color name="colorBlackPercent20">#33000000</color>
+    <color name="colorBlackPercent30">#4D000000</color>
+    <color name="colorBlackPercent40">#66000000</color>
+    <color name="colorBlackPercent50">#80000000</color>
+    <color name="colorBlackPercent70">#B3000000</color>
+
+    <!-- ripple -->
+    <color name="colorClickRipple">#363535</color>
+
+</resources>

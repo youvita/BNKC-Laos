@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_20dp">
+
+        <TextView
+            android:id="@+id/tv_choose_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_language"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_choose_language">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_english"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableStart="@drawable/ic_en_flag"
+                android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="@dimen/margin_12dp"
+                android:text="@string/english_language" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_chinese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableStart="@drawable/ic_china_flag"
+                android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                android:drawablePadding="@dimen/margin_12dp"
+                android:text="@string/chinese_language" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
