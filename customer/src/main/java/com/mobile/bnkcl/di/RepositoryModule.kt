@@ -1,8 +1,10 @@
 package com.mobile.bnkcl.di
 
 import com.mobile.bnkcl.data.api.CommentApi
+import com.mobile.bnkcl.data.api.MGApi
 import com.mobile.bnkcl.repository.comment.CommentRepo
 import com.mobile.bnkcl.repository.login.LoginRepo
+import com.mobile.bnkcl.repository.Intro.MGRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +19,12 @@ object RepositoryModule {
     @Provides
     fun provideCommentRepo(commentApi: CommentApi): CommentRepo {
         return CommentRepo(commentApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMGRepo(mgApi: MGApi): MGRepo {
+        return MGRepo(mgApi)
     }
 
     @Singleton

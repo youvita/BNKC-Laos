@@ -56,6 +56,8 @@ android {
             resValue "string", "app_name", "BNKC LAO"
 
             buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com\""
+
+            buildConfigField "String", "MG_URL", "\"https://mg.kosign.dev\""
         }
 
         production {
@@ -67,6 +69,8 @@ android {
             resValue "string", "app_name", "BNKC LAO"
 
             buildConfigField "String", "BASE_URL", "\"https://api.instantwebtools.net\""
+
+            buildConfigField "String", "MG_URL", "\"https://mg.kosign.dev\""
         }
     }
 }

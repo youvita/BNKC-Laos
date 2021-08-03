@@ -7,4 +7,5 @@ package com.bnkc.library.rxjava
 
 class RxEvent {
     class CommentSuccess(val value: String)
+    class MGSuccess(val value: String)
 }
