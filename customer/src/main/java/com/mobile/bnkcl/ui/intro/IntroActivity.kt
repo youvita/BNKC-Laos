@@ -1,7 +1,6 @@
 package com.mobile.bnkcl.ui.intro
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.os.Bundle
 import android.util.Log
@@ -22,7 +21,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     private var introDisposable: Disposable? = null
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +28,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
         initImageLoadingRotate()
 
-        introDisposable = RxJava.listen(RxEvent.MGSuccess::class.java).subscribe(){
+        introDisposable = RxJava.listen(RxEvent.MGSuccess::class.java).subscribe() {
             Log.d("nng", "result: $it")
         }
 
@@ -53,11 +51,13 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
     @SuppressLint("SetTextI18n")
     private fun initAppVersion() {
-        binding.tvAppVersion.text = "Version " + this.packageManager.getPackageInfo(this.packageName, 0).versionName
+        binding.tvAppVersion.text =
+            "Version " + this.packageManager.getPackageInfo(this.packageName, 0).versionName
+    }
 
     private fun getMGData() {
         introViewModel.getMGData()
-        introViewModel.mgData.observe(this){
+        introViewModel.mgData.observe(this) {
             Log.d("nng", "MG: $it")
         }
     }
