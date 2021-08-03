@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:stateListAnimator="@null"
+        android:background="#f5f7fc">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/col_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Settings"
+            app:collapsedTitleGravity="center"
+            app:expandedTitleMargin="21dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_01"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                app:layout_collapseMode="pin"
+                app:collapseIcon="@null"
+                android:background="#f5f7fc"
+                android:contentInsetEnd="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
+
+                <ImageView
+                    android:id="@+id/toolbar_left_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="21dp"
+                    android:src="@drawable/nav_back_dark_btn"
+                    android:layout_gravity="start"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/toolbar_right_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="21dp"
+                    android:src="@drawable/nav_close_dark_btn"
+                    android:layout_gravity="end"
+                    android:visibility="invisible"/>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

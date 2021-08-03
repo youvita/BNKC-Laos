@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.mobile.bnkcl.ui.user.AccountInformationViewModel" />
+
+        <variable
+            name="accountInformationViewModel"
+            type="AccountInformationViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f7fc"
+        tools:context=".ui.user.AccountInformationActivity">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="21dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/nav_back_dark_btn" />
+
+            <TextView
+                android:id="@+id/tv_title_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:text="Account Information" />
+
+            <TextView
+                android:id="@+id/tv_title_toolbar_02"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="21dp"
+                android:gravity="center_vertical"
+                android:text="Edit"
+                android:textAllCaps="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:overScrollMode="never"
+                android:paddingBottom="50dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="21dp"
+                        android:layout_marginBottom="41dp"
+                        android:gravity="start"
+                        android:src="@drawable/brand_bnkc_medium" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/round_solid_ffffff_15"
+                        android:orientation="vertical"
+                        android:paddingBottom="55dp"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="21dp"
+                                android:layout_marginBottom="10dp"
+                                android:src="@drawable/profile_ico" />
+
+                            <com.mobile.bnkcl.com.view.ShadowLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="-16dp"
+                                android:layout_marginRight="8dp"
+                                app:shadowColor="#3090a4ae"
+                                app:shadowDx="0dp"
+                                app:shadowDy="0dp"
+                                app:shadowRadius="8dp"
+                                app:shadowShape="rectangle"
+                                app:shadowSide="all">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_view_more_personal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:drawablePadding="10dp"
+                                            android:gravity="center_vertical"
+                                            android:text="Personal Information"
+                                            app:drawableStartCompat="@drawable/personal_info_ico" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_more_personal"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="end"
+                                            android:src="@drawable/fold_ico" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_wrap_personal_info"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:paddingLeft="15dp"
+                                        android:paddingRight="15dp"
+                                        android:paddingBottom="15dp"
+                                        android:visibility="visible">
+
+                                        <View
+                                            android:id="@+id/view_1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="#eef5f8" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="15dp"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:paddingBottom="5dp">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:text="Name" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="2"
+                                                android:gravity="end"
+                                                tools:text="Ko Youngkwon" />
+
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:paddingBottom="5dp">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:text="Gender" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="end"
+                                                tools:text="Male" />
+
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:text="Gender" />
+
+                                            <TextView
+                                                android:id="@+id/tv_phone_number"
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:gravity="end"
+                                                tools:text="+856-205-5541-341" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </com.mobile.bnkcl.com.view.ShadowLayout>
+
+                            <com.mobile.bnkcl.com.view.ShadowLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="-16dp"
+                                android:layout_marginRight="8dp"
+                                app:shadowColor="#3090a4ae"
+                                app:shadowDx="0dp"
+                                app:shadowDy="0dp"
+                                app:shadowRadius="8dp"
+                                app:shadowShape="rectangle"
+                                app:shadowSide="all">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_more_loan_info"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:drawableStart="@drawable/lease_info_ico"
+                                            android:drawablePadding="10dp"
+                                            android:gravity="center_vertical"
+                                            android:text="Lease Information" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_more_loan_info"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="end"
+                                            android:src="@drawable/fold_ico" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_wrap_loan_info"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:paddingLeft="15dp"
+                                        android:paddingRight="15dp"
+                                        android:paddingBottom="15dp"
+                                        android:visibility="visible">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="#eef5f8" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="15dp"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:text="Account Number" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:gravity="end"
+                                                tools:text="N/A" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </com.mobile.bnkcl.com.view.ShadowLayout>
+
+                            <com.mobile.bnkcl.com.view.ShadowLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="-16dp"
+                                android:layout_marginRight="8dp"
+                                app:shadowColor="#3090a4ae"
+                                app:shadowDx="0dp"
+                                app:shadowDy="0dp"
+                                app:shadowRadius="8dp"
+                                app:shadowShape="rectangle"
+                                app:shadowSide="all">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_additional_info"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:drawableStart="@drawable/info_ico"
+                                            android:drawablePadding="10dp"
+                                            android:gravity="center_vertical"
+                                            android:text="Account Information" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_more_additional"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="end"
+                                            android:src="@drawable/fold_ico" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_wrap_additional_info"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:paddingLeft="15dp"
+                                        android:paddingRight="15dp"
+                                        android:paddingBottom="15dp"
+                                        android:visibility="visible">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="#eef5f8" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="15dp"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:paddingBottom="5dp">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginEnd="10dp"
+                                                android:text="Address" />
+
+                                            <TextView
+                                                android:id="@+id/tv_address"
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="3"
+                                                android:gravity="end"
+                                                tools:text="N/A" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginEnd="10dp"
+                                                android:text="Occupation" />
+
+                                            <TextView
+                                                android:id="@+id/tv_occupation"
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="2"
+                                                android:gravity="end"
+                                                tools:text="N/A" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </com.mobile.bnkcl.com.view.ShadowLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/ll_wrap_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#ffffff"
+                android:paddingBottom="21dp">
+
+                <TextView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginEnd="21dp"
+                    android:background="@drawable/selector_d7191f_8b0304"
+                    android:gravity="center"
+                    android:text="Log Out"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
