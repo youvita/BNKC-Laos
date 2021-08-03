@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mobile.bnkcl">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.AppApplication"
@@ -14,26 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BNKC_LAOS"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m"
-        tools:overrideLibrary="androidx.security.identity.credential">
-        <activity
-            android:name=".ui.setting.SettingActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".ui.user.AccountInformationActivity"
-            android:exported="true"/>
-        <activity android:name=".ui.home.HomeActivity"></activity>
-        <activity android:name=".ui.intro.IntroActivity"></activity>
-        <activity android:name=".ui.login.LoginActivity">
+        tools:overrideLibrary="androidx.security.identity.credential"
+        tools:targetApi="m">
+        <activity android:name=".ui.intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.login.LoginActivity">
 
-        <activity android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"/>
+        </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
