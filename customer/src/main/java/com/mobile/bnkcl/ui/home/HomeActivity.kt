@@ -10,8 +10,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.tvCurrentLang.text = "ພາສາລາວ"
-
         binding.clChangeLanguage.setOnClickListener {
 
             val dlgLanguage = DlgLanguage()

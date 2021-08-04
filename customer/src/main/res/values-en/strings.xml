@@ -19,4 +19,6 @@
     <string name="english_language">English</string>
     <string name="chinese_language">中文</string>
 
+    <string name="language">English</string>
+
 </resources>
