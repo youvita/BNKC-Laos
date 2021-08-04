@@ -32,16 +32,16 @@ fun Fragment.getWindowHeight(): Int {
 }
 
 /**
- * convert any list to string
+ * convert any object to string
  */
-inline fun <reified T> convertListToString(list: T?): String? {
-    return Gson().toJson(list)
+inline fun <reified T> convertToString(obj: T?): String? {
+    return Gson().toJson(obj)
 }
 
 /**
- * convert any string to list
+ * convert any string to object
  */
-inline fun <reified T> convertStringToList(json: String?): T {
-    json?: emptyList<T>()
-    return Gson().fromJson(json, object : TypeToken<T>() {}.type)
+inline fun <reified T> convertToObject(obj: String?): T {
+    obj?: emptyList<T>()
+    return Gson().fromJson(obj, object : TypeToken<T>() {}.type)
 }
