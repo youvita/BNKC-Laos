@@ -19,6 +19,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            testCoverageEnabled = "true"
+            debuggable = true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -56,6 +60,8 @@ dependencies {
     // retrofit
     implementation deps.retrofit.runtime
     implementation deps.retrofit.converter_gson
+    implementation deps.okhttp.okhttp3_interceptor
+    implementation deps.okhttp.okhttp3
 
     //Coroutine
     implementation deps.coroutine.core

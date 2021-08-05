@@ -1,7 +1,9 @@
-package com.mobile.bnkcl.di
+package com.bnkc.sourcemodule.di.header
 
 
-import com.mobile.bnkcl.BuildConfig
+import com.bnkc.library.prefer.CredentialSharedPrefer
+import com.bnkc.sourcemodule.BuildConfig
+import com.bnkc.sourcemodule.app.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +12,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
-import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -25,25 +26,18 @@ class HeaderInterceptor {
 
     @Provides
     @Singleton
-    fun provideHeaderInterceptor(): Interceptor {
-        val timeZoneInGMTFormat = TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT)
-
+    fun provideHeaderInterceptor(credentialSharedPrefer: CredentialSharedPrefer): Interceptor {
         return Interceptor(fun(chain: Interceptor.Chain): Response {
+            val tokenBearer = "$BEARER ${credentialSharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
 
             val request = chain.request()
                     .newBuilder()
-//                    .header(ACCEPT_LANGUAGE, "km")
-//                    .header(X_APP_VERSION, "20210709")
+                    .header(ACCEPT_LANGUAGE, "")
+                    .header(X_APP_VERSION, "")
             when {
-//                !credentialPref.accessToken.isNullOrEmpty() -> {
-//                    request.header(AUTHORIZATION, tokenBearer)
-//                }
-//                !credentialPref.basicAccessToken.isNullOrEmpty() -> {
-//                    request.header(AUTHORIZATION, basicToken)
-//                }
-//                else -> {
-//                    request.header(AUTHORIZATION, basicAuth)
-//                }
+                !credentialSharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty() -> {
+                    request.header(AUTHORIZATION, tokenBearer)
+                }
             }
             return chain.proceed(request.build())
         })

@@ -8,6 +8,8 @@ package com.bnkc.library.app
 import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import com.bnkc.library.util.Constants
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 /**
  * Language recreate activity
@@ -27,4 +29,19 @@ fun Fragment.getWindowHeight(): Int {
     val displayMetrics = DisplayMetrics()
     context?.display?.getRealMetrics(displayMetrics)
     return displayMetrics.heightPixels
+}
+
+/**
+ * convert any object to string
+ */
+inline fun <reified T> convertToString(obj: T?): String? {
+    return Gson().toJson(obj)
+}
+
+/**
+ * convert any string to object
+ */
+inline fun <reified T> convertToObject(obj: String?): T {
+    obj?: emptyList<T>()
+    return Gson().fromJson(obj, object : TypeToken<T>() {}.type)
 }

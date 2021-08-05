@@ -1,10 +1,8 @@
-package com.mobile.bnkcl.di
+package com.bnkc.sourcemodule.di
 
+import com.bnkc.sourcemodule.di.header.AuthInterceptorOkHttpClient
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.mobile.bnkcl.app.Constants
-import com.mobile.bnkcl.data.api.CommentApi
-import com.mobile.bnkcl.data.api.MGApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,26 +29,5 @@ object RetrofitModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
     }
-
-    @Singleton
-    @Provides
-    fun provideCommentService(retrofit: Retrofit.Builder): CommentApi {
-        return retrofit
-            .baseUrl(Constants.BASE_URL)
-            .build()
-            .create(CommentApi::class.java)
-
-    }
-
-    @Singleton
-    @Provides
-    fun provideMGService(retrofit: Retrofit.Builder): MGApi {
-        return retrofit
-            .baseUrl(Constants.MG_URL)
-            .build()
-            .create(MGApi::class.java)
-    }
-
-    /* TODO: add more api service here */
 
 }
