@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.di
+package com.bnkc.sourcemodule.di.header
 
 import javax.inject.Qualifier
 
