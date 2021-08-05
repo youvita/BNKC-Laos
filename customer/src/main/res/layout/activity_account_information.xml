@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="21dp"
                 android:gravity="center_vertical"
-                android:src="@drawable/nav_back_dark_btn" />
+                android:src="@drawable/ic_nav_back_dark_btn" />
 
             <TextView
                 android:id="@+id/tv_title_toolbar"
@@ -82,7 +82,7 @@
                         android:layout_marginEnd="21dp"
                         android:layout_marginBottom="41dp"
                         android:gravity="start"
-                        android:src="@drawable/brand_bnkc_medium" />
+                        android:src="@drawable/ic_brand_bnkc_lao_ndmf" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="21dp"
                                 android:layout_marginBottom="10dp"
-                                android:src="@drawable/profile_ico" />
+                                android:src="@drawable/ic_avatar_s" />
 
                             <com.mobile.bnkcl.com.view.ShadowLayout
                                 android:layout_width="wrap_content"
@@ -137,14 +137,14 @@
                                             android:drawablePadding="10dp"
                                             android:gravity="center_vertical"
                                             android:text="Personal Information"
-                                            app:drawableStartCompat="@drawable/personal_info_ico" />
+                                            app:drawableStartCompat="@drawable/ic_personal_info_ico" />
 
                                         <ImageView
                                             android:id="@+id/iv_more_personal"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="end"
-                                            android:src="@drawable/fold_ico" />
+                                            android:src="@drawable/ic_fold_ico" />
 
                                     </LinearLayout>
 
@@ -268,7 +268,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:drawableStart="@drawable/lease_info_ico"
+                                            android:drawableStart="@drawable/ic_loan_in_use_ico"
                                             android:drawablePadding="10dp"
                                             android:gravity="center_vertical"
                                             android:text="Lease Information" />
@@ -278,7 +278,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="end"
-                                            android:src="@drawable/fold_ico" />
+                                            android:src="@drawable/ic_fold_ico" />
 
                                     </LinearLayout>
 
@@ -354,7 +354,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:drawableStart="@drawable/info_ico"
+                                            android:drawableStart="@drawable/ic_info_ico"
                                             android:drawablePadding="10dp"
                                             android:gravity="center_vertical"
                                             android:text="Account Information" />
@@ -364,7 +364,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="end"
-                                            android:src="@drawable/fold_ico" />
+                                            android:src="@drawable/ic_fold_ico" />
 
                                     </LinearLayout>
 

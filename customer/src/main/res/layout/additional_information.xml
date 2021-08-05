@@ -44,7 +44,7 @@
                 android:id="@+id/tv_province"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/expand_more_ico"
+                android:drawableEnd="@drawable/ic_more_ico"
                 android:gravity="center_vertical"
                 android:text="" />
         </LinearLayout>
@@ -69,7 +69,7 @@
                 android:id="@+id/tv_district"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/expand_more_ico"
+                android:drawableEnd="@drawable/ic_more_ico"
                 android:gravity="center_vertical"
                 android:text="" />
         </LinearLayout>
@@ -94,7 +94,7 @@
                 android:id="@+id/tv_village"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/expand_more_ico"
+                android:drawableEnd="@drawable/ic_more_ico"
                 android:gravity="center_vertical"
                 android:text=" " />
         </LinearLayout>

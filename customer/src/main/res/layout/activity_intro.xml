@@ -33,7 +33,7 @@
                 android:id="@+id/iv_brand_bnkc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/brand_bnkc_large"
+                android:src="@drawable/ic_brand_bnkc_lao_leasing"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

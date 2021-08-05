@@ -29,7 +29,7 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>() {
         val actionBar = binding.actionBar
         actionBar.setBackgroundActionBar(resources.getColor(R.color.white))
         actionBar.setToolbarTitleWithActionBack(
-            R.drawable.nav_close_dark_btn,
+            R.drawable.ic_nav_close_dark_btn,
             "Edit Account Information"
         )
         actionBar.setOnMenuLeftClick { onBackPressed() }

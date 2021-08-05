@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="21dp"
-                    android:src="@drawable/nav_back_dark_btn"
+                    android:src="@drawable/ic_nav_back_dark_btn"
                     android:layout_gravity="start"
                     tools:ignore="RtlSymmetry" />
 
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="21dp"
-                    android:src="@drawable/nav_close_dark_btn"
+                    android:src="@drawable/ic_nav_close_dark_btn"
                     android:layout_gravity="end"
                     android:visibility="invisible"/>
             </androidx.appcompat.widget.Toolbar>

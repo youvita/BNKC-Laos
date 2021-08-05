@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:padding="5dp"
-                    android:src="@drawable/nav_back_dark_btn" />
+                    android:src="@drawable/ic_nav_back_dark_btn" />
 
                 <TextView
                     android:id="@+id/id_action_bar_text_left"
@@ -74,7 +74,7 @@
                 android:paddingTop="7dp"
                 android:paddingEnd="9dp"
                 android:paddingBottom="7dp"
-                android:src="@drawable/nav_close_dark_btn" />
+                android:src="@drawable/ic_nav_close_dark_btn" />
 
             <TextView
                 android:id="@+id/id_action_bar_text_right"

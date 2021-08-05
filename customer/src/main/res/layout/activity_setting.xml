@@ -61,7 +61,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/settings_push_notif_ico"
+                                android:drawableLeft="@drawable/ic_notification_white_ico"
                                 android:drawablePadding="10dp"
                                 android:gravity="center_vertical"
                                 android:text="Push Notification" />
@@ -93,7 +93,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/settings_lock_ico"
+                                android:drawableLeft="@drawable/ic_lock_ico"
                                 android:drawablePadding="10dp"
                                 android:gravity="center_vertical"
                                 android:text="Reset PIN" />
@@ -131,7 +131,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/brand_bnkc_below" />
+                    android:src="@drawable/ic_brand_bnkc_lao_leasing" />
 
                 <TextView
                     android:id="@+id/tv_app_version"
