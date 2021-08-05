@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.CommentsItem
 import com.mobile.bnkcl.databinding.ItemCommentBinding
-import com.mobile.bnkcl.ui.base.BaseAdapter
+import com.bnkc.sourcemodule.base.BaseAdapter
 
 /**
  *

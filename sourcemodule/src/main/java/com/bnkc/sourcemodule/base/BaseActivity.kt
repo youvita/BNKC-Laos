@@ -4,7 +4,7 @@
  * @author chan youvita
  * @since 2021.08.01
  */
-package com.mobile.bnkcl.ui.base
+package com.bnkc.sourcemodule.base
 
 import android.content.Context
 import android.os.Bundle

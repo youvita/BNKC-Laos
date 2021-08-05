@@ -8,7 +8,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityMainBinding
 import com.mobile.bnkcl.ui.adapter.CommentAdapter
-import com.mobile.bnkcl.ui.base.BaseActivity
+import com.bnkc.sourcemodule.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import java.util.*

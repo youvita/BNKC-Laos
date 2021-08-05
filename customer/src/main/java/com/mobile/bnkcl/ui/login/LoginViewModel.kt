@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mobile.bnkcl.data.request.LoginRequest
 import com.mobile.bnkcl.repository.login.LoginRepo
-import com.mobile.bnkcl.ui.base.BaseViewModel
+import com.bnkc.sourcemodule.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

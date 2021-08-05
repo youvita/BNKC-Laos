@@ -9,7 +9,7 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityIntroBinding
-import com.mobile.bnkcl.ui.base.BaseActivity
+import com.bnkc.sourcemodule.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 

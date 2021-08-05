@@ -1,6 +1,6 @@
 package com.mobile.bnkcl.ui.home
 
-import com.mobile.bnkcl.ui.base.BaseViewModel
+import com.bnkc.sourcemodule.base.BaseViewModel
 
 class HomeViewModel : BaseViewModel() {
 }

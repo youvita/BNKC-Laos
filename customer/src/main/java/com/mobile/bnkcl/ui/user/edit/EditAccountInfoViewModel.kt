@@ -1,6 +1,6 @@
 package com.mobile.bnkcl.ui.user.edit
 
-import com.mobile.bnkcl.ui.base.BaseViewModel
+import com.bnkc.sourcemodule.base.BaseViewModel
 
 class EditAccountInfoViewModel : BaseViewModel() {
 }

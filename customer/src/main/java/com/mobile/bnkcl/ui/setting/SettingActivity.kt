@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivitySettingBinding
-import com.mobile.bnkcl.ui.base.BaseActivity
+import com.bnkc.sourcemodule.base.BaseActivity
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {

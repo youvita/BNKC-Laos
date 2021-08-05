@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLoginBinding
-import com.mobile.bnkcl.ui.base.BaseActivity
+import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.ui.language.LanguageDialog
 import com.mobile.bnkcl.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint

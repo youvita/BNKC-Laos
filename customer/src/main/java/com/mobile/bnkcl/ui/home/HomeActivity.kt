@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.alert.DlgLanguage
 import com.mobile.bnkcl.databinding.ActivityHomeBinding
-import com.mobile.bnkcl.ui.base.BaseActivity
+import com.bnkc.sourcemodule.base.BaseActivity
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {

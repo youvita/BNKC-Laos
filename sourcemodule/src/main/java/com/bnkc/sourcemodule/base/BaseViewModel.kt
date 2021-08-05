@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.base
+package com.bnkc.sourcemodule.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

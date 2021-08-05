@@ -1,11 +1,9 @@
 package com.mobile.bnkcl.ui.user.edit
 
 import android.os.Bundle
-import android.view.View
-import androidx.core.view.ViewCompat.setBackground
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityEditAccountInfoBinding
-import com.mobile.bnkcl.ui.base.BaseActivity
+import com.bnkc.sourcemodule.base.BaseActivity
 
 class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
