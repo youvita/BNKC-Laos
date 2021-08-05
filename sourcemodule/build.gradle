@@ -67,9 +67,6 @@ dependencies {
     implementation deps.coroutine.core
     implementation deps.coroutine.android
 
-    // security
-    implementation deps.security.crypto
-
     // junit test
     testImplementation 'junit:junit:4.13.2'
     //noinspection GradleCompatible
