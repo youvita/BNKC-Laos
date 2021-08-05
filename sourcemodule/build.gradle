@@ -52,6 +52,7 @@ dependencies {
     implementation deps.rxjava2
     implementation deps.paging_ktx
     implementation deps.support.fragment_ktx
+    implementation deps.glide
 
     // injection
     implementation deps.dagger.android
