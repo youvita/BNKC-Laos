@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nav Drawer -->
+    <string name="nav_content_001">Customer ID</string>
+    <string name="nav_content_002">NOTICE</string>
+    <string name="nav_content_003">CS/CENTER</string>
+    <string name="nav_content_004">Language</string>
+    <string name="nav_content_005">Facebook BNKC (Cambodia)</string>
+    <string name="nav_content_006">Company Profile</string>
+    <string name="nav_content_007">Settings</string>
+    <string name="nav_content_008">ភាសា</string>
+</resources>

@@ -1,12 +1,12 @@
-package com.mobile.bnkcl.ui.reponse
+package com.mobile.bnkcl.ui.response
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.mobile.bnkcl.R
 
-class ReponseActivity : AppCompatActivity() {
+class ResponseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reponse)
+        setContentView(R.layout.activity_response)
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ffffff"
-    tools:context=".ui.reponse.ReponseActivity">
+    tools:context=".ui.response.ResponseActivity">
 
     <com.mobile.bnkcl.com.view.ActionBar
         android:id="@+id/toolbar"
