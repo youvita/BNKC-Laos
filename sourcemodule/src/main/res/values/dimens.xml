@@ -2,27 +2,34 @@
 <resources>
 
     <!-- margins -->
+    <dimen name="margin_0dp">0dp</dimen><!--used 04/07/2021-->
     <dimen name="margin_1dp">1dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen><!--used 04/07/2021-->
     <dimen name="margin_6dp">6dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
     <dimen name="margin_12dp">12dp</dimen>
     <dimen name="margin_14dp">14dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen><!--used 04/07/2021-->
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_18dp">18dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_21dp">21dp</dimen><!--used 04/07/2021-->
     <dimen name="margin_22dp">22dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_25dp">25dp</dimen><!--used 04/07/2021-->
     <dimen name="margin_26dp">26dp</dimen>
     <dimen name="margin_28dp">28dp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_31dp">31dp</dimen><!--used 04/07/2021-->
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="margin_34dp">34dp</dimen>
     <dimen name="margin_36dp">36dp</dimen>
     <dimen name="margin_38dp">38dp</dimen>
     <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_41dp">41dp</dimen>
     <dimen name="margin_42dp">42dp</dimen>
     <dimen name="margin_44dp">44dp</dimen>
     <dimen name="margin_46dp">46dp</dimen>
@@ -33,19 +40,23 @@
     <dimen name="margin_56dp">56dp</dimen>
     <dimen name="margin_58dp">58dp</dimen>
     <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="margin_120dp">120dp</dimen><!--used -->
 
     <!-- padding -->
     <dimen name="padding_1dp">1dp</dimen>
     <dimen name="padding_2dp">2dp</dimen>
     <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="padding_5dp">5dp</dimen><!--used 04/07/2021-->
     <dimen name="padding_6dp">6dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_10dp">10dp</dimen>
     <dimen name="padding_12dp">12dp</dimen>
     <dimen name="padding_14dp">14dp</dimen>
+    <dimen name="padding_15dp">15dp</dimen><!--used 04/07/2021-->
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="padding_18dp">18dp</dimen>
     <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="padding_21dp">21dp</dimen><!--used 04/07/2021-->
     <dimen name="padding_22dp">22dp</dimen>
     <dimen name="padding_24dp">24dp</dimen>
     <dimen name="padding_26dp">26dp</dimen>
@@ -56,13 +67,27 @@
     <dimen name="padding_36dp">36dp</dimen>
     <dimen name="padding_38dp">38dp</dimen>
     <dimen name="padding_40dp">40dp</dimen>
+    <dimen name="padding_95dp">95dp</dimen>
 
     <!-- height -->
     <dimen name="height_05dp">0.5dp</dimen>
+    <dimen name="height_1dp">1dp</dimen><!--used 04/07/2021-->
+    <dimen name="height_24dp">24dp</dimen><!--used 04/07/2021-->
     <dimen name="height_46dp">46dp</dimen>
+    <dimen name="height_50dp">50dp</dimen><!--used 04/07/2021-->
+    <dimen name="height_100dp">100dp</dimen><!--used 04/07/2021-->
+    <dimen name="height_120dp">120dp</dimen><!--used 04/07/2021-->
+
+    <!-- width -->
+    <dimen name="width_0dp">0dp</dimen><!--used 04/07/2021-->
+    <dimen name="width_1dp">1dp</dimen><!--used 04/07/2021-->
+    <dimen name="width_2dp">2dp</dimen><!--used 04/07/2021-->
+    <dimen name="width_24dp">24dp</dimen><!--used 04/07/2021-->
+    <dimen name="width_50dp">50dp</dimen><!--used 04/07/2021-->
+    <dimen name="width_60dp">60dp</dimen><!--used 04/07/2021-->
+
 
     <!-- radius -->
     <dimen name="radius_4dp">4dp</dimen>
     <dimen name="radius_8dp">8dp</dimen>
-
 </resources>

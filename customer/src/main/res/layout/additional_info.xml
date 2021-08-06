@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/personal_information"
+                android:visibility="gone"
+                style="@style/font21_263238_medium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_address"
+                android:layout_marginTop="@dimen/margin_15dp"
+                style="@style/font13_263238_medium"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/capital"
+                android:layout_marginTop="@dimen/margin_10dp"
+                style="@style/font13_263238_medium"
+                />
+            <LinearLayout
+                android:id="@+id/ll_province"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="@dimen/padding_15dp"
+                android:paddingEnd="@dimen/padding_15dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_province"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/select_capital"
+                    android:drawableEnd="@drawable/ic_more_ico" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/district"
+                android:layout_marginTop="15dp"
+                style="@style/font13_263238_medium"
+                />
+            <LinearLayout
+                android:id="@+id/ll_district"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_district"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/select_district"
+                    android:drawableEnd="@drawable/ic_more_ico" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/village"
+                android:layout_marginTop="15dp"
+                style="@style/font13_263238_medium"
+                />
+            <LinearLayout
+                android:id="@+id/ll_village"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_village"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/select_village"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_more_ico" />
+            </LinearLayout>
+
+            <com.mobile.bnkcl.comm.view.BnKEditText
+                android:id="@+id/edt_detailed_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_edittext_bg"
+                android:layout_marginTop="10dp"
+                android:textColorHint="#cfd8dc"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:maxLength="200"
+                android:singleLine="true"
+                android:hint="@string/input_detailed_address"
+                style="@style/font15_CFD8DC_medium_input"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/job_type"
+                android:layout_marginTop="15dp"
+                style="@style/font13_263238_medium"
+                />
+            <LinearLayout
+                android:id="@+id/ll_job_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_job_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:hint="@string/select_job_type"
+                    android:drawableEnd="@drawable/ic_more_ico" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
