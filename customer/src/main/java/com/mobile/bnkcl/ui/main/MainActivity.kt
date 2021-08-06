@@ -30,26 +30,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getCommentList()
+//        getCommentList()
 
         commentDisposable = RxJava.listen(RxEvent.CommentSuccess::class.java).subscribe {
             Log.d(">>>>","Result::: ${it.value}")
         }
     }
 
-    /**
-     * get comments
-     */
-    private fun getCommentList() {
-        binding.rvComment.adapter = commentAdapter
-        viewModel.getComments()
-
-        viewModel.comments.observe(this) {
-            if (it.isNullOrEmpty()) return@observe
-            commentAdapter.addItemList(it)
-            viewModel.cancelRequests()
-        }
-    }
+//    /**
+//     * get comments
+//     */
+//    private fun getCommentList() {
+//        binding.rvComment.adapter = commentAdapter
+//        viewModel.getComments()
+//
+//        viewModel.comments.observe(this) {
+//            if (it.isNullOrEmpty()) return@observe
+//            commentAdapter.addItemList(it)
+//            viewModel.cancelRequests()
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

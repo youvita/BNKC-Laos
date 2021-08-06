@@ -58,7 +58,513 @@
     <string name="answer_by_bnkc">Answer by BNKC</string>
     <string name="faq">FAQ</string>
     <string name="ask_bnkc">Ask BNKC</string>
-    <string name="ask_bnkc">Ask BNKC</string>
-    <string name="ask_bnkc">Ask BNKC</string>
     <string name="policy">Policy</string>
+
+    <!-- Permission -->
+    <string name="perm_01">Photo, media, file access</string>
+    <string name="perm_02">Access to address book</string>
+    <string name="perm_03">Phone call and management</string>
+    <string name="perm_04">Take a photo and record a video</string>
+    <string name="perm_05">Unable to open bizplay corporate card app. Try again after change setting</string>
+    <string name="perm_06">Unable to attach an image. Try again after change setting</string>
+
+    <!-- Language -->
+    <string name="language_01" translatable="false">ខ្មែរ</string>
+    <string name="language_02" translatable="false">English</string>
+    <string name="language_03">English</string>
+
+    <!-- Currency -->
+    <string name="curr_usd">USD</string>
+    <string name="khr">KHR</string>
+    <string name="khr_format">%s KHR</string>
+    <string name="usd_format">%s USD</string>
+    <string name="usd">USD</string>
+    <string name="months">%s Months</string>
+
+    <!-- Recommend -->
+    <string name="comm_notification">Notification</string>
+    <string name="comm_cancel">Cancel</string>
+    <string name="comm_ok">OK</string>
+    <string name="comm_setting">Setting</string>
+    <string name="comm_confirm">Confirm</string>
+    <string name="comm_update_now">Update Now</string>
+    <string name="comm_sign_up">Sign Up</string>
+    <string name="comm_login">login</string>
+    <string name="comm_continue">Continue</string>
+    <string name="comm_next">Next</string>
+    <string name="comm_register_again">Register Again</string>
+    <string name="comm_setup_new_pin">Setup NewPin</string>
+    <string name="comm_try_again">Try Again</string>
+    <string name="comm_reset_pin">Reset Pin</string>
+    <string name="comm_apply_loan">Apply Loan</string>
+    <string name="comm_error_internet_connection">Please check your internet connection and try again.</string>
+    <string name="comm_error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
+    <string name="comm_error">Error</string>
+    <string name="comm_submit">Submit</string>
+    <string name="comm_go_home">Go Home</string>
+    <string name="comm_submit_document">Submit Document</string>
+    <string name="comm_select">Select</string>
+
+    <string name="submit_document_success">Document is Submitted</string>
+    <string name="submit_document_success_smg">BNK will review your document\nand get back to you soon</string>
+    <string name="submit_document_failed">Document is Not Submitted</string>
+
+    <string name="uploading">Uploading</string>
+    <string name="card_uploaded">Document Uploaded</string>
+
+    <!-- MainActivity -->
+    <!-- Main - My Loan Request Menu -->
+    <string name="my_loan_menu_001">Application</string>
+    <string name="my_loan_menu_002">Document</string>
+    <string name="my_loan_menu_003">Processing</string>
+    <string name="my_loan_menu_004">Success</string>
+
+    <string name="main_bottom_menu1">My Loan</string>
+    <string name="main_bottom_menu2">Loan Service</string>
+    <string name="main_bottom_menu3">Find Office</string>
+
+    <string name="main_subtitle_001">My Loan Request</string>
+    <string name="main_subtitle_002">Loan in Use</string>
+
+    <string name="loan_type_001">MICRO LOAN</string>
+    <string name="loan_type_002">SMALL LOAN</string>
+    <string name="loan_type_003">MEDIUM LOAN</string>
+    <string name="main_content_004">ADD NEW LOAN SERVICE</string>
+    <string name="main_content_005">Loan Balance</string>
+    <string name="main_content_006">Upcoming Payment Date</string>
+    <string name="main_content_007">Total Payment of this Time</string>
+    <string name="main_content_008">*Including Overdue Amount</string>
+    <string name="main_content_009">BILL PAYMENT</string>
+    <string name="main_content_010">MANAGEMENT</string>
+    <string name="main_content_011"><font color="#00695C">Download BNK Mobile</font>\nand Take Loan Now.</string>
+
+
+    <!-- My Loan Request -->
+    <string name="my_laon_request_001">Progress</string>
+    <string name="my_laon_request_002">Loan Amount</string>
+    <string name="my_laon_request_003">Loan Term</string>
+    <string name="my_laon_request_004">Date of Application</string>
+    <string name="my_laon_request_005">SUBMIT DOC</string>
+    <string name="my_laon_request_006">Call Center</string>
+    <string name="my_loan_request_007">\u0020Months</string>
+    <string name="my_loan_request_008">Weekday 09:00 - 18:00</string>
+    <string name="my_loan_request_009">Result of Application</string>
+    <string name="my_loan_request_010">Scheduled Date of Visit</string>
+    <string name="my_loan_request_011">Branch Name</string>
+    <string name="my_loan_request_012">The Person in Charge</string>
+    <string name="my_loan_request_013">Reasons</string>
+    <string name="my_loan_request_014">Approve</string>
+    <string name="my_loan_request_015">Reject</string>
+    <string name="my_loan_request_016">Approval Amount</string>
+
+    <!-- Nav Drawer -->
+    <string name="nav_content_001">Customer ID</string>
+    <string name="nav_content_002">NOTICE</string>
+    <string name="nav_content_003">CS/CENTER</string>
+    <string name="nav_content_004">Language</string>
+    <string name="nav_content_005">Facebook BNKC (Cambodia)</string>
+    <string name="nav_content_006">Company Profile</string>
+    <string name="nav_content_007">Settings</string>
+    <string name="nav_content_008">ភាសា</string>
+
+    <!--signup-->
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_up_01">Step 1</string>
+    <string name="sign_up_02">Step 2</string>
+    <string name="sign_up_03">OTP Verification</string>
+    <string name="sign_up_04">Enter your phone number and we\u0027ll send you a confirmation code.</string>
+    <string name="sign_up_05">OTP Code</string>
+    <string name="sign_up_06">Incorrect</string>
+    <string name="sign_up_07">Didn\u0027t get the code? \u0020 </string>
+    <string name="sign_up_08">RESEND</string>
+    <string name="sign_up_09">CONTINUE</string>
+    <string name="sign_up_10">Personal Information</string>
+    <string name="sign_up_11">Family Name</string>
+    <string name="sign_up_12">Family Name in Latin</string>
+    <string name="sign_up_13">Given Name</string>
+    <string name="sign_up_14">Given Name in Latin</string>
+    <string name="sign_up_15">Date of Birth</string>
+    <string name="sign_up_16">DD-MM-YYYY (31-01-1985)</string>
+    <string name="sign_up_17">Gender</string>
+    <string name="sign_up_18">Male</string>
+    <string name="sign_up_19">Female</string>
+    <string name="sign_up_20">Next</string>
+    <string name="sign_up_21">I agree to BNKC\'s\u0020 Terms and Conditions</string>
+    <string name="sign_up_22">Terms and Conditions</string>
+    <string name="sign_up_23">Correct</string>
+    <string name="sign_up_24">You Haven\u0027t \nSigned Up Yet</string>
+    <string name="sign_up_25">Phone number hasn\u0027t signed up\nfor BNK Account. Please sign up.</string>
+    <string name="sign_up_26">You Already Signed Up</string>
+    <string name="sign_up_27">Phone number has already\nregistered. Please login using PIN.</string>
+    <string name="sign_up_28">I agree to BNKC\'s Terms and Conditions </string>
+    <string name="login_01">Log In</string>
+    <string name="sign_up_29">Terms and Conditions</string>
+    <string name="sign_up_30">Recommender ID</string>
+    <string name="sign_up_31">7-Digit Number</string>
+    <string name="sign_up_32"><i>(Optional)</i></string>
+    <string name="sign_up_33">Please check your date of birth again.</string>
+    <string name="sign_up_34">Wrong Input Data</string>
+    <string name="sign_up_35">Try Again</string>
+    <!--Initial activity-->
+    <string name="init_01">En</string>
+    <string name="init_02">Khmer</string>
+    <string name="init_03">English</string>
+    <string name="init_04">ខ្មែរ</string>
+    <string name="init_lang_tag">English</string>
+
+    <!--splash screen-->
+    <string name="intro_01">New Version Available</string>
+    <string name="intro_02">Please update app to the new version to continue using.</string>
+    <string name="intro_03">UPDATE NOW</string>
+
+    <!--account info-->
+    <string name="acc_info_01">Edit</string>
+    <string name="acc_info_02">Account Information</string>
+    <string name="acc_info_03">Personal Information</string>
+    <string name="acc_info_04">Name</string>
+    <string name="acc_info_05">Gender</string>
+    <string name="acc_info_06">Marital Status</string>
+    <string name="acc_info_07">Tel</string>
+    <string name="acc_info_08">Loan Information</string>
+    <string name="acc_info_09">Account Number</string>
+    <string name="acc_info_10">Additional Information</string>
+    <string name="acc_info_11">Home Address</string>
+    <string name="acc_info_12">Income Type</string>
+    <string name="acc_info_13">Log Out</string>
+    <string name="acc_info_14">Cancel</string>
+    <string name="acc_info_15">Edit Account Information</string>
+    <string name="acc_info_16">Loan Information</string>
+    <string name="acc_info_19">Save</string>
+    <string name="acc_info_20">Account Information has been saved.</string>
+    <string name="acc_info_21">Are you sure to log out?</string>
+    <string name="acc_info_22">Province</string>
+    <string name="acc_info_23">"Do you really want to close without saving?"</string>
+    <string name="acc_info_25">Select Income Type</string>
+    <string name="acc_info_26">If you need to correct personal information, please visit the nearest branch.</string>
+
+    <!--setting-->
+    <string name="setting_01">Push Notification</string>
+    <string name="setting_02">Reset PIN</string>
+    <string name="setting_03">Policy</string>
+    <string name="setting_04">RESET</string>
+    <string name="setting_05">VIEW</string>
+
+    <!--c\s center-->
+    <string name="cs_01">C/S Center</string>
+    <string name="cs_02">Ask BNKC</string>
+    <string name="cs_03">Category</string>
+    <string name="cs_04">Question</string>
+    <string name="cs_05">Comment</string>
+    <string name="cs_06">Subject</string>
+    <string name="cs_07">Description</string>
+    <string name="cs_08">FAQ</string>
+    <string name="cs_09">Answer by BNKC</string>
+    <string name="cs_10">Answer:</string>
+    <string name="cs_11">Frequently Asked Questions</string>
+    <string name="cs_12">Yes</string>
+    <string name="cs_13">No</string>
+    <string name="cs_14">Inquiry is Submitted</string>
+    <string name="cs_15">BNKC will review your inquiry\nand get back to you soon.</string>
+    <string name="cs_16">Close</string>
+    <string name="cs_17">Loan</string>
+
+    <!--apply loan-->
+    <string name="apply_01">Apply Loan</string>
+    <string name="apply_02">Marital Status</string>
+    <string name="apply_03">Home Address (Full Address)</string>
+    <string name="apply_04">Occupation</string>
+    <string name="apply_05">Home Address</string>
+    <string name="apply_06">Monthly  Income</string>
+    <string name="apply_07">Loan Application is Submitted</string>
+    <string name="apply_08">You have to submit necessary \ndocuments for loan screening by taping \non \"SUBMIT DOCUMENT\" below.</string>
+    <string name="apply_09">Loan Application is Failed</string>
+    <string name="apply_10">Branch</string>
+
+    <!--loan consult-->
+    <string name="loan_consult_01">Loan Consultation</string>
+    <string name="loan_consult_02">Loan Type</string>
+    <string name="loan_consult_03">Loan with Collateral</string>
+    <string name="loan_consult_04">Loan without Collateral</string>
+    <string name="loan_consult_05">Micro</string>
+    <string name="loan_consult_06">Small</string>
+    <string name="loan_consult_07">Medium</string>
+    <string name="loan_consult_08">Counselling Type</string>
+    <string name="loan_consult_09">Telephone</string>
+    <string name="loan_consult_10">Visit</string>
+    <string name="loan_consult_11">E.g. Please call me between 8:00 a.m. to 10:00 a.m.</string>
+    <string name="loan_consult_12">We will check your request and contact you\nback as soon as possible.</string>
+    <string name="loan_consult_13">Request is Submitted</string>
+    <string name="loan_consult_14">GO HOME</string>
+    <string name="loan_product">Loan Product</string>
+    <string name="apply_now">Apply Now</string>
+    <string name="micro_loan">Micro Loan</string>
+    <string name="help_clients_run_and_grow_micro_nbusiness_purchase_electronic_equipment_vehicles_etc">Help clients run and grow micro\nbusiness, purchase electronic\nequipment, vehicles, etc.</string>
+    <string name="make_home_improvement_payoff_ndebts_finance_business_with_very_competitive_interest_rate">Make home improvement, payoff \ndebts, finance business with very\ncompetitive interest rate.</string>
+    <string name="small_loan">Small Loan</string>
+    <string name="apply_loan">APPLY LOAN</string>
+    <string name="support_individuals_enterprises_in_expanding_business_or_set_up_new_business">Support individuals, enterprises in\nexpanding business or set up new\nbusiness.</string>
+    <string name="medium_loan">Medium Loan</string>
+    <string name="loan_consultation">Loan Consultation</string>
+    <string name="do_you_need_any_loan_related_consultation">Do you need any \nloan-related consultation?</string>
+    <string name="consult_now">CONSULT NOW</string>
+    <string name="loan_detail">Free option of Currency KHR and USD, a reasonable interest rate, calculated based on outstanding balance, flexible loan terms and repayment plan that are catered to your need, Convenient option to apply for and repay loan at nearest BNKC office or at your business site.</string>
+    <string name="product_introduction">Product Introduction</string>
+
+    <string name="interest_rate">Interest Rate</string>
+    <string name="_1_1_5_interest_based_negotiation">1%​~​1.5% (Interest Based \nNegotiation)</string>
+    <string name="loan_term">Loan Term</string>
+    <string name="_48_months_flexible">48 Months (Flexible)</string>
+    <string name="repayment_method">Repayment Method</string>
+    <string name="decline_annuity_semi_balloons">Decline/Annuity/\nBalloon/Semi Balloon </string>
+    <string name="requirement_documents">Requirement Documents</string>
+    <string name="loan_process">Loan Process</string>
+    <string name="faqs">FAQs</string>
+    <string name="up_to_5_000_usd_equivalent_khr">Up to 5,000 \n(USD/Equivalent KHR)</string>
+    <string name="loan_calculator">Loan Calculator</string>
+    <string name="monthly_repayment">Monthly Repayment</string>
+    <string name="total_principal_paid">Total Principal Paid</string>
+    <string name="total_interest_paid">Total Interest Paid</string>
+    <string name="this_result_may_not_be_correct_for_simple_reference">This result may not be correct for simple reference.</string>
+    <string name="result">Result</string>
+    <string name="currency_val">%s USD</string>
+    <string name="details">Details</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="take_a_photo">Take a Photo</string>
+    <string name="please_upload_n_the_following_document">Upload\nRequired Document</string>
+    <string name="pin_01">Login</string>
+    <string name="pin_02">Reset</string>
+    <string name="pin_03">Set Up New PIN</string>
+    <string name="pin_04">Forget PIN?,RESET NOW</string>
+    <string name="pin_05">Existing</string>
+    <string name="pin_06">PIN Registration</string>
+    <string name="pin_07">Can\'t remember</string>
+    <string name="pin_08">Please input code again</string>
+    <string name="pin_09">Forget PIN</string>
+    <string name="pin_10">Reset now</string>
+    <string name="pin_11">Wrong PIN\n5 Times</string>
+    <string name="pin_12">You have reached maximum\nfailed attempts. Please reset PIN.</string>
+    <string name="pin_13">RESET PIN</string>
+    <string name="pin_14">Wrong PIN. Please\nTry Again</string>
+    <string name="pin_15">After %d times failed attempts,\nyou have to reset the PIN.</string>
+    <string name="pin_16">TRY AGAIN</string>
+    <string name="pin_17">PIN Registration</string>
+    <string name="pin_18">Existing PIN</string>
+    <string name="pin_19">PIN Confirmation</string>
+    <string name="pin_reset_success">PIN Reset Successful</string>
+    <string name="pin_reset_failed">PIN Reset Failed</string>
+    <string name="pin_registration_success">Registration Successful</string>
+    <string name="pin_registration_msg">You have successfully registered.\nPlease log in.</string>
+    <string name="pin_registration_failed">Registration Failed</string>
+    <string name="km_option" translatable="false">%dលាន</string>
+
+    <string name="req_failed">Request is Failed</string>
+
+    <!-- Loan Management -->
+    <string name="loan_manage_001">Loan Management</string>
+    <string name="loan_manage_002">TOTAL SCHEDULE</string>
+    <string name="loan_manage_003">TRANSACTION HISTORY</string>
+    <string name="loan_manage_004">Loan Account</string>
+    <string name="loan_manage_005">Interest (Monthly)</string>
+    <string name="loan_manage_006">Admin Fee</string>
+    <string name="loan_manage_007">Disbursement Date</string>
+    <string name="loan_manage_008">Maturity Date</string>
+    <string name="loan_manage_010">Repayment Date</string>
+    <string name="loan_manage_011">Coming Repayment</string>
+    <string name="loan_manage_012">Principal</string>
+    <string name="loan_manage_013">Interest</string>
+    <string name="loan_manage_014">Admin Fee</string>
+    <string name="loan_manage_015">Penalty</string>
+    <string name="loan_manage_016">Total</string>
+    <string name="loan_manage_017">CHECK FULL REPAYMENT AMOUNT</string>
+    <string name="loan_manage_018">Coming Repayment Date</string>
+    <string name="loan_manage_019">Every\u0020</string>
+    <string name="loan_manage_020">\u0020Months</string>
+
+    <!-- Transaction History -->
+    <string name="tran_history_001">Transaction History</string>
+    <string name="tran_history_002">From the Oldest</string>
+    <string name="tran_history_003">Paid Amount</string>
+    <string name="tran_history_004">Payment Date</string>
+    <string name="tran_history_005">Fee</string>
+    <string name="tran_history_006">Empty</string>
+    <string name="tran_history_007">Transaction history does not exist</string>
+
+    <!-- Full Payment Amount -->
+    <string name="full_payment_001">Full Repayment Amount</string>
+    <string name="full_payment_002">Total Repayment Details</string>
+    <string name="full_payment_003">Other</string>
+    <string name="full_payment_004">Overdue Principal</string>
+    <string name="full_payment_005">Overdue Interest</string>
+    <string name="full_payment_006">Mobile Payment</string>
+    <string name="full_payment_007">Bank Account Information</string>
+    <string name="full_payment_008">Client Information</string>
+    <string name="full_payment_009">Principal (A)</string>
+    <string name="full_payment_010">Interest (B)</string>
+    <string name="full_payment_011">Admin Fee (C)</string>
+    <string name="full_payment_012">Other (D)</string>
+    <string name="full_payment_013">Pay By</string>
+    <string name="full_payment_014">Bank Name</string>
+    <string name="full_payment_015">Currency</string>
+    <string name="full_payment_016">CID</string>
+    <string name="full_payment_017">Check</string>
+    <string name="full_payment_018">Full Repayment (A+B+C+D)</string>
+    <string name="full_payment_019">Repayment Date</string>
+    <string name="full_payment_020">Bank Name</string>
+    <string name="full_payment_021">Currency</string>
+    <string name="full_payment_022">Account Number</string>
+    <string name="full_payment_023">ACLEDA Bank</string>
+    <string name="full_payment_024">WING</string>
+    <string name="full_payment_025">TrueMoney</string>
+
+    <!-- Bill Payment -->
+    <string name="bill_payment_001">Bill Payment</string>
+    <string name="bill_payment_002">Payment Amount</string>
+
+    <!-- Total Loan Schedule-->
+    <string name="total_loan_schedule_001">Total Loan Schedule</string>
+    <string name="total_loan_schedule_002">Total Principal</string>
+    <string name="total_loan_schedule_003">Total Interest</string>
+    <string name="total_loan_schedule_004">Total Amount</string>
+    <string name="total_loan_schedule_005">Balance</string>
+    <string name="total_loan_schedule_006">From the Oldest</string>
+    <string name="total_loan_schedule_007">Principal</string>
+    <string name="total_loan_schedule_008">Interest</string>
+    <string name="reset_now">RESET NOW</string>
+
+    <!-- Banner Details -->
+    <string name="banner_details_001">Banner Details</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="decline">Decline</string>
+    <string name="annuity">Annuity</string>
+    <string name="semi_balloon_3_or_6_months">Semi Balloon (3 or 6 Months)</string>
+    <string name="initial">INITIAL</string>
+
+    <string name="calculate">Calculate</string>
+    <string name="perm_0_9">Unable to attach an image. Try again after change setting</string>
+    <string name="forget_password_smg">Please renter code to confirm.</string>
+    <string name="all">All</string>
+    <string name="area">Area</string>
+    <string name="view_map">View Map</string>
+    <string name="call_now">Call Now</string>
+    <string name="call">Call</string>
+    <string name="office_address" translatable="false"># Ground and first floor of B-Ray Tower, Preah \nNorodom Blvd, Sangkat Tonle Bassac, Khan \nChamkamorn, Phnom Penh\nhq.info@bnkcmfi.com</string>
+    <string name="head_office" translatable="false">HEAD OFFICE</string>
+    <string name="notice_01">Notice</string>
+    <string name="single">Single</string>
+    <string name="married">Married</string>
+    <string name="divorced">Divorced</string>
+    <string name="salary">Salary</string>
+    <string name="business">Business</string>
+    <string name="salary_business">Both (Salary and Business)</string>
+    <string name="upload_id_card">UPLOAD DOCUMENT</string>
+
+    <string name="income_type">Income Type</string>
+
+    <string name="addition_01">Select Province</string>
+    <string name="addition_02">District</string>
+    <string name="addition_03">Select District</string>
+    <string name="addition_04">Commune</string>
+    <string name="addition_05">Select Commune</string>
+    <string name="addition_06">Village</string>
+    <string name="addition_07">Select Village</string>
+    <string name="addition_08">Input Detailed Address</string>
+
+    <string name="sort_1">Sort</string>
+    <string name="sort_2">From the Oldest</string>
+    <string name="sort_3">From the Latest</string>
+
+    <string name="mobile_01">Pay by Wing</string>
+    <string name="mobile_02">Wing Account</string>
+    <string name="mobile_03">Wing Code (SMS)</string>
+    <string name="mobile_04">Pay</string>
+    <string name="mobile_05">Payment Failed</string>
+    <string name="mobile_06">Payment Success</string>
+    <string name="mobile_07">Payment Failed\nMessage.</string>
+    <string name="mobile_08">Payment Success\nMessage.</string>
+    <string name="loan_account">Loan Account</string>
+    <string name="acc_info_24">Address</string>
+
+    <string name="occupation_06">Occupation</string>
+    <string name="not_available"> N/A</string>
+    <string name="content">Content</string>
+    <string name="not_answer">Not Answered yet</string>
+    <string name="branch">Branch</string>
+    <string name="change_photo">Change Photo</string>
+
+    <string name="loan_result_01">\u0020\u0020 Ins \u0020\u0020</string>
+    <string name="loan_result_02">\u0020\u0020\u0020 Principal \u0020\u0020\u0020</string>
+    <string name="loan_result_03">\u0020\u0020 Interest \u0020\u0020</string>
+    <string name="loan_result_04">\u0020\u0020\u0020 Repayment \u0020\u0020\u0020</string>
+    <string name="loan_result_05">\u0020\u0020\u0020 Balance \u0020\u0020\u0020</string>
+    <string name="_1_what_is_the_interest_rate_per_month"> What is the Interest Rate per Month?</string>
+    <string name="negotiation">Negotiation.</string>
+    <string name="_2_can_i_borrow_without_collateral"> Can I borrow without collateral?</string>
+    <string name="yes_you_can_borrow_without_collateral_depend_non_the_borrowing_amount">Yes. You can borrow without collateral depend on the borrowing amount.</string>
+    <string name="_3_how_much_income_do_i_need_per_month_to_be_nable_to_borrow_money"> How much income do I need per month to be able to borrow money?</string>
+    <string name="as_long_as_you_have_income_your_borrowing_namount_will_be_studied_to_be_able_to_provide_nto_you">As long as you have income, your borrowing amount will be studied to be able to provide to you.</string>
+
+    <string name="n_1">1.</string>
+    <string name="n_2">2.</string>
+    <string name="n_3">3.</string>
+    <string name="n_4">4.</string>
+    <string name="n_5">5.</string>
+    <string name="bullet_point">•</string>
+
+    <string name="income_type_01">Financial Institution Employee</string>
+    <string name="income_type_02">Government Officer</string>
+    <string name="income_type_03">Teacher</string>
+    <string name="income_type_04">Doctor</string>
+    <string name="income_type_05">Nurse</string>
+    <string name="income_type_06">Technician / Engineer</string>
+    <string name="income_type_07">Driver</string>
+    <string name="income_type_08">Factory Worker</string>
+    <string name="income_type_09">Construction Worker</string>
+    <string name="income_type_10">Employee</string>
+    <string name="income_type_11">BNKC Employee</string>
+    <string name="income_type_12">Seller</string>
+    <string name="income_type_13">Transportor / Carrier</string>
+    <string name="income_type_14">Constructer / Builder</string>
+    <string name="income_type_15">Clothes sewing and sale</string>
+    <string name="income_type_16">Leasing Service</string>
+    <string name="income_type_17">Carpenter</string>
+    <string name="income_type_18">Farmer</string>
+    <string name="income_type_19">Fisherman</string>
+    <string name="income_type_20">Livestock</string>
+    <string name="income_type_21">Other - Salary</string>
+    <string name="income_type_22">Other - Business</string>
+    <string name="income_type_23">Other - Agriculture</string>
+
+    <string name="apply_loan_message_01">Amount must be max %s</string>
+    <string name="apply_loan_message_02">Amount must be min %s to %s</string>
+    <string name="apply_loan_message_03">Amount must be min %s</string>
+    <string name="_4_what_documents_are_needed"> What documents are needed?</string>
+    <string name="id_card_or_family_book_or_residence_book_or_pay_slip_or_other_legal_documents_etc">ID card or Family book or residence book or pay slip, or other legal documents etc.</string>
+    <string name="_5_when_can_i_receive_the_money_after_applying_loan"> When can I receive the money after applying loan?</string>
+    <string name="the_processing_would_take_1day_4days_depend_on_loan_size">the processing would take 1day-4days depend on loan size</string>
+    <string name="visit_your_nearest_bnkc_office_or_our_agents">Visit your nearest BNKC office or our agents</string>
+    <string name="copy_of_your_id_card">Copy of your ID Card</string>
+    <string name="copy_of_family_book">Copy of family book</string>
+    <string name="salary_slip_or_income_statement">Salary slip or income statement</string>
+
+    <string name="small_amount">up to 13,000 (USD/ equivalent KHR)</string>
+    <string name="small_rate">1%​~​1.4% (interest based negotiation)</string>
+    <string name="small_term">68 months (flexible)</string>
+
+    <string name="medium_amount">from 15,000 to Maximum</string>
+    <string name="medium_rate">0.9%~1.1% (interest based negotiation)</string>
+    <string name="medium_term">72 months (flexible)</string>
+
+    <string name="micro_loan_sub_title">Help clients run and grow micro businesses, purchase electronic equipment, vehicles etc. </string>
+    <string name="small_loan_sub_title">Allow you to make home improvement, payoff your dept and finance your business with a very competivive interest rate.</string>
+    <string name="medium_loan_sub_title">support individuals, enterprises in expanding business or set up new business </string>
+    <string name="month_s">Month(s)</string>
+    <string name="enter_month">Enter month</string>
+    <string name="required_document">Required Document :</string>
+    <string name="or_resident_book">Or Resident Book</string>
+    <string name="or_passport">Or Passport</string>
+    <string name="or_salary_slip_or_income">Or Salary Slip or Income statement</string>
+    <string name="statement">Statement</string>
+    <string name="or_others">Or Others</string>
+    <string name="unit_loan_result">Unit: %s</string>
+
 </resources>

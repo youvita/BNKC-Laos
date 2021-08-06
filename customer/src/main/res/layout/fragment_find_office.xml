@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        tools:context=".ui.main.fragment.findoffice.FindOfficeFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <!--    <TextView-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:text="TODO" />-->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                style="@style/font_15_FFFFFF_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/area" />
+        </LinearLayout>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_find_office"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_find_office"
+                android:layout_width="match_parent"
+                android:overScrollMode="never"
+                android:layout_height="wrap_content"/>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.mobile.bnkcl.com.view.ShadowLayout
+            android:id="@+id/sl_areas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:shadowColor="@color/color_90a4ae_shadow"
+            app:shadowDx="0dp"
+            app:shadowDy="0dp"
+            app:shadowRadius="5dp"
+            app:shadowShape="rectangle"
+            app:shadowSide="all">
+            <TextView
+                android:id="@+id/tv_areas"
+                style="@style/font15_263238_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="top"
+                android:gravity="center_vertical"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                android:freezesText="true"
+                android:singleLine="true"
+                android:paddingStart="20dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/all" />
+        </com.mobile.bnkcl.com.view.ShadowLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

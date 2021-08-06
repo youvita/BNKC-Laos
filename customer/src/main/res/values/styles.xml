@@ -26,339 +26,351 @@
         <item name="android:background">@drawable/selector_pin_key</item>
     </style>
 
-    <style name="radio_font14_90A4AE_medium">
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
+    <style name="PFLockScreenCodeStyle">
+        <item name="android:button">@drawable/selector_pin_num</item>
     </style>
 
-    <style name="font15_90a4ae_medium">
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font15_90a4ae_bold">
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_bold</item>
-    </style>
-    <style name="font15_00695c_medium">
-        <item name="android:textColor">@color/color_00695c</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-
-    <style name="font13_00695c_regular">
-        <item name="android:textColor">@color/color_00695c</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <!-- font size 13 -->
-    <style name="font_13_90A4AE_normal">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/color_90A4AE</item>
+    <style name="PFLockScreenButtonStyle" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/font_key_code</item>
+        <item name="android:textColor">@color/color_ffffff</item>
         <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:background">@drawable/selector_pin_key</item>
     </style>
-    <style name="font_13_90A4AE_regular">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:fontFamily">@font/rubik_regular</item>
-    </style>
+
+<!--    <style name="radio_font14_90A4AE_medium">-->
+<!--        <item name="android:textAlignment">center</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_90a4ae_medium">-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font15_90a4ae_bold">-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_bold</item>-->
+<!--    </style>-->
+<!--    <style name="font15_00695c_medium">-->
+<!--        <item name="android:textColor">@color/color_00695c</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+
+<!--    <style name="font13_00695c_regular">-->
+<!--        <item name="android:textColor">@color/color_00695c</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; font size 13 &ndash;&gt;-->
+<!--    <style name="font_13_90A4AE_normal">-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_13_90A4AE_regular">-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
     <style name="font_11_90A4AE_regular">
         <item name="android:textSize">@dimen/font_11_size</item>
         <item name="android:textColor">@color/color_90A4AE</item>
         <item name="android:fontFamily">@font/rubik_regular</item>
     </style>
-    <style name="font_9_90A4AE_regular">
-        <item name="android:textSize">@dimen/font_9_size</item>
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font_13_00695C_regular">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/color_00695c</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <!-- font size 14 -->
-    <style name="font_14_prim_normal">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_14_FFFFFF_normal">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <!-- font size 15 -->
-    <style name="font_15_0c419b">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_0c419b</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font_15_bfc1c9">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_bfc1c9</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font_15_FFFFFF_normal">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_15_ffffff_regular">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font_15_263238_normal">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_15_263238_regular">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font_15_90A4AE_regular">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <!-- font size 17 -->
-    <style name="font_17_0c419b_bold">
-        <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@color/color_0c419b</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <!-- font size 18 -->
-    <style name="font_18_263238_normal">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_18_263238_bold">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_bold</item>
-    </style>
-    <style name="font_18_ffffff_bold">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:fontFamily">@font/rubik_bold</item>
-    </style>
-
-    <!-- font size 21 -->
-    <style name="font_21_FFFFFF_medium">
-        <item name="android:textSize">@dimen/font_pin_message</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_21_263238_normal">
-        <item name="android:textSize">21sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font_21_263238_medium">
-        <item name="android:textSize">21sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font_21_FFFFFF_regular">
-        <item name="android:textSize">21sp</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <!-- font size 28 -->
-    <style name="font_28_263238_normal">
-        <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_28_263238_bold">
-        <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_bold</item>
-    </style>
-
-    <!-- font size 34 -->
-    <style name="font_34_FFFFFF_normal">
-        <item name="android:textSize">34sp</item>
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
-    </style>
-
-<!--    <style name="font10_d7191f_medium_menu">-->
-<!--        <item name="android:textColor">@drawable/selector_color_d7191f_263238_cfd8dc</item>-->
-<!--        <item name="android:textSize">10sp</item>-->
-<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    <style name="font_9_90A4AE_regular">-->
+<!--        <item name="android:textSize">@dimen/font_9_size</item>-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_regular</item>-->
 <!--    </style>-->
-
-    <style name="font15_ffffff_medium">
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font13_ffffff_medium">
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font13_ffffff_regular">
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <style name="font13_ffffff_medium_only">
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-<!--    <style name="font13_ffffff_medium_tab">-->
+<!--    <style name="font_13_00695C_regular">-->
 <!--        <item name="android:textSize">13sp</item>-->
-<!--        <item name="fontFamily">@font/rubik_medium</item>-->
-<!--        <item name="android:textColor">@drawable/selector_color_d7191f_ffffff</item>-->
+<!--        <item name="android:textColor">@color/color_00695c</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
 <!--    </style>-->
 
-    <style name="font15_d7191f_medium">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font_15_d7191f_medium">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    &lt;!&ndash; font size 14 &ndash;&gt;-->
+<!--    <style name="font_14_prim_normal">-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="android:textColor">@color/colorPrimary</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_14_FFFFFF_normal">-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font15_d7191f_medium_en">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font21_263238_medium">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">21sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_90a4ae_regular">
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <style name="font15_2B3FF2_regular">
-        <item name="android:textColor">@color/color_2B3FF2</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <style name="font15_2B3FF2_medium">
-        <item name="android:textColor">@color/color_2B3FF2</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_263238_medium">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font15_263238_medium_en">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font15_263238_medium_dimen">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">@dimen/font_15_size</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_CFD8DC_medium_input">
-        <item name="android:textColorHint">@color/color_cfd8dc</item>
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_263238_regular">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <style name="font15_radio_medium_general">
-        <item name="android:textColor">@color/selector_radio_label</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font15_radio_c4d0d6_medium">
-        <item name="android:textColor">#C4D0D6</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_radio_medium">
-        <item name="android:textColor">@color/selector_radio_label</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font15_radio_medium_not_km">
-        <item name="android:textColor">@color/selector_radio_label</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-<!--    <style name="font15_radio_medium_km">-->
-<!--        <item name="android:textColor">@color/selector_radio_label</item>-->
+<!--    &lt;!&ndash; font size 15 &ndash;&gt;-->
+<!--    <style name="font_15_0c419b">-->
 <!--        <item name="android:textSize">15sp</item>-->
-<!--        <item name="fontFamily">@font/kantumruy_bold</item>-->
+<!--        <item name="android:textColor">@color/color_0c419b</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_bfc1c9">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:textColor">@color/color_bfc1c9</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_FFFFFF_normal">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_ffffff_regular">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_263238_normal">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_263238_regular">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_90A4AE_regular">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_regular</item>-->
 <!--    </style>-->
 
-    <style name="font10_d7191f_medium">
-        <item name="android:textColor">@color/color_d7191f</item>
+<!--    &lt;!&ndash; font size 17 &ndash;&gt;-->
+<!--    <style name="font_17_0c419b_bold">-->
+<!--        <item name="android:textSize">17sp</item>-->
+<!--        <item name="android:textColor">@color/color_0c419b</item>-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; font size 18 &ndash;&gt;-->
+<!--    <style name="font_18_263238_normal">-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_18_263238_bold">-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_bold</item>-->
+<!--    </style>-->
+<!--    <style name="font_18_ffffff_bold">-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_bold</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; font size 21 &ndash;&gt;-->
+<!--    <style name="font_21_FFFFFF_medium">-->
+<!--        <item name="android:textSize">@dimen/font_pin_message</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_21_263238_normal">-->
+<!--        <item name="android:textSize">21sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font_21_263238_medium">-->
+<!--        <item name="android:textSize">21sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font_21_FFFFFF_regular">-->
+<!--        <item name="android:textSize">21sp</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; font size 28 &ndash;&gt;-->
+<!--    <style name="font_28_263238_normal">-->
+<!--        <item name="android:textSize">28sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_28_263238_bold">-->
+<!--        <item name="android:textSize">28sp</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_bold</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; font size 34 &ndash;&gt;-->
+<!--    <style name="font_34_FFFFFF_normal">-->
+<!--        <item name="android:textSize">34sp</item>-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+    <style name="font10_d7191f_medium_menu">
+        <item name="android:textColor">@drawable/selector_color_d7191f_263238_cfd8dc</item>
         <item name="android:textSize">10sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
-    <style name="font14_ffffff_medium">
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font15_ffffff_medium">-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font14_d7191f_medium">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font14_d7191f_medium_dimen">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">@dimen/font_14_size</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font13_ffffff_medium">-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font14_d7191f_medium_single">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font13_ffffff_regular">-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    <style name="font13_ffffff_medium_only">-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--&lt;!&ndash;    <style name="font13_ffffff_medium_tab">&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:textSize">13sp</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="fontFamily">@font/rubik_medium</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:textColor">@drawable/selector_color_d7191f_ffffff</item>&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+<!--    <style name="font15_d7191f_medium">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font_15_d7191f_medium">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_d7191f_medium_en">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font21_263238_medium">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">21sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_90a4ae_regular">-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_2B3FF2_regular">-->
+<!--        <item name="android:textColor">@color/color_2B3FF2</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_2B3FF2_medium">-->
+<!--        <item name="android:textColor">@color/color_2B3FF2</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_263238_medium">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font15_263238_medium_en">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font15_263238_medium_dimen">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">@dimen/font_15_size</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_CFD8DC_medium_input">-->
+<!--        <item name="android:textColorHint">@color/color_cfd8dc</item>-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_263238_regular">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_radio_medium_general">-->
+<!--        <item name="android:textColor">@color/selector_radio_label</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font15_radio_c4d0d6_medium">-->
+<!--        <item name="android:textColor">#C4D0D6</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_radio_medium">-->
+<!--        <item name="android:textColor">@color/selector_radio_label</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font15_radio_medium_not_km">-->
+<!--        <item name="android:textColor">@color/selector_radio_label</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--&lt;!&ndash;    <style name="font15_radio_medium_km">&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:textColor">@color/selector_radio_label</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:textSize">15sp</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="fontFamily">@font/kantumruy_bold</item>&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+<!--    <style name="font10_d7191f_medium">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">10sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font14_ffffff_medium">-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font14_d7191f_medium">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font14_d7191f_medium_dimen">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">@dimen/font_14_size</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font14_d7191f_medium_single">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
     <style name="main_tab_text_style">
         <item name="android:textSize">10sp</item>
@@ -367,182 +379,176 @@
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
-    <style name="font13_d7191f_bold">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font13_d7191f_bold">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font13_263238_regular">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font13_263238_regular_flex">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-    <style name="font13_90a4ae_medium_flex">
-        <item name="android:textColor">@color/color_90a4ae</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font13_263238_regular">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+<!--    <style name="font13_263238_regular_flex">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+<!--    <style name="font13_90a4ae_medium_flex">-->
+<!--        <item name="android:textColor">@color/color_90a4ae</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font13_263238_medium">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font13_263238_medium_flex">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font14_263238_medium">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font13_cfd8dc_medium">
-        <item name="android:textColor">@color/color_cfd8dc</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_c4d0d6_medium">
-        <item name="android:textColor">@color/color_c4d0d6</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_c4d0d6_medium_en">
-        <item name="android:textColor">@color/color_c4d0d6</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font15_cfd8dc_regular">
-        <item name="android:textColor">@color/color_cfd8dc</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <style name="font15_cfd8dc_regular_agreement">
-        <item name="android:textColor">@color/color_cfd8dc</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
-
-    <style name="font15_cfd8dc_medium">
-        <item name="android:textColor">@color/color_cfd8dc</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-    <style name="font14_90A4AE_medium">
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-
-<!--    <style name="font14_selector_medium">-->
-<!--        <item name="sb_textColor">@color/colorPrimary</item>-->
-<!--        <item name="sb_textColor_onSelection">@color/color_ffffff</item>-->
+<!--    <style name="font13_263238_medium">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font13_263238_medium_flex">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font14_263238_medium">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
 <!--        <item name="android:textSize">14sp</item>-->
 <!--        <item name="fontFamily">@font/rubik_medium</item>-->
 <!--    </style>-->
 
-    <style name="font10_655c4f_medium">
-        <item name="android:textColor">@color/color_655c4f</item>
-        <item name="android:textSize">10sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font13_cfd8dc_medium">-->
+<!--        <item name="android:textColor">@color/color_cfd8dc</item>-->
+<!--        <item name="android:textSize">13sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font15_655c4f_medium">
-        <item name="android:textColor">@color/color_655c4f</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
+<!--    <style name="font15_c4d0d6_medium">-->
+<!--        <item name="android:textColor">@color/color_c4d0d6</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    </style>
+<!--    <style name="font15_c4d0d6_medium_en">-->
+<!--        <item name="android:textColor">@color/color_c4d0d6</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="PresetLayoutButton">
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:clickable">true</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:textStyle">normal</item>
-    </style>
+<!--    <style name="font15_cfd8dc_regular">-->
+<!--        <item name="android:textColor">@color/color_cfd8dc</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
 
-    <style name="PresetLayoutButton_ValueText">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/text_size_time_preset_unit</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">
-            @dimen/padding_side_title_text
-        </item>
-        <item name="android:paddingLeft">@dimen/padding_side_title_text</item>
-        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">
-            @dimen/padding_side_title_text
-        </item>
-        <item name="android:paddingRight">@dimen/padding_side_title_text</item>
-    </style>
+<!--    <style name="font15_cfd8dc_regular_agreement">-->
+<!--        <item name="android:textColor">@color/color_cfd8dc</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
 
-    <style name="CustomSwitchTheme" parent="Theme.AppCompat.Light">
-        <item name="android:colorControlActivated">#FF0000</item>
-    </style>
+<!--    <style name="font15_cfd8dc_medium">-->
+<!--        <item name="android:textColor">@color/color_cfd8dc</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#fff</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+<!--&lt;!&ndash;    <style name="font14_selector_medium">&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="sb_textColor">@color/colorPrimary</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="sb_textColor_onSelection">@color/color_ffffff</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:textSize">14sp</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="fontFamily">@font/rubik_medium</item>&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
 
-    <style name="font28_d7191f_medium">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">28sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="font10_655c4f_medium">-->
+<!--        <item name="android:textColor">@color/color_655c4f</item>-->
+<!--        <item name="android:textSize">10sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
-    <style name="font15_050A19_medium">
-        <item name="android:textColor">@color/color_050a19</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
-    <style name="font15_050A19_regular">
-        <item name="android:textColor">@color/color_050a19</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
+<!--    <style name="font15_655c4f_medium">-->
+<!--        <item name="android:textColor">@color/color_655c4f</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
 
-    <style name="font15_00695c_regular">
-        <item name="android:textColor">@color/color_00695c</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_regular</item>
-    </style>
+<!--    </style>-->
 
-    <style name="font15_263238_medium_button" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="PresetLayoutButton">-->
+<!--        <item name="android:layout_marginTop">5dp</item>-->
+<!--        <item name="android:clickable">true</item>-->
+<!--        <item name="android:layout_marginBottom">5dp</item>-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--    </style>-->
 
-    <style name="font14_d7191f_medium_button" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="PresetLayoutButton_ValueText">-->
+<!--        <item name="android:textColor">@color/colorPrimary</item>-->
+<!--        <item name="android:textSize">@dimen/text_size_time_preset_unit</item>-->
+<!--        <item name="android:layout_centerHorizontal">true</item>-->
+<!--        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">-->
+<!--            @dimen/padding_side_title_text-->
+<!--        </item>-->
+<!--        <item name="android:paddingLeft">@dimen/padding_side_title_text</item>-->
+<!--        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">-->
+<!--            @dimen/padding_side_title_text-->
+<!--        </item>-->
+<!--        <item name="android:paddingRight">@dimen/padding_side_title_text</item>-->
+<!--    </style>-->
 
-    <style name="font14_90A4AE_medium_button" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:textColor">@color/color_90A4AE</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="CustomSwitchTheme" parent="Theme.AppCompat.Light">-->
+<!--        <item name="android:colorControlActivated">#FF0000</item>-->
+<!--    </style>-->
 
-    <style name="font14_ffffff_medium_button" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:textColor">@color/color_ffffff</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/rubik_medium</item>
-    </style>
+<!--    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="android:textColor">#fff</item>-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--    </style>-->
+
+<!--    <style name="font28_d7191f_medium">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">28sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_050A19_medium">-->
+<!--        <item name="android:textColor">@color/color_050a19</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+<!--    <style name="font15_050A19_regular">-->
+<!--        <item name="android:textColor">@color/color_050a19</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_00695c_regular">-->
+<!--        <item name="android:textColor">@color/color_00695c</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_regular</item>-->
+<!--    </style>-->
+
+<!--    <style name="font15_263238_medium_button" parent="Widget.AppCompat.Button.Borderless">-->
+<!--        <item name="android:textColor">@color/color_263238</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font14_d7191f_medium_button" parent="Widget.AppCompat.Button.Borderless">-->
+<!--        <item name="android:textColor">@color/color_d7191f</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font14_90A4AE_medium_button" parent="Widget.AppCompat.Button.Borderless">-->
+<!--        <item name="android:textColor">@color/color_90A4AE</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
+
+<!--    <style name="font14_ffffff_medium_button" parent="Widget.AppCompat.Button.Borderless">-->
+<!--        <item name="android:textColor">@color/color_ffffff</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="fontFamily">@font/rubik_medium</item>-->
+<!--    </style>-->
 
 </resources>
