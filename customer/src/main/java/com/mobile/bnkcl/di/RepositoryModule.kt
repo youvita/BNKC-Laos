@@ -4,7 +4,7 @@ import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.MGApi
 import com.mobile.bnkcl.repository.comment.CommentRepo
 import com.mobile.bnkcl.repository.login.LoginRepo
-import com.mobile.bnkcl.repository.Intro.MGRepo
+import com.mobile.bnkcl.repository.intro.MGRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
