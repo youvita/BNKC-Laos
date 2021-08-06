@@ -34,14 +34,14 @@ fun Fragment.getWindowHeight(): Int {
 /**
  * convert any object to string
  */
-inline fun <reified T> convertToString(obj: T?): String? {
+fun <T> convertToString(obj: T?): String? {
     return Gson().toJson(obj)
 }
 
 /**
  * convert any string to object
  */
-inline fun <reified T> convertToObject(obj: String?): T {
+fun <T> convertToObject(obj: String?): T {
     obj?: emptyList<T>()
     return Gson().fromJson(obj, object : TypeToken<T>() {}.type)
 }
