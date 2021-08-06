@@ -18,5 +18,10 @@
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight, and colorSwitchThumbNormal. -->
     </style>
-
+    <style name="PFLockScreenButtonStyle" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/font_key_code</item>
+        <item name="android:textColor">@color/color_ffffff</item>
+        <item name="android:background">@drawable/selector_pin_key</item>
+    </style>
 </resources>

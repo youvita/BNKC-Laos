@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_lock_screen_fp_size">80dp</dimen>
+    <dimen name="button_lock_screen_fp_margin_vertical">25dp</dimen>
+    <dimen name="code_fp_size">80dp</dimen>
+    <dimen name="code_fp_margin">5dp</dimen>
+    <dimen name="code_white_pin_size">27dp</dimen>
+
+    <dimen name="margin_key_pin_code">20dp</dimen>
+    <dimen name="font_key_code">30sp</dimen>
+
+    <dimen name="font_pin_message">20sp</dimen>
+
+    <dimen name="consult_max_width">220dp</dimen>
+
+    <dimen name="margin_top_pin_code">20dp</dimen>
+    <dimen name="margin_top_pin_message">15dp</dimen>
+
+    <dimen name="margin_top_pin_key">20dp</dimen>
+    <dimen name="margin_bottom_pin_key">40dp</dimen>
+
+    <dimen name="main_toolbar_margin_top">40dp</dimen>
+    <dimen name="main_red_gradient_height">205dp</dimen>
+    <dimen name="main_tab_height">70dp</dimen>
+
+    <!--innit screen-->
+    <dimen name="initail_img_bg">580dp</dimen>
+    <dimen name="initail_toolbar_top">30dp</dimen>
+    <dimen name="initail_margin_top">200dp</dimen>
+    <dimen name="signup_btn_margin_bottom">55dp</dimen>
+
+    <dimen name="padding_side_title_text">5dp</dimen>
+    <dimen name="padding_top_title_text">10dp</dimen>
+    <dimen name="text_size_time_preset_unit">20sp</dimen>
+
+    <dimen name="loan_consult_margin">15dp</dimen>
+    <dimen name="indicator_space">5dp</dimen>
+    <dimen name="delete_img_size">36dp</dimen>
+
+    <dimen name="font_9_size">12sp</dimen>
+    <dimen name="font_11_size">11sp</dimen>
+    <dimen name="font_15_size">15sp</dimen>
+    <dimen name="font_14_size">14sp</dimen>
+
+    <dimen name="high_loan_progress">106dp</dimen>
+</resources>
