@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.cscenter.AskbnkcActivity">
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:background="@color/color_f5f7fc"
+            android:layout_height="match_parent"
+            tools:context=".ui.settiing.SettingsActivity"
+            android:id="@+id/wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_f5f7fc"
+                android:stateListAnimator="@null">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/coll_toolbar"
+                    style="@style/font_28_263238_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_120dp"
+                    app:collapsedTitleGravity="center"
+                    app:expandedTitleMargin="@dimen/margin_21dp"
+                    app:expandedTitleTextAppearance="@style/font_28_263238_bold"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:title="Ask BNKC">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/font_18_263238_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/color_00ffffff"
+                        android:contentInsetStart="0dp"
+                        android:contentInsetEnd="0dp"
+                        android:contentInsetRight="0dp"
+                        android:gravity="center"
+                        app:collapseIcon="@null"
+                        app:contentInsetEnd="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetRight="0dp"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin">
+
+                        <ImageView
+                            android:id="@+id/toolbar_left_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:paddingStart="@dimen/padding_21dp"
+                            android:src="@drawable/ic_nav_close_dark_btn"
+                            tools:ignore="RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/toolbar_right_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:paddingEnd="@dimen/padding_21dp"
+                            android:src="@drawable/ic_nav_close_dark_btn"
+                            android:visibility="invisible" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_solid_ffffff_15"
+                android:paddingLeft="@dimen/padding_21dp"
+                android:paddingRight="@dimen/padding_21dp"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/margin_31dp"
+                    android:layout_marginBottom="@dimen/margin_120dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/font13_263238_medium"
+                        android:layout_marginTop="@dimen/margin_15dp"
+                        android:text="@string/subject"/>
+
+                    <com.mobile.bnkcl.comm.view.BnKEditText
+                        android:id="@+id/edt_subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Subject"
+                        android:textColorHint="@color/color_cfd8dc"
+                        android:background="@drawable/selector_edittext_bg"
+                        android:textColor="@color/color_263238"
+                        android:paddingTop="@dimen/padding_16dp"
+                        android:paddingBottom="@dimen/padding_16dp"
+                        android:paddingRight="@dimen/padding_15dp"
+                        android:paddingLeft="@dimen/padding_15dp"
+                        android:maxLength="255"
+                        android:singleLine="true"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        style="@style/font15_263238_medium"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/font13_263238_medium"
+                        android:layout_marginTop="15dp"
+                        android:text="Description"/>
+                    <com.mobile.bnkcl.comm.view.BnKEditText
+                        android:id="@+id/edt_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Description"
+                        android:textColorHint="@color/color_cfd8dc"
+                        android:background="@drawable/selector_edittext_bg"
+                        android:textColor="@color/color_263238"
+                        android:gravity="top"
+                        android:paddingTop="@dimen/padding_16dp"
+                        android:paddingBottom="@dimen/padding_16dp"
+                        android:paddingRight="@dimen/padding_15dp"
+                        android:paddingLeft="@dimen/padding_15dp"
+                        android:minHeight="@dimen/height_100dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        style="@style/font15_263238_medium"/>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/padding_20dp"
+                android:paddingEnd="@dimen/padding_20dp"
+                android:paddingBottom="@dimen/padding_21dp"
+                android:background="@color/color_ffffff"
+                android:layout_gravity="bottom">
+
+                <com.mobile.bnkcl.comm.view.ValidateButton
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50dp"
+                    app:buttonText="Submit"
+                    app:is_active="false"
+                    android:layout_gravity="bottom"
+                    />
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

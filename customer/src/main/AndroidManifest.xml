@@ -17,6 +17,15 @@
         android:usesCleartextTraffic="true"
         tools:overrideLibrary="androidx.security.identity.credential"
         tools:targetApi="m">
+        <activity android:name=".ui.notice.NoticeDetailActivity"></activity>
+        <activity android:name=".ui.notification.NotificationActivity" />
+        <activity android:name=".ui.signup.TermsAndConditionsActivity" />
+        <activity android:name=".ui.cscenter.AskbnkcActivity" />
+        <activity android:name=".ui.cscenter.AskBNKCDetailActivity" />
+        <activity android:name=".ui.cscenter.CSCenterActivity" />
+        <activity android:name=".ui.success.ResultActivity" />
+        <activity android:name=".ui.notice.NoticeActivity" />
+        <activity android:name=".ui.signup.SignUpActivity"/>
         <activity android:name=".ui.reponse.ReponseActivity"></activity>
         <activity android:name=".ui.pinview.PinCodeActivity" />
         <activity android:name=".ui.intro.IntroActivity">
@@ -26,7 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.home.HomeActivity" />
+        <activity android:name=".ui.login.LoginActivity">
+
+        </activity>
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />

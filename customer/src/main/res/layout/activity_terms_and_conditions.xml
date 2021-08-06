@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.signup.TermsAndConditionsActivity"
+        android:background="@color/color_ffffff"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ui.signup.TermsAndConditionsActivity">
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/width_24dp"
+                    android:layout_height="@dimen/height_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_21dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:src="@drawable/ic_nav_close_dark_btn" />
+
+                <TextView
+                    android:id="@+id/tv_title_toolbar"
+                    style="@style/font_18_263238_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/rubik_bold"
+                    android:text="@string/policy" />
+
+            </RelativeLayout>
+
+
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_21dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_21dp"
+                android:layout_marginBottom="@dimen/margin_21dp"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
