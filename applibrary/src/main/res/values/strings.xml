@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_no_network">No network connection</string>
+    <string name="message_pls_check_network">Please check your internet connection and try again.</string>
+</resources>
