@@ -11,6 +11,10 @@
             name="introViewModel"
             type="IntroViewModel" />
 
+        <variable
+            name="appVersion"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textSize="13sp"
+                android:text="@{`Version` + appVersion}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_brand_bnkc"
                 tools:text="Version 1.0" />

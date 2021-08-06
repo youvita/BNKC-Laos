@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mobile.bnkcl.data.MGData
-import com.mobile.bnkcl.repository.Intro.MGRepo
+import com.mobile.bnkcl.repository.intro.MGRepo
 import com.bnkc.sourcemodule.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -18,9 +18,11 @@ class IntroViewModel @Inject constructor(private val mgRepo: MGRepo) : BaseViewM
     private val _mgData: MutableLiveData<MGData> = MutableLiveData()
     val mgData: LiveData<MGData> get() = _mgData
 
-    fun getMGData(){
+    fun getMGData() {
         viewModelScope.launch {
-            mgRepo.getMGData().onEach { mgData -> _mgData.value = mgData }.launchIn(viewModelScope)
+            mgRepo.getMGData().onEach {
+                    resource -> _mgData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 

@@ -1,5 +1,6 @@
-package com.mobile.bnkcl.repository.Intro
+package com.mobile.bnkcl.repository.intro
 
+import com.bnkc.library.data.Resource
 import com.bnkc.library.network.RemoteDataSource
 import com.mobile.bnkcl.data.MGData
 import com.mobile.bnkcl.data.api.MGApi
@@ -10,7 +11,7 @@ import retrofit2.Response
 
 class MGRepo(private val mgApi: MGApi) {
 
-    fun getMGData(): Flow<MGData> = flow {
+    fun getMGData(): Flow<Resource<MGData>> = flow {
         delay(1000)
         try {
             val request = object: RemoteDataSource<MGData>(){
@@ -19,8 +20,9 @@ class MGRepo(private val mgApi: MGApi) {
                 }
             }
             request.networkRequest()
-            emit(request.asLiveData().value?.data!!)
+            emit(request.asLiveData().value!!)
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
