@@ -3,7 +3,7 @@
  * @author chan youvita
  * @since 2021.08.01
  */
-package com.bnkc.library.network
+package com.bnkc.library.data.network
 
 sealed class RetrofitResponse<out T> {
 

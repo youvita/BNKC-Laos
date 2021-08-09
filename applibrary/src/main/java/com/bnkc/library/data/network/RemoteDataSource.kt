@@ -3,13 +3,13 @@
  * @author chan youvita
  * @since 2021.08.01
  */
-package com.bnkc.library.network
+package com.bnkc.library.data.network
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bnkc.library.R
-import com.bnkc.library.data.Resource
+import com.bnkc.library.data.type.Resource
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import kotlinx.coroutines.CancellationException

@@ -1,6 +1,6 @@
 package com.mobile.bnkcl.data.repository.comment
 
-import com.bnkc.library.network.RemoteDataSource
+import com.bnkc.library.data.network.RemoteDataSource
 import com.mobile.bnkcl.data.CommentsItem
 import com.mobile.bnkcl.data.api.CommentApi
 import kotlinx.coroutines.delay

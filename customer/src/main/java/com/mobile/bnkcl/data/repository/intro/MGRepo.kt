@@ -1,7 +1,7 @@
 package com.mobile.bnkcl.data.repository.intro
 
-import com.bnkc.library.data.Resource
-import com.bnkc.library.network.RemoteDataSource
+import com.bnkc.library.data.type.Resource
+import com.bnkc.library.data.network.RemoteDataSource
 import com.mobile.bnkcl.data.MGData
 import com.mobile.bnkcl.data.api.MGApi
 import kotlinx.coroutines.delay
