@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.repository.intro
+package com.mobile.bnkcl.data.repository.intro
 
 import com.bnkc.library.data.Resource
 import com.bnkc.library.network.RemoteDataSource

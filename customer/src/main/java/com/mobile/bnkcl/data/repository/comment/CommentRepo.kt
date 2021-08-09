@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.repository.comment
+package com.mobile.bnkcl.data.repository.comment
 
 import com.bnkc.library.network.RemoteDataSource
 import com.mobile.bnkcl.data.CommentsItem

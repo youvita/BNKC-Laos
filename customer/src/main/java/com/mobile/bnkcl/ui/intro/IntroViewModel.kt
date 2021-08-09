@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mobile.bnkcl.data.MGData
-import com.mobile.bnkcl.repository.intro.MGRepo
+import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.bnkc.sourcemodule.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn

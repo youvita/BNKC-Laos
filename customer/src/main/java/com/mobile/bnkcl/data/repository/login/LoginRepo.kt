@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.repository.login
+package com.mobile.bnkcl.data.repository.login
 
 class LoginRepo {
 
