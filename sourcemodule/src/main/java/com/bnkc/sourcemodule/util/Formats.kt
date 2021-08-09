@@ -2,6 +2,11 @@ package com.bnkc.sourcemodule.util
 
 object Formats {
 
-    //Decimal format
-    const val DECIMAL_FORMAT = "#,###,##0.00"
+    // Date
+    const val DAY_MONTH_YEAR = "dd-MM-yyyy"
+    const val DAY_MONTH_YEAR_FROM = "yyyyMMdd"
+
+    // Decimal format
+    const val DECIMAL_FORMAT = "#,###,###"
+
 }

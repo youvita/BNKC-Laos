@@ -109,7 +109,7 @@
                     android:drawableEnd="@drawable/ic_more_ico" />
             </LinearLayout>
 
-            <com.mobile.bnkcl.comm.view.BnKEditText
+            <com.mobile.bnkcl.com.view.BnkEditText
                 android:id="@+id/edt_detailed_address"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

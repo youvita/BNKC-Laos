@@ -18,7 +18,7 @@
             android:background="@color/color_ffffff"
             tools:context=".ui.cscenter.AskBNKCDetailActivity">
 
-            <com.mobile.bnkcl.comm.view.ActionBar
+            <com.mobile.bnkcl.com.view.ActionBar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
