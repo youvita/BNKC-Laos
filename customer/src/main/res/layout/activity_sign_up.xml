@@ -166,7 +166,7 @@
                                     style="@style/font13_263238_medium"
                                     android:text="@string/name" />
 
-                                <com.mobile.bnkcl.comm.view.BnKEditText
+                                <com.mobile.bnkcl.com.view.BnkEditText
                                     android:id="@+id/edt_family_name"
                                     style="@style/font15_CFD8DC_medium_input"
                                     android:layout_width="match_parent"
@@ -202,7 +202,7 @@
                                     android:background="@drawable/selector_viewgroup_bg"
                                     android:orientation="horizontal">
 
-                                    <com.mobile.bnkcl.comm.view.BnKEditText
+                                    <com.mobile.bnkcl.com.view.BnkEditText
                                         android:id="@+id/tv_dob"
                                         android:layout_width="@dimen/width_0dp"
                                         android:layout_height="match_parent"
@@ -253,7 +253,7 @@
                                     android:layout_marginEnd="@dimen/margin_10dp"
                                     android:orientation="horizontal">
 
-                                    <com.mobile.bnkcl.comm.view.BnKEditText
+                                    <com.mobile.bnkcl.com.view.BnkEditText
                                         android:id="@+id/edt_id_num"
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"

@@ -76,7 +76,7 @@
                 android:layout_marginBottom="@dimen/margin_21dp"
                 android:orientation="horizontal">
 
-                <com.mobile.bnkcl.comm.view.ValidateButton
+                <com.mobile.bnkcl.com.view.ValidateButton
                     android:id="@+id/vb_result"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"

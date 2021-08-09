@@ -99,7 +99,7 @@
                         android:layout_marginTop="@dimen/margin_15dp"
                         android:text="@string/subject"/>
 
-                    <com.mobile.bnkcl.comm.view.BnKEditText
+                    <com.mobile.bnkcl.com.view.BnkEditText
                         android:id="@+id/edt_subject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                         style="@style/font13_263238_medium"
                         android:layout_marginTop="15dp"
                         android:text="Description"/>
-                    <com.mobile.bnkcl.comm.view.BnKEditText
+                    <com.mobile.bnkcl.com.view.BnkEditText
                         android:id="@+id/edt_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:background="@color/color_ffffff"
                 android:layout_gravity="bottom">
 
-                <com.mobile.bnkcl.comm.view.ValidateButton
+                <com.mobile.bnkcl.com.view.ValidateButton
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
