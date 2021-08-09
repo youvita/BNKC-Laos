@@ -25,15 +25,17 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f5f7fc"
+                android:background="@color/color_f5f7fc"
                 android:stateListAnimator="@null">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/coll_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="@dimen/height_120dp"
                     app:collapsedTitleGravity="center"
-                    app:expandedTitleMargin="21dp"
+                    app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
+                    app:expandedTitleMargin="@dimen/margin_21dp"
+                    app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                     app:title="Bill Payment">
 
@@ -41,7 +43,7 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:background="#f5f7fc"
+                        android:background="@color/color_f5f7fc"
                         android:contentInsetStart="0dp"
                         android:contentInsetEnd="0dp"
                         android:contentInsetRight="0dp"
@@ -58,7 +60,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:paddingStart="21dp"
+                            android:layout_marginStart="@dimen/margin_21dp"
                             android:src="@drawable/ic_nav_back_dark_btn"
                             tools:ignore="RtlSymmetry" />
 
@@ -67,7 +69,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:paddingEnd="21dp"
+                            android:layout_marginEnd="@dimen/margin_21dp"
                             android:src="@drawable/ic_nav_close_dark_btn"
                             android:visibility="invisible" />
                     </androidx.appcompat.widget.Toolbar>
@@ -80,9 +82,9 @@
                     android:background="@drawable/round_top_solid_ffffff_corner_15"
                     android:elevation="15dp"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="30dp"
-                    android:paddingRight="20dp"
+                    android:paddingLeft="@dimen/padding_20dp"
+                    android:paddingTop="@dimen/padding_30dp"
+                    android:paddingRight="@dimen/padding_20dp"
                     app:layout_collapseMode="pin">
 
                     <LinearLayout
@@ -90,21 +92,23 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                         android:orientation="vertical"
-                        android:padding="20dp">
+                        android:padding="@dimen/padding_20dp">
 
                         <TextView
+                            style="@style/font15_263238_medium"
                             android:id="@+id/tv_full_payment_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Payment Amount" />
+                            android:text="@string/bill_01" />
 
                         <TextView
                             android:id="@+id/tv_payment_amount"
                             android:layout_width="wrap_content"
+                            style="@style/font28_d7191f_medium"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:drawableStart="@drawable/ic_payment_red_ico"
-                            android:drawablePadding="10dp"
+                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:drawablePadding="@dimen/padding_10dp"
+                            app:drawableStartCompat="@drawable/ic_payment_red_ico"
                             android:text="3,650.00 USD" />
                     </LinearLayout>
 
@@ -115,7 +119,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
+                android:background="@color/color_ffffff"
                 android:fillViewport="true"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -123,16 +127,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="85dp">
+                    android:paddingLeft="@dimen/padding_20dp"
+                    android:paddingRight="@dimen/padding_20dp">
 
                     <include
                         android:id="@+id/mobile_payment"
                         layout="@layout/mobile_payment_item_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="@dimen/margin_10dp" />
 
                 </LinearLayout>
 

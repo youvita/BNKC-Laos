@@ -22,7 +22,61 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/comm_collapse_toolbar" />
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/color_f5f7fc"
+                android:stateListAnimator="@null">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/col_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:collapsedTitleGravity="center"
+                    app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
+                    app:expandedTitleMargin="@dimen/margin_21dp"
+                    app:expandedTitleTextAppearance="@style/font_28_263238_bold"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:title="Pay by ?">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar_01"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/color_f5f7fc"
+                        android:contentInsetStart="0dp"
+                        android:contentInsetEnd="0dp"
+                        android:contentInsetRight="0dp"
+                        android:gravity="center"
+                        app:collapseIcon="@null"
+                        app:contentInsetEnd="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetRight="0dp"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin">
+
+                        <ImageView
+                            android:id="@+id/toolbar_left_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_21dp"
+                            android:src="@drawable/ic_nav_back_dark_btn"
+                            tools:ignore="ContentDescription,RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/toolbar_right_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="@dimen/margin_21dp"
+                            android:src="@drawable/ic_nav_close_dark_btn"
+                            android:visibility="invisible"
+                            tools:ignore="ContentDescription" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -34,32 +88,34 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="21dp"
-                    android:paddingTop="30dp"
-                    android:paddingRight="21dp">
+                    android:layout_marginStart="@dimen/margin_21dp"
+                    android:layout_marginTop="@dimen/margin_30dp"
+                    android:layout_marginEnd="@dimen/margin_21dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        style="@style/font13_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="/? Account Number" />
+                        android:text="@string/mbl_payment_07" />
 
                     <LinearLayout
                         android:id="@+id/ll_wing_account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
                         android:background="@drawable/selector_viewgroup_bg"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginStart="@dimen/margin_15dp"
                             android:src="@drawable/ic_client_info_ico" />
 
                         <com.mobile.bnkcl.com.view.BnkEditText
                             android:id="@+id/edt_wing_account"
+                            style="@style/font15_263238_medium"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -67,57 +123,61 @@
                             android:hint="0000-0000"
                             android:inputType="number"
                             android:maxLength="9"
-                            android:paddingStart="10dp"
-                            android:paddingTop="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="@dimen/margin_10dp"
+                            android:paddingTop="@dimen/margin_16dp"
+                            android:paddingEnd="0dp"
+                            android:paddingBottom="@dimen/margin_16dp"
                             android:singleLine="true"
-                            android:textColorHint="#cfd8dc" />
+                            android:textColorHint="@color/color_cfd8dc" />
 
                         <ImageView
                             android:id="@+id/iv_send_code"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginRight="15dp"
+                            android:layout_marginEnd="@dimen/margin_15dp"
                             android:clickable="false"
                             android:src="@drawable/ic_otp_send_off_ico" />
 
                     </LinearLayout>
 
                     <TextView
+                        style="@style/font13_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="31dp"
-                        android:text="/? Code (SMS)" />
+                        android:layout_marginTop="@dimen/margin_31dp"
+                        android:text="@string/mbl_payment_08" />
 
                     <LinearLayout
                         android:id="@+id/ll_wing_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
                         android:background="@drawable/selector_viewgroup_bg"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="15dp"
-                            android:src="@drawable/ic_lock_ico" />
+                            android:layout_marginStart="@dimen/margin_15dp"
+                            android:src="@drawable/ic_lock_grey_ico"
+                            tools:ignore="ContentDescription" />
 
                         <com.mobile.bnkcl.com.view.BnkEditText
                             android:id="@+id/edt_wing_code"
+                            style="@style/font15_263238_medium"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:enabled="false"
                             android:hint="XXX-XXX"
                             android:inputType="number"
                             android:maxLength="7"
-                            android:paddingStart="10dp"
-                            android:paddingTop="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="@dimen/margin_10dp"
+                            android:paddingTop="@dimen/margin_16dp"
+                            android:paddingEnd="0dp"
+                            android:paddingBottom="@dimen/margin_16dp"
                             android:singleLine="true"
-                            android:textColorHint="#cfd8dc" />
+                            android:textColorHint="@color/color_cfd8dc" />
 
                     </LinearLayout>
 
@@ -130,16 +190,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
-                android:background="#ffffff"
-                android:paddingBottom="21dp">
+                android:layout_marginBottom="@dimen/margin_21dp"
+                android:background="@color/color_ffffff">
 
                 <Button
                     android:id="@+id/btn_pay"
+                    style="@style/font14_ffffff_medium"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp"
-                    android:text="PAY" />
+                    android:layout_marginLeft="@dimen/margin_21dp"
+                    android:layout_marginRight="@dimen/margin_21dp"
+                    android:background="@drawable/round_solid_d7191f_8"
+                    android:text="@string/mbl_payment_09" />
 
             </LinearLayout>
 

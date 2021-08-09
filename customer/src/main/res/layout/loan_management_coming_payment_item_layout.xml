@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-        android:padding="15dp">
+        android:padding="@dimen/padding_15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,20 +26,22 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawablePadding="10dp"
+                    style="@style/font15_263238_medium"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="Coming Repayment"
+                    android:text="@string/lease_16"
                     app:drawableStartCompat="@drawable/ic_payment_ico" />
 
                 <TextView
                     android:id="@+id/tv_coming_repayment_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@drawable/round_solid_e0f2f1"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:paddingLeft="10dp"
+                    style="@style/font15_00695c_medium"
                     android:paddingTop="3dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="3dp"
@@ -66,7 +68,7 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="#eef5f8" />
+                    android:background="@color/color_eef5f8" />
 
                 <!-- Coming Repayment Date -->
                 <LinearLayout
@@ -79,7 +81,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Coming Repayment Date" />
+                        style="@style/font15_90a4ae_regular"
+                        android:text="@string/lease_17" />
 
                     <TextView
                         android:id="@+id/tv_coming_repayment_date"
@@ -87,6 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
+                        style="@style/font15_263238_medium"
                         android:text="15-05-2020" />
                 </LinearLayout>
 
@@ -101,12 +105,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Repayment Session" />
+                        style="@style/font15_90a4ae_regular"
+                        android:text="@string/lease_18" />
 
                     <TextView
                         android:id="@+id/tv_repayment_session"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        style="@style/font15_263238_medium"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="5th / 36th" />
@@ -123,12 +129,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Principal" />
+                        style="@style/font15_90a4ae_regular"
+                        android:text="@string/lease_19" />
 
                     <TextView
                         android:id="@+id/tv_principle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        style="@style/font15_263238_medium"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="13,500,000 Kip" />
@@ -145,13 +153,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Interest" />
+                        style="@style/font15_90a4ae_regular"
+                        android:text="@string/lease_20" />
 
                     <TextView
                         android:id="@+id/tv_interest"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/font15_263238_medium"
                         android:gravity="end"
                         android:text="500,000 Kip" />
                 </LinearLayout>
@@ -167,13 +177,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Overdue Principal" />
+                        style="@style/font15_d7191f_regular"
+                        android:text="@string/lease_21" />
 
                     <TextView
                         android:id="@+id/tv_overdue_principle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/font15_263238_medium"
                         android:gravity="end"
                         android:text="1,3500,000 Kip" />
                 </LinearLayout>
@@ -189,12 +201,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Overdue Interest" />
+                        style="@style/font15_d7191f_regular"
+                        android:text="@string/lease_22" />
 
                     <TextView
                         android:id="@+id/tv_overdue_interest"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        style="@style/font15_263238_medium"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="400,000 Kip" />
@@ -211,12 +225,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Overdue Penalty (11Days)" />
+                        style="@style/font15_d7191f_regular"
+                        android:text="@string/lease_23" />
 
                     <TextView
                         android:id="@+id/tv_overdue_penalty"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        style="@style/font15_263238_medium"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="100,000 Kip" />
@@ -233,11 +249,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="Total" />
+                        style="@style/font15_90a4ae_regular"
+                        android:text="@string/lease_24" />
 
                     <TextView
                         android:id="@+id/tv_total"
                         android:layout_width="0dp"
+                        style="@style/font15_263238_medium"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -262,7 +280,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#ffffff" />
+                        android:background="@color/color_ffffff" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -270,9 +288,10 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="15dp"
+                        style="@style/font13_d7191f_medium"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
-                        android:text="If you don't pay today, The Penalty will be increase." />
+                        android:text="@string/lease_25" />
                 </LinearLayout>
 
             </LinearLayout>

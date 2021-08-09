@@ -21,10 +21,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginStart="@dimen/margin_21dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:layout_marginEnd="@dimen/margin_21dp"
+            android:layout_marginBottom="@dimen/margin_30dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_top"
@@ -39,28 +39,30 @@
                     android:src="@drawable/ic_brand_bnkc_lao_ndmf"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_change_language"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="@dimen/margin_36dp"
                     android:background="@drawable/round_solid_ffeeee_18"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:paddingEnd="@dimen/padding_8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/tv_current_lang"
+                        style="@style/font13_d7191f_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="@dimen/margin_8dp"
+                        android:text="@string/home_04"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/iv_flag"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:text="@string/language"
                         tools:text="ພາສາລາວ" />
 
                     <ImageView
@@ -70,7 +72,8 @@
                         android:src="@drawable/laos_flag"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,13 +108,15 @@
                             android:src="@drawable/initial_loan_image"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
+                            style="@style/font21_263238_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="21dp"
-                            android:text="Need a Loan?"
+                            android:layout_marginTop="@dimen/margin_21dp"
+                            android:text="@string/home_01"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/iv_home_loan" />
@@ -140,23 +145,26 @@
                             android:src="@drawable/initial_lease_image"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/tv_lease"
+                            style="@style/font21_263238_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="21dp"
-                            android:text="Need a Leasing?"
+                            android:layout_marginTop="@dimen/margin_21dp"
+                            android:text="@string/home_02"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/iv_lease" />
 
                         <TextView
+                            style="@style/font18_263238_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="(car, motorcycle, mobile phone etc)"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:text="@string/home_03"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_lease" />
@@ -177,11 +185,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="21dp"
+                    android:layout_marginTop="@dimen/margin_21dp"
                     android:src="@drawable/ic_brand_bnkc_lao_leasing"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

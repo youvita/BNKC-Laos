@@ -17,8 +17,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         return R.layout.activity_setting
     }
 
-    @SuppressLint("SetTextI18n")
     private fun initAppVersion() {
-        binding.tvAppVersion.text = "Version " + this.packageManager.getPackageInfo(this.packageName, 0).versionName
+        binding.appVersion = this.packageManager.getPackageInfo(this.packageName, 0).versionName
     }
 }

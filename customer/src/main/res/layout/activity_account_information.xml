@@ -16,10 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f5f7fc"
+        android:background="@color/color_f5f7fc"
         tools:context=".ui.user.AccountInformationActivity">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -30,33 +30,43 @@
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="21dp"
+                android:layout_marginStart="@dimen/margin_21dp"
                 android:gravity="center_vertical"
-                android:src="@drawable/ic_nav_back_dark_btn" />
+                android:src="@drawable/ic_nav_back_dark_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_title_toolbar"
-                android:layout_width="match_parent"
+                style="@style/font_18_263238_bold"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:text="Account Information" />
+                android:text="@string/info_01"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_title_toolbar_02"
+                style="@style/font14_d7191f_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="21dp"
+                android:layout_marginEnd="@dimen/margin_21dp"
                 android:gravity="center_vertical"
-                android:text="Edit"
-                android:textAllCaps="true" />
+                android:text="@string/info_02"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/height_0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -65,22 +75,21 @@
                 android:layout_height="wrap_content"
                 android:fillViewport="true"
                 android:overScrollMode="never"
-                android:paddingBottom="50dp"
                 android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="21dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="21dp"
-                        android:layout_marginBottom="41dp"
+                        android:layout_marginStart="@dimen/margin_21dp"
+                        android:layout_marginTop="@dimen/margin_15dp"
+                        android:layout_marginEnd="@dimen/margin_21dp"
+                        android:layout_marginBottom="@dimen/margin_41dp"
                         android:gravity="start"
                         android:src="@drawable/ic_brand_bnkc_lao_ndmf" />
 
@@ -89,32 +98,32 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/round_solid_ffffff_15"
                         android:orientation="vertical"
-                        android:paddingBottom="55dp"
                         android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="UselessParent">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="21dp"
-                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="@dimen/margin_21dp"
+                                android:layout_marginBottom="@dimen/margin_10dp"
                                 android:src="@drawable/ic_avatar_s" />
 
                             <com.mobile.bnkcl.com.view.ShadowLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="-16dp"
-                                android:layout_marginRight="8dp"
-                                app:shadowColor="#3090a4ae"
-                                app:shadowDx="0dp"
-                                app:shadowDy="0dp"
-                                app:shadowRadius="8dp"
+                                android:layout_marginLeft="@dimen/margin_8dp"
+                                android:layout_marginTop="@dimen/margin_minus_16dp"
+                                android:layout_marginRight="@dimen/margin_8dp"
+                                app:shadowColor="@color/color_3090a4ae_shadow"
+                                app:shadowDx="@dimen/shadowD_0dp"
+                                app:shadowDy="@dimen/shadowD_0dp"
+                                app:shadowRadius="@dimen/shadow_radius_8dp"
                                 app:shadowShape="rectangle"
                                 app:shadowSide="all">
 
@@ -128,15 +137,17 @@
                                         android:id="@+id/ll_view_more_personal"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="15dp">
+                                        android:padding="@dimen/padding_15dp"
+                                        tools:ignore="TooDeepLayout,UseCompoundDrawables">
 
                                         <TextView
+                                            style="@style/font15_263238_medium"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:drawablePadding="10dp"
+                                            android:drawablePadding="@dimen/padding_10dp"
                                             android:gravity="center_vertical"
-                                            android:text="Personal Information"
+                                            android:text="@string/info_03"
                                             app:drawableStartCompat="@drawable/ic_personal_info_ico" />
 
                                         <ImageView
@@ -144,7 +155,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="end"
-                                            android:src="@drawable/ic_fold_ico" />
+                                            android:src="@drawable/ic_fold_ico"
+                                            tools:ignore="ContentDescription" />
 
                                     </LinearLayout>
 
@@ -153,33 +165,35 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:paddingLeft="15dp"
-                                        android:paddingRight="15dp"
-                                        android:paddingBottom="15dp"
+                                        android:paddingLeft="@dimen/padding_15dp"
+                                        android:paddingRight="@dimen/padding_15dp"
+                                        android:paddingBottom="@dimen/padding_15dp"
                                         android:visibility="visible">
 
                                         <View
                                             android:id="@+id/view_1"
                                             android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="#eef5f8" />
+                                            android:layout_height="@dimen/height_1dp"
+                                            android:background="@color/color_eef5f8" />
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="15dp"
+                                            android:layout_marginTop="@dimen/margin_15dp"
                                             android:gravity="center_vertical"
                                             android:orientation="horizontal"
-                                            android:paddingBottom="5dp">
+                                            android:paddingBottom="@dimen/padding_5dp">
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_90a4ae_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
-                                                android:text="Name" />
+                                                android:text="@string/info_04" />
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_263238_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="2"
                                                 android:gravity="end"
@@ -193,16 +207,18 @@
                                             android:layout_height="wrap_content"
                                             android:gravity="center_vertical"
                                             android:orientation="horizontal"
-                                            android:paddingBottom="5dp">
+                                            android:paddingBottom="@dimen/padding_5dp">
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_90a4ae_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
-                                                android:text="Gender" />
+                                                android:text="@string/info_05" />
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_263238_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
@@ -218,14 +234,16 @@
                                             android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_90a4ae_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
-                                                android:text="Gender" />
+                                                android:text="@string/info_06" />
 
                                             <TextView
                                                 android:id="@+id/tv_phone_number"
-                                                android:layout_width="0dp"
+                                                style="@style/font15_263238_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
@@ -242,13 +260,13 @@
                             <com.mobile.bnkcl.com.view.ShadowLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="-16dp"
-                                android:layout_marginRight="8dp"
-                                app:shadowColor="#3090a4ae"
-                                app:shadowDx="0dp"
-                                app:shadowDy="0dp"
-                                app:shadowRadius="8dp"
+                                android:layout_marginLeft="@dimen/margin_8dp"
+                                android:layout_marginTop="@dimen/margin_minus_16dp"
+                                android:layout_marginRight="@dimen/margin_8dp"
+                                app:shadowColor="@color/color_3090a4ae_shadow"
+                                app:shadowDx="@dimen/shadowD_0dp"
+                                app:shadowDy="@dimen/shadowD_0dp"
+                                app:shadowRadius="@dimen/shadow_radius_8dp"
                                 app:shadowShape="rectangle"
                                 app:shadowSide="all">
 
@@ -262,23 +280,26 @@
                                         android:id="@+id/ll_more_loan_info"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="15dp">
+                                        android:padding="@dimen/padding_15dp"
+                                        tools:ignore="UseCompoundDrawables">
 
                                         <TextView
+                                            style="@style/font15_263238_medium"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:drawableStart="@drawable/ic_loan_in_use_ico"
-                                            android:drawablePadding="10dp"
+                                            android:drawablePadding="@dimen/padding_10dp"
                                             android:gravity="center_vertical"
-                                            android:text="Lease Information" />
+                                            android:text="@string/info_07"
+                                            app:drawableStartCompat="@drawable/ic_loan_in_use_ico" />
 
                                         <ImageView
                                             android:id="@+id/iv_more_loan_info"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="end"
-                                            android:src="@drawable/ic_fold_ico" />
+                                            android:src="@drawable/ic_fold_ico"
+                                            tools:ignore="ContentDescription" />
 
                                     </LinearLayout>
 
@@ -287,31 +308,33 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:paddingLeft="15dp"
-                                        android:paddingRight="15dp"
-                                        android:paddingBottom="15dp"
+                                        android:paddingLeft="@dimen/padding_15dp"
+                                        android:paddingRight="@dimen/padding_15dp"
+                                        android:paddingBottom="@dimen/padding_15dp"
                                         android:visibility="visible">
 
                                         <View
                                             android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="#eef5f8" />
+                                            android:layout_height="@dimen/height_1dp"
+                                            android:background="@color/color_eef5f8" />
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="15dp"
+                                            android:layout_marginTop="@dimen/margin_15dp"
                                             android:gravity="center_vertical"
                                             android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_90a4ae_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
-                                                android:text="Account Number" />
+                                                android:text="@string/info_08" />
 
                                             <TextView
-                                                android:layout_width="0dp"
+                                                style="@style/font15_263238_medium"
+                                                android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
@@ -328,13 +351,13 @@
                             <com.mobile.bnkcl.com.view.ShadowLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="-16dp"
-                                android:layout_marginRight="8dp"
-                                app:shadowColor="#3090a4ae"
-                                app:shadowDx="0dp"
-                                app:shadowDy="0dp"
-                                app:shadowRadius="8dp"
+                                android:layout_marginLeft="@dimen/margin_8dp"
+                                android:layout_marginTop="@dimen/margin_minus_16dp"
+                                android:layout_marginRight="@dimen/margin_8dp"
+                                app:shadowColor="@color/color_3090a4ae_shadow"
+                                app:shadowDx="@dimen/shadowD_0dp"
+                                app:shadowDy="@dimen/shadowD_0dp"
+                                app:shadowRadius="@dimen/shadow_radius_8dp"
                                 app:shadowShape="rectangle"
                                 app:shadowSide="all">
 
@@ -348,23 +371,26 @@
                                         android:id="@+id/ll_additional_info"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="15dp">
+                                        android:padding="@dimen/padding_15dp"
+                                        tools:ignore="UseCompoundDrawables">
 
                                         <TextView
+                                            style="@style/font15_263238_medium"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:drawableStart="@drawable/ic_info_ico"
-                                            android:drawablePadding="10dp"
+                                            android:drawablePadding="@dimen/padding_10dp"
                                             android:gravity="center_vertical"
-                                            android:text="Account Information" />
+                                            android:text="@string/info_09"
+                                            app:drawableStartCompat="@drawable/ic_info_ico" />
 
                                         <ImageView
                                             android:id="@+id/iv_more_additional"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="end"
-                                            android:src="@drawable/ic_fold_ico" />
+                                            android:src="@drawable/ic_fold_ico"
+                                            tools:ignore="ContentDescription" />
 
                                     </LinearLayout>
 
@@ -373,32 +399,34 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:paddingLeft="15dp"
-                                        android:paddingRight="15dp"
-                                        android:paddingBottom="15dp"
+                                        android:paddingLeft="@dimen/padding_15dp"
+                                        android:paddingRight="@dimen/padding_15dp"
+                                        android:paddingBottom="@dimen/padding_15dp"
                                         android:visibility="visible">
 
                                         <View
                                             android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="#eef5f8" />
+                                            android:layout_height="@dimen/height_1dp"
+                                            android:background="@color/color_eef5f8" />
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="15dp"
+                                            android:layout_marginTop="@dimen/margin_15dp"
                                             android:gravity="center_vertical"
                                             android:orientation="horizontal"
-                                            android:paddingBottom="5dp">
+                                            android:paddingBottom="@dimen/padding_5dp">
 
                                             <TextView
+                                                style="@style/font15_90a4ae_medium"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_marginEnd="10dp"
-                                                android:text="Address" />
+                                                android:layout_marginEnd="@dimen/margin_10dp"
+                                                android:text="@string/info_10" />
 
                                             <TextView
                                                 android:id="@+id/tv_address"
+                                                style="@style/font15_263238_medium"
                                                 android:layout_width="0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="3"
@@ -414,13 +442,15 @@
                                             android:orientation="horizontal">
 
                                             <TextView
+                                                style="@style/font15_90a4ae_medium"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
-                                                android:layout_marginEnd="10dp"
-                                                android:text="Occupation" />
+                                                android:layout_marginEnd="@dimen/margin_10dp"
+                                                android:text="@string/info_11" />
 
                                             <TextView
                                                 android:id="@+id/tv_occupation"
+                                                style="@style/font15_263238_medium"
                                                 android:layout_width="0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="2"
@@ -448,18 +478,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="#ffffff"
-                android:paddingBottom="21dp">
+                android:background="@color/color_ffffff"
+                android:paddingBottom="@dimen/padding_21dp">
 
                 <TextView
                     android:id="@+id/btn_logout"
+                    style="@style/font15_ffffff_medium"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginEnd="21dp"
+                    android:layout_height="@dimen/height_50dp"
+                    android:layout_marginStart="@dimen/margin_21dp"
+                    android:layout_marginEnd="@dimen/margin_21dp"
                     android:background="@drawable/selector_d7191f_8b0304"
                     android:gravity="center"
-                    android:text="Log Out"
+                    android:text="@string/info_12"
                     android:textAllCaps="true" />
 
             </LinearLayout>

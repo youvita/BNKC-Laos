@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
     <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:stateListAnimator="@null"
-        android:background="#f5f7fc">
+        android:background="@color/color_f5f7fc"
+        android:stateListAnimator="@null">
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/col_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:title="Settings"
             app:collapsedTitleGravity="center"
-            app:expandedTitleMargin="21dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
+            app:expandedTitleMargin="@dimen/margin_21dp"
+            app:expandedTitleTextAppearance="@style/font_28_263238_bold"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:title="Settings">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_01"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:gravity="center"
-                app:layout_collapseMode="pin"
-                app:collapseIcon="@null"
-                android:background="#f5f7fc"
+                android:background="@color/color_f5f7fc"
+                android:contentInsetStart="0dp"
                 android:contentInsetEnd="0dp"
                 android:contentInsetRight="0dp"
-                android:contentInsetStart="0dp"
+                android:gravity="center"
+                app:collapseIcon="@null"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin">
 
                 <ImageView
                     android:id="@+id/toolbar_left_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="21dp"
-                    android:src="@drawable/ic_nav_back_dark_btn"
                     android:layout_gravity="start"
-                    tools:ignore="RtlSymmetry" />
+                    android:layout_marginStart="@dimen/margin_21dp"
+                    android:src="@drawable/ic_nav_back_dark_btn"
+                    tools:ignore="ContentDescription,RtlSymmetry" />
 
                 <ImageView
                     android:id="@+id/toolbar_right_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="21dp"
-                    android:src="@drawable/ic_nav_close_dark_btn"
                     android:layout_gravity="end"
-                    android:visibility="invisible"/>
+                    android:layout_marginEnd="@dimen/margin_21dp"
+                    android:src="@drawable/ic_nav_close_dark_btn"
+                    android:visibility="invisible"
+                    tools:ignore="ContentDescription" />
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

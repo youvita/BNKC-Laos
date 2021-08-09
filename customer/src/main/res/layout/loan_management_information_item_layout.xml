@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/ll_wrap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-        android:padding="15dp">
+        android:padding="@dimen/padding_15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:id="@+id/ll_loan_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <TextView
                     android:id="@+id/tv_loan_info"
+                    style="@style/font15_263238_medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="-5dp"
                     android:layout_weight="1"
-                    android:drawablePadding="10dp"
+                    android:drawablePadding="@dimen/padding_10dp"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="Lease Information"
+                    android:text="@string/lease_06"
                     app:drawableStartCompat="@drawable/ic_loan_in_use_ico" />
 
                 <ImageView
@@ -39,7 +43,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:src="@drawable/ic_fold_ico"
-                    android:text="910.00 USD" />
+                    android:text="910.00 USD"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <!-- Expand Content -->
@@ -52,26 +57,28 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#eef5f8" />
+                    android:layout_height="@dimen/height_1dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:background="@color/color_eef5f8" />
 
                 <!-- Lease Account -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Lease Account" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_07" />
 
                     <TextView
                         android:id="@+id/tv_lease_account"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -84,16 +91,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Product Type" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_08" />
 
                     <TextView
                         android:id="@+id/tv_product_type"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -106,16 +115,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Lease Amount" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_09" />
 
                     <TextView
                         android:id="@+id/tv_interest"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -128,16 +139,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Interest (Monthly)" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_10" />
 
                     <TextView
                         android:id="@+id/tv_loan_term"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -150,16 +163,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Term" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_11" />
 
                     <TextView
                         android:id="@+id/tv_term"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -172,16 +187,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Disbursement Date" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_12" />
 
                     <TextView
                         android:id="@+id/tv_disbursement_date"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -194,16 +211,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Maturity Date" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_13" />
 
                     <TextView
                         android:id="@+id/tv_maturity_date"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -216,16 +235,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Repayment Date" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_14" />
 
                     <TextView
                         android:id="@+id/tv_repayment_date"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -238,16 +259,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="25dp">
+                    android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="Monthly Repayment" />
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:text="@string/lease_15" />
 
                     <TextView
                         android:id="@+id/tv_monthly_payment"
+                        style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

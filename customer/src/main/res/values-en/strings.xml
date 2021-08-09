@@ -40,7 +40,6 @@
     <string name="select_district">Select District</string>
     <string name="input_detailed_address">Input Detailed Address</string>
 
-    <string name="language">English</string>
     <string name="personal_information">Personal Information</string>
     <string name="capital">Capital</string>
     <string name="district">District</string>
@@ -566,4 +565,84 @@
     <string name="or_others">Or Others</string>
     <string name="unit_loan_result">Unit: %s</string>
 
+    <string name="home_01">Need a Loan?</string>
+    <string name="home_02">Need a Leasing?</string>
+    <string name="home_03">(car, motorcycle, mobile phone etc)</string>
+    <string name="home_04">English</string>
+
+    <string name="lang_01">Language</string>
+    <string name="lang_02">ພາສາລາວ</string>
+    <string name="lang_03">English</string>
+
+    <string name="info_01">Account Information</string>
+    <string name="info_02">Edit</string>
+    <string name="info_03">Personal Information</string>
+    <string name="info_04">Name</string>
+    <string name="info_05">Gender</string>
+    <string name="info_06">Tel</string>
+    <string name="info_07">Lease Information</string>
+    <string name="info_08">Account Number</string>
+    <string name="info_09">Account Information</string>
+    <string name="info_10">Address</string>
+    <string name="info_11">Occupation</string>
+    <string name="info_12">Log Out</string>
+
+    <string name="edit_01">Personal Information</string>
+    <string name="edit_02">Name</string>
+    <string name="edit_03">Date of Birth</string>
+    <string name="edit_04">Identification Number</string>
+    <string name="edit_05">Job Type (Optional)</string>
+    <string name="edit_06">Lease Information</string>
+    <string name="edit_07">Account Number</string>
+    <string name="edit_08">Cancel</string>
+    <string name="edit_09">Save</string>
+    <string name="edit_10">Invalid</string>
+    <string name="edit_11">Gender</string>
+
+    <string name="bill_01">Payment Amount</string>
+    <string name="mbl_payment_01">Mobile Payment</string>
+    <string name="mbl_payment_02">PAY BY</string>
+    <string name="mbl_payment_03">Bank Account Information</string>
+    <string name="mbl_payment_04">Client Information</string>
+    <string name="mbl_payment_05">CID</string>
+    <string name="mbl_payment_06">Account Number</string>
+    <string name="mbl_payment_07">/? Account Number</string>
+    <string name="mbl_payment_08">/? Code (SMS)</string>
+    <string name="mbl_payment_09">PAY</string>
+    <string name="full_payment_01">Repayment Date</string>
+    <string name="full_payment_02">CHECK</string>
+    <string name="full_payment_03">Full Repayment (A+B+C+D)</string>
+    <string name="full_payment_04">Total Repayment Details</string>
+    <string name="full_payment_05">Principal (A)</string>
+    <string name="full_payment_06">Interest (B)</string>
+    <string name="full_payment_07">Early Repayment Fee (C)</string>
+    <string name="full_payment_08">Other (D)</string>
+    <string name="full_payment_09">Overdue Principal</string>
+    <string name="full_payment_10">Overdue Interest</string>
+    <string name="full_payment_11">Total</string>
+    <string name="lease_01">Lease Management</string>
+    <string name="lease_02">Automobile Lease</string>
+    <string name="lease_03">TOTAL SCHEDULE</string>
+    <string name="lease_04">TRANSACTION HISTORY</string>
+    <string name="lease_05">CHECK FULL REPAYMENT AMOUNT</string>
+    <string name="lease_06">Lease Information</string>
+    <string name="lease_07">Lease Account</string>
+    <string name="lease_08">Product Type</string>
+    <string name="lease_09">Lease Amount</string>
+    <string name="lease_10">Interest (Monthly)</string>
+    <string name="lease_11">Term</string>
+    <string name="lease_12">Disbursement Date</string>
+    <string name="lease_13">Maturity Date</string>
+    <string name="lease_14">Repayment Date</string>
+    <string name="lease_15">Monthly Repayment</string>
+    <string name="lease_16">Coming Repayment</string>
+    <string name="lease_17">Coming Repayment Date</string>
+    <string name="lease_18">Repayment Session</string>
+    <string name="lease_19">Principal</string>
+    <string name="lease_20">Interest</string>
+    <string name="lease_21">Overdue Principal</string>
+    <string name="lease_22">Overdue Interest</string>
+    <string name="lease_23">Overdue Penalty (11 Days)</string>
+    <string name="lease_24">Total</string>
+    <string name="lease_25">If you don\'t pay today, The Penalty will be increase.</string>
 </resources>

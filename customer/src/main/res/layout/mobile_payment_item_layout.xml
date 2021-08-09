@@ -1,88 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
         android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingTop="20dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="20dp">
+        android:paddingLeft="@dimen/padding_15dp"
+        android:paddingTop="@dimen/padding_20dp"
+        android:paddingRight="@dimen/padding_15dp"
+        android:paddingBottom="@dimen/padding_20dp">
 
         <TextView
+            style="@style/font15_263238_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_mobile_payment_ico"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center"
-            android:text="Mobile Payment" />
+            android:text="@string/mbl_payment_01"
+            app:drawableStartCompat="@drawable/ic_mobile_payment_ico" />
 
         <LinearLayout
             android:id="@+id/ll_pay_by_wing"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="@dimen/height_46dp"
+            android:layout_marginTop="@dimen/margin_10dp"
             android:background="@drawable/selector_d7191f_ffffee"
             android:clickable="true"
+            android:focusable="true"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_payby_wing"
+                style="@style/font14_d7191f_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_payment_ico"
-                android:drawablePadding="10dp"
+                android:drawablePadding="@dimen/padding_10dp"
                 android:gravity="center"
-                android:text="PAY BY"
-                android:textAllCaps="true" />
+                android:text="@string/mbl_payment_02"
+                android:textAllCaps="true"
+                app:drawableEndCompat="@drawable/ic_payment_ico"
+                app:drawableTint="@color/colorPrimary" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:background="#eef5f8" />
+            android:layout_height="@dimen/height_1dp"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:layout_marginBottom="@dimen/margin_15dp"
+            android:background="@color/color_eef5f8" />
 
         <TextView
+            style="@style/font15_263238_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_bank_acc_info_ico"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center_vertical"
-            android:text="Bank Account Information" />
+            android:text="@string/mbl_payment_03"
+            app:drawableStartCompat="@drawable/ic_bank_acc_info_ico" />
 
         <!-- Bank Account Info. Table -->
         <TableLayout
             android:id="@+id/table_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
             android:stretchColumns="*" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="#eef5f8" />
+            android:layout_height="@dimen/height_1dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:background="@color/color_eef5f8" />
 
         <!-- Client Info -->
         <TextView
+            style="@style/font15_263238_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_client_info_ico"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center"
-            android:text="Client Information" />
+            android:text="@string/mbl_payment_04"
+            app:drawableStartCompat="@drawable/ic_client_info_ico" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -90,16 +96,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:minHeight="25dp">
+                android:minHeight="@dimen/height_24dp">
 
                 <TextView
+                    style="@style/font15_90a4ae_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="CID" />
+                    android:layout_marginEnd="@dimen/margin_5dp"
+                    android:text="@string/mbl_payment_05" />
 
                 <TextView
                     android:id="@+id/tv_cid"
+                    style="@style/font15_263238_medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -111,16 +119,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:minHeight="25dp">
+                android:minHeight="@dimen/height_24dp">
 
                 <TextView
+                    style="@style/font15_90a4ae_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="Account Number" />
+                    android:layout_marginEnd="@dimen/margin_5dp"
+                    android:text="@string/mbl_payment_06" />
 
                 <TextView
                     android:id="@+id/tv_account_number"
+                    style="@style/font15_263238_medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

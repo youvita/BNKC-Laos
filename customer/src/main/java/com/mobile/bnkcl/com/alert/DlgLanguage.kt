@@ -55,10 +55,10 @@ class DlgLanguage : View.OnClickListener{
         val rbEnglish = view.findViewById<RadioButton>(R.id.rb_en)
         val tvTitle = view.findViewById<TextView>(R.id.alertTitle)
         if (locale.equals("la", ignoreCase = true)) {
-            tvTitle.text = "ພາສາລາວ"
+//            tvTitle.text = "ພາສາລາວ"
             rbLaos.isChecked = true
         } else {
-            tvTitle.text = "English"
+//            tvTitle.text = "English"
             rbEnglish.isChecked = true
         }
     }

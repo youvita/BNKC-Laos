@@ -11,6 +11,10 @@
             name="settingViewModel"
             type="SettingViewModel" />
 
+        <variable
+            name="appVersion"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,18 +34,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/round_solid_ffffff_15"
-                android:paddingLeft="13dp"
-                android:paddingRight="13dp"
+                android:paddingLeft="@dimen/padding_12dp"
+                android:paddingRight="@dimen/padding_12dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <com.mobile.bnkcl.com.view.ShadowLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="31dp"
-                    app:shadowColor="#3090a4ae"
-                    app:shadowDx="0dp"
-                    app:shadowDy="0dp"
-                    app:shadowRadius="8dp"
+                    android:layout_marginTop="@dimen/margin_31dp"
+                    app:shadowColor="@color/color_3090a4ae_shadow"
+                    app:shadowDx="@dimen/shadowD_0dp"
+                    app:shadowDy="@dimen/shadowD_0dp"
+                    app:shadowRadius="@dimen/shadow_radius_8dp"
                     app:shadowShape="rectangle"
                     app:shadowSide="all">
 
@@ -55,21 +59,22 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="15dp">
+                            android:padding="@dimen/padding_15dp">
 
                             <TextView
+                                style="@style/font15_263238_medium"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/ic_notification_white_ico"
-                                android:drawablePadding="10dp"
+                                android:drawablePadding="@dimen/padding_10dp"
                                 android:gravity="center_vertical"
-                                android:text="Push Notification" />
+                                android:text="@string/setting_01"
+                                app:drawableLeftCompat="@drawable/ic_notification_grey_ico" />
 
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/toggle_user"
                                 android:layout_width="wrap_content"
-                                android:layout_height="21dp"
+                                android:layout_height="@dimen/height_21dp"
                                 android:checked="true"
                                 android:theme="@style/SettingSwitch"
                                 android:thumb="@drawable/switch_thumb_selector"
@@ -79,38 +84,38 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="5dp"
-                            android:layout_marginLeft="1dp"
-                            android:layout_marginRight="1dp"
-                            android:background="#eef5f8" />
+                            android:layout_height="@dimen/height_5dp"
+                            android:background="@color/color_eef5f8" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="15dp">
+                            android:padding="@dimen/padding_15dp">
 
                             <TextView
+                                style="@style/font15_263238_medium"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/ic_lock_ico"
-                                android:drawablePadding="10dp"
+                                android:drawablePadding="@dimen/padding_10dp"
                                 android:gravity="center_vertical"
-                                android:text="Reset PIN" />
+                                android:text="@string/setting_02"
+                                app:drawableLeftCompat="@drawable/ic_lock_grey_ico" />
 
                             <TextView
                                 android:id="@+id/tv_reset_pin"
+                                style="@style/font15_d7191f_medium"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableRight="@drawable/right_red_arrow_ico"
                                 android:gravity="center"
-                                android:text="RESET" />
+                                android:text="@string/setting_04"
+                                app:drawableRightCompat="@drawable/right_red_arrow_ico" />
                         </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#eef5f8" />
+                            android:layout_height="@dimen/height_1dp"
+                            android:background="@color/color_eef5f8" />
 
                     </LinearLayout>
 
@@ -122,27 +127,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="@dimen/margin_50dp"
+                android:layout_marginRight="@dimen/margin_50dp"
+                android:layout_marginBottom="@dimen/margin_50dp"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_brand_bnkc_lao_leasing" />
+                    android:src="@drawable/ic_brand_bnkc_lao_leasing"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_app_version"
+                    style="@style/font13_90a4ae_medium_flex"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
                     android:gravity="center"
-                    android:textColor="#90A4AE"
-                    android:textSize="13sp"
-                    tools:text="Version 1.0" />
+                    android:text="@{`Version ` + appVersion}" />
             </LinearLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

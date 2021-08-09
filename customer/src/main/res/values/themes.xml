@@ -20,6 +20,12 @@
         <item name="android:fontFamily">@font/rubik_medium</item>
     </style>
 
+    <style name="font_18_263238_medium"> <!-- used-->
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/color_263238</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+    </style>
+
     <style name="font_21_263238_normal"> <!--used -->
         <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/color_263238</item>
@@ -44,10 +50,28 @@
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
+    <style name="font13_d7191f_medium"> <!-- used-->
+        <item name="android:textColor">@color/color_d7191f</item>
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="font13_d7191f_regular"> <!-- used-->
+        <item name="android:textColor">@color/color_d7191f</item>
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/rubik_regular</item>
+    </style>
+
     <style name="font21_263238_medium"><!-- used-->
         <item name="android:textColor">@color/color_263238</item>
         <item name="android:textSize">21sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="font18_263238_regular"><!-- used-->
+        <item name="android:textColor">@color/color_263238</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/rubik_regular</item>
     </style>
 
     <style name="font13_263238_medium"> <!--used -->
@@ -148,6 +172,12 @@
         <item name="android:textColor">@color/color_d7191f</item>
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="font15_d7191f_regular">
+        <item name="android:textColor">@color/color_d7191f</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/rubik_regular</item>
     </style>
 
     <style name="font15_ffffff_medium"> <!-- used-->

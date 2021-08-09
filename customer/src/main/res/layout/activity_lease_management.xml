@@ -25,23 +25,25 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f5f7fc"
+                android:background="@color/color_f5f7fc"
                 android:stateListAnimator="@null">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/coll_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="@dimen/height_120dp"
                     app:collapsedTitleGravity="center"
-                    app:expandedTitleMargin="21dp"
+                    app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
+                    app:expandedTitleMargin="@dimen/margin_21dp"
+                    app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="Lease Management">
+                    app:title="@string/lease_01">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:background="#00ffffff"
+                        android:background="@color/color_00ffffff"
                         android:contentInsetStart="0dp"
                         android:contentInsetEnd="0dp"
                         android:contentInsetRight="0dp"
@@ -58,18 +60,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:paddingStart="21dp"
+                            android:paddingStart="@dimen/padding_21dp"
+                            android:paddingEnd="0dp"
                             android:src="@drawable/ic_nav_back_dark_btn"
-                            tools:ignore="RtlSymmetry" />
+                            tools:ignore="ContentDescription" />
 
                         <ImageView
                             android:id="@+id/toolbar_right_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:paddingEnd="21dp"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="@dimen/padding_21dp"
                             android:src="@drawable/ic_nav_close_dark_btn"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"
+                            tools:ignore="ContentDescription" />
                     </androidx.appcompat.widget.Toolbar>
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -80,54 +85,59 @@
                     android:background="@drawable/round_top_solid_ffffff_corner_15"
                     android:elevation="15dp"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="30dp"
-                    android:paddingRight="20dp"
+                    android:paddingLeft="@dimen/padding_20dp"
+                    android:paddingTop="@dimen/padding_30dp"
+                    android:paddingRight="@dimen/padding_20dp"
                     app:layout_collapseMode="pin">
 
                     <LinearLayout
                         android:id="@+id/ll_filter_loan"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="@dimen/height_50dp"
                         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                         android:gravity="center">
 
                         <TextView
                             android:id="@+id/tv_loan_type"
+                            style="@style/font15_263238_medium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableEnd="@drawable/ic_more_ico"
-                            android:gravity="left|center_vertical"
-                            android:paddingLeft="15dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="15dp"
-                            android:paddingBottom="10dp"
-                            android:text="Automobile Lease"
+                            android:gravity="start|center_vertical"
+                            android:paddingLeft="@dimen/padding_15dp"
+                            android:paddingTop="@dimen/padding_10dp"
+                            android:paddingRight="@dimen/padding_15dp"
+                            android:paddingBottom="@dimen/padding_10dp"
+                            android:text="@string/lease_02"
+                            app:drawableEndCompat="@drawable/ic_more_ico"
                             tools:text="Automobile Lease" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_height="@dimen/height_50dp"
+                        android:layout_marginTop="@dimen/margin_10dp">
 
                         <Button
                             android:id="@+id/btn_total_schedule"
+                            style="@style/font14_d7191f_medium"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="@dimen/margin_5dp"
                             android:layout_weight="1"
                             android:background="@drawable/selector_d7191f_ffffee"
-                            android:text="TOTAL SCHEDULE" />
+                            android:text="@string/lease_03"
+                            tools:ignore="ButtonStyle" />
 
                         <Button
                             android:id="@+id/btn_transaction_history"
+                            style="@style/font14_ffffff_medium"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="@dimen/margin_5dp"
                             android:layout_weight="1"
                             android:background="@drawable/selector_d7191f_8b0304"
-                            android:text="TRANSACTION HISTORY" />
+                            android:text="@string/lease_04"
+                            tools:ignore="ButtonStyle" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -137,7 +147,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
+                android:background="@color/color_ffffff"
                 android:fillViewport="true"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -145,23 +155,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="90dp">
+                    android:paddingLeft="@dimen/padding_20dp"
+                    android:paddingRight="@dimen/padding_20dp"
+                    android:paddingBottom="@dimen/padding_95dp">
 
                     <include
                         android:id="@+id/loan_info"
                         layout="@layout/loan_management_information_item_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="@dimen/margin_10dp" />
 
                     <include
                         android:id="@+id/coming_loan_repayment"
+                        style="@style/font14_263238_medium"
                         layout="@layout/loan_management_coming_payment_item_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="@dimen/margin_10dp" />
 
                 </LinearLayout>
 
@@ -175,19 +186,20 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="31dp"
-                    android:layout_marginTop="40dp"
-                    android:background="#ffffff" />
+                    android:layout_height="@dimen/height_24dp"
+                    android:layout_marginTop="@dimen/margin_40dp"
+                    android:background="@color/color_ffffff" />
 
                 <Button
                     android:id="@+id/btn_check_fullpayment"
+                    style="@style/font14_d7191f_medium"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="bottom"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:layout_marginEnd="@dimen/margin_20dp"
                     android:background="@drawable/selector_d7191f_ffffee"
-                    android:text="CHECK FULL REPAYMENT AMOUNT" />
+                    android:text="@string/lease_05" />
             </RelativeLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
