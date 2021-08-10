@@ -1,5 +1,6 @@
 package com.bnkc.sourcemodule.di
 
+import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import dagger.Module
 import dagger.Provides
@@ -14,4 +15,9 @@ object SourceModule {
     @Singleton
     @Provides
     fun provideLoadingDialog() = LoadingDialog()
+
+    @Singleton
+    @Provides
+    fun provideDatePickerDialog() = DatePickerDialog()
+
 }

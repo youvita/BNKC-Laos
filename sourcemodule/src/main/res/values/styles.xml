@@ -38,6 +38,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- dialog animation -->
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/scale_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+    </style>
+
+
+    <!-- font style -->
     <style name="radio_font14_90A4AE_medium">
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">14sp</item>
