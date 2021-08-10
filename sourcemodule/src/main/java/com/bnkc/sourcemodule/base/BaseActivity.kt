@@ -1,4 +1,3 @@
-
 /**
  * KOSIGN (Cambodia) Investment Co., Ltd.
  * @author chan youvita
@@ -17,6 +16,7 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.dialog.LoadingDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -26,10 +26,13 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
     private var loadingDialog: LoadingDialog? = null
 
-    private var introDisposable: Disposable? = null
+    private var disposable: Disposable? = null
 
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
+
+    @Inject
+    lateinit var systemDialog: SystemDialog
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -44,16 +47,24 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
         performDataBinding()
 
         successListener()
+
+        systemErrorListener()
     }
 
+    /**
+     * init binding
+     */
     private fun performDataBinding() {
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.lifecycleOwner = this
         binding.executePendingBindings()
     }
 
+    /**
+     * handle catch success
+     */
     private fun successListener() {
-        introDisposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
+        disposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
             if (loadingDialog != null) {
                 loadingDialog?.dismiss()
                 loadingDialog = null
@@ -61,6 +72,19 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    /**
+     * handle catch server error
+     */
+    private fun systemErrorListener() {
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            systemDialog = SystemDialog.newInstance(getString(it.title), getString(it.message as Int))
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+        }
+    }
+
+    /**
+     * handle to show loading
+     */
     fun showLoading() {
         loadingDialog = LoadingDialog()
         loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
@@ -68,7 +92,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        introDisposable?.dispose()
-        introDisposable = null
+        disposable?.dispose()
+        disposable = null
     }
 }

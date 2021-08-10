@@ -6,7 +6,12 @@
 package com.bnkc.library.rxjava
 
 class RxEvent {
+
     class CommentSuccess(val value: String)
+
     class MGSuccess(val value: String)
+
     class ResponseSuccess
+
+    class ServerError(val title: Int, val message: Any)
 }

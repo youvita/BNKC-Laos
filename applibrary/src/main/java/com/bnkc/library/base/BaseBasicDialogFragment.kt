@@ -14,7 +14,7 @@ abstract class BaseBasicDialogFragment: DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.Theme_AppCompat_Dialog)
+        setStyle(STYLE_NO_TITLE, R.style.Theme_AppCompat_Dialog_Alert)
 
     }
 

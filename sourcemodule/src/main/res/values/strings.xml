@@ -9,4 +9,6 @@
     <string name="nav_content_006">Company Profile</string>
     <string name="nav_content_007">Settings</string>
     <string name="nav_content_008">ភាសា</string>
+
+    <string name="confirm">Confirm</string>
 </resources>

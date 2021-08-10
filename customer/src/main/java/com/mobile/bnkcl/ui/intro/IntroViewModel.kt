@@ -3,6 +3,9 @@ package com.mobile.bnkcl.ui.intro
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
 import com.mobile.bnkcl.data.MGData
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.bnkc.sourcemodule.base.BaseViewModel
@@ -20,8 +23,15 @@ class IntroViewModel @Inject constructor(private val mgRepo: MGRepo) : BaseViewM
 
     fun getMGData() {
         viewModelScope.launch {
-            mgRepo.getMGData().onEach {
-                    resource -> _mgData.value = resource.data
+            mgRepo.getMGData().onEach { resource ->
+                // catch error
+                if (resource.status == Status.ERROR) {
+                    val title   = resource.messageTitle
+                    val message = resource.messageDes
+                    RxJava.publish(RxEvent.ServerError(title!!, message!!))
+                } else {
+                    _mgData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
