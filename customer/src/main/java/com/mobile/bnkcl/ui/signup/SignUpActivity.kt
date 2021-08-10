@@ -12,7 +12,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_sign_up
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
