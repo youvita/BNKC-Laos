@@ -177,7 +177,7 @@
                         android:layout_marginTop="-10dp"/>
 
                     <!-- Banner Item View Pager -->
-                    <com.mobile.bnkcl.utilities.CustomPager
+                    <com.mobile.bnkcl.com.view.CustomPager
                         android:id="@+id/banner_view_pager"
                         android:layout_width="match_parent"
                         android:layout_height="86dp"

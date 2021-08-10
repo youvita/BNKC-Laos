@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.com.view
 
 import android.content.Context
 import android.util.AttributeSet

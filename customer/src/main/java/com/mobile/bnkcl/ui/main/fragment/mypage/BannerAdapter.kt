@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.utilities.CustomPager
+import com.mobile.bnkcl.com.view.CustomPager
 import java.util.*
 
 class BannerAdapter(private val context: Context, private val imageList: ArrayList<Int>) :

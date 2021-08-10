@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--    <data>-->
-    <!--        <variable-->
-    <!--            name="loanServiceViewModel"-->
-    <!--            type="com.mobile.bnk.ui.main.fragment.loanservice.LoanServiceViewModel" />-->
-    <!--    </data>-->
+        <data>
+            <import type="android.view.View"/>
+            <variable
+                name="menuViewModel"
+                type="com.mobile.bnkcl.ui.main.fragment.menu.MenuViewModel" />
+        </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -359,7 +360,8 @@
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:paddingLeft="25dp"
-                android:paddingRight="25dp">
+                android:paddingRight="25dp"
+                android:onClick="@{(v)->menuViewModel.goToLogin()}">
 
                 <TextView
                     style="@style/font15_d7191f_medium"

@@ -65,7 +65,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
 
-        <com.mobile.bnkcl.utilities.ValidateButton
+        <com.mobile.bnkcl.com.view.ValidateButton
             android:id="@+id/vb_result"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
             app:textAllCaps="true"
             android:layout_marginEnd="5dp"
             android:layout_height="50dp"/>
-        <com.mobile.bnkcl.utilities.ValidateButton
+        <com.mobile.bnkcl.com.view.ValidateButton
             android:id="@+id/vb_result_right"
             android:layout_width="0dp"
             app:buttonText="Submit Document"

@@ -332,11 +332,11 @@
 <!--        <item name="android:textSize">15sp</item>-->
 <!--        <item name="fontFamily">@font/rubik_medium</item>-->
 <!--    </style>-->
-<!--    <style name="font15_radio_medium_not_km">-->
-<!--        <item name="android:textColor">@color/selector_radio_label</item>-->
-<!--        <item name="android:textSize">15sp</item>-->
-<!--        <item name="fontFamily">@font/rubik_medium</item>-->
-<!--    </style>-->
+    <style name="font15_radio_medium_not_km">
+        <item name="android:textColor">@color/selector_radio_label</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
 <!--&lt;!&ndash;    <style name="font15_radio_medium_km">&ndash;&gt;-->
 <!--&lt;!&ndash;        <item name="android:textColor">@color/selector_radio_label</item>&ndash;&gt;-->
 <!--&lt;!&ndash;        <item name="android:textSize">15sp</item>&ndash;&gt;-->

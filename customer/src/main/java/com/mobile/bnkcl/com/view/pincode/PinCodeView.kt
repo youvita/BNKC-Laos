@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities.pincode
+package com.mobile.bnkcl.com.view.pincode
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable

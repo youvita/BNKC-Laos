@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pinView"
         android:background="@color/color_263238"
@@ -80,22 +84,7 @@
 
         </LinearLayout>
 
-        <!--    <androidx.recyclerview.widget.RecyclerView-->
-        <!--        android:id="@+id/numbersGridView"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_marginTop="20dp"-->
-        <!--        android:gravity="center"-->
-        <!--        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@id/pin_view"-->
-        <!--        app:spanCount="3"-->
-        <!--        tools:itemCount="11"-->
-        <!--        tools:listitem="@layout/item_number" />-->
-
-        <com.mobile.bnkcl.utilities.pincode.PinCodeView
+        <com.mobile.bnkcl.com.view.pincode.PinCodeView
             android:id="@+id/pin_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

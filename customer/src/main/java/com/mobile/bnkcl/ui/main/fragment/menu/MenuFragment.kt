@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.ui.main.fragment.menu
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,13 @@ import androidx.fragment.app.viewModels
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
+import com.mobile.bnkcl.ui.login.LoginActivity
 import com.mobile.bnkcl.ui.main.MainViewModel
+import com.mobile.bnkcl.ui.otp.OtpActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MenuFragment : BaseFragment<FragmentMenuBinding>(){
 
     private val viewModel: MenuViewModel by viewModels()
@@ -24,10 +30,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.context = requireContext()
+        binding.menuViewModel = viewModel
 
-        binding.btnLogin.setOnClickListener {
-            Toast.makeText(context,"Login now success", Toast.LENGTH_LONG).show()
-        }
+//        binding.btnLogin.setOnClickListener {
+//            val intent = Intent(context, OtpActivity::class.java)
+//            startActivity(intent)
+//        }
 
     }
 

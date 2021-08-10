@@ -8,7 +8,7 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
 import com.mobile.bnkcl.ui.login.LoginActivity
-import com.mobile.bnkcl.utilities.pincode.NOT_MATCH_PASSWORD
+import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
