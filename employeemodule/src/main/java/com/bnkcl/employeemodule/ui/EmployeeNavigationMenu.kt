@@ -1,17 +1,18 @@
-package com.bnkc.sourcemodule.ui
+package com.bnkcl.employeemodule.ui
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewStub
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.databinding.NavDrawerLayoutBinding
 import com.google.android.material.navigation.NavigationView
 
 
-class NavigationMenu : NavigationView {
+class EmployeeNavigationMenu : NavigationView {
 
     constructor(context: Context?) : super(context!!) {
 
@@ -35,17 +36,27 @@ class NavigationMenu : NavigationView {
         initView(context)
     }
 
-    fun initView(context: Context?){
+    private fun initView(context: Context?){
 
-        val mBinding = LayoutInflater.from(context).inflate(R.layout.nav_drawer_layout, null, false)
+//        val inflater =
+//            context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val mBinding = DataBindingUtil.inflate(inflater,R.layout.nav_drawer_layout)
+
+        val mBinding =LayoutInflater.from(context).inflate(R.layout.nav_drawer_layout, null, false)
         val btnSignUP = mBinding.findViewById<LinearLayout>(R.id.btn_signup)
         val btnLogin = mBinding.findViewById<LinearLayout>(R.id.btn_login)
+//        val tvSignUp = mBinding.findViewById<TextView>(R.id.tv_setting)
 
+//        tvSignUp!!.text = "Dealer"
+//        mBinding.btnSignup.visibility = View.GONE
+//        val tvSignUp = mBinding.findViewById<TextView>(R.id.tv_signup)
+//        tvSignUp.text = "Dealer"
+//        tvSignUp.setTextColor(Color.parseColor("#262626"))
         btnSignUP.setOnClickListener {
-            Toast.makeText(context, "SignUp :)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Call from employee module SignUp :)", Toast.LENGTH_SHORT).show()
         }
         btnLogin.setOnClickListener {
-            Toast.makeText(context, "Login :)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Call from employee module  Login :)", Toast.LENGTH_SHORT).show()
         }
 
         addView(mBinding)

@@ -21,49 +21,49 @@
             android:layout_height="match_parent"
             android:background="@color/color_f5f7fc">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_red_gradient_height"
-                android:background="@drawable/main_background_gradient"/>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/main_red_gradient_height"-->
+<!--                android:background="@drawable/main_background_gradient"/>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:context=".ui.main.MainActivity"
-                android:layout_marginTop="@dimen/main_toolbar_margin_top">
+                >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingStart="20dp"-->
+<!--                    android:paddingEnd="10dp">-->
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_brand_bnkc_lao_ndmf" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:scaleType="fitStart"-->
+<!--                        android:src="@drawable/ic_brand_bnkc_lao_ndmf" />-->
 
-                    <ImageButton
-                        android:id="@+id/btn_notification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_notification_white_ico" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/btn_notification"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@null"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:src="@drawable/ic_notification_white_ico" />-->
 
-                    <ImageButton
-                        android:id="@+id/btn_option"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_tab_menu_off" />
-                </LinearLayout>
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/btn_option"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@null"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:src="@drawable/ic_tab_menu_off" />-->
+<!--                </LinearLayout>-->
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/main_view_pager"
@@ -80,14 +80,19 @@
 
         </RelativeLayout>
 
-        <com.google.android.material.navigation.NavigationView
+        <com.bnkc.sourcemodule.ui.NavigationMenu
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="end|top">
+            android:layout_gravity="end|top"/>
 
-            <include layout="@layout/nav_drawer_layout"/>
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="end|top">-->
 
-        </com.google.android.material.navigation.NavigationView>
+<!--            <include layout="@layout/nav_drawer_layout"/>-->
+
+<!--        </com.google.android.material.navigation.NavigationView>-->
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

@@ -20,7 +20,7 @@
     <dimen name="margin_bottom_pin_key">40dp</dimen>
 
     <dimen name="main_toolbar_margin_top">40dp</dimen>
-    <dimen name="main_red_gradient_height">205dp</dimen>
+    <dimen name="main_red_gradient_height">165dp</dimen>
     <dimen name="main_tab_height">70dp</dimen>
 
     <!--innit screen-->

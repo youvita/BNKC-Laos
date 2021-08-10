@@ -19,24 +19,61 @@
         tools:context=".ui.main.fragment.myloan.MyLoanFragment"
         android:background="@null">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_red_gradient_height"
+            android:background="@drawable/main_background_gradient"/>
+
         <!-- My Loan Fragment Content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp">
+
+                <ImageView
+                    android:layout_width="@dimen/height_50dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Capital Lao Leasing Co, Ltd"
+                    android:textColor="@color/color_ffffff"
+                    android:textSize="@dimen/margin_18dp"
+                    android:textStyle="bold"/>
+
+                <ImageButton
+                    android:id="@+id/btn_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_notification_white_ico" />
+
+            </LinearLayout>
+
             <TextView
                 style="@style/font_15_FFFFFF_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:drawablePadding="10dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="15dp"
                 android:text="@string/main_subtitle_001"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_loan_in_use_ico" />
 
             <com.mobile.bnkcl.com.view.ShadowLayout
                 android:id="@+id/ll_loan_item"
@@ -51,8 +88,9 @@
                 app:shadowSide="all"
                 android:layout_marginLeft="11dp"
                 android:layout_marginRight="11dp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginBottom="-10dp">
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="-10dp"
+                >
                 <include
                     android:id="@+id/request_menu"
                     layout="@layout/myloan_request_menu"
