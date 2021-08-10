@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -9,298 +9,269 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_ffffff"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/font13_263238_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:text="@string/home_address" />
+
+            <TextView
+                style="@style/font13_263238_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:text="@string/capital" />
+
+            <LinearLayout
+                android:id="@+id/ll_province"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="@dimen/padding_15dp"
+                android:paddingEnd="@dimen/padding_15dp">
+
+                <TextView
+                    android:id="@+id/tv_province"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/select_capital"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/font13_263238_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/district" />
+
+            <LinearLayout
+                android:id="@+id/ll_district"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <TextView
+                    android:id="@+id/tv_district"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/select_district"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/font13_263238_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/village" />
+
+            <LinearLayout
+                android:id="@+id/ll_village"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <TextView
+                    android:id="@+id/tv_village"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/select_village"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+            </LinearLayout>
+
+            <com.mobile.bnkcl.com.view.BnkEditText
+                android:id="@+id/edt_detailed_address"
+                style="@style/font15_CFD8DC_medium_input"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_edittext_bg"
+                android:hint="@string/input_detailed_address"
+                android:maxLength="200"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:singleLine="true"
+                android:textColorHint="#cfd8dc" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/padding_10dp"
+                    android:gravity="center"
+                    android:text="ETC"
+                    app:drawableStartCompat="@drawable/ic_check_ico" />
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_5dp"
+                    android:text="(No Applicable Information)" />
+
+            </LinearLayout>
+
+            <com.mobile.bnkcl.com.view.BnkEditText
+                android:id="@+id/edt_etc"
+                style="@style/font15_CFD8DC_medium_input"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_edittext_bg"
+                android:hint="@string/input_detailed_address"
+                android:maxLength="200"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:singleLine="true"
+                android:textColorHint="#cfd8dc" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/padding_10dp"
+                    android:gravity="center"
+                    android:text="Account Information" />
+
+                <TextView
+                    style="@style/font_13_90A4AE_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_5dp"
+                    android:text="(optional)" />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_ffffff"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="@string/home_address" />
-
-                <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10dp"
-                    android:text="@string/capital" />
-
-                <LinearLayout
-                    android:id="@+id/ll_province"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50dp"
-                    android:layout_marginTop="@dimen/margin_10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/padding_15dp"
-                    android:paddingEnd="@dimen/padding_15dp">
-
-                    <TextView
-                        android:id="@+id/tv_province"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableEnd="@drawable/ic_more_ico"
-                        android:gravity="center_vertical"
-                        android:hint="@string/select_capital" />
-                </LinearLayout>
-
-                <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/district" />
-
-                <LinearLayout
-                    android:id="@+id/ll_district"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
-
-                    <TextView
-                        android:id="@+id/tv_district"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableEnd="@drawable/ic_more_ico"
-                        android:gravity="center_vertical"
-                        android:hint="@string/select_district" />
-                </LinearLayout>
-
-                <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/village" />
-
-                <LinearLayout
-                    android:id="@+id/ll_village"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
-
-                    <TextView
-                        android:id="@+id/tv_village"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableEnd="@drawable/ic_more_ico"
-                        android:gravity="center_vertical"
-                        android:hint="@string/select_village" />
-                </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <com.mobile.bnkcl.com.view.BnkEditText
-                    android:id="@+id/edt_detailed_address"
+                    android:id="@+id/edt_bank_name"
                     style="@style/font15_CFD8DC_medium_input"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/width_0dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="@dimen/margin_10dp"
+                    android:layout_weight="0.7"
                     android:background="@drawable/selector_edittext_bg"
-                    android:hint="@string/input_detailed_address"
+                    android:hint="Bank Name"
                     android:maxLength="200"
                     android:paddingStart="15sp"
                     android:paddingEnd="15sp"
                     android:singleLine="true"
                     android:textColorHint="#cfd8dc" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|start"
-                    android:layout_marginTop="@dimen/margin_20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_check_ico"
-                        android:drawablePadding="@dimen/padding_10dp"
-                        android:gravity="center"
-                        style="@style/font13_263238_medium"
-
-                        android:text="ETC" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/padding_5dp"
-                        style="@style/font13_263238_medium"
-
-                        android:text="(No Applicable Information)" />
-                </LinearLayout>
-
                 <com.mobile.bnkcl.com.view.BnkEditText
-                    android:id="@+id/edt_etc"
+                    android:id="@+id/edt_account_number"
                     style="@style/font15_CFD8DC_medium_input"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/width_0dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/selector_edittext_bg"
-                    android:hint="@string/input_detailed_address"
+                    android:hint="Account Number"
                     android:maxLength="200"
                     android:paddingStart="15sp"
                     android:paddingEnd="15sp"
                     android:singleLine="true"
                     android:textColorHint="#cfd8dc" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|start"
-                    android:layout_marginTop="@dimen/margin_20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
+            </LinearLayout>
 
-                    >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/padding_10dp"
-                        android:gravity="center"
-                        android:text="Account Information" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/padding_5dp"
-                        style="@style/font13_263238_medium"
-
-                        android:text="(optional)" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.mobile.bnkcl.com.view.BnkEditText
-                        android:id="@+id/edt_bank_name"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="@dimen/width_0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="@dimen/margin_10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_edittext_bg"
-                        android:hint="Bank Name"
-                        android:maxLength="200"
-                        android:paddingStart="15sp"
-                        android:paddingEnd="15sp"
-                        android:singleLine="true"
-                        android:textColorHint="#cfd8dc" />
-
-                    <com.mobile.bnkcl.com.view.BnkEditText
-                        android:id="@+id/edt_account_number"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="@dimen/width_0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_edittext_bg"
-                        android:hint="Account Number"
-                        android:maxLength="200"
-                        android:paddingStart="15sp"
-                        android:paddingEnd="15sp"
-                        android:singleLine="true"
-                        android:textColorHint="#cfd8dc" />
-
-                </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/font13_263238_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:text="@string/job_type" />
 
-                <LinearLayout
-                    android:id="@+id/ll_job_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
-
-                    <TextView
-                        android:id="@+id/tv_job_type"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableEnd="@drawable/ic_more_ico"
-                        android:gravity="center_vertical"
-                        android:hint="@string/select_job_type" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    style="@style/font_13_90A4AE_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|start"
-                    android:layout_marginTop="@dimen/margin_20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_5dp"
+                    android:text="(optional)" />
 
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/padding_10dp"
-                        android:gravity="center"
-                        style="@style/font13_263238_medium"
-                        android:text="Recommender" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/padding_5dp"
-                        android:text="(optional)" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.mobile.bnkcl.com.view.BnkEditText
-                        android:id="@+id/edt_recommend"
-                        style="@style/font15_CFD8DC_medium_input"
-                        android:layout_width="@dimen/width_0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="@dimen/margin_10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_edittext_bg"
-                        android:hint="Input Recommender"
-                        android:maxLength="200"
-                        android:paddingStart="15sp"
-                        android:paddingEnd="15sp"
-                        android:singleLine="true"
-                        android:textColorHint="#cfd8dc" />
-                </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_job_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <TextView
+                    android:id="@+id/tv_job_type"
+                    style="@style/font15_CFD8DC_medium_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@drawable/ic_more_ico"
+                    android:gravity="center_vertical"
+                    android:hint="@string/select_job_type" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

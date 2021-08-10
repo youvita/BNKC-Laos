@@ -277,35 +277,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent" />
 
-                                <TextView
-                                    android:id="@+id/tv_job_type"
-                                    style="@style/font13_263238_medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/margin_15dp"
-                                    android:text="@string/edit_05" />
-
-                                <LinearLayout
-                                    android:id="@+id/ll_job_type"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/height_50dp"
-                                    android:layout_marginTop="@dimen/margin_10dp"
-                                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                                    android:gravity="center"
-                                    android:paddingStart="@dimen/padding_15dp"
-                                    android:paddingEnd="@dimen/padding_15dp">
-
-                                    <TextView
-                                        android:id="@+id/tv_occupation"
-                                        style="@style/font15_c4d0d6_medium"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:gravity="center_vertical"
-                                        android:hint="Select"
-                                        android:textColorHint="@color/color_cfd8dc"
-                                        app:drawableEndCompat="@drawable/ic_more_ico" />
-                                </LinearLayout>
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

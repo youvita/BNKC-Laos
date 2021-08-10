@@ -609,6 +609,7 @@
     <string name="mbl_payment_07">/? Account Number</string>
     <string name="mbl_payment_08">/? Code (SMS)</string>
     <string name="mbl_payment_09">PAY</string>
+
     <string name="full_payment_01">Repayment Date</string>
     <string name="full_payment_02">CHECK</string>
     <string name="full_payment_03">Full Repayment (A+B+C+D)</string>
@@ -620,6 +621,7 @@
     <string name="full_payment_09">Overdue Principal</string>
     <string name="full_payment_10">Overdue Interest</string>
     <string name="full_payment_11">Total</string>
+
     <string name="lease_01">Lease Management</string>
     <string name="lease_02">Automobile Lease</string>
     <string name="lease_03">TOTAL SCHEDULE</string>
@@ -645,4 +647,24 @@
     <string name="lease_23">Overdue Penalty (11 Days)</string>
     <string name="lease_24">Total</string>
     <string name="lease_25">If you don\'t pay today, The Penalty will be increase.</string>
+
+    <string name="dlg_01">New Version Available</string>
+    <string name="dlg_02">There is an Update available,\n please update to use this App.</string>
+    <string name="dlg_03">UPDATE NOW</string>
+    <string name="dlg_04">Server is Being Maintenance</string>
+    <string name="dlg_05">We are currently undergoing\n maintenance. Will be right back.</string>
+    <string name="dlg_06">CLOSE</string>
+    <string name="dlg_07">No Internet Connection</string>
+    <string name="dlg_08">Please check your internet\n connection and try again.</string>
+    <string name="dlg_09">TRY AGAIN</string>
+    <string name="dlg_10">Payment Success</string>
+    <string name="dlg_11">Payment Success\n Message.</string>
+    <string name="dlg_12">CLOSE</string>
+    <string name="dlg_13">Payment Failed</string>
+    <string name="dlg_14">Payment Failed\n Message.</string>
+    <string name="dlg_15">TRY AGAIN</string>
+    <string name="dlg_16">Log Out</string>
+    <string name="dlg_17">Are you sure to log out?</string>
+    <string name="dlg_18">CANCEL</string>
+    <string name="dlg_19">LOG OUT</string>
 </resources>

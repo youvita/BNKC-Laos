@@ -304,7 +304,90 @@
 
                                 </LinearLayout>
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="vertical"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_10dp"
+                                    android:layout_marginBottom="@dimen/margin_21dp">
+
+                                    <TextView
+                                        style="@style/font13_263238_medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/margin_10dp"
+                                        android:text="@string/edit_11" />
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_province"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/height_50dp"
+                                        android:layout_marginTop="@dimen/margin_10dp"
+                                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                                        android:gravity="center"
+                                        android:paddingStart="@dimen/padding_15dp"
+                                        android:paddingEnd="@dimen/padding_15dp">
+
+                                        <TextView
+                                            android:id="@+id/tv_province"
+                                            style="@style/font15_90a4ae_medium"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="Select Gender"
+                                            app:drawableEndCompat="@drawable/ic_more_ico" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
                                 <include layout="@layout/additional_info" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:layout_marginTop="@dimen/margin_20dp"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/font13_263238_medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="@dimen/padding_10dp"
+                                        android:gravity="center"
+                                        android:text="Recommender" />
+
+                                    <TextView
+                                        style="@style/font_13_90A4AE_regular"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding_5dp"
+                                        android:text="(optional)" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.mobile.bnkcl.com.view.BnkEditText
+                                        android:id="@+id/edt_recommend"
+                                        style="@style/font15_CFD8DC_medium_input"
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginEnd="@dimen/margin_10dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/selector_edittext_bg"
+                                        android:hint="Input Recommender"
+                                        android:maxLength="200"
+                                        android:paddingStart="15sp"
+                                        android:paddingEnd="15sp"
+                                        android:singleLine="true"
+                                        android:textColorHint="#cfd8dc" />
+                                </LinearLayout>
+
                             </LinearLayout>
 
                         </RelativeLayout>
