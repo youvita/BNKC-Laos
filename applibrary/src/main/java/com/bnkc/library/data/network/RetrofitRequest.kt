@@ -5,7 +5,6 @@
  */
 package com.bnkc.library.data.network
 
-import android.util.Log
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -24,7 +23,7 @@ object RetrofitRequest {
             } else {
                 var errorMessage: String? = null
                 var errorCode: String? = null
-                val jsonObject = JSONObject(response.errorBody()?.string())
+                val jsonObject = JSONObject(response.errorBody()!!.string())
 
                 try {
                     errorCode = jsonObject.getString("code")
