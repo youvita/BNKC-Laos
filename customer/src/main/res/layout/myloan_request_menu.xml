@@ -1,175 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+        android:baselineAligned="false"
+        android:padding="21dp">
+
+        <!-- Application -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_menu1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
-            android:padding="21dp">
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
-            <!-- Application -->
-            <LinearLayout
-                android:id="@+id/ll_menu1"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:duplicateParentState="true">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="true">
-
-                    <ImageView
-                        android:id="@+id/img_menu1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:duplicateParentState="true"
-                        android:src="@drawable/selector_loan_app" />
-
-                    <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:layout_alignRight="@id/img_menu1"
-                        android:layout_alignBottom="@id/img_menu1"
-                        android:layout_marginRight="-5dp"
-                        android:duplicateParentState="true"
-                        android:src="@drawable/selector_red_check" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_menu_title1"
-                    style="@style/font10_d7191f_medium_menu"
+                <ImageView
+                    android:id="@+id/img_menu1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:minHeight="20dp"
-                    android:paddingBottom="2dp"
-                    android:text="@string/my_loan_menu_001" />
+                    android:src="@drawable/selector_loan_app"
+                    tools:ignore="ContentDescription" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
-                    android:duplicateParentState="true" />
-            </LinearLayout>
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_alignEnd="@id/img_menu1"
+                    android:layout_alignBottom="@id/img_menu1"
+                    android:layout_marginEnd="-5dp"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/selector_red_check"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
 
-            <!-- Application -->
-            <LinearLayout
-                android:id="@+id/ll_menu3"
+            <TextView
+                android:id="@+id/tv_menu_title1"
+                style="@style/font10_d7191f_medium_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:minHeight="20dp"
+                android:paddingBottom="2dp"
+                android:text="@string/my_loan_menu_001" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="true">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
+                android:duplicateParentState="true" />
 
-                    <ImageView
-                        android:id="@+id/img_menu3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:duplicateParentState="true"
-                        android:src="@drawable/selector_loan_approve" />
-
-                    <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:layout_alignRight="@id/img_menu3"
-                        android:layout_alignBottom="@id/img_menu3"
-                        android:layout_marginRight="-5dp"
-                        android:duplicateParentState="true"
-                        android:src="@drawable/selector_red_check" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_menu_title3"
-                    style="@style/font10_d7191f_medium_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:minHeight="20dp"
-                    android:paddingBottom="2dp"
-                    android:text="Screening" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
-                    android:duplicateParentState="true" />
-            </LinearLayout>
-
-            <!-- Application -->
-            <LinearLayout
-                android:id="@+id/ll_menu4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="true">
-
-                    <ImageView
-                        android:id="@+id/img_menu4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:duplicateParentState="true"
-                        android:src="@drawable/selector_loan_success" />
-
-                    <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:layout_alignRight="@id/img_menu4"
-                        android:layout_alignBottom="@id/img_menu4"
-                        android:layout_marginRight="-5dp"
-                        android:duplicateParentState="true"
-                        android:src="@drawable/selector_red_check" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_menu_title4"
-                    style="@style/font10_d7191f_medium_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:minHeight="20dp"
-                    android:paddingBottom="2dp"
-                    android:text="Result" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
-                    android:duplicateParentState="true" />
-            </LinearLayout>
         </LinearLayout>
+
+        <!-- Application -->
+        <LinearLayout
+            android:id="@+id/ll_menu3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true">
+
+                <ImageView
+                    android:id="@+id/img_menu3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/selector_loan_approve"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_alignEnd="@id/img_menu3"
+                    android:layout_alignBottom="@id/img_menu3"
+                    android:layout_marginEnd="-5dp"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/selector_red_check"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_menu_title3"
+                style="@style/font10_d7191f_medium_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:minHeight="20dp"
+                android:paddingBottom="2dp"
+                android:text="Screening" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
+                android:duplicateParentState="true" />
+
+        </LinearLayout>
+
+        <!-- Application -->
+        <LinearLayout
+            android:id="@+id/ll_menu4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true">
+
+                <ImageView
+                    android:id="@+id/img_menu4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/selector_loan_success"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_alignEnd="@id/img_menu4"
+                    android:layout_alignBottom="@id/img_menu4"
+                    android:layout_marginEnd="-5dp"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/selector_red_check"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_menu_title4"
+                style="@style/font10_d7191f_medium_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:minHeight="20dp"
+                android:paddingBottom="2dp"
+                android:text="Result" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
+                android:duplicateParentState="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </layout>

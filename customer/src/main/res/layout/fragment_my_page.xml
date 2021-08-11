@@ -71,9 +71,9 @@
                 android:paddingTop="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="15dp"
-                android:text="@string/main_subtitle_001"
+                android:text="My Lease Request (Until the last 14days)"
                 android:gravity="center_vertical"
-                app:drawableStartCompat="@drawable/ic_loan_in_use_ico" />
+                app:drawableStartCompat="@drawable/ic_my_loan_req_white_ico" />
 
             <com.mobile.bnkcl.com.view.ShadowLayout
                 android:id="@+id/ll_loan_item"
@@ -91,6 +91,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="-10dp"
                 >
+
                 <include
                     android:id="@+id/request_menu"
                     layout="@layout/myloan_request_menu"
@@ -123,7 +124,7 @@
                             style="@style/font15_263238_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
+                            android:drawableStart="@drawable/ic_loan_in_use_ico"
                             android:drawablePadding="10dp"
                             android:gravity="center_vertical"
                             android:text="@string/main_subtitle_002" />

@@ -91,6 +91,7 @@ dependencies {
     implementation deps.constraintlayout
     implementation deps.support.activity_ktx
     implementation deps.support.fragment_ktx
+    implementation deps.ceryle
 
     // injection
     implementation deps.dagger.android
@@ -128,4 +129,7 @@ dependencies {
     //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+//    implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
 }

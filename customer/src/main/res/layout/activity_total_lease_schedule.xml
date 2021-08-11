@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.mobile.bnkcl.ui.schedule.TotalLeaseScheduleViewModel" />
+
+        <variable
+            name="totalLeaseScheduleViewModel"
+            type="TotalLeaseScheduleViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.schedule.TotalLeaseScheduleActivity">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_f5f7fc"
+                android:stateListAnimator="@null">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/coll_toolbar"
+                    style="@style/font_28_263238_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_120dp"
+                    app:collapsedTitleGravity="center"
+                    app:expandedTitleMargin="@dimen/margin_21dp"
+                    app:expandedTitleTextAppearance="@style/font_28_263238_bold"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:title="@string/total_loan_schedule_001">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/font_18_263238_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/color_00ffffff"
+                        android:contentInsetStart="0dp"
+                        android:contentInsetEnd="0dp"
+                        android:contentInsetRight="0dp"
+                        android:gravity="center"
+                        app:collapseIcon="@null"
+                        app:contentInsetEnd="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetRight="0dp"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin">
+
+                        <ImageView
+                            android:id="@+id/toolbar_left_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:paddingStart="@dimen/margin_21dp"
+                            android:src="@drawable/ic_nav_back_dark_btn"
+                            tools:ignore="ContentDescription,RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/toolbar_right_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:paddingEnd="@dimen/margin_21dp"
+                            android:src="@drawable/ic_nav_close_dark_btn"
+                            android:visibility="invisible"
+                            tools:ignore="ContentDescription,RtlSymmetry" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_top_solid_ffffff_corner_15"
+                    android:elevation="15dp"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/padding_30dp"
+                    app:layout_collapseMode="pin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/padding_20dp"
+                        android:paddingRight="@dimen/padding_20dp">
+
+                        <TextView
+                            android:id="@+id/tv_sort"
+                            style="@style/font15_263238_medium"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_50dp"
+                            android:layout_marginEnd="@dimen/margin_5dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                            android:drawablePadding="@dimen/padding_10dp"
+                            android:gravity="start|center_vertical"
+                            android:padding="@dimen/padding_10dp"
+                            android:text="@string/total_loan_schedule_006"
+                            app:drawableRightCompat="@drawable/ic_more_ico" />
+
+                        <co.ceryle.segmentedbutton.SegmentedButton
+                            android:id="@+id/segment_button"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/margin_10dp"
+                            app:sbg_animateSelectorDuration="200"
+                            app:sbg_backgroundColor="@color/color_ffeeee"
+                            app:sbg_draggable="false"
+                            app:sbg_position="0"
+                            app:sbg_radius="8dp"
+                            app:sbg_selectorColor="@color/color_d7191f"
+                            tools:ignore="MissingClass">
+
+                            <co.ceryle.segmentedbutton.SegmentedButton
+                                android:id="@+id/sb_day"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="9dp"
+                                app:sb_drawableTint_onSelection="@color/color_ffffff" />
+
+                            <co.ceryle.segmentedbutton.SegmentedButton
+                                android:id="@+id/sb_list"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="9dp"
+                                app:sb_drawableTint_onSelection="@color/color_ffffff" />
+                        </co.ceryle.segmentedbutton.SegmentedButton>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_ffffff"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_20dp"
+                    android:paddingRight="@dimen/padding_20dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/loan_schedule_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:background="@color/color_ffffff"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingBottom="100dp"
+                        tools:listitem="@layout/item_lease_schedule_layout" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_web_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:layout_marginBottom="@dimen/margin_20dp"
+                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:visibility="gone">
+
+                        <WebView
+                            android:id="@+id/web_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:rotation="90"
+                            android:scrollbars="none" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
+            <LinearLayout
+                android:id="@+id/ll_total_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/color_f9fafb"
+                android:baselineAligned="false"
+                android:minHeight="95dp"
+                android:paddingLeft="@dimen/padding_20dp"
+                android:paddingTop="@dimen/padding_20dp"
+                android:paddingRight="@dimen/padding_20dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_10dp"
+                        android:src="@drawable/ic_total_principal_ico"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/font15_00695c_regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/total_loan_schedule_002" />
+
+                        <TextView
+                            android:id="@+id/tv_total_principal"
+                            style="@style/font15_263238_medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4,500,000,000" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_10dp"
+                        android:src="@drawable/ic_total_interest_ico"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/font15_00695c_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/total_loan_schedule_003" />
+
+                        <TextView
+                            android:id="@+id/tv_total_interest"
+                            style="@style/font15_263238_medium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1,125,00 USD" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
