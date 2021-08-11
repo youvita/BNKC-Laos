@@ -100,4 +100,7 @@
     <dimen name="radius_4dp">4dp</dimen>
     <dimen name="radius_5dp">5dp</dimen>
     <dimen name="radius_8dp">8dp</dimen>
+
+    <!-- dialog -->
+    <dimen name="dialog_40dp">40dp</dimen>
 </resources>
