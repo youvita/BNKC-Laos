@@ -8,7 +8,7 @@ package com.bnkc.library.data.network
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bnkc.library.R
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.Resource
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -40,26 +40,29 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                     setValue(Resource.Success(response.body))
                 }
                 is RetrofitResponse.Exception -> {
+                    var code = ErrorCode.TIMEOUT_ERROR
                     val throwable = response.throwable
                     if (throwable is CancellationException) {
                         return@withContext
                     } else {
                         if (throwable is UnknownHostException || throwable is ConnectException) {
-                            // TODO: error title & message
-                            setValue(Resource.Error(R.string.title_no_network, R.string.message_pls_check_network))
+                            // Unknown Error
+                            code = ErrorCode.UNKNOWN_ERROR
                         }
+                        setValue(Resource.Error("","", code))
                     }
                 }
                 is RetrofitResponse.Error -> {
                     when (response.code) {
                         HttpURLConnection.HTTP_UNAUTHORIZED -> {
-                            // TODO: Session Expired
+                            // Session Expired
+                            setValue((Resource.Error(response.errorTitle!!, response.errorMessage!!, response.code)))
                         }
                         HttpURLConnection.HTTP_INTERNAL_ERROR -> {
 
                         }
                         else -> {
-                            if (response.msg != null) {
+                            if (response.errorMessage != null) {
 
                             }
                         }

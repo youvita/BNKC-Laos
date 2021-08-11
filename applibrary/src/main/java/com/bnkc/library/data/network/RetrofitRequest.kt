@@ -5,6 +5,8 @@
  */
 package com.bnkc.library.data.network
 
+import android.util.Log
+import org.json.JSONObject
 import retrofit2.Response
 
 object RetrofitRequest {
@@ -20,8 +22,17 @@ object RetrofitRequest {
                     RetrofitResponse.Success(body)
                 }
             } else {
-                val errorBody: T? = null
-                RetrofitResponse.Error(response.code(), response.message(), errorBody)
+                var errorMessage: String? = null
+                var errorCode: String? = null
+                val jsonObject = JSONObject(response.errorBody()?.string())
+
+                try {
+                    errorCode = jsonObject.getString("code")
+                    errorMessage = jsonObject.getString("message")
+                }catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                RetrofitResponse.Error(response.code(), errorCode, errorMessage)
             }
         } catch (throwable: Throwable) {
             RetrofitResponse.Exception(throwable)

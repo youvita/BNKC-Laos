@@ -1,8 +1,10 @@
 package com.mobile.bnkcl.di
 
+import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.mobile.bnkcl.app.Constants
 import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.MGApi
+import com.mobile.bnkcl.data.api.UserApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +33,15 @@ object CustomerModule {
             .baseUrl(Constants.MG_URL)
             .build()
             .create(MGApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserService(retrofit: Retrofit.Builder, credentialSharedPrefer: CredentialSharedPrefer): UserApi {
+        return retrofit
+                .baseUrl(credentialSharedPrefer.getPrefer(com.bnkc.sourcemodule.app.Constants.KEY_BASE_URL)!!)
+                .build()
+                .create(UserApi::class.java)
     }
 
 }

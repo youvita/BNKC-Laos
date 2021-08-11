@@ -13,5 +13,5 @@ class RxEvent {
 
     class ResponseSuccess
 
-    class ServerError(val title: Int, val message: Any)
+    class ServerError(val code: Int, val title: String, val message: String)
 }

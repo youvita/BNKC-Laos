@@ -11,10 +11,12 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
+import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import io.reactivex.disposables.Disposable
@@ -77,7 +79,20 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
      */
     private fun systemErrorListener() {
         disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            systemDialog = SystemDialog.newInstance(getString(it.title), getString(it.message as Int))
+            var title = it.title
+            var message = it.message
+            if (title == "" && message == "") {
+                when (it.code) {
+                    ErrorCode.UNKNOWN_ERROR -> {
+                        title = getString(R.string.title_no_network)
+                        message = getString(R.string.message_pls_check_network)
+                    }
+                    ErrorCode.TIMEOUT_ERROR -> {
+                        // TODO: Request Timeout
+                    }
+                }
+            }
+            systemDialog = SystemDialog.newInstance(title, message)
             systemDialog.show(supportFragmentManager, systemDialog.tag)
         }
     }

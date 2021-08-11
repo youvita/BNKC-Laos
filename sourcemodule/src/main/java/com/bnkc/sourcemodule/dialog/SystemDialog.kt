@@ -5,6 +5,7 @@
  */
 package com.bnkc.sourcemodule.dialog
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import com.bnkc.sourcemodule.R
@@ -12,6 +13,8 @@ import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.bnkc.sourcemodule.databinding.DialogSystemBinding
 
 class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
+
+    private var confirmClickListener: (() -> Unit)? = null
 
     companion object {
         private const val TITLE   = "title"
@@ -34,5 +37,17 @@ class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.errorTitle   = arguments?.getString(TITLE)
         binding.errorMessage = arguments?.getString(MESSAGE)
+        binding.confirm.setOnClickListener {
+            confirmClickListener?.invoke()
+            dialog?.dismiss()
+        }
     }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        confirmClickListener = null
+    }
+
+    fun onConfirmClicked(confirmListener: (() -> Unit)) =
+            apply { this.confirmClickListener = confirmListener }
 }
