@@ -1,7 +1,8 @@
 package com.mobile.bnkcl.di
 
 import com.bnkc.library.prefer.CredentialSharedPrefer
-import com.mobile.bnkcl.app.Constants
+import com.bnkc.sourcemodule.app.Constants
+import com.mobile.bnkcl.app.AppBuild
 import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.MGApi
 import com.mobile.bnkcl.data.api.UserApi
@@ -20,7 +21,7 @@ object CustomerModule {
     @Provides
     fun provideCommentService(retrofit: Retrofit.Builder): CommentApi {
         return retrofit
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(CommentApi::class.java)
 
@@ -30,7 +31,7 @@ object CustomerModule {
     @Provides
     fun provideMGService(retrofit: Retrofit.Builder): MGApi {
         return retrofit
-            .baseUrl(Constants.MG_URL)
+            .baseUrl(AppBuild.MG_URL)
             .build()
             .create(MGApi::class.java)
     }
@@ -39,7 +40,7 @@ object CustomerModule {
     @Provides
     fun provideUserService(retrofit: Retrofit.Builder, credentialSharedPrefer: CredentialSharedPrefer): UserApi {
         return retrofit
-                .baseUrl(credentialSharedPrefer.getPrefer(com.bnkc.sourcemodule.app.Constants.KEY_BASE_URL)!!)
+                .baseUrl(credentialSharedPrefer.getPrefer(Constants.KEY_BASE_URL)!!)
                 .build()
                 .create(UserApi::class.java)
     }

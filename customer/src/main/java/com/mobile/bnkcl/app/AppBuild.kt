@@ -7,7 +7,7 @@ package com.mobile.bnkcl.app
 
 import com.mobile.bnkcl.BuildConfig
 
-object Constants {
+object AppBuild {
 
     const val BASE_URL = BuildConfig.BASE_URL
 
