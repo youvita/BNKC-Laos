@@ -1,5 +1,6 @@
 package com.bnkc.sourcemodule.di
 
+import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
@@ -24,5 +25,9 @@ object SourceModule {
     @Singleton
     @Provides
     fun provideSystemDialog() = SystemDialog()
+
+    @Singleton
+    @Provides
+    fun provideConfirmDialog() = ConfirmDialog()
 
 }

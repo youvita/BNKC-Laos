@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="errorIcon"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="errorTitle"
+            type="String" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="errorAct"
+            type="String" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_40dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_dialog_white_radius_5">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_badge_error"/>
+
+            <TextView style="@style/font_21_263238_medium"
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:gravity="center"
+                android:text="@{errorTitle}"
+                app:layout_constraintBottom_toTopOf="@+id/tv_message"
+                app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
+                tools:text="Error"/>
+
+
+            <TextView style="@style/font_15_263238_regular"
+                android:id="@+id/tv_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/padding_20dp"
+                android:paddingEnd="@dimen/padding_20dp"
+                android:gravity="center"
+                android:text="@{errorMessage}"
+                app:layout_constraintBottom_toTopOf="@+id/login"
+                app:layout_constraintEnd_toEndOf="@+id/login"
+                app:layout_constraintStart_toStartOf="@+id/login"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="Error Message"/>
+
+            <androidx.appcompat.widget.AppCompatButton style="@style/appCompatButtonPrimary"
+                android:id="@+id/login"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_50dp"
+                android:gravity="center"
+                tools:text="@string/confirm"
+                android:text="@{errorAct}"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:layout_marginEnd="@dimen/margin_20dp"
+                android:layout_marginBottom="@dimen/margin_20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_message" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</layout>

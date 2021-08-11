@@ -6,6 +6,11 @@
 package com.bnkc.sourcemodule.app
 
 object Constants {
+
+    // Login info
+    const val USER_ID = "USER_ID"
     const val KEY_TOKEN = "TOKEN"
-    const val KEY_BASE_URL = "BASE_URL"
+
+    //    MG
+    const val KEY_START_URL         = "c_start_url"
 }
