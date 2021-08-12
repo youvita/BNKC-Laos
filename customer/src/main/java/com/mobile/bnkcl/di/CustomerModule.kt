@@ -40,7 +40,7 @@ object CustomerModule {
     @Provides
     fun provideUserService(retrofit: Retrofit.Builder, credentialSharedPrefer: CredentialSharedPrefer): UserApi {
         return retrofit
-                .baseUrl(credentialSharedPrefer.getPrefer(Constants.KEY_START_URL)!!)
+                .baseUrl(AppBuild.BASE_URL)
                 .build()
                 .create(UserApi::class.java)
     }
