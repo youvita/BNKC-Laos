@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.data.request
+package com.mobile.bnkcl.data.request.signup
 
 import com.google.gson.annotations.SerializedName
 

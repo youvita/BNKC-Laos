@@ -668,5 +668,15 @@
     <string name="dlg_17">Are you sure to log out?</string>
     <string name="dlg_18">CANCEL</string>
     <string name="dlg_19">LOG OUT</string>
+    <string name="dlg_20">You cannot sign up\n through this app. Call customer\n service and request for a change\n the phone number registered\n when you sign up.</string>
+    <string name="dlg_21">Different Phone Number</string>
+
+
+    <string name="pin_number_enty_error_and_re_entry_request_statement">PIN Number enty error and re-entry request \n statement</string>
+    <string name="bnkc_will_review_your_inquiry_and_get_back_to_you_soon">BNKC will review your inquiry and get back to you soon</string>
+    <string name="inquiry_is_failed">Inquiry is Failed</string>
+    <string name="inquiry_is_submitted">Inquiry is Submitted</string>
+    <string name="internal_server_error">Internal Server Error</string>
+    <string name="error_code_500">(Error Code : 500)</string>
 
 </resources>

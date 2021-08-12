@@ -613,4 +613,6 @@
     <string name="dlg_17">Are you sure to log out?</string>
     <string name="dlg_18">CANCEL</string>
     <string name="dlg_19">LOG OUT</string>
+    <string name="dlg_20">You cannot sign up\n through this app. Call customer\n service and request for a change\n the phone number registered\n when you sign up.</string>
+    <string name="dlg_21">Different Phone Number</string>
 </resources>
