@@ -109,10 +109,10 @@
                             android:text="@string/total_loan_schedule_006"
                             app:drawableRightCompat="@drawable/ic_more_ico" />
 
-                        <co.ceryle.segmentedbutton.SegmentedButton
+                        <co.ceryle.segmentedbutton.SegmentedButtonGroup
                             android:id="@+id/segment_button"
                             android:layout_width="150dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="@dimen/height_50dp"
                             android:layout_marginStart="@dimen/margin_10dp"
                             app:sbg_animateSelectorDuration="200"
                             app:sbg_backgroundColor="@color/color_ffeeee"
@@ -125,21 +125,23 @@
                             <co.ceryle.segmentedbutton.SegmentedButton
                                 android:id="@+id/sb_day"
                                 android:layout_width="0dp"
-                                android:layout_height="match_parent"
+                                android:layout_height="@dimen/height_50dp"
                                 android:layout_weight="1"
-                                android:paddingTop="8dp"
-                                android:paddingBottom="9dp"
+                                android:paddingTop="@dimen/padding_8dp"
+                                android:paddingBottom="@dimen/padding_8dp"
+                                app:sb_drawable="@drawable/selector_background_schedule_view_list"
                                 app:sb_drawableTint_onSelection="@color/color_ffffff" />
 
                             <co.ceryle.segmentedbutton.SegmentedButton
                                 android:id="@+id/sb_list"
                                 android:layout_width="0dp"
-                                android:layout_height="match_parent"
+                                android:layout_height="@dimen/height_50dp"
                                 android:layout_weight="1"
-                                android:paddingTop="8dp"
-                                android:paddingBottom="9dp"
+                                android:paddingTop="@dimen/padding_8dp"
+                                android:paddingBottom="@dimen/padding_8dp"
+                                app:sb_drawable="@drawable/selector_background_schedule_view_table"
                                 app:sb_drawableTint_onSelection="@color/color_ffffff" />
-                        </co.ceryle.segmentedbutton.SegmentedButton>
+                        </co.ceryle.segmentedbutton.SegmentedButtonGroup>
 
                     </LinearLayout>
 
