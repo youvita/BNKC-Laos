@@ -7,6 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
+import com.bnkc.library.data.type.ErrorCode
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
@@ -49,71 +52,79 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     }
 
     private fun getMGData() {
-        introViewModel.getMGData()
-        introViewModel.mgData.observe(this) {
+        try {
+            introViewModel.getMGData()
+            introViewModel.mgData.observe(this) {
 
-            if (it != null) {
-                sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
-            }
+                if (it != null) {
+                    sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
+                }
 
-            val availableService = it.c_available_service
-            if (availableService!!) {
+                val availableService = it.c_available_service
+                if (availableService!!) {
 
-                val appVer = getAppVersionName().trim()
-                val programVer = it.c_program_ver!!.trim()
+                    val appVer = getAppVersionName().trim()
+                    val programVer = it.c_program_ver!!.trim()
 
-                if (validateAppVersion(appVer, programVer)) {
+                    if (validateAppVersion(appVer, programVer)) {
 
-                    confirmDialog = ConfirmDialog.newInstance(
-                        R.drawable.badge_new_version,
-                        getString(R.string.dlg_01),
-                        getString(R.string.dlg_02),
-                        getString(R.string.dlg_03)
-                    )
-                    confirmDialog.onConfirmClickedListener {
-                        var marketUrl = it.c_appstore_url!!
-                        if (marketUrl!!.isEmpty()) {
-                            marketUrl = "market://details?id=$packageName"
-                        }
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(marketUrl))
-                        startActivity(intent)
-                        finish()
-                    }
-                    confirmDialog.isCancelable = false
-                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
-
-                } else {
-                    if (it.c_act_yn!!) {
-                        val serviceReason = it.c_act_msg
                         confirmDialog = ConfirmDialog.newInstance(
+                                R.drawable.badge_new_version,
+                                getString(R.string.dlg_01),
+                                getString(R.string.dlg_02),
+                                getString(R.string.dlg_03)
+                        )
+                        confirmDialog.onConfirmClickedListener {
+                            var marketUrl = it.c_appstore_url!!
+                            if (marketUrl.isEmpty()) {
+                                marketUrl = "market://details?id=$packageName"
+                            }
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(marketUrl))
+                            startActivity(intent)
+                            finish()
+                        }
+                        confirmDialog.isCancelable = false
+                        confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+
+                    } else {
+                        if (it.c_act_yn!!) {
+                            val serviceReason = it.c_act_msg
+                            confirmDialog = ConfirmDialog.newInstance(
+                                    R.drawable.ic_badge_error,
+                                    getString(R.string.notice_01),
+                                    serviceReason!!,
+                                    getString(R.string.comm_confirm)
+                            )
+                            confirmDialog.onConfirmClickedListener {
+                                startApp()
+                            }
+                            confirmDialog.isCancelable = false
+                            confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+                        } else {
+                            startApp()
+                        }
+                    }
+                } else {
+                    val serviceReason = it.c_act_msg
+                    confirmDialog = ConfirmDialog.newInstance(
                             R.drawable.ic_badge_error,
                             getString(R.string.notice_01),
                             serviceReason!!,
                             getString(R.string.comm_confirm)
-                        )
-                        confirmDialog.onConfirmClickedListener {
-                            startApp()
-                        }
-                        confirmDialog.isCancelable = false
-                        confirmDialog.show(supportFragmentManager, confirmDialog.tag)
-                    } else {
-                        startApp()
+                    )
+                    confirmDialog.onConfirmClickedListener {
+                        finish()
                     }
+                    confirmDialog.isCancelable = false
+                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                 }
-            } else {
-                val serviceReason = it.c_act_msg
-                confirmDialog = ConfirmDialog.newInstance(
-                    R.drawable.ic_badge_error,
-                    getString(R.string.notice_01),
-                    serviceReason!!,
-                    getString(R.string.comm_confirm)
-                )
-                confirmDialog.onConfirmClickedListener {
-                    finish()
-                }
-                confirmDialog.isCancelable = false
-                confirmDialog.show(supportFragmentManager, confirmDialog.tag)
             }
+        }catch (e: Exception) {
+            e.printStackTrace()
+            // Catch some error when MG down service
+            val title   = getString(R.string.comm_error)
+            val message = getString(R.string.comm_error_during_process)
+            RxJava.publish(RxEvent.ServerError(ErrorCode.SERVICE_ERROR, title, message))
         }
     }
 
