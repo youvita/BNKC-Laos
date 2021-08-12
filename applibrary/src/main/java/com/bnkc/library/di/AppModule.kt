@@ -6,6 +6,9 @@
 package com.bnkc.library.di
 
 import android.content.Context
+import com.bnkc.library.R
+import com.bnkc.library.custom.cardview.CardOffsetDecoration
+import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.library.permission.AppPermissionsFactory
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import dagger.Module
@@ -27,5 +30,16 @@ object AppModule {
     @Singleton
     @Provides
     fun provideAppPermissionFactory() = AppPermissionsFactory()
+
+    @Singleton
+    @Provides
+    fun provideCardRecyclerView() = CardRecyclerView()
+
+    @Singleton
+    @Provides
+    fun provideCardItemOffsetDecoration(@ApplicationContext context: Context): CardOffsetDecoration {
+        val cardSpacing = context.resources.getDimensionPixelOffset(R.dimen.default_spacing_small)
+        return CardOffsetDecoration(cardSpacing)
+    }
 
 }

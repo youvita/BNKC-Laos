@@ -44,6 +44,14 @@
         <item name="android:windowExitAnimation">@anim/scale_out</item>
     </style>
 
+    <!-- recyclerview style-->
+    <style name="recyclerViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
 
     <!-- font style -->
     <style name="radio_font14_90A4AE_medium">
