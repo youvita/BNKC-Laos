@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="signup"
+            type="com.mobile.bnkcl.ui.signup.SignUpActivity" />
+        <variable
+            name="signUpViewModle"
+            type="com.mobile.bnkcl.ui.signup.SignUpViewModel" />
 
 
     </data>
@@ -405,13 +411,15 @@
                         android:background="@drawable/round_solid_e1e5ec_8"
                         android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/tv_continue"
-                            style="@style/font14_90A4AE_medium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/subimit"
-                            android:textAllCaps="true" />
+                        <com.mobile.bnkcl.com.view.ValidateButton
+                            android:id="@+id/vb_result"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_50dp"
+                            android:layout_marginEnd="@dimen/margin_5dp"
+                            app:buttonText="Log in"
+                            app:textAllCaps="true" />
+
+
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>

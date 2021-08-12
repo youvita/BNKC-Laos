@@ -10,8 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.success.ResultActivity">
-
+        tools:context=".ui.success.AskBNKCRegisterFailedActivity">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,7 +27,7 @@
                 android:layout_marginStart="@dimen/margin_20dp"
                 android:layout_marginTop="@dimen/margin_50dp"
                 android:layout_marginEnd="@dimen/margin_20dp"
-                android:src="@drawable/ic_brand_bnkc_lao_ndmf"
+                android:src="@drawable/ic_brand_bnkc_lao_leasing"
                 android:visibility="visible" />
 
             <LinearLayout
@@ -43,7 +42,7 @@
                     android:id="@+id/iv_reg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_badge_success_g_char" />
+                    android:src="@drawable/ic_badge_failed_b_char" />
 
                 <TextView
                     android:id="@+id/tv_result_title"
@@ -51,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:gravity="center"
-                    android:text="@string/registration_successful"
+                    android:text="@string/inquiry_is_failed"
                     style="@style/font_21_263238_normal"/>
 
                 <TextView
@@ -60,9 +59,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="@string/you_have_registered_please_log_in"
+                    android:text="@string/internal_server_error"
                     android:textAlignment="center"
                     style="@style/font_15_263238_regular"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/error_code_500"
+                    />
             </LinearLayout>
 
             <LinearLayout
