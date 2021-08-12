@@ -3,6 +3,8 @@ package com.mobile.bnkcl.ui.history
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.bnkc.library.custom.cardview.CardOffsetDecoration
+import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.CommentsItem
@@ -11,6 +13,7 @@ import com.mobile.bnkcl.ui.adapter.TransactionHistoryAdapter
 import javax.inject.Inject
 
 class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBinding>() {
+
     @Inject
     lateinit var transactionAdapter: TransactionHistoryAdapter
 
@@ -22,21 +25,23 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         super.onCreate(savedInstanceState)
 
         transactionAdapter = TransactionHistoryAdapter()
-        val arrayList = ArrayList<CommentsItem>()
+        val list = mutableListOf<CommentsItem>()
+
+        val item = CommentsItem()
+        item.postId = 1
+        item.id = 1
+        item.name = "dara"
+        item.email = "email"
+        item.body = "body"
+
+        list.add(0, item)
+        list.add(1, item)
 
         binding.transactionRecyclerview.adapter = transactionAdapter
+        transactionAdapter.addItemList(list)
 
-        val item1 = CommentsItem(1,1,"Jam","jamm@gmail.com","hello this is me, Jam!")
-        arrayList.add(item1)
-        arrayList.add(item1)
-        arrayList.add(item1)
-        arrayList.add(item1)
-        arrayList.add(item1)
-
-        transactionAdapter.addItemList(arrayList)
-
-        Log.d(">>>", "onCreate: "+transactionAdapter.itemCount)
-        if (arrayList.size == 0){
+        Log.d(">>>", "onCreate: " + transactionAdapter.itemCount)
+        if (list.size == 0) {
             binding.llWrapSort.visibility = View.GONE
             binding.llNoData.visibility = View.VISIBLE
         }

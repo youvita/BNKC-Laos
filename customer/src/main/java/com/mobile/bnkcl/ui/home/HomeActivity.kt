@@ -6,6 +6,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityHomeBinding
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.main.MainActivity
 

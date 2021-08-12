@@ -35,7 +35,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="@string/lease_06"
-                    app:drawableStartCompat="@drawable/ic_loan_in_use_ico" />
+                    app:drawableStartCompat="@drawable/ic_lease_in_use_ico" />
 
                 <ImageView
                     android:id="@+id/iv_fold"

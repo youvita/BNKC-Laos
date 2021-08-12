@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.MyLoan
-import com.mobile.bnkcl.databinding.LoanItemLayoutBinding
+import com.mobile.bnkcl.databinding.LeaseItemLayoutBinding
 import java.util.*
 
 class LoanViewPagerAdapter(listener: LoanPagerClickedListener) :
@@ -26,9 +26,9 @@ class LoanViewPagerAdapter(listener: LoanPagerClickedListener) :
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val binding: LoanItemLayoutBinding = DataBindingUtil.inflate(
+        val binding: LeaseItemLayoutBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.loan_item_layout,
+            R.layout.lease_item_layout,
             parent,
             false
         )
@@ -54,7 +54,7 @@ class LoanViewPagerAdapter(listener: LoanPagerClickedListener) :
             )
         })
         if (position == mLoanItemList.size - 1) {
-            holder.binding.btnAddLoan.setOnClickListener(View.OnClickListener { mListener.onAddNewLoanClicked() })
+            holder.binding.btnAddLease.setOnClickListener(View.OnClickListener { mListener.onAddNewLoanClicked() })
         }
     }
 
@@ -62,19 +62,19 @@ class LoanViewPagerAdapter(listener: LoanPagerClickedListener) :
         return mLoanItemList.size
     }
 
-    inner class ViewHolder(binding: LoanItemLayoutBinding) :
+    inner class ViewHolder(binding: LeaseItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val binding: LoanItemLayoutBinding = binding
+        val binding: LeaseItemLayoutBinding = binding
         fun setBinding(item: MyLoan?, position: Int) {
 //            binding.setLoanItem(item)
 
             // Show at new loan at last position
             if (position == mLoanItemList.size - 1) {
-                binding.llLoanItem.visibility = View.GONE
-                binding.rlAddNewLoan.visibility = View.VISIBLE
+                binding.llLeaseItem.visibility = View.GONE
+                binding.rlAddNewLease.visibility = View.VISIBLE
             } else {
-                binding.llLoanItem.visibility = View.VISIBLE
-                binding.rlAddNewLoan.visibility = View.GONE
+                binding.llLeaseItem.visibility = View.VISIBLE
+                binding.rlAddNewLease.visibility = View.GONE
             }
             binding.executePendingBindings()
         }

@@ -7,20 +7,21 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
         android:baselineAligned="false"
-        android:padding="21dp">
+        android:padding="@dimen/padding_21dp"
+        android:weightSum="3">
 
         <!-- Application -->
         <LinearLayout
             android:id="@+id/ll_menu1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingRight="@dimen/padding_5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -33,8 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:duplicateParentState="true"
-                    android:src="@drawable/selector_loan_app"
-                    tools:ignore="ContentDescription" />
+                    android:src="@drawable/selector_lease_app" />
 
                 <ImageView
                     android:layout_width="13dp"
@@ -43,8 +43,8 @@
                     android:layout_alignBottom="@id/img_menu1"
                     android:layout_marginEnd="-5dp"
                     android:duplicateParentState="true"
-                    android:src="@drawable/selector_red_check"
-                    tools:ignore="ContentDescription" />
+                    android:src="@drawable/selector_red_check" />
+
             </RelativeLayout>
 
             <TextView
@@ -55,30 +55,32 @@
                 android:duplicateParentState="true"
                 android:gravity="center"
                 android:minHeight="20dp"
-                android:paddingBottom="2dp"
+                android:paddingBottom="@dimen/padding_2dp"
                 android:text="@string/my_loan_menu_001" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="@dimen/padding_10dp"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:layout_marginEnd="@dimen/padding_10dp"
                 android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
                 android:duplicateParentState="true" />
 
         </LinearLayout>
 
-        <!-- Application -->
+        <!-- Screening -->
         <LinearLayout
-            android:id="@+id/ll_menu3"
-            android:layout_width="wrap_content"
+            android:id="@+id/ll_menu2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingRight="@dimen/padding_5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -86,19 +88,19 @@
                 android:duplicateParentState="true">
 
                 <ImageView
-                    android:id="@+id/img_menu3"
+                    android:id="@+id/img_menu2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:duplicateParentState="true"
-                    android:src="@drawable/selector_loan_approve"
+                    android:src="@drawable/selector_lease_screening"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:layout_width="13dp"
                     android:layout_height="13dp"
-                    android:layout_alignEnd="@id/img_menu3"
-                    android:layout_alignBottom="@id/img_menu3"
+                    android:layout_alignEnd="@id/img_menu2"
+                    android:layout_alignBottom="@id/img_menu2"
                     android:layout_marginEnd="-5dp"
                     android:duplicateParentState="true"
                     android:src="@drawable/selector_red_check"
@@ -113,30 +115,32 @@
                 android:duplicateParentState="true"
                 android:gravity="center"
                 android:minHeight="20dp"
-                android:paddingBottom="2dp"
+                android:paddingBottom="@dimen/padding_2dp"
                 android:text="Screening" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="@dimen/padding_10dp"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:layout_marginEnd="@dimen/padding_10dp"
                 android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
                 android:duplicateParentState="true" />
 
         </LinearLayout>
 
-        <!-- Application -->
+        <!-- Result -->
         <LinearLayout
-            android:id="@+id/ll_menu4"
-            android:layout_width="wrap_content"
+            android:id="@+id/ll_menu3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingRight="@dimen/padding_5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -144,19 +148,19 @@
                 android:duplicateParentState="true">
 
                 <ImageView
-                    android:id="@+id/img_menu4"
+                    android:id="@+id/img_menu3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:duplicateParentState="true"
-                    android:src="@drawable/selector_loan_success"
+                    android:src="@drawable/selector_lease_result"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:layout_width="13dp"
                     android:layout_height="13dp"
-                    android:layout_alignEnd="@id/img_menu4"
-                    android:layout_alignBottom="@id/img_menu4"
+                    android:layout_alignEnd="@id/img_menu3"
+                    android:layout_alignBottom="@id/img_menu3"
                     android:layout_marginEnd="-5dp"
                     android:duplicateParentState="true"
                     android:src="@drawable/selector_red_check"
@@ -171,13 +175,15 @@
                 android:duplicateParentState="true"
                 android:gravity="center"
                 android:minHeight="20dp"
-                android:paddingBottom="2dp"
+                android:paddingBottom="@dimen/padding_2dp"
                 android:text="Result" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="@dimen/padding_10dp"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:layout_marginEnd="@dimen/padding_10dp"
                 android:background="@drawable/selector_background_d7191f_263238_cfd8dc"
                 android:duplicateParentState="true" />
 

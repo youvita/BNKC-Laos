@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,7 +24,21 @@
                 android:layout_height="wrap_content"
                 android:text="Application" />
 
-            <include layout="@layout/layout_applied_info" />
+            <include layout="@layout/layout_applied_info"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/transaction_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_ffffff"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="@dimen/padding_20dp"
+                android:paddingTop="@dimen/padding_10dp"
+                tools:itemCount="2"
+                android:paddingRight="@dimen/padding_20dp"
+                android:paddingBottom="@dimen/padding_20dp"
+                tools:listitem="@layout/item_transaction_history_layout" />
 
             <View
                 android:layout_width="match_parent"

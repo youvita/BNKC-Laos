@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--    <data>-->
-<!--        <import type="com.mobile.bnk.comm.util.FormatUtil"/>-->
-<!--        <import type="com.mobile.bnk.ui.main.fragment.myloan.LoanViewPagerAdapter"/>-->
-<!--        <variable-->
-<!--            name="loanItem"-->
-<!--            type="com.mobile.bnk.model.loan.MyLoan" />-->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--    <data>-->
+    <!--        <import type="com.mobile.bnk.comm.util.FormatUtil"/>-->
+    <!--        <import type="com.mobile.bnk.ui.main.fragment.myloan.LoanViewPagerAdapter"/>-->
+    <!--        <variable-->
+    <!--            name="loanItem"-->
+    <!--            type="com.mobile.bnk.model.loan.MyLoan" />-->
 
-<!--    </data>-->
+    <!--    </data>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.mobile.bnkcl.com.view.ShadowLayout
-            android:id="@+id/ll_loan_item"
+            android:id="@+id/ll_lease_item"
             android:layout_width="match_parent"
             android:layout_height="260dp"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginTop="-6dp"
+            android:layout_marginRight="-2dp"
+            android:visibility="visible"
             app:shadowColor="@color/color_90a4ae_shadow"
             app:shadowDx="0dp"
             app:shadowDy="0dp"
             app:shadowRadius="4dp"
             app:shadowShape="rectangle"
-            app:shadowSide="all"
-            android:layout_marginLeft="-2dp"
-            android:layout_marginRight="-2dp"
-            android:layout_marginTop="-6dp"
-            android:visibility="visible">
+            app:shadowSide="all">
+
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
                 android:gravity="center_vertical"
-                android:layout_height="240dp"
-                android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:paddingTop="15dp"
+                android:paddingRight="20dp"
                 android:paddingBottom="15dp"
                 android:visibility="visible">
 
@@ -45,7 +47,7 @@
                     style="@style/font21_263238_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="test" />
+                    android:text="AutoMobile Lease" />
 
                 <View
                     android:layout_width="match_parent"
@@ -54,12 +56,12 @@
                     android:layout_marginBottom="5dp"
                     android:background="@color/color_eef5f8" />
 
-                <!-- Loan Balance -->
+                <!-- Lease Balance -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="30dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:minHeight="30dp">
 
                     <TextView
                         style="@style/font15_90a4ae_regular"
@@ -70,21 +72,21 @@
                         android:text="@string/main_content_005" />
 
                     <TextView
-                        android:id="@+id/tv_loan_balance"
+                        android:id="@+id/tv_lease_balance"
                         style="@style/font15_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        tools:text="3,650.00 USD"
-                        android:text="3,650.00 USD}"/>
+                        android:text="3,650.00 USD}"
+                        tools:text="3,650.00 USD" />
                 </LinearLayout>
 
                 <!-- Upcoming Payment Date -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="30dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:minHeight="30dp">
 
                     <TextView
                         style="@style/font15_90a4ae_regular"
@@ -100,20 +102,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        tools:text="14-04-2020"
-                        android:text="14-04-2020"/>
+                        android:text="14-04-2020"
+                        tools:text="14-04-2020" />
                 </LinearLayout>
 
                 <!-- Total Payment of this Time -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="30dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:minHeight="30dp">
 
                     <TextView
                         style="@style/font15_90a4ae_regular"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
@@ -125,20 +127,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        tools:text="152.08 USD"
-                        android:text="152.08 USD"/>
+                        android:text="152.08 USD"
+                        tools:text="152.08 USD" />
                 </LinearLayout>
 
                 <!-- Including Overdue Amount -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="20dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:minHeight="20dp">
 
                     <TextView
                         style="@style/font10_d7191f_medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
@@ -174,10 +176,10 @@
                             style="@style/font14_d7191f_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_bill_payment_ico"
                             android:drawablePadding="5dp"
                             android:gravity="center_vertical"
-                            android:text="@string/main_content_009" />
+                            android:text="@string/main_content_009"
+                            app:drawableStartCompat="@drawable/ic_bill_payment_ico" />
 
                     </LinearLayout>
 
@@ -196,10 +198,10 @@
                             style="@style/font14_ffffff_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_manage_ico"
                             android:drawablePadding="5dp"
                             android:gravity="center_vertical"
-                            android:text="@string/main_content_010" />
+                            android:text="@string/main_content_010"
+                            app:drawableStartCompat="@drawable/ic_manage_ico" />
 
                     </LinearLayout>
 
@@ -207,48 +209,51 @@
 
             </LinearLayout>
         </com.mobile.bnkcl.com.view.ShadowLayout>
-        <!-- Loan Item -->
+        <!-- Lease Item -->
 
-        <!-- Add new loan -->
+        <!-- Add new lease -->
         <com.mobile.bnkcl.com.view.ShadowLayout
-            android:id="@+id/rl_add_new_loan"
-            android:layout_height="260dp"
+            android:id="@+id/rl_add_new_lease"
             android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginTop="-6dp"
+            android:layout_marginRight="-2dp"
+            android:visibility="gone"
             app:shadowColor="@color/color_90a4ae_shadow"
             app:shadowDx="0dp"
             app:shadowDy="0dp"
             app:shadowRadius="4dp"
             app:shadowShape="rectangle"
-            app:shadowSide="all"
-            android:layout_marginLeft="-2dp"
-            android:layout_marginRight="-2dp"
-            android:layout_marginTop="-6dp"
-            android:visibility="gone">
+            app:shadowSide="all">
+
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
                 android:gravity="center_vertical"
-                android:layout_height="240dp"
-                android:layout_width="match_parent"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:background="@null"
-                    android:id="@+id/btn_add_loan"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_add_lease"
                     android:layout_width="wrap_content"
-                    android:src="@drawable/ic_add_new_loan_btn" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@null"
+                    android:src="@drawable/ic_add_new_lease_btn"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/font15_d7191f_medium"
-                    android:layout_below="@id/btn_add_loan"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_add_lease"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="-15dp"
                     android:text="@string/main_content_004" />
 
             </RelativeLayout>
+
         </com.mobile.bnkcl.com.view.ShadowLayout>
 
     </LinearLayout>
