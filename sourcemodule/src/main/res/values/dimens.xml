@@ -38,6 +38,7 @@
     <dimen name="margin_52dp">52dp</dimen>
     <dimen name="margin_54dp">54dp</dimen>
     <dimen name="margin_56dp">56dp</dimen>
+    <dimen name="margin_57dp">57dp</dimen>
     <dimen name="margin_58dp">58dp</dimen>
     <dimen name="margin_60dp">60dp</dimen>
     <dimen name="margin_120dp">120dp</dimen><!--used -->
@@ -84,6 +85,7 @@
     <dimen name="height_24dp">24dp</dimen><!--used 04/07/2021-->
     <dimen name="height_46dp">46dp</dimen>
     <dimen name="height_50dp">50dp</dimen><!--used 04/07/2021-->
+    <dimen name="height_64dp">64dp</dimen><!--used 04/07/2021-->
     <dimen name="height_100dp">100dp</dimen><!--used 04/07/2021-->
     <dimen name="height_120dp">120dp</dimen><!--used 04/07/2021-->
 
@@ -94,6 +96,7 @@
     <dimen name="width_24dp">24dp</dimen><!--used 04/07/2021-->
     <dimen name="width_50dp">50dp</dimen><!--used 04/07/2021-->
     <dimen name="width_60dp">60dp</dimen><!--used 04/07/2021-->
+    <dimen name="width_64dp">64dp</dimen><!--used 04/07/2021-->
 
 
     <!-- radius -->
