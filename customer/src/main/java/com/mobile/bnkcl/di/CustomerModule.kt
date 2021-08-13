@@ -1,18 +1,18 @@
 package com.mobile.bnkcl.di
 
 import com.bnkc.library.prefer.CredentialSharedPrefer
-import com.bnkc.sourcemodule.app.Constants
 import com.mobile.bnkcl.app.AppBuild
 import com.mobile.bnkcl.data.api.CommentApi
-import com.mobile.bnkcl.data.api.MGApi
+import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.UserApi
+import com.mobile.bnkcl.data.api.auth.AuthAPI
+import com.mobile.bnkcl.data.api.otp.OTPApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -54,6 +54,24 @@ object CustomerModule {
             .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(SignUpApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideOTPService(retrofit: Retrofit.Builder): OTPApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(OTPApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit.Builder): AuthAPI{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(AuthAPI::class.java)
     }
 
 }

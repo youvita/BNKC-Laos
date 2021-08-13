@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
-import com.mobile.bnkcl.data.MGData
+import com.mobile.bnkcl.data.response.common.MGDataResponse
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.user.UserRepo
@@ -20,8 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class IntroViewModel @Inject constructor(private val mgRepo: MGRepo, private val userRepo: UserRepo) : BaseViewModel() {
 
-    private val _mgData: MutableLiveData<MGData> = MutableLiveData()
-    val mgData: LiveData<MGData> get() = _mgData
+    private val _mgDataResponse: MutableLiveData<MGDataResponse> = MutableLiveData()
+    val mgDataResponse: LiveData<MGDataResponse> get() = _mgDataResponse
 
     fun getMGData() {
         viewModelScope.launch {
@@ -33,7 +33,7 @@ class IntroViewModel @Inject constructor(private val mgRepo: MGRepo, private val
                     val message = resource.messageDes
                     RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
                 } else {
-                    _mgData.value = resource.data
+                    _mgDataResponse.value = resource.data
                 }
             }.launchIn(viewModelScope)
         }

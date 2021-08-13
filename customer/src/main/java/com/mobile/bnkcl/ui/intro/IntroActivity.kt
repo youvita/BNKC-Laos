@@ -54,7 +54,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     private fun getMGData() {
         try {
             introViewModel.getMGData()
-            introViewModel.mgData.observe(this) {
+            introViewModel.mgDataResponse.observe(this) {
 
                 if (it != null) {
                     sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)

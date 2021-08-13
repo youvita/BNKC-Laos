@@ -7,12 +7,8 @@ import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
-import com.mobile.bnkcl.data.MGData
 import com.mobile.bnkcl.data.repository.signup.SignUpRepo
-import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
-import com.mobile.bnkcl.data.request.signup.SignUpRequest
 import com.mobile.bnkcl.data.response.signup.PreSignUpResponse
-import com.mobile.bnkcl.data.response.signup.SignUpResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

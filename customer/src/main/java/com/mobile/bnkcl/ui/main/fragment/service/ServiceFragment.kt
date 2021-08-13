@@ -19,6 +19,12 @@ class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
         return inflater.inflate(R.layout.fragment_loan_service, (container), false);
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentLoanServiceBinding.bind(view)
+        binding.handler = ServiceHandler()
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_loan_service
     }

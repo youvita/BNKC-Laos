@@ -1,8 +1,8 @@
-package com.mobile.bnkcl.data
+package com.mobile.bnkcl.data.response.common
 
 import com.google.gson.annotations.SerializedName
 
-data class MGData(
+data class MGDataResponse(
 
     @SerializedName("_master_id")
     val masterId: String? = null,

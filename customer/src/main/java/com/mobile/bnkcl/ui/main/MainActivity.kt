@@ -6,9 +6,14 @@ import androidx.activity.viewModels
 import androidx.viewpager.widget.ViewPager
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.tabs.TabLayout
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.request.auth.DeviceInfo
+import com.mobile.bnkcl.data.request.auth.LoginRequest
+import com.mobile.bnkcl.data.request.auth.PreLoginRequest
+import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityMainBinding
 import com.mobile.bnkcl.ui.adapter.CommentAdapter
 import com.mobile.bnkcl.ui.main.fragment.menu.MenuFragment
@@ -132,6 +137,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //            }
 //        }
 
+        //for testing
+        sendOTP()
     }
 
 //    /**
@@ -154,4 +161,49 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         commentDisposable = null
     }
 
+
+    // for testing
+    private fun sendOTP() {
+        viewModel.sendOTP()
+        viewModel.sendOTPLiveData.observe(this) {
+            Log.d("nng", it.toString())
+            viewModel.otpVerifyRequest = OTPVerifyRequest(it.pin, it.pin_id)
+            verifyOTP()
+        }
+
+    }
+
+    private fun verifyOTP() {
+        viewModel.verifyOTP()
+        viewModel.verifyOTPLiveData.observe(this){
+            Log.d("nng", it.toString())
+            viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
+            preLogin()
+        }
+    }
+
+    private fun preLogin() {
+        viewModel.preLogin()
+        viewModel.preloginLiveData.observe(this){
+            Log.d("nng", it.toString())
+            var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+            var loginRequest = LoginRequest(
+                it.session_id,
+                viewModel.sendOTPRequest.to,
+                "5ZTnExlqPg0\u003d",
+                deviceInfo
+            )
+            viewModel.logRequest = loginRequest
+            login()
+        }
+    }
+
+    private fun login() {
+        viewModel.login()
+        viewModel.loginLiveData.observe(this){
+            Log.d("nng", it.toString())
+            sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
+        }
+    }
+    // end for testing
 }

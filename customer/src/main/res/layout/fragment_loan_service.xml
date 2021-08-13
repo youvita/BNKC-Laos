@@ -3,16 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <data>-->
+    <data>
 <!--        <variable-->
 <!--            name="loanServiceViewModel"-->
 <!--            type="com.mobile.bnk.ui.main.fragment.loanservice.LoanServiceViewModel" />-->
-<!--    </data>-->
+        <import type="com.mobile.bnkcl.ui.main.fragment.service.ServiceHandler" />
+        <import type="android.view.View"/>
+
+        <variable
+            name="handler"
+            type="ServiceHandler" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{(view) -> handler.goToNotification(view)}"
+            android:text="notification"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btn_alarm"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{(view) -> handler.goToSettings(view)}"
+            android:text="settings"/>
 
 <!--        <androidx.core.widget.NestedScrollView-->
 <!--            android:layout_width="match_parent"-->
