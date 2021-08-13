@@ -6,11 +6,13 @@ import com.mobile.bnkcl.app.AppBuild
 import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.MGApi
 import com.mobile.bnkcl.data.api.UserApi
+import com.mobile.bnkcl.data.api.signup.SignUpApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -43,6 +45,15 @@ object CustomerModule {
                 .baseUrl(AppBuild.BASE_URL)
                 .build()
                 .create(UserApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providePreSignUpService(retrofit: Retrofit.Builder): SignUpApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(SignUpApi::class.java)
     }
 
 }

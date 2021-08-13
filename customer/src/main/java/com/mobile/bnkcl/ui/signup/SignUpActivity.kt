@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
@@ -12,6 +13,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
 import com.mobile.bnkcl.databinding.DialogLogOutBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,6 +28,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getPreSignUpData()
         binding.llDob.setOnClickListener(){
             setDate()
         }
@@ -39,6 +42,21 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             Log.d("zimah", "Date: $it")
         }
 
+    }
+
+    private fun getPreSignUpData(){
+        try {
+            viewModel.getPreSignUpData()
+            viewModel.mgData.observe(this){
+                if (it != null) {
+//                    sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
+                    Log.d("zimah", "getPreSignUpData: ${it.session_id}")
+                }
+            }
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
 }
