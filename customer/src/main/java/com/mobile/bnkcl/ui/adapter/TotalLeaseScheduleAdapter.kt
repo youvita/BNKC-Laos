@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.CommentsItem
-import com.mobile.bnkcl.databinding.ItemTransactionHistoryLayoutBinding
+import com.mobile.bnkcl.databinding.ItemTotalLeaseScheduleLayoutBinding
 import com.mobile.bnkcl.utilities.UtilAnimation
 
-class TransactionHistoryAdapter : BaseAdapter<ItemTransactionHistoryLayoutBinding, CommentsItem, TransactionHistoryAdapter.ViewHolder>() {
+class TotalLeaseScheduleAdapter : BaseAdapter<ItemTotalLeaseScheduleLayoutBinding, CommentsItem, TotalLeaseScheduleAdapter.ViewHolder>() {
 
     override fun getLayoutId(viewType: Int): Int {
-        return R.layout.item_transaction_history_layout
+        return R.layout.item_total_lease_schedule_layout
     }
 
     override fun setViewHolder(parent: ViewGroup): ViewHolder {
@@ -36,5 +36,5 @@ class TransactionHistoryAdapter : BaseAdapter<ItemTransactionHistoryLayoutBindin
      * provide a reference to the type of views that you are using custom view holder
      * @param binding item binding
      */
-    class ViewHolder(val binding: ItemTransactionHistoryLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemTotalLeaseScheduleLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 }

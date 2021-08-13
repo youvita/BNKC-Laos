@@ -92,20 +92,32 @@
                         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                         android:gravity="center"
                         android:paddingStart="15dp"
+                        android:orientation="horizontal"
                         tools:ignore="RtlSymmetry">
 
                         <TextView
                             android:id="@+id/tv_sort"
                             style="@style/font15_263238_medium"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="@string/tran_history_002"
-                            app:drawableEndCompat="@drawable/ic_more_ico" />
+                            android:text="@string/tran_history_002" />
+
+                        <ImageView
+                            android:id="@+id/iv_item_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_more_ico"
+                            android:paddingStart="@dimen/padding_10dp"
+                            android:paddingEnd="@dimen/padding_20dp"
+                            tools:ignore="ContentDescription" />
+
                     </LinearLayout>
 
 
                 </LinearLayout>
+
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.core.widget.NestedScrollView
@@ -130,6 +142,7 @@
                         android:paddingTop="@dimen/padding_10dp"
                         android:paddingRight="@dimen/padding_20dp"
                         android:paddingBottom="@dimen/padding_20dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_transaction_history_layout" />
 
                     <LinearLayout

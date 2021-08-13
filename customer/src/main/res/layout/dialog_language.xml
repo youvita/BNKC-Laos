@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/rb_la"
+                    android:id="@+id/rb_laos"
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

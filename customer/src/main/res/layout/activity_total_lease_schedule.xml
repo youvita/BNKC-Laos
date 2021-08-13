@@ -164,14 +164,16 @@
                     android:paddingRight="@dimen/padding_20dp">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/loan_schedule_recyclerview"
+                        android:id="@+id/total_lease_schedule_recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_10dp"
                         android:background="@color/color_ffffff"
                         android:nestedScrollingEnabled="false"
                         android:paddingBottom="100dp"
-                        tools:listitem="@layout/item_lease_schedule_layout" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_total_lease_schedule_layout" />
 
                     <LinearLayout
                         android:id="@+id/ll_web_container"

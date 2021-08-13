@@ -65,7 +65,7 @@
     <string name="main_bottom_menu3">Find Office</string>
 
     <string name="main_subtitle_001">My Loan Request</string>
-    <string name="main_subtitle_002">Loan in Use</string>
+    <string name="main_subtitle_002">ພາສາລາວ</string>
 
     <string name="loan_type_001">MICRO LOAN</string>
     <string name="loan_type_002">SMALL LOAN</string>
@@ -511,12 +511,12 @@
     <string name="or_others">Or Others</string>
     <string name="unit_loan_result">Unit: %s</string>
 
-    <string name="home_01">Need a Loan?</string>
-    <string name="home_02">Need a Leasing?</string>
-    <string name="home_03">(car, motorcycle, mobile phone etc)</string>
+    <string name="home_01">ພາສາລາວ</string>
+    <string name="home_02">ພາສາລາວ</string>
+    <string name="home_03">ພາສາລາວ</string>
     <string name="home_04">ພາສາລາວ</string>
 
-    <string name="lang_01">ພາສາ</string>
+    <string name="lang_01">ພາສາລາວ</string>
     <string name="lang_02">ພາສາລາວ</string>
     <string name="lang_03">English</string>
 

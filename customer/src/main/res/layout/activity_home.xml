@@ -67,8 +67,8 @@
 
                     <ImageView
                         android:id="@+id/iv_flag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/laos_flag"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +112,7 @@
                             tools:ignore="ContentDescription" />
 
                         <TextView
+                            android:id="@+id/tv_loan"
                             style="@style/font21_263238_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -161,6 +162,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/iv_lease" />
 
                         <TextView
+                            android:id="@+id/tv_lease_ex"
                             style="@style/font18_263238_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

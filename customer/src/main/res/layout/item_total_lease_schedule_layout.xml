@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="com.mobile.bnkcl.data.CommentsItem"/>
+        <variable
+            name="item"
+            type="CommentsItem" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,12 +31,14 @@
                 tools:ignore="UselessParent">
 
                 <LinearLayout
+                    android:id="@+id/ll_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <TextView
-                        android:id="@+id/tv_schedule_date"
+                        android:id="@+id/tv_tran_date"
                         style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -38,10 +47,18 @@
                         android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:singleLine="true"
-                        android:text="ttt"
-                        app:drawableEndCompat="@drawable/ic_unfold_ico"
-                        app:drawableStartCompat="@drawable/ic_calendar_off_ico"
+                        android:text="@{item.name}"
+                        app:drawableStartCompat="@drawable/ic_calendar_grey_ico"
                         tools:text="04/03/19" />
+
+                    <ImageView
+                        android:id="@+id/iv_item_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_unfold_ico"
+                        android:paddingStart="@dimen/padding_10dp"
+                        android:paddingEnd="@dimen/padding_10dp"
+                        tools:ignore="ContentDescription" />
 
                 </LinearLayout>
 
@@ -51,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <View
                         android:layout_width="match_parent"
@@ -80,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="ttt"
+                            android:text="3,280,000"
                             tools:text="04/03/19" />
                     </LinearLayout>
 
@@ -105,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="ttt"
+                            android:text="3,280,000"
                             tools:text="265,000" />
                     </LinearLayout>
 
@@ -130,7 +147,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="ttt"
+                            android:text="3,280,000"
                             tools:text="224,867" />
                     </LinearLayout>
 
@@ -155,33 +172,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="ttt"
+                            android:text="3,280,000"
                             tools:text="40,133" />
-                    </LinearLayout>
-
-                    <!-- Admin Fee -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_8dp"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            style="@style/font15_90a4ae_regular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="@string/loan_manage_006" />
-
-                        <TextView
-                            android:id="@+id/tv_admin_fee"
-                            style="@style/font15_263238_medium"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="ttt"
-                            tools:text="3,280,000" />
                     </LinearLayout>
 
                     <!-- Balance -->
@@ -205,7 +197,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="ttt"
+                            android:text="3,280,000"
                             tools:text="3,800,000" />
                     </LinearLayout>
 

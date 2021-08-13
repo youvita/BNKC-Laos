@@ -1,17 +1,16 @@
 package com.mobile.bnkcl.ui.history
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.bnkc.library.custom.cardview.CardOffsetDecoration
-import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.CommentsItem
 import com.mobile.bnkcl.databinding.ActivityTransactionHistoryBinding
 import com.mobile.bnkcl.ui.adapter.TransactionHistoryAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBinding>() {
 
     @Inject
@@ -24,27 +23,34 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        transactionAdapter = TransactionHistoryAdapter()
+        initAdapter()
+
+    }
+
+    private fun initAdapter() {
+
         val list = mutableListOf<CommentsItem>()
 
         val item = CommentsItem()
         item.postId = 1
         item.id = 1
-        item.name = "dara"
+        item.name = "Charity Plan"
         item.email = "email"
         item.body = "body"
 
-        list.add(0, item)
-        list.add(1, item)
+        for (i in 0..14) {
+            list.add(i, item)
+        }
 
         binding.transactionRecyclerview.adapter = transactionAdapter
         transactionAdapter.addItemList(list)
 
-        Log.d(">>>", "onCreate: " + transactionAdapter.itemCount)
         if (list.size == 0) {
             binding.llWrapSort.visibility = View.GONE
             binding.llNoData.visibility = View.VISIBLE
         }
+
     }
+
 
 }
