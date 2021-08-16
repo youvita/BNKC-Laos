@@ -15,6 +15,10 @@
             name="appVersion"
             type="String" />
 
+        <variable
+            name="activity"
+            type="com.mobile.bnkcl.ui.setting.SettingActivity" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,7 +79,7 @@
                                 android:id="@+id/toggle_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/height_21dp"
-                                android:checked="true"
+                                android:checked="@{settingViewModel.settingData.push_alarm_enabled.equals('Y')}"
                                 android:theme="@style/SettingSwitch"
                                 android:thumb="@drawable/switch_thumb_selector"
                                 app:track="@drawable/switch_track_selector" />
@@ -108,6 +112,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
+                                android:onClick="@{() -> activity.goToResetPin()}"
                                 android:text="@string/setting_04"
                                 app:drawableRightCompat="@drawable/right_red_arrow_ico" />
                         </LinearLayout>

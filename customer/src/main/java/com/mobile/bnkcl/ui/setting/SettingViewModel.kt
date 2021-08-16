@@ -20,10 +20,10 @@ class SettingViewModel @Inject constructor(private val userRepo: UserRepo) : Bas
 
     private val _updateUserSetting: MutableLiveData<Unit> = MutableLiveData()
     val userSettingLiveData: LiveData<Unit> = _updateUserSetting
-    private var settingData: SettingData = SettingData("Y")
+    var settingData: SettingData? = null
     fun updateUserSetting() {
         viewModelScope.launch {
-            userRepo.updateUserSetting(settingData).onEach { resource ->
+            userRepo.updateUserSetting(settingData!!).onEach { resource ->
                 if (resource.status == Status.ERROR) {
                     val code = resource.errorCode
                     val title = resource.messageTitle
