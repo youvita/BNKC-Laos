@@ -4,6 +4,7 @@ import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.mobile.bnkcl.data.api.auth.AuthAPI
 import com.mobile.bnkcl.data.request.auth.LoginRequest
+import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
@@ -35,6 +36,21 @@ class AuthRepo(private val authAPI: AuthAPI) {
             val request = object : RemoteDataSource<LoginResponse>() {
                 override suspend fun createCall(): Response<LoginResponse> {
                     return authAPI.loginUser(loginRequest)
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun loginUserNoAuth(loginRequest: LoginRequestNoAuth): Flow<Resource<LoginResponse>> = flow {
+        try {
+            delay(1000)
+            val request = object : RemoteDataSource<LoginResponse>() {
+                override suspend fun createCall(): Response<LoginResponse> {
+                    return authAPI.loginUserNoAuth(loginRequest)
                 }
             }
             request.networkRequest()

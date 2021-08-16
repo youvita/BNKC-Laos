@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.request.auth.LoginRequest
+import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityMainBinding
@@ -138,7 +139,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        }
 
         //for testing
-        sendOTP()
+        login()
     }
 
 //    /**
@@ -199,7 +200,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun login() {
-        viewModel.login()
+        var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+        var loginRequestNoAuth = LoginRequestNoAuth(
+            "2012345678",
+            "5ZTnExlqPg0\u003d",
+            deviceInfo
+        )
+        viewModel.loginRequestNoAuth = loginRequestNoAuth
+        viewModel.loginNoAuth()
         viewModel.loginLiveData.observe(this){
             Log.d("nng", it.toString())
             sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)

@@ -10,6 +10,7 @@ import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.request.auth.LoginRequest
+import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
@@ -96,6 +97,22 @@ class MainViewModel @Inject constructor(private val commentRepo: CommentRepo, pr
     fun login(){
         viewModelScope.launch {
             authRepo.loginUser(logRequest!!).onEach { resource ->
+                if (resource.status == Status.ERROR) {
+                    val code = resource.errorCode
+                    val title = resource.messageTitle
+                    val message = resource.messageDes
+                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+                } else {
+                    _login.value = resource.data
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    var loginRequestNoAuth: LoginRequestNoAuth? = null
+    fun loginNoAuth(){
+        viewModelScope.launch {
+            authRepo.loginUserNoAuth(loginRequestNoAuth!!).onEach { resource ->
                 if (resource.status == Status.ERROR) {
                     val code = resource.errorCode
                     val title = resource.messageTitle
