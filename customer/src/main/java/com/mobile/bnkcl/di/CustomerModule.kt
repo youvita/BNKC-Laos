@@ -38,14 +38,14 @@ object CustomerModule {
             .create(MGApi::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideUserService(retrofit: Retrofit.Builder, credentialSharedPrefer: CredentialSharedPrefer): UserApi {
-        return retrofit
-                .baseUrl(AppBuild.BASE_URL)
-                .build()
-                .create(UserApi::class.java)
-    }
+//    @Singleton
+//    @Provides
+//    fun provideUserService(retrofit: Retrofit.Builder, credentialSharedPrefer: CredentialSharedPrefer): UserApi {
+//        return retrofit
+//                .baseUrl(AppBuild.BASE_URL)
+//                .build()
+//                .create(UserApi::class.java)
+//    }
 
     @Singleton
     @Provides

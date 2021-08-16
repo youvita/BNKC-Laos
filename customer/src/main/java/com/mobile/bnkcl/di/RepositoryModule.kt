@@ -1,5 +1,7 @@
 package com.mobile.bnkcl.di
 
+import android.content.Context
+import com.bnkc.sourcemodule.di.header.AuthInterceptorOkHttpClient
 import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.UserApi
@@ -16,7 +18,9 @@ import com.mobile.bnkcl.data.repository.user.UserRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 @Module
@@ -55,8 +59,8 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUserRepo(userApi: UserApi): UserRepo {
-        return UserRepo(userApi)
+    fun provideUserRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): UserRepo {
+        return UserRepo(context, okHttpClient)
     }
 
     @Singleton
