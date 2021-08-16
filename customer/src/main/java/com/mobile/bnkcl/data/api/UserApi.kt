@@ -11,6 +11,6 @@ interface UserApi {
     suspend fun getProfile(): Response<ProfileData>
 
     @PATCH("api/ca/user/setting")
-    suspend fun updateUserSetting(@Body settingData: SettingData): Response<SettingData>
+    suspend fun updateUserSetting(@Body settingData: SettingData): Response<Unit>
 
 }

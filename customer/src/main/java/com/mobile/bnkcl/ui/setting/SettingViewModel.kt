@@ -18,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor(private val userRepo: UserRepo) : BaseViewModel() {
 
-    private val _updateUserSetting: MutableLiveData<SettingData> = MutableLiveData()
-    val userSettingLiveData: LiveData<SettingData> = _updateUserSetting
+    private val _updateUserSetting: MutableLiveData<Unit> = MutableLiveData()
+    val userSettingLiveData: LiveData<Unit> = _updateUserSetting
     private var settingData: SettingData = SettingData("Y")
     fun updateUserSetting() {
         viewModelScope.launch {

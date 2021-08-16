@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.data.response.user
 
 import com.google.gson.annotations.SerializedName
+import com.mobile.bnkcl.data.response.user.profile.Address
 
 data class ProfileData(
 
@@ -17,7 +18,7 @@ data class ProfileData(
         val date_of_birth: String? = null,
 
         @SerializedName("address")
-        val address: String? = null,
+        val address: Address? = null,
 
         @SerializedName("occupation")
         val occupation: String? = null,
@@ -26,5 +27,5 @@ data class ProfileData(
         val push_alarm_enabled: String? = null,
 
         @SerializedName("my_loans")
-        val my_loans: ProfileLoanData? = null
+        val my_loans: List<String>? = null
 )

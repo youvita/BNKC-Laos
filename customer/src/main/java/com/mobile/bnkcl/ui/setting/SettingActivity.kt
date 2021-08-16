@@ -33,7 +33,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     private fun updateUserSetting() {
         settingViewModel.updateUserSetting()
         settingViewModel.userSettingLiveData.observe(this){
-            Log.d("nng", "${it.push_alarm_enabled}")
+//            Log.d("nng", "${it.push_alarm_enabled}")
         }
     }
 }

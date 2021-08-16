@@ -12,10 +12,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import retrofit2.Response
+import javax.inject.Inject
 
-class UserRepo(context: Context, okHttpClient: OkHttpClient) {
+class UserRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
 
-    private val userApi: UserApi by lazy { RetrofitBuilder(context, okHttpClient).getRetrofit().create(UserApi::class.java) }
+    private val userApi: UserApi by lazy {
+        RetrofitBuilder(context, okHttpClient).getRetrofit().create(UserApi::class.java)
+    }
 
     fun getProfile(): Flow<Resource<ProfileData>> = flow {
         delay(1000)
@@ -32,11 +35,11 @@ class UserRepo(context: Context, okHttpClient: OkHttpClient) {
         }
     }
 
-    fun updateUserSetting(body: SettingData): Flow<Resource<SettingData>> = flow {
+    fun updateUserSetting(body: SettingData): Flow<Resource<Unit>> = flow {
         delay(1000)
         try {
-            val request = object : RemoteDataSource<SettingData>(){
-                override suspend fun createCall(): Response<SettingData> {
+            val request = object : RemoteDataSource<Unit>(){
+                override suspend fun createCall(): Response<Unit> {
                     return userApi.updateUserSetting(body)
                 }
             }

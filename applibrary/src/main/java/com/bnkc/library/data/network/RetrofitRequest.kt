@@ -34,6 +34,7 @@ object RetrofitRequest {
                 RetrofitResponse.Error(response.code(), errorCode, errorMessage)
             }
         } catch (throwable: Throwable) {
+            throwable.printStackTrace()
             RetrofitResponse.Exception(throwable)
         }
     }

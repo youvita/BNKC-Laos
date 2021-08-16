@@ -1,3 +1,10 @@
 package com.mobile.bnkcl.data.response.user
 
-data class SettingData(var push_alarm_enabled: String)
+import com.google.gson.annotations.SerializedName
+
+data class SettingData(
+
+        @SerializedName("push_alarm_enabled")
+        var push_alarm_enabled: String? = null
+
+)
