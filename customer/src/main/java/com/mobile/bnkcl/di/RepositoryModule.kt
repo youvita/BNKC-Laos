@@ -8,6 +8,7 @@ import com.mobile.bnkcl.data.api.UserApi
 import com.mobile.bnkcl.data.api.auth.AuthAPI
 import com.mobile.bnkcl.data.api.otp.OTPApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
+import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.comment.CommentRepo
 import com.mobile.bnkcl.data.repository.login.LoginRepo
@@ -67,5 +68,14 @@ object RepositoryModule {
     @Provides
     fun providePreSignUpRepo(signUpApi: SignUpApi): SignUpRepo{
         return SignUpRepo(signUpApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAlarmRepo(
+        @ApplicationContext context: Context,
+        @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient
+    ): AlarmRepo {
+        return AlarmRepo(context, okHttpClient)
     }
 }
