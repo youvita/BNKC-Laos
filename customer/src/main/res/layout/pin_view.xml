@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <import type="android.view.View"/>
-    </data>
+<!--    <data>-->
+<!--        <import type="android.view.View"/>-->
+<!--    </data>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pinView"
@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:textColor="@color/color_ffffff"
-                android:text="Set Up New Pin" />
+                android:text="Set Up New Pin"
+                style="@style/font_18_ffffff_bold"/>
 
         </RelativeLayout>
 
@@ -70,7 +71,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top_pin_message"
                     android:text="Forget Pin?"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    style="@style/font_21_FFFFFF_regular"/>
 
                 <TextView
                     android:id="@+id/tv_pin_action"
@@ -79,7 +81,8 @@
                     android:layout_marginStart="3dp"
                     android:textColor="@color/color_ffffff"
                     android:layout_marginTop="@dimen/margin_top_pin_message"
-                    android:text="RESET NOW" />
+                    android:text="RESET NOW"
+                    style="@style/font_21_FFFFFF_medium"/>
             </LinearLayout>
 
         </LinearLayout>

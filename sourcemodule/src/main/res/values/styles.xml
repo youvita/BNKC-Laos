@@ -183,12 +183,6 @@
         <item name="android:fontFamily">@font/rubik_bold</item>
     </style>
 
-    <!-- font size 21 -->
-<!--    <style name="font_21_FFFFFF_medium">-->
-<!--        <item name="android:textSize">@dimen/font_pin_message</item>-->
-<!--        <item name="android:textColor">@color/color_ffffff</item>-->
-<!--        <item name="android:fontFamily">@font/rubik_medium</item>-->
-<!--    </style>-->
     <style name="font_21_263238_normal">
         <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/color_263238</item>

@@ -4,10 +4,15 @@ import android.content.res.Resources.NotFoundException
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.request.auth.PreLoginRequest
+import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +21,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
     val viewModel : OtpViewModel by viewModels()
 
+    var pinID = ""
     var sendOtp = false
 
     private var txtAgreement: String? = null
@@ -26,7 +32,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         override fun afterTextChanged(s: Editable?) {
-            val text: String = binding.edtOtp.getText().toString()
+            val text: String = binding.edtOtp.text.toString()
             if (text.endsWith("-") || text.endsWith(" ")) return
 
             if (text.length == 4) {
@@ -39,15 +45,65 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
             val inputOtp =
                 s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
             if (inputOtp.length == 6) {
-//                val otp: String =
-//                    binding.edtOtp.text.toString().trim().replaceAll("-", "")
+                val otp: String =
+                    binding.edtOtp.text.toString().trim().replace("-", "")
 //                    binding.otpViewModel.getVerifyOTPModel().setPin(otp)
-//                    binding.otpViewModel.requestVerifyOtp()
+                    viewModel.otpVerifyRequest = OTPVerifyRequest(otp, pinID)
+                    binding.otpViewModel!!.verifyOTP()
+                verifyOTP()
             }
             binding.tvCorrect.visibility = View.GONE
             binding.llOptCode.background = getDrawable(R.drawable.round_stroke_e1e5ec_8)
         }
     }
+    var textLength = 0
+    private val textPhoneNumberWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) {
+            binding.edtPhonenumber.tag = s
+            val text: String = binding.edtPhonenumber.text.toString()
+            textLength = binding.edtPhonenumber.text.toString().length
+
+            if (text.startsWith("0")) {
+                binding.edtPhonenumber.setText("")
+                return
+            }
+
+            if (text.endsWith("-") || text.endsWith(" ")) return
+
+            if (textLength == 3) {
+                binding.edtPhonenumber.setText(
+                    StringBuilder(text).insert(text.length - 1, "-").toString()
+                )
+                binding.edtPhonenumber.setSelection(textLength)
+            } else if (textLength == 7) {
+                binding.edtPhonenumber.setText(
+                    StringBuilder(text).insert(text.length - 1, "-").toString()
+                )
+                binding.edtPhonenumber.setSelection(textLength)
+            }
+
+            if (textLength <= 0) {
+                binding.ivSendOtp.setImageResource(R.drawable.ic_otp_send_off_ico)
+                binding.ivSendOtp.setOnClickListener(null)
+            } else {
+                binding.ivSendOtp.setImageResource(R.drawable.ic_otp_send_on_ico)
+                binding.ivSendOtp.setOnClickListener(ivSendOTPClickListener)
+            }
+        }
+    }
+
+    private val ivSendOTPClickListener = View.OnClickListener() {
+        try {
+            viewModel.sendOTP(binding.edtPhonenumber.text.toString().replace("-", ""))
+            binding.edtOtp.text!!.clear()
+            binding.ivSendOtp.setOnClickListener(null)
+            binding.ivSendOtp.setImageResource(R.drawable.ic_otp_send_off_ico)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    };
 
     /**
      * login request observable
@@ -61,14 +117,40 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 //        }
     }
 
+    // for testing
+    private fun sendOTP() {
+        viewModel.sendOTPLiveData.observe(this) {
+            Log.d("nng", it.toString())
+            pinID = it.pin_id.toString()
+            viewModel.otpVerifyRequest = OTPVerifyRequest("", pinID)
+//            binding.viverifyOTP()
+        }
+    }
+
+    private fun verifyOTP() {
+        viewModel.verifyOTPLiveData.observe(this){
+            Log.d("nng", it.toString())
+            binding.enableButton = it.verified
+//            viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
+//            preLogin()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
+
+            viewModel.context = this
+            binding.otpViewModel = viewModel
+            binding.enableButton = false
             txtAgreement = getString(R.string.sign_up_28)
+            binding.agreement = txtAgreement
             binding.edtOtp.addTextChangedListener(textOtpWatcher)
+            binding.edtPhonenumber.addTextChangedListener(textPhoneNumberWatcher)
 
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
+                Log.d(">>>>>>", "action :: $action")
                 if (action.equals("LOGIN", ignoreCase = true)) {
 
                     binding.otpViewModel!!.uiMode = 0
@@ -87,10 +169,10 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 //                    binding.llAgreement.setVisibility(View.GONE)
 //                    binding.llStepSignup.setVisibility(View.GONE)
 //                    binding.ivLogin.setVisibility(View.VISIBLE)
-//                    binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
-//                    binding.edtPhonenumber.setFocusable(false)
-//                    binding.edtPhonenumber.setEnabled(false)
-//                    binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
+                    binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
+                    binding.edtPhonenumber.setFocusable(false)
+                    binding.edtPhonenumber.setEnabled(false)
+                    binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
 //                    val phone: String?
 //                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
 //                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
@@ -103,7 +185,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 } else if (action.equals("SIGN_UP", ignoreCase = true)) {
 
                     binding.otpViewModel!!.uiMode = 2
-
+                    binding.otpViewModel!!.statFocus = 1
+                    binding.otpViewModel!!.step = 1
 
 //                    mOtpBinding.tvTitleToolbar.setText(getString(R.string.sign_up_title))
 //                    mOtpBinding.llAgreement.setVisibility(View.VISIBLE)
@@ -111,7 +194,18 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 //                    mOtpBinding.ivLogin.setVisibility(View.GONE)
 //                    isLogin = false
                 }
+
             }
+
+            binding.edtPhonenumber.setOnFocusChangeListener { _, hasFocus ->
+                binding.llPhoneNo.isSelected = hasFocus
+            }
+
+            binding.edtOtp.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+                binding.llOptCode.isSelected = hasFocus
+            }
+
+            sendOTP()
 
 ////            setAnimateType(ANIMATE_LEFT)
 //            binding.otpViewModel = viewModel

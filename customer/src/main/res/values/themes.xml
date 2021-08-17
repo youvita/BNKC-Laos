@@ -14,6 +14,68 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ToggleSwitchTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+    <style name="PFLockScreenDeleteButtonStyle">
+        <item name="android:background">@drawable/selector_pin_key</item>
+    </style>
+
+    <style name="PFLockScreenCodeStyle">
+        <item name="android:button">@drawable/selector_pin_num</item>
+    </style>
+
+    <style name="PFLockScreenButtonStyle" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/font_key_code</item>
+        <item name="android:textColor">@color/color_ffffff</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:background">@drawable/selector_pin_key</item>
+    </style>
+
+    <style name="SettingSwitch" parent="Theme.AppCompat.Light">
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">#D7191F</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">#D7191F</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorAccent">#D7191F</item>
+
+        <item name="track">@drawable/switch_track_selector</item>
+        <item name="android:thumb">@drawable/switch_thumb_selector</item>
+        <!-- You can also set colorControlNormal, colorControlActivated
+             colorControlHighlight, and colorSwitchThumbNormal. -->
+    </style>
+
+    <style name="font_11_90A4AE_regular">
+        <item name="android:textSize">@dimen/font_11_size</item>
+        <item name="android:textColor">@color/color_90A4AE</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
+    </style>
+
+
+    <style name="font10_d7191f_medium_menu">
+        <item name="android:textColor">@drawable/selector_color_d7191f_263238_cfd8dc</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="font15_radio_medium_not_km">
+        <item name="android:textColor">@color/selector_radio_label</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="main_tab_text_style">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@drawable/selector_color_d7191f_cfd8dc</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
     <style name="font_18_263238_bold"> <!-- used-->
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/color_263238</item>
@@ -185,6 +247,13 @@
         <item name="android:textSize">15sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
 
+    </style>
+
+    <!-- font size 21 -->
+    <style name="font_21_FFFFFF_medium">
+        <item name="android:textSize">@dimen/font_pin_message</item>
+        <item name="android:textColor">@color/color_ffffff</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
     </style>
 
 </resources>

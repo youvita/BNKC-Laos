@@ -1,12 +1,16 @@
-package com.mobile.bnkcl.com.view
+package com.bnkc.sourcemodule.ui
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.mobile.bnkcl.R
+import androidx.databinding.DataBindingUtil
+import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.databinding.CommValidateButtonBinding
+import com.bnkc.sourcemodule.databinding.CommValidateButtonBinding.inflate
 import java.util.*
 
 class ValidateButton : LinearLayout {
@@ -48,10 +52,17 @@ class ValidateButton : LinearLayout {
         val textColor = a.getColor(R.styleable.ValidateButton_buttonTextColor, 0)
         val inflate = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
         val mView: View = inflate.inflate(R.layout.comm_validate_button, this, true)
+
+//        val viewRoot = inflate.inflate(R.layout.comm_validate_button, this, false)
+//        val binding: CommValidateButtonBinding? = DataBindingUtil.bind(viewRoot)
+//        addView(binding!!.root)
         llCheckLabel = mView.findViewById(R.id.ll_check_button)
         tvCheckLabel = mView.findViewById(R.id.tv_check_button)
         tvCheckLabel!!.setTextAppearance(context, R.style.font_14_FFFFFF_normal)
-        setLabelButton(text!!)
+
+        Log.d(">>>>>>>","tvCheckLabel $tvCheckLabel $text")
+//        tvCheckLabel!!.text = if (isTextCaps) text!!.toUpperCase() else text
+//        setLabelButton(text!!)
         if (active) {
             setActive(true)
         } else {
@@ -86,11 +97,11 @@ class ValidateButton : LinearLayout {
         return status
     }
 
-    private fun setLabelButton(text: String) {
+    fun setLabelButton(text: String) {
         tvCheckLabel!!.text = if (isTextCaps) text.toUpperCase() else text
     }
 
-    private fun setCheckButtonBackGround(isEnable: Boolean) {
+    fun setCheckButtonBackGround(isEnable: Boolean) {
         if (isEnable) {
             llCheckLabel!!.background =
                 context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)

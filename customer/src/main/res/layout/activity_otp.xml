@@ -14,6 +14,10 @@
             type="Boolean"/>
 
         <variable
+            name="agreement"
+            type="String"/>
+
+        <variable
             name="otpViewModel"
             type="com.mobile.bnkcl.ui.otp.OtpViewModel" />
 
@@ -40,14 +44,15 @@
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{otpViewModel.setUpImageView(otpViewModel.uiMode)}"
+                android:src="@{otpViewModel.setUpImageView()}"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="21dp"/>
+                android:layout_marginStart="21dp"
+                android:onClick="@{(v)->otpViewModel.closeButton_Click()}"/>
             <TextView
                 android:id="@+id/tv_title_toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{otpViewModel.setUpTextView(otpViewModel.uiMode)"
+                android:text="@{otpViewModel.setUpToolbarTitle()}"
                 android:layout_centerInParent="true"
                 style="@style/font_18_263238_bold"/>
 
@@ -66,15 +71,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_badge_key_gray"
-                android:visibility="@{otpViewModel.setUpVisibilityView(otpViewModel.uiMode) ? View.VISIBLE : View.GONE}"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                app:visibleGone="@{otpViewModel.setUpVisibilityView()}"/>
             <LinearLayout
                 android:id="@+id/ll_step_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
-                android:visibility="@{!otpViewModel.setUpVisibilityView(otpViewModel.uiMode) ? View.VISIBLE : View.GONE}"
+                app:visibleGone="@{!otpViewModel.setUpVisibilityView()}"
                 >
 
                 <LinearLayout
@@ -87,7 +92,7 @@
                         android:id="@+id/iv_step1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_step_otp_off"/>
+                        android:src="@{otpViewModel.setUpImageViewFocus()}"/>
                     <TextView
                         android:id="@+id/tv_step1"
                         android:layout_width="wrap_content"
@@ -116,7 +121,7 @@
                         android:id="@+id/iv_step2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_step_personal_info_on"/>
+                        android:src="@{otpViewModel.setUpImageViewFocus()}"/>
                     <TextView
                         android:id="@+id/tv_step2"
                         android:layout_width="wrap_content"
@@ -179,24 +184,6 @@
                             android:layout_marginTop="21dp"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="67dp"
-                                android:layout_height="match_parent"
-                                android:text="+855"
-                                style="@style/font15_c4d0d6_medium_en"
-                                android:gravity="center"
-                                android:layout_marginStart="1dp"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="1dp"
-                                android:background="@drawable/round_solid_f3f6f7_8_left"/>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginBottom="1dp"
-                                android:background="@color/color_e1e5ec"/>
-
                             <com.mobile.bnkcl.com.view.BnkEditText
                                 android:id="@+id/edt_phonenumber"
                                 android:layout_width="0dp"
@@ -204,12 +191,13 @@
                                 android:layout_weight="1"
                                 android:paddingStart="15dp"
                                 android:hint="00-000-000"
+
                                 android:textColorHint="#cfd8dc"
                                 style="@style/font15_radio_medium_not_km"
                                 android:background="@null"
                                 android:paddingTop="16dp"
                                 android:paddingBottom="16dp"
-                                android:maxLength="11"
+                                android:maxLength="12"
                                 android:singleLine="true"
                                 android:inputType="number"/>
                             <ImageView
@@ -217,9 +205,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_otp_send_off_ico"
-                                android:layout_marginRight="15dp"
-                                android:clickable="false"
-                                android:onClick="@{(v) -> otpViewModel.sendOtp()}"
+                                android:layout_marginEnd="15dp"
+
                                 />
 
                         </LinearLayout>
@@ -281,7 +268,8 @@
                                 android:layout_marginEnd="10dp"
                                 android:maxLength="7"
                                 android:singleLine="true"
-                                android:inputType="number"/>
+                                android:inputType="number"
+                                />
 
                             <TextView
                                 android:id="@+id/tv_correct"
@@ -346,7 +334,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginBottom="24dp"
-                        android:visibility="visible">
+                        app:visibleGone="@{!otpViewModel.setUpVisibilityView()}">
 
                         <CheckBox
                             android:id="@+id/cb_agreement"
@@ -355,7 +343,7 @@
                             android:button="@drawable/selector_radio_botton_solid_grey"
                             android:layout_marginEnd="10dp"
                             android:clickable="true"
-                            android:checked="false"
+                            android:checked="@{otpViewModel.checked}"
                             android:focusable="true"
                             android:onClick="@{(v) -> otpViewModel.agreementCheckBoxClick()}"/>
                         <TextView
@@ -363,7 +351,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:text="@string/sign_up_28"
+                            android:text="I agree to BNKC\'s Terms and Conditions"
+                            app:text="@{agreement}"
+                            app:isChecked="@{otpViewModel.checked}"
                             style="@style/font15_cfd8dc_regular_agreement"
                             android:onClick="@{(v) -> otpViewModel.agreementViewClick()}"/>
 
@@ -384,13 +374,13 @@
 <!--                            />-->
 <!--                    </LinearLayout>-->
 
-<!--                    <com.mobile.bnkcl.com.view.ValidateButton-->
+<!--                    <com.bnkc.sourcemodule.ui.ValidateButton-->
 <!--                        android:layout_width="match_parent"-->
 <!--                        android:layout_height="50dp"-->
 <!--                        app:is_active="true"-->
 <!--                        />-->
 
-<!--                    <com.mobile.bnkcl.com.view.ValidateButton-->
+<!--                    <com.bnkc.sourcemodule.ui.ValidateButton-->
 <!--                        android:layout_width="match_parent"-->
 <!--                        android:layout_marginTop="15dp"-->
 <!--                        app:buttonText="@string/loan_calculator"-->
@@ -398,11 +388,11 @@
 <!--                        app:is_active="true"-->
 <!--                        android:layout_height="50dp"/>-->
 
-                    <com.mobile.bnkcl.com.view.ValidateButton
+                    <com.bnkc.sourcemodule.ui.ValidateButton
                         android:id="@+id/btn_calculate"
                         android:layout_width="match_parent"
-                        app:buttonText="Login"
-                        app:is_active="true"
+                        app:textButton="@{otpViewModel.setUpButtonText()}"
+                        app:enableButton="@{enableButton}"
                         android:layout_height="50dp"
                         android:onClick="@{(v) -> otpViewModel.reqLogin()}"/>
 

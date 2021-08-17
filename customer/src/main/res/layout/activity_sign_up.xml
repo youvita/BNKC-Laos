@@ -411,7 +411,7 @@
                         android:background="@drawable/round_solid_e1e5ec_8"
                         android:gravity="center">
 
-                        <com.mobile.bnkcl.com.view.ValidateButton
+                        <com.bnkc.sourcemodule.ui.ValidateButton
                             android:id="@+id/vb_result"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_50dp"

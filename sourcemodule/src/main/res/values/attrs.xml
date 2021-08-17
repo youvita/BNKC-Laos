@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ValidateButton">
+        <attr name="buttonText" format="string"/>
+        <attr name="buttonTextColor" format="color"/>
+        <attr name="buttonBackground" format="reference"/>
+        <attr name="is_active" format="boolean"/>
+        <attr name="textAllCaps" format="boolean"/>
+    </declare-styleable>
+</resources>

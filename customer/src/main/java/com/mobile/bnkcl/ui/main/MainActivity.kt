@@ -3,6 +3,7 @@ package com.mobile.bnkcl.ui.main
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
 import androidx.viewpager.widget.ViewPager
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -139,7 +140,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        }
 
         //for testing
-        login()
+//        login()
     }
 
 //    /**

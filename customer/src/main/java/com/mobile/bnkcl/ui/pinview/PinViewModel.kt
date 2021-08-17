@@ -8,4 +8,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PinViewModel @Inject constructor(private val mgRepo: MGRepo) : BaseViewModel(){
 
+    var pinUI : Int = 1
+
 }

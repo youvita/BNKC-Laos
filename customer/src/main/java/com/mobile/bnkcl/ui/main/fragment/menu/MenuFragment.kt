@@ -92,7 +92,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(), View.OnClickListener {
                     startActivity(Intent(requireContext(), SettingActivity::class.java))
                 }
                 R.id.ll_signup -> {
-                    startActivity(Intent(requireContext(), OtpActivity::class.java))
+                    viewModel.goToSignUp()
                 }
                 R.id.ll_login -> {
                     startActivity(Intent(requireContext(), OtpActivity::class.java))

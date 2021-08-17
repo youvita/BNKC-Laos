@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava

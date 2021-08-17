@@ -80,10 +80,10 @@
 
         </RelativeLayout>
 
-        <com.bnkc.sourcemodule.ui.NavigationMenu
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end|top"/>
+<!--        <com.bnkc.sourcemodule.ui.NavigationMenu-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="end|top"/>-->
 
 <!--        <com.google.android.material.navigation.NavigationView-->
 <!--            android:layout_width="match_parent"-->

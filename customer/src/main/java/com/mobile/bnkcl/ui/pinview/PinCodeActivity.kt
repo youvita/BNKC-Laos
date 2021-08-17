@@ -14,20 +14,25 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
-    private val pinViewModel : PinViewModel by viewModels()
+    private val viewModel : PinViewModel by viewModels()
+
+    var pinUI : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        if (intent != null) {
+        binding.pinViewModel = viewModel
+        if (intent != null) {
 //            extrasLogin = ExtrasLogin(this, intent)
-//            class_owner = extrasLogin.Param.getOwner()
-//            when (class_owner) {
+            pinUI = intent.getStringExtra("pin_action").toString()
+//            when (pinAction) {
 //                "login" -> setAnimateType(ANIMATE_LEFT)
 //                else -> setAnimateType(ANIMATE_NORMAL)
 //            }
-//
-//            if (class_owner == "register") {
+
+            if (pinUI == "sign_up") {
+
+//                binding.pinViewModel.pinUI = 3
+
 //                isRegister = true
 //                if (intent.hasExtra("username")) {
 //                    setUpPasswordViewModel.getSetupPasswordModel()
@@ -37,8 +42,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                    setUpPasswordViewModel.getSetupPasswordModel()
 //                        .setSession_id(intent.getStringExtra("session_id"))
 //                }
-//
-//                // 6/17/2021 soktry
+
+                // 6/17/2021 soktry
 //                signUpViewModel.getSignUpModel()
 //                    .setFamily_name(MemoryPreferenceDelegator.getInstance().get("family_name"))
 //                signUpViewModel.getSignUpModel()
@@ -53,7 +58,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                signUpViewModel.getSignUpModel()
 //                    .setGender(MemoryPreferenceDelegator.getInstance().get("gender"))
 //                signUpViewModel.getSignUpModel().setSession_id(intent.getStringExtra("session_id"))
-//            } else if (class_owner == "forgetpin") {
+            } else if (pinUI == "forget") {
+
+//                binding.pinViewModel.pinUI = 2
+
 //                isForgetPin = true
 //                if (intent.hasExtra("pin_id")) {
 //                    preLoginViewModel.getPreLoginModel().setPin_id(intent.getStringExtra("pin_id"))
@@ -63,7 +71,12 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                        .setUsername(intent.getStringExtra("username"))
 //                }
 //                preLoginViewModel.requestPreLogin()
-//            } else if (class_owner == "login") {
+            } else if (pinUI == "login") {
+
+                viewModel.pinUI = 1
+
+//                binding.pinViewModel.pinUI = 1
+
 //                isLogin = true
 //                if (intent.hasExtra("username")) {
 //                    loginViewModel.getLoginModel().setUsername(intent.getStringExtra("username"))
@@ -75,8 +88,17 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
 //                    )
 //                }
-//            }
-//        }
+            } else if(pinUI == "reset"){
+//                binding.pinViewModel.pinUI = 4
+
+
+
+            }
+        }
+
+        binding.pinView.setOnClosePinListener = {
+            finish()
+        }
 
         binding.pinView.setOnCompletedListener = { pinCode : String ->
 

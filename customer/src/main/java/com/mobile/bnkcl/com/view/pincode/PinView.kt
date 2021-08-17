@@ -2,7 +2,9 @@ package com.mobile.bnkcl.com.view.pincode
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.database.DatabaseUtils
 import android.graphics.Color
+import android.media.Image
 import android.os.Handler
 import android.os.Vibrator
 import android.text.TextUtils
@@ -13,9 +15,11 @@ import android.view.View.OnClickListener
 import android.view.View.OnLongClickListener
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.databinding.DataBindingUtil
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.utilities.UtilsSize
 import kotlin.properties.Delegates
@@ -23,19 +27,21 @@ import kotlin.properties.Delegates
 
 class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
-    private var mPinView : PinCodeView? = null
-    private var mPinMessage: TextView? = null
-    private  var mResetPin:TextView? = null
-    private  var title:TextView? = null
-    private val reEnterPassword : Boolean? = false
-    private var mCodeValidation = ""
-    private var mCode = ""
+     var mPinView : PinCodeView? = null
+     var mPinMessage: TextView? = null
+     var mResetPin:TextView? = null
+     var title:TextView? = null
+     val reEnterPassword : Boolean? = false
+     var mCodeValidation = ""
+     var mCode = ""
 
 
     var setOnCompletedListener: (pinCode: String) -> Unit = {}
     // function type variable that is invoked when pin code is completed
 
     var setOnErrorListener: (msg: Int) -> Unit = {}
+
+    var setOnClosePinListener: () -> Unit = {}
 
     var setOnPinKeyClickListener : (keyPressed : String) -> Unit = {}
     // function type variable that is invoked when a pin key clicked
@@ -58,6 +64,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
 
     init {
         val view = inflate(context, R.layout.pin_view, this)
+
         attributes = context.obtainStyledAttributes(attrs, R.styleable.PinView)
 
 //        .text = attributes.getString(R.styleable.PinView_titleName)
@@ -90,6 +97,8 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         val button8 = view.findViewById<TextView>(R.id.button_8)
         val button9 = view.findViewById<TextView>(R.id.button_9)
 
+        val closeButton = view.findViewById<ImageView>(R.id.iv_close)
+
         title = view.findViewById<TextView>(R.id.tv_title_toolbar)
         mPinMessage = view.findViewById<TextView>(R.id.tv_pin_smg)
         mResetPin = view.findViewById<TextView>(R.id.tv_pin_action)
@@ -118,6 +127,10 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
 
         button0.layoutParams = middle
         buttonDelete.layoutParams = last
+
+        closeButton.setOnClickListener {
+            setOnClosePinListener()
+        }
 
         button0.setOnClickListener(OnClickListener {
             val number = button0.text.toString()

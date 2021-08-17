@@ -151,7 +151,7 @@
                 android:background="@color/color_ffffff"
                 android:layout_gravity="bottom">
 
-                <com.mobile.bnkcl.com.view.ValidateButton
+                <com.bnkc.sourcemodule.ui.ValidateButton
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
