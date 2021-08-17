@@ -13,7 +13,8 @@ import com.mobile.bnkcl.utilities.UtilAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AccountInformationActivity : BaseActivity<ActivityAccountInformationBinding>(), View.OnClickListener {
+class AccountInformationActivity : BaseActivity<ActivityAccountInformationBinding>(),
+    View.OnClickListener {
 
     private val accountInformationViewModel: AccountInformationViewModel by viewModels()
 
@@ -22,10 +23,10 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
         setClickListeners()
 
-//        accountInformationViewModel.getAccountInformation()
-//        accountInformationViewModel.accountInformationLiveData.observe(this) {
-//            binding.profile = it
-//        }
+        accountInformationViewModel.getAccountInformation()
+        accountInformationViewModel.accountInformationLiveData.observe(this) {
+            binding.profile = it
+        }
     }
 
     private fun setClickListeners() {

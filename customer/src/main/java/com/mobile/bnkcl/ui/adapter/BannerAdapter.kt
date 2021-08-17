@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.main.fragment.mypage
+package com.mobile.bnkcl.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.CustomPager
+import com.mobile.bnkcl.utilities.UtilsGlide
 import java.util.*
 
 class BannerAdapter(private val context: Context, private val imageList: ArrayList<Int>) :
@@ -20,7 +21,7 @@ class BannerAdapter(private val context: Context, private val imageList: ArrayLi
 
     override fun isViewFromObject(
         view: View,
-        `object` : Any
+        `object`: Any
     ): Boolean {
         return view === `object` as LinearLayout
     }
@@ -34,10 +35,8 @@ class BannerAdapter(private val context: Context, private val imageList: ArrayLi
         if (position != mCurrentPosition) {
             val linearLayout = `object` as LinearLayout
             val pager: CustomPager = container as CustomPager
-            if (linearLayout != null) {
-                mCurrentPosition = position
-                pager.measureCurrentView(linearLayout)
-            }
+            mCurrentPosition = position
+            pager.measureCurrentView(linearLayout)
         }
     }
 
@@ -46,14 +45,8 @@ class BannerAdapter(private val context: Context, private val imageList: ArrayLi
             LayoutInflater.from(context).inflate(R.layout.banner_item_layout, container, false)
         val imageView =
             view.findViewById<ImageView>(R.id.img_banner)
-//        UtilsGlide.loadRounded(context, imageList[position], imageView, null)
-        //        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(container.getContext(), BannerDetailsActivity.class);
-//                container.getContext().startActivity(intent);
-//            }
-//        });
+
+        UtilsGlide.loadRounded(context, imageList[position], imageView, null)
         container.addView(view)
         return view
     }

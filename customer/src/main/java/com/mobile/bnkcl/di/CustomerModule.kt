@@ -6,6 +6,7 @@ import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.UserApi
 import com.mobile.bnkcl.data.api.auth.AuthAPI
+import com.mobile.bnkcl.data.api.dashboard.DashboardApi
 import com.mobile.bnkcl.data.api.otp.OTPApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
 import dagger.Module
@@ -74,4 +75,12 @@ object CustomerModule {
 //            .create(AuthAPI::class.java)
 //    }
 
+    @Singleton
+    @Provides
+    fun provideDashboardService(retrofit: Retrofit.Builder): DashboardApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(DashboardApi::class.java)
+    }
 }

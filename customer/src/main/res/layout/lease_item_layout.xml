@@ -2,14 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--    <data>-->
-    <!--        <import type="com.mobile.bnk.comm.util.FormatUtil"/>-->
-    <!--        <import type="com.mobile.bnk.ui.main.fragment.myloan.LoanViewPagerAdapter"/>-->
-    <!--        <variable-->
-    <!--            name="loanItem"-->
-    <!--            type="com.mobile.bnk.model.loan.MyLoan" />-->
 
-    <!--    </data>-->
+    <data>
+        <!--            <import type="com.mobile.bnk.comm.util.FormatUtil"/>-->
+        <!--            <import type="com.mobile.bnk.ui.main.fragment.myloan.LoanViewPagerAdapter"/>-->
+        <variable
+            name="leaseItem"
+            type="com.mobile.bnkcl.data.response.dashboard.MyLeasesData" />
+
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +34,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="250dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
@@ -52,8 +53,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
                     android:background="@color/color_eef5f8" />
 
                 <!-- Lease Balance -->
@@ -77,8 +78,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="3,650.00 USD}"
+                        android:text="@{leaseItem.lease_balance}"
                         tools:text="3,650.00 USD" />
+
                 </LinearLayout>
 
                 <!-- Upcoming Payment Date -->
@@ -102,8 +104,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="14-04-2020"
+                        android:text="@{leaseItem.repayment_date}"
                         tools:text="14-04-2020" />
+
                 </LinearLayout>
 
                 <!-- Total Payment of this Time -->
@@ -127,37 +130,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="152.08 USD"
+                        android:text="@{leaseItem.repayment_amount}"
                         tools:text="152.08 USD" />
-                </LinearLayout>
 
-                <!-- Including Overdue Amount -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:minHeight="20dp">
-
-                    <TextView
-                        style="@style/font10_d7191f_medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
-                        android:text="@string/main_content_008" />
-
-                    <TextView
-                        android:id="@+id/tv_overdue_amt"
-                        style="@style/font10_d7191f_medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:text="152.08 USD" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="55dp"
                     android:baselineAligned="false"
                     android:gravity="bottom">
 
@@ -208,6 +188,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
         </com.mobile.bnkcl.com.view.ShadowLayout>
         <!-- Lease Item -->
 
@@ -229,7 +210,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="250dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
                 android:gravity="center_vertical"
                 android:orientation="vertical">

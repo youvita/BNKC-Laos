@@ -56,9 +56,8 @@
     <!-- MainActivity -->
     <!-- Main - My Loan Request Menu -->
     <string name="my_loan_menu_001">Application</string>
-    <string name="my_loan_menu_002">Document</string>
-    <string name="my_loan_menu_003">Processing</string>
-    <string name="my_loan_menu_004">Success</string>
+    <string name="my_loan_menu_002">Screening</string>
+    <string name="my_loan_menu_003">Result</string>
 
     <string name="main_bottom_menu1">My Loan</string>
     <string name="main_bottom_menu2">Loan Service</string>
@@ -67,14 +66,13 @@
     <string name="main_subtitle_001">My Loan Request</string>
     <string name="main_subtitle_002">ພາສາລາວ</string>
 
-    <string name="loan_type_001">MICRO LOAN</string>
-    <string name="loan_type_002">SMALL LOAN</string>
-    <string name="loan_type_003">MEDIUM LOAN</string>
-    <string name="main_content_004">ADD NEW LOAN SERVICE</string>
-    <string name="main_content_005">Loan Balance</string>
-    <string name="main_content_006">Upcoming Payment Date</string>
-    <string name="main_content_007">Total Payment of this Time</string>
-    <string name="main_content_008">*Including Overdue Amount</string>
+    <string name="loan_type_001">MICRO LEASE</string>
+    <string name="loan_type_002">SMALL LEASE</string>
+    <string name="loan_type_003">MEDIUM LEASE</string>
+    <string name="main_content_004">ADD NEW LEASE SERVICE</string>
+    <string name="main_content_005">Balance of Lease</string>
+    <string name="main_content_006">Coming Repayment Date</string>
+    <string name="main_content_007">Total Payment</string>
     <string name="main_content_009">BILL PAYMENT</string>
     <string name="main_content_010">MANAGEMENT</string>
     <string name="main_content_011"><font color="#00695C">Download BNK Mobile</font>\nand Take Loan Now.</string>

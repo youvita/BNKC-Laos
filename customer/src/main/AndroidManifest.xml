@@ -51,6 +51,8 @@
         <activity android:name=".ui.user.AccountInformationActivity" />
         <activity android:name=".ui.user.edit.EditAccountInfoActivity" />
         <activity android:name=".ui.otp.OtpActivity" />
+        <activity android:name=".ui.bill.BillPaymentActivity" />
+        <activity android:name=".ui.management.LeaseManagementActivity" />
         <activity android:name=".ui.login.LoginActivity"></activity>
         <activity
             android:name=".ui.main.MainActivity"

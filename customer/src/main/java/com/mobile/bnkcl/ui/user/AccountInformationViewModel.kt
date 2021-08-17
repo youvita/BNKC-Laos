@@ -16,21 +16,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountInformationViewModel @Inject constructor(private val userRepo: UserRepo) : BaseViewModel() {
-//    private val _accountInformation: MutableLiveData<ProfileData> = MutableLiveData()
-//    val accountInformationLiveData: LiveData<ProfileData> = _accountInformation
-//    fun getAccountInformation() {
-//        viewModelScope.launch {
-//            userRepo.getProfile().onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//                    _accountInformation.value = resource.data
-//                }
-//            }.launchIn(viewModelScope)
-//        }
-//    }
+class AccountInformationViewModel @Inject constructor(private val userRepo: UserRepo) :
+    BaseViewModel() {
+    private val _accountInformation: MutableLiveData<ProfileData> = MutableLiveData()
+    val accountInformationLiveData: LiveData<ProfileData> = _accountInformation
+    fun getAccountInformation() {
+        viewModelScope.launch {
+            userRepo.getProfile().onEach { resource ->
+                if (resource.status == Status.ERROR) {
+                    val code = resource.errorCode
+                    val title = resource.messageTitle
+                    val message = resource.messageDes
+                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+                } else {
+                    _accountInformation.value = resource.data
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
 }

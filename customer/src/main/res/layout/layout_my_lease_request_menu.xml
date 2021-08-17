@@ -108,7 +108,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_menu_title3"
+                android:id="@+id/tv_menu_title2"
                 style="@style/font10_d7191f_medium_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_menu_title4"
+                android:id="@+id/tv_menu_title3"
                 style="@style/font10_d7191f_medium_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

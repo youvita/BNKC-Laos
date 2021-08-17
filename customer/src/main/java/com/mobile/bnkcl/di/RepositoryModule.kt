@@ -11,6 +11,7 @@ import com.mobile.bnkcl.data.api.signup.SignUpApi
 import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.comment.CommentRepo
+import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
 import com.mobile.bnkcl.data.repository.login.LoginRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
@@ -77,5 +78,11 @@ object RepositoryModule {
         @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient
     ): AlarmRepo {
         return AlarmRepo(context, okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDashboardRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): DashboardRepo {
+        return DashboardRepo(context, okHttpClient)
     }
 }

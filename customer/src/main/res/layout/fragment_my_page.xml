@@ -120,7 +120,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_marginBottom="4dp">
+                        android:layout_marginBottom="10dp">
 
                         <TextView
                             style="@style/font15_263238_medium"
@@ -138,20 +138,21 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
+                            android:background="@drawable/selector_circle_count_background"
                             android:enabled="true"
                             android:gravity="center"
                             android:paddingLeft="6.5dp"
                             android:paddingTop="1.5dp"
                             android:paddingRight="6.5dp"
                             android:paddingBottom="1.5dp"
-                            tools:text="2" />
+                            tools:text="99" />
                     </LinearLayout>
 
                     <!-- Lease Item View Pager -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="240dp">
+                        android:minHeight="260dp">
 
                         <androidx.viewpager2.widget.ViewPager2
                             android:id="@+id/lease_view_pager"
@@ -159,10 +160,10 @@
                             android:layout_height="wrap_content"
                             android:clipChildren="false"
                             android:clipToPadding="false"
-                            android:minHeight="240dp"
+                            android:minHeight="260dp"
                             android:overScrollMode="never"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp"
+                            android:paddingStart="@dimen/padding_20dp"
+                            android:paddingEnd="@dimen/padding_20dp"
                             tools:listitem="@layout/lease_item_layout" />
 
                     </RelativeLayout>
@@ -172,9 +173,8 @@
                         android:id="@+id/ll_lease_indicator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-10dp"
-                        android:layout_marginBottom="3dp"
                         android:gravity="center"
+                        android:layout_marginTop="-15dp"
                         android:orientation="horizontal" />
 
                     <!-- Banner Item View Pager -->
@@ -182,18 +182,17 @@
                         android:id="@+id/banner_view_pager"
                         android:layout_width="match_parent"
                         android:layout_height="86dp"
+                        android:layout_marginTop="-10dp"
                         android:clipChildren="false"
                         android:clipToPadding="false"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp" />
+                        android:paddingStart="@dimen/padding_20dp"
+                        android:paddingEnd="@dimen/padding_20dp" />
 
                     <!-- Banner Item Indicator -->
                     <LinearLayout
                         android:id="@+id/ll_banner_indicator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
                         android:gravity="center"
                         android:orientation="horizontal" />
 
