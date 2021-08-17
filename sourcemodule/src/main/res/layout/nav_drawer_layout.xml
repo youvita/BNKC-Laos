@@ -195,26 +195,38 @@
             android:background="@color/color_eaedf5"
             android:layout_marginLeft="60dp"/>
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_facebook"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:clickable="true">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/nav_content_005"-->
+<!--                android:drawableLeft="@drawable/ic_fb_ico"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                style="@style/font15_263238_medium"/>-->
+
+<!--        </LinearLayout>-->
+
+        <TextView
             android:id="@+id/btn_facebook"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:text="@string/nav_content_005"
+            android:drawableLeft="@drawable/ic_fb_ico"
             android:gravity="center_vertical"
-            android:clickable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/nav_content_005"
-                android:drawableLeft="@drawable/ic_fb_ico"
-                android:gravity="center_vertical"
-                android:drawablePadding="10dp"
-                style="@style/font15_263238_medium"/>
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            style="@style/font15_263238_medium"/>
 
         <View
             android:layout_width="match_parent"
@@ -222,26 +234,38 @@
             android:background="@color/color_eaedf5"
             android:layout_marginLeft="60dp"/>
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_company_profile"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:clickable="true">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/nav_content_006"-->
+<!--                android:drawableLeft="@drawable/ic_com_profile_ico"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                style="@style/font15_263238_medium"/>-->
+
+<!--        </LinearLayout>-->
+
+        <TextView
             android:id="@+id/btn_company_profile"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:text="@string/nav_content_006"
+            android:drawableLeft="@drawable/ic_com_profile_ico"
             android:gravity="center_vertical"
-            android:clickable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/nav_content_006"
-                android:drawableLeft="@drawable/ic_com_profile_ico"
-                android:gravity="center_vertical"
-                android:drawablePadding="10dp"
-                style="@style/font15_263238_medium"/>
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            style="@style/font15_263238_medium"/>
 
         <View
             android:layout_width="match_parent"
@@ -249,26 +273,38 @@
             android:background="@color/color_eaedf5"
             android:layout_marginLeft="60dp"/>
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_policy"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:clickable="true">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Policy"-->
+<!--                android:drawableLeft="@drawable/ic_policy_ico"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                style="@style/font15_263238_medium"/>-->
+
+<!--        </LinearLayout>-->
+
+        <TextView
             android:id="@+id/btn_policy"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:text="Policy"
+            android:drawableLeft="@drawable/ic_policy_ico"
             android:gravity="center_vertical"
-            android:clickable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Policy"
-                android:drawableLeft="@drawable/ic_policy_ico"
-                android:gravity="center_vertical"
-                android:drawablePadding="10dp"
-                style="@style/font15_263238_medium"/>
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            style="@style/font15_263238_medium"/>
 
         <View
             android:layout_width="match_parent"
@@ -277,27 +313,39 @@
             android:layout_marginLeft="60dp"/>
 
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_setting"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:clickable="true">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_setting"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/nav_content_007"-->
+<!--                android:drawableLeft="@drawable/ic_setting_ico"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                style="@style/font15_263238_medium"/>-->
+
+<!--        </LinearLayout>-->
+
+        <TextView
             android:id="@+id/btn_setting"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:text="@string/nav_content_007"
+            android:drawableLeft="@drawable/ic_setting_ico"
             android:gravity="center_vertical"
-            android:clickable="true">
-
-            <TextView
-                android:id="@+id/tv_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/nav_content_007"
-                android:drawableLeft="@drawable/ic_setting_ico"
-                android:gravity="center_vertical"
-                android:drawablePadding="10dp"
-                style="@style/font15_263238_medium"/>
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            style="@style/font15_263238_medium"/>
 
         <View
             android:layout_width="match_parent"
@@ -305,27 +353,39 @@
             android:background="@color/color_eaedf5"
             android:layout_marginLeft="60dp"/>
 
-        <LinearLayout
-            android:id="@+id/btn_signup"
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_signup"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:clickable="true">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_sign_up"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Sign Up"-->
+<!--                android:drawableLeft="@drawable/ic_sign_up_ico"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                style="@style/font15_d7191f_medium"/>-->
+
+<!--        </LinearLayout>-->
+
+        <TextView
+            android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:text="Sign Up"
+            android:drawableLeft="@drawable/ic_sign_up_ico"
             android:gravity="center_vertical"
-            android:clickable="true">
-
-            <TextView
-                android:id="@+id/tv_sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sign Up"
-                android:drawableLeft="@drawable/ic_sign_up_ico"
-                android:gravity="center_vertical"
-                android:drawablePadding="10dp"
-                style="@style/font15_d7191f_medium"/>
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            style="@style/font15_d7191f_medium"/>
 
         <View
             android:layout_width="match_parent"
@@ -334,26 +394,39 @@
             android:layout_marginLeft="60dp"/>
 
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_login"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:clickable="true">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_login"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Login"-->
+<!--                android:drawableLeft="@drawable/ic_login_ico"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                style="@style/font15_d7191f_medium"/>-->
+
+<!--        </LinearLayout>-->
+
+        <TextView
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:text="Login"
+            android:drawableLeft="@drawable/ic_login_ico"
             android:gravity="center_vertical"
-            android:clickable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Login"
-                android:drawableLeft="@drawable/ic_login_ico"
-                android:gravity="center_vertical"
-                android:drawablePadding="10dp"
-                style="@style/font15_d7191f_medium"/>
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            style="@style/font15_d7191f_medium"/>
 
     </LinearLayout>
 </layout>

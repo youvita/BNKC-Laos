@@ -136,63 +136,62 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
             val number = button0.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
         })
         button1.setOnClickListener(OnClickListener {
             val number = button1.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
         button2.setOnClickListener(OnClickListener {
             val number = button2.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
         button3.setOnClickListener(OnClickListener {
             val number = button3.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
         button4.setOnClickListener(OnClickListener {
             val number = button4.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
 
         button5.setOnClickListener(OnClickListener {
             val number = button5.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
 
         button6.setOnClickListener(OnClickListener {
             val number = button6.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
         button7.setOnClickListener(OnClickListener {
             val number = button7.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
         button8.setOnClickListener(OnClickListener {
             val number = button8.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
         button9.setOnClickListener(OnClickListener {
             val number = button9.text.toString()
             val codeLength: Int = mPinView!!.input(number)
             appendNumber(number.toInt())
-            Log.d(">>>>>>>", "key :: {$number} {$codeLength}")
+
         })
 
         buttonDelete.setOnClickListener(OnClickListener {

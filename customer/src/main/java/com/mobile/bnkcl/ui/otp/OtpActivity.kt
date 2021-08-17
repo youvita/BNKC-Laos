@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.request.auth.DeviceInfo
+import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
@@ -21,6 +23,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
     val viewModel : OtpViewModel by viewModels()
 
+    var phoneNumber = ""
     var pinID = ""
     var sendOtp = false
 
@@ -82,6 +85,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                     StringBuilder(text).insert(text.length - 1, "-").toString()
                 )
                 binding.edtPhonenumber.setSelection(textLength)
+            }else if (textLength == 11){
+                binding.edtPhonenumber.setText(
+                    StringBuilder(text).insert(text.length - 1, "-").toString()
+                )
+                binding.edtPhonenumber.setSelection(textLength)
             }
 
             if (textLength <= 0) {
@@ -96,7 +104,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
     private val ivSendOTPClickListener = View.OnClickListener() {
         try {
-            viewModel.sendOTP(binding.edtPhonenumber.text.toString().replace("-", ""))
+            phoneNumber = binding.edtPhonenumber.text.toString().replace("-", "")
+            viewModel._phoneNumberContent.value = phoneNumber
+            viewModel.sendOTP(phoneNumber)
             binding.edtOtp.text!!.clear()
             binding.ivSendOtp.setOnClickListener(null)
             binding.ivSendOtp.setImageResource(R.drawable.ic_otp_send_off_ico)
@@ -129,10 +139,25 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
     private fun verifyOTP() {
         viewModel.verifyOTPLiveData.observe(this){
-            Log.d("nng", it.toString())
+            Log.d(">>>>>>>>", it.toString())
             binding.enableButton = it.verified
-//            viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
-//            preLogin()
+            viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
+            preLogin()
+        }
+    }
+
+    private fun preLogin() {
+        viewModel.preLogin()
+        viewModel.preloginLiveData.observe(this){
+            Log.d("nng", it.toString())
+//            var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+//            var loginRequest = LoginRequest(
+//                it.session_id,
+//                viewModel.sendOTPRequest.to,
+//                "5ZTnExlqPg0\u003d",
+//                deviceInfo
+//            )
+//            viewModel.logRequest = loginRequest
         }
     }
 
@@ -197,15 +222,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
             }
 
-            binding.edtPhonenumber.setOnFocusChangeListener { _, hasFocus ->
-                binding.llPhoneNo.isSelected = hasFocus
-            }
-
-            binding.edtOtp.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-                binding.llOptCode.isSelected = hasFocus
-            }
-
             sendOTP()
+
+            initEvent()
 
 ////            setAnimateType(ANIMATE_LEFT)
 //            binding.otpViewModel = viewModel
@@ -365,6 +384,20 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         } catch (e: NotFoundException) {
             e.printStackTrace()
         }
+    }
+
+    fun initEvent(){
+        binding.edtPhonenumber.setOnFocusChangeListener { _, hasFocus ->
+            binding.llPhoneNo.isSelected = hasFocus
+        }
+
+        binding.edtOtp.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            binding.llOptCode.isSelected = hasFocus
+        }
+//        binding.btnContinue.setOnClickListener {
+//            Log.d(">>>>>>", "reqLogin ::: ")
+//
+//        }
     }
 
     override fun getLayoutId(): Int {

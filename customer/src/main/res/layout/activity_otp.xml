@@ -191,13 +191,12 @@
                                 android:layout_weight="1"
                                 android:paddingStart="15dp"
                                 android:hint="00-000-000"
-
                                 android:textColorHint="#cfd8dc"
                                 style="@style/font15_radio_medium_not_km"
                                 android:background="@null"
                                 android:paddingTop="16dp"
                                 android:paddingBottom="16dp"
-                                android:maxLength="12"
+                                android:maxLength="13"
                                 android:singleLine="true"
                                 android:inputType="number"/>
                             <ImageView
@@ -359,42 +358,14 @@
 
 
                     </LinearLayout>
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/btn_continue"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:gravity="center"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:background="@drawable/round_solid_e1e5ec_8">-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/tv_continue"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/sign_up_09"-->
-<!--                            style="@style/font14_90A4AE_medium"-->
-<!--                            />-->
-<!--                    </LinearLayout>-->
-
-<!--                    <com.bnkc.sourcemodule.ui.ValidateButton-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        app:is_active="true"-->
-<!--                        />-->
-
-<!--                    <com.bnkc.sourcemodule.ui.ValidateButton-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_marginTop="15dp"-->
-<!--                        app:buttonText="@string/loan_calculator"-->
-<!--                        app:textAllCaps="true"-->
-<!--                        app:is_active="true"-->
-<!--                        android:layout_height="50dp"/>-->
 
                     <com.bnkc.sourcemodule.ui.ValidateButton
-                        android:id="@+id/btn_calculate"
+                        android:id="@+id/btn_continue"
                         android:layout_width="match_parent"
                         app:textButton="@{otpViewModel.setUpButtonText()}"
                         app:enableButton="@{enableButton}"
                         android:layout_height="50dp"
-                        android:onClick="@{(v) -> otpViewModel.reqLogin()}"/>
+                        android:onClick="@{() -> otpViewModel.continueClick()}"/>
 
                 </LinearLayout>
 

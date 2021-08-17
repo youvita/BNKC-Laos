@@ -109,12 +109,13 @@ object BindingAdapters {
             llCheckLabel!!.background =
                 context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
             tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_ffffff))
+
         } else {
             Log.d(">>>>>", "BindingAdapter $isEnable")
             llCheckLabel!!.background =
                 context!!.resources.getDrawable(R.drawable.round_solid_e1e5ec_8)
             tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_90a4ae))
-            setOnClickListener(null)
+
         }
 
     }

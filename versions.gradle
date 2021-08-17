@@ -24,6 +24,7 @@ versions.room = "2.3.0"
 versions.crypto = "1.1.0-alpha01"
 versions.glide = "4.11.0"
 versions.ceryle = "v2.0.2"
+versions.bouncycastle = "1.66"
 ext.versions = versions
 
 def dagger = [:]
@@ -45,6 +46,10 @@ def coroutine = [:]
 coroutine.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
 coroutine.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 deps.coroutine = coroutine
+
+def bouncycastle = [:]
+bouncycastle.secure = "org.bouncycastle:bcprov-jdk15to18:$versions.bouncycastle"
+deps.bouncycastle = bouncycastle
 
 def kotlin = [:]
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"

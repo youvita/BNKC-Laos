@@ -3,16 +3,21 @@ package com.mobile.bnkcl.ui.main.fragment.menu
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.sourcemodule.base.BaseFragment
+import com.bnkc.sourcemodule.ui.NavigationMenu
+import com.bnkcl.employeemodule.ui.EmployeeNavigationMenu
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.ui.main.MainViewModel
 import com.mobile.bnkcl.ui.notice.NoticeActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
@@ -22,9 +27,15 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MenuFragment : BaseFragment<FragmentMenuBinding>(), View.OnClickListener {
+class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
 
     private val viewModel: MenuViewModel by viewModels()
+
+    private var userRole = 0
+
+//    var navigationMenu : NavigationMenu = NavigationMenu(context, false)
+
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_menu
@@ -35,23 +46,67 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(), View.OnClickListener {
         viewModel.context = requireContext()
         binding.menuViewModel = viewModel
 
+        if (mainViewModel.isLogin){
+            binding.btnSignUp.visibility = View.GONE
+            binding.btnLogin.text = "Logout"
+//            binding.btnLogin.setOnClickListener {
+//
+//            }
+        }
+
+        when(mainViewModel.userRole){
+            0 -> { //Customer
+//                var navigationMenu = NavigationMenu(context, true)
+//                binding.mainMenu.addView(navigationMenu)
+
+            }
+            1 -> { //Employee
+//                var navigationMenu = EmployeeNavigationMenu(context, true)
+//                navigationMenu.setOnClickListener {
+//                    Log.d(">>>>>>>>", "menu click id ${it.id}")
+//                    if (it.id == R.id.btn_facebook){
+//                        val facebookIntent = Intent(Intent.ACTION_VIEW)
+//                        facebookIntent.data = Uri.parse("https://www.google.com")
+//                        startActivity(facebookIntent)
+//                    }else if (it.id == R.id.btn_setting){
+//                        startActivity(Intent(requireContext(), SettingActivity::class.java))
+//                    }
+//                }
+//                binding.mainMenu.addView(navigationMenu)
+            }
+            2 -> { //Dealer
+//                var navigationMenu = NavigationMenu(context, true)
+//                binding.mainMenu.addView(navigationMenu)
+            }
+            else -> { //Not yet login
+//                val navigationMenu = NavigationMenu(context, false)
+//                navigationMenu.btnFacebook!!.setOnClickListener {
+//                    val facebookIntent = Intent(Intent.ACTION_VIEW)
+//                    facebookIntent.data = Uri.parse("https://www.google.com")
+//                    startActivity(facebookIntent)
+//                }
+//                navigationMenu.btnSetting!!.setOnClickListener {
+//                    startActivity(Intent(requireContext(), SettingActivity::class.java))
+//                }
+//                binding.mainMenu.addView(navigationMenu)
+            }
+        }
+
         setClickListeners()
 
     }
 
     private fun setClickListeners() {
-        binding.llProfile.setOnClickListener(this)
         binding.llNotice.setOnClickListener(this)
         binding.llCsCenter.setOnClickListener(this)
         binding.llHome.setOnClickListener(this)
         binding.llLanguage.setOnClickListener(this)
-        binding.llFacebook.setOnClickListener(this)
-        binding.llCompanyProfile.setOnClickListener(this)
-        binding.llPolicy.setOnClickListener(this)
-        binding.llSettings.setOnClickListener(this)
-        binding.llSignup.setOnClickListener(this)
-        binding.llLogin.setOnClickListener(this)
-        binding.llLogout.setOnClickListener(this)
+        binding.btnFacebook.setOnClickListener(this)
+        binding.btnCompanyProfile.setOnClickListener(this)
+        binding.btnPolicy.setOnClickListener(this)
+        binding.btnSetting.setOnClickListener(this)
+        binding.btnSignUp.setOnClickListener(this)
+        binding.btnLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -77,27 +132,27 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(), View.OnClickListener {
                         recreateLanguageChanged()
                     }
                 }
-                R.id.ll_facebook -> {
+                R.id.btn_facebook -> {
                     val facebookIntent = Intent(Intent.ACTION_VIEW)
                     facebookIntent.data = Uri.parse("https://www.google.com")
                     startActivity(facebookIntent)
                 }
-                R.id.ll_company_profile -> {
+                R.id.btn_company_profile -> {
                     startActivity(Intent(requireContext(), TermsAndConditionsActivity::class.java))
                 }
-                R.id.ll_policy -> {
+                R.id.btn_policy -> {
                     startActivity(Intent(requireContext(), TermsAndConditionsActivity::class.java))
                 }
-                R.id.ll_settings -> {
+                R.id.btn_setting -> {
                     startActivity(Intent(requireContext(), SettingActivity::class.java))
                 }
-                R.id.ll_signup -> {
+                R.id.btn_sign_up -> {
                     viewModel.goToSignUp()
                 }
-                R.id.ll_login -> {
+                R.id.btn_login -> {
                     startActivity(Intent(requireContext(), OtpActivity::class.java))
                 }
-                R.id.ll_logout -> {
+                R.id.btn_logout -> {
                     val logOutDialog = LogOutDialog()
                     logOutDialog.show(requireActivity().supportFragmentManager, logOutDialog.tag)
                 }

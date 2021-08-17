@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
@@ -136,6 +137,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      */
     fun startApp() {
         val user = sharedPrefer.getPrefer(Constants.USER_ID)
+        Log.d(">>>>>>", "USER :: $user")
         if (user!!.isEmpty()) {
             startActivity(Intent(this, HomeActivity::class.java))
         } else {

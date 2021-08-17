@@ -27,6 +27,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val commentRepo: CommentRepo, private val otpRepo: OTPRepo, private val authRepo: AuthRepo) : BaseViewModel() {
 
+    var userRole = 1
+    var isLogin = false
+
     private val _comments: MutableLiveData<List<CommentsItem>> = MutableLiveData()
     val comments: LiveData<List<CommentsItem>> get() = _comments
 

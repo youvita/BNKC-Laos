@@ -124,6 +124,9 @@ dependencies {
     implementation deps.room.room_ktx
     kapt deps.room.compiler
 
+    // secure encrypt & decrypt password
+    implementation deps.bouncycastle.secure
+
     // junit test
     testImplementation 'junit:junit:4.13.2'
     //noinspection GradleCompatible

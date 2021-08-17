@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewStub
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.bnkc.sourcemodule.R
 import com.google.android.material.navigation.NavigationView
@@ -13,10 +14,24 @@ import com.google.android.material.navigation.NavigationView
 
 class NavigationMenu : NavigationView {
 
-    constructor(context: Context?) : super(context!!) {
+    var alreadyLogin = false
 
+    var btnFacebook : TextView? = null
+    var btnCompanyProfile : TextView? = null
+    var btnPolicy : TextView? = null
+    var btnSetting : TextView? = null
+    var btnSignUP : TextView? = null
+    var btnLogin : TextView? = null
+
+    constructor(context: Context?, isLogin : Boolean) : super(context!!) {
+        alreadyLogin = isLogin
         initView(context)
     }
+
+//    constructor(context: Context?) : super(context!!) {
+//
+//        initView(context)
+//    }
 
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context!!,
@@ -37,18 +52,33 @@ class NavigationMenu : NavigationView {
 
     fun initView(context: Context?){
 
-        val mBinding = LayoutInflater.from(context).inflate(R.layout.nav_drawer_layout, null, false)
-        val btnSignUP = mBinding.findViewById<LinearLayout>(R.id.btn_signup)
-        val btnLogin = mBinding.findViewById<LinearLayout>(R.id.btn_login)
+        val view = LayoutInflater.from(context).inflate(R.layout.nav_drawer_layout, this, false)
+        btnSignUP = view.findViewById<TextView>(R.id.btn_sign_up)
+        btnLogin = view.findViewById<TextView>(R.id.btn_login)
 
-        btnSignUP.setOnClickListener {
+//        val tvLogin = view.findViewById<TextView>(R.id.tv_login)
+
+        btnFacebook = view.findViewById<TextView>(R.id.btn_facebook)
+        btnCompanyProfile = view.findViewById<TextView>(R.id.btn_company_profile)
+        btnPolicy = view.findViewById<TextView>(R.id.btn_policy)
+        btnSetting = view.findViewById<TextView>(R.id.btn_setting)
+
+        btnSignUP!!.setOnClickListener {
             Toast.makeText(context, "SignUp :)", Toast.LENGTH_SHORT).show()
         }
-        btnLogin.setOnClickListener {
+        btnLogin!!.setOnClickListener {
             Toast.makeText(context, "Login :)", Toast.LENGTH_SHORT).show()
         }
 
-        addView(mBinding)
+        if (alreadyLogin){
+            btnSignUP!!.visibility = View.GONE
+            btnLogin!!.text = "Logout"
+            btnLogin!!.setOnClickListener {
+                Toast.makeText(context, "You have logout success :)", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        addView(view)
 
 //        try {
 //            mainViewPager = binding.mainViewPager

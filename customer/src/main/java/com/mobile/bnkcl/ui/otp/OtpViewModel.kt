@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.otp
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.TextView
@@ -14,13 +15,17 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.login.LoginRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.request.LoginRequest
+import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
+import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.otp.OTPVerifyResponse
 import com.mobile.bnkcl.data.response.otp.SendOTPResponse
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -28,14 +33,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo) : BaseViewModel(){
+class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val authRepo: AuthRepo) : BaseViewModel(){
 
     var uiMode : Int = 0
     var isChecked : Boolean = false
     var statFocus : Int = 0
     var step : Int = 1
 
-    private val _phoneNumberContent = MutableLiveData<String>()
+    val _phoneNumberContent = MutableLiveData<String>()
     val phoneNumber : LiveData<String>
         get() = _phoneNumberContent
 
@@ -163,9 +168,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo) : BaseViewM
 
     private val _sendOTP: MutableLiveData<SendOTPResponse> = MutableLiveData()
     val sendOTPLiveData: LiveData<SendOTPResponse> = _sendOTP
-
+    var sendOTPRequest : SendOTPRequest = SendOTPRequest()
     fun sendOTP(phoneNumber : String){
-        var sendOTPRequest: SendOTPRequest = SendOTPRequest(phoneNumber)
+        sendOTPRequest = SendOTPRequest(phoneNumber)
         Log.d(">>>>>>", "sendOTP ::: " + sendOTPRequest.to)
         viewModelScope.launch {
             otpRepo.sendOTP(sendOTPRequest).onEach { resource ->
@@ -199,6 +204,24 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo) : BaseViewM
         }
     }
 
+    private val _preLogin: MutableLiveData<PreLoginResponse> = MutableLiveData()
+    val preloginLiveData: LiveData<PreLoginResponse> = _preLogin
+    var prelogRequest: PreLoginRequest? = null
+    fun preLogin(){
+        viewModelScope.launch {
+            authRepo.preLogin(prelogRequest!!).onEach { resource ->
+                if (resource.status == Status.ERROR) {
+                    val code = resource.errorCode
+                    val title = resource.messageTitle
+                    val message = resource.messageDes
+                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+                } else {
+                    _preLogin.value = resource.data
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
     fun resendOtp(){
 
     }
@@ -216,9 +239,20 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo) : BaseViewM
         Log.d(">>>>>>", "Hello $isChecked")
     }
 
-    fun reqLogin(){
-        Log.d(">>>>>>", "reqLogin ::: ")
+    fun continueClick(){
+        Log.d(">>>>>>", "reqLogin ::: " + uiMode)
+        when(uiMode){
+            0->{  //Login
+                val intent = Intent(context, PinCodeActivity::class.java)
+                intent.putExtra("pin_action", "login")
+                intent.putExtra("username", phoneNumber.value)
+                context.startActivity(intent)
+            }
+            2->{ //Sign up
 
+            }
+
+        }
     }
 
     //test countdown

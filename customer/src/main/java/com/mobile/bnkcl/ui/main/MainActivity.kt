@@ -53,6 +53,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             Log.d(">>>>", "Result::: ${it.value}")
         }
 
+        viewModel.userRole = -1 //Custom : 0, Employee : 1 , Dealer : 2, Not yet login : -1
+        viewModel.isLogin = sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()
+
         try {
             mainViewPager = binding.mainViewPager
             mainTabLayout = binding.mainBottomMenu.mainTabLayout
@@ -66,6 +69,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             val loanServiceFragment = ServiceFragment()
             val findOfficeFragment = FindOfficeFragment()
             val menuFragment = MenuFragment()
+
 //            myPageFragment.setMyLoanCardClickedListener(this)
             mainViewPagerAdapter!!.addFragment(
                 loanServiceFragment,

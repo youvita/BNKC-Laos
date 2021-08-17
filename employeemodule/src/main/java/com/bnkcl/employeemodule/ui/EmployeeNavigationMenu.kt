@@ -1,21 +1,25 @@
 package com.bnkcl.employeemodule.ui
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import com.bnkc.sourcemodule.R
-import com.bnkc.sourcemodule.databinding.NavDrawerLayoutBinding
 import com.google.android.material.navigation.NavigationView
 
 
 class EmployeeNavigationMenu : NavigationView {
 
-    constructor(context: Context?) : super(context!!) {
+    var alreadyLogin = false
 
+    constructor(context: Context?, isLogin : Boolean) : super(context!!) {
+        alreadyLogin = isLogin
         initView(context)
     }
 
@@ -43,20 +47,50 @@ class EmployeeNavigationMenu : NavigationView {
 //        val mBinding = DataBindingUtil.inflate(inflater,R.layout.nav_drawer_layout)
 
         val mBinding =LayoutInflater.from(context).inflate(R.layout.nav_drawer_layout, null, false)
-        val btnSignUP = mBinding.findViewById<LinearLayout>(R.id.btn_signup)
-        val btnLogin = mBinding.findViewById<LinearLayout>(R.id.btn_login)
-//        val tvSignUp = mBinding.findViewById<TextView>(R.id.tv_setting)
+        val btnFacebook = mBinding.findViewById<TextView>(R.id.btn_facebook)
+        val btnCompanyProfile = mBinding.findViewById<TextView>(R.id.btn_company_profile)
+        val btnPolicy = mBinding.findViewById<TextView>(R.id.btn_policy)
+        val btnSetting = mBinding.findViewById<TextView>(R.id.btn_setting)
+        val btnSignUP = mBinding.findViewById<TextView>(R.id.btn_sign_up)
+        val tvLogin = mBinding.findViewById<TextView>(R.id.btn_login)
 
 //        tvSignUp!!.text = "Dealer"
 //        mBinding.btnSignup.visibility = View.GONE
 //        val tvSignUp = mBinding.findViewById<TextView>(R.id.tv_signup)
 //        tvSignUp.text = "Dealer"
 //        tvSignUp.setTextColor(Color.parseColor("#262626"))
+//        btnFacebook.setOnClickListener {
+//            val facebookIntent = Intent(Intent.ACTION_VIEW)
+//            facebookIntent.data = Uri.parse("https://www.google.com")
+//            context!!.startActivity(facebookIntent)
+//        }
+//        btnCompanyProfile.setOnClickListener{
+//
+//        }
+//        btnPolicy.setOnClickListener {
+//            Toast.makeText(context, "Call from employee module SignUp :)", Toast.LENGTH_SHORT).show()
+//        }
+//        btnSetting.setOnClickListener {
+//            Toast.makeText(context, "YCall from employee module Login :)", Toast.LENGTH_SHORT).show()
+//        }
         btnSignUP.setOnClickListener {
             Toast.makeText(context, "Call from employee module SignUp :)", Toast.LENGTH_SHORT).show()
         }
-        btnLogin.setOnClickListener {
-            Toast.makeText(context, "Call from employee module  Login :)", Toast.LENGTH_SHORT).show()
+        tvLogin.setOnClickListener {
+            Toast.makeText(context, "YCall from employee module Login :)", Toast.LENGTH_SHORT).show()
+        }
+        if (alreadyLogin){
+            btnSignUP.text = "Dealer"
+            btnSignUP.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_dealer_ico, 0, 0, 0)
+            btnSignUP.setTextColor(Color.parseColor("#262626"))
+            tvLogin.text = "Logout"
+            tvLogin.setOnClickListener {
+                Toast.makeText(context, "You have logout success :)", Toast.LENGTH_SHORT).show()
+            }
+
+            btnSignUP.setOnClickListener {
+                Toast.makeText(context, "You click dealer :)", Toast.LENGTH_SHORT).show()
+            }
         }
 
         addView(mBinding)

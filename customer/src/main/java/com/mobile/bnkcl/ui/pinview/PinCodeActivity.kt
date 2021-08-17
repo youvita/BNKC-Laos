@@ -2,13 +2,20 @@ package com.mobile.bnkcl.ui.pinview
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
+import com.mobile.bnkcl.data.request.auth.DeviceInfo
+import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
 import com.mobile.bnkcl.ui.login.LoginActivity
-import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
+import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.utilities.SecureUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +23,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     private val viewModel : PinViewModel by viewModels()
 
+    var username = ""
     var pinUI : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +32,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         if (intent != null) {
 //            extrasLogin = ExtrasLogin(this, intent)
             pinUI = intent.getStringExtra("pin_action").toString()
+            username = intent.getStringExtra("username").toString()
 //            when (pinAction) {
 //                "login" -> setAnimateType(ANIMATE_LEFT)
 //                else -> setAnimateType(ANIMATE_NORMAL)
@@ -102,13 +111,17 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
         binding.pinView.setOnCompletedListener = { pinCode : String ->
 
-            if(pinCode == "1234")
-                startActivity(Intent(this, LoginActivity::class.java))
-
-            else {
-                binding.pinView.errorAction()
-                binding.pinView.clearPin()
+            if (!pinCode.isEmpty()){
+                login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
             }
+
+//            if(pinCode == "1234")
+//                startActivity(Intent(this, LoginActivity::class.java))
+//
+//            else {
+//                binding.pinView.errorAction()
+//                binding.pinView.clearPin()
+//            }
         }
 
         binding.pinView.setOnErrorListener = {errorCode : Int->
@@ -118,9 +131,30 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         }
 
         binding.pinView.setOnPinKeyClickListener = { keyPressed : String ->
-            Toast.makeText(this,"Key pressed was $keyPressed", Toast.LENGTH_SHORT).show()
+
         }
 
+    }
+
+    private fun login(pinCode : String) {
+        var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+        var loginRequestNoAuth = LoginRequestNoAuth(
+            username,
+            pinCode,
+            deviceInfo
+        )
+        viewModel.loginRequestNoAuth = loginRequestNoAuth
+        viewModel.loginNoAuth()
+        viewModel.loginLiveData.observe(this){
+            Log.d("nng", it.toString())
+            sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
+            sharedPrefer.putPrefer(Constants.USER_ID, username)
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun getLayoutId(): Int {
