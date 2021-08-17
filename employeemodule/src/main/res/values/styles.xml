@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  bottom navigation -->
+    <style name="bottomNavigation">
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/rubik_bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">83dp</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+
+</resources>

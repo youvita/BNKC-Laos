@@ -106,4 +106,8 @@
 
     <!-- dialog -->
     <dimen name="dialog_40dp">40dp</dimen>
+
+    <dimen name="main_toolbar_margin_top">40dp</dimen>
+    <dimen name="main_red_gradient_height">165dp</dimen>
+    <dimen name="main_tab_height">83dp</dimen>
 </resources>

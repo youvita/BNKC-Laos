@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/selector_tab_notice" android:title="@string/menu_nav_notice"/>
+    <item android:icon="@drawable/selector_tab_find_customer" android:title="@string/menu_find_customer"/>
+    <item android:icon="@drawable/selector_tab_check_list" android:title="@string/menu_check_list"/>
+</menu>

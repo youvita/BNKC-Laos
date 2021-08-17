@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -30,13 +31,20 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     implementation project(path: ':sourcemodule')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // support
+    implementation deps.kotlin.stdlib
+    implementation deps.core_ktx
+    implementation deps.appcompat
     implementation deps.material
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
