@@ -28,7 +28,6 @@
             android:id="@+id/iv_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{localeCode == Locale.ENGLISH.language ? @drawable/ic_en_flag : @drawable/ic_china_flag, default = @drawable/ic_en_flag}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

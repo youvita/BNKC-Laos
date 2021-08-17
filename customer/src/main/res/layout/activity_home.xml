@@ -11,6 +11,11 @@
             name="homeViewModel"
             type="HomeViewModel" />
 
+        <import type="java.util.Locale"/>
+        <variable
+            name="localeCode"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +74,7 @@
                         android:id="@+id/iv_flag"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
-                        android:src="@drawable/laos_flag"
+                        android:src="@{localeCode == Locale.ENGLISH.language ? @drawable/ic_fb_ico: @drawable/laos_flag}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
