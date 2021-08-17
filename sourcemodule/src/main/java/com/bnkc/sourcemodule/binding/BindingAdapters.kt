@@ -5,11 +5,14 @@
  */
 package com.bnkc.sourcemodule.binding
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.ui.ValidateButton
 import com.bnkc.sourcemodule.util.Formats
 import com.bumptech.glide.Glide
 import java.text.DateFormat
@@ -24,14 +27,14 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("visibleGone")
-    fun visibleGone(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.GONE
+    fun View.visibleGone(show: Boolean) {
+        visibility = if (show) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
     @BindingAdapter("visibleInvisible")
-    fun visibleInvisible(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.INVISIBLE
+    fun View.visibleInvisible(show: Boolean) {
+        visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
     @JvmStatic
@@ -72,6 +75,48 @@ object BindingAdapters {
         val dayMonthFormat = SimpleDateFormat(Formats.DAY_MONTH_YEAR, Locale.getDefault())
         val dayMonth = dayMonthFormat.format(date)
         tvDayMonth.text = dayMonth
+    }
+
+    @JvmStatic
+    @BindingAdapter("text", "isChecked")
+    fun setUpAgreementText(textView: TextView, txtAgreement: String?, checked: Boolean) {
+        var txtAgreement = "I agree to BNKC\'s Terms and Conditions"
+        Log.d(">>>>>", "setUpAgreementText $txtAgreement $checked")
+        textView.setTextColor(textView.context.resources.getColor(R.color.color_263238))
+        textView.setText(
+            Formats.getSeparateFontByLang(
+                textView.context,
+                18,
+                txtAgreement!!.length,
+                txtAgreement,
+                checked
+            ), TextView.BufferType.SPANNABLE
+        )
+    }
+
+    @JvmStatic
+    @BindingAdapter("textButton")
+    fun textButton(textView: ValidateButton, str: String?) {
+        textView.tvCheckLabel!!.text = str
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @JvmStatic
+    @BindingAdapter("enableButton")
+    fun ValidateButton.enableButton(isEnable: Boolean?) {
+        if (isEnable != null && isEnable) {
+            Log.d(">>>>>", "BindingAdapter $isEnable")
+            llCheckLabel!!.background =
+                context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
+            tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_ffffff))
+        } else {
+            Log.d(">>>>>", "BindingAdapter $isEnable")
+            llCheckLabel!!.background =
+                context!!.resources.getDrawable(R.drawable.round_solid_e1e5ec_8)
+            tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_90a4ae))
+            setOnClickListener(null)
+        }
+
     }
 
 }
