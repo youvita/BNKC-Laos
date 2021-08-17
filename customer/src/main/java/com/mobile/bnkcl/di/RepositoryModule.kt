@@ -41,14 +41,14 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideOTPRepo(otpApi: OTPApi): OTPRepo {
-        return OTPRepo(otpApi)
+    fun provideOTPRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): OTPRepo {
+        return OTPRepo(context, okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideAuthRepo(authAPI: AuthAPI): AuthRepo {
-        return AuthRepo(authAPI)
+    fun provideAuthRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AuthRepo {
+        return AuthRepo(context, okHttpClient)
     }
 
     @Singleton

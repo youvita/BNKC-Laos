@@ -56,22 +56,22 @@ object CustomerModule {
             .create(SignUpApi::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideOTPService(retrofit: Retrofit.Builder): OTPApi{
-        return retrofit
-            .baseUrl(AppBuild.BASE_URL)
-            .build()
-            .create(OTPApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideAuthService(retrofit: Retrofit.Builder): AuthAPI{
-        return retrofit
-            .baseUrl(AppBuild.BASE_URL)
-            .build()
-            .create(AuthAPI::class.java)
-    }
+//    @Singleton
+//    @Provides
+//    fun provideOTPService(retrofit: Retrofit.Builder): OTPApi{
+//        return retrofit
+//            .baseUrl(AppBuild.BASE_URL)
+//            .build()
+//            .create(OTPApi::class.java)
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideAuthService(retrofit: Retrofit.Builder): AuthAPI{
+//        return retrofit
+//            .baseUrl(AppBuild.BASE_URL)
+//            .build()
+//            .create(AuthAPI::class.java)
+//    }
 
 }
