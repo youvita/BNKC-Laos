@@ -22,7 +22,7 @@ class AlarmRepo(context: Context, okHttpClient: OkHttpClient) {
             delay(1000)
             val request = object : RemoteDataSource<AlarmResponse>(){
                 override suspend fun createCall(): Response<AlarmResponse> {
-                    return alarmApi.getAlarmList(alarmRequest.page_number, alarmRequest.page_size, "id")
+                    return alarmApi.getAlarmList(alarmRequest.page_number, alarmRequest.page_size, alarmRequest.sort_by)
                 }
             }
             request.networkRequest()

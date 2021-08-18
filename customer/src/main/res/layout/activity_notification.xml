@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.notification.NotificationActivity">
+        tools:context=".ui.alarm.AlarmActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".ui.notification.NotificationActivity">
+            tools:context=".ui.alarm.AlarmActivity">
 
             <RelativeLayout
                 android:id="@+id/toolbar"

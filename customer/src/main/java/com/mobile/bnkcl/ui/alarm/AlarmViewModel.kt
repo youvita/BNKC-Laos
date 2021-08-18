@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.notification
+package com.mobile.bnkcl.ui.alarm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationViewModel @Inject constructor(private var alarmRepo: AlarmRepo) : BaseViewModel() {
+class AlarmViewModel @Inject constructor(private var alarmRepo: AlarmRepo) : BaseViewModel() {
 
     private val _getAlarmList: MutableLiveData<AlarmResponse> = MutableLiveData()
     val alarmListLiveData: LiveData<AlarmResponse> = _getAlarmList

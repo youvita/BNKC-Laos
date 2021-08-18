@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.notification
+package com.mobile.bnkcl.ui.alarm
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,20 +9,20 @@ import com.mobile.bnkcl.databinding.ActivityNotificationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotificationActivity : BaseActivity<ActivityNotificationBinding>() {
+class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 
-    private val notificationViewModel: NotificationViewModel by viewModels()
+    private val alarmViewModel: AlarmViewModel by viewModels()
 
     override fun getLayoutId(): Int = R.layout.activity_notification
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        notificationViewModel.alarmListLiveData.observe(this) {
+        alarmViewModel.alarmListLiveData.observe(this) {
 
         }
-        notificationViewModel.alarmRequest = AlarmRequest(1, 10, "ASC")
-        notificationViewModel.getAlarmList()
+        alarmViewModel.alarmRequest = AlarmRequest(1, 10, "")
+        alarmViewModel.getAlarmList()
     }
 
 
