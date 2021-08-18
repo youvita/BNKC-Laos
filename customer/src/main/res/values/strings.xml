@@ -677,4 +677,9 @@
     <string name="internal_server_error">Internal Server Error</string>
     <string name="error_code_500">(Error Code : 500)</string>
 
+    <string name="tab_service">Service</string>
+    <string name="tab_my_page">My Page</string>
+    <string name="tab_find_office">Find Office</string>
+    <string name="tab_menu">Menu</string>
+
 </resources>

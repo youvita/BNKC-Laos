@@ -98,13 +98,13 @@ object BindingAdapters {
     @BindingAdapter("text", "isChecked")
     fun setUpAgreementText(textView: TextView, txtAgreement: String?, checked: Boolean) {
         var txtAgreement = "I agree to BNKC\'s Terms and Conditions"
-        Log.d(">>>>>", "setUpAgreementText $txtAgreement $checked")
-        textView.setTextColor(textView.context.resources.getColor(R.color.color_263238))
+
+        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.color_263238))
         textView.setText(
             Formats.getSeparateFontByLang(
                 textView.context,
                 18,
-                txtAgreement!!.length,
+                txtAgreement.length,
                 txtAgreement,
                 checked
             ), TextView.BufferType.SPANNABLE
@@ -122,16 +122,13 @@ object BindingAdapters {
     @BindingAdapter("enableButton")
     fun ValidateButton.enableButton(isEnable: Boolean?) {
         if (isEnable != null && isEnable) {
-            Log.d(">>>>>", "BindingAdapter $isEnable")
             llCheckLabel!!.background =
                 context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
-            tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_ffffff))
-
+            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context ,R.color.color_ffffff))
         } else {
-            Log.d(">>>>>", "BindingAdapter $isEnable")
             llCheckLabel!!.background =
-                context!!.resources.getDrawable(R.drawable.round_solid_e1e5ec_8)
-            tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_90a4ae))
+                ContextCompat.getDrawable(context,R.drawable.round_solid_e1e5ec_8)
+            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context,R.color.color_90a4ae))
 
         }
 

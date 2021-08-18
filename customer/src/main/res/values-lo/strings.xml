@@ -613,4 +613,9 @@
     <string name="dlg_19">LOG OUT</string>
     <string name="dlg_20">You cannot sign up\n through this app. Call customer\n service and request for a change\n the phone number registered\n when you sign up.</string>
     <string name="dlg_21">Different Phone Number</string>
+
+    <string name="tab_service">Service</string>
+    <string name="tab_my_page">My Page</string>
+    <string name="tab_find_office">Find Office</string>
+    <string name="tab_menu">Menu</string>
 </resources>

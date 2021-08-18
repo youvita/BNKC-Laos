@@ -2,14 +2,22 @@ package com.mobile.bnkcl.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.databinding.TabItemViewBinding
+import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
+import com.bnkcl.employeemodule.ui.check.CheckListFragment
+import com.bnkcl.employeemodule.ui.find.FindCustomerFragment
+import com.bnkcl.employeemodule.ui.notice.NoticeFragment
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.request.auth.LoginRequest
@@ -33,9 +41,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private var commentDisposable: Disposable? = null
 
-    private var mainViewPagerAdapter: MainViewPagerApapter? = null
-    var mainViewPager: ViewPager? = null
-    private var mainTabLayout: TabLayout? = null
+    private var tabLayout: TabLayout? = null
+
+    private var viewPager: ViewPager2? = null
+
+    private var tabAdapter: TabViewPagerAdapter = TabViewPagerAdapter(supportFragmentManager, lifecycle)
+
+    /**
+     * menu title list
+     */
+    private val menuNames = arrayOf(
+        R.string.tab_service,
+        R.string.tab_my_page,
+        R.string.tab_find_office,
+        R.string.tab_menu)
+
+
+    /**
+     * menu icons list
+     */
+     private val menuIcons = arrayOf(
+        R.drawable.selector_tab_loan_service,
+        R.drawable.selector_tab_mypage,
+        R.drawable.selector_tab_find_office,
+        R.drawable.selector_tab_menu)
 
     private val role: Int = 1
 
@@ -58,110 +87,34 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewModel.isLogin = sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()
 
         try {
-            mainViewPager = binding.mainViewPager
-            mainTabLayout = binding.mainBottomMenu.mainTabLayout
-//            if (intent != null) {
-//                MainActivity.isSelectFromButton =
-//                    intent.getBooleanExtra("IS_SELECT_FROM_BUTTON", false)
-//            } else MainActivity.isSelectFromButton = false
-//            profileResponse = GetMyProfileResponse()
-            mainViewPagerAdapter = MainViewPagerApapter(supportFragmentManager, this)
-            val myPageFragment = PageFragment()
-            val loanServiceFragment = ServiceFragment()
-            val findOfficeFragment = FindOfficeFragment()
-            val menuFragment = MenuFragment()
 
-//            myPageFragment.setMyLoanCardClickedListener(this)
-            mainViewPagerAdapter!!.addFragment(
-                loanServiceFragment,
-                "Service",
-                R.drawable.selector_tab_loan_service
-            )
-            mainViewPagerAdapter!!.addFragment(
-                myPageFragment,
-                "My Page",
-                R.drawable.selector_tab_mypage
-            )
-            mainViewPagerAdapter!!.addFragment(
-                findOfficeFragment,
-                "Find Office",
-                R.drawable.selector_tab_find_office
-            )
-            mainViewPagerAdapter!!.addFragment(
-                menuFragment,
-                "Menu",
-                R.drawable.selector_tab_menu
-            )
-            mainViewPager!!.adapter = mainViewPagerAdapter
-            mainViewPager!!.offscreenPageLimit = 4
-            mainViewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                }
+            viewPager = binding.viewPager
+            tabLayout = binding.tabBottomMenu.mainTabLayout
 
-                override fun onPageSelected(position: Int) {
-                    when (position) {
-//                        0 -> myPageFragment.myLoanTabSelected()
-                        1 -> {
-                        }
-                        2 -> {
-                            findOfficeFragment.loanServiceTabSelected()
-                        }
-                    }
-                }
+            tabAdapter.addFragment(ServiceFragment())
+            tabAdapter.addFragment(PageFragment())
+            tabAdapter.addFragment(FindOfficeFragment())
+            tabAdapter.addFragment(MenuFragment())
 
-                override fun onPageScrollStateChanged(state: Int) {}
-            })
-            mainTabLayout!!.setupWithViewPager(mainViewPager)
-            for (i in 0 until mainTabLayout!!.getTabCount()) {
-                mainTabLayout!!.getTabAt(i)!!.customView = mainViewPagerAdapter!!.getTabView(i)
-            }
+            viewPager?.adapter = tabAdapter
+
+            TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
+                val binding = TabItemViewBinding.inflate(LayoutInflater.from(this))
+                binding.menuName = menuNames[position]
+                binding.menuIcon = menuIcons[position]
+                tab.customView = binding.root
+            }.attach()
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
-
-//        val navigationMenu = NavigationMenu(context = this)
-
-//        when(role){
-//            0 -> {
-//                val navigationMenu = NavigationMenu(this)
-//                binding.v.addView(navigationMenu)
-//                Log.d(">>>>","You login as ::: Customer")
-//            }
-//            1 -> {
-//                val employeeNavigationMenu = EmployeeNavigationMenu(this)
-//                binding.v.addView(employeeNavigationMenu)
-//                Log.d(">>>>","You login as ::: Employee")
-//            }
-//            else -> {
-//                val employeeNavigationMenu = EmployeeNavigationMenu(this)
-//                binding.v.addView(employeeNavigationMenu)
-//                Log.d(">>>>","You login as ::: Dealer")
-//            }
-//        }
-
     }
-
-//    /**
-//     * get comments
-//     */
-//    private fun getCommentList() {
-//        binding.rvComment.adapter = commentAdapter
-//        viewModel.getComments()
-//
-//        viewModel.comments.observe(this) {
-//            if (it.isNullOrEmpty()) return@observe
-//            commentAdapter.addItemList(it)
-//            viewModel.cancelRequests()
-//        }
-//    }
 
     override fun onDestroy() {
         super.onDestroy()
+        tabLayout = null
+        viewPager = null
         commentDisposable?.dispose()
         commentDisposable = null
     }

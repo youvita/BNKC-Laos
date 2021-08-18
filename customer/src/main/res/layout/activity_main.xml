@@ -9,90 +9,25 @@
             type="com.mobile.bnkcl.ui.main.MainViewModel" />
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="end">
+        tools:context=".ui.main.MainActivity"
+        >
 
-
-        <RelativeLayout
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_f5f7fc">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/main_red_gradient_height"-->
-<!--                android:background="@drawable/main_background_gradient"/>-->
+        <include
+            android:id="@+id/tab_bottom_menu"
+            layout="@layout/tab_bottom_layout" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context=".ui.main.MainActivity"
-                >
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="?attr/actionBarSize"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:paddingStart="20dp"-->
-<!--                    android:paddingEnd="10dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:scaleType="fitStart"-->
-<!--                        android:src="@drawable/ic_brand_bnkc_lao_ndmf" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/btn_notification"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@null"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:src="@drawable/ic_notification_white_ico" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/btn_option"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@null"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:src="@drawable/ic_tab_menu_off" />-->
-<!--                </LinearLayout>-->
-
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/main_view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:overScrollMode="never"/>
-
-                <include
-                    android:id="@+id/main_bottom_menu"
-                    layout="@layout/main_bottom_menu" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-<!--        <com.bnkc.sourcemodule.ui.NavigationMenu-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="end|top"/>-->
-
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="end|top">-->
-
-<!--            <include layout="@layout/nav_drawer_layout"/>-->
-
-<!--        </com.google.android.material.navigation.NavigationView>-->
-    </androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
