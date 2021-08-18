@@ -26,7 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PinViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseViewModel(){
 
-    var pinUI : Int = 1
+    var pinUI : Int = 0
 
     private val _login: MutableLiveData<LoginResponse> = MutableLiveData()
     val loginLiveData: LiveData<LoginResponse> = _login

@@ -33,6 +33,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     lateinit var confirmDialog: ConfirmDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(resources.getColor(R.color.color_ffffff))
+//        setStatusBarTransparent(this, false)
         super.onCreate(savedInstanceState)
 
         initAppVersion()
@@ -147,6 +149,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 //            extrasLogin.Param.setLabel(getString(R.string.pin_04))
 
             val intent = Intent(this, PinCodeActivity::class.java)
+            intent.putExtra("username", user)
+            intent.putExtra("pin_action", "login")
 //            intent.putExtras(extrasLogin.bundle!!)
             startActivity(intent)
         }

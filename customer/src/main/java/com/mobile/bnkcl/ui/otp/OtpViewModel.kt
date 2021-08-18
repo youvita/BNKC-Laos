@@ -5,8 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
-import android.widget.TextView
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,7 +14,6 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
-import com.mobile.bnkcl.data.repository.login.LoginRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.request.LoginRequest
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
@@ -51,10 +48,13 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 "Login"
             }
             1->{
-                "Forget"
+                "Sign up"
             }
             2->{
-                "Sign up"
+                "Forget PIN"
+            }
+            3->{
+                "Reset PIN"
             }
             else -> {
                 "Login"
@@ -74,6 +74,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
             2->{
                 "Continue"
             }
+            3->{
+                "Continue"
+            }
             else -> {
                 "Login"
             }
@@ -91,6 +94,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 context.resources.getDrawable(R.drawable.ic_nav_close_dark_btn)
             }
             2->{
+                context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
+            }
+            3->{
                 context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
             }
             else -> {
@@ -145,6 +151,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
             }
             2->{
                 false
+            }
+            3->{
+                true
             }
             else -> {
                 true
@@ -240,7 +249,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     fun continueClick(){
-        Log.d(">>>>>>", "reqLogin ::: " + uiMode)
+        Log.d(">>>>>>", "reqLogin ::: " + phoneNumber.value)
         when(uiMode){
             0->{  //Login
                 val intent = Intent(context, PinCodeActivity::class.java)

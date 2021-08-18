@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
-                app:visibleGone="@{!otpViewModel.setUpVisibilityView()}"
+                app:visibleGone="@{otpViewModel.setUpVisibilityView()}"
                 >
 
                 <LinearLayout

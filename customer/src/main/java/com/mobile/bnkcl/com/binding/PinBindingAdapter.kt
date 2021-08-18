@@ -16,9 +16,7 @@ object PinBindingAdapter {
                 mPinMessage!!.text = "Forget PIN?"
 
                 mResetPin!!.setOnClickListener {
-                    title?.text = "Reset PIN"
-                    mResetPin!!.visibility = View.GONE
-                    mPinMessage!!.text = "PIN Registration"
+                    setOnActionListener("reset_pin")
                 }
 
             }

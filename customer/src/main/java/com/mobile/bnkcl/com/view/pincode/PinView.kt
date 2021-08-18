@@ -41,7 +41,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
 
     var setOnErrorListener: (msg: Int) -> Unit = {}
 
-    var setOnClosePinListener: () -> Unit = {}
+    var setOnActionListener: (action : String) -> Unit = {}
 
     var setOnPinKeyClickListener : (keyPressed : String) -> Unit = {}
     // function type variable that is invoked when a pin key clicked
@@ -129,7 +129,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         buttonDelete.layoutParams = last
 
         closeButton.setOnClickListener {
-            setOnClosePinListener()
+            setOnActionListener("close")
         }
 
         button0.setOnClickListener(OnClickListener {

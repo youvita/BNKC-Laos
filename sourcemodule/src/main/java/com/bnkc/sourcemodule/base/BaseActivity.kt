@@ -5,8 +5,13 @@
  */
 package com.bnkc.sourcemodule.base
 
+import android.app.Activity
 import android.content.Context
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -73,6 +78,80 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
             }
         }
     }
+
+    protected open fun setStatusBarColor(color: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                color == getColor(R.color.color_f5f7fc) -> {
+                    // status bar white color -> text black
+                    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    window.statusBarColor = color
+                }
+                color != Color.WHITE -> {
+                    window.statusBarColor = color
+                }
+                else -> {
+                    // status bar white color -> text black
+                    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    window.statusBarColor = color
+                }
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            when {
+                color == resources.getColor(R.color.color_f5f7fc) -> {
+                    // status bar white color -> text black
+                    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    window.statusBarColor = color
+                }
+                color != Color.WHITE -> {
+                    window.statusBarColor = color
+                }
+                else -> {
+                    window.statusBarColor = darkenColor(color)
+                }
+            }
+        }
+    }
+
+    fun darkenColor(color: Int): Int {
+        val hsv = FloatArray(3)
+        Color.colorToHSV(color, hsv)
+        hsv[2] *= 0.8f
+        return Color.HSVToColor(hsv)
+    }
+
+    protected open fun setStatusBarTransparent(
+        activity: Activity,
+        darkStatusBar: Boolean
+    ): Boolean {
+        val decorView = activity.window.decorView
+        val isInMultiWindowMode =
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && activity.isInMultiWindowMode
+        if (isInMultiWindowMode) {
+            return false
+        } else {
+            var systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            if (darkStatusBar && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            }
+            decorView.systemUiVisibility = systemUiVisibility
+            activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.window
+                    .addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.window.statusBarColor = Color.TRANSPARENT
+            }
+        }
+        return true
+    }
+
 
     /**
      * handle catch server error

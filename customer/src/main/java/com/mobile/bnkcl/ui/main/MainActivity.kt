@@ -45,6 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(resources.getColor(R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
 
 //        getCommentList()

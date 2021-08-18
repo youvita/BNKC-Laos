@@ -7,12 +7,11 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.auth.DeviceInfo
-import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
@@ -115,25 +114,12 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         }
     };
 
-    /**
-     * login request observable
-     */
-    private fun loginRequest() {
-//        binding.otpViewModel.login.observe(this) {
-//            if (it) {
-//                val intent = Intent(applicationContext, MainActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
-    }
-
     // for testing
     private fun sendOTP() {
         viewModel.sendOTPLiveData.observe(this) {
             Log.d("nng", it.toString())
             pinID = it.pin_id.toString()
-            viewModel.otpVerifyRequest = OTPVerifyRequest("", pinID)
-//            binding.viverifyOTP()
+            Toast.makeText(this, "OTP : ${it.pin}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -162,6 +148,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(resources.getColor(R.color.color_f5f7fc))
         super.onCreate(savedInstanceState)
         try {
 
@@ -175,49 +162,75 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
-                Log.d(">>>>>>", "action :: $action")
-                if (action.equals("LOGIN", ignoreCase = true)) {
+                when {
+                    action.equals("LOGIN", ignoreCase = true) -> {
 
-                    binding.otpViewModel!!.uiMode = 0
+                        binding.otpViewModel!!.uiMode = 0
 
-//                    binding.tvTitleToolbar.setText(getString(R.string.login_01))
-//                    binding.llAgreement.setVisibility(View.GONE)
-//                    binding.llStepSignup.setVisibility(View.GONE)
-//                    binding.ivLogin.setVisibility(View.VISIBLE)
-//                    isLogin = true
-                } else if (action.equals("FORGET", ignoreCase = true)) {
+            //                    binding.tvTitleToolbar.setText(getString(R.string.login_01))
+            //                    binding.llAgreement.setVisibility(View.GONE)
+            //                    binding.llStepSignup.setVisibility(View.GONE)
+            //                    binding.ivLogin.setVisibility(View.VISIBLE)
+            //                    isLogin = true
+                    }
+                    action.equals("FORGET", ignoreCase = true) -> {
 
-                    binding.otpViewModel!!.uiMode = 1
+                        binding.otpViewModel!!.uiMode = 2
 
-//                    binding.ivBack.setImageDrawable(resources.getDrawable(R.drawable.nav_close_dark_btn))
-//                    binding.tvTitleToolbar.setText(getString(R.string.setting_02))
-//                    binding.llAgreement.setVisibility(View.GONE)
-//                    binding.llStepSignup.setVisibility(View.GONE)
-//                    binding.ivLogin.setVisibility(View.VISIBLE)
-                    binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
-                    binding.edtPhonenumber.setFocusable(false)
-                    binding.edtPhonenumber.setEnabled(false)
-                    binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
-//                    val phone: String?
-//                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
-//                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
-//                    } else {
-//                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
-//                    }
-//                    mOtpBinding.edtPhonenumber.setTag(phone)
-//                    mOtpBinding.edtPhonenumber.setText(FormatUtil.formatPhoneNumberMask(phone))
-//                    isLogin = true
-                } else if (action.equals("SIGN_UP", ignoreCase = true)) {
+            //                    binding.ivBack.setImageDrawable(resources.getDrawable(R.drawable.nav_close_dark_btn))
+            //                    binding.tvTitleToolbar.setText(getString(R.string.setting_02))
+            //                    binding.llAgreement.setVisibility(View.GONE)
+            //                    binding.llStepSignup.setVisibility(View.GONE)
+            //                    binding.ivLogin.setVisibility(View.VISIBLE)
+                        binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
+                        binding.edtPhonenumber.setFocusable(false)
+                        binding.edtPhonenumber.setEnabled(false)
+                        binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
+            //                    val phone: String?
+            //                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
+            //                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
+            //                    } else {
+            //                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
+            //                    }
+            //                    mOtpBinding.edtPhonenumber.setTag(phone)
+            //                    mOtpBinding.edtPhonenumber.setText(FormatUtil.formatPhoneNumberMask(phone))
+            //                    isLogin = true
+                    }
+                    action.equals("RESET", ignoreCase = true) -> {
 
-                    binding.otpViewModel!!.uiMode = 2
-                    binding.otpViewModel!!.statFocus = 1
-                    binding.otpViewModel!!.step = 1
+                        binding.otpViewModel!!.uiMode = 3
 
-//                    mOtpBinding.tvTitleToolbar.setText(getString(R.string.sign_up_title))
-//                    mOtpBinding.llAgreement.setVisibility(View.VISIBLE)
-//                    mOtpBinding.llStepSignup.setVisibility(View.VISIBLE)
-//                    mOtpBinding.ivLogin.setVisibility(View.GONE)
-//                    isLogin = false
+                        //                    binding.ivBack.setImageDrawable(resources.getDrawable(R.drawable.nav_close_dark_btn))
+                        //                    binding.tvTitleToolbar.setText(getString(R.string.setting_02))
+                        //                    binding.llAgreement.setVisibility(View.GONE)
+                        //                    binding.llStepSignup.setVisibility(View.GONE)
+                        //                    binding.ivLogin.setVisibility(View.VISIBLE)
+//                        binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
+//                        binding.edtPhonenumber.setFocusable(false)
+//                        binding.edtPhonenumber.setEnabled(false)
+//                        binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
+                        //                    val phone: String?
+                        //                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
+                        //                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
+                        //                    } else {
+                        //                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
+                        //                    }
+                        //                    mOtpBinding.edtPhonenumber.setTag(phone)
+                        //                    mOtpBinding.edtPhonenumber.setText(FormatUtil.formatPhoneNumberMask(phone))
+                        //                    isLogin = true
+                    }
+                    action.equals("SIGN_UP", ignoreCase = true) -> {
+
+                        binding.otpViewModel!!.uiMode = 1
+                        binding.otpViewModel!!.statFocus = 1
+                        binding.otpViewModel!!.step = 1
+
+            //                    mOtpBinding.tvTitleToolbar.setText(getString(R.string.sign_up_title))
+            //                    mOtpBinding.llAgreement.setVisibility(View.VISIBLE)
+            //                    mOtpBinding.llStepSignup.setVisibility(View.VISIBLE)
+            //                    mOtpBinding.ivLogin.setVisibility(View.GONE)
+            //                    isLogin = false
+                    }
                 }
 
             }

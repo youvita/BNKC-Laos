@@ -15,6 +15,7 @@ import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
 import com.mobile.bnkcl.ui.login.LoginActivity
 import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.utilities.SecureUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +28,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     var pinUI : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(resources.getColor(R.color.color_263238))
+//        setStatusBarTransparent(this, false)
         super.onCreate(savedInstanceState)
         binding.pinViewModel = viewModel
         if (intent != null) {
@@ -40,7 +43,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
             if (pinUI == "sign_up") {
 
-//                binding.pinViewModel.pinUI = 3
+                binding.pinViewModel!!.pinUI = 3
 
 //                isRegister = true
 //                if (intent.hasExtra("username")) {
@@ -69,7 +72,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                signUpViewModel.getSignUpModel().setSession_id(intent.getStringExtra("session_id"))
             } else if (pinUI == "forget") {
 
-//                binding.pinViewModel.pinUI = 2
+                binding.pinViewModel!!.pinUI = 2
 
 //                isForgetPin = true
 //                if (intent.hasExtra("pin_id")) {
@@ -82,7 +85,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                preLoginViewModel.requestPreLogin()
             } else if (pinUI == "login") {
 
-                viewModel.pinUI = 1
+                binding.pinViewModel!!.pinUI = 1
 
 //                binding.pinViewModel.pinUI = 1
 
@@ -98,20 +101,28 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //                    )
 //                }
             } else if(pinUI == "reset"){
-//                binding.pinViewModel.pinUI = 4
-
-
+                binding.pinViewModel!!.pinUI = 4
 
             }
         }
 
-        binding.pinView.setOnClosePinListener = {
-            finish()
+        binding.pinView.setOnActionListener = { action : String ->
+            when(action){
+                "close" -> {
+                    finish()
+                }
+                "reset_pin" -> {
+                    val intent = Intent(this, OtpActivity::class.java)
+                    intent.putExtra("ACTION_TAG", "RESET")
+                    startActivity(intent)
+                }
+            }
+
         }
 
         binding.pinView.setOnCompletedListener = { pinCode : String ->
 
-            if (!pinCode.isEmpty()){
+            if (pinCode.isNotEmpty()){
                 login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
             }
 
@@ -151,7 +162,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             sharedPrefer.putPrefer(Constants.USER_ID, username)
 
             val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }
