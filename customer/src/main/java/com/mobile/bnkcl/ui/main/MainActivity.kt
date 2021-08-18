@@ -143,8 +143,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //            }
 //        }
 
-        //for testing
-        login()
     }
 
 //    /**
@@ -167,56 +165,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         commentDisposable = null
     }
 
-
-    // for testing
-    private fun sendOTP() {
-        viewModel.sendOTP()
-        viewModel.sendOTPLiveData.observe(this) {
-            Log.d("nng", it.toString())
-            viewModel.otpVerifyRequest = OTPVerifyRequest(it.pin, it.pin_id)
-            verifyOTP()
-        }
-
-    }
-
-    private fun verifyOTP() {
-        viewModel.verifyOTP()
-        viewModel.verifyOTPLiveData.observe(this){
-            Log.d("nng", it.toString())
-            viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
-            preLogin()
-        }
-    }
-
-    private fun preLogin() {
-        viewModel.preLogin()
-        viewModel.preloginLiveData.observe(this){
-            Log.d("nng", it.toString())
-            var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
-            var loginRequest = LoginRequest(
-                it.session_id,
-                viewModel.sendOTPRequest.to,
-                "5ZTnExlqPg0\u003d",
-                deviceInfo
-            )
-            viewModel.logRequest = loginRequest
-            login()
-        }
-    }
-
-    private fun login() {
-        var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
-        var loginRequestNoAuth = LoginRequestNoAuth(
-            "2012345678",
-            "5ZTnExlqPg0\u003d",
-            deviceInfo
-        )
-        viewModel.loginRequestNoAuth = loginRequestNoAuth
-        viewModel.loginNoAuth()
-        viewModel.loginLiveData.observe(this){
-            Log.d("nng", it.toString())
-            sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
-        }
-    }
-    // end for testing
 }
