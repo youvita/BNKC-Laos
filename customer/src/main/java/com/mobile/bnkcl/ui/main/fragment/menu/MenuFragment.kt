@@ -3,14 +3,11 @@ package com.mobile.bnkcl.ui.main.fragment.menu
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.sourcemodule.base.BaseFragment
-import com.bnkc.sourcemodule.ui.NavigationMenu
-import com.bnkcl.employeemodule.ui.EmployeeNavigationMenu
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
