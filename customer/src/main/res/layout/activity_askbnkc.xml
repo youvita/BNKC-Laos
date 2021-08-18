@@ -103,7 +103,7 @@
                         android:id="@+id/edt_subject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Subject"
+                        android:hint="@string/subject"
                         android:textColorHint="@color/color_cfd8dc"
                         android:background="@drawable/selector_edittext_bg"
                         android:textColor="@color/color_263238"

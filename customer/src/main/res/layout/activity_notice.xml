@@ -74,23 +74,50 @@
             </com.google.android.material.appbar.AppBarLayout>
 
 
-            <androidx.core.widget.NestedScrollView
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/round_solid_ffffff_15"
-                android:fillViewport="false">
+                android:fillViewport="false"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <WebView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_21dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_50dp"
+                        android:layout_weight="2"
+                        android:layout_marginEnd="@dimen/margin_10dp"
+                        android:background="@drawable/selector_edittext_bg" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_d7191f_8b0304"
+                        android:text="search"
+                        android:textColor="@color/color_ffffff"
+
+
+                        />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/wb_notice"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/margin_31dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_21dp"
                     android:layout_marginRight="@dimen/margin_21dp"
-                    android:layout_marginBottom="@dimen/margin_21dp"/>
+                    android:layout_marginBottom="@dimen/margin_21dp" />
 
-            </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/ll_wrap_btn"
                 android:layout_width="match_parent"

@@ -1,7 +1,7 @@
 package com.mobile.bnkcl.data.api.signup
 
-import com.mobile.bnkcl.data.PostItem
 import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
+import com.mobile.bnkcl.data.response.area.CapitalData
 import com.mobile.bnkcl.data.response.signup.PreSignUpResponse
 import retrofit2.Response
 import retrofit2.http.Body

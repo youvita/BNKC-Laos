@@ -144,7 +144,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        }
 
         //for testing
-//        login()
+        login()
     }
 
 //    /**

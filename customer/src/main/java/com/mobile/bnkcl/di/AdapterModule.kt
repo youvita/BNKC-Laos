@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.di
 
 import com.mobile.bnkcl.ui.adapter.CommentAdapter
+import com.mobile.bnkcl.ui.adapter.NoticeAdapter
 import com.mobile.bnkcl.ui.adapter.TotalLeaseScheduleAdapter
 import com.mobile.bnkcl.ui.adapter.TransactionHistoryAdapter
 import dagger.Module
@@ -24,5 +25,9 @@ object AdapterModule {
     @Singleton
     @Provides
     fun provideTotalLeaseScheduleAdapter() = TotalLeaseScheduleAdapter()
+
+    @Singleton
+    @Provides
+    fun provideNoticeAdapter() = NoticeAdapter()
 
 }

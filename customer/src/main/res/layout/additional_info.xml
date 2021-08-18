@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="addressViewModel"
+            type="com.mobile.bnkcl.ui.signup.AddressInfoViewModel" />
 
     </data>
 
@@ -34,17 +38,19 @@
                 android:text="@string/capital" />
 
             <LinearLayout
-                android:id="@+id/ll_province"
+                android:id="@+id/ll_capital"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_50dp"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                 android:gravity="center"
                 android:paddingStart="@dimen/padding_15dp"
-                android:paddingEnd="@dimen/padding_15dp">
+                android:paddingEnd="@dimen/padding_15dp"
+                android:onClick="@{(v) -> addressViewModel.getCapitalData()}"
+                >
 
                 <TextView
-                    android:id="@+id/tv_province"
+                    android:id="@+id/tv_capital"
                     style="@style/font15_CFD8DC_medium_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
