@@ -5,9 +5,18 @@
 
     <data>
 
+        <variable
+            name="claimItems"
+            type="com.mobile.bnkcl.data.response.cscenter.ClaimItems" />
+
+        <variable
+            name="viewModel"
+            type="com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_wrap_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingRight="@dimen/padding_20dp"
@@ -28,7 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/font15_263238_medium"
-                tools:text="Hello "/>
+                tools:text="hello"
+                android:text="@={claimItems.title}"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -53,6 +64,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:singleLine="true"
+                    android:text="@={claimItems.created_on}"
                     tools:text="04-04-2020" />
 
                 <LinearLayout

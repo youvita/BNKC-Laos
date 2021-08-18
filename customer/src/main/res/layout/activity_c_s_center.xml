@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel"/>
 
+            <variable
+                name="csViewmodel"
+                type="CSCenterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -163,7 +167,7 @@
                                 android:focusable="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                tools:listitem="@layout/question_item"
+                                tools:listitem="@layout/item_cs_question"
                                 android:layout_marginTop="@dimen/margin_10dp"
                                 />
                         </LinearLayout>
