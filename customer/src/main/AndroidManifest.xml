@@ -53,6 +53,7 @@
         <activity android:name=".ui.otp.OtpActivity" />
         <activity android:name=".ui.bill.BillPaymentActivity" />
         <activity android:name=".ui.management.LeaseManagementActivity" />
+        <activity android:name=".ui.mobile_payment.MobilePaymentActivity" />
         <activity android:name=".ui.login.LoginActivity"></activity>
         <activity
             android:name=".ui.main.MainActivity"

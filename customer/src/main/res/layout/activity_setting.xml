@@ -81,6 +81,7 @@
                                 android:layout_height="@dimen/height_21dp"
                                 android:checked="@{settingViewModel.settingData.push_alarm_enabled.equals('Y')}"
                                 android:theme="@style/SettingSwitch"
+                                android:background="@null"
                                 android:thumb="@drawable/switch_thumb_selector"
                                 app:track="@drawable/switch_track_selector" />
 

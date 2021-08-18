@@ -7,6 +7,7 @@ import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.UserApi
 import com.mobile.bnkcl.data.api.auth.AuthAPI
 import com.mobile.bnkcl.data.api.dashboard.DashboardApi
+import com.mobile.bnkcl.data.api.lease.LeaseApi
 import com.mobile.bnkcl.data.api.otp.OTPApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
 import dagger.Module
@@ -82,5 +83,14 @@ object CustomerModule {
             .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(DashboardApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLeaseService(retrofit: Retrofit.Builder): LeaseApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(LeaseApi::class.java)
     }
 }

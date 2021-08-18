@@ -4,6 +4,8 @@ import android.content.Context
 import com.bnkc.sourcemodule.di.header.AuthInterceptorOkHttpClient
 import com.mobile.bnkcl.data.api.CommentApi
 import com.mobile.bnkcl.data.api.common.MGApi
+import com.mobile.bnkcl.data.api.auth.AuthAPI
+import com.mobile.bnkcl.data.api.otp.OTPApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
 import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
 import com.mobile.bnkcl.data.repository.area.AreaRepo
@@ -13,6 +15,7 @@ import com.mobile.bnkcl.data.repository.comment.CommentRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
 import com.mobile.bnkcl.data.repository.login.LoginRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
+import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.repository.notice.NoticeRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.repository.signup.SignUpRepo
@@ -97,6 +100,12 @@ object RepositoryModule {
     @Provides
     fun provideAreaRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AreaRepo{
         return AreaRepo(context,okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLeaseRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): LeaseRepo {
+        return LeaseRepo(context, okHttpClient)
     }
 
     @Singleton

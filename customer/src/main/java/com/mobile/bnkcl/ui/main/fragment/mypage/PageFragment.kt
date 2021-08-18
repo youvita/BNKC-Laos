@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bnkc.sourcemodule.base.BaseFragment
-import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
 import com.mobile.bnkcl.data.response.dashboard.SummaryData
@@ -61,7 +60,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         myLoanBinding!!.leaseViewPager.adapter = mLeaseAdapter
         myLoanBinding!!.leaseViewPager.offscreenPageLimit = 3
 
-//        pageViewModel.getDashboard()
+        pageViewModel.getDashboard()
         pageViewModel.dashboardLiveData.observe(requireActivity()) {
             MLR001 = it.summary?.count_pending!!
             MLR002 = it.summary.count_in_progress!!
@@ -135,7 +134,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     override fun onClick(v: View?) {
 
-        when(v!!.id){
+        when (v!!.id) {
             R.id.ll_menu1 -> {
                 loadingDialog = ApplicationDialog()
                 loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
@@ -149,7 +148,8 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     override fun onBillPaymentClicked(contractNo: String?, position: Int) {
         val intent = Intent(requireActivity(), BillPaymentActivity::class.java)
-        intent.putExtra("CONTACT_NO", 1)
+        intent.putExtra("CONTRACT_NO", contractNo)
+        intent.putExtra("TOTAL_PAYMENT", mLeaseData!![position].contract_no)
         startActivity(intent)
     }
 
