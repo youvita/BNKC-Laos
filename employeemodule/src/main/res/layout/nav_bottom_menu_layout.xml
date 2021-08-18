@@ -6,31 +6,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/padding_40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:id="@+id/navView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="83dp"-->
-<!--            android:background="?android:attr/windowBackground"-->
-<!--            style="@style/BottomNavigationView"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:itemTextAppearanceActive="@style/bottomNavigation"-->
-<!--            app:itemTextAppearanceInactive="@style/bottomNavigation"-->
-<!--            app:menu="@menu/menu_item" />-->
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/main_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,4 +19,5 @@
             layout="@layout/tab_bottom_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

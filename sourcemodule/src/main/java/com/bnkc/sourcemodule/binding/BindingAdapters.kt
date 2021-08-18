@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.ui.ValidateButton
@@ -54,6 +55,22 @@ object BindingAdapters {
                 .placeholder(R.drawable.ic_avatar_error)
                 .error(R.drawable.ic_avatar_error)
                 .into(view)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("imageInt")
+    fun setImageSrc(view: ImageView, image: Int?) {
+        image?.let {
+            view.setImageDrawable(ContextCompat.getDrawable(view.context, it))
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("textInt")
+    fun setTextString(textView: TextView, text: Int?) {
+        text?.let {
+            textView.text = textView.context.getString(it)
         }
     }
 

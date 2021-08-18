@@ -1,46 +1,68 @@
 package com.bnkcl.employeemodule.ui
 
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
+import android.view.LayoutInflater
+import androidx.viewpager2.widget.ViewPager2
 import com.bnkc.employee.R
 import com.bnkc.employee.databinding.NavBottomMenuLayoutBinding
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
 import com.bnkcl.employeemodule.ui.check.CheckListFragment
 import com.bnkcl.employeemodule.ui.find.FindCustomerFragment
 import com.bnkcl.employeemodule.ui.notice.NoticeFragment
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class EmployeeActivity: BaseActivity<NavBottomMenuLayoutBinding>() {
 
-    override fun getLayoutId(): Int = R.layout.nav_bottom_menu_layout
+    private var tabLayout: TabLayout? = null
 
-//    val navView: BottomNavigationView by lazy { findViewById(R.id.navView) }
-    private var navView: TabLayout? = null
-    private var mainViewPager: ViewPager? = null
+    private var viewPager: ViewPager2? = null
+
+    private var tabAdapter: TabViewPagerAdapter = TabViewPagerAdapter(supportFragmentManager, lifecycle)
+
+    /**
+     * menu title list
+     */
+    private val menuNames = arrayOf(
+        R.string.menu_nav_notice,
+        R.string.menu_find_customer,
+        R.string.menu_check_list)
+
+    /**
+     * menu icons list
+     */
+    private val menuIcons = arrayOf(
+        R.drawable.selector_tab_notice,
+        R.drawable.selector_tab_find_customer,
+        R.drawable.selector_tab_check_list)
+
+    override fun getLayoutId(): Int = R.layout.nav_bottom_menu_layout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        setSupportActionBar(binding.toolbar)
+        viewPager = binding.viewPager
+        tabLayout = binding.tabBottomMenu.mainTabLayout
 
-        mainViewPager = binding.mainViewPager
-        navView = binding.tabBottomMenu.mainTabLayout
+        tabAdapter.addFragment(NoticeFragment())
+        tabAdapter.addFragment(FindCustomerFragment())
+        tabAdapter.addFragment(CheckListFragment())
 
-        val tabViewPagerAdapter = TabViewPagerAdapter(supportFragmentManager, this)
-        val noticeFragment = NoticeFragment()
-        val findCustomerFragment = FindCustomerFragment()
-        val checkListFragment = CheckListFragment()
+        viewPager?.adapter = tabAdapter
 
-        tabViewPagerAdapter.addFragment(noticeFragment, "Notice", R.drawable.selector_tab_notice)
-        tabViewPagerAdapter.addFragment(findCustomerFragment, "Find Customer", R.drawable.selector_tab_find_customer)
-        tabViewPagerAdapter.addFragment(checkListFragment, "Check List", R.drawable.selector_tab_check_list)
+        TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
+            val binding = TabItemViewBinding.inflate(LayoutInflater.from(this))
+            binding.menuName = menuNames[position]
+            binding.menuIcon = menuIcons[position]
+            tab.customView = binding.root
+        }.attach()
+    }
 
-        mainViewPager?.adapter = tabViewPagerAdapter
-        mainViewPager!!.offscreenPageLimit = 3
-        navView!!.setupWithViewPager(mainViewPager)
-        for (i in 0 until navView!!.getTabCount()) {
-            navView!!.getTabAt(i)!!.customView = tabViewPagerAdapter!!.getTabView(i)
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        tabLayout = null
+        viewPager = null
     }
 }
