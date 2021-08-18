@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.CommentsItem
 import com.mobile.bnkcl.databinding.ItemTotalLeaseScheduleLayoutBinding
 import com.mobile.bnkcl.utilities.UtilAnimation
 

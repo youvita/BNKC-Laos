@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.CommentsItem
 import com.mobile.bnkcl.databinding.ActivityTotalLeaseScheduleBinding
 import com.mobile.bnkcl.ui.adapter.TotalLeaseScheduleAdapter
 import dagger.hilt.android.AndroidEntryPoint

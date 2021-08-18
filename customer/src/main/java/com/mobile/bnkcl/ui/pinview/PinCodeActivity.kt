@@ -13,7 +13,6 @@ import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
-import com.mobile.bnkcl.ui.login.LoginActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.utilities.SecureUtils

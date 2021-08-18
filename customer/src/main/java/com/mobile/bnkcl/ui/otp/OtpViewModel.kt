@@ -15,7 +15,6 @@ import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
-import com.mobile.bnkcl.data.request.LoginRequest
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest

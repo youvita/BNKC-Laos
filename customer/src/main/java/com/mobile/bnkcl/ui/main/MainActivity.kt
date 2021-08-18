@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
-import androidx.lifecycle.observe
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -13,19 +11,10 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
-import com.bnkcl.employeemodule.ui.check.CheckListFragment
-import com.bnkcl.employeemodule.ui.find.FindCustomerFragment
-import com.bnkcl.employeemodule.ui.notice.NoticeFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.auth.DeviceInfo
-import com.mobile.bnkcl.data.request.auth.LoginRequest
-import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
-import com.mobile.bnkcl.data.request.auth.PreLoginRequest
-import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityMainBinding
-import com.mobile.bnkcl.ui.adapter.CommentAdapter
 import com.mobile.bnkcl.ui.main.fragment.menu.MenuFragment
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
@@ -38,8 +27,6 @@ import javax.inject.Inject
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val viewModel: MainViewModel by viewModels()
-
-    private var commentDisposable: Disposable? = null
 
     private var tabLayout: TabLayout? = null
 
@@ -68,20 +55,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val role: Int = 1
 
-    @Inject
-    lateinit var commentAdapter: CommentAdapter
-
     override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(resources.getColor(R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
-
-//        getCommentList()
-
-        commentDisposable = RxJava.listen(RxEvent.CommentSuccess::class.java).subscribe {
-            Log.d(">>>>", "Result::: ${it.value}")
-        }
 
         viewModel.userRole = -1 //Custom : 0, Employee : 1 , Dealer : 2, Not yet login : -1
         viewModel.isLogin = sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()
@@ -115,8 +93,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onDestroy()
         tabLayout = null
         viewPager = null
-        commentDisposable?.dispose()
-        commentDisposable = null
     }
 
 }

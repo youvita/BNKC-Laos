@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:shadowColor="@color/color_1590a4ae_shadow"
+    app:shadowColor="@color/color_1590a4ae"
     app:shadowDx="0dp"
     app:shadowDy="0dp"
     app:shadowRadius="15dp"

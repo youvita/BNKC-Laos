@@ -97,13 +97,13 @@
                         android:layout_height="wrap_content"
                         style="@style/font13_263238_medium"
                         android:layout_marginTop="@dimen/margin_15dp"
-                        android:text="@string/subject"/>
+                        android:text="@string/ask_subject"/>
 
                     <com.mobile.bnkcl.com.view.BnkEditText
                         android:id="@+id/edt_subject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/subject"
+                        android:hint="@string/ask_subject"
                         android:textColorHint="@color/color_cfd8dc"
                         android:background="@drawable/selector_edittext_bg"
                         android:textColor="@color/color_263238"

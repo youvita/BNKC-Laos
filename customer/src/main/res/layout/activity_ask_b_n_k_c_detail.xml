@@ -108,7 +108,7 @@
                                 android:layout_width="@dimen/width_0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/loan_amount"
+                                android:text="@string/ask_loan_amount"
                                 style="@style/font_15_90A4AE_regular"/>
                             <TextView
                                 android:id="@+id/tv_loan_amount_type"
@@ -129,7 +129,7 @@
                                 android:layout_width="@dimen/width_0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:text="@string/counselling_type"
+                                android:text="@string/ask_counselling_type"
                                 style="@style/font_15_90A4AE_regular"/>
                             <TextView
                                 android:id="@+id/tv_counseling_type"
@@ -148,7 +148,7 @@
                             <TextView
                                 android:layout_width="@dimen/width_0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/contents"
+                                android:text="@string/ask_contents"
                                 android:layout_weight="1"
                                 style="@style/font_15_90A4AE_regular"/>
                             <TextView
@@ -198,7 +198,7 @@
                                 android:id="@+id/tv_title_reply"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/answer_by_bnkc"
+                                android:text="@string/ask_answer_by_bnkc"
                                 android:gravity="center_vertical"
                                 android:drawablePadding="@dimen/padding_10dp"
                                 android:drawableStart="@drawable/ic_answer_green_ico"

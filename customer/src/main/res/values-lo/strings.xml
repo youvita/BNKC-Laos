@@ -1,18 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- register success -->
+    <string name="register_successful">Registration Successful</string>
+    <string name="register_login">You have registered. Please Log in</string>
 
-    <!-- Permission -->
-    <string name="perm_01">Photo, media, file access</string>
-    <string name="perm_02">Access to address book</string>
-    <string name="perm_03">Phone call and management</string>
-    <string name="perm_04">Take a photo and record a video</string>
-    <string name="perm_05">Unable to open bizplay corporate card app. Try again after change setting</string>
-    <string name="perm_06">Unable to attach an image. Try again after change setting</string>
+    <!-- sign up personal information -->
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_step_one">Step 1</string>
+    <string name="sign_step_two">Step 2</string>
+    <string name="sign_name">Name</string>
+    <string name="sign_date_of_birth">Date of Birth</string>
+    <string name="sign_identify_number">Identification Number</string>
+    <string name="sign_dd_mm_yyyy">DD-MM-YYYY</string>
+    <string name="sign_check">check</string>
+    <string name="sign_input_identify_number">Input Identification Number</string>
+    <string name="sign_existing_customer">Existing Customer</string>
 
-    <!-- Language -->
-    <string name="language_01" translatable="false">ខ្មែរ</string>
-    <string name="language_02" translatable="false">English</string>
-    <string name="language_03">English</string>
+    <!-- additional information  -->
+    <string name="addition_home_address">Home Address</string>
+    <string name="addition_select_capital">Select Capital</string>
+    <string name="addition_select_district">Select District</string>
+    <string name="addition_input_detail_address">Input Detailed Address</string>
+    <string name="addition_capital">Capital</string>
+    <string name="addition_district">District</string>
+    <string name="addition_village">Village</string>
+    <string name="addition_select_village">Select Village</string>
+    <string name="addition_job_type">Job Type</string>
+    <string name="addition_select_job_type">Select Job Type</string>
+
+    <!-- notification -->
+    <string name="notification">Notification</string>
+
+    <!-- ask bnkc -->
+    <string name="ask_subject">Subject</string>
+    <string name="ask_loan_amount">Loan Amount</string>
+    <string name="ask_counselling_type">Counselling Type</string>
+    <string name="ask_contents">Contents</string>
+    <string name="ask_answer_by_bnkc">Answer by BNKC</string>
+
+    <!-- c/s center -->
+    <string name="center_faq">FAQ</string>
+    <string name="center_ask_bnkc">Ask BNKC</string>
+
+    <!-- agree term  -->
+    <string name="term_condition_policy">Policy</string>
+
 
     <!-- Currency -->
     <string name="curr_usd">USD</string>
@@ -181,9 +213,6 @@
     <string name="acc_info_25">Select Income Type</string>
     <string name="acc_info_26">If you need to correct personal information, please visit the nearest branch.</string>
 
-    <!--notification-->
-    <string name="noti_01">Notification</string>
-
     <!--setting-->
     <string name="setting_01">Push Notification</string>
     <string name="setting_02">Reset PIN</string>
@@ -251,7 +280,6 @@
     <string name="consult_now">CONSULT NOW</string>
     <string name="loan_detail">Free option of Currency KHR and USD, a reasonable interest rate, calculated based on outstanding balance, flexible loan terms and repayment plan that are catered to your need, Convenient option to apply for and repay loan at nearest BNKC office or at your business site.</string>
     <string name="product_introduction">Product Introduction</string>
-    <string name="loan_amount">Loan Amount</string>
     <string name="interest_rate">Interest Rate</string>
     <string name="_1_1_5_interest_based_negotiation">1%​~​1.5% (Interest Based \nNegotiation)</string>
     <string name="loan_term">Loan Term</string>
@@ -614,6 +642,14 @@
     <string name="dlg_20">You cannot sign up\n through this app. Call customer\n service and request for a change\n the phone number registered\n when you sign up.</string>
     <string name="dlg_21">Different Phone Number</string>
 
+    <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
+    <string name="ask_bnkc_review">BNKC will review your inquiry and get back to you soon</string>
+    <string name="ask_inquiry_failed">Inquiry is Failed</string>
+    <string name="ask_inquiry_submitted">Inquiry is Submitted</string>
+    <string name="ask_internal_server_error">Internal Server Error</string>
+    <string name="ask_error_code_500">(Error Code : 500)</string>
+
+    <!-- tab bottom menu -->
     <string name="tab_service">Service</string>
     <string name="tab_my_page">My Page</string>
     <string name="tab_find_office">Find Office</string>

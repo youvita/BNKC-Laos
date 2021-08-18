@@ -28,14 +28,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15dp"
-                android:text="@string/home_address" />
+                android:text="@string/addition_home_address" />
 
             <TextView
                 style="@style/font13_263238_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10dp"
-                android:text="@string/capital" />
+                android:text="@string/addition_capital" />
 
             <LinearLayout
                 android:id="@+id/ll_capital"
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:hint="@string/select_capital"
+                    android:hint="@string/addition_select_capital"
                     app:drawableEndCompat="@drawable/ic_more_ico" />
 
             </LinearLayout>
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/district" />
+                android:text="@string/addition_district" />
 
             <LinearLayout
                 android:id="@+id/ll_district"
@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:hint="@string/select_district"
+                    android:hint="@string/addition_select_district"
                     app:drawableEndCompat="@drawable/ic_more_ico" />
 
             </LinearLayout>
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/village" />
+                android:text="@string/addition_village" />
 
             <LinearLayout
                 android:id="@+id/ll_village"
@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:hint="@string/select_village"
+                    android:hint="@string/addition_select_village"
                     app:drawableEndCompat="@drawable/ic_more_ico" />
 
             </LinearLayout>
@@ -123,7 +123,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/selector_edittext_bg"
-                android:hint="@string/input_detailed_address"
+                android:hint="@string/addition_input_detail_address"
                 android:maxLength="200"
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
@@ -163,7 +163,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/selector_edittext_bg"
-                android:hint="@string/input_detailed_address"
+                android:hint="@string/addition_input_detail_address"
                 android:maxLength="200"
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
@@ -245,7 +245,7 @@
                     style="@style/font13_263238_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/job_type" />
+                    android:text="@string/addition_job_type" />
 
                 <TextView
                     style="@style/font_13_90A4AE_regular"
@@ -273,7 +273,7 @@
                     android:layout_height="match_parent"
                     android:drawableEnd="@drawable/ic_more_ico"
                     android:gravity="center_vertical"
-                    android:hint="@string/select_job_type" />
+                    android:hint="@string/addition_select_job_type" />
 
             </LinearLayout>
 

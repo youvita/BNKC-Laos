@@ -13,10 +13,6 @@ object AdapterModule {
 
     @Singleton
     @Provides
-    fun provideCommentAdapter() = CommentAdapter()
-
-    @Singleton
-    @Provides
     fun provideTransactionHistoryAdapter() = TransactionHistoryAdapter()
 
     @Singleton

@@ -6,7 +6,6 @@ import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.CommentsItem
 import com.mobile.bnkcl.databinding.DialogApplicationBinding
 import com.mobile.bnkcl.ui.adapter.LeaseRequestProcessAdapter
 import dagger.hilt.android.AndroidEntryPoint

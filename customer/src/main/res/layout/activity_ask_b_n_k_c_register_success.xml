@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:gravity="center"
-                    android:text="@string/inquiry_is_submitted"
+                    android:text="@string/ask_inquiry_submitted"
                     style="@style/font_21_263238_normal"/>
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="@string/bnkc_will_review_your_inquiry_and_get_back_to_you_soon"
+                    android:text="@string/ask_bnkc_review"
                     android:textAlignment="center"
                     style="@style/font_15_263238_regular"/>
             </LinearLayout>

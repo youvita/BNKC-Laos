@@ -17,7 +17,7 @@
     <style name="appCompatButtonPrimary" parent="font14_263238_medium">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/height_50dp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/color_ffffff</item>
         <item name="textAllCaps">true</item>
         <item name="android:background">@drawable/bg_primary_selector</item>
     </style>

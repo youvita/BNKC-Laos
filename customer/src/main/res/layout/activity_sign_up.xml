@@ -97,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5dp"
                             android:gravity="center"
-                            android:text="@string/step_1" />
+                            android:text="@string/sign_step_one" />
                     </LinearLayout>
 
                     <View
@@ -127,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5dp"
                             android:gravity="center"
-                            android:text="@string/step_2" />
+                            android:text="@string/sign_step_two" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -175,7 +175,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_21dp"
-                                    android:text="@string/name" />
+                                    android:text="@string/sign_name" />
 
                                 <com.mobile.bnkcl.com.view.BnkEditText
                                     android:id="@+id/edt_name"
@@ -201,7 +201,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_21dp"
-                                    android:text="@string/date_of_birth"
+                                    android:text="@string/sign_date_of_birth"
 
                                     />
 
@@ -222,7 +222,7 @@
                                         android:background="@null"
                                         android:clickable="true"
                                         android:digits="0123456789"
-                                        android:hint="@string/dd_mm_yyyy"
+                                        android:hint="@string/sign_dd_mm_yyyy"
                                         android:inputType="date"
                                         android:maxLength="10"
                                         android:paddingStart="@dimen/padding_15dp"
@@ -245,7 +245,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_21dp"
-                                    android:text="@string/identification_number" />
+                                    android:text="@string/sign_identify_number" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -270,7 +270,7 @@
                                             android:background="@null"
                                             android:clickable="true"
                                             android:digits="0123456789"
-                                            android:hint="@string/input_identification_number"
+                                            android:hint="@string/sign_input_identify_number"
                                             android:inputType="number"
                                             android:maxLength="10"
                                             android:paddingStart="@dimen/padding_15dp"
@@ -291,7 +291,7 @@
                                             android:paddingTop="@dimen/padding_16dp"
                                             android:paddingEnd="@dimen/padding_10dp"
                                             android:paddingBottom="@dimen/padding_16dp"
-                                            android:text="@string/existing_customer"
+                                            android:text="@string/sign_existing_customer"
                                             android:visibility="gone" />
 
                                     </LinearLayout>
@@ -303,7 +303,7 @@
                                         android:layout_height="match_parent"
                                         android:background="@drawable/selector_d7191f_8b0304"
                                         android:fontFamily="@font/rubik_medium"
-                                        android:text="@string/check"
+                                        android:text="@string/sign_check"
                                         android:textAllCaps="true"
                                         android:textColor="@color/color_ffffff"
                                         android:textSize="14sp" />

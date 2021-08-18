@@ -1,76 +1,49 @@
 <resources>
-    <!-- comment -->
-    <string name="comment_email">Email</string>
-    <string name="comment_body">Comment</string>
 
-    <!-- login -->
-    <string name="user_email">Email</string>
-    <string name="user_password">Password</string>
-    <string name="user_login">Login</string>
-    <string name="forget_password">Forget Password</string>
+    <!-- register success -->
+    <string name="register_successful">Registration Successful</string>
+    <string name="register_login">You have registered. Please Log in</string>
 
-    <!-- description -->
-    <string name="desc_logo">email image for login</string>
-    <string name="desc_email">email image for login</string>
-    <string name="desc_password">password image for login</string>
-
-    <!-- language -->
-    <string name="choose_language">Choose Language</string>
-    <string name="english_language">English</string>
-    <string name="chinese_language">中文</string>
-
-    <!-- Notification -->
-    <string name="noti_01">Notification</string>
-
-    <!--register -->
-    <string name="registration_successful">Registration Successful</string>
-    <string name="you_have_registered_please_log_in">You have registered. Please Log in</string>
+    <!-- sign up personal information -->
     <string name="sign_up">Sign Up</string>
-    <string name="step_1">Step 1</string>
-    <string name="step_2">Step 2</string>
-    <string name="name">Name</string>
-    <string name="date_of_birth">Date of Birth</string>
-    <string name="identification_number">Identification Number</string>
-    <string name="dd_mm_yyyy">DD-MM-YYYY</string>
-    <string name="check">check</string>
-    <string name="input_identification_number">Input Identification Number</string>
-    <string name="existing_customer">Existing Customer</string>
-    <string name="new_customer">New Customer</string>
-    <string name="home_address">Home Address</string>
-    <string name="select_capital">Select Capital</string>
-    <string name="select_district">Select District</string>
-    <string name="input_detailed_address">Input Detailed Address</string>
+    <string name="sign_step_one">Step 1</string>
+    <string name="sign_step_two">Step 2</string>
+    <string name="sign_name">Name</string>
+    <string name="sign_date_of_birth">Date of Birth</string>
+    <string name="sign_identify_number">Identification Number</string>
+    <string name="sign_dd_mm_yyyy">DD-MM-YYYY</string>
+    <string name="sign_check">check</string>
+    <string name="sign_input_identify_number">Input Identification Number</string>
+    <string name="sign_existing_customer">Existing Customer</string>
 
-    <string name="personal_information">Personal Information</string>
-    <string name="capital">Capital</string>
-    <string name="district">District</string>
-    <string name="village">Village</string>
-    <string name="select_village">Select Village</string>
-    <string name="job_type">Job Type</string>
-    <string name="select_job_type">Select Job Type</string>
-    <string name="subimit">subimit</string>
+    <!-- additional information  -->
+    <string name="addition_home_address">Home Address</string>
+    <string name="addition_select_capital">Select Capital</string>
+    <string name="addition_select_district">Select District</string>
+    <string name="addition_input_detail_address">Input Detailed Address</string>
+    <string name="addition_capital">Capital</string>
+    <string name="addition_district">District</string>
+    <string name="addition_village">Village</string>
+    <string name="addition_select_village">Select Village</string>
+    <string name="addition_job_type">Job Type</string>
+    <string name="addition_select_job_type">Select Job Type</string>
+
+    <!-- notification -->
     <string name="notification">Notification</string>
-    <string name="subject">Subject</string>
-    <string name="loan_amount">Loan Amount</string>
-    <string name="counselling_type">Counselling Type</string>
-    <string name="contents">Contents</string>
-    <string name="answer_by_bnkc">Answer by BNKC</string>
-    <string name="faq">FAQ</string>
-    <string name="ask_bnkc">Ask BNKC</string>
-    <string name="policy">Policy</string>
 
-    <!-- Permission -->
-    <string name="perm_01">Photo, media, file access</string>
-    <string name="perm_02">Access to address book</string>
-    <string name="perm_03">Phone call and management</string>
-    <string name="perm_04">Take a photo and record a video</string>
-    <string name="perm_05">Unable to open bizplay corporate card app. Try again after change setting</string>
-    <string name="perm_06">Unable to attach an image. Try again after change setting</string>
+    <!-- ask bnkc -->
+    <string name="ask_subject">Subject</string>
+    <string name="ask_loan_amount">Loan Amount</string>
+    <string name="ask_counselling_type">Counselling Type</string>
+    <string name="ask_contents">Contents</string>
+    <string name="ask_answer_by_bnkc">Answer by BNKC</string>
 
-    <!-- Language -->
-    <string name="language_01" translatable="false">ខ្មែរ</string>
-    <string name="language_02" translatable="false">English</string>
-    <string name="language_03">English</string>
+    <!-- c/s center -->
+    <string name="center_faq">FAQ</string>
+    <string name="center_ask_bnkc">Ask BNKC</string>
+
+    <!-- agree term  -->
+    <string name="term_condition_policy">Policy</string>
 
     <!-- Currency -->
     <string name="curr_usd">USD</string>
@@ -669,17 +642,16 @@
     <string name="dlg_20">You cannot sign up\n through this app. Call customer\n service and request for a change\n the phone number registered\n when you sign up.</string>
     <string name="dlg_21">Different Phone Number</string>
 
+    <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
+    <string name="ask_bnkc_review">BNKC will review your inquiry and get back to you soon</string>
+    <string name="ask_inquiry_failed">Inquiry is Failed</string>
+    <string name="ask_inquiry_submitted">Inquiry is Submitted</string>
+    <string name="ask_internal_server_error">Internal Server Error</string>
+    <string name="ask_error_code_500">(Error Code : 500)</string>
 
-    <string name="pin_number_enty_error_and_re_entry_request_statement">PIN Number enty error and re-entry request \n statement</string>
-    <string name="bnkc_will_review_your_inquiry_and_get_back_to_you_soon">BNKC will review your inquiry and get back to you soon</string>
-    <string name="inquiry_is_failed">Inquiry is Failed</string>
-    <string name="inquiry_is_submitted">Inquiry is Submitted</string>
-    <string name="internal_server_error">Internal Server Error</string>
-    <string name="error_code_500">(Error Code : 500)</string>
-
+    <!-- tab bottom menu -->
     <string name="tab_service">Service</string>
     <string name="tab_my_page">My Page</string>
     <string name="tab_find_office">Find Office</string>
     <string name="tab_menu">Menu</string>
-
 </resources>

@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:gravity="center"
-                    android:text="@string/inquiry_is_failed"
+                    android:text="@string/ask_inquiry_failed"
                     style="@style/font_21_263238_normal"/>
 
                 <TextView
@@ -59,13 +59,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="@string/internal_server_error"
+                    android:text="@string/ask_internal_server_error"
                     android:textAlignment="center"
                     style="@style/font_15_263238_regular"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/error_code_500"
+                    android:text="@string/ask_error_code_500"
                     />
             </LinearLayout>
 
