@@ -8,7 +8,6 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
-import com.mobile.bnkcl.com.alert.DlgArea
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

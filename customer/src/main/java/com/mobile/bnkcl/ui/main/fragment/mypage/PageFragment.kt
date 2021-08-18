@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bnkc.sourcemodule.base.BaseFragment
+import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
 import com.mobile.bnkcl.data.response.dashboard.SummaryData
@@ -22,12 +23,13 @@ import com.mobile.bnkcl.databinding.FragmentMyPageBinding
 import com.mobile.bnkcl.ui.adapter.BannerAdapter
 import com.mobile.bnkcl.ui.adapter.LeaseViewPagerAdapter
 import com.mobile.bnkcl.ui.bill.BillPaymentActivity
+import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PageFragment : BaseFragment<FragmentMyPageBinding>(),
-    LeaseViewPagerAdapter.LoanPagerClickedListener {
+    LeaseViewPagerAdapter.LoanPagerClickedListener, View.OnClickListener {
 
     private var myLoanBinding: FragmentMyPageBinding? = null
     private var mLeaseAdapter: LeaseViewPagerAdapter? = null
@@ -42,7 +44,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var MLR004: Int = 0
     private var bannerArray: ArrayList<Int>? = null
     private var page = 0
-
+    private var loadingDialog: ApplicationDialog? = null
     private val pageViewModel: PageViewModel by viewModels()
 
     override fun onCreateView(
@@ -59,7 +61,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         myLoanBinding!!.leaseViewPager.adapter = mLeaseAdapter
         myLoanBinding!!.leaseViewPager.offscreenPageLimit = 3
 
-        pageViewModel.getDashboard()
+//        pageViewModel.getDashboard()
         pageViewModel.dashboardLiveData.observe(requireActivity()) {
             MLR001 = it.summary?.count_pending!!
             MLR002 = it.summary.count_in_progress!!
@@ -71,10 +73,14 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             setUpDashboard(it.summary)
         }
 
-
+        initClickListener()
         setUpBanner()
 
         return myLoanBinding!!.root
+    }
+
+    private fun initClickListener() {
+        myLoanBinding!!.requestMenu.llMenu1.setOnClickListener(this)
     }
 
     private fun setUpLeaseIndicator() {
@@ -127,6 +133,15 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     }
 
+    override fun onClick(v: View?) {
+
+        when(v!!.id){
+            R.id.ll_menu1 -> {
+                loadingDialog = ApplicationDialog()
+                loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
+            }
+        }
+    }
 
     interface MyLoanCardClickedListener {
         fun onAddNewLoanClicked()

@@ -10,86 +10,22 @@
         <LinearLayout
             android:layout_width="372dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/comm_popup_ffffff_radius_5"
             android:orientation="vertical"
-            android:padding="@dimen/padding_20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                style="@style/font15_263238_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Application" />
-
-            <include layout="@layout/layout_applied_info"
-                android:visibility="gone"/>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/transaction_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_ffffff"
+                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingLeft="@dimen/padding_20dp"
-                android:paddingTop="@dimen/padding_10dp"
+                android:orientation="horizontal"
+                app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
                 tools:itemCount="2"
-                android:paddingRight="@dimen/padding_20dp"
-                android:paddingBottom="@dimen/padding_20dp"
-                tools:listitem="@layout/item_transaction_history_layout" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_1dp"
-                android:layout_marginTop="@dimen/margin_15dp"
-                android:background="@drawable/round_solid_e0f2f1" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5dp"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/height_24dp">
-
-                <TextView
-                    style="@style/font15_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Product Type" />
-
-                <TextView
-                    android:id="@+id/tv_product_type"
-                    style="@style/font15_d7191f_medium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="Wait for screening" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_right"
-                    style="@style/font14_ffffff_medium"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height_50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_d7191f_8b0304"
-                    android:maxLines="1"
-                    android:text="@string/dlg_09"
-                    android:textColor="@color/color_ffffff" />
-
-            </LinearLayout>
+                tools:listitem="@layout/item_lease_request_process" />
 
         </LinearLayout>
 
