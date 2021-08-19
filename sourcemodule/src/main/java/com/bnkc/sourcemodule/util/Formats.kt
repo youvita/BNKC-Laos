@@ -46,7 +46,7 @@ object Formats {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             ss.setSpan(
-                ForegroundColorSpan(mContext.resources.getColor(R.color.color_263238)),
+                ForegroundColorSpan(mContext.resources.getColor(R.color.color_d7191f)),
                 indexStart,
                 indexEnd,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

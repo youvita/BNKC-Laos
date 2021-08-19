@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -40,6 +42,8 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     val phoneNumber : LiveData<String>
         get() = _phoneNumberContent
 
+    var isVerified = false
+
     fun setUpToolbarTitle() : String{
         Log.d(">>>>>>", "setUpTextView $uiMode")
         return when(uiMode){
@@ -47,7 +51,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 "Login"
             }
             1->{
-                "Sign up"
+                "Sign UP"
             }
             2->{
                 "Forget PIN"
@@ -61,27 +65,20 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         }
     }
 
+    // 0 : Login, 1 : Sign up , 2 : Forget , 3 : Reset
     fun setUpButtonText() : String{
         Log.d(">>>>>>", "setUpTextView $uiMode")
         return when(uiMode){
             0->{
                 "Login"
             }
-            1->{
-                "Continue"
-            }
-            2->{
-                "Continue"
-            }
-            3->{
-                "Continue"
-            }
             else -> {
-                "Login"
+                "Continue"
             }
         }
     }
 
+    // 0 : Login, 1 : Sign up , 2 : Forget , 3 : Reset
     @SuppressLint("UseCompatLoadingForDrawables")
     fun setUpImageView() : Drawable{
         Log.d(">>>>>>", "" + uiMode)
@@ -90,13 +87,13 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
             }
             1->{
-                context.resources.getDrawable(R.drawable.ic_nav_close_dark_btn)
+                context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
             }
             2->{
-                context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
+                context.resources.getDrawable(R.drawable.ic_nav_close_dark_btn)
             }
             3->{
-                context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
+                context.resources.getDrawable(R.drawable.ic_nav_close_dark_btn)
             }
             else -> {
                 context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
@@ -116,29 +113,37 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    fun setUpImageViewFocus() : Drawable{
+    fun setUpImageStep1() : Drawable? {
         Log.d(">>>>>>", "" + uiMode)
         return when(step){
-            0->{
-                if (statFocus == 0){
-                    context.resources.getDrawable(R.drawable.ic_step_otp_off)
-                }else{
-                    context.resources.getDrawable(R.drawable.ic_step_otp_on)
-                }
-            }
             1->{
-                if (statFocus == 0){
-                    context.resources.getDrawable(R.drawable.ic_step_personal_info_off)
-                }else{
-                    context.resources.getDrawable(R.drawable.ic_step_personal_info_on)
-                }
+                ContextCompat.getDrawable(context, R.drawable.ic_step_otp_on)
+//                if (statFocus == 0){
+//                    context.resources.getDrawable(R.drawable.ic_step_otp_off)
+//                }else{
+//                    context.resources.getDrawable(R.drawable.ic_step_otp_on)
+//                }
             }
             else -> {
-                context.resources.getDrawable(R.drawable.ic_step_otp_off)
+                ContextCompat.getDrawable(context, R.drawable.ic_step_otp_off)
             }
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    fun setUpImageStep2() : Drawable? {
+        Log.d(">>>>>>", "" + uiMode)
+        return when(step){
+            1->{
+                ContextCompat.getDrawable(context, R.drawable.ic_step_personal_info_off)
+            }
+            else -> {
+                ContextCompat.getDrawable(context, R.drawable.ic_step_personal_info_on)
+            }
+        }
+    }
+
+    // 0 : Login, 1 : Sign up , 2 : Forget , 3 : Reset
     fun setUpVisibilityView() : Boolean{
         Log.d(">>>>>>", "" + uiMode)
         return when(uiMode){
@@ -146,10 +151,10 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 true
             }
             1->{
-                true
+                false
             }
             2->{
-                false
+                true
             }
             3->{
                 true
@@ -264,7 +269,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     //test countdown
-    private fun millisecondsToTime(milliseconds: Long): String? {
+    fun millisecondsToTime(milliseconds: Long): String? {
         return try {
             val minutes = milliseconds / 1000 / 60
             val seconds = milliseconds / 1000 % 60

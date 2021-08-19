@@ -10,7 +10,7 @@
             type="com.mobile.bnkcl.ui.otp.OtpActivity" />
 
         <variable
-            name="enableButton"
+            name="isVerified"
             type="Boolean"/>
 
         <variable
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
-                app:visibleGone="@{otpViewModel.setUpVisibilityView()}"
+                app:visibleGone="@{!otpViewModel.setUpVisibilityView()}"
                 >
 
                 <LinearLayout
@@ -92,7 +92,7 @@
                         android:id="@+id/iv_step1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@{otpViewModel.setUpImageViewFocus()}"/>
+                        android:src="@{otpViewModel.setUpImageStep1()}"/>
                     <TextView
                         android:id="@+id/tv_step1"
                         android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
                         android:id="@+id/iv_step2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@{otpViewModel.setUpImageViewFocus()}"/>
+                        android:src="@{otpViewModel.setUpImageStep2()}"/>
                     <TextView
                         android:id="@+id/tv_step2"
                         android:layout_width="wrap_content"
@@ -303,9 +303,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/sign_up_08"
-                                android:textSize="15sp"
                                 android:textColor="@{otp.sendOtp ? @color/colorPrimary : @color/color_cfd8dc}"
                                 android:gravity="center"
+                                style="@style/font15_cfd8dc_medium"
                                 android:onClick="@{(v) -> otpViewModel.resendOtp()}"
                                 />
                         </LinearLayout>
@@ -350,9 +350,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:text="I agree to BNKC\'s Terms and Conditions"
-                            app:text="@{agreement}"
-                            app:isChecked="@{otpViewModel.checked}"
+                            android:text="@string/term_and_condition"
                             style="@style/font15_cfd8dc_regular_agreement"
                             android:onClick="@{(v) -> otpViewModel.agreementViewClick()}"/>
 
@@ -363,7 +361,7 @@
                         android:id="@+id/btn_continue"
                         android:layout_width="match_parent"
                         app:textButton="@{otpViewModel.setUpButtonText()}"
-                        app:enableButton="@{enableButton}"
+                        app:enableButton="@{isVerified}"
                         android:layout_height="50dp"
                         android:onClick="@{() -> otpViewModel.continueClick()}"/>
 

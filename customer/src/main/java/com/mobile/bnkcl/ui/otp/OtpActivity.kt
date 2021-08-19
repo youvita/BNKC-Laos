@@ -1,31 +1,39 @@
 package com.mobile.bnkcl.ui.otp
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources.NotFoundException
+import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
+import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OtpActivity : BaseActivity<ActivityOtpBinding>() {
+class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     val viewModel : OtpViewModel by viewModels()
 
+    var lifeTime = 0
     var phoneNumber = ""
     var pinID = ""
     var sendOtp = false
-
+    private var countDownTimer: CountDownTimer? = null
     private var txtAgreement: String? = null
     /**
      * text watcher event changed listener
@@ -33,6 +41,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     private val textOtpWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        @SuppressLint("UseCompatLoadingForDrawables")
         override fun afterTextChanged(s: Editable?) {
             val text: String = binding.edtOtp.text.toString()
             if (text.endsWith("-") || text.endsWith(" ")) return
@@ -90,7 +99,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 )
                 binding.edtPhonenumber.setSelection(textLength)
             }
-
+            binding.tvCorrect.visibility = View.GONE
             if (textLength <= 0) {
                 binding.ivSendOtp.setImageResource(R.drawable.ic_otp_send_off_ico)
                 binding.ivSendOtp.setOnClickListener(null)
@@ -119,6 +128,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         viewModel.sendOTPLiveData.observe(this) {
             Log.d("nng", it.toString())
             pinID = it.pin_id.toString()
+            binding.tvResend.setTextColor(resources.getColor(R.color.colorPrimary))
+            lifeTime = it.lifetime!!
+            resendTimer()
             Toast.makeText(this, "OTP : ${it.pin}", Toast.LENGTH_SHORT).show()
         }
     }
@@ -126,9 +138,38 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     private fun verifyOTP() {
         viewModel.verifyOTPLiveData.observe(this){
             Log.d(">>>>>>>>", it.toString())
-            binding.enableButton = it.verified
-            viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
-            preLogin()
+            binding.isVerified = it.verified!!
+            Log.d(">>>>>>>>", "Verified livedata " + viewModel.isVerified)
+            binding.tvCorrect.visibility = View.VISIBLE
+            if (it.verified!!){
+                viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
+                preLogin()
+
+                binding.llOptCode.background = getDrawable(R.drawable.round_stroke_00695c_8)
+                binding.tvCorrect.setTextColor(resources.getColor(R.color.color_00695c))
+                binding.tvCorrect.text = getString(R.string.sign_up_23)
+                binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    getDrawable(R.drawable.ic_correct_ico),
+                    null
+                )
+                binding.tvAgree.setTextColor(resources.getColor(R.color.color_263238))
+
+            }else{
+                countDownTimer!!.cancel()
+                binding.tvCountdown.setTextColor(resources.getColor(R.color.color_cfd8dc))
+                binding.llOptCode.background = getDrawable(R.drawable.round_stroke_d7191f_solid_ffffff_8)
+                binding.tvCorrect.setTextColor(resources.getColor(R.color.colorPrimary))
+                binding.tvCorrect.text = getString(R.string.sign_up_06)
+                binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    getDrawable(R.drawable.ic_info_red_ico_1),
+                    null
+                )
+//                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
+            }
         }
     }
 
@@ -136,14 +177,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         viewModel.preLogin()
         viewModel.preloginLiveData.observe(this){
             Log.d("nng", it.toString())
-//            var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
-//            var loginRequest = LoginRequest(
-//                it.session_id,
-//                viewModel.sendOTPRequest.to,
-//                "5ZTnExlqPg0\u003d",
-//                deviceInfo
-//            )
-//            viewModel.logRequest = loginRequest
         }
     }
 
@@ -154,7 +187,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
             viewModel.context = this
             binding.otpViewModel = viewModel
-            binding.enableButton = false
+            binding.isVerified = false
             txtAgreement = getString(R.string.sign_up_28)
             binding.agreement = txtAgreement
             binding.edtOtp.addTextChangedListener(textOtpWatcher)
@@ -162,241 +195,60 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
+                val phoneNumber = intent.getStringExtra("PHONE_NUMBER")
                 when {
                     action.equals("LOGIN", ignoreCase = true) -> {
 
                         binding.otpViewModel!!.uiMode = 0
 
-            //                    binding.tvTitleToolbar.setText(getString(R.string.login_01))
-            //                    binding.llAgreement.setVisibility(View.GONE)
-            //                    binding.llStepSignup.setVisibility(View.GONE)
-            //                    binding.ivLogin.setVisibility(View.VISIBLE)
-            //                    isLogin = true
+                    }
+                    action.equals("SIGN_UP", ignoreCase = true) -> {
+
+                        binding.otpViewModel!!.uiMode = 1
+                        binding.otpViewModel!!.step = 1
+
                     }
                     action.equals("FORGET", ignoreCase = true) -> {
 
                         binding.otpViewModel!!.uiMode = 2
-
-            //                    binding.ivBack.setImageDrawable(resources.getDrawable(R.drawable.nav_close_dark_btn))
-            //                    binding.tvTitleToolbar.setText(getString(R.string.setting_02))
-            //                    binding.llAgreement.setVisibility(View.GONE)
-            //                    binding.llStepSignup.setVisibility(View.GONE)
-            //                    binding.ivLogin.setVisibility(View.VISIBLE)
                         binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
                         binding.edtPhonenumber.setFocusable(false)
                         binding.edtPhonenumber.setEnabled(false)
                         binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
-            //                    val phone: String?
-            //                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
-            //                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
-            //                    } else {
-            //                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
-            //                    }
-            //                    mOtpBinding.edtPhonenumber.setTag(phone)
-            //                    mOtpBinding.edtPhonenumber.setText(FormatUtil.formatPhoneNumberMask(phone))
-            //                    isLogin = true
+
                     }
                     action.equals("RESET", ignoreCase = true) -> {
 
                         binding.otpViewModel!!.uiMode = 3
 
-                        //                    binding.ivBack.setImageDrawable(resources.getDrawable(R.drawable.nav_close_dark_btn))
-                        //                    binding.tvTitleToolbar.setText(getString(R.string.setting_02))
-                        //                    binding.llAgreement.setVisibility(View.GONE)
-                        //                    binding.llStepSignup.setVisibility(View.GONE)
-                        //                    binding.ivLogin.setVisibility(View.VISIBLE)
-//                        binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
-//                        binding.edtPhonenumber.setFocusable(false)
-//                        binding.edtPhonenumber.setEnabled(false)
-//                        binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
-                        //                    val phone: String?
-                        //                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
-                        //                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
-                        //                    } else {
-                        //                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
-                        //                    }
-                        //                    mOtpBinding.edtPhonenumber.setTag(phone)
-                        //                    mOtpBinding.edtPhonenumber.setText(FormatUtil.formatPhoneNumberMask(phone))
-                        //                    isLogin = true
                     }
-                    action.equals("SIGN_UP", ignoreCase = true) -> {
 
-                        binding.otpViewModel!!.uiMode = 1
-                        binding.otpViewModel!!.statFocus = 1
-                        binding.otpViewModel!!.step = 1
-
-            //                    mOtpBinding.tvTitleToolbar.setText(getString(R.string.sign_up_title))
-            //                    mOtpBinding.llAgreement.setVisibility(View.VISIBLE)
-            //                    mOtpBinding.llStepSignup.setVisibility(View.VISIBLE)
-            //                    mOtpBinding.ivLogin.setVisibility(View.GONE)
-            //                    isLogin = false
-                    }
                 }
 
             }
 
             sendOTP()
 
+            initView()
+
             initEvent()
 
-////            setAnimateType(ANIMATE_LEFT)
-//            binding.otpViewModel = viewModel
-////            preLoginViewModel = PreLoginViewModel(application)
-////            setContentViewBinding(R.layout.activity_otp, otpViewModel, BR.otpViewModel)
-////            mOtpBinding = mViewDataBinding as ActivityOtpBinding
-////            setLoadingDialogObserver()
-////            Utils.setHideKeyboard(this@OTPActivity, mOtpBinding.llWrapContent)
-////            setStatusBarColor(resources.getColor(R.color.color_f5f7fc))
-//            binding.edtOtp.setFocusable(false)
-//            binding.edtOtp.setEnabled(false)
-//            binding.ivSendOtp.setOnClickListener(null)
-//            txtAgreement = getString(R.string.sign_up_28)
-//            if (LocaleHelper.getLanguage(this)
-//                    .equals("en")
-//            ) //                mOtpBinding.tvAgree.setText(FormatUtil.getSeparateFontByLang(OTPActivity.this, 15, 37, txtAgreement, mOtpBinding.cbAgreement.isChecked()), TextView.BufferType.SPANNABLE);
-//                binding.tvAgree.setText(txtAgreement)
-//            val intent = intent
-//            if (intent != null) {
-//                action = intent.getStringExtra("ACTION_TAG")
-//                if (action.equals("LOGIN", ignoreCase = true)) {
-//                    binding.tvTitleToolbar.setText(getString(R.string.login_01))
-//                    binding.llAgreement.setVisibility(View.GONE)
-//                    binding.llStepSignup.setVisibility(View.GONE)
-//                    binding.ivLogin.setVisibility(View.VISIBLE)
-//                    isLogin = true
-//                } else if (action.equals("RESET", ignoreCase = true)) {
-//                    binding.ivBack.setImageDrawable(resources.getDrawable(R.drawable.nav_close_dark_btn))
-//                    binding.tvTitleToolbar.setText(getString(R.string.setting_02))
-//                    binding.llAgreement.setVisibility(View.GONE)
-//                    binding.llStepSignup.setVisibility(View.GONE)
-//                    binding.ivLogin.setVisibility(View.VISIBLE)
-//                    binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
-//                    binding.edtPhonenumber.setFocusable(false)
-//                    mOtpBinding.edtPhonenumber.setEnabled(false)
-//                    mOtpBinding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
-//                    val phone: String?
-//                    phone = if (intent.hasExtra(Constant.LoginInfo.USER_ID)) {
-//                        intent.getStringExtra(Constant.LoginInfo.USER_ID)
-//                    } else {
-//                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
-//                    }
-//                    mOtpBinding.edtPhonenumber.setTag(phone)
-//                    mOtpBinding.edtPhonenumber.setText(FormatUtil.formatPhoneNumberMask(phone))
-//                    isLogin = true
-//                } else if (action.equals("SIGNUP", ignoreCase = true)) {
-//                    mOtpBinding.tvTitleToolbar.setText(getString(R.string.sign_up_title))
-//                    mOtpBinding.llAgreement.setVisibility(View.VISIBLE)
-//                    mOtpBinding.llStepSignup.setVisibility(View.VISIBLE)
-//                    mOtpBinding.ivLogin.setVisibility(View.GONE)
-//                    isLogin = false
-//                }
-//            }
-//            mOtpBinding.tvResend.setTypeface(Utils.getTypeFace(this, 2))
-//            if (mOtpBinding.edtPhonenumber.getText().length() > 0) {
-//                mOtpBinding.ivSendOtp.setImageResource(R.drawable.otp_send_on_ico)
-//                mOtpBinding.ivSendOtp.setOnClickListener(ivSendOTPClickListener)
-//            }
-//            mOtpBinding.edtPhonenumber.addTextChangedListener(object : TextWatcher {
-//                override fun beforeTextChanged(
-//                    s: CharSequence,
-//                    start: Int,
-//                    count: Int,
-//                    after: Int
-//                ) {
-//                }
-//
-//                override fun onTextChanged(
-//                    s: CharSequence,
-//                    start: Int,
-//                    before: Int,
-//                    count: Int
-//                ) {
-//                }
-//
-//                override fun afterTextChanged(s: Editable) {
-//                    mOtpBinding.edtPhonenumber.setTag(s)
-//                    val text: String = mOtpBinding.edtPhonenumber.getText().toString()
-//                    textLength = mOtpBinding.edtPhonenumber.getText().length()
-//                    if (text.startsWith("0")) {
-//                        mOtpBinding.edtPhonenumber.setText("")
-//                        return
-//                    }
-//                    if (text.endsWith("-") || text.endsWith(" ")) return
-//                    if (textLength == 3) {
-//                        mOtpBinding.edtPhonenumber.setText(
-//                            StringBuilder(text).insert(text.length - 1, "-").toString()
-//                        )
-//                        mOtpBinding.edtPhonenumber.setSelection(textLength)
-//                    } else if (textLength == 7) {
-//                        mOtpBinding.edtPhonenumber.setText(
-//                            StringBuilder(text).insert(text.length - 1, "-").toString()
-//                        )
-//                        mOtpBinding.edtPhonenumber.setSelection(textLength)
-//                    }
-//                    if (textLength <= 0) {
-//                        mOtpBinding.ivSendOtp.setImageResource(R.drawable.otp_send_off_ico)
-//                        mOtpBinding.ivSendOtp.setOnClickListener(null)
-//                    } else {
-//                        mOtpBinding.ivSendOtp.setImageResource(R.drawable.otp_send_on_ico)
-//                        mOtpBinding.ivSendOtp.setOnClickListener(ivSendOTPClickListener)
-//                    }
-//                }
-//            })
-//            mOtpBinding.edtOtp.addTextChangedListener(object : TextWatcher {
-//                override fun beforeTextChanged(
-//                    s: CharSequence,
-//                    start: Int,
-//                    count: Int,
-//                    after: Int
-//                ) {
-//                }
-//
-//                override fun onTextChanged(
-//                    s: CharSequence,
-//                    start: Int,
-//                    before: Int,
-//                    count: Int
-//                ) {
-//                }
-//
-//                override fun afterTextChanged(s: Editable) {
-//                    val text: String = mOtpBinding.edtOtp.getText().toString()
-//                    if (text.endsWith("-") || text.endsWith(" ")) return
-//                    if (text.length == 4) {
-//                        mOtpBinding.edtOtp.setText(
-//                            StringBuffer(text).insert(text.length - 1, "-").toString()
-//                        )
-//                        mOtpBinding.edtOtp.setSelection(mOtpBinding.edtOtp.getText().length())
-//                    }
-//                    val inputOtp =
-//                        s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
-//                    if (inputOtp.length == 6) {
-//                        val otp: String =
-//                            mOtpBinding.edtOtp.getText().toString().trim().replaceAll("-", "")
-//                        otpViewModel.getVerifyOTPModel().setPin(otp)
-//                        otpViewModel.requestVerifyOtp()
-//                    }
-//                    mOtpBinding.tvCorrect.setVisibility(View.GONE)
-//                    mOtpBinding.llOptCode.setBackground(getDrawable(R.drawable.round_stroke_e1e5ec_8))
-//                }
-//            })
-//            mOtpBinding.edtOtp.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
-//                mOtpBinding.llOptCode.setSelected(
-//                    hasFocus
-//                )
-//            })
-//            mOtpBinding.edtPhonenumber.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
-//                mOtpBinding.llPhoneNo.setSelected(
-//                    hasFocus
-//                )
-//            })
-//            mOtpBinding.cbAgreement.setOnClickListener(this)
-//            //            mOtpBinding.tvAgree.setOnClickListener(this);
-//            mOtpBinding.ivBack.setOnClickListener(this)
-//            initLiveData()
         } catch (e: NotFoundException) {
             e.printStackTrace()
         }
+    }
+
+    fun initView(){
+        binding.tvAgree.setTextColor(resources.getColor(R.color.color_cfd8dc))
+        binding.tvAgree.setText(
+            Formats.getSeparateFontByLang(
+                this,
+                18,
+                txtAgreement!!.length,
+                txtAgreement,
+                binding.cbAgreement.isChecked()
+            ), TextView.BufferType.SPANNABLE
+        )
     }
 
     fun initEvent(){
@@ -407,16 +259,87 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         binding.edtOtp.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             binding.llOptCode.isSelected = hasFocus
         }
-//        binding.btnContinue.setOnClickListener {
-//            Log.d(">>>>>>", "reqLogin ::: ")
-//
-//        }
+
+        binding.cbAgreement.setOnClickListener {
+
+            binding.tvAgree.setOnClickListener(if (binding.cbAgreement.isChecked()) this else null)
+            if (binding.cbAgreement.isChecked()) {
+                binding.tvAgree.setTextColor(resources.getColor(R.color.color_263238))
+                binding.tvAgree.setText(
+                    Formats.getSeparateFontByLang(
+                        this,
+                        18,
+                        txtAgreement!!.length,
+                        txtAgreement,
+                        binding.cbAgreement.isChecked()
+                    ), TextView.BufferType.SPANNABLE
+                )
+            } else {
+                binding.tvAgree.setTextColor(resources.getColor(R.color.color_cfd8dc))
+                binding.tvAgree.setText(
+                    Formats.getSeparateFontByLang(
+                        this,
+                        18,
+                        txtAgreement!!.length,
+                        txtAgreement,
+                        binding.cbAgreement.isChecked()
+                    ), TextView.BufferType.SPANNABLE
+                )
+            }
+//            if (otpViewModel.getVerifyOTPResponse() != null) {
+//                enableContinueBtn(
+//                    otpViewModel.getVerifyOTPResponse()
+//                        .isVerified() && mOtpBinding.cbAgreement.isChecked()
+//                )
+//            } else {
+//                enableContinueBtn(false)
+//            }
+
+        }
     }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_otp
     }
 
+    override fun onClick(p0: View?) {
+        when(p0!!.id){
+            R.id.tv_agree -> {
+                val intent1 =
+                    Intent(this, TermsAndConditionsActivity::class.java)
+//                intent1.putExtra(Constant.WebViewUrl.URL, ServiceName.termNConditionUrl)
+//                intent1.putExtra(Constant.WebViewUrl.TITLE, getString(R.string.sign_up_29))
+                startActivity(intent1)
+            }
+        }
+    }
 
+    fun resendTimer(){
+        binding.tv1.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_263238))
+        binding.tvCountdown.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_263238))
+        val lifeTime: Int = lifeTime * 1000
+        if (countDownTimer != null) countDownTimer!!.cancel()
+        countDownTimer = object : CountDownTimer(lifeTime.toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                binding.tvCountdown.setText(viewModel.millisecondsToTime(millisUntilFinished))
+            }
+
+            override fun onFinish() {
+                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
+                binding.tvCountdown.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_cfd8dc))
+            }
+        }.start()
+        binding.tvResend.setOnClickListener(null)
+    }
+
+    private var tvReSendOTPClickListener = View.OnClickListener() {
+//        try {
+//            otpViewModel.getSendOTPModel().setTo(getPhoneNo());
+//            otpViewModel.requestSendOtp();
+//            binding.edtOtp.getText().clear();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
 
 }

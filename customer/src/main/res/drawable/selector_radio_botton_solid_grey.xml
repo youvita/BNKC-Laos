@@ -4,6 +4,6 @@
         android:drawable="@drawable/ic_radio_btn_on"
         android:state_checked="true"/>
     <item
-        android:drawable="@drawable/ic_radio_btn_off"
+        android:drawable="@drawable/ic_radio_btn_disable"
         android:state_checked="false"/>
 </selector>
