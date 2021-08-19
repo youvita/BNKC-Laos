@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseSchedulesResponse
 import com.mobile.bnkcl.databinding.ActivityTotalLeaseScheduleBinding
 import com.mobile.bnkcl.ui.adapter.TotalLeaseScheduleAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,14 +46,9 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     }
 
     private fun initAdapter() {
-        val list = mutableListOf<CommentsItem>()
+        val list = mutableListOf<TotalLeaseSchedulesResponse>()
 
-        val item = CommentsItem()
-        item.postId = 1
-        item.id = 1
-        item.name = "Charity Plan"
-        item.email = "email"
-        item.body = "body"
+        val item = TotalLeaseSchedulesResponse()
 
         for (i in 0..14) {
             list.add(i, item)

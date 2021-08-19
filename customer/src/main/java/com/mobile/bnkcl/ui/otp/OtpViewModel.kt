@@ -161,7 +161,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     /** handle request data class */
-    var loginRequest = LoginRequest()
+//    var loginRequest = LoginRequest()
 
     /**
      * handle enable/disable valid login button

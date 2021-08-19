@@ -6,6 +6,7 @@ import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.lease.LeaseInfoData
 import com.mobile.bnkcl.databinding.DialogApplicationBinding
 import com.mobile.bnkcl.ui.adapter.LeaseRequestProcessAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,13 +32,8 @@ class ApplicationDialog : BaseDialogFragment<DialogApplicationBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = mutableListOf<CommentsItem>()
-        val item = CommentsItem()
-        item.postId = 1
-        item.id = 1
-        item.name = "1"
-        item.email = "1"
-        item.body = "1"
+        val list = mutableListOf<LeaseInfoData>()
+        val item = LeaseInfoData()
 
         for (i in 0..5) {
             list.add(i, item)

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.mobile.bnkcl.data.CommentsItem" />
+            type="com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

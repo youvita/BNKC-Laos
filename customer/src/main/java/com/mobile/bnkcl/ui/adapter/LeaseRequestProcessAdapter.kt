@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.lease.LeaseInfoData
 import com.mobile.bnkcl.databinding.ItemLeaseRequestProcessBinding
 
 class LeaseRequestProcessAdapter :
-    BaseAdapter<ItemLeaseRequestProcessBinding, CommentsItem, LeaseRequestProcessAdapter.ViewHolder>() {
+    BaseAdapter<ItemLeaseRequestProcessBinding, LeaseInfoData, LeaseRequestProcessAdapter.ViewHolder>() {
 
     var type: Int? = null
 
@@ -30,7 +31,7 @@ class LeaseRequestProcessAdapter :
         return ViewHolder(binding)
     }
 
-    override fun setBindData(holder: ViewHolder, data: CommentsItem, position: Int) {
+    override fun setBindData(holder: ViewHolder, data: LeaseInfoData, position: Int) {
         binding.viewModel = data
         when (type) {
             1 -> {

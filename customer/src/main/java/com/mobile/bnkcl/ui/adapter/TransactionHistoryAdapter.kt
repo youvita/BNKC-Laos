@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryResponse
 import com.mobile.bnkcl.databinding.ItemTransactionHistoryLayoutBinding
 import com.mobile.bnkcl.utilities.UtilAnimation
 
-class TransactionHistoryAdapter : BaseAdapter<ItemTransactionHistoryLayoutBinding, CommentsItem, TransactionHistoryAdapter.ViewHolder>() {
+class TransactionHistoryAdapter : BaseAdapter<ItemTransactionHistoryLayoutBinding, TransactionHistoryResponse, TransactionHistoryAdapter.ViewHolder>() {
 
     override fun getLayoutId(viewType: Int): Int {
         return R.layout.item_transaction_history_layout
@@ -18,7 +19,7 @@ class TransactionHistoryAdapter : BaseAdapter<ItemTransactionHistoryLayoutBindin
         return ViewHolder(binding)
     }
 
-    override fun setBindData(holder: ViewHolder, data: CommentsItem, position: Int) {
+    override fun setBindData(holder: ViewHolder, data: TransactionHistoryResponse, position: Int) {
         binding.item = data
         holder.binding.llItem.setOnClickListener {
             if (holder.binding.llExpandInfo.visibility == View.VISIBLE) {

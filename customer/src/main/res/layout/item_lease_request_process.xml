@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.mobile.bnkcl.data.CommentsItem" />
+        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoData" />
 
         <variable
             name="viewModel"
-            type="CommentsItem" />
+            type="LeaseInfoData" />
     </data>
 
     <androidx.cardview.widget.CardView
