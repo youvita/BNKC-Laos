@@ -4,19 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TransactionHistoryResponse (
 
-    @SerializedName("payment_date")
-    val paymentDate: String? = null,
-
-    @SerializedName("paid_amount")
-    val paidAmount: String? = null,
-
-    @SerializedName("penalty")
-    val penalty: String? = null,
-
-    @SerializedName("interest")
-    val interest: String? = null,
-
-    @SerializedName("principal")
-    val principal: String? = null
+    @SerializedName("transaction_history")
+    val transactionHistory: List<TransactionHistoryData>? = null
 
 )

@@ -3,6 +3,7 @@ package com.mobile.bnkcl.ui.main.fragment.menu
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
@@ -28,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
 
     private val viewModel: MenuViewModel by viewModels()
+    private var profileData: ProfileData? = null
 
     private var userRole = 0
 
@@ -43,6 +46,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
         super.onViewCreated(view, savedInstanceState)
         viewModel.context = requireContext()
         binding.menuViewModel = viewModel
+        profileData = ProfileData()
+
+        viewModel.userProfileLiveData.observe(requireActivity()) {
+            profileData = it
+            Log.d(">>>", "onViewCreated: " + profileData!!.account_number)
+        }
 
         if (mainViewModel.isLogin){
             binding.btnSignUp.visibility = View.GONE
@@ -119,7 +128,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
         if (v != null) {
             when(v.id) {
                 R.id.ll_profile -> {
-                    startActivity(Intent(requireContext(), AccountInformationActivity::class.java))
+                    startActivity(Intent(requireContext(), AccountInformationActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
                 }
                 R.id.ll_notice -> {
                     startActivity(Intent(requireContext(), NoticeActivity::class.java))

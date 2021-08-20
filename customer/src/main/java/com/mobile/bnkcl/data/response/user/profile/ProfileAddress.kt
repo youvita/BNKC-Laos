@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.data.response.user.profile
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ProfileAddress(
 
@@ -18,4 +19,4 @@ data class ProfileAddress(
 
         @SerializedName("more_info")
         val more_info: String? = null,
-)
+) : Serializable

@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.transaction.TransactionHistoryRequest
-import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryResponse
+import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData
 import com.mobile.bnkcl.databinding.ActivityTransactionHistoryBinding
 import com.mobile.bnkcl.ui.adapter.TransactionHistoryAdapter
 import com.mobile.bnkcl.utilities.Utils
@@ -30,7 +30,6 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initToolbar()
-        initAdapter()
 
         transactionHistoryRequest = TransactionHistoryRequest()
 
@@ -39,11 +38,11 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         }
 
         transactionHistoryRequest.contract_no = CONTRACT_NO
-        transactionHistoryRequest.payment_date_dir = "ASC"
+        transactionHistoryRequest.payment_date_dir = "asc"
 
         viewModel.getTotalLeaseSchedule(transactionHistoryRequest)
         viewModel.transactionHistoryLiveData.observe(this) {
-            // Internal server error!
+            initAdapter(it.transactionHistory!!)
         }
     }
 
@@ -53,20 +52,11 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         binding.toolbarLeftButton.setOnClickListener(this)
     }
 
-    private fun initAdapter() {
-
-        val list = mutableListOf<TransactionHistoryResponse>()
-
-        val item = TransactionHistoryResponse()
-
-        for (i in 0..14) {
-            list.add(i, item)
-        }
-
+    private fun initAdapter(transactionHistoryData: List<TransactionHistoryData>) {
         binding.transactionRecyclerview.adapter = transactionAdapter
-        transactionAdapter.addItemList(list)
+        transactionAdapter.addItemList(transactionHistoryData)
 
-        if (list.size == 0) {
+        if (transactionHistoryData.isEmpty()) {
             binding.llWrapSort.visibility = View.GONE
             binding.llNoData.visibility = View.VISIBLE
         }

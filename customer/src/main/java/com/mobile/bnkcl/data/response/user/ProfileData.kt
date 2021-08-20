@@ -1,8 +1,8 @@
 package com.mobile.bnkcl.data.response.user
 
 import com.google.gson.annotations.SerializedName
-import com.mobile.bnkcl.data.response.user.profile.Address
 import com.mobile.bnkcl.data.response.user.profile.ProfileAddress
+import java.io.Serializable
 
 data class ProfileData(
 
@@ -44,4 +44,4 @@ data class ProfileData(
 
         @SerializedName("my_lease")
         var my_lease: List<String>? = null
-)
+) : Serializable

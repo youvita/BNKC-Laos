@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequest
-import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleResponse
+import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData
 import com.mobile.bnkcl.databinding.ActivityTotalLeaseScheduleBinding
 import com.mobile.bnkcl.ui.adapter.TotalLeaseScheduleAdapter
 import com.mobile.bnkcl.utilities.Utils
@@ -31,17 +31,16 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         super.onCreate(savedInstanceState)
         initToolbar()
         totalLeaseScheduleRequest= TotalLeaseScheduleRequest()
-        initAdapter()
 
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
         }
 
         totalLeaseScheduleRequest.contract_no = CONTRACT_NO
-        totalLeaseScheduleRequest.payment_date_dir = "ASC"
+        totalLeaseScheduleRequest.payment_date_dir = "asc"
         viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
         viewModel.totalLeaseScheduleLiveData.observe(this) {
-            // Internal server error!
+            initAdapter(it.totalLeaseScheduleData!!)
         }
 
         binding.segmentButton.setOnPositionChangedListener {
@@ -70,17 +69,9 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 //        }
     }
 
-    private fun initAdapter() {
-        val list = mutableListOf<TotalLeaseScheduleResponse>()
-
-        val item = TotalLeaseScheduleResponse()
-
-        for (i in 0..14) {
-            list.add(i, item)
-        }
-
+    private fun initAdapter(totalLeaseScheduleList: List<TotalLeaseScheduleData>) {
         binding.totalLeaseScheduleRecyclerview.adapter = totalLeaseScheduleAdapter
-        totalLeaseScheduleAdapter.addItemList(list)
+        totalLeaseScheduleAdapter.addItemList(totalLeaseScheduleList)
     }
 
     override fun onClick(v: View?) {

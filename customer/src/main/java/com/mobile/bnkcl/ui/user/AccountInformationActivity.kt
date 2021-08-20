@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
@@ -17,11 +18,28 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     View.OnClickListener {
 
     private val accountInformationViewModel: AccountInformationViewModel by viewModels()
+    private var profileData: ProfileData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        profileData = ProfileData()
         setClickListeners()
+
+        if (intent != null) {
+            profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
+
+            if (null != profileData!!.address) {
+                val moreInfo: String? = profileData!!.address!!.more_info
+                val state: String? = profileData!!.address!!.state!!.alias1 as String?
+                val district: String? = profileData!!.address!!.district!!.alias1 as String?
+                val village: String? = profileData!!.address!!.village!!.alias1 as String?
+                if (null == state || state.isEmpty()) {
+                    binding.tvAddress.text = getString(R.string.not_available)
+                } else {
+                    binding.tvAddress.text = moreInfo.plus(village).plus(district).plus(state)
+                }
+            }
+        }
 
         accountInformationViewModel.getAccountInformation()
         accountInformationViewModel.accountInformationLiveData.observe(this) {

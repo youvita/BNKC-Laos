@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryResponse"/>
+        <import type="com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData"/>
         <variable
             name="item"
-            type="TransactionHistoryResponse" />
+            type="TransactionHistoryData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

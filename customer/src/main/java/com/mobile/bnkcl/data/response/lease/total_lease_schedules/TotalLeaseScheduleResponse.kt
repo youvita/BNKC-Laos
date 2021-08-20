@@ -11,6 +11,6 @@ data class TotalLeaseScheduleResponse (
     val totalInterest: String? = null,
 
     @SerializedName("total_lease_schedules")
-    val totalLeaseScheduleData: TotalLeaseScheduleData? = null
+    val totalLeaseScheduleData: List<TotalLeaseScheduleData>? = null
 
 )

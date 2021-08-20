@@ -2,6 +2,7 @@ package com.mobile.bnkcl.data.response.user.profile
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Area(
 
@@ -25,4 +26,4 @@ data class Area(
 
     @SerializedName("branches_count")
     var branched_count: Any? = null
-)
+): Serializable

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleResponse"/>
+        <import type="com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData"/>
         <variable
             name="item"
-            type="TotalLeaseScheduleResponse" />
+            type="TotalLeaseScheduleData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
