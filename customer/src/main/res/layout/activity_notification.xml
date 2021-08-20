@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="activity"
+            type="com.mobile.bnkcl.ui.alarm.AlarmActivity" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +64,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_notification"/>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
 

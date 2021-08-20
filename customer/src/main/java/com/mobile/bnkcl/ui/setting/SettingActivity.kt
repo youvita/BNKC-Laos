@@ -17,6 +17,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     private val settingViewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(resources.getColor(R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
         binding.activity = this
 

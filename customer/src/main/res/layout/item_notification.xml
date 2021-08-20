@@ -5,62 +5,76 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.mobile.bnkcl.data.response.alarm.AlarmItem" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="4dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
-            android:paddingStart="@dimen/padding_15dp"
-            android:paddingEnd="@dimen/padding_18dp"
-            android:paddingBottom="@dimen/padding_15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/margin_15dp">
 
             <ImageView
+                android:id="@+id/icon"
                 android:layout_width="@dimen/width_24dp"
-                android:layout_height="@dimen/height_24dp"
-                android:layout_marginTop="@dimen/margin_15dp"
-                android:src="@drawable/ic_notification_red_ico" />
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:src="@drawable/ic_notification_red_ico"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_title"
+                tools:ignore="ContentDescription" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/font15_263238_medium"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="@dimen/margin_18dp"
-                android:orientation="vertical">
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:layout_marginEnd="@dimen/margin_15dp"
+                android:text="@{item.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="New Card Payment Fee fjsldfj lsdjflkfjgjggjghkhkhkjggjhjhjsdjf lksjdfl sdlkfjsldfj slkdfjslkdfj sdlkfj" />
 
+            <TextView
+                android:id="@+id/tv_content"
+                style="@style/font13_263238_regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_6dp"
+                android:layout_marginEnd="@dimen/margin_15dp"
+                android:gravity="center_vertical"
+                android:text="@{item.content}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="We would like to announce that new payment fee...ksjldfjsd lkjsdflkjsdlkf lkjsdlkfjlsdk fkljsdlkfjslkd flskjdfklsd fklsjdf sdkfjklsdjf" />
 
-                <TextView
-                    style="@style/font15_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    tools:text="New Card Payment Fee" />
+            <TextView
+                style="@style/font_13_90A4AE_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:gravity="center_vertical"
+                android:text="@{item.created_on}"
+                app:layout_constraintStart_toStartOf="@+id/tv_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                tools:text="02-03-2020 - 09:30 a.m." />
 
-                <TextView
-                    android:id="@+id/tv_content"
-                    style="@style/font13_263238_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_6dp"
-                    android:gravity="center_vertical"
-                    tools:text="We would like to announce that new payment fee..." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    style="@style/font_13_90A4AE_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10dp"
-                    android:gravity="center_vertical"
-                    tools:text="02-03-2020 - 09:30 a.m." />
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

@@ -27,4 +27,7 @@ object AdapterModule {
     @Provides
     fun provideLeaseRequestProcessAdapter() = LeaseRequestProcessAdapter()
 
+    @Singleton
+    @Provides
+    fun provideAlarmAdapter() = AlarmAdapter()
 }
