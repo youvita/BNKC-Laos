@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class DashboardResponse (
 
-    @SerializedName("summary")
+    @SerializedName("my_lease_request")
     val summary: SummaryData? = null,
 
-    @SerializedName("my_leases")
-    val my_leases: ArrayList<MyLeasesData>? = null
+    @SerializedName("lease_in_use")
+    val myLeases: ArrayList<MyLeasesData>? = null
 
 )

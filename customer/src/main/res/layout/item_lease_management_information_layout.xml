@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoData"/>
+        <variable
+            name="leaseInfo"
+            type="LeaseInfoData" />
+
+    </data>
+
     <LinearLayout
         android:id="@+id/ll_wrap"
         android:layout_width="match_parent"
@@ -17,14 +25,14 @@
             tools:ignore="UselessParent">
 
             <LinearLayout
-                android:id="@+id/ll_loan_info"
+                android:id="@+id/ll_lease_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <TextView
-                    android:id="@+id/tv_loan_info"
+                    android:id="@+id/tv_lease_info"
                     style="@style/font15_263238_medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -49,7 +57,7 @@
 
             <!-- Expand Content -->
             <LinearLayout
-                android:id="@+id/ll_loan_info_expand"
+                android:id="@+id/ll_lease_info_expand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -83,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="CDE439283" />
+                        android:text="@{leaseInfo.leaseAccount}" />
                 </LinearLayout>
 
                 <!-- Product Type -->
@@ -107,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="Automobile" />
+                        android:text="@{leaseInfo.productType}" />
                 </LinearLayout>
 
                 <!-- Lease Amount -->
@@ -125,13 +133,13 @@
                         android:text="@string/lease_09" />
 
                     <TextView
-                        android:id="@+id/tv_interest"
+                        android:id="@+id/tv_lease_amount"
                         style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="500,000,000 Kip" />
+                        android:text="@{leaseInfo.leaseAmount}" />
                 </LinearLayout>
 
                 <!-- Interest -->
@@ -149,13 +157,13 @@
                         android:text="@string/lease_10" />
 
                     <TextView
-                        android:id="@+id/tv_loan_term"
+                        android:id="@+id/tv_lease_interest"
                         style="@style/font15_263238_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="19.0%" />
+                        android:text="@{leaseInfo.leaseInterestRate}" />
                 </LinearLayout>
 
                 <!-- Term -->
@@ -179,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="36 Months" />
+                        android:text="@{leaseInfo.leaseTerm}" />
                 </LinearLayout>
 
                 <!-- Disbursement Date -->
@@ -203,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="14-04-2020" />
+                        android:text="@{leaseInfo.disbursementDate}" />
                 </LinearLayout>
 
                 <!-- Maturity Date -->
@@ -227,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="14-04-2023" />
+                        android:text="@{leaseInfo.maturityDate}" />
                 </LinearLayout>
 
                 <!-- Repayment Date -->
@@ -251,7 +259,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="Every 15th" />
+                        android:text="@{leaseInfo.repaymentDate}" />
                 </LinearLayout>
 
                 <!-- Monthly Repayment -->
@@ -275,7 +283,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="14,000,000 Kip" />
+                        android:text="@{leaseInfo.monthlyRepayment}" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -20,9 +20,9 @@ class LeaseManagementViewModel @Inject constructor(private val leaseRepo: LeaseR
 
     private val _lease: MutableLiveData<LeaseInfoResponse> = MutableLiveData()
     val leaseLiveData: LiveData<LeaseInfoResponse> = _lease
-    fun gerLeaseInfo(){
+    fun getLeaseInfo(contractNo: String){
         viewModelScope.launch {
-            leaseRepo.getLeaseInfo().onEach { resource ->
+            leaseRepo.getLeaseInfo(contractNo).onEach { resource ->
                 if (resource.status == Status.ERROR) {
                     val code = resource.errorCode
                     val title = resource.messageTitle

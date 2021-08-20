@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="@{leaseItem.lease_balance}"
+                        android:text="@{leaseItem.leaseBalance}"
                         tools:text="3,650.00 USD" />
 
                 </LinearLayout>
@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="@{leaseItem.repayment_date}"
+                        android:text="@{leaseItem.comingRepaymentDate}"
                         tools:text="14-04-2020" />
 
                 </LinearLayout>
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="@{leaseItem.repayment_amount}"
+                        android:text="@{leaseItem.totalPayment}"
                         tools:text="152.08 USD" />
 
                 </LinearLayout>

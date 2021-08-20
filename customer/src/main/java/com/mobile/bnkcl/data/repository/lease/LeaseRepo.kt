@@ -19,12 +19,12 @@ class LeaseRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient
         RetrofitBuilder(context, okHttpClient).getRetrofit().create(LeaseApi::class.java)
     }
 
-    fun getLeaseInfo(): Flow<Resource<LeaseInfoResponse>> = flow {
+    fun getLeaseInfo(contractNo: String): Flow<Resource<LeaseInfoResponse>> = flow {
         delay(1000)
         try {
             val request = object: RemoteDataSource<LeaseInfoResponse>(){
                 override suspend fun createCall(): Response<LeaseInfoResponse> {
-                    return leaseApi.getLeaseInfo("585628843")
+                    return leaseApi.getLeaseInfo(contractNo)
                 }
             }
             request.networkRequest()

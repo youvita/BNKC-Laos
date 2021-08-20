@@ -26,7 +26,7 @@ data class LeaseInfoData (
     val maturityDate: String? = null,
 
     @SerializedName("repayment_day")
-    val repaymentDay: String? = null,
+    val repaymentDate: String? = null,
 
     @SerializedName("monthly_repayment")
     val monthlyRepayment: String? = null

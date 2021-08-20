@@ -2,7 +2,7 @@ package com.mobile.bnkcl.data.response.lease.total_lease_schedules
 
 import com.google.gson.annotations.SerializedName
 
-data class TotalLeaseSchedulesResponse (
+data class TotalLeaseScheduleResponse (
 
     @SerializedName("total_principal")
     val totalPrincipal: String? = null,
@@ -11,6 +11,6 @@ data class TotalLeaseSchedulesResponse (
     val totalInterest: String? = null,
 
     @SerializedName("total_lease_schedules")
-    val totalLeaseSchedulesData: TotalLeaseSchedulesData? = null
+    val totalLeaseScheduleData: TotalLeaseScheduleData? = null
 
 )

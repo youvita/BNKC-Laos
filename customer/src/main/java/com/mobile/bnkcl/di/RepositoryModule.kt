@@ -11,6 +11,8 @@ import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
+import com.mobile.bnkcl.data.repository.lease.total_schedule.TotalLeaseScheduleRepo
+import com.mobile.bnkcl.data.repository.lease.transaction.TransactionHistoryRepo
 import com.mobile.bnkcl.data.repository.notice.NoticeRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.repository.signup.SignUpRepo
@@ -95,6 +97,18 @@ object RepositoryModule {
     @Provides
     fun provideClaimRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): ClaimRepo{
         return ClaimRepo(context, okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTotalLeaseScheduleRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): TotalLeaseScheduleRepo {
+        return TotalLeaseScheduleRepo(context, okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTransactionHistoryRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): TransactionHistoryRepo {
+        return TransactionHistoryRepo(context, okHttpClient)
     }
 
 }

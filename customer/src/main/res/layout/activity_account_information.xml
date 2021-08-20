@@ -229,8 +229,8 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
-                                                android:text="@{profile.gender.equalsIgnoreCase(&quot;M&quot;)? @string/sign_up_18 : @string/sign_up_19 }"
-                                                android:maxLines="1"/>
+                                                android:maxLines="1"
+                                                android:text="@{profile.gender.equalsIgnoreCase(&quot;M&quot;)? @string/sign_up_18 : @string/sign_up_19 }" />
 
 
                                         </LinearLayout>

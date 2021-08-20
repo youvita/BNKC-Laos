@@ -45,13 +45,13 @@ class LeaseViewPagerAdapter(listener: LoanPagerClickedListener) :
         holder.setBinding(item, position)
         holder.binding.btnBillPayment.setOnClickListener {
             mListener.onBillPaymentClicked(
-                item.contract_no,
+                item.contractNo,
                 position
             )
         }
         holder.binding.btnManagement.setOnClickListener {
             mListener.onManagementClicked(
-                item.contract_no,
+                item.contractNo,
                 position
             )
         }

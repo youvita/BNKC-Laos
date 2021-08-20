@@ -102,6 +102,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
     }
 
     private fun setClickListeners() {
+        binding.llProfile.setOnClickListener(this)
         binding.llNotice.setOnClickListener(this)
         binding.llCsCenter.setOnClickListener(this)
         binding.llHome.setOnClickListener(this)

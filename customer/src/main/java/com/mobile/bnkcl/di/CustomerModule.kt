@@ -4,6 +4,8 @@ import com.mobile.bnkcl.app.AppBuild
 import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.dashboard.DashboardApi
 import com.mobile.bnkcl.data.api.lease.LeaseApi
+import com.mobile.bnkcl.data.api.lease.total_schedule.TotalLeaseScheduleApi
+import com.mobile.bnkcl.data.api.lease.transaction.TransactionHistoryApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
 import dagger.Module
 import dagger.Provides
@@ -50,5 +52,23 @@ object CustomerModule {
             .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(LeaseApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTotalLeaseScheduleService(retrofit: Retrofit.Builder): TotalLeaseScheduleApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(TotalLeaseScheduleApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTransactionHistoryService(retrofit: Retrofit.Builder): TransactionHistoryApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(TransactionHistoryApi::class.java)
     }
 }

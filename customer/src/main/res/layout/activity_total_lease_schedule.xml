@@ -175,25 +175,25 @@
                         tools:itemCount="2"
                         tools:listitem="@layout/item_total_lease_schedule_layout" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_web_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/margin_10dp"
-                        android:layout_marginBottom="@dimen/margin_20dp"
-                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                        android:gravity="center"
-                        android:padding="15dp"
-                        android:visibility="gone">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/ll_web_container"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_marginTop="@dimen/margin_10dp"-->
+<!--                        android:layout_marginBottom="@dimen/margin_20dp"-->
+<!--                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
+<!--                        android:gravity="center"-->
+<!--                        android:padding="15dp"-->
+<!--                        android:visibility="gone">-->
 
-                        <WebView
-                            android:id="@+id/web_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:rotation="90"
-                            android:scrollbars="none" />
+<!--                        <WebView-->
+<!--                            android:id="@+id/web_view"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:rotation="90"-->
+<!--                            android:scrollbars="none" />-->
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 

@@ -21,8 +21,7 @@ class ApplicationDialog : BaseDialogFragment<DialogApplicationBinding>() {
     @Inject
     lateinit var cardOffsetDecoration: CardOffsetDecoration
 
-    @Inject
-    lateinit var cardRecyclerView: CardRecyclerView
+    private var cardRecyclerView: CardRecyclerView = CardRecyclerView()
 
 
     override fun getLayoutId(): Int {

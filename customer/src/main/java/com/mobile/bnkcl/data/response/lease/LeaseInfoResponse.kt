@@ -7,10 +7,10 @@ data class LeaseInfoResponse (
     @SerializedName("coming_repayment_amount")
     val comingRepaymentAmount: String? = null,
 
-    @SerializedName("summary")
+    @SerializedName("lease_info")
     val leaseInfoData: LeaseInfoData? = null,
 
-    @SerializedName("my_leases")
+    @SerializedName("coming_repayment_info")
     val comingRepaymentInfoData: ComingRepaymentInfoData? = null
 
 )

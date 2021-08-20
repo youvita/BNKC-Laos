@@ -91,14 +91,14 @@
                     app:layout_collapseMode="pin">
 
                     <LinearLayout
-                        android:id="@+id/ll_filter_loan"
+                        android:id="@+id/ll_filter_lease"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_50dp"
                         android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                         android:gravity="center">
 
                         <TextView
-                            android:id="@+id/tv_loan_type"
+                            android:id="@+id/tv_lease_type"
                             style="@style/font15_263238_medium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -160,16 +160,16 @@
                     android:paddingBottom="@dimen/padding_95dp">
 
                     <include
-                        android:id="@+id/loan_info"
-                        layout="@layout/loan_management_information_item_layout"
+                        android:id="@+id/lease_info"
+                        layout="@layout/item_lease_management_information_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10dp" />
 
                     <include
-                        android:id="@+id/coming_loan_repayment"
+                        android:id="@+id/coming_lease_repayment"
                         style="@style/font14_263238_medium"
-                        layout="@layout/loan_management_coming_payment_item_layout"
+                        layout="@layout/item_lease_management_coming_payment_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10dp" />

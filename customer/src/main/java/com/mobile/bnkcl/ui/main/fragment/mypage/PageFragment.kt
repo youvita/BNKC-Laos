@@ -34,6 +34,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var mLeaseAdapter: LeaseViewPagerAdapter? = null
     private var mBannerAdapter: BannerAdapter? = null
     private var mLeaseData: ArrayList<MyLeasesData>? = null
+    private var mContractNoRecord: ArrayList<String>? = null
     private val mListener: MyLoanCardClickedListener? = null
     private var callback: OnPageChangeCallback? = null
     private var positionIndicator = 0
@@ -62,12 +63,11 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         pageViewModel.getDashboard()
         pageViewModel.dashboardLiveData.observe(requireActivity()) {
-            MLR001 = it.summary?.count_pending!!
-            MLR002 = it.summary.count_in_progress!!
-            MLR003 = it.summary.count_done!!
-            MLR004 = it.summary.count_activated!!
-            it.my_leases?.let { it1 -> mLeaseAdapter!!.addData(it1) }
-            mLeaseData!!.addAll(it.my_leases!!)
+            MLR001 = it.summary?.countApplication!!
+            MLR002 = it.summary.countScreening!!
+            MLR003 = it.summary.countResult!!
+            mLeaseAdapter!!.addData(it.myLeases!!)
+            mLeaseData!!.addAll(it.myLeases)
             setUpLeaseIndicator()
             setUpDashboard(it.summary)
         }
@@ -114,21 +114,21 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     private fun setUpDashboard(summary: SummaryData) {
         myLoanBinding!!.requestMenu.llMenu1.isSelected = MLR001 > 0
-        myLoanBinding!!.requestMenu.llMenu1.isEnabled = summary.count_pending!! > 0
+        myLoanBinding!!.requestMenu.llMenu1.isEnabled = summary.countApplication!! > 0
         myLoanBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.my_loan_menu_001).plus(
             "\n"
         ).plus(MLR001.toString())
-        myLoanBinding!!.requestMenu.llMenu2.isEnabled = summary.count_in_progress!! > 0
+        myLoanBinding!!.requestMenu.llMenu2.isEnabled = summary.countScreening!! > 0
         myLoanBinding!!.requestMenu.tvMenuTitle2.text = getString(R.string.my_loan_menu_002).plus(
             "\n"
         ).plus(MLR002.toString())
-        myLoanBinding!!.requestMenu.llMenu3.isEnabled = summary.count_done!! > 0
+        myLoanBinding!!.requestMenu.llMenu3.isEnabled = summary.countResult!! > 0
         myLoanBinding!!.requestMenu.tvMenuTitle3.text = getString(R.string.my_loan_menu_003).plus(
             "\n"
         ).plus(MLR003.toString())
 
-        myLoanBinding!!.tvLeaseInUseCnt.isEnabled = summary.count_activated != 0
-        myLoanBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(summary.count_activated)
+//        myLoanBinding!!.tvLeaseInUseCnt.isEnabled = summary.count_activated != 0
+//        myLoanBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(summary.count_activated)
 
     }
 
@@ -149,13 +149,18 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     override fun onBillPaymentClicked(contractNo: String?, position: Int) {
         val intent = Intent(requireActivity(), BillPaymentActivity::class.java)
         intent.putExtra("CONTRACT_NO", contractNo)
-        intent.putExtra("TOTAL_PAYMENT", mLeaseData!![position].contract_no)
+        intent.putExtra("TOTAL_PAYMENT", mLeaseData!![position].contractNo)
         startActivity(intent)
     }
 
     override fun onManagementClicked(contractNo: String?, position: Int) {
         val intent = Intent(requireActivity(), LeaseManagementActivity::class.java)
-        intent.putExtra("CONTACT_NO", 2)
+        intent.putExtra("CONTRACT_NO", contractNo)
+        mContractNoRecord = ArrayList()
+        for (i in 0 until mLeaseData!!.size - 1) {
+            mContractNoRecord!!.add(mLeaseData!![i].contractNo!!)
+        }
+        intent.putExtra("CONTRACT_NO_RECORD", mContractNoRecord)
         startActivity(intent)
     }
 
@@ -188,6 +193,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
+                myLoanBinding!!.bannerViewPager.currentItem = position
             }
 
             override fun onPageSelected(position: Int) {
