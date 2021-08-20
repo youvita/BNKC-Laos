@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.alarm
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.alarm.AlarmRequest
@@ -18,11 +19,13 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        alarmViewModel.alarmListLiveData.observe(this) {
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            alarmViewModel.alarmListLiveData.observe(this) {
 
+            }
+            alarmViewModel.alarmRequest = AlarmRequest(1, 10, "")
+            alarmViewModel.getAlarmList()
         }
-        alarmViewModel.alarmRequest = AlarmRequest(1, 10, "")
-        alarmViewModel.getAlarmList()
     }
 
 

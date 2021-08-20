@@ -4,7 +4,7 @@ import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
-import com.mobile.bnkcl.data.api.UserApi
+import com.mobile.bnkcl.data.api.user.UserApi
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.data.response.user.SettingData
 import kotlinx.coroutines.delay

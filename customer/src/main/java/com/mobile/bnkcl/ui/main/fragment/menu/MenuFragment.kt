@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bnkc.library.app.recreateLanguageChanged
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
@@ -93,6 +94,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            viewModel.getUserProfile()
+        }
+    }
+
     private fun setClickListeners() {
         binding.llNotice.setOnClickListener(this)
         binding.llCsCenter.setOnClickListener(this)
@@ -141,7 +149,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     startActivity(Intent(requireContext(), TermsAndConditionsActivity::class.java))
                 }
                 R.id.btn_setting -> {
-                    startActivity(Intent(requireContext(), SettingActivity::class.java))
+                    startActivity(Intent(requireContext(), SettingActivity::class.java).putExtra("push_alarm_enabled", viewModel.userProfileLiveData.value!!.push_alarm_enabled))
                 }
                 R.id.btn_sign_up -> {
                     viewModel.goToSignUp()

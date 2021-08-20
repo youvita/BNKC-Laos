@@ -18,6 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor(private val userRepo: UserRepo) : BaseViewModel() {
 
+    var push_notification_yn: String? = null
+
     private val _updateUserSetting: MutableLiveData<Unit> = MutableLiveData()
     val userSettingLiveData: LiveData<Unit> = _updateUserSetting
     var settingData: SettingData? = null
@@ -31,6 +33,7 @@ class SettingViewModel @Inject constructor(private val userRepo: UserRepo) : Bas
                     RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
                 } else {
                     _updateUserSetting.value = resource.data
+                    push_notification_yn = settingData!!.push_alarm_enabled
                 }
             }.launchIn(viewModelScope)
         }

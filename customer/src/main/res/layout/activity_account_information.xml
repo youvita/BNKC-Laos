@@ -205,7 +205,7 @@
                                                 android:layout_weight="2"
                                                 android:gravity="end"
                                                 android:maxLines="2"
-                                                android:text="@{profile.family_name.concat(` `).concat(profile.given_name)}" />
+                                                android:text="@{profile.name}" />
 
                                         </LinearLayout>
 

@@ -3,7 +3,6 @@ package com.mobile.bnkcl.ui.setting
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
@@ -22,9 +21,21 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         binding.activity = this
 
         initAppVersion()
+        initView()
+        initLiveData()
+    }
 
-        settingViewModel.userSettingLiveData.observe(this@SettingActivity) {
-            Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
+    override fun getLayoutId(): Int {
+        return R.layout.activity_setting
+    }
+
+    private fun initView() {
+        if (intent.hasExtra("push_alarm_enabled")) {
+            settingViewModel.push_notification_yn = intent.getStringExtra("push_alarm_enabled")
+            binding.toggleUser.isChecked = settingViewModel.push_notification_yn.equals("Y")
+        }
+        binding.includedLayout.toolbarLeftButton.setOnClickListener{
+            onBackPressed()
         }
         binding.toggleUser.setOnCheckedChangeListener { _, isChecked ->
             val settingData = SettingData()
@@ -33,11 +44,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             settingViewModel.settingData = settingData
             settingViewModel.updateUserSetting()
         }
-
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_setting
+    private fun initLiveData(){
+        settingViewModel.userSettingLiveData.observe(this@SettingActivity) {
+            Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
+        }
     }
 
     private fun initAppVersion() {

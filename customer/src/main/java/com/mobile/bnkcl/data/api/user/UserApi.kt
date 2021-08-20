@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.data.api
+package com.mobile.bnkcl.data.api.user
 
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.data.response.user.SettingData

@@ -6,6 +6,7 @@
     <data>
 
         <import type="com.mobile.bnkcl.ui.setting.SettingViewModel" />
+        <import type="com.mobile.bnkcl.ui.setting.SettingActivity"/>
 
         <variable
             name="settingViewModel"
@@ -17,7 +18,7 @@
 
         <variable
             name="activity"
-            type="com.mobile.bnkcl.ui.setting.SettingActivity" />
+            type="SettingActivity" />
 
     </data>
 
@@ -32,7 +33,9 @@
             android:background="#f5f7fc"
             tools:context=".ui.settiing.SettingsActivity">
 
-            <include layout="@layout/comm_collapse_toolbar" />
+            <include
+                android:id="@+id/included_layout"
+                layout="@layout/comm_collapse_toolbar" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
