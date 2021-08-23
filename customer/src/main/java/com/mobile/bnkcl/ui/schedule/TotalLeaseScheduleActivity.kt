@@ -9,12 +9,14 @@ import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequ
 import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData
 import com.mobile.bnkcl.databinding.ActivityTotalLeaseScheduleBinding
 import com.mobile.bnkcl.ui.adapter.TotalLeaseScheduleAdapter
+import com.mobile.bnkcl.ui.dialog.SortDialog
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBinding>(), View.OnClickListener {
+class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBinding>(),
+    View.OnClickListener {
 
     @Inject
     lateinit var totalLeaseScheduleAdapter: TotalLeaseScheduleAdapter
@@ -30,18 +32,16 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initToolbar()
-        totalLeaseScheduleRequest= TotalLeaseScheduleRequest()
+        totalLeaseScheduleRequest = TotalLeaseScheduleRequest()
 
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
+            totalLeaseScheduleRequest.contract_no = CONTRACT_NO
+            totalLeaseScheduleRequest.payment_date_dir = "asc"
+            viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
         }
 
-        totalLeaseScheduleRequest.contract_no = CONTRACT_NO
-        totalLeaseScheduleRequest.payment_date_dir = "asc"
-        viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
-        viewModel.totalLeaseScheduleLiveData.observe(this) {
-            initAdapter(it.totalLeaseScheduleData!!)
-        }
+        initLiveData()
 
         binding.segmentButton.setOnPositionChangedListener {
             if (it == 0) {
@@ -53,10 +53,20 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
     }
 
+    private fun initLiveData() {
+        viewModel.totalLeaseScheduleLiveData.observe(this) {
+            initAdapter(it.totalLeaseScheduleData!!)
+
+            binding.tvTotalInterest.text = it.totalInterest
+            binding.tvTotalPrincipal.text = it.totalPrincipal
+        }
+    }
+
     private fun initToolbar() {
         binding.collToolbar.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))
         binding.collToolbar.setCollapsedTitleTypeface(Utils.getTypeFace(this, 3))
         binding.toolbarLeftButton.setOnClickListener(this)
+        binding.tvSort.setOnClickListener(this)
     }
 
     private fun loadWebViewContent(hide: Boolean) {
@@ -75,9 +85,17 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id){
+        when (v!!.id) {
             R.id.toolbar_left_button -> {
                 finish()
+            }
+            R.id.tv_sort -> {
+                val sortDialog = SortDialog("asc")
+                sortDialog.show(supportFragmentManager, sortDialog.tag)
+                sortDialog.onDismissListener {
+                    totalLeaseScheduleRequest.payment_date_dir = sortDialog.sortCode
+                    viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
+                }
             }
         }
     }

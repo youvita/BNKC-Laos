@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityBillPaymentBinding
@@ -34,24 +35,25 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO")
             TOTAL_AMOUNT = intent.getStringExtra("TOTAL_PAYMENT")
-            binding.tvPaymentAmount.text = FormatUtils.getNumberFormatWithoutCurrency(this, TOTAL_AMOUNT.plus("Kip"))
+            binding.tvPaymentAmount.text =
+                FormatUtils.getNumberFormat(this, TOTAL_AMOUNT.plus("Kip"))
         }
 
         binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
         binding.mobilePayment.tvCid.text = CONTRACT_NO
-        binding.mobilePayment.llPayByWing.setOnClickListener(this)
+        binding.mobilePayment.llPay.setOnClickListener(this)
     }
 
     private fun addBankAccountInformationTable() {
         binding.mobilePayment.tableLayout.removeAllViews()
         val bankInfo = arrayOf(
-            arrayOf("ACLEDA Bank", getString(R.string.khr), "001-02-157144-2-5"),
+            arrayOf("ACLEDA Bank", getString(R.string.curr_kip), "001-02-157144-2-5"),
             arrayOf("ACLEDA Bank", getString(R.string.usd), "001-02-157144-1-5"),
-            arrayOf("WING", getString(R.string.khr), "01947372"),
+            arrayOf("WING", getString(R.string.curr_kip), "01947372"),
             arrayOf("WING", getString(R.string.usd), "01751517"),
             arrayOf(
                 "TrueMoney",
-                getString(R.string.khr).plus(" & ").plus(getString(R.string.usd)),
+                getString(R.string.curr_kip).plus(" & ").plus(getString(R.string.usd)),
                 "7077"
             )
         )
@@ -66,8 +68,8 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
         bankName.gravity = Gravity.START
         bankName.setPadding(0, 10, 0, 10)
         bankName.text = resources.getString(R.string.full_payment_014)
-        bankName.setBackgroundColor(resources.getColor(R.color.color_ffffff))
-        bankName.setTextColor(resources.getColor(R.color.color_90A4AE))
+        bankName.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
+        bankName.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
         bankName.textSize = 13f
         bankName.typeface = Utils.getTypeFace(this, 1)
 
@@ -81,8 +83,8 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
         currency.gravity = Gravity.START
         currency.setPadding(0, 10, 0, 10)
         currency.text = resources.getString(R.string.full_payment_015)
-        currency.setBackgroundColor(resources.getColor(R.color.color_ffffff))
-        currency.setTextColor(resources.getColor(R.color.color_90A4AE))
+        currency.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
+        currency.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
         currency.textSize = 13f
         currency.typeface = Utils.getTypeFace(this, 1)
 
@@ -96,8 +98,8 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
         accNum.gravity = Gravity.END
         accNum.setPadding(0, 10, 0, 10)
         accNum.text = resources.getString(R.string.acc_info_09)
-        accNum.setBackgroundColor(resources.getColor(R.color.color_ffffff))
-        accNum.setTextColor(resources.getColor(R.color.color_90A4AE))
+        accNum.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
+        accNum.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
         accNum.textSize = 13f
         accNum.typeface = Utils.getTypeFace(this, 1)
 
@@ -164,8 +166,8 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
                 }
                 textView.setPadding(0, 10, 0, 10)
                 textView.text = bankInfo[i][j]
-                textView.setBackgroundColor(resources.getColor(R.color.color_ffffff))
-                textView.setTextColor(resources.getColor(R.color.color_050a19))
+                textView.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
+                textView.setTextColor(ContextCompat.getColor(this, R.color.color_050a19))
                 textView.textSize = 13f
                 tableRow.addView(textView)
             }
@@ -184,7 +186,7 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
             R.id.toolbar_left_button -> {
                 finish()
             }
-            R.id.ll_pay_by_wing -> {
+            R.id.ll_pay -> {
                 val intent = Intent(this, MobilePaymentActivity::class.java)
                 intent.putExtra("CONTRACT_NO", CONTRACT_NO)
                 intent.putExtra("PAYMENT_AMOUNT", TOTAL_AMOUNT)

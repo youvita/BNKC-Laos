@@ -4,6 +4,7 @@ import com.mobile.bnkcl.app.AppBuild
 import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.dashboard.DashboardApi
 import com.mobile.bnkcl.data.api.lease.LeaseApi
+import com.mobile.bnkcl.data.api.lease.full_payment.FullPaymentApi
 import com.mobile.bnkcl.data.api.lease.total_schedule.TotalLeaseScheduleApi
 import com.mobile.bnkcl.data.api.lease.transaction.TransactionHistoryApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
@@ -70,5 +71,14 @@ object CustomerModule {
             .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(TransactionHistoryApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFullPaymentService(retrofit: Retrofit.Builder): FullPaymentApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(FullPaymentApi::class.java)
     }
 }

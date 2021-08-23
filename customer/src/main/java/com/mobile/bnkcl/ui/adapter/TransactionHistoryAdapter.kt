@@ -21,7 +21,7 @@ class TransactionHistoryAdapter :
     }
 
     override fun setBindData(holder: ViewHolder, data: TransactionHistoryData, position: Int) {
-        binding.item = data
+        binding.transactionHistoryData = data
         holder.binding.llItem.setOnClickListener {
             if (holder.binding.llExpandInfo.visibility == View.VISIBLE) {
                 UtilAnimation.collapse(holder.binding.llExpandInfo, 300)

@@ -20,7 +20,7 @@ class TotalLeaseScheduleAdapter : BaseAdapter<ItemTotalLeaseScheduleLayoutBindin
     }
 
     override fun setBindData(holder: ViewHolder, data: TotalLeaseScheduleData, position: Int) {
-        binding.item = data
+        binding.totalLeaseScheduleData = data
         holder.binding.llItem.setOnClickListener {
             if (holder.binding.llExpandInfo.visibility == View.VISIBLE) {
                 UtilAnimation.collapse(holder.binding.llExpandInfo, 300)

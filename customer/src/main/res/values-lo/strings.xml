@@ -48,8 +48,8 @@
 
     <!-- Currency -->
     <string name="curr_usd">USD</string>
-    <string name="khr">KHR</string>
-    <string name="khr_format">%s KHR</string>
+    <string name="curr_kip">Kip</string>
+    <string name="kip_format">%s Kip</string>
     <string name="usd_format">%s USD</string>
     <string name="usd">USD</string>
     <string name="months">%s Months</string>

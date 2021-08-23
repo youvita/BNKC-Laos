@@ -56,6 +56,7 @@
         <activity android:name=".ui.mobile_payment.MobilePaymentActivity" />
         <activity android:name=".ui.history.TransactionHistoryActivity"/>
         <activity android:name=".ui.schedule.TotalLeaseScheduleActivity"/>
+        <activity android:name=".ui.full_payment.FullPaymentActivity"/>
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />

@@ -197,7 +197,7 @@ companion object{
             currency = input.substring(0, 4)
             currency =
                 if (currency.contains("USD")) context.getString(R.string.curr_usd) else context.getString(
-                    R.string.khr
+                    R.string.curr_kip
                 )
         } catch (e: Exception) {
         }
@@ -213,7 +213,7 @@ companion object{
             number = input.substring(4)
             currency =
                 if (currency.contains("USD")) context.getString(R.string.curr_usd) else context.getString(
-                    R.string.khr
+                    R.string.curr_kip
                 )
             var str1 = number
             var str2 = ""

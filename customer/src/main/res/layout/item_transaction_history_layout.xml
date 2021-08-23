@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData"/>
+
+        <import type="com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData" />
+
         <variable
-            name="item"
+            name="transactionHistoryData"
             type="TransactionHistoryData" />
     </data>
 
@@ -47,6 +49,7 @@
                         android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:singleLine="true"
+                        android:text="@{transactionHistoryData.paymentDate}"
                         app:drawableStartCompat="@drawable/ic_calendar_grey_ico"
                         tools:text="04/03/19" />
 
@@ -54,9 +57,9 @@
                         android:id="@+id/iv_item_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_unfold_ico"
                         android:paddingStart="@dimen/padding_10dp"
                         android:paddingEnd="@dimen/padding_10dp"
+                        android:src="@drawable/ic_unfold_ico"
                         tools:ignore="ContentDescription" />
 
                 </LinearLayout>
@@ -67,7 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <View
                         android:layout_width="match_parent"
@@ -96,7 +100,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="3,280,000"
+                            android:text="@{transactionHistoryData.paymentDate}"
                             tools:text="04/03/19" />
                     </LinearLayout>
 
@@ -121,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="3,280,000"
+                            android:text="@{transactionHistoryData.paidAmount}"
                             tools:text="265,000" />
                     </LinearLayout>
 
@@ -146,7 +150,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="3,280,000"
+                            android:text="@{transactionHistoryData.penalty}"
                             tools:text="224,867" />
                     </LinearLayout>
 
@@ -171,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="3,280,000"
+                            android:text="@{transactionHistoryData.interest}"
                             tools:text="3,280,000" />
                     </LinearLayout>
 
@@ -196,7 +200,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="3,280,000"
+                            android:text="@{transactionHistoryData.principal}"
                             tools:text="3,800,000" />
                     </LinearLayout>
 
