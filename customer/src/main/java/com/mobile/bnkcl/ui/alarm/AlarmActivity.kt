@@ -3,11 +3,12 @@ package com.mobile.bnkcl.ui.alarm
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.alarm.AlarmRequest
 import com.mobile.bnkcl.data.response.alarm.AlarmItem
 import com.mobile.bnkcl.databinding.ActivityNotificationBinding
 import com.mobile.bnkcl.ui.adapter.AlarmAdapter
@@ -25,6 +26,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_notification
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
 
         initView()
@@ -32,20 +34,68 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             binding.lvNotifiation.adapter = adapter
             alarmViewModel.alarmListLiveData.observe(this) {
-                var list: MutableList<AlarmItem> = mutableListOf()
-                for (i in 0..10) {
-                    list.add(i,AlarmItem(i, "test$i", "content$i", "2021.08.20", 'n', 'n'))
+                if (binding.swipeRefreshNotification.isRefreshing) {
+                    binding.swipeRefreshNotification.isRefreshing = false
                 }
-                adapter.addItemList(list)
+                binding.lvNotifiation.removeAllViews()
+                val list: MutableList<AlarmItem> = it.alarms
+//                val list: MutableList<AlarmItem> = mutableListOf() // test empty
+
+                checkUIChangeEmptyData(list)
+                if (list.isNotEmpty()) {
+                    adapter.addItemList(list)
+                }
             }
-            alarmViewModel.alarmRequest = AlarmRequest(1, 10, "")
             alarmViewModel.getAlarmList()
         }
     }
 
-    fun initView() {
-        binding.ivBack.setOnClickListener{
-            onBackPressedDispatcher
+    private fun initView() {
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.swipeRefreshNotification.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorAccent))
+        binding.swipeRefreshNotification.setOnRefreshListener {
+            resetStartPage()
+        }
+
+        binding.lvNotifiation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!binding.swipeRefreshNotification.isRefreshing) {
+                    val layoutManager: LinearLayoutManager =
+                        binding.lvNotifiation.layoutManager as LinearLayoutManager
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+//                    val lastVisible = layoutManager.findLastVisibleItemPosition()
+                    if (dy > 0) {
+                        if (!alarmViewModel.isLastPage()) {
+                            if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                                ++alarmViewModel.pageNo
+                                alarmViewModel.getAlarmList()
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun resetStartPage() {
+        alarmViewModel.pageNo = 0
+        alarmViewModel.getAlarmList()
+    }
+
+    private fun checkUIChangeEmptyData(list: List<AlarmItem>) {
+        if (list.isEmpty()) {
+            binding.lvNotifiation.visibility = View.GONE
+            binding.llNoData.visibility = View.VISIBLE
+        } else {
+            binding.lvNotifiation.visibility = View.VISIBLE
+            binding.llNoData.visibility = View.GONE
         }
     }
 

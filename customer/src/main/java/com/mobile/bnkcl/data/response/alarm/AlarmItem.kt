@@ -17,9 +17,9 @@ data class AlarmItem(
     var created_on: String,
 
     @SerializedName("status")
-    var status: Char,
+    var status: String,
 
     @SerializedName("push_status")
-    var push_status: Char
+    var push_status: String
 
 )

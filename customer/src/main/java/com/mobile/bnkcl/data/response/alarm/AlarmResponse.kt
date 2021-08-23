@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class AlarmResponse(
 
     @SerializedName("alarms")
-    var alarms: List<AlarmItem>,
+    var alarms: MutableList<AlarmItem>,
 
     @SerializedName("last")
     var last: Boolean,

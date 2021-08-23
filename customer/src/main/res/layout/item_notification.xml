@@ -65,13 +65,15 @@
 
             <TextView
                 style="@style/font_13_90A4AE_regular"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_15dp"
                 android:gravity="center_vertical"
                 android:text="@{item.created_on}"
                 app:layout_constraintStart_toStartOf="@+id/tv_content"
                 app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:text="02-03-2020 - 09:30 a.m." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.SettingData
@@ -17,7 +18,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     private val settingViewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setStatusBarColor(resources.getColor(R.color.colorPrimaryDark))
+        setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
         binding.activity = this
 

@@ -19,12 +19,14 @@ import javax.inject.Inject
 @HiltViewModel
 class AlarmViewModel @Inject constructor(private var alarmRepo: AlarmRepo) : BaseViewModel() {
 
+    var pageNo = 0
+    var lastpage = false
+
     private val _getAlarmList: MutableLiveData<AlarmResponse> = MutableLiveData()
     val alarmListLiveData: LiveData<AlarmResponse> = _getAlarmList
-    var alarmRequest: AlarmRequest? = null
     fun getAlarmList() {
         viewModelScope.launch {
-            alarmRepo.getAlarmList(alarmRequest!!).onEach { resource ->
+            alarmRepo.getAlarmList(AlarmRequest(pageNo, 10, "")).onEach { resource ->
                 if (resource.status == Status.ERROR) {
                     val code = resource.errorCode
                     val title = resource.messageTitle
@@ -32,8 +34,13 @@ class AlarmViewModel @Inject constructor(private var alarmRepo: AlarmRepo) : Bas
                     RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
                 } else {
                     _getAlarmList.value = resource.data
+                    lastpage = resource.data!!.last
                 }
             }.launchIn(viewModelScope)
         }
+    }
+
+    fun isLastPage(): Boolean {
+        return lastpage
     }
 }
