@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -49,7 +50,7 @@ android {
 
         develop {
             signingConfig signingConfigs.debug
-            applicationIdSuffix = ".develop"    // show up package app log development when run app
+//            applicationIdSuffix = ".develop"    // show up package app log development when run app
             versionCode 1
             versionName "1.0.0"
 
@@ -62,7 +63,7 @@ android {
 
         production {
             signingConfig signingConfigs.release
-            applicationIdSuffix = ".release"    // show up package app log release when run app
+//            applicationIdSuffix = ".release"    // show up package app log release when run app
             versionCode 1
             versionName "1.0.0"
 
@@ -134,4 +135,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    //fcm
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation deps.firebase_messaging
+    implementation deps.firebase_analytics
 }

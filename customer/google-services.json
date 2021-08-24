@@ -1,0 +1,185 @@
+{
+  "project_info": {
+    "project_number": "298480253661",
+    "firebase_url": "https://kosign-projects.firebaseio.com",
+    "project_id": "kosign-projects",
+    "storage_bucket": "kosign-projects.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298480253661:android:bab49cf1f682a979d0b934",
+        "android_client_info": {
+          "package_name": "com.kosign.wegarden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGKMe31TIIY-5IyRiBLjuulLVR3d5CszQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298480253661:android:45b4dd0a6e484f09d0b934",
+        "android_client_info": {
+          "package_name": "com.mobile.bnk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGKMe31TIIY-5IyRiBLjuulLVR3d5CszQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298480253661:android:fff832a2d326cf46d0b934",
+        "android_client_info": {
+          "package_name": "com.mobile.bnk.employee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGKMe31TIIY-5IyRiBLjuulLVR3d5CszQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298480253661:android:848594ebdf1f271ad0b934",
+        "android_client_info": {
+          "package_name": "com.mobile.bnkcl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGKMe31TIIY-5IyRiBLjuulLVR3d5CszQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298480253661:android:cfaba00a4a671c90d0b934",
+        "android_client_info": {
+          "package_name": "com.wabooks.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGKMe31TIIY-5IyRiBLjuulLVR3d5CszQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298480253661:android:f12ae1c3e5846c6ad0b934",
+        "android_client_info": {
+          "package_name": "com.webcash.wabooks.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGKMe31TIIY-5IyRiBLjuulLVR3d5CszQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298480253661-c07l72t0orujmk8vqd0t3n1vovt7c8j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
