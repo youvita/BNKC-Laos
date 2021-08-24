@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivitySettingBinding
+import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,6 +48,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             settingViewModel.settingData = settingData
             settingViewModel.updateUserSetting()
         }
+
+        binding.tvResetPin.setOnClickListener{
+            val intent: Intent
+            if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
+                intent = Intent(this, PinCodeActivity::class.java)
+                intent.putExtra("owner", "setting")
+                intent.putExtra("label", resources.getString(R.string.pin_05))
+                intent.putExtra("RESETPIN", true)
+            } else {
+                intent = Intent(this, HomeActivity::class.java)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun initLiveData(){
@@ -56,13 +71,5 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
 
     private fun initAppVersion() {
         binding.appVersion = this.packageManager.getPackageInfo(this.packageName, 0).versionName
-    }
-
-    fun goToResetPin() {
-        val intent = Intent(this, PinCodeActivity::class.java)
-        intent.putExtra("owner", "setting")
-        intent.putExtra("label", resources.getString(R.string.pin_05))
-        intent.putExtra("RESETPIN", true)
-        startActivity(intent)
     }
 }

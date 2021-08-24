@@ -31,7 +31,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 
         initView()
 
-        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+//        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             binding.lvNotifiation.adapter = adapter
             alarmViewModel.alarmListLiveData.observe(this) {
                 if (binding.swipeRefreshNotification.isRefreshing) {
@@ -46,7 +46,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
                 }
             }
             alarmViewModel.getAlarmList()
-        }
+//        }
     }
 
     private fun initView() {

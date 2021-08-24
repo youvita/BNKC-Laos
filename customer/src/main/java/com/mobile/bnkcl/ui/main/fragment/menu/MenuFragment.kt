@@ -159,7 +159,14 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     startActivity(Intent(requireContext(), TermsAndConditionsActivity::class.java))
                 }
                 R.id.btn_setting -> {
-                    startActivity(Intent(requireContext(), SettingActivity::class.java).putExtra("push_alarm_enabled", viewModel.userProfileLiveData.value!!.push_alarm_enabled))
+                    val intent = Intent(requireContext(), SettingActivity::class.java)
+                    if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
+                        intent.putExtra(
+                            "push_alarm_enabled",
+                            viewModel.userProfileLiveData.value!!.push_alarm_enabled
+                        )
+                    }
+                    startActivity(intent)
                 }
                 R.id.btn_sign_up -> {
                     viewModel.goToSignUp()

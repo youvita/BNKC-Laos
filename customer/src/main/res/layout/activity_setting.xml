@@ -116,7 +116,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:onClick="@{() -> activity.goToResetPin()}"
                                 android:text="@string/setting_04"
                                 app:drawableRightCompat="@drawable/right_red_arrow_ico" />
                         </LinearLayout>
