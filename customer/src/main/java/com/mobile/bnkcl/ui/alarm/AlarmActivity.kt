@@ -37,7 +37,6 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
                 if (binding.swipeRefreshNotification.isRefreshing) {
                     binding.swipeRefreshNotification.isRefreshing = false
                 }
-                binding.lvNotifiation.removeAllViews()
                 val list: MutableList<AlarmItem> = it.alarms
 //                val list: MutableList<AlarmItem> = mutableListOf() // test empty
 

@@ -21,6 +21,7 @@ import com.mobile.bnkcl.data.response.dashboard.SummaryData
 import com.mobile.bnkcl.databinding.FragmentMyPageBinding
 import com.mobile.bnkcl.ui.adapter.BannerAdapter
 import com.mobile.bnkcl.ui.adapter.LeaseViewPagerAdapter
+import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.bill.BillPaymentActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
@@ -80,6 +81,9 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     private fun initClickListener() {
         myLoanBinding!!.requestMenu.llMenu1.setOnClickListener(this)
+        myLoanBinding!!.btnNotification.setOnClickListener{
+            startActivity(Intent(activity, AlarmActivity::class.java))
+        }
     }
 
     private fun setUpLeaseIndicator() {
