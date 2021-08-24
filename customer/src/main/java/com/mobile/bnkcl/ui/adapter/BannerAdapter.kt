@@ -1,63 +1,29 @@
 package com.mobile.bnkcl.ui.adapter
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.viewpager.widget.PagerAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.com.view.CustomPager
-import com.mobile.bnkcl.utilities.UtilsGlide
-import java.util.*
+import com.mobile.bnkcl.databinding.BannerItemLayoutBinding
 
-class BannerAdapter(private val context: Context, private val imageList: ArrayList<Int>) :
-    PagerAdapter() {
-    private var mCurrentPosition = -1
-    override fun getCount(): Int {
-        return imageList.size
+class BannerAdapter: BaseAdapter<BannerItemLayoutBinding, Int, BannerAdapter.ViewHolder>() {
+
+    override fun getLayoutId(viewType: Int): Int {
+        return R.layout.banner_item_layout
     }
 
-    override fun isViewFromObject(
-        view: View,
-        `object`: Any
-    ): Boolean {
-        return view === `object` as LinearLayout
+    override fun setViewHolder(parent: ViewGroup): ViewHolder {
+        return ViewHolder(binding)
     }
 
-    override fun setPrimaryItem(
-        container: ViewGroup,
-        position: Int,
-        `object`: Any
-    ) {
-        super.setPrimaryItem(container, position, `object`)
-        if (position != mCurrentPosition) {
-            val linearLayout = `object` as LinearLayout
-            val pager: CustomPager = container as CustomPager
-            mCurrentPosition = position
-            pager.measureCurrentView(linearLayout)
-        }
+    override fun setBindData(holder: ViewHolder, data: Int, position: Int) {
+        binding.bannerImage = data
     }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view: View =
-            LayoutInflater.from(context).inflate(R.layout.banner_item_layout, container, false)
-        val imageView =
-            view.findViewById<ImageView>(R.id.img_banner)
-
-        UtilsGlide.loadRounded(context, imageList[position], imageView, null)
-        container.addView(view)
-        return view
-    }
-
-    override fun destroyItem(
-        container: ViewGroup,
-        position: Int,
-        `object`: Any
-    ) {
-        val view = `object` as View
-        container.removeView(view)
-    }
+    /**
+     * provide a reference to the type of views that you are using custom view holder
+     * @param binding item binding
+     */
+    class ViewHolder(binding: BannerItemLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
 }

@@ -42,5 +42,5 @@ class CardModeLayoutManager : LinearLayoutManager {
 
    private val verticalSpace get() = width - paddingTop - paddingBottom
 
-   private val ratio = 0.95f // change to 0.7f for 70%
+   private val ratio = 1f // change to 0.7f for 70%
 }

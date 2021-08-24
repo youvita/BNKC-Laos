@@ -30,4 +30,8 @@ object AdapterModule {
     @Singleton
     @Provides
     fun provideAlarmAdapter() = AlarmAdapter()
+
+    @Singleton
+    @Provides
+    fun provideBannerAdapter() = BannerAdapter()
 }

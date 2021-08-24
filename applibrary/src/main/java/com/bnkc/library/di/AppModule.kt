@@ -38,7 +38,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideCardItemOffsetDecoration(@ApplicationContext context: Context): CardOffsetDecoration {
-        val cardSpacing = context.resources.getDimensionPixelOffset(R.dimen.default_spacing_small)
+        val cardSpacing = context.resources.getDimensionPixelOffset(R.dimen.default_spacing_5dp)
         return CardOffsetDecoration(cardSpacing)
     }
 

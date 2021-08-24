@@ -12,8 +12,9 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.bnkc.library.custom.cardview.CardOffsetDecoration
+import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
@@ -26,14 +27,24 @@ import com.mobile.bnkcl.ui.bill.BillPaymentActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     LeaseViewPagerAdapter.LoanPagerClickedListener, View.OnClickListener {
 
+    @Inject
+    lateinit var cardRecyclerView: CardRecyclerView
+
+    @Inject
+    lateinit var mBannerAdapter: BannerAdapter
+
+    @Inject
+    lateinit var itemOffsetDecoration: CardOffsetDecoration
+
     private var myLoanBinding: FragmentMyPageBinding? = null
     private var mLeaseAdapter: LeaseViewPagerAdapter? = null
-    private var mBannerAdapter: BannerAdapter? = null
+//    private var mBannerAdapter: BannerAdapter? = null
     private var mLeaseData: ArrayList<MyLeasesData>? = null
     private var mContractNoRecord: ArrayList<String>? = null
     private val mListener: MyLoanCardClickedListener? = null
@@ -182,36 +193,43 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         bannerArray!!.add(R.drawable.banner_2)
         bannerArray!!.add(R.drawable.banner_3)
         bannerArray!!.add(R.drawable.banner_4)
-        mBannerAdapter = BannerAdapter(requireActivity().applicationContext, bannerArray!!)
-        myLoanBinding!!.bannerViewPager.adapter = mBannerAdapter
-        myLoanBinding!!.bannerViewPager.offscreenPageLimit = 4
-        addIndicator(
-            myLoanBinding!!.llBannerIndicator,
-            mBannerAdapter!!.count,
-            0
-        )
 
-        myLoanBinding!!.bannerViewPager.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                myLoanBinding!!.bannerViewPager.currentItem = position
-            }
+        myLoanBinding?.bannerViewPager?.adapter = mBannerAdapter
+        myLoanBinding?.bannerViewPager?.removeItemDecoration(itemOffsetDecoration)
+        myLoanBinding?.bannerViewPager?.addItemDecoration(itemOffsetDecoration)
+        cardRecyclerView.attachToRecyclerView(myLoanBinding?.bannerViewPager)
+        cardRecyclerView.setScale(1f)
 
-            override fun onPageSelected(position: Int) {
-                page = position
+//        mBannerAdapter = BannerAdapter(requireActivity().applicationContext, bannerArray!!)
+//        myLoanBinding!!.bannerViewPager.adapter = mBannerAdapter
+//        myLoanBinding!!.bannerViewPager.offscreenPageLimit = 4
+//        addIndicator(
+//            myLoanBinding!!.llBannerIndicator,
+//            mBannerAdapter!!.count,
+//            0
+//        )
 
-                addIndicator(
-                    myLoanBinding!!.llBannerIndicator,
-                    mBannerAdapter!!.count,
-                    position
-                )
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {}
-        })
+//        myLoanBinding!!.bannerViewPager.addOnPageChangeListener(object : OnPageChangeListener {
+//            override fun onPageScrolled(
+//                position: Int,
+//                positionOffset: Float,
+//                positionOffsetPixels: Int
+//            ) {
+//                myLoanBinding!!.bannerViewPager.currentItem = position
+//            }
+//
+//            override fun onPageSelected(position: Int) {
+//                page = position
+//
+//                addIndicator(
+//                    myLoanBinding!!.llBannerIndicator,
+//                    mBannerAdapter!!.count,
+//                    position
+//                )
+//            }
+//
+//            override fun onPageScrollStateChanged(state: Int) {}
+//        })
 
     }
 
