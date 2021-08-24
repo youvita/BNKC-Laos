@@ -10,7 +10,6 @@ import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.request.cscenter.ClaimDataRequest
 import com.mobile.bnkcl.data.response.cscenter.ClaimDataResponse
-import com.mobile.bnkcl.data.response.cscenter.ClaimItems
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -22,8 +21,8 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
 
     //Notice Data
     private val _claimData: MutableLiveData<ClaimDataResponse> = MutableLiveData()
-    val claim: LiveData<ClaimDataResponse> get() = _claimData
-
+    val claimLiveData: LiveData<ClaimDataResponse> get() = _claimData
+    private val lastPage = false
 
     fun getClaimData(request: ClaimDataRequest){
         viewModelScope.launch {
@@ -40,6 +39,10 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
             }.launchIn(viewModelScope)
         }
     }
+    fun isLastPage(): Boolean {
+        return lastPage
+    }
+
 
 
 }

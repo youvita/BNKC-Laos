@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 class ClaimDataResponse {
 
     @SerializedName("claims")
-    var claims: List<ClaimItems>? = null
+    var claims: ArrayList<ClaimItems>? = null
 
     @SerializedName("last")
     var last: Boolean? = null

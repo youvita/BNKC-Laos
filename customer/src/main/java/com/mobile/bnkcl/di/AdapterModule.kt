@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.di
 
 import com.mobile.bnkcl.ui.adapter.*
+import com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,4 +35,8 @@ object AdapterModule {
     @Singleton
     @Provides
     fun provideBannerAdapter() = BannerAdapter()
+
+    @Singleton
+    @Provides
+    fun provideAskQuestionAdapter() = AskQuestionAdapter()
 }

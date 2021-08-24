@@ -83,6 +83,7 @@
     <dimen name="height_05dp">0.5dp</dimen>
     <dimen name="height_1dp">1dp</dimen><!--used 04/07/2021-->
     <dimen name="height_24dp">24dp</dimen><!--used 04/07/2021-->
+    <dimen name="height_42dp">42dp</dimen><!--used 04/07/2021-->
     <dimen name="height_46dp">46dp</dimen>
     <dimen name="height_50dp">50dp</dimen><!--used 04/07/2021-->
     <dimen name="height_64dp">64dp</dimen><!--used 04/07/2021-->

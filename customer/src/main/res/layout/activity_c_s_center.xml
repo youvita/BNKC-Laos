@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel"/>
 
             <variable
-                name="csViewmodel"
-                type="CSCenterViewModel" />
+                name="activity"
+                type="com.mobile.bnkcl.ui.cscenter.CSCenterActivity" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,54 +26,56 @@
                 android:layout_height="wrap_content"
                 android:stateListAnimator="@null"
                 android:background="@color/color_f5f7fc">
+
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/col_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_120dp"
-                    app:title="Full Repayment"
                     app:collapsedTitleGravity="center"
+                    app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
-                    app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:title="Full Repayment">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar_01"
+                        style="@style/font_18_263238_bold"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:gravity="center"
-                        app:layout_collapseMode="pin"
-                        app:collapseIcon="@null"
-                        style="@style/font_18_263238_bold"
                         android:background="@color/color_f5f7fc"
+                        android:contentInsetStart="0dp"
                         android:contentInsetEnd="0dp"
                         android:contentInsetRight="0dp"
-                        android:contentInsetStart="0dp"
+                        android:gravity="center"
+                        app:collapseIcon="@null"
                         app:contentInsetEnd="0dp"
                         app:contentInsetLeft="0dp"
                         app:contentInsetRight="0dp"
-                        app:contentInsetStart="0dp">
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/toolbar_left_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="start"
                             android:paddingStart="@dimen/padding_21dp"
                             android:src="@drawable/ic_nav_close_dark_btn"
-                            android:layout_gravity="start"
                             tools:ignore="RtlSymmetry" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/toolbar_right_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="end"
                             android:paddingEnd="@dimen/padding_21dp"
                             android:src="@drawable/ic_nav_close_dark_btn"
-                            android:layout_gravity="end"
-                            android:visibility="invisible"/>
+                            android:visibility="invisible" />
                     </androidx.appcompat.widget.Toolbar>
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,7 +83,7 @@
                     <LinearLayout
                         android:id="@+id/ll_tab"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_50dp"
+                        android:layout_height="@dimen/height_42dp"
                         android:orientation="horizontal"
                         android:background="@drawable/round_solid_ffeeee"
                         android:layout_marginLeft="@dimen/margin_21dp"
@@ -135,13 +137,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingBottom="@dimen/padding_95dp"
-                        android:layout_marginTop="@dimen/margin_31dp">
+                        android:layout_marginTop="@dimen/margin_21dp">
                         <!--faq-->
                         <WebView
                             android:id="@+id/wb_faq"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
                             android:layout_marginLeft="@dimen/margin_20dp"
                             android:layout_marginRight="@dimen/margin_20dp"
                             />
@@ -151,7 +152,6 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:focusableInTouchMode="true"
-                            android:visibility="visible"
                             >
 
                             <TextView
@@ -164,11 +164,11 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rc_question"
-                                android:focusable="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                tools:listitem="@layout/item_cs_question"
                                 android:layout_marginTop="@dimen/margin_10dp"
+                                android:focusable="false"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 />
                         </LinearLayout>
                     </RelativeLayout>
@@ -183,7 +183,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/padding_21dp"
-                android:visibility="visible">
+                >
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_ask_bnk"
