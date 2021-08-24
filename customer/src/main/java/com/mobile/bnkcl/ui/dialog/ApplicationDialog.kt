@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
-import com.bnkc.sourcemodule.base.BaseDialogFragment
+import com.bnkc.sourcemodule.base.BaseFullDialogFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.LeaseInfoData
 import com.mobile.bnkcl.databinding.DialogApplicationBinding
@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ApplicationDialog : BaseDialogFragment<DialogApplicationBinding>() {
+class ApplicationDialog : BaseFullDialogFragment<DialogApplicationBinding>() {
 
     @Inject
     lateinit var leaseRequestProcessAdapter: LeaseRequestProcessAdapter
