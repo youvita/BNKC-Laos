@@ -126,6 +126,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
 
     override fun onClick(v: View?) {
         if (v != null) {
+            val intent: Intent
             when(v.id) {
                 R.id.ll_profile -> {
                     startActivity(Intent(requireContext(), AccountInformationActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
@@ -153,13 +154,19 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     startActivity(facebookIntent)
                 }
                 R.id.btn_company_profile -> {
-                    startActivity(Intent(requireContext(), TermsAndConditionsActivity::class.java))
+                    intent = Intent(requireContext(), TermsAndConditionsActivity::class.java)
+                    intent.putExtra(Constants.WEB_URL, "/pages/company_profile.html")
+                    intent.putExtra(Constants.WEB_TITLE, getString(R.string.nav_content_006))
+                    startActivity(intent)
                 }
                 R.id.btn_policy -> {
-                    startActivity(Intent(requireContext(), TermsAndConditionsActivity::class.java))
+                    intent = Intent(requireContext(), TermsAndConditionsActivity::class.java)
+                    intent.putExtra(Constants.WEB_URL, "/pages/policy.html")
+                    intent.putExtra(Constants.WEB_TITLE, getString(R.string.setting_03))
+                    startActivity(intent)
                 }
                 R.id.btn_setting -> {
-                    val intent = Intent(requireContext(), SettingActivity::class.java)
+                    intent = Intent(requireContext(), SettingActivity::class.java)
                     if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
                         intent.putExtra(
                             "push_alarm_enabled",

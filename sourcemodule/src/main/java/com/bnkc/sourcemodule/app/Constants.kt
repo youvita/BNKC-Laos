@@ -13,4 +13,11 @@ object Constants {
 
     //    MG
     const val KEY_START_URL         = "c_start_url"
+
+    // Web
+    const val WEB_URL = "WEB_URL"
+    const val WEB_TITLE = "WEB_TITLE"
+
+    // Language
+    const val LANGUAGE = "LANGUAGE"
 }

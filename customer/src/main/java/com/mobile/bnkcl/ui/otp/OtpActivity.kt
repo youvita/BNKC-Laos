@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
@@ -305,10 +306,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.tv_agree -> {
-                val intent1 =
-                    Intent(this, TermsAndConditionsActivity::class.java)
-//                intent1.putExtra(Constant.WebViewUrl.URL, ServiceName.termNConditionUrl)
-//                intent1.putExtra(Constant.WebViewUrl.TITLE, getString(R.string.sign_up_29))
+                val intent1 = Intent(this, TermsAndConditionsActivity::class.java)
+                intent1.putExtra(Constants.WEB_URL, "/pages/terms_and_conditions.html")
+                intent1.putExtra(Constants.WEB_TITLE, getString(R.string.sign_up_29))
                 startActivity(intent1)
             }
         }
