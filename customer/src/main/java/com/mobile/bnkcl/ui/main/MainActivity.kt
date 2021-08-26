@@ -69,9 +69,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             viewPager = binding.viewPager
             tabLayout = binding.tabBottomMenu.mainTabLayout
 
+            val findOfficeFragment = FindOfficeFragment()
             tabAdapter.addFragment(ServiceFragment())
             tabAdapter.addFragment(PageFragment())
-            tabAdapter.addFragment(FindOfficeFragment())
+            tabAdapter.addFragment(findOfficeFragment)
             tabAdapter.addFragment(MenuFragment())
 
             viewPager?.adapter = tabAdapter
@@ -82,6 +83,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 binding.menuIcon = menuIcons[position]
                 tab.customView = binding.root
             }.attach()
+
+            viewPager!!.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                }
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    when(position){
+                        2 -> {
+                            findOfficeFragment.loanServiceTabSelected()
+                        }
+                    }
+
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                }
+            })
 
         } catch (e: Exception) {
             e.printStackTrace()

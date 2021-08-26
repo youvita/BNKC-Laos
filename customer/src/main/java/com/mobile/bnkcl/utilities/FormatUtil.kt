@@ -1,12 +1,8 @@
 package com.mobile.bnkcl.utilities
 
 import android.content.Context
-import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.prefer.CredentialSharedPrefer
-import com.bnkc.sourcemodule.app.Constants
 import com.mobile.bnkcl.R
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -89,6 +85,97 @@ companion object{
         }
         return stDate
     }
+
+        fun getTelFormat(tel: String, action: Int): String? {
+            var result: String? = ""
+            var tmp = ""
+            var tmp1 = ""
+            when (action) {
+                0 -> if (tel.contains("(855)")) { //(855) 023 903 305
+                    if (tel[6] == '0') {
+                        if (tel.split(" ".toRegex()).toTypedArray().size == 4) {
+                            result = "(+855) " + tel.substring(tel.indexOf("0") + 1)
+                        } else {
+                            tmp = tel.substring(tel.indexOf("0") + 1).replace(" ", "")
+                            var i = 0
+                            while (i < tmp.length) {
+                                if (i == 2) {
+                                    tmp1 += tmp.substring(0, i) + " "
+                                } else if (i == 5) {
+                                    tmp1 += tmp.substring(2, i) + " "
+                                } else if (i == tmp.length - 1) {
+                                    tmp1 += tmp.substring(5) + " "
+                                }
+                                i++
+                            }
+                            result = "(+855) $tmp1"
+                        }
+                    } else {
+                        result = "(+855) " + tel.substring(6)
+                    }
+                } else if (tel[0] == '0') {
+                    if (tel.contains(" ")) {
+                        result = "(+855) " + tel.substring(1)
+                    } else {
+                        tmp = tel.substring(1)
+                        var i = 0
+                        while (i < tel.length) {
+                            if (i == 2) {
+                                tmp1 += tmp.substring(0, i) + " "
+                            } else if (i == 5) {
+                                tmp1 += tmp.substring(2, i) + " "
+                            } else if (i == tmp.length - 1) {
+                                tmp1 += tmp.substring(5) + " "
+                            }
+                            i++
+                        }
+                        result = "(+855) $tmp1"
+                    }
+                }
+                1 -> if (tel.contains("(855)")) { //(855) 025 21 82 8
+                    if (tel[6] == '0') {
+                        if (tel.split(" ".toRegex()).toTypedArray().size == 4) {
+                            result = tel.substring(tel.indexOf("0"))
+                        } else {
+                            tmp = tel.substring(tel.indexOf("0")).replace(" ", "")
+                            var i = 0
+                            while (i < tmp.length) {
+                                if (i == 3) {
+                                    tmp1 += tmp.substring(0, i) + " "
+                                } else if (i == 6) {
+                                    tmp1 += tmp.substring(3, i) + " "
+                                } else if (i == tmp.length - 1) {
+                                    tmp1 += tmp.substring(6) + " "
+                                }
+                                i++
+                            }
+                            result = tmp1
+                        }
+                    } else {
+                        result = "0" + tel.substring(6)
+                    }
+                } else if (tel[0] == '0') { //024 900 135
+                    result = tel
+                }
+                2 -> {
+                    tmp = tel.substring(1)
+                    var i = 0
+                    while (i < tmp.length) {
+                        //023478327
+                        if (i == 2) {
+                            tmp1 += tmp.substring(0, i) + " "
+                        } else if (i == 5) {
+                            tmp1 += tmp.substring(2, i) + " "
+                        } else if (i == tmp.length - 1) {
+                            tmp1 += tmp.substring(5) + " "
+                        }
+                        i++
+                    }
+                    result = "+855 $tmp1"
+                }
+            }
+            return result
+        }
 
     }
 

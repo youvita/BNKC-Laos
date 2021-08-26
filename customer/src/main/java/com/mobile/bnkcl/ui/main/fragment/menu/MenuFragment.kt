@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
+import com.bnkcl.employeemodule.ui.EmployeeActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
@@ -132,7 +133,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     startActivity(Intent(requireContext(), AccountInformationActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
                 }
                 R.id.ll_notice -> {
-                    startActivity(Intent(requireContext(), NoticeActivity::class.java))
+                    startActivity(Intent(requireContext(), EmployeeActivity::class.java))
                 }
                 R.id.ll_cs_center -> {
                     startActivity(Intent(requireContext(), CSCenterActivity::class.java))

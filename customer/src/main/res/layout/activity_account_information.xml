@@ -121,7 +121,7 @@
                                 android:layout_marginBottom="@dimen/margin_10dp"
                                 android:src="@drawable/ic_avatar_s" />
 
-                            <com.mobile.bnkcl.com.view.ShadowLayout
+                            <com.bnkc.sourcemodule.ui.ShadowLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/margin_8dp"
@@ -262,9 +262,9 @@
 
                                 </LinearLayout>
 
-                            </com.mobile.bnkcl.com.view.ShadowLayout>
+                            </com.bnkc.sourcemodule.ui.ShadowLayout>
 
-                            <com.mobile.bnkcl.com.view.ShadowLayout
+                            <com.bnkc.sourcemodule.ui.ShadowLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/margin_8dp"
@@ -354,9 +354,9 @@
 
                                 </LinearLayout>
 
-                            </com.mobile.bnkcl.com.view.ShadowLayout>
+                            </com.bnkc.sourcemodule.ui.ShadowLayout>
 
-                            <com.mobile.bnkcl.com.view.ShadowLayout
+                            <com.bnkc.sourcemodule.ui.ShadowLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/margin_8dp"
@@ -472,7 +472,7 @@
 
                                 </LinearLayout>
 
-                            </com.mobile.bnkcl.com.view.ShadowLayout>
+                            </com.bnkc.sourcemodule.ui.ShadowLayout>
 
                         </LinearLayout>
 

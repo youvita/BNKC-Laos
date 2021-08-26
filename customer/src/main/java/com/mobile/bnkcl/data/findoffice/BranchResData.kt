@@ -1,25 +1,29 @@
 package com.mobile.bnkcl.data.findoffice
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class BranchResData {
+class BranchResData : Serializable{
 
     @SerializedName("id")
-    val id: Long = 0
+    var id: Long = 0
 
     @SerializedName("name")
-    val name: String? = null
+    var name: String? = null
+
+    @SerializedName("area_name")
+    var area_name: String? = null
 
     @SerializedName("tel")
-    val tel: String? = null
+    var tel: String? = null
 
     @SerializedName("email")
-    val email: String? = null
+    var email: String? = null
 
     @SerializedName("address")
-    val address: String? = null
+    var address: String? = null
 
     @SerializedName("location")
-    val location: Location? = null
+    var location: Location? = null
 
 }

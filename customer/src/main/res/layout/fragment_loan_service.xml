@@ -57,7 +57,7 @@
 <!--                        style="@style/font_15_FFFFFF_normal"/>-->
 <!--                </LinearLayout>-->
 
-<!--                <com.mobile.bnkcl.com.view.ShadowLayout-->
+<!--                <com.bnkc.sourcemodule.ui.ShadowLayout-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_marginStart="5dp"-->
@@ -105,7 +105,7 @@
 <!--                                style="@style/font_11_90A4AE_regular"/>-->
 <!--                        </LinearLayout>-->
 
-<!--                        <com.mobile.bnkcl.com.view.ShadowLayout-->
+<!--                        <com.bnkc.sourcemodule.ui.ShadowLayout-->
 <!--                            android:layout_width="wrap_content"-->
 <!--                            android:layout_gravity="center_vertical"-->
 <!--                            android:layout_height="wrap_content"-->
@@ -134,13 +134,13 @@
 <!--                                    style="@style/font_14_FFFFFF_normal"/>-->
 
 <!--                            </LinearLayout>-->
-<!--                        </com.mobile.bnkcl.com.view.ShadowLayout>-->
+<!--                        </com.bnkc.sourcemodule.ui.ShadowLayout>-->
 
 <!--                    </LinearLayout>-->
-<!--                </com.mobile.bnkcl.com.view.ShadowLayout>-->
+<!--                </com.bnkc.sourcemodule.ui.ShadowLayout>-->
 
 
-<!--                <com.mobile.bnkcl.com.view.ShadowLayout-->
+<!--                <com.bnkc.sourcemodule.ui.ShadowLayout-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_marginStart="10dp"-->
@@ -185,7 +185,7 @@
 <!--                                style="@style/font_11_90A4AE_regular"/>-->
 <!--                        </LinearLayout>-->
 
-<!--                        <com.mobile.bnkcl.com.view.ShadowLayout-->
+<!--                        <com.bnkc.sourcemodule.ui.ShadowLayout-->
 <!--                            android:layout_width="wrap_content"-->
 <!--                            android:layout_gravity="center_vertical"-->
 <!--                            android:layout_height="wrap_content"-->
@@ -214,13 +214,13 @@
 <!--                                    style="@style/font_14_FFFFFF_normal"/>-->
 
 <!--                            </LinearLayout>-->
-<!--                        </com.mobile.bnkcl.com.view.ShadowLayout>-->
+<!--                        </com.bnkc.sourcemodule.ui.ShadowLayout>-->
 
 <!--                    </LinearLayout>-->
-<!--                </com.mobile.bnkcl.com.view.ShadowLayout>-->
+<!--                </com.bnkc.sourcemodule.ui.ShadowLayout>-->
 
 
-<!--                <com.mobile.bnkcl.com.view.ShadowLayout-->
+<!--                <com.bnkc.sourcemodule.ui.ShadowLayout-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_marginStart="5dp"-->
@@ -266,7 +266,7 @@
 <!--                                style="@style/font_11_90A4AE_regular"/>-->
 <!--                        </LinearLayout>-->
 
-<!--                        <com.mobile.bnkcl.com.view.ShadowLayout-->
+<!--                        <com.bnkc.sourcemodule.ui.ShadowLayout-->
 <!--                            android:layout_width="wrap_content"-->
 <!--                            android:layout_gravity="center_vertical"-->
 <!--                            android:layout_height="wrap_content"-->
@@ -295,10 +295,10 @@
 <!--                                    style="@style/font_14_FFFFFF_normal"/>-->
 
 <!--                            </LinearLayout>-->
-<!--                        </com.mobile.bnkcl.com.view.ShadowLayout>-->
+<!--                        </com.bnkc.sourcemodule.ui.ShadowLayout>-->
 
 <!--                    </LinearLayout>-->
-<!--                </com.mobile.bnkcl.com.view.ShadowLayout>-->
+<!--                </com.bnkc.sourcemodule.ui.ShadowLayout>-->
 
 <!--                <LinearLayout-->
 <!--                    android:layout_width="match_parent"-->

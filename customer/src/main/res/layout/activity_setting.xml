@@ -45,7 +45,7 @@
                 android:paddingRight="@dimen/padding_12dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <com.mobile.bnkcl.com.view.ShadowLayout
+                <com.bnkc.sourcemodule.ui.ShadowLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_31dp"
@@ -127,7 +127,7 @@
 
                     </LinearLayout>
 
-                </com.mobile.bnkcl.com.view.ShadowLayout>
+                </com.bnkc.sourcemodule.ui.ShadowLayout>
 
             </androidx.core.widget.NestedScrollView>
 

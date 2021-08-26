@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.fragment.myloan.MyLoanFragment"
         android:background="@null">
 
         <LinearLayout
@@ -68,151 +67,58 @@
                     android:paddingBottom="15dp"
                     android:text="@string/main_subtitle_001"
                     android:gravity="center_vertical"
-                    app:drawableStartCompat="@drawable/ic_lease_in_use_ico" />
+                    app:drawableStartCompat="@drawable/ic_area_ico" />
 
-                <com.mobile.bnkcl.com.view.ShadowLayout
-                    android:id="@+id/ll_loan_item"
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nsv_find_office"
                     android:layout_width="match_parent"
-                    android:minHeight="50dp"
-                    android:layout_height="wrap_content"
-                    app:shadowColor="@color/color_90a4ae_shadow"
-                    app:shadowDx="0dp"
-                    app:shadowDy="0dp"
-                    app:shadowRadius="4dp"
-                    app:shadowShape="rectangle"
-                    app:shadowSide="all"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginRight="11dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="-10dp"
-                    >
-                    <TextView
-                        android:id="@+id/tv_areas"
-                        style="@style/font15_263238_medium"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_find_office"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:layout_gravity="top"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
-                        android:freezesText="true"
-                        android:singleLine="true"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="15dp"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
-                        android:text="@string/all" />
-                </com.mobile.bnkcl.com.view.ShadowLayout>
-
+                        android:overScrollMode="never" />
+                </androidx.core.widget.NestedScrollView>
 
             </LinearLayout>
         </LinearLayout>
 
-    </RelativeLayout>
+        <com.bnkc.sourcemodule.ui.ShadowLayout
+            android:id="@+id/ll_loan_item"
+            android:layout_width="match_parent"
+            android:minHeight="50dp"
+            android:layout_height="wrap_content"
+            app:shadowColor="@color/color_90a4ae_shadow"
+            app:shadowDx="0dp"
+            app:shadowDy="0dp"
+            app:shadowRadius="4dp"
+            app:shadowShape="rectangle"
+            app:shadowSide="all"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginBottom="-10dp"
+            >
+            <TextView
+                android:id="@+id/tv_areas"
+                style="@style/font15_263238_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_more_ico"
+                android:layout_gravity="top"
+                android:gravity="center_vertical"
+                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                android:freezesText="true"
+                android:singleLine="true"
+                android:paddingStart="20dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/all" />
+        </com.bnkc.sourcemodule.ui.ShadowLayout>
 
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical"-->
-<!--        android:paddingTop="20dp"-->
-<!--        tools:context=".ui.main.fragment.findoffice.FindOfficeFragment">-->
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:paddingStart="20dp"-->
-<!--            android:paddingEnd="10dp">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="@dimen/height_50dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_brand_bnkc_lao_leasing_white" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Capital Lao Leasing Co, Ltd"-->
-<!--                android:textColor="@color/color_ffffff"-->
-<!--                android:textSize="@dimen/margin_18dp"-->
-<!--                android:textStyle="bold"/>-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/btn_notification"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@null"-->
-<!--                android:padding="10dp"-->
-<!--                android:src="@drawable/ic_notification_white_ico" />-->
-
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/linearLayout2"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:paddingStart="20dp"-->
-<!--            android:paddingEnd="20dp"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                />-->
-
-<!--            <TextView-->
-<!--                style="@style/font_15_FFFFFF_normal"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:text="@string/area" />-->
-<!--        </LinearLayout>-->
-<!--        <androidx.core.widget.NestedScrollView-->
-<!--            android:id="@+id/nsv_find_office"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="80dp"-->
-<!--            app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/recycler_find_office"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:overScrollMode="never"-->
-<!--                android:layout_height="wrap_content"/>-->
-<!--        </androidx.core.widget.NestedScrollView>-->
-
-<!--        <com.mobile.bnkcl.com.view.ShadowLayout-->
-<!--            android:id="@+id/sl_areas"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            app:shadowColor="@color/color_90a4ae_shadow"-->
-<!--            app:shadowDx="0dp"-->
-<!--            app:shadowDy="0dp"-->
-<!--            app:shadowRadius="5dp"-->
-<!--            app:shadowShape="rectangle"-->
-<!--            app:shadowSide="all">-->
-<!--            <TextView-->
-<!--                android:id="@+id/tv_areas"-->
-<!--                style="@style/font15_263238_medium"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-
-<!--                android:layout_gravity="top"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"-->
-<!--                android:freezesText="true"-->
-<!--                android:singleLine="true"-->
-<!--                android:paddingStart="20dp"-->
-<!--                android:paddingEnd="15dp"-->
-<!--                android:paddingTop="15dp"-->
-<!--                android:paddingBottom="15dp"-->
-<!--                android:text="@string/all" />-->
-<!--        </com.mobile.bnkcl.com.view.ShadowLayout>-->
-
-
-<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 </layout>

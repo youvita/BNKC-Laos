@@ -20,6 +20,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -161,7 +162,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 //            extrasLogin.Param.setOwner("login")
 //            extrasLogin.Param.setLabel(getString(R.string.pin_04))
 
-            val intent = Intent(this, PinCodeActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("username", user)
             intent.putExtra("pin_action", "login")
 //            intent.putExtras(extrasLogin.bundle!!)

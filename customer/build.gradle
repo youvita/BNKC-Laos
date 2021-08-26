@@ -82,6 +82,9 @@ dependencies {
     implementation project(path: ':sourcemodule')
     implementation project(path: ':employeemodule')
 
+    //Map
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
     // support
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx

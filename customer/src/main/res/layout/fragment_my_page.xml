@@ -77,7 +77,7 @@
                 android:text="My Lease Request (Until the last 14days)"
                 app:drawableStartCompat="@drawable/ic_my_lease_req_white_ico" />
 
-            <com.mobile.bnkcl.com.view.ShadowLayout
+            <com.bnkc.sourcemodule.ui.ShadowLayout
                 android:id="@+id/ll_lease_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     layout="@layout/layout_my_lease_request_menu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-            </com.mobile.bnkcl.com.view.ShadowLayout>
+            </com.bnkc.sourcemodule.ui.ShadowLayout>
 
 
             <ScrollView

@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.TypedValue
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.sourcemodule.R
 
@@ -76,5 +77,13 @@ object Formats {
                 R.font.rubik_regular
             )
         }
+    }
+
+    fun getValueInDP(context: Context, value: Int): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            value.toFloat(),
+            context.resources.displayMetrics
+        ).toInt()
     }
 }

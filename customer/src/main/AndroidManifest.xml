@@ -14,14 +14,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BNKC_LAOS"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:overrideLibrary="androidx.security.identity.credential"
         tools:targetApi="m">
-        <activity android:name=".ui.map.MapActivity"></activity>
+<!--        <activity android:name=".ui.lease.ApplyLeaseActivity"></activity>-->
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/map_api_key" />
+
+        <activity android:name=".ui.map.MapActivity" />
         <activity android:name=".ui.notice.NoticeDetailActivity" />
         <activity android:name=".ui.alarm.AlarmActivity" />
         <activity android:name=".ui.signup.TermsAndConditionsActivity" />
@@ -30,12 +36,14 @@
         <activity android:name=".ui.cscenter.CSCenterActivity" />
         <activity android:name=".ui.success.ResultActivity" />
         <activity android:name=".ui.notice.NoticeActivity" />
-        <activity android:name=".ui.signup.SignUpActivity" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".ui.signup.SignUpActivity">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.response.ResponseActivity" />
         <activity android:name=".ui.pinview.PinCodeActivity" />
@@ -54,14 +62,15 @@
         <activity android:name=".ui.bill.BillPaymentActivity" />
         <activity android:name=".ui.management.LeaseManagementActivity" />
         <activity android:name=".ui.mobile_payment.MobilePaymentActivity" />
-        <activity android:name=".ui.history.TransactionHistoryActivity"/>
-        <activity android:name=".ui.schedule.TotalLeaseScheduleActivity"/>
-        <activity android:name=".ui.full_payment.FullPaymentActivity"/>
+        <activity android:name=".ui.history.TransactionHistoryActivity" />
+        <activity android:name=".ui.schedule.TotalLeaseScheduleActivity" />
+        <activity android:name=".ui.full_payment.FullPaymentActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
+
         <service
-            android:name="com.mobile.bnkcl.fcm.PushMessageService"
+            android:name=".fcm.PushMessageService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

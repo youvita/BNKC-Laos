@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.mobile.bnkcl.com.view.ShadowLayout
+        <com.bnkc.sourcemodule.ui.ShadowLayout
             android:id="@+id/ll_lease_item"
             android:layout_width="match_parent"
             android:layout_height="260dp"
@@ -189,11 +189,11 @@
 
             </LinearLayout>
 
-        </com.mobile.bnkcl.com.view.ShadowLayout>
+        </com.bnkc.sourcemodule.ui.ShadowLayout>
         <!-- Lease Item -->
 
         <!-- Add new lease -->
-        <com.mobile.bnkcl.com.view.ShadowLayout
+        <com.bnkc.sourcemodule.ui.ShadowLayout
             android:id="@+id/rl_add_new_lease"
             android:layout_width="match_parent"
             android:layout_height="260dp"
@@ -235,7 +235,7 @@
 
             </RelativeLayout>
 
-        </com.mobile.bnkcl.com.view.ShadowLayout>
+        </com.bnkc.sourcemodule.ui.ShadowLayout>
 
     </LinearLayout>
 </layout>

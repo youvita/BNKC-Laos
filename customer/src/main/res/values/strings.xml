@@ -1,5 +1,7 @@
 <resources>
 
+    <string name="map_api_key" translatable="false">AIzaSyB4_a8kx86WFi9NFatDeNeDwXVvm-Km7N8</string>
+
     <!-- register success -->
     <string name="register_successful">Registration Successful</string>
     <string name="register_login">You have registered. Please Log in</string>

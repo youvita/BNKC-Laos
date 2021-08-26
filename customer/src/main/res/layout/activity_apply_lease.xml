@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.lease.ApplyLeaseActivity">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/comm_collapse_toolbar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_apply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingBottom="70dp"
+            android:background="@drawable/round_solid_ffffff_15"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/ll_container"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <TextView
+                    style="@style/font21_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Commodity Information"/>
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Product Type"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_loan_term"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_pro_type"
+                        style="@style/font15_cfd8dc_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:text="Select Product Type"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_more_ico" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:text="Name of Brand"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_name_brand"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_name_brand"
+                        style="@style/font15_cfd8dc_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:text="Input Name of Brand"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_more_ico" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/name_model"
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:text="Name of Model"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_name_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_name_model"
+                        style="@style/font15_cfd8dc_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:text="Input Name of Model"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_more_ico" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/pro_price"
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:text="Product Price"/>
+
+                <RelativeLayout
+                    android:id="@+id/loan_term_container"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/selector_viewgroup_bg"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:id="@+id/tv_term"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="wrap_content"
+                        android:text="Kip"
+                        android:layout_marginEnd="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_height="wrap_content"
+                        style="@style/font15_263238_medium"/>
+
+                    <com.mobile.bnkcl.com.view.BnkEditText
+                        android:id="@+id/ed_loan_term"
+                        android:layout_width="match_parent"
+                        android:hint="0.00"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:maxLength="2"
+                        android:digits="1234567890,"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textAlignment="textEnd"
+                        android:background="@null"
+                        android:layout_height="match_parent"
+                        android:imeOptions="actionDone"
+                        style="@style/font15_CFD8DC_medium_input"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/font21_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Lease Information"/>
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Request Amount"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_req_amt"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/selector_viewgroup_bg"
+                    android:layout_height="50dp">
+
+                    <TextView
+                        android:id="@+id/tv_req_amt"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="wrap_content"
+                        android:text="Kip"
+                        android:layout_marginEnd="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_height="wrap_content"
+                        style="@style/font15_263238_medium"/>
+
+                    <com.mobile.bnkcl.com.view.BnkEditText
+                        android:id="@+id/ed_req_amt"
+                        android:layout_width="match_parent"
+                        android:hint="0.00"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:maxLength="2"
+                        android:digits="1234567890,"
+                        android:inputType="number"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textAlignment="textEnd"
+                        android:background="@null"
+                        android:layout_height="match_parent"
+                        android:imeOptions="actionDone"
+                        style="@style/font15_CFD8DC_medium_input"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Advance Payment"/>
+
+                <TextView
+                    android:id="@+id/tv_advance_payment"
+                    android:layout_width="match_parent"
+                    android:text="0.00 Kip"
+                    android:paddingEnd="@dimen/margin_10dp"
+                    android:gravity="center_vertical|end"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/round_stroke_e1e5ec_e3f6f7_8"
+                    android:layout_height="@dimen/height_50dp"
+                    style="@style/font15_cfd8dc_medium"/>
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:text="Repayment Term"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_repayment_term"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_repayment_term"
+                        style="@style/font15_cfd8dc_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:text="Select"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_more_ico" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/font21_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Lease Information"/>
+
+                <!--       Customer information table         -->
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:background="@null">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/color_ffffff"
+                android:layout_marginTop="40dp"
+                android:paddingBottom="10dp"/>
+
+            <com.bnkc.sourcemodule.ui.ValidateButton
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                app:buttonText="Submit"
+                app:textAllCaps="true"
+                app:is_active="false"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_height="50dp"/>
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

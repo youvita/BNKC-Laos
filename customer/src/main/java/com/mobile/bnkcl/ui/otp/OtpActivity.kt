@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.otp
 
 import android.annotation.SuppressLint
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Resources.NotFoundException
 import android.os.Build
@@ -14,6 +15,7 @@ import android.view.View.OnFocusChangeListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -182,7 +184,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setStatusBarColor(resources.getColor(R.color.color_f5f7fc))
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         super.onCreate(savedInstanceState)
         try {
 

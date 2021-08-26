@@ -11,7 +11,7 @@
 
     </data>
 
-        <com.mobile.bnkcl.com.view.ShadowLayout
+        <com.bnkc.sourcemodule.ui.ShadowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:shadowColor="@color/color_3090a4ae"
@@ -82,6 +82,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.mobile.bnkcl.com.view.ShadowLayout>
+        </com.bnkc.sourcemodule.ui.ShadowLayout>
 
 </layout>

@@ -1,15 +1,13 @@
-package com.mobile.bnkcl.com.view
+package com.bnkc.sourcemodule.ui
 
 import android.content.Context
 import android.widget.RelativeLayout
 import android.graphics.RectF
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import com.mobile.bnkcl.R
-import android.util.DisplayMetrics
+import com.bnkc.sourcemodule.R
 
 class ShadowLayout @JvmOverloads constructor(
     context: Context?,
@@ -23,7 +21,8 @@ class ShadowLayout @JvmOverloads constructor(
     private var mShadowDx = 0f
     private var mShadowDy = 0f
     private var mShadowSide = ALL
-    private var mShadowShape = SHAPE_RECTANGLE
+    private var mShadowShape =
+        SHAPE_RECTANGLE
     fun setShadowSide(t: String, r: String, b: String, l: String) {
         if (t == "T") {
             mShadowSide = TOP
@@ -111,8 +110,12 @@ class ShadowLayout @JvmOverloads constructor(
                 typedArray.getDimension(R.styleable.ShadowLayout_shadowRadius, dip2px(0f))
             mShadowDx = typedArray.getDimension(R.styleable.ShadowLayout_shadowDx, dip2px(0f))
             mShadowDy = typedArray.getDimension(R.styleable.ShadowLayout_shadowDy, dip2px(0f))
-            mShadowSide = typedArray.getInt(R.styleable.ShadowLayout_shadowSide, ALL)
-            mShadowShape = typedArray.getInt(R.styleable.ShadowLayout_shadowShape, SHAPE_RECTANGLE)
+            mShadowSide = typedArray.getInt(R.styleable.ShadowLayout_shadowSide,
+                ALL
+            )
+            mShadowShape = typedArray.getInt(R.styleable.ShadowLayout_shadowShape,
+                SHAPE_RECTANGLE
+            )
             typedArray.recycle()
         }
         setUpShadowPaint()

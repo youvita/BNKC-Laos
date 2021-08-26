@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.app.Constants
+import com.bnkc.sourcemodule.app.Constants.USER_ID
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
@@ -17,6 +19,7 @@ import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.utilities.SecureUtils
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
@@ -25,6 +28,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     var username = ""
     var pinUI : String = ""
+    var countAttempt = 0
+
+    @Inject
+    lateinit var confirmDialog: ConfirmDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(resources.getColor(R.color.color_263238))
@@ -124,7 +131,6 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             if (pinCode.isNotEmpty()){
                 login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
             }
-
 //            if(pinCode == "1234")
 //                startActivity(Intent(this, LoginActivity::class.java))
 //
@@ -157,14 +163,58 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         viewModel.loginNoAuth()
         viewModel.loginLiveData.observe(this){
             Log.d("nng", it.toString())
-            sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
-            sharedPrefer.putPrefer(Constants.USER_ID, username)
+            if (it.cust_no != null || it.cust_no != null) {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
+                sharedPrefer.putPrefer(Constants.USER_ID, username)
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            finish()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                finish()
+            }else {
+                countAttempt ++
+                if (countAttempt > 4){
+                    confirmDialog = ConfirmDialog.newInstance(
+                        R.drawable.ic_badge_error,
+                        getString(R.string.pin_11),
+                        getString(R.string.pin_12),
+                        getString(R.string.comm_reset_pin)
+                    )
+                    confirmDialog.onConfirmClickedListener {
+                        binding.pinView.clearPin()
+                        val intent = Intent(
+                            this,
+                            OtpActivity::class.java
+                        )
+                        intent.putExtra(
+                            USER_ID,
+                            username
+                        )
+                        intent.putExtra("ACTION_TAG", "RESET")
+                        startActivity(intent)
+                    }
+                    confirmDialog.isCancelable = false
+                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+                }
+                else{
+                    confirmDialog = ConfirmDialog.newInstance(
+                        R.drawable.ic_badge_error,
+                        getString(R.string.pin_14),
+                        getString(R.string.pin_15),
+                        getString(R.string.pin_16)
+                    )
+                    confirmDialog.onConfirmClickedListener {
+                        binding.pinView.clearPin()
+                    }
+                    confirmDialog.isCancelable = false
+                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+                }
+            }
         }
+    }
+
+    fun checkResponse(){
+
     }
 
     override fun getLayoutId(): Int {
