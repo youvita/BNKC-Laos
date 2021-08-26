@@ -56,7 +56,7 @@ class AskQuestionAdapter():
             val intent = Intent(context, AskBNKCDetailActivity::class.java)
             intent.putExtra("CLAIM_ID", data.id)
             intent.putExtra("CATEGORY", data.category)
-            intent.putExtra("CATEGORY_NAME", data.category_name)
+//            intent.putExtra("CATEGORY_NAME", data.category_name)
             context.startActivity(intent)
         }
 

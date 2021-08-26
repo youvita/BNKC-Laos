@@ -20,7 +20,6 @@ class ClaimRepo(context: Context, okHttpClient: OkHttpClient) {
     }
 
     fun getClaimData(request: ClaimDataRequest): Flow<Resource<ClaimDataResponse>> = flow {
-        delay(1000)
         try {
             val request = object: RemoteDataSource<ClaimDataResponse>(){
                 override suspend fun createCall(): Response<ClaimDataResponse> {

@@ -7,6 +7,7 @@ import com.mobile.bnkcl.data.api.signup.SignUpApi
 import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
 import com.mobile.bnkcl.data.repository.area.AreaRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
+import com.mobile.bnkcl.data.repository.cscenter.ClaimDetailRepo
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
@@ -116,6 +117,12 @@ object RepositoryModule {
     @Provides
     fun provideFullPaymentRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): FullPaymentRepo {
         return FullPaymentRepo(context, okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideClaimDetailRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  ClaimDetailRepo{
+        return ClaimDetailRepo(context,okHttpClient)
     }
 
 }

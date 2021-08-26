@@ -1,17 +1,20 @@
 package com.mobile.bnkcl.ui.cscenter
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.cscenter.ClaimDataRequest
 import com.mobile.bnkcl.data.response.cscenter.ClaimItems
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
+import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,17 +26,22 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
     private val csCenterViewModel : CSCenterViewModel by viewModels()
     private lateinit var claimDataRequest : ClaimDataRequest
     private lateinit var claimItemsList : ArrayList<ClaimItems>
+    private lateinit var collapseToolBarLayout : CollapsingToolbarLayout
     private var PAGE = 0
     private var isSending = false
     @Inject
     lateinit var adapter : AskQuestionAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         claimDataRequest = ClaimDataRequest()
         claimItemsList = ArrayList()
+        collapseToolBarLayout =binding.colToolbar
 
         adapter = AskQuestionAdapter()
+
+        initToolbar()
 
         if (intent != null) {
             if (intent.getIntExtra("tab_index", 0) !== 0) {
@@ -63,6 +71,12 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
         }
     }
 
+    private fun initToolbar(){
+        collapseToolBarLayout.title = this.getString(R.string.cs_01)
+        collapseToolBarLayout.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))
+        collapseToolBarLayout.setCollapsedTitleTypeface(Utils.getTypeFace(this, 3))
+
+    }
     private fun getClaimData(page_no: Int, loading: Boolean){
         try {
             csCenterViewModel.getClaimData(claimDataRequest)

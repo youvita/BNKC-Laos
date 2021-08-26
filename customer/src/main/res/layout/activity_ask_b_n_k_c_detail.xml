@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.mobile.bnkcl.data.response.cscenter.ClaimDetailRes"/>
+        <variable
+            name="items"
+            type="ClaimDetailRes" />
 
     </data>
 
@@ -18,17 +22,45 @@
             android:background="@color/color_ffffff"
             tools:context=".ui.cscenter.AskBNKCDetailActivity">
 
-            <com.mobile.bnkcl.com.view.ActionBar
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/color_ffffff"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_21dp"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/ic_nav_back_dark_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_title_toolbar"
+                    style="@style/font_18_263238_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/cs_01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <ScrollView
                 android:id="@+id/sv_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fillViewport="true"
-                android:visibility="visible"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,6 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="@dimen/margin_10dp">
                         <TextView
                             android:id="@+id/tv_category"
@@ -48,22 +81,30 @@
                             tools:text="Loan /"
                             android:fontFamily="@font/rubik_medium"
                             android:textSize="13sp"
-                            android:gravity="center_vertical"
                             android:singleLine="true"
                             android:ellipsize="end"
                             android:layout_marginTop="@dimen/margin_6dp"/>
-
+                        <TextView
+                            android:id="@+id/tv_create_on"
+                            style="@style/font_13_90A4AE_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="6dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            tools:text="04-04-2020" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_gravity="end"
-                            android:gravity="end">
+                            >
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:text="Answer:"
+                                android:layout_gravity="center"
                                 style="@style/font_13_90A4AE_normal"
                                 android:gravity="center_vertical"
                                 android:layout_marginEnd="@dimen/margin_10dp"/>
@@ -71,7 +112,7 @@
                             <TextView
                                 android:id="@+id/tv_answer"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 style="@style/font_13_00695C_regular"
                                 android:gravity="center_vertical"
                                 android:paddingLeft="@dimen/padding_12dp"
@@ -169,7 +210,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10dp"
                         style="@style/font_15_263238_regular"
-                        android:visibility="visible"
                         tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"/>
 
                     <LinearLayout

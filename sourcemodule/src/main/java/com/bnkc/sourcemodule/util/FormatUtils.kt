@@ -18,7 +18,7 @@ class FormatUtils {
                         formatter =
                                 SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
                         date = formatter.parse(inputDate)
-                        newFormatter = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
+                        newFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                     }
                     2 -> {
                         formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
