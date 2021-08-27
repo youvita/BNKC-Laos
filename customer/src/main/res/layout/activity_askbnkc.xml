@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.cscenter.AskbnkcActivity">
+        tools:context=".ui.cscenter.AskBNKCActivity">
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:background="@color/color_f5f7fc"
@@ -154,10 +157,8 @@
                 <com.bnkc.sourcemodule.ui.ValidateButton
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50dp"
-                    app:buttonText="Submit"
-                    app:is_active="false"
-                    android:layout_gravity="bottom"
+                    android:layout_height="50dp"
+                    android:onClick="@{() -> viewModel.onClickSubmit()}"
                     />
             </LinearLayout>
 

@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.ui.cscenter
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -41,7 +40,10 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
 
         adapter = AskQuestionAdapter()
 
+        binding.toolbarLeftButton.setOnClickListener(this)
+
         initToolbar()
+        initButton()
 
         if (intent != null) {
             if (intent.getIntExtra("tab_index", 0) !== 0) {
@@ -92,6 +94,11 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
         }catch (e: Exception){
             e.printStackTrace()
         }
+    }
+    private fun initButton(){
+        binding.btnAskBnk.setLabelButton(this.getString(R.string.cs_02))
+        binding.btnAskBnk.setButtonBackGround(R.drawable.round_solid_d7191f_8)
+        binding.btnAskBnk.setCheckButtonTextColor(true)
     }
 
     private fun visibleWebView() {
@@ -152,9 +159,10 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
 
             }
             R.id.btn_ask_bnk -> {
-                val intent = Intent(this, AskbnkcActivity::class.java)
+                val intent = Intent(this, AskBNKCActivity::class.java)
                 startActivity(intent)
             }
+            R.id.toolbar_left_button -> onBackPressed()
         }
     }
 }

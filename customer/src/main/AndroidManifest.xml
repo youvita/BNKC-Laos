@@ -31,7 +31,7 @@
         <activity android:name=".ui.notice.NoticeDetailActivity" />
         <activity android:name=".ui.alarm.AlarmActivity" />
         <activity android:name=".ui.signup.TermsAndConditionsActivity" />
-        <activity android:name=".ui.cscenter.AskbnkcActivity" />
+        <activity android:name=".ui.cscenter.AskBNKCActivity" />
         <activity android:name=".ui.cscenter.AskBNKCDetailActivity" />
         <activity android:name=".ui.cscenter.CSCenterActivity" />
         <activity android:name=".ui.success.ResultActivity" />

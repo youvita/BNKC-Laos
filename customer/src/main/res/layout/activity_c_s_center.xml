@@ -184,17 +184,13 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/padding_21dp"
                 >
-
-                <androidx.appcompat.widget.AppCompatButton
+                <com.bnkc.sourcemodule.ui.ValidateButton
                     android:id="@+id/btn_ask_bnk"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50dp"
-                    android:text="@string/center_ask_bnkc"
-                    android:background="@drawable/selector_d7191f_8b0304"
-                    style="@style/font15_ffffff_medium"
-                    android:layout_gravity="bottom"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="@dimen/margin_21dp"
-                    android:layout_marginRight="@dimen/margin_21dp"/>
+                    android:layout_marginRight="@dimen/margin_21dp"
+                    />
             </LinearLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

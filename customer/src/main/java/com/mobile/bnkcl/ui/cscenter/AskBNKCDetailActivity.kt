@@ -31,6 +31,7 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
 
 
         getClaimDetailData()
+        binding.ivBack.setOnClickListener(this)
 
     }
 
@@ -106,13 +107,11 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
     }
 
     override fun onClick(v: View?) {
-
-        if (v != null) {
-            when (v.id) {
+            when (v?.id) {
                 R.id.iv_back -> {
                     onBackPressed()
                 }
             }
-        }
+
     }
 }
