@@ -8,6 +8,7 @@ package com.bnkc.sourcemodule.dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.bnkc.sourcemodule.databinding.DialogConfirmBinding
@@ -40,7 +41,7 @@ class ConfirmDialog : BaseDialogFragment<DialogConfirmBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.appCompatImageView.background = view.context.getDrawable(arguments?.getInt(ICON)!!)
+        binding.appCompatImageView.background = ContextCompat.getDrawable(view.context, arguments?.getInt(ICON)!!)
         binding.errorTitle = arguments?.getString(TITLE)
         binding.errorMessage = arguments?.getString(MESSAGE)
         binding.errorAct = arguments?.getString(ACT)
@@ -56,6 +57,6 @@ class ConfirmDialog : BaseDialogFragment<DialogConfirmBinding>() {
     }
 
     fun onConfirmClickedListener(confirmListener: (() -> Unit)) =
-        apply { this.confirmClickListener = confirmClickListener }
+        apply { this.confirmClickListener = confirmListener }
 
 }

@@ -14,6 +14,7 @@ import com.mobile.bnkcl.data.request.findoffice.BranchRequest
 import com.mobile.bnkcl.data.response.area.AreaObjResponse
 import com.mobile.bnkcl.data.response.area.BranchResponse
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
+import com.mobile.bnkcl.data.response.user.profile.Area
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,6 +60,15 @@ class FindOfficeViewModel @Inject constructor(var findOfficeRepo: FindOfficeRepo
                 }
             }.launchIn(viewModelScope)
         }
+    }
+
+    private var areaNames: ArrayList<String>? = ArrayList()
+    fun setUpAreaName(data : ArrayList<AreaDataResponse>) : ArrayList<String> {
+        areaNames!!.clear()
+        for (i in 0 until data.size){
+            areaNames?.add(data[i].alias1!!)
+        }
+        return areaNames!!
     }
 
 }

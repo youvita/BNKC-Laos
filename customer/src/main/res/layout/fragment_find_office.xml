@@ -65,7 +65,7 @@
                     android:paddingTop="20dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="15dp"
-                    android:text="@string/main_subtitle_001"
+                    android:text="@string/main_bottom_menu3"
                     android:gravity="center_vertical"
                     app:drawableStartCompat="@drawable/ic_area_ico" />
 

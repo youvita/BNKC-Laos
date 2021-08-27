@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -39,11 +40,11 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         super.onCreate(savedInstanceState)
 
         if (intent != null) {
-//            branchId = intent.getLongExtra("branch_id", 0)
-//            Log.d(">>>>>>", "onCreate :: $branchId")
-//            mapViewModel.branchId = branchId
-//            mapViewModel.reqOffice()
-            data = intent.getSerializableExtra("branch_info") as BranchResData
+            branchId = intent.getLongExtra("branch_id", 0)
+            Log.d(">>>>>>", "onCreate :: $branchId")
+            mapViewModel.branchId = branchId
+            mapViewModel.reqOffice()
+//            data = intent.getSerializableExtra("branch_info") as BranchResData
         }
         binding.toolbarName.isSelected = true
 
@@ -66,30 +67,30 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 //        mapView = findViewById(R.id.mapView2)
         binding.mapView2.onCreate(savedInstanceState)
 
-//        observeData()
+        observeData()
 
-        binding.tvOffice.text = data?.name
-        binding.toolbarName.text = data?.name
-        binding.tvAddress.text = data?.address
-        binding.mapView2.getMapAsync(this)
+//        binding.tvOffice.text = data?.name
+//        binding.toolbarName.text = data?.name
+//        binding.tvAddress.text = data?.address
+//        binding.mapView2.getMapAsync(this)
     }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_map
     }
 
-//    private fun observeData() {
-//        mapViewModel.officeLiveData
-//            .observe(this, {
-//                if (it != null) {
-//                    data = it
-//                    binding.tvOffice.setText(data?.name)
-//                    binding.toolbarName.setText(data?.name)
-//                    binding.tvAddress.setText(data?.address)
-//                    binding.mapView2.getMapAsync(this)
-//                }
-//            })
-//    }
+    private fun observeData() {
+        mapViewModel.officeLiveData
+            .observe(this, {
+                if (it != null) {
+                    data = it
+                    binding.tvOffice.setText(data?.name)
+                    binding.toolbarName.setText(data?.name)
+                    binding.tvAddress.setText(data?.address)
+                    binding.mapView2.getMapAsync(this)
+                }
+            })
+    }
 
     private fun startPhoneCall() {
         try {

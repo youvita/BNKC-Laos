@@ -133,7 +133,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     startActivity(Intent(requireContext(), AccountInformationActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
                 }
                 R.id.ll_notice -> {
-                    startActivity(Intent(requireContext(), EmployeeActivity::class.java))
+                    startActivity(Intent(requireContext(), NoticeActivity::class.java))
                 }
                 R.id.ll_cs_center -> {
                     startActivity(Intent(requireContext(), CSCenterActivity::class.java))

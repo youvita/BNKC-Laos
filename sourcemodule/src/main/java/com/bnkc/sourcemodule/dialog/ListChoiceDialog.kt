@@ -3,8 +3,10 @@ package com.bnkc.sourcemodule.dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.bnkc.sourcemodule.databinding.ListChoiceDialogBinding
@@ -17,9 +19,9 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
     override fun getLayoutId(): Int {
         return R.layout.list_choice_dialog
     }
+//    var onConfirmClickListener: ((pos : Int) -> Unit) = { }
 
-    private val mlistener: onItemClickLisenter? = null
-    private var confirmClickListener: (() -> Unit)? = null
+    var setOnItemListener : (pos: Int) -> Unit = {}
 
     companion object {
         private const val ICON = "icon"
@@ -28,15 +30,16 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
         private const val SELECTED_ITEM = "selected_item"
         private const val item = 4
 
-        var data : ArrayList<Any> = ArrayList()
+        var data : ArrayList<String> = ArrayList()
 
         @Synchronized
-        fun newInstance(icon: Int, title: String, obj: ArrayList<Any>, selectedItem : Int): ListChoiceDialog {
+        fun newInstance(icon: Int, title: String, obj: ArrayList<String>, selectedItem : Int): ListChoiceDialog {
             data = obj
             return ListChoiceDialog().apply {
                 arguments = Bundle().apply {
                     putInt(ICON, icon)
                     putString(TITLE, title)
+                    putStringArrayList(OBJ, obj)
                     putInt(SELECTED_ITEM, selectedItem)
                 }
             }
@@ -45,36 +48,23 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var selectedItem = arguments!!.getInt(ListChoiceDialog.SELECTED_ITEM)
-        binding.imgTitle.background = view.context.getDrawable(arguments?.getInt(
-            ListChoiceDialog.ICON
+        var selectedItem = requireArguments().getInt(SELECTED_ITEM)
+        binding.imgTitle.background = ContextCompat.getDrawable(view.context, arguments?.getInt(
+            ICON
         )!!)
-        binding.alertTitle.text = arguments?.getString(ListChoiceDialog.TITLE)
-
-        val sortList = ArrayList<Any>()
-        var obj = data
-        val map: MutableMap<String, Any> =
-            LinkedHashMap()
-         if (obj.get(0) is String) {
-            for (i in obj.indices) {
-                sortList.add(obj.get(i))
-            }
-        }
+        binding.alertTitle.text = arguments?.getString(TITLE)
 
         val adapter =
-            ListChoiceAdapter(context!!.applicationContext, sortList, selectedItem)
+            ListChoiceAdapter(requireContext(), data, selectedItem)
 
         val handler = Handler()
         handler.postDelayed({
             try {
                 val h1 = binding.lvLoanTerm.height
-                val itemHeight: Int
-                if (item % 2 == 0) {
-                    itemHeight =
-                        h1 / item // find item height
+                val itemHeight: Int = if (item % 2 == 0) {
+                    h1 / item // find item height
                 } else {
-                    itemHeight =
-                        h1 / item / 2 // if number item is odd we have to divide by 2
+                    h1 / item / 2 // if number item is odd we have to divide by 2
                 }
                 binding.lvLoanTerm.smoothScrollToPositionFromTop(selectedItem, h1 / 2 - itemHeight, 0)
             } catch (e: Exception) {
@@ -88,33 +78,21 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
             binding.lvLoanTerm,
             item
         )
-
-        // set on item selected
-
         // set on item selected
         binding.lvLoanTerm.onItemClickListener =
             OnItemClickListener { parent, view, position, id ->
-                if (obj.get(0) is Map<*, *>) mlistener!!.onClickItem(
-                    position,
-                    map
-                ) else mlistener!!.onClickItem(
-                    position,
-                    sortList[position]
-                )
+                setOnItemListener(position)
+                dismiss()
+                Log.d(">>>>>", "List click $position")
             }
 
     }
 
-    interface onItemClickLisenter {
-        fun onClickItem(dialogIndex: Int, obj: Any?)
-    }
-
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        confirmClickListener = null
     }
 
-    fun onConfirmClickedListener(confirmListener: (() -> Unit)) =
-        apply { this.confirmClickListener = confirmClickListener }
+//    fun onConfirmClickedListener(confirmListener: ((pos : Int) -> Unit)) =
+//        apply { this.confirmClickListener = confirmListener }
 
 }

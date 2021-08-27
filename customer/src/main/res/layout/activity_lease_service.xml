@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:background="@color/color_f5f7fc"
+        android:layout_height="match_parent"
+        tools:context=".ui.lease.service.LeaseServiceActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:stateListAnimator="@null"
+            android:background="@color/color_f5f7fc">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/col_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:expandedTitleTextAppearance="@style/font_28_263238_bold"
+                app:collapsedTitleTextAppearance="@style/font_18_263238_bold"
+                app:title="Full Repayment"
+                app:collapsedTitleGravity="center"
+                app:expandedTitleMargin="21dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar_01"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center"
+                    app:layout_collapseMode="pin"
+                    app:collapseIcon="@null"
+                    style="@style/font_18_263238_bold"
+                    android:background="@color/color_f5f7fc"
+                    android:contentInsetEnd="0dp"
+                    android:contentInsetRight="0dp"
+                    android:contentInsetStart="0dp"
+                    app:contentInsetEnd="0dp"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetRight="0dp"
+                    app:contentInsetStart="0dp">
+
+                    <ImageView
+                        android:id="@+id/toolbar_left_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="21dp"
+                        android:src="@drawable/ic_nav_back_dark_btn"
+                        android:layout_gravity="start"
+                        tools:ignore="RtlSymmetry" />
+
+                    <ImageView
+                        android:id="@+id/toolbar_right_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="21dp"
+                        android:src="@drawable/ic_nav_back_dark_btn"
+                        android:layout_gravity="end"
+                        android:visibility="invisible"/>
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_loan_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/ll_root"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="80dp">
+
+                <TextView
+                    android:id="@+id/tv_sub_description"
+                    android:layout_width="match_parent"
+                    android:text="@string/loan_detail"
+                    android:padding="5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:lineSpacingMultiplier="1.1"
+                    style="@style/font_15_263238_regular"
+                    android:layout_height="wrap_content"/>
+
+                <com.bnkc.sourcemodule.ui.ShadowLayout
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    app:shadowDx="0dp"
+                    app:shadowDy="0dp"
+                    app:shadowRadius="15dp"
+                    app:shadowShape="rectangle"
+                    app:shadowSide="left|top|right">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <LinearLayout
+                            android:id="@+id/ll_pro_container"
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/product_introduction"
+                                android:layout_height="wrap_content"
+                                style="@style/font15_263238_medium"/>
+                            <ImageView
+                                android:id="@+id/iv_state"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_product_intro"
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:visibility="visible"
+                            android:layout_height="wrap_content">
+                            <View
+                                android:layout_width="match_parent"
+                                android:background="@color/color_eef5f8"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="15dp"/>
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:orientation="horizontal"-->
+<!--                                android:layout_height="wrap_content">-->
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    style="@style/font15_90a4ae_regular"/>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:text=""-->
+<!--                                    android:layout_marginStart="15dp"-->
+<!--                                    android:layout_weight="1"-->
+<!--                                    android:lineSpacingMultiplier="1.1"-->
+<!--                                    android:textAlignment="textEnd"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    style="@style/font15_263238_medium"-->
+<!--                                    tools:targetApi="p" />-->
+
+<!--                            </LinearLayout>-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="@string/interest_rate"
+                                    android:layout_height="wrap_content"
+                                    style="@style/font15_90a4ae_regular"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:text="Under the commodity
+price
+"
+                                    android:layout_weight="1"
+                                    android:lineSpacingMultiplier="1.1"
+                                    android:textAlignment="textEnd"
+                                    android:layout_height="wrap_content"
+                                    style="@style/font15_263238_medium"
+                                    tools:targetApi="p" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="Interest Rate"
+                                    android:layout_height="wrap_content"
+                                    style="@style/font15_90a4ae_regular"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:text="0.50%~ (Flexible"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_weight="1"
+                                    android:lineSpacingMultiplier="1.1"
+                                    android:textAlignment="textEnd"
+                                    android:layout_height="wrap_content"
+                                    style="@style/font15_263238_medium"
+                                    tools:targetApi="p" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:text="Term"
+                                    android:layout_height="wrap_content"
+                                    style="@style/font15_90a4ae_regular"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:text="12~60M (Flexible)"
+                                    android:layout_weight="1"
+                                    android:lineSpacingMultiplier="1.1"
+                                    android:textAlignment="textEnd"
+                                    android:layout_height="wrap_content"
+                                    style="@style/font15_263238_medium"
+                                    tools:targetApi="p" />
+
+                            </LinearLayout>
+
+                            <com.bnkc.sourcemodule.ui.ValidateButton
+                                android:id="@+id/btn_loan_calculator"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="15dp"
+                                app:buttonText="Calculate"
+                                app:textAllCaps="true"
+                                app:buttonBackground="@drawable/selector_d7191f_ffffee"
+                                app:buttonTextColor="@color/colorPrimary"
+                                android:layout_height="50dp"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </com.bnkc.sourcemodule.ui.ShadowLayout>
+
+                <include android:id="@+id/lyt_document" layout="@layout/requirement_document_layout"/>
+
+                <include android:id="@+id/lyt_loan_process" layout="@layout/loan_process_layout"/>
+
+                <include android:id="@+id/lyt_faqs" layout="@layout/faqs_layout"/>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:background="@null">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/color_f5f7fc"
+                android:layout_marginTop="40dp"
+                android:paddingBottom="10dp"/>
+
+            <com.bnkc.sourcemodule.ui.ValidateButton
+                android:id="@+id/btn_apply_loan"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                app:buttonText="Apply Now"
+                app:is_active="false"
+                android:layout_height="50dp"/>
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

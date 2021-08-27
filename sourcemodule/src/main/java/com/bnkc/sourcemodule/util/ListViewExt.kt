@@ -1,22 +1,16 @@
 package com.bnkc.sourcemodule.util
 
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ListAdapter
 import android.widget.ListView
 
 fun ListView.setListViewHeightBasedOnChildren(listView : ListView, showItem : Int) {
-    if (listView == null) {
+    var listAdapter: ListAdapter? = listView.adapter
+        ?: // pre-condition
         return;
-    }
-    var listAdapter = listView.getAdapter();
-    if (listAdapter == null) {
-        // pre-condition
-        return;
-    }
 
-    var totalHeight = listView.getPaddingTop() + listView.getPaddingBottom();
-    for (i in 0..listAdapter.count){
+    var totalHeight = listView.paddingTop + listView.paddingBottom;
+    for (i in 0..listAdapter!!.count){
         if (i>showItem-1){
             break;
         }
@@ -26,10 +20,10 @@ fun ListView.setListViewHeightBasedOnChildren(listView : ListView, showItem : In
         }
 
         listItem.measure(0, 0);
-        if (i<listAdapter.getCount()-1){
-            totalHeight += listItem.getMeasuredHeight() + listView.getDividerHeight();
+        totalHeight += if (i<listAdapter.count -1){
+            listItem.measuredHeight + listView.dividerHeight;
         }else {
-            totalHeight += listItem.getMeasuredHeight() - listView.getDividerHeight();
+            listItem.measuredHeight - listView.dividerHeight;
         }
     }
 

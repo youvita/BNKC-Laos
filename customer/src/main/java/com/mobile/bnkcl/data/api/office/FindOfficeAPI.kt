@@ -7,9 +7,7 @@ import com.mobile.bnkcl.data.request.findoffice.BranchRequest
 import com.mobile.bnkcl.data.response.area.AreaResponse
 import com.mobile.bnkcl.data.response.area.BranchResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface FindOfficeAPI {
 
@@ -26,7 +24,7 @@ interface FindOfficeAPI {
         @Query("sort_by") sort_by: String? = null
     ) : Response<BranchResponse>
 
-    @GET("/api/ca/branches/")
-    suspend fun getBranchInfo(@Query("") id: Long) : Response<BranchResData>
+    @GET("/api/ca/branches/{branch_id}") // /api/ca/branches/13
+    suspend fun getBranchInfo(@Path("branch_id") branch_id: Long) : Response<BranchResData>
 
 }

@@ -132,7 +132,7 @@ class FindOfficeRecyclerAdapter(private val offices: List<BranchResData>, privat
             tvOfficeEmail.setOnClickListener { sendEmail(offices[adapterPosition].email!!) }
             llViewMap.setOnClickListener { //set branch info to extra
                 val intent = Intent(context, MapActivity::class.java)
-                intent.putExtra("branch_info", offices[adapterPosition])
+                intent.putExtra("branch_id", offices[adapterPosition].id)
                 context?.startActivity(intent)
             }
             llContact.setOnClickListener {

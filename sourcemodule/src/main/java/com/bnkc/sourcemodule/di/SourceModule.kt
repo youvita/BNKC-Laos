@@ -1,9 +1,6 @@
 package com.bnkc.sourcemodule.di
 
-import com.bnkc.sourcemodule.dialog.ConfirmDialog
-import com.bnkc.sourcemodule.dialog.DatePickerDialog
-import com.bnkc.sourcemodule.dialog.LoadingDialog
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +26,9 @@ object SourceModule {
     @Singleton
     @Provides
     fun provideConfirmDialog() = ConfirmDialog()
+
+    @Singleton
+    @Provides
+    fun provideListChoiceDialog() = ListChoiceDialog()
 
 }

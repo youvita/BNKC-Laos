@@ -27,16 +27,17 @@ import com.mobile.bnkcl.ui.map.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
     private var recFindOffice: RecyclerView? = null
-    private var objects: List<AreaDataResponse>? = null
+    private var objects: ArrayList<AreaDataResponse>? = ArrayList()
     private val viewModel : FindOfficeViewModel by viewModels()
-    private var areaSelected = 0
+    private var selectedItem = 0;
 
-//    @Inject
-//    lateinit var listChoiceDialog: ListChoiceDialog
+    @Inject
+    lateinit var listChoiceDialog: ListChoiceDialog
 
     var findOfficeBinding : FragmentFindOfficeBinding? = null
 
@@ -65,95 +66,42 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
         binding.recyclerFindOffice.layoutManager = manager
 
         viewModel.reqAreasList()
+
+        binding.tvAreas.setOnClickListener(View.OnClickListener {
+            if (objects != null && objects!!.size > 0) {
+
+                listChoiceDialog = ListChoiceDialog.newInstance(
+                    R.drawable.ic_badge_error,
+                    getString(R.string.area),
+                    viewModel.setUpAreaName(objects!!),
+                    selectedItem
+                )
+
+                listChoiceDialog.setOnItemListener = {
+                    p : Int ->
+                    selectedItem = p
+                    binding.tvAreas.text = objects!![p].alias1
+                    viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
+                    viewModel.reqBranchList()
+                }
+                listChoiceDialog.isCancelable = true
+                listChoiceDialog.show(requireActivity().supportFragmentManager, listChoiceDialog.tag)
+
+            }
+        })
+        viewModel.reqAreasList()
         getAreas()
         getBranches()
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        binding.btnNotification.setOnClickListener{
-//            startActivity(Intent(activity, AlarmActivity::class.java))
-//        }
-////
-//        val manager =
-//            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        binding.recyclerFindOffice.layoutManager = manager
-//
-//        binding.tvAreas.setOnClickListener(View.OnClickListener {
-////            if (objects != null && objects!!.size > 0) {
-////
-////                confirmDialog = ListChoiceDialog.newInstance(
-////                    R.drawable.ic_badge_error,
-////                    getString(R.string.area),
-////                    objects!!,
-////                    0
-////                )
-////                confirmDialog.onConfirmClickedListener {
-////
-////                }
-////                confirmDialog.isCancelable = false
-////                confirmDialog.show(activity!!.supportFragmentManager, confirmDialog.tag)
-////
-//////                DlgLoanTerm.DlgLoanTerm(
-//////                    context,
-//////                    getString(R.string.area),
-//////                    objects,
-//////                    areaSelected,
-//////                    object : onItemClickLisenter() {
-//////                        fun onClickItem(dialogIndex: Int, obj: Any) {
-//////                            areaSelected = dialogIndex
-//////                            officeBinding!!.tvAreas.text =
-//////                                if (obj is AreaRespondObj) (obj as AreaRespondObj).getAlias1() else "not string"
-//////                            officeViewModel.setAREA_ID((objects!![areaSelected] as AreaRespondObj).getId())
-//////                            officeViewModel.reqBranchList()
-//////                        }
-//////                    },
-//////                    true
-//////                )
-////            }
-//            startActivity(Intent(context, MapActivity::class.java))
-//        })
-//        viewModel.reqAreasList()
-//        getAreas()
-//        getBranches()
-//    }
-
-//    private fun observeData() {
-//        officeViewModel.getBranchLiveData().observe(
-//            Objects.requireNonNull(getActivity()),
-//            object : Observer<ArrayList<BranchResData?>?> {
-//                override fun onChanged(branchResData: ArrayList<BranchResData?>) {
-//                    val adapter = FindOfficeRecyclerAdapter(branchResData)
-//                    recFindOffice!!.adapter = adapter
-//                }
-//            })
-//        officeViewModel.getAreaLiveData()
-//            .observe(getActivity(), object : Observer<ArrayList<AreaRespondObj?>?> {
-//                override fun onChanged(areaRespondObjs: ArrayList<AreaRespondObj>) {
-//                    if (objects!!.size != areaRespondObjs.size) {
-//                        objects!!.clear()
-//                        val areaRespondObj = AreaRespondObj()
-//                        areaRespondObj.setAlias1(getString(R.string.all))
-//                        areaRespondObj.setId(0)
-//                        objects!!.add(areaRespondObj)
-//                        objects!!.addAll(areaRespondObjs)
-//                    }
-//                }
-//            })
-////        officeViewModel.getHandleError().observe(getActivity(),
-////            Observer<Any?> { })
-//    }
-
     fun getAreas(){
         viewModel.areaLiveData.observe(requireActivity()) {
-//            objects!!.clear()
-
-            val areaRespondObj = AreaObjResponse()
+            objects!!.clear()
+            val areaRespondObj = AreaDataResponse()
             areaRespondObj.alias1 = getString(R.string.all)
             areaRespondObj.id = 0
-//            objects!!.add(areaRespondObj)
-//            objects!!.addAll(it)
+            objects!!.add(areaRespondObj)
+            objects!!.addAll(it)
             viewModel.branchRequest = BranchRequest("", 1, 10, "")
             viewModel.reqBranchList()
         }
