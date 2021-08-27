@@ -1,9 +1,17 @@
 package com.mobile.bnkcl.ui.notice
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.viewModels
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.mobile.bnkcl.BuildConfig
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.notice.NoticeRequest
 import com.mobile.bnkcl.databinding.ActivityNoticeBinding
@@ -23,9 +31,49 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        noticeRequest = NoticeRequest()
 
-        getNoticeData()
+
+
+//        noticeRequest = NoticeRequest()
+
+//        getNoticeData()
+
+        initView()
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun initView() {
+
+        binding.toolbarLeftButton.setOnClickListener(View.OnClickListener {
+            onBackPressed()
+        })
+
+        val webSettings = binding.wbNotice.settings
+        webSettings.javaScriptEnabled = true
+        webSettings.domStorageEnabled = true
+        webSettings.setAppCacheEnabled(true)
+        webSettings.loadsImagesAutomatically = true
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        binding.wbNotice.webViewClient = object : WebViewClient(){
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                view?.loadUrl(url!!)
+                return true
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                view!!.loadUrl("javascript:window.HTMLOUT.processHTML('<body>'+document.getElementsByTagName('html')[0].innerHTML+'</body>');")
+            }
+        }
+
+        val header = mutableMapOf<String, String>()
+        header.put("Authorization", "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}")
+        header.put("Accept-Language", if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!)
+
+        binding.wbNotice.loadUrl(BuildConfig.BASE_URL + "/customer/notices", header)
     }
 
     private fun getNoticeData() {
