@@ -6,27 +6,23 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
-import androidx.databinding.adapters.TextViewBindingAdapter
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.binding.BindingAdapters.enableButton
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.cscenter.ClaimReq
 import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
 import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCViewModel
+import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListener {
     override fun getLayoutId(): Int = R.layout.activity_askbnkc
-    private var category : String =""
-    private var subject: String = ""
-    private var description : String = ""
     private val askBNKCViewModel : AskBNKCViewModel by viewModels()
 
-    private lateinit var claimReq: ClaimReq
-
+    private var subject: String = ""
+    private var description : String = ""
     private lateinit var collapseToolBarLayout : CollapsingToolbarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +30,10 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
         collapseToolBarLayout =binding.collToolbar
 
-        //init button
-
         initToolbar()
         initButton()
+        observeData()
+
     }
     private fun initToolbar(){
         collapseToolBarLayout.title = this.getString(R.string.cs_02)
@@ -47,7 +43,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
     }
     private fun initButton(){
-        binding.btnSubmit.setLabelButton("submit")
+        binding.btnSubmit.setLabelButton(this.getString(R.string.comm_submit))
         binding.btnSubmit.setOnClickListener(this)
 
         binding.edtSubject.addTextChangedListener(inputText)
@@ -55,15 +51,14 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
     }
 
-    private fun onSubmit(){
-        try {
-            askBNKCViewModel.getClaim("1",subject,description)
-            askBNKCViewModel.claimLiveData.observe(this){
-
-
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
+    private fun onRequestToSubmit(){
+        askBNKCViewModel.getClaim("1",subject,description)
+    }
+    private fun observeData(){
+        askBNKCViewModel.claimLiveData.observe(this){
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra("ACTION_TAG","ask_bnkc")
+            startActivity(intent)
         }
     }
 
@@ -77,21 +72,16 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         override fun afterTextChanged(s: Editable?) {
             subject = binding.edtSubject.text.toString()
             description = binding.edtDescription.text.toString()
-
             setEnableSubmitButton(subject, description)
-
         }
-
     }
 
     fun setEnableSubmitButton(subject: String, desc: String){
         if(subject.isEmpty() || desc.isEmpty()){
-            binding.btnSubmit.enableButton(false)
-            binding.btnSubmit.setCheckButtonTextColor(false)
+            binding.btnSubmit.setActive(false)
         }
         else {
-            binding.btnSubmit.enableButton(true)
-            binding.btnSubmit.setCheckButtonTextColor(true)
+            binding.btnSubmit.setActive(true)
         }
     }
 
@@ -99,7 +89,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         when(v?.id){
             R.id.toolbar_left_button -> onBackPressed()
 
-            R.id.btn_submit -> onSubmit()
+            R.id.btn_submit -> onRequestToSubmit()
         }
     }
 }

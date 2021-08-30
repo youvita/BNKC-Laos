@@ -27,11 +27,12 @@ class AskBNKCViewModel @Inject constructor(private val claimRepo: ClaimRepo) : B
 
     private val _claimData: MutableLiveData<ClaimRes> = MutableLiveData()
     val claimLiveData: LiveData<ClaimRes> get() = _claimData
-    private var claimReq : ClaimReq = ClaimReq()
+    private var claimReq = ClaimReq()
 
     fun getClaim(category: String, subject : String, description : String){
 
         claimReq = ClaimReq(category,subject,description)
+
         viewModelScope.launch {
             claimRepo.getClaim(claimReq).onEach { resource ->
                 if (resource.status == Status.ERROR) {
@@ -46,11 +47,4 @@ class AskBNKCViewModel @Inject constructor(private val claimRepo: ClaimRepo) : B
 
         }
     }
-
-    fun onClickSubmit(){
-                val intent = Intent(context, AskBNKCRegisterSuccessActivity::class.java)
-                intent.putExtra("pin_action", "login")
-//                intent.putExtra("username", phoneNumber.value)
-                context.startActivity(intent)
-        }
     }

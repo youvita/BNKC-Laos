@@ -23,8 +23,15 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
     private val _claimData: MutableLiveData<ClaimDataResponse> = MutableLiveData()
     val claimLiveData: LiveData<ClaimDataResponse> get() = _claimData
     private val lastPage = false
+    var  request = ClaimDataRequest()
 
-    fun getClaimData(request: ClaimDataRequest){
+
+
+    fun getClaimData(page_number: Int, loading: Boolean){
+
+      request = ClaimDataRequest(page_number, request.page_size, "")
+
+
         viewModelScope.launch {
             claimRepo.getClaimData(request).onEach { resource ->
                 // catch error

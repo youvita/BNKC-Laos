@@ -42,7 +42,7 @@
                     android:id="@+id/iv_reg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_badge_failed_b_char" />
+                    android:src="@drawable/ic_badge_success_b_char" />
 
                 <TextView
                     android:id="@+id/tv_result_title"

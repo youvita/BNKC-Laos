@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:gravity="center"
-                    android:text="@string/register_successful"
+                    tools:text="@string/register_successful"
                     style="@style/font_21_263238_normal"/>
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="@string/register_login"
+                    tools:text="@string/register_login"
                     android:textAlignment="center"
                     style="@style/font_15_263238_regular"/>
             </LinearLayout>
@@ -81,8 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    app:buttonText="Log in"
-                    app:textAllCaps="true" />
+                    />
             </LinearLayout>
         </RelativeLayout>
 

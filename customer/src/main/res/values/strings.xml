@@ -236,9 +236,11 @@
     <string name="cs_12">Yes</string>
     <string name="cs_13">No</string>
     <string name="cs_14">Inquiry is Submitted</string>
-    <string name="cs_15">BNKC will review your inquiry\nand get back to you soon.</string>
+    <string name="cs_15">BNKC will review your inquiry\n and get back to you soon.</string>
     <string name="cs_16">Close</string>
     <string name="cs_17">Loan</string>
+    <string name="cs_18">Inquiry is Failed</string>
+    <string name="cs_19">Internal Server Error \n (Error Code : 500) </string>
 
     <!--apply loan-->
     <string name="apply_01">Apply Loan</string>
@@ -645,10 +647,10 @@
     <string name="dlg_21">Different Phone Number</string>
 
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
-    <string name="ask_bnkc_review">BNKC will review your inquiry and get back to you soon</string>
+    <string name="ask_bnkc_review">BNKC will review your inquiry\n and get back to you soon</string>
     <string name="ask_inquiry_failed">Inquiry is Failed</string>
     <string name="ask_inquiry_submitted">Inquiry is Submitted</string>
-    <string name="ask_internal_server_error">Internal Server Error</string>
+    <string name="ask_internal_server_error">Internal Server Error \n (Error Code : 500) </string>
     <string name="ask_error_code_500">(Error Code : 500)</string>
 
     <!-- tab bottom menu -->

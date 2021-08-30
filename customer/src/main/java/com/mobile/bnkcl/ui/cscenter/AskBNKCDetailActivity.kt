@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.ActionBar
@@ -76,27 +77,28 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
 
                 if (null == it.replied_on || "".equals(it.replied_on, ignoreCase = true)) {
                     binding.tvAnswer.text = this.getString(R.string.cs_13)
-                    binding.tvAnswer.background = this.getDrawable(R.drawable.round_solid_ffeeee_18)
-                    binding.tvAnswer.setTextColor(this.resources.getColor(R.color.color_d7191f))
+                    binding.tvAnswer.background = ContextCompat.getDrawable(this,R.drawable.round_solid_ffeeee_18)
+                    binding.tvAnswer.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
+
                 } else {
                     binding.tvAnswer.text = this.getString(R.string.cs_12)
-                    binding.tvAnswer.background = this.getDrawable(R.drawable.round_solid_e0f2f1_18)
-                    binding.tvAnswer.setTextColor(this.resources.getColor(R.color.color_00695c))
+                    binding.tvAnswer.background = ContextCompat.getDrawable(this,R.drawable.round_solid_e0f2f1_18)
+                    binding.tvAnswer.setTextColor(ContextCompat.getColor(this, R.color.color_00695c))
                 }
 
 
                 if (null == it.reply || "".equals(it.reply, ignoreCase = true)) {
-                    binding.llWrapReply.background = this.getDrawable(R.drawable.round_solid_ffeeee_5)
+                    binding.llWrapReply.background = ContextCompat.getDrawable(this,R.drawable.round_solid_ffeeee_5)
                     binding.tvReply.text = getString(R.string.not_answer)
                     binding.tvTitleReply.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_not_answer_red_ico, 0, 0, 0)
-                    binding.view1.setBackgroundColor(resources.getColor(R.color.color_d7191f))
-                    binding.tvTitleReply.setTextColor(resources.getColor(R.color.color_d7191f))
+                    binding.view1.setBackgroundColor(ContextCompat.getColor(this,R.color.color_d7191f))
+                    binding.tvTitleReply.setTextColor(ContextCompat.getColor(this,R.color.color_d7191f))
                 } else {
                     binding.llWrapReply.background = getDrawable(R.drawable.round_solid_f8fcfc_5)
                     binding.tvReply.text = it.reply
                     binding.tvTitleReply.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_answer_green_ico, 0, 0, 0)
-                    binding.view1.setBackgroundColor(resources.getColor(R.color.color_00695c))
-                    binding.tvTitleReply.setTextColor(resources.getColor(R.color.color_00695c))
+                    binding.view1.setBackgroundColor(ContextCompat.getColor(this,R.color.color_00695c))
+                    binding.tvTitleReply.setTextColor(ContextCompat.getColor(this,R.color.color_00695c))
                 }
 
             }

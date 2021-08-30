@@ -22,12 +22,6 @@ class AskBNKCDetailViewModel @Inject constructor(private val claimRepo: ClaimDet
     //Notice Data
     private val _claimDetailData: MutableLiveData<ClaimDetailRes> = MutableLiveData()
     val claimDetailLiveData: LiveData<ClaimDetailRes> get() = _claimDetailData
-    private val lastPage = false
-    lateinit var  mClaim : String
-    lateinit var reg : ClaimDetailReq
-
-
-
 
     fun getClaimDetailData(request: ClaimDetailReq){
         viewModelScope.launch {

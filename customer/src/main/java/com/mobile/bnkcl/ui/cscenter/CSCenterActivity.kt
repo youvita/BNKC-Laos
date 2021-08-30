@@ -2,9 +2,13 @@ package com.mobile.bnkcl.ui.cscenter
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
@@ -30,6 +34,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
     private var isSending = false
     @Inject
     lateinit var adapter : AskQuestionAdapter
+    lateinit var recyclerView: RecyclerView
+    lateinit var layoutManager: LinearLayoutManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +46,12 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
 
         adapter = AskQuestionAdapter()
 
+
         binding.toolbarLeftButton.setOnClickListener(this)
 
         initToolbar()
         initButton()
+        observeData()
 
         if (intent != null) {
             if (intent.getIntExtra("tab_index", 0) !== 0) {
@@ -63,7 +71,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
         binding.btnAskBnk.setOnClickListener(this)
         binding.nsvAsk.smoothScrollBy(0, 0)
 
-        binding.swipeRefreshAskBnkc.setColorSchemeColors(resources.getColor(R.color.colorAccent))
+        binding.swipeRefreshAskBnkc.setColorSchemeColors(ContextCompat.getColor(this,R.color.colorAccent))
         binding.swipeRefreshAskBnkc.setOnRefreshListener {
             PAGE = 0
             claimItemsList.clear()
@@ -80,19 +88,15 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
 
     }
     private fun getClaimData(page_no: Int, loading: Boolean){
-        try {
-            csCenterViewModel.getClaimData(claimDataRequest)
+            csCenterViewModel.getClaimData(page_no, loading)
+    }
 
-            binding.rcQuestion.adapter = adapter
+    private fun observeData(){
 
-            csCenterViewModel.claimLiveData.observe(this){
-                for (i in 0 until it.claims!!.size){
-
-                }
-                adapter.addItemList(it.claims)
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
+        csCenterViewModel.claimLiveData.observe(this){
+            Log.d(">>>","$it")
+            adapter.addItemList(it.claims)
+            isSending = false
         }
     }
     private fun initButton(){
@@ -109,8 +113,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
         binding.llWrapBtn.visibility = View.GONE
         binding.tvFaq.background = getDrawable(R.drawable.round_solid_d7191f_8)
         binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_ffeeee)
-        binding.tvFaq.setTextColor(resources.getColor(R.color.color_ffffff))
-        binding.tvAskBnk.setTextColor(resources.getColor(R.color.color_d7191f))
+        binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
+        binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
 
     }
 
@@ -122,21 +126,25 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
         binding.llWrapBtn.visibility = View.VISIBLE
         binding.tvFaq.background = getDrawable(R.drawable.round_solid_ffeeee)
         binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_d7191f_8)
-        binding.tvFaq.setTextColor(resources.getColor(R.color.color_d7191f))
-        binding.tvAskBnk.setTextColor(resources.getColor(R.color.color_ffffff))
+        binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
+        binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
+        binding.rcQuestion.adapter = adapter
+
         binding.rcQuestion.isNestedScrollingEnabled = false
         binding.nsvAsk.viewTreeObserver.addOnScrollChangedListener(ViewTreeObserver.OnScrollChangedListener {
-            val view = binding.nsvAsk.getChildAt(binding.nsvAsk.childCount - 1) as View
-            val diff = view.bottom - (binding.nsvAsk.height + binding.nsvAsk
-                    .scrollY)
-            if (diff == 0) {
-                if (!csCenterViewModel.isLastPage()) {
-                    if (isSending) return@OnScrollChangedListener
-                    ++PAGE
-                    getClaimData(PAGE, true)
-                    isSending = true
+
+                val view = binding.nsvAsk.getChildAt(binding.nsvAsk.childCount - 1) as View
+                val diff = view.bottom - (binding.nsvAsk.height + binding.nsvAsk.scrollY)
+
+                if (diff == 0) {
+                    if (!csCenterViewModel.isLastPage()) {
+                        if(isSending) return@OnScrollChangedListener
+
+                        ++PAGE
+                        getClaimData(PAGE, true)
+                        isSending = true
+                    }
                 }
-            }
         })
     }
 
