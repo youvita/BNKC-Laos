@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.R
-import com.bnkc.sourcemodule.databinding.CommValidateButtonBinding
-import com.bnkc.sourcemodule.databinding.CommValidateButtonBinding.inflate
 import java.util.*
 
 class ValidateButton : LinearLayout {
@@ -60,9 +58,8 @@ class ValidateButton : LinearLayout {
         tvCheckLabel = mView.findViewById(R.id.tv_check_button)
         tvCheckLabel!!.setTextAppearance(context, R.style.font_14_FFFFFF_normal)
 
-        Log.d(">>>>>>>","tvCheckLabel $tvCheckLabel $text")
 //        tvCheckLabel!!.text = if (isTextCaps) text!!.toUpperCase() else text
-//        setLabelButton(text!!)
+        setLabelButton(text!!)
         if (active) {
             setActive(true)
         } else {
@@ -104,10 +101,11 @@ class ValidateButton : LinearLayout {
     fun setCheckButtonBackGround(isEnable: Boolean) {
         if (isEnable) {
             llCheckLabel!!.background =
-                context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
+                ContextCompat.getDrawable(context, R.drawable.selector_d7191f_8b0304)
+            setOnClickListener(null)
         } else {
             llCheckLabel!!.background =
-                context!!.resources.getDrawable(R.drawable.round_solid_e1e5ec_8)
+                ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
         }
     }
 

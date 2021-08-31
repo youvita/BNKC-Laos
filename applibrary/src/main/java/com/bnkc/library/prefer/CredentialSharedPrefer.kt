@@ -52,6 +52,10 @@ class CredentialSharedPrefer(context: Context) {
      */
     fun getPrefer(key: String) = sharedPreferences.getString(key, "")
 
+    fun remove(key: String) = sharedPreferences.edit().remove(key).commit()
+
+    fun clear() = sharedPreferences.edit().clear().commit()
+
     /**
      * created instead of using the static keyword for class methods
      */

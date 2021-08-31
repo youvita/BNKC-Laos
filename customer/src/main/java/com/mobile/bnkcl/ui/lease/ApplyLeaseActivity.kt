@@ -12,6 +12,13 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         super.onCreate(savedInstanceState)
+
+        initView()
+
+    }
+
+    private fun initView(){
+        binding.include.colToolbar.title = "Apply Lease"
     }
 
     override fun getLayoutId(): Int {

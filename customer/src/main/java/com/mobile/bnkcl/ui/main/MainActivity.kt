@@ -63,7 +63,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         viewModel.userRole = -1 //Custom : 0, Employee : 1 , Dealer : 2, Not yet login : -1
         viewModel.isLogin = sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()
-
+        Log.d(">>>>", "Login ready ??? ${viewModel.isLogin}")
         try {
 
             viewPager = binding.viewPager

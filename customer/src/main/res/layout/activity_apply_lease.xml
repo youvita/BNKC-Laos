@@ -334,6 +334,118 @@
                     android:text="Lease Information"/>
 
                 <!--       Customer information table         -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_20dp"
+                    android:padding="@dimen/margin_20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
+                    android:elevation="5dp">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            style="@style/font_15_90A4AE_regular"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:text="Ko Youngwon"
+                            style="@style/font15_263238_medium"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Identification NM"
+                            style="@style/font_15_90A4AE_regular"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:text="01050080340"
+                            style="@style/font15_263238_medium"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date of Birth"
+                            style="@style/font_15_90A4AE_regular"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:text="12-09-83"
+                            style="@style/font15_263238_medium"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Phone Number"
+                            style="@style/font_15_90A4AE_regular"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:text="020 5608 8075"
+                            style="@style/font15_263238_medium"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Address"
+                            style="@style/font_15_90A4AE_regular"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:lineHeight="@dimen/margin_25dp"
+                            android:text="Vientiane Capital \n
+Phonkeo Village Unit 14"
+                            style="@style/font15_263238_medium"/>
+
+                    </LinearLayout>
+
+                    <com.bnkc.sourcemodule.ui.ValidateButton
+                        android:id="@+id/btn_loan_calculator"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="15dp"
+                        app:buttonText="Edit"
+                        app:textAllCaps="true"
+                        app:buttonBackground="@drawable/selector_d7191f_ffffee"
+                        app:buttonTextColor="@color/colorPrimary"
+                        android:layout_height="50dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

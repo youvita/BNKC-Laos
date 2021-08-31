@@ -21,7 +21,22 @@
         android:usesCleartextTraffic="true"
         tools:overrideLibrary="androidx.security.identity.credential"
         tools:targetApi="m">
-<!--        <activity android:name=".ui.lease.ApplyLeaseActivity"></activity>-->
+
+        <activity
+            android:name=".ui.lease.ApplyLeaseActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.lease.service.LeaseServiceActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.lease.calculate.result.CalculateResultActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.lease.calculate.LeaseCalculateActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

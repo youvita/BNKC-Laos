@@ -32,7 +32,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:src="@drawable/ic_acc_number_ico"
+                    android:src="@drawable/ic_faq_ico"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="0dp"
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:text="@string/negotiation"
                     android:layout_marginTop="5dp"
-                    android:layout_marginStart="22dp"
+                    android:layout_marginStart="17dp"
                     android:layout_height="wrap_content"
                     style="@style/font15_90a4ae_medium"/>
 
@@ -110,92 +110,92 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="@string/yes_you_can_borrow_without_collateral_depend_non_the_borrowing_amount"
+                    android:text="ect"
                     android:layout_marginTop="5dp"
-                    android:layout_marginStart="22dp"
+                    android:layout_marginStart="17dp"
                     android:layout_height="wrap_content"
                     style="@style/font15_90a4ae_medium"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/n_3"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/_3_how_much_income_do_i_need_per_month_to_be_nable_to_borrow_money"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="5dp"
-                        style="@style/font15_263238_medium"/>
-                </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="@string/n_3"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        style="@style/font15_263238_medium"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="@string/_3_how_much_income_do_i_need_per_month_to_be_nable_to_borrow_money"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        style="@style/font15_263238_medium"/>-->
+<!--                </LinearLayout>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/as_long_as_you_have_income_your_borrowing_namount_will_be_studied_to_be_able_to_provide_nto_you"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="22dp"
-                    android:layout_height="wrap_content"
-                    style="@style/font15_90a4ae_medium"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:text="@string/as_long_as_you_have_income_your_borrowing_namount_will_be_studied_to_be_able_to_provide_nto_you"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:layout_marginStart="22dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/font15_90a4ae_medium"/>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/n_4"
-                        android:layout_height="wrap_content"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/_4_what_documents_are_needed"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        style="@style/font15_263238_medium"/>
-                </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="@string/n_4"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        style="@style/font15_263238_medium"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="@string/_4_what_documents_are_needed"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        style="@style/font15_263238_medium"/>-->
+<!--                </LinearLayout>-->
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/id_card_or_family_book_or_residence_book_or_pay_slip_or_other_legal_documents_etc"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="22dp"
-                    android:layout_height="wrap_content"
-                    style="@style/font15_90a4ae_medium"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:text="@string/id_card_or_family_book_or_residence_book_or_pay_slip_or_other_legal_documents_etc"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:layout_marginStart="22dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/font15_90a4ae_medium"/>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/n_5"
-                        android:layout_height="wrap_content"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/_5_when_can_i_receive_the_money_after_applying_loan"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        style="@style/font15_263238_medium"/>
-                </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="@string/n_5"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        style="@style/font15_263238_medium"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="@string/_5_when_can_i_receive_the_money_after_applying_loan"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        style="@style/font15_263238_medium"/>-->
+<!--                </LinearLayout>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/the_processing_would_take_1day_4days_depend_on_loan_size"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginStart="22dp"
-                    android:layout_height="wrap_content"
-                    style="@style/font15_90a4ae_medium"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:text="@string/the_processing_would_take_1day_4days_depend_on_loan_size"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:layout_marginStart="22dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/font15_90a4ae_medium"/>-->
 
             </LinearLayout>
         </LinearLayout>

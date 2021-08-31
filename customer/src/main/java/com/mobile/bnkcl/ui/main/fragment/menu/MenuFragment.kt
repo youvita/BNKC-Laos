@@ -180,7 +180,17 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     viewModel.goToSignUp()
                 }
                 R.id.btn_login -> {
-                    startActivity(Intent(requireContext(), OtpActivity::class.java))
+                    if (mainViewModel.isLogin){
+                        val logOutDialog = LogOutDialog()
+                        logOutDialog.onConfirmClickedListener {
+                            sharedPrefer.remove(Constants.USER_ID)
+                            Log.d(">>>>", "Remove ready ??? ${sharedPrefer.getPrefer(Constants.USER_ID)}")
+                            startActivity(Intent(requireContext(), OtpActivity::class.java))
+                        }
+                        logOutDialog.show(requireActivity().supportFragmentManager, logOutDialog.tag)
+                    }else{
+                        startActivity(Intent(requireContext(), OtpActivity::class.java))
+                    }
                 }
                 R.id.btn_logout -> {
                     val logOutDialog = LogOutDialog()

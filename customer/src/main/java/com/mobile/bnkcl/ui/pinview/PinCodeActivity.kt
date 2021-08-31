@@ -51,61 +51,14 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
                 binding.pinViewModel!!.pinUI = 3
 
-//                isRegister = true
-//                if (intent.hasExtra("username")) {
-//                    setUpPasswordViewModel.getSetupPasswordModel()
-//                        .setUsername(intent.getStringExtra("username"))
-//                }
-//                if (intent.hasExtra("session_id")) {
-//                    setUpPasswordViewModel.getSetupPasswordModel()
-//                        .setSession_id(intent.getStringExtra("session_id"))
-//                }
-
-                // 6/17/2021 soktry
-//                signUpViewModel.getSignUpModel()
-//                    .setFamily_name(MemoryPreferenceDelegator.getInstance().get("family_name"))
-//                signUpViewModel.getSignUpModel()
-//                    .setGiven_name(MemoryPreferenceDelegator.getInstance().get("given_name"))
-//                signUpViewModel.getSignUpModel().setRecommender_id(
-//                    MemoryPreferenceDelegator.getInstance().get("recommender_id")
-//                )
-//                signUpViewModel.getSignUpModel()
-//                    .setDate_of_birth(MemoryPreferenceDelegator.getInstance().get("date_of_birth"))
-//                signUpViewModel.getSignUpModel()
-//                    .setPhone_number(MemoryPreferenceDelegator.getInstance().get("phone_number"))
-//                signUpViewModel.getSignUpModel()
-//                    .setGender(MemoryPreferenceDelegator.getInstance().get("gender"))
-//                signUpViewModel.getSignUpModel().setSession_id(intent.getStringExtra("session_id"))
             } else if (pinUI == "forget") {
 
                 binding.pinViewModel!!.pinUI = 2
 
-//                isForgetPin = true
-//                if (intent.hasExtra("pin_id")) {
-//                    preLoginViewModel.getPreLoginModel().setPin_id(intent.getStringExtra("pin_id"))
-//                }
-//                if (intent.hasExtra("username")) {
-//                    preLoginViewModel.getPreLoginModel()
-//                        .setUsername(intent.getStringExtra("username"))
-//                }
-//                preLoginViewModel.requestPreLogin()
             } else if (pinUI == "login") {
 
                 binding.pinViewModel!!.pinUI = 1
 
-//                binding.pinViewModel.pinUI = 1
-
-//                isLogin = true
-//                if (intent.hasExtra("username")) {
-//                    loginViewModel.getLoginModel().setUsername(intent.getStringExtra("username"))
-//                }
-//                if (!PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
-//                        .isEmpty()
-//                ) {
-//                    loginViewModel.getLoginModel().setUsername(
-//                        PreferenceDelegator.getInstance(this).get(Constant.LoginInfo.USER_ID)
-//                    )
-//                }
             } else if(pinUI == "reset"){
                 binding.pinViewModel!!.pinUI = 4
 

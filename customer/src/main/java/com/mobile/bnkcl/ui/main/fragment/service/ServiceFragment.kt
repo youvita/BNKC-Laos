@@ -1,15 +1,19 @@
 package com.mobile.bnkcl.ui.main.fragment.service
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentLoanServiceBinding
+import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 
 class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
+
+    val viewModel: ServiceViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +26,20 @@ class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoanServiceBinding.bind(view)
+        binding.serviceViewModel = viewModel
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.actLiveData.observe(viewLifecycleOwner, {
+            when(it){
+                "DETAIL" -> {
+                    startActivity(Intent(requireActivity(), LeaseServiceActivity::class.java))
+                }else -> {
+
+                }
+            }
+        })
     }
 
     override fun getLayoutId(): Int {

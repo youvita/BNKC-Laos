@@ -6,7 +6,6 @@
 package com.bnkc.sourcemodule.binding
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -111,11 +110,11 @@ object BindingAdapters {
         )
     }
 
-    @JvmStatic
-    @BindingAdapter("textButton")
-    fun textButton(textView: ValidateButton, str: String?) {
-        textView.tvCheckLabel!!.text = str
-    }
+//    @JvmStatic
+//    @BindingAdapter("textButton")
+//    fun textButton(textView: ValidateButton, str: String?) {
+//        textView.tvCheckLabel!!.text = str
+//    }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @JvmStatic
@@ -124,11 +123,11 @@ object BindingAdapters {
         if (isEnable != null && isEnable) {
             llCheckLabel!!.background =
                 context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
-            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context ,R.color.color_ffffff))
+            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
         } else {
             llCheckLabel!!.background =
-                ContextCompat.getDrawable(context,R.drawable.round_solid_e1e5ec_8)
-            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context,R.color.color_90a4ae))
+                ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
+            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context, R.color.color_90a4ae))
 
         }
 

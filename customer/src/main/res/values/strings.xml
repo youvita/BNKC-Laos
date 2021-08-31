@@ -290,8 +290,8 @@
     <string name="_48_months_flexible">48 Months (Flexible)</string>
     <string name="repayment_method">Repayment Method</string>
     <string name="decline_annuity_semi_balloons">Decline/Annuity/\nBalloon/Semi Balloon </string>
-    <string name="requirement_documents">Requirement Documents</string>
-    <string name="loan_process">Loan Process</string>
+    <string name="requirement_documents">Document</string>
+    <string name="loan_process">Process</string>
     <string name="faqs">FAQs</string>
     <string name="up_to_5_000_usd_equivalent_khr">Up to 5,000 \n(USD/Equivalent KHR)</string>
     <string name="loan_calculator">Loan Calculator</string>

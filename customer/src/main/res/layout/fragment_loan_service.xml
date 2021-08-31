@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-<!--        <variable-->
-<!--            name="loanServiceViewModel"-->
-<!--            type="com.mobile.bnk.ui.main.fragment.loanservice.LoanServiceViewModel" />-->
-        <import type="android.view.View"/>
+        <import type="com.mobile.bnkcl.ui.main.fragment.service.ServiceViewModel"/>
+        <variable
+            name="serviceViewModel"
+            type="ServiceViewModel" />
 
     </data>
 
@@ -15,6 +15,34 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_top"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_marginEnd="@dimen/margin_20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_brand_bnkc_lao_ndmf"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/iv_flag"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_notification_grey_ico"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.bnkc.sourcemodule.ui.ShadowLayout
             android:layout_width="wrap_content"
@@ -26,34 +54,6 @@
             app:shadowRadius="15dp"
             app:shadowShape="rectangle"
             app:shadowSide="all">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_top"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_brand_bnkc_lao_ndmf"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
-
-                <ImageView
-                    android:id="@+id/iv_flag"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:src="@drawable/ic_notification_grey_ico"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
                 android:layout_below="@+id/cl_top"
@@ -120,9 +120,10 @@ interest."
                 <com.bnkc.sourcemodule.ui.ValidateButton
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
-                    textButton="For more detail"
+                    app:buttonText="For more detail"
                     app:is_active="true"
-                    android:layout_height="@dimen/height_50dp"/>
+                    android:layout_height="@dimen/height_50dp"
+                    android:onClick="@{() -> serviceViewModel.serviceMoreDetail()}"/>
 
             </RelativeLayout>
         </com.bnkc.sourcemodule.ui.ShadowLayout>

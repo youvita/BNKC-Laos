@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -257,11 +260,11 @@
                 android:paddingBottom="10dp"/>
 
             <com.bnkc.sourcemodule.ui.ValidateButton
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_calculate"
                 android:layout_width="match_parent"
-                app:buttonText="Submit"
+                app:buttonText="Calculate"
                 app:textAllCaps="true"
-                app:is_active="false"
+                app:is_active="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_height="50dp"/>

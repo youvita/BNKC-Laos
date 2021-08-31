@@ -15,7 +15,6 @@
         app:shadowSide="all">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
