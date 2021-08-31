@@ -121,11 +121,11 @@
                         <TextView
                             android:id="@+id/tv_paid_amount"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{transactionHistoryData.paidAmount}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{transactionHistoryData.paidAmount}"
                             tools:text="265,000" />
                     </LinearLayout>
 
@@ -146,11 +146,11 @@
                         <TextView
                             android:id="@+id/tv_penalty"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{transactionHistoryData.penalty}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{transactionHistoryData.penalty}"
                             tools:text="224,867" />
                     </LinearLayout>
 
@@ -171,11 +171,11 @@
                         <TextView
                             android:id="@+id/tv_interest"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{transactionHistoryData.interest}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{transactionHistoryData.interest}"
                             tools:text="3,280,000" />
                     </LinearLayout>
 
@@ -196,11 +196,11 @@
                         <TextView
                             android:id="@+id/tv_principle"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{transactionHistoryData.principal}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{transactionHistoryData.principal}"
                             tools:text="3,800,000" />
                     </LinearLayout>
 

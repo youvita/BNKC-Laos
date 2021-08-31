@@ -43,10 +43,23 @@
                 android:layout_height="wrap_content">
 
                 <RadioButton
+                    android:id="@+id/rb_oldest"
+                    style="@style/font15_263238_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/selector_radio_bg_ffffee_d7181f"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_radio_botton_stroke_black"
+                    android:drawablePadding="@dimen/padding_10dp"
+                    android:padding="@dimen/padding_10dp"
+                    android:text="From the Oldest" />
+
+                <RadioButton
                     android:id="@+id/rb_newest"
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
                     android:background="@drawable/selector_radio_bg_ffffee_d7181f"
                     android:button="@null"
                     android:buttonTint="@color/colorBlackPercent70"
@@ -54,19 +67,6 @@
                     android:drawablePadding="@dimen/padding_10dp"
                     android:padding="@dimen/padding_10dp"
                     android:text="From the Newest" />
-
-                <RadioButton
-                    android:id="@+id/rb_oldest"
-                    style="@style/font15_263238_medium"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/margin_10dp"
-                    android:background="@drawable/selector_radio_bg_ffffee_d7181f"
-                    android:button="@null"
-                    android:drawableStart="@drawable/selector_radio_botton_stroke_black"
-                    android:drawablePadding="@dimen/padding_10dp"
-                    android:padding="@dimen/padding_10dp"
-                    android:text="From the Oldest" />
 
             </RadioGroup>
 

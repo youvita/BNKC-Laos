@@ -9,16 +9,18 @@ import com.mobile.bnkcl.data.request.lease.transaction.TransactionHistoryRequest
 import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData
 import com.mobile.bnkcl.databinding.ActivityTransactionHistoryBinding
 import com.mobile.bnkcl.ui.adapter.TransactionHistoryAdapter
+import com.mobile.bnkcl.ui.dialog.SortDialog
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBinding>(), View.OnClickListener {
+class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBinding>(),
+    View.OnClickListener {
 
     @Inject
     lateinit var transactionAdapter: TransactionHistoryAdapter
-
+    private var sortCode: String? = "asc"
     private val viewModel: TransactionHistoryViewModel by viewModels()
     private var CONTRACT_NO: String? = null
     private lateinit var transactionHistoryRequest: TransactionHistoryRequest
@@ -40,7 +42,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         transactionHistoryRequest.contract_no = CONTRACT_NO
         transactionHistoryRequest.payment_date_dir = "asc"
 
-        viewModel.getTotalLeaseSchedule(transactionHistoryRequest)
+        viewModel.getTransactionHistory(transactionHistoryRequest)
         viewModel.transactionHistoryLiveData.observe(this) {
             initAdapter(it.transactionHistory!!)
         }
@@ -50,6 +52,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         binding.collToolbar.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))
         binding.collToolbar.setCollapsedTitleTypeface(Utils.getTypeFace(this, 3))
         binding.toolbarLeftButton.setOnClickListener(this)
+        binding.llSort.setOnClickListener(this)
     }
 
     private fun initAdapter(transactionHistoryData: List<TransactionHistoryData>) {
@@ -64,9 +67,25 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id) {
+        when (v!!.id) {
             R.id.toolbar_left_button -> {
                 finish()
+            }
+            R.id.ll_sort -> {
+                val sortDialog = SortDialog(sortCode!!)
+                sortDialog.show(supportFragmentManager, sortDialog.tag)
+                sortDialog.onDismissListener {
+                    if (sortDialog.sortCode != null) {
+                        transactionHistoryRequest.payment_date_dir = sortDialog.sortCode
+                        sortCode = sortDialog.sortCode
+                        viewModel.getTransactionHistory(transactionHistoryRequest)
+                        if (sortDialog.sortCode.toString() != "desc") {
+                            binding.tvSort.text = getString(R.string.tran_history_002)
+                        } else {
+                            binding.tvSort.text = getString(R.string.tran_history_008)
+                        }
+                    }
+                }
             }
         }
     }

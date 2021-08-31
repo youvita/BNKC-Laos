@@ -8,7 +8,7 @@ import com.mobile.bnkcl.databinding.DialogSortBinding
 
 class SortDialog(string: String) : BaseDialogFragment<DialogSortBinding>(), View.OnClickListener {
 
-    lateinit var sortCode: String
+    var sortCode: String? = null
     private var sortCheck: String = string
 
     override fun getLayoutId(): Int {
@@ -23,9 +23,9 @@ class SortDialog(string: String) : BaseDialogFragment<DialogSortBinding>(), View
 
     private fun setCheckRadioButton() {
         if (sortCheck == "asc") {
-            binding.rbNewest.isChecked = true
-        } else {
             binding.rbOldest.isChecked = true
+        } else {
+            binding.rbNewest.isChecked = true
         }
 
         binding.rbNewest.setOnClickListener(this)
@@ -35,11 +35,11 @@ class SortDialog(string: String) : BaseDialogFragment<DialogSortBinding>(), View
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.rb_newest -> {
-                sortCode = "asc"
+                sortCode = "desc"
                 dialog?.dismiss()
             }
             R.id.rb_oldest -> {
-                sortCode = "desc"
+                sortCode = "asc"
                 dialog?.dismiss()
             }
         }

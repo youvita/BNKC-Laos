@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class LeaseInfoData (
 
-    @SerializedName("lease_account")
-    val leaseAccount: String? = null,
+    @SerializedName("contract_no")
+    val contractNo: String? = null,
 
     @SerializedName("product_type")
     val productType: String? = null,

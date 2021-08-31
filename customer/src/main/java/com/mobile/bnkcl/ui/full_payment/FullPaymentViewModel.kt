@@ -20,12 +20,14 @@ import javax.inject.Inject
 class FullPaymentViewModel @Inject constructor(private val fullPaymentRepo: FullPaymentRepo) :
     BaseViewModel() {
 
+    private var fullPaymentRequest: FullPaymentRequest? = null
     private val _fullPayment: MutableLiveData<FullPaymentResponse> = MutableLiveData()
     val fullPaymentLiveData: LiveData<FullPaymentResponse> = _fullPayment
 
-    fun getFullPayment(fullPaymentRequest: FullPaymentRequest) {
+    fun getFullPayment(contractNo: String, repaymentDate: String, sort: String) {
+        fullPaymentRequest = FullPaymentRequest(contractNo, repaymentDate, sort)
         viewModelScope.launch {
-            fullPaymentRepo.getFullPayment(fullPaymentRequest)
+            fullPaymentRepo.getFullPayment(fullPaymentRequest!!)
                 .onEach { resource ->
                     if (resource.status == Status.ERROR) {
                         val code = resource.errorCode

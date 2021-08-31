@@ -101,7 +101,7 @@
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="@{totalLeaseScheduleData.paymentDate}"
-                            tools:text="3,280,000" />
+                            tools:text="2020-09-12" />
                     </LinearLayout>
 
                     <!-- Total Amount -->
@@ -121,11 +121,11 @@
                         <TextView
                             android:id="@+id/tv_total_amount"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{totalLeaseScheduleData.totalAmount}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{totalLeaseScheduleData.totalAmount}"
                             tools:text="265,000" />
                     </LinearLayout>
 
@@ -146,11 +146,11 @@
                         <TextView
                             android:id="@+id/tv_penalty"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{totalLeaseScheduleData.principal}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{totalLeaseScheduleData.principal}"
                             tools:text="224,867" />
                     </LinearLayout>
 
@@ -171,11 +171,11 @@
                         <TextView
                             android:id="@+id/tv_interest"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{totalLeaseScheduleData.interest}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{totalLeaseScheduleData.interest}"
                             tools:text="40,133" />
                     </LinearLayout>
 
@@ -196,11 +196,11 @@
                         <TextView
                             android:id="@+id/tv_balance"
                             style="@style/font15_263238_medium"
+                            setNumberFormat="@{totalLeaseScheduleData.balance}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{totalLeaseScheduleData.balance}"
                             tools:text="3,800,000" />
                     </LinearLayout>
 

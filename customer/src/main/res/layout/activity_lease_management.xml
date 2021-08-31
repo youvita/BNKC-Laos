@@ -107,7 +107,6 @@
                             android:paddingTop="@dimen/padding_10dp"
                             android:paddingRight="@dimen/padding_15dp"
                             android:paddingBottom="@dimen/padding_10dp"
-                            android:text="@string/lease_02"
                             app:drawableEndCompat="@drawable/ic_more_ico"
                             tools:text="Automobile Lease" />
                     </LinearLayout>
@@ -168,7 +167,6 @@
 
                     <include
                         android:id="@+id/coming_lease_repayment"
-                        style="@style/font14_263238_medium"
                         layout="@layout/item_lease_management_coming_payment_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

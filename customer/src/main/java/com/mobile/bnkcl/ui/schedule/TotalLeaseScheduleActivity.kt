@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequest
 import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData
@@ -23,6 +24,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
     private val viewModel: TotalLeaseScheduleViewModel by viewModels()
     private var CONTRACT_NO: String? = null
+    private var sortCode: String? = "asc"
     private lateinit var totalLeaseScheduleRequest: TotalLeaseScheduleRequest
 
     override fun getLayoutId(): Int {
@@ -57,8 +59,8 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         viewModel.totalLeaseScheduleLiveData.observe(this) {
             initAdapter(it.totalLeaseScheduleData!!)
 
-            binding.tvTotalInterest.text = it.totalInterest
-            binding.tvTotalPrincipal.text = it.totalPrincipal
+            binding.tvTotalInterest.text = FormatUtils.getNumberFormat(this, it.totalInterest!!)
+            binding.tvTotalPrincipal.text = FormatUtils.getNumberFormat(this, it.totalPrincipal!!)
         }
     }
 
@@ -90,11 +92,19 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                 finish()
             }
             R.id.tv_sort -> {
-                val sortDialog = SortDialog("asc")
+                val sortDialog = SortDialog(sortCode!!)
                 sortDialog.show(supportFragmentManager, sortDialog.tag)
                 sortDialog.onDismissListener {
-                    totalLeaseScheduleRequest.payment_date_dir = sortDialog.sortCode
-                    viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
+                    if (sortDialog.sortCode != null) {
+                        totalLeaseScheduleRequest.payment_date_dir = sortDialog.sortCode
+                        sortCode = sortDialog.sortCode
+                        viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
+                        if (sortDialog.sortCode.toString() != "asc") {
+                            binding.tvSort.text = getString(R.string.total_loan_schedule_009)
+                        } else {
+                            binding.tvSort.text = getString(R.string.total_loan_schedule_006)
+                        }
+                    }
                 }
             }
         }

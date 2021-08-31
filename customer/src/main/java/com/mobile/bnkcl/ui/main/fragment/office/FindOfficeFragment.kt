@@ -15,17 +15,11 @@ import com.bnkc.sourcemodule.base.BaseFragment
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.findoffice.BranchRequest
-import com.mobile.bnkcl.data.response.area.AreaObjResponse
-import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.databinding.FragmentFindOfficeBinding
-import com.mobile.bnkcl.databinding.FragmentMyPageBinding
-import com.mobile.bnkcl.ui.adapter.LeaseViewPagerAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.main.adapter.FindOfficeRecyclerAdapter
-import com.mobile.bnkcl.ui.map.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 

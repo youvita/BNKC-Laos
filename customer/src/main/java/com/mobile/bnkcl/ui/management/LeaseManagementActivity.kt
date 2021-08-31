@@ -2,11 +2,11 @@ package com.mobile.bnkcl.ui.management
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseManagementBinding
 import com.mobile.bnkcl.ui.full_payment.FullPaymentActivity
@@ -21,7 +21,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     View.OnClickListener {
 
     private val viewModel: LeaseManagementViewModel by viewModels()
-    private var CONTRACT_NO_RECORD: ArrayList<*>? = null
+    private var mLeaseArraylist: ArrayList<*>? = null
     private var CONTRACT_NO: String? = null
     private var REPAYMENT_DATE: String? = null
     private var isWarning: Boolean? = null
@@ -32,30 +32,40 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initToolbar()
-        setUpClickListener()
 
         if (intent != null) {
-            CONTRACT_NO_RECORD = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<*>?
+            mLeaseArraylist = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<*>?
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
 
-            Log.d(">>>", "onCreate: " + CONTRACT_NO_RECORD!!.size + " -- " + CONTRACT_NO)
+            viewModel.getLeaseInfo(CONTRACT_NO!!)
+            binding.tvLeaseType.text = CONTRACT_NO
         }
 
-        viewModel.getLeaseInfo(CONTRACT_NO!!)
+        initToolbar()
+        setUpClickListener()
+        initLiveData()
+
+    }
+
+    private fun initLiveData() {
         viewModel.leaseLiveData.observe(this) {
-            binding.leaseInfo.leaseInfo = it.leaseInfoData
-            binding.comingLeaseRepayment.comingInfo = it.comingRepaymentInfoData
-            binding.comingLeaseRepayment.tvComingRepaymentAmount.text = it.comingRepaymentAmount
+            binding.leaseInfo.leaseInfo = it
+            binding.comingLeaseRepayment.comingInfo = it
+            REPAYMENT_DATE = it.repaymentDay
+            binding.comingLeaseRepayment.tvComingRepaymentAmount.text =
+                FormatUtils.getNumberFormat(this, it.comingRepaymentAmount!!)
+
+            // for warning lease management
             isWarning = true
             setUpRepaymentWithWarning(isWarning!!)
-            REPAYMENT_DATE = it.leaseInfoData!!.repaymentDate
         }
     }
 
     private fun setUpRepaymentWithWarning(isWarning: Boolean) {
-        binding.comingLeaseRepayment.llWarningRepayment.visibility = if (isWarning) View.VISIBLE else View.GONE
-        binding.comingLeaseRepayment.llWarningNote.visibility = if (isWarning) View.VISIBLE else View.GONE
+        binding.comingLeaseRepayment.llWarningRepayment.visibility =
+            if (isWarning) View.VISIBLE else View.GONE
+        binding.comingLeaseRepayment.llWarningNote.visibility =
+            if (isWarning) View.VISIBLE else View.GONE
     }
 
     private fun setUpClickListener() {
@@ -122,7 +132,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
                 )
             }
             R.id.ll_filter_lease -> {
-                finish()
+                // to do
             }
             R.id.btn_check_fullpayment -> {
                 val openFullPayment = Intent(this, FullPaymentActivity::class.java)

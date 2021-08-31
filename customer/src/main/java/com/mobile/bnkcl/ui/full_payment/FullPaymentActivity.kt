@@ -13,12 +13,11 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.lease.full_payment.FullPaymentRequest
 import com.mobile.bnkcl.databinding.ActivityFullPaymentBinding
 import com.mobile.bnkcl.ui.mobile_payment.MobilePaymentActivity
-import com.mobile.bnkcl.utilities.FormatUtils
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +28,6 @@ import java.util.*
 class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnClickListener {
 
     private val viewModel: FullPaymentViewModel by viewModels()
-    private lateinit var fullPaymentRequest: FullPaymentRequest
     private var REPAYMENT_DATE: String? = null
     private var CONTRACT_NO: String? = null
     private var TOTAL_AMOUNT: String? = null
@@ -46,7 +44,6 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
         initToolbar()
         addBankAccountInformationTable()
         setUpClickListener()
-        fullPaymentRequest = FullPaymentRequest()
 
         if (intent != null) {
             val c = Calendar.getInstance().time
@@ -54,18 +51,15 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
             REPAYMENT_DATE = "2021-08-23"
 //            REPAYMENT_DATE = intent.getStringExtra("REPAYMENT_DATE")
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO")
+
             binding.btnDate.text = REPAYMENT_DATE
             binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
-            binding.mobilePayment.tvCid.text = CONTRACT_NO
-            fullPaymentRequest.contract_no = CONTRACT_NO
-            fullPaymentRequest.payment_date_dir = "asc"
-            fullPaymentRequest.repayment_date = "2021-08-04"
+            binding.mobilePayment.tvCid.text = sharedPrefer.getPrefer(Constants.USER_ID)
 
-            viewModel.getFullPayment(fullPaymentRequest)
+            viewModel.getFullPayment(CONTRACT_NO!!, REPAYMENT_DATE!!, "asc")
         }
 
         checkDate()
-
         initLiveData()
 
     }
@@ -75,18 +69,20 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
             binding.fullPaymentInfo.fullRepaymentInfo = it
 
             binding.fullPaymentInfo.tvFullPaymentAmount.text =
-                FormatUtils.getNumberFormat(this, it.fullRepayment!!)
+                com.bnkc.sourcemodule.util.FormatUtils.getNumberFormat(this, it.fullRepayment!!)
             TOTAL_AMOUNT = it.fullRepayment
 
             if (it.othersData?.isNotEmpty() == true) {
                 binding.fullPaymentInfo.llWrapOther.removeAllViews()
                 for (i in it.othersData.indices) {
-                    val view =
-                        View.inflate(this, R.layout.item_full_repayment_other, null)
+                    val view = View.inflate(this, R.layout.item_full_repayment_other, null)
                     val tvTitle = view.findViewById<TextView>(R.id.tv_title)
                     val tvAmount = view.findViewById<TextView>(R.id.tv_amount)
                     tvTitle.text = it.othersData[i].title
-                    tvAmount.text = FormatUtils.getNumberFormat(this, it.othersData[i].amount!!)
+                    tvAmount.text = com.bnkc.sourcemodule.util.FormatUtils.getNumberFormat(
+                        this,
+                        it.othersData[i].amount!!
+                    )
                     binding.fullPaymentInfo.llWrapOther.addView(view)
                 }
             }
@@ -203,10 +199,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
                 datePickerDialog.show()
             }
             R.id.btn_check -> {
-                fullPaymentRequest.contract_no = CONTRACT_NO
-                fullPaymentRequest.payment_date_dir = "asc"
-                fullPaymentRequest.repayment_date = "2021-08-04"
-                viewModel.getFullPayment(fullPaymentRequest)
+                viewModel.getFullPayment(CONTRACT_NO!!, "2021-08-04", "asc")
             }
             R.id.ll_pay -> {
                 val intent = Intent(this, MobilePaymentActivity::class.java)

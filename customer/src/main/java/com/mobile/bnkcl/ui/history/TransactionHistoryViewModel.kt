@@ -23,7 +23,7 @@ class TransactionHistoryViewModel @Inject constructor(private val transactionHis
     private val _transactionHistory: MutableLiveData<TransactionHistoryResponse> = MutableLiveData()
     val transactionHistoryLiveData: LiveData<TransactionHistoryResponse> = _transactionHistory
 
-    fun getTotalLeaseSchedule(transactionHistoryRequest: TransactionHistoryRequest){
+    fun getTransactionHistory(transactionHistoryRequest: TransactionHistoryRequest){
         viewModelScope.launch {
             transactionHistoryRepo.getTransactionHistory(transactionHistoryRequest).onEach { resource ->
                 if (resource.status == Status.ERROR) {

@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoData"/>
+
+        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoResponse" />
+
         <variable
             name="leaseInfo"
-            type="LeaseInfoData" />
+            type="LeaseInfoResponse" />
 
     </data>
 
@@ -91,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{leaseInfo.leaseAccount}" />
+                        android:text="@{leaseInfo.contractNo}" />
                 </LinearLayout>
 
                 <!-- Product Type -->
@@ -135,11 +137,11 @@
                     <TextView
                         android:id="@+id/tv_lease_amount"
                         style="@style/font15_263238_medium"
+                        setNumberFormat="@{leaseInfo.leaseAmount}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@{leaseInfo.leaseAmount}" />
+                        android:gravity="end" />
                 </LinearLayout>
 
                 <!-- Interest -->
@@ -259,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{leaseInfo.repaymentDate}" />
+                        android:text="@{leaseInfo.repaymentDay}" />
                 </LinearLayout>
 
                 <!-- Monthly Repayment -->
@@ -279,11 +281,11 @@
                     <TextView
                         android:id="@+id/tv_monthly_payment"
                         style="@style/font15_263238_medium"
+                        setNumberFormat="@{leaseInfo.monthlyRepayment}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@{leaseInfo.monthlyRepayment}" />
+                        android:gravity="end" />
                 </LinearLayout>
 
             </LinearLayout>

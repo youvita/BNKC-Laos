@@ -154,17 +154,18 @@
                         android:layout_height="wrap_content"
                         android:minHeight="260dp">
 
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/lease_view_pager"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/lease_recyclerview"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="250dp"
                             android:clipChildren="false"
                             android:clipToPadding="false"
-                            android:minHeight="260dp"
+                            android:orientation="horizontal"
                             android:overScrollMode="never"
                             android:paddingStart="@dimen/padding_20dp"
                             android:paddingEnd="@dimen/padding_20dp"
-                            tools:listitem="@layout/lease_item_layout" />
+                            app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
+                            tools:listitem="@layout/item_lease_layout" />
 
                     </RelativeLayout>
 
@@ -178,15 +179,16 @@
                         android:orientation="horizontal" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/banner_view_pager"
+                        android:id="@+id/banner_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/padding_21dp"
-                        android:paddingEnd="@dimen/padding_21dp"
                         android:clipToPadding="false"
                         android:orientation="horizontal"
+                        android:paddingStart="@dimen/padding_21dp"
+                        android:paddingEnd="@dimen/padding_21dp"
                         app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
-                        tools:listitem="@layout/banner_item_layout"/>
+                        tools:listitem="@layout/banner_item_layout" />
+
 
                     <!-- Banner Item Indicator -->
                     <LinearLayout

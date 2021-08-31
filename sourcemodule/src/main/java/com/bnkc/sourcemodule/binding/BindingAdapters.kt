@@ -6,6 +6,7 @@
 package com.bnkc.sourcemodule.binding
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.ui.ValidateButton
+import com.bnkc.sourcemodule.util.FormatUtils
 import com.bnkc.sourcemodule.util.Formats
 import com.bumptech.glide.Glide
 import java.text.DateFormat
@@ -133,4 +135,10 @@ object BindingAdapters {
 
     }
 
+    @JvmStatic
+    @BindingAdapter("setNumberFormat")
+    fun setNumberFormat(textView: TextView, str: String?) {
+        if (str == null) return
+        textView.text = FormatUtils.getNumberFormat(textView.context, str)
+    }
 }

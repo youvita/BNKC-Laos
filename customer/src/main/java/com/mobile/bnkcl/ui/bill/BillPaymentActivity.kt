@@ -9,13 +9,15 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityBillPaymentBinding
 import com.mobile.bnkcl.ui.mobile_payment.MobilePaymentActivity
-import com.mobile.bnkcl.utilities.FormatUtils
 import com.mobile.bnkcl.utilities.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnClickListener {
 
     private var CONTRACT_NO: String? = null
@@ -36,11 +38,11 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO")
             TOTAL_AMOUNT = intent.getStringExtra("TOTAL_PAYMENT")
             binding.tvPaymentAmount.text =
-                FormatUtils.getNumberFormat(this, TOTAL_AMOUNT.plus("Kip"))
+                com.bnkc.sourcemodule.util.FormatUtils.getNumberFormat(this, TOTAL_AMOUNT!!)
         }
 
         binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
-        binding.mobilePayment.tvCid.text = CONTRACT_NO
+        binding.mobilePayment.tvCid.text = sharedPrefer.getPrefer(Constants.USER_ID)
         binding.mobilePayment.llPay.setOnClickListener(this)
     }
 

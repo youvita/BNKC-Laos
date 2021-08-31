@@ -8,7 +8,6 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
-import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.response.dashboard.DashboardResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn

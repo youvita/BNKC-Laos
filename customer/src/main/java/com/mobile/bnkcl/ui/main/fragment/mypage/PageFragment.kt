@@ -12,26 +12,27 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
-import com.mobile.bnkcl.data.response.dashboard.SummaryData
 import com.mobile.bnkcl.databinding.FragmentMyPageBinding
 import com.mobile.bnkcl.ui.adapter.BannerAdapter
-import com.mobile.bnkcl.ui.adapter.LeaseViewPagerAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.bill.BillPaymentActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import androidx.recyclerview.widget.RecyclerView
+import com.bnkc.library.custom.cardview.CardModeLayoutManager
+import com.mobile.bnkcl.ui.adapter.LeaseAdapter
+
 
 @AndroidEntryPoint
 class PageFragment : BaseFragment<FragmentMyPageBinding>(),
-    LeaseViewPagerAdapter.LoanPagerClickedListener, View.OnClickListener {
+    LeaseAdapter.LeaseItemClickedListener, View.OnClickListener {
 
     @Inject
     lateinit var cardRecyclerView: CardRecyclerView
@@ -42,20 +43,16 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     @Inject
     lateinit var itemOffsetDecoration: CardOffsetDecoration
 
-    private var myLoanBinding: FragmentMyPageBinding? = null
-    private var mLeaseAdapter: LeaseViewPagerAdapter? = null
-//    private var mBannerAdapter: BannerAdapter? = null
+    private lateinit var mLeaseAdapter: LeaseAdapter
+    private var myLeaseBinding: FragmentMyPageBinding? = null
+    private var cardModeLayoutManager : CardModeLayoutManager? = null
     private var mLeaseData: ArrayList<MyLeasesData>? = null
     private var mContractNoRecord: ArrayList<String>? = null
     private val mListener: MyLoanCardClickedListener? = null
-    private var callback: OnPageChangeCallback? = null
-    private var positionIndicator = 0
     private var MLR001: Int = 0
     private var MLR002: Int = 0
     private var MLR003: Int = 0
-    private var MLR004: Int = 0
     private var bannerArray: ArrayList<Int>? = null
-    private var page = 0
     private var loadingDialog: ApplicationDialog? = null
     private val pageViewModel: PageViewModel by viewModels()
 
@@ -65,85 +62,90 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         savedInstanceState: Bundle?
     ): View {
 
-        myLoanBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
-
-        mLeaseAdapter = LeaseViewPagerAdapter(this)
+        myLeaseBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
+        mLeaseAdapter = LeaseAdapter(this)
         mLeaseData = java.util.ArrayList<MyLeasesData>()
-        myLoanBinding!!.leaseViewPager.adapter = mLeaseAdapter
-        myLoanBinding!!.leaseViewPager.offscreenPageLimit = 3
 
         pageViewModel.getDashboard()
         pageViewModel.dashboardLiveData.observe(requireActivity()) {
-            MLR001 = it.summary?.countApplication!!
-            MLR002 = it.summary.countScreening!!
-            MLR003 = it.summary.countResult!!
-            mLeaseAdapter!!.addData(it.myLeases!!)
+            MLR001 = it.countApplication!!
+            MLR002 = it.countScreening!!
+            MLR003 = it.countResult!!
+
+            setUpDashboard(MLR001, MLR002, MLR003, it.myLeases!!.size)
+
+            it.myLeases.add(MyLeasesData())
+            mLeaseAdapter.addItemList(it.myLeases)
+            myLeaseBinding!!.leaseRecyclerview.adapter = mLeaseAdapter
+            myLeaseBinding?.leaseRecyclerview?.removeItemDecoration(itemOffsetDecoration)
+            myLeaseBinding?.leaseRecyclerview?.addItemDecoration(itemOffsetDecoration)
+            cardRecyclerView.attachToRecyclerView(myLeaseBinding?.leaseRecyclerview)
+            cardRecyclerView.setScale(1f)
+
             mLeaseData!!.addAll(it.myLeases)
             setUpLeaseIndicator()
-            setUpDashboard(it.summary)
         }
 
         initClickListener()
-        setUpBanner()
 
-        return myLoanBinding!!.root
+        setUpBanner()
+        return myLeaseBinding!!.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setUpBanner()
     }
 
     private fun initClickListener() {
-        myLoanBinding!!.requestMenu.llMenu1.setOnClickListener(this)
-        myLoanBinding!!.btnNotification.setOnClickListener{
+        myLeaseBinding!!.requestMenu.llMenu1.setOnClickListener(this)
+        myLeaseBinding!!.btnNotification.setOnClickListener{
             startActivity(Intent(activity, AlarmActivity::class.java))
         }
     }
 
     private fun setUpLeaseIndicator() {
-        addIndicator(myLoanBinding!!.llLeaseIndicator, mLeaseData!!.size, 0)
 
-        callback = object : OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
+        addIndicator(
+            myLeaseBinding!!.llLeaseIndicator,
+            mLeaseAdapter.itemCount,
+            0
+        )
+
+        cardModeLayoutManager = myLeaseBinding?.leaseRecyclerview?.layoutManager as CardModeLayoutManager
+        myLeaseBinding?.leaseRecyclerview?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                addIndicator(
+                    myLeaseBinding!!.llLeaseIndicator,
+                    mLeaseAdapter.itemCount,
+                    cardModeLayoutManager!!.findLastVisibleItemPosition()
+                )
+
             }
+        })
 
-            override fun onPageSelected(position: Int) {
-                addIndicator(myLoanBinding!!.llLeaseIndicator, mLeaseAdapter!!.itemCount, position)
-                positionIndicator = position
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {}
-        }
-
-        myLoanBinding!!.leaseViewPager.registerOnPageChangeCallback(callback as OnPageChangeCallback)
-        myLoanBinding!!.leaseViewPager.post {
-
-            addIndicator(
-                myLoanBinding!!.llLeaseIndicator,
-                mLeaseAdapter!!.itemCount,
-                positionIndicator
-            )
-        }
     }
 
-    private fun setUpDashboard(summary: SummaryData) {
-        myLoanBinding!!.requestMenu.llMenu1.isSelected = MLR001 > 0
-        myLoanBinding!!.requestMenu.llMenu1.isEnabled = summary.countApplication!! > 0
-        myLoanBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.my_loan_menu_001).plus(
+    private fun setUpDashboard(MLR001: Int, MLR002: Int, MLR003: Int, MLR004: Int) {
+        myLeaseBinding!!.requestMenu.llMenu1.isSelected = this.MLR001 > 0
+        myLeaseBinding!!.requestMenu.llMenu1.isEnabled = MLR001 > 0
+        myLeaseBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.my_loan_menu_001).plus(
             "\n"
-        ).plus(MLR001.toString())
-        myLoanBinding!!.requestMenu.llMenu2.isEnabled = summary.countScreening!! > 0
-        myLoanBinding!!.requestMenu.tvMenuTitle2.text = getString(R.string.my_loan_menu_002).plus(
+        ).plus(this.MLR001.toString())
+        myLeaseBinding!!.requestMenu.llMenu2.isEnabled = MLR002 > 0
+        myLeaseBinding!!.requestMenu.tvMenuTitle2.text = getString(R.string.my_loan_menu_002).plus(
             "\n"
-        ).plus(MLR002.toString())
-        myLoanBinding!!.requestMenu.llMenu3.isEnabled = summary.countResult!! > 0
-        myLoanBinding!!.requestMenu.tvMenuTitle3.text = getString(R.string.my_loan_menu_003).plus(
+        ).plus(this.MLR002.toString())
+        myLeaseBinding!!.requestMenu.llMenu3.isEnabled = MLR003 > 0
+        myLeaseBinding!!.requestMenu.tvMenuTitle3.text = getString(R.string.my_loan_menu_003).plus(
             "\n"
-        ).plus(MLR003.toString())
+        ).plus(this.MLR003.toString())
 
-//        myLoanBinding!!.tvLeaseInUseCnt.isEnabled = summary.count_activated != 0
-//        myLoanBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(summary.count_activated)
+        myLeaseBinding!!.tvLeaseInUseCnt.isEnabled = MLR004 != 0
+        myLeaseBinding!!.tvLeaseInUseCnt.visibility = View.VISIBLE
+        myLeaseBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(MLR004)
 
     }
 
@@ -164,7 +166,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     override fun onBillPaymentClicked(contractNo: String?, position: Int) {
         val intent = Intent(requireActivity(), BillPaymentActivity::class.java)
         intent.putExtra("CONTRACT_NO", contractNo)
-        intent.putExtra("TOTAL_PAYMENT", mLeaseData!![position].contractNo)
+        intent.putExtra("TOTAL_PAYMENT", mLeaseData!![position].totalPayment)
         startActivity(intent)
     }
 
@@ -179,7 +181,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         startActivity(intent)
     }
 
-    override fun onAddNewLoanClicked() {
+    override fun onAddNewLeaseClicked() {
         mListener?.onAddNewLoanClicked()
     }
 
@@ -194,42 +196,31 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         bannerArray!!.add(R.drawable.banner_3)
         bannerArray!!.add(R.drawable.banner_4)
 
-        myLoanBinding?.bannerViewPager?.adapter = mBannerAdapter
-        myLoanBinding?.bannerViewPager?.removeItemDecoration(itemOffsetDecoration)
-        myLoanBinding?.bannerViewPager?.addItemDecoration(itemOffsetDecoration)
-        cardRecyclerView.attachToRecyclerView(myLoanBinding?.bannerViewPager)
+        mBannerAdapter.addItemList(bannerArray)
+        myLeaseBinding?.bannerRecyclerView?.adapter = mBannerAdapter
+        myLeaseBinding?.bannerRecyclerView?.removeItemDecoration(itemOffsetDecoration)
+        myLeaseBinding?.bannerRecyclerView?.addItemDecoration(itemOffsetDecoration)
+        cardRecyclerView.attachToRecyclerView(myLeaseBinding?.bannerRecyclerView)
         cardRecyclerView.setScale(1f)
+        addIndicator(
+            myLeaseBinding!!.llBannerIndicator,
+            mBannerAdapter.itemCount,
+            0
+        )
 
-//        mBannerAdapter = BannerAdapter(requireActivity().applicationContext, bannerArray!!)
-//        myLoanBinding!!.bannerViewPager.adapter = mBannerAdapter
-//        myLoanBinding!!.bannerViewPager.offscreenPageLimit = 4
-//        addIndicator(
-//            myLoanBinding!!.llBannerIndicator,
-//            mBannerAdapter!!.count,
-//            0
-//        )
+        cardModeLayoutManager = myLeaseBinding?.bannerRecyclerView?.layoutManager as CardModeLayoutManager
+        myLeaseBinding?.bannerRecyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-//        myLoanBinding!!.bannerViewPager.addOnPageChangeListener(object : OnPageChangeListener {
-//            override fun onPageScrolled(
-//                position: Int,
-//                positionOffset: Float,
-//                positionOffsetPixels: Int
-//            ) {
-//                myLoanBinding!!.bannerViewPager.currentItem = position
-//            }
-//
-//            override fun onPageSelected(position: Int) {
-//                page = position
-//
-//                addIndicator(
-//                    myLoanBinding!!.llBannerIndicator,
-//                    mBannerAdapter!!.count,
-//                    position
-//                )
-//            }
-//
-//            override fun onPageScrollStateChanged(state: Int) {}
-//        })
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                addIndicator(
+                    myLeaseBinding!!.llBannerIndicator,
+                    mBannerAdapter.itemCount,
+                    cardModeLayoutManager!!.findLastVisibleItemPosition()
+                )
+
+            }
+        })
 
     }
 

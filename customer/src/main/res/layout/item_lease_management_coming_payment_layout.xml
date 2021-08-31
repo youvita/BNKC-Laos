@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.mobile.bnkcl.data.response.lease.ComingRepaymentInfoData" />
-
+        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoResponse"/>
         <variable
             name="comingInfo"
-            type="ComingRepaymentInfoData" />
+            type="LeaseInfoResponse" />
+
     </data>
 
     <LinearLayout
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{comingInfo.comingRepaymentDate}" />
+                        android:text="@{comingInfo.repaymentDay}" />
 
                 </LinearLayout>
 
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{comingInfo.principal}" />
+                        setNumberFormat="@{comingInfo.principal}" />
 
                 </LinearLayout>
 
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{comingInfo.interest}" />
+                        setNumberFormat="@{comingInfo.interest}" />
 
                 </LinearLayout>
 
@@ -204,12 +204,12 @@
 
                         <TextView
                             android:id="@+id/tv_overdue_principle"
-                            style="@style/font15_d7191f_medium"
+                            style="@style/font_15_d7191f_medium"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{comingInfo.overduePrinciple}" />
+                            setNumberFormat="@{comingInfo.overduePrincipal}" />
 
                     </LinearLayout>
 
@@ -229,12 +229,12 @@
 
                         <TextView
                             android:id="@+id/tv_overdue_interest"
-                            style="@style/font15_d7191f_medium"
+                            style="@style/font_15_d7191f_medium"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{comingInfo.overdueInterest}" />
+                            setNumberFormat="@{comingInfo.overdueInterest}" />
 
                     </LinearLayout>
 
@@ -254,12 +254,12 @@
 
                         <TextView
                             android:id="@+id/tv_overdue_penalty"
-                            style="@style/font15_d7191f_medium"
+                            style="@style/font_15_d7191f_medium"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{comingInfo.overduePenalty}" />
+                            setNumberFormat="@{comingInfo.overduePenalty}" />
 
                     </LinearLayout>
 
@@ -286,7 +286,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{comingInfo.total}" />
+                        setNumberFormat="@{comingInfo.total}" />
 
                 </LinearLayout>
 
@@ -321,6 +321,7 @@
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
                         android:text="@string/lease_25" />
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -4,35 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--            <import type="com.mobile.bnk.comm.util.FormatUtil"/>-->
-        <!--            <import type="com.mobile.bnk.ui.main.fragment.myloan.LoanViewPagerAdapter"/>-->
+
         <variable
             name="leaseItem"
             type="com.mobile.bnkcl.data.response.dashboard.MyLeasesData" />
-
     </data>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
 
-        <com.bnkc.sourcemodule.ui.ShadowLayout
-            android:id="@+id/ll_lease_item"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_marginLeft="-2dp"
-            android:layout_marginTop="-6dp"
-            android:layout_marginRight="-2dp"
-            android:visibility="visible"
-            app:shadowColor="@color/color_90a4ae_shadow"
-            app:shadowDx="0dp"
-            app:shadowDy="0dp"
-            app:shadowRadius="4dp"
-            app:shadowShape="rectangle"
-            app:shadowSide="all">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_lease_item"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
@@ -48,7 +37,8 @@
                     style="@style/font21_263238_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AutoMobile Lease" />
+                    tools:text="Auto Mobile"
+                    android:text="@{leaseItem.leaseType}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -78,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="@{leaseItem.leaseBalance}"
+                        setNumberFormat="@{leaseItem.leaseBalance}"
                         tools:text="3,650.00 USD" />
 
                 </LinearLayout>
@@ -130,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="@{leaseItem.totalPayment}"
+                        setNumberFormat="@{leaseItem.totalPayment}"
                         tools:text="152.08 USD" />
 
                 </LinearLayout>
@@ -188,38 +178,23 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <!-- Lease Item -->
 
-        </com.bnkc.sourcemodule.ui.ShadowLayout>
-        <!-- Lease Item -->
-
-        <!-- Add new lease -->
-        <com.bnkc.sourcemodule.ui.ShadowLayout
-            android:id="@+id/rl_add_new_lease"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_marginLeft="-2dp"
-            android:layout_marginTop="-6dp"
-            android:layout_marginRight="-2dp"
-            android:visibility="gone"
-            app:shadowColor="@color/color_90a4ae_shadow"
-            app:shadowDx="0dp"
-            app:shadowDy="0dp"
-            app:shadowRadius="4dp"
-            app:shadowShape="rectangle"
-            app:shadowSide="all">
-
-            <RelativeLayout
+            <!-- Add new lease -->
+            <LinearLayout
+                android:id="@+id/ll_add_new_lease"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageButton
                     android:id="@+id/btn_add_lease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
                     android:background="@null"
                     android:src="@drawable/ic_add_new_lease_btn"
                     tools:ignore="ContentDescription" />
@@ -228,14 +203,14 @@
                     style="@style/font15_d7191f_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/btn_add_lease"
-                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="-15dp"
                     android:text="@string/main_content_004" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-        </com.bnkc.sourcemodule.ui.ShadowLayout>
+        </LinearLayout>
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </layout>

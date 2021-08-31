@@ -362,6 +362,7 @@
     <string name="tran_history_005">Fee</string>
     <string name="tran_history_006">Empty</string>
     <string name="tran_history_007">Transaction history does not exist</string>
+    <string name="tran_history_008">From the Newest</string>
 
     <!-- Full Payment Amount -->
     <string name="full_payment_001">Full Repayment Amount</string>
@@ -403,6 +404,7 @@
     <string name="total_loan_schedule_006">From the Oldest</string>
     <string name="total_loan_schedule_007">Principal</string>
     <string name="total_loan_schedule_008">Interest</string>
+    <string name="total_loan_schedule_009">From the Newest</string>
     <string name="reset_now">RESET NOW</string>
 
     <!-- Banner Details -->
