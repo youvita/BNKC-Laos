@@ -69,7 +69,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     /**
      * handle catch success
      */
-    private fun successListener() {
+    fun successListener() {
         disposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
             if (loadingDialog != null) {
                 loadingDialog?.dismiss()

@@ -99,6 +99,8 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     private fun initClickListener() {
         myLeaseBinding!!.requestMenu.llMenu1.setOnClickListener(this)
+        myLeaseBinding!!.requestMenu.llMenu2.setOnClickListener(this)
+        myLeaseBinding!!.requestMenu.llMenu3.setOnClickListener(this)
         myLeaseBinding!!.btnNotification.setOnClickListener{
             startActivity(Intent(activity, AlarmActivity::class.java))
         }
@@ -153,7 +155,15 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         when (v!!.id) {
             R.id.ll_menu1 -> {
-                loadingDialog = ApplicationDialog()
+                loadingDialog = ApplicationDialog(1)
+                loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
+            }
+            R.id.ll_menu2 -> {
+                loadingDialog = ApplicationDialog(2)
+                loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
+            }
+            R.id.ll_menu3 -> {
+                loadingDialog = ApplicationDialog(3)
                 loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
             }
         }

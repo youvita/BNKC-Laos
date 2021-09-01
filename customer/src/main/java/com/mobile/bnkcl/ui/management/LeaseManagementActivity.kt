@@ -38,6 +38,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
 
             viewModel.getLeaseInfo(CONTRACT_NO!!)
+            showLoading()
             binding.tvLeaseType.text = CONTRACT_NO
         }
 
@@ -49,6 +50,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
     private fun initLiveData() {
         viewModel.leaseLiveData.observe(this) {
+            successListener()
             binding.leaseInfo.leaseInfo = it
             binding.comingLeaseRepayment.comingInfo = it
             REPAYMENT_DATE = it.repaymentDay

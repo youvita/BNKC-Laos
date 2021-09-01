@@ -98,10 +98,11 @@
                     layout="@layout/layout_my_lease_request_menu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
             </com.bnkc.sourcemodule.ui.ShadowLayout>
 
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
@@ -157,13 +158,12 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/lease_recyclerview"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            android:clipChildren="false"
+                            android:layout_height="wrap_content"
                             android:clipToPadding="false"
+                            android:nestedScrollingEnabled="false"
                             android:orientation="horizontal"
-                            android:overScrollMode="never"
-                            android:paddingStart="@dimen/padding_20dp"
-                            android:paddingEnd="@dimen/padding_20dp"
+                            android:paddingStart="@dimen/padding_21dp"
+                            android:paddingEnd="25dp"
                             app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
                             tools:listitem="@layout/item_lease_layout" />
 
@@ -175,20 +175,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_marginTop="-15dp"
                         android:orientation="horizontal" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/banner_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
                         android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
                         android:orientation="horizontal"
                         android:paddingStart="@dimen/padding_21dp"
                         android:paddingEnd="@dimen/padding_21dp"
                         app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
                         tools:listitem="@layout/banner_item_layout" />
-
 
                     <!-- Banner Item Indicator -->
                     <LinearLayout
@@ -200,7 +200,7 @@
 
                 </LinearLayout>
 
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 

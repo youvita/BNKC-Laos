@@ -57,6 +57,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
             binding.mobilePayment.tvCid.text = sharedPrefer.getPrefer(Constants.USER_ID)
 
             viewModel.getFullPayment(CONTRACT_NO!!, REPAYMENT_DATE!!, "asc")
+            showLoading()
         }
 
         checkDate()
@@ -66,6 +67,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
 
     private fun initLiveData() {
         viewModel.fullPaymentLiveData.observe(this) {
+            successListener()
             binding.fullPaymentInfo.fullRepaymentInfo = it
 
             binding.fullPaymentInfo.tvFullPaymentAmount.text =
@@ -200,6 +202,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
             }
             R.id.btn_check -> {
                 viewModel.getFullPayment(CONTRACT_NO!!, "2021-08-04", "asc")
+                showLoading()
             }
             R.id.ll_pay -> {
                 val intent = Intent(this, MobilePaymentActivity::class.java)

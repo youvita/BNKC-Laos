@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ApplicationDialog : BaseFullDialogFragment<DialogApplicationBinding>() {
+class ApplicationDialog(type: Int) : BaseFullDialogFragment<DialogApplicationBinding>() {
 
     @Inject
     lateinit var leaseRequestProcessAdapter: LeaseRequestProcessAdapter
@@ -22,6 +22,7 @@ class ApplicationDialog : BaseFullDialogFragment<DialogApplicationBinding>() {
     lateinit var cardOffsetDecoration: CardOffsetDecoration
 
     private var cardRecyclerView: CardRecyclerView = CardRecyclerView()
+    private val type: Int = type
 
 
     override fun getLayoutId(): Int {
@@ -39,7 +40,7 @@ class ApplicationDialog : BaseFullDialogFragment<DialogApplicationBinding>() {
         }
 
         binding.transactionRecyclerview.adapter = leaseRequestProcessAdapter
-        leaseRequestProcessAdapter.setLeaseProcessType(4)
+        leaseRequestProcessAdapter.setLeaseProcessType(type)
         binding.transactionRecyclerview.removeItemDecoration(cardOffsetDecoration)
         binding.transactionRecyclerview.addItemDecoration(cardOffsetDecoration)
         cardRecyclerView.attachToRecyclerView(binding.transactionRecyclerview)

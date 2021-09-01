@@ -8,6 +8,7 @@ import com.mobile.bnkcl.data.api.lease.full_payment.FullPaymentApi
 import com.mobile.bnkcl.data.api.lease.total_schedule.TotalLeaseScheduleApi
 import com.mobile.bnkcl.data.api.lease.transaction.TransactionHistoryApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
+import com.mobile.bnkcl.data.api.user.EditAccountInfoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -80,5 +81,14 @@ object CustomerModule {
             .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(FullPaymentApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEditAccountInfoService(retrofit: Retrofit.Builder): EditAccountInfoApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(EditAccountInfoApi::class.java)
     }
 }

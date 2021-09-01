@@ -42,8 +42,12 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         }
 
         accountInformationViewModel.getAccountInformation()
+        showLoading()
+
         accountInformationViewModel.accountInformationLiveData.observe(this) {
+            successListener()
             binding.profile = it
+            profileData = it
         }
     }
 
@@ -67,7 +71,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     onBackPressed()
                 }
                 R.id.tv_title_toolbar_02 -> {
-                    startActivity(Intent(applicationContext, EditAccountInfoActivity::class.java))
+                    startActivity(Intent(applicationContext, EditAccountInfoActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
                 }
                 R.id.btn_logout -> {
                     val logOutDialog = LogOutDialog()

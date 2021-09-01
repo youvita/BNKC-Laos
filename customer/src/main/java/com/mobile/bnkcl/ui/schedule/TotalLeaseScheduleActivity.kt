@@ -41,6 +41,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
             totalLeaseScheduleRequest.contract_no = CONTRACT_NO
             totalLeaseScheduleRequest.payment_date_dir = "asc"
             viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
+            showLoading()
         }
 
         initLiveData()
@@ -58,7 +59,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     private fun initLiveData() {
         viewModel.totalLeaseScheduleLiveData.observe(this) {
             initAdapter(it.totalLeaseScheduleData!!)
-
+            successListener()
             binding.tvTotalInterest.text = FormatUtils.getNumberFormat(this, it.totalInterest!!)
             binding.tvTotalPrincipal.text = FormatUtils.getNumberFormat(this, it.totalPrincipal!!)
         }
@@ -83,6 +84,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
     private fun initAdapter(totalLeaseScheduleList: List<TotalLeaseScheduleData>) {
         binding.totalLeaseScheduleRecyclerview.adapter = totalLeaseScheduleAdapter
+        totalLeaseScheduleAdapter.clearItemList()
         totalLeaseScheduleAdapter.addItemList(totalLeaseScheduleList)
     }
 
@@ -99,6 +101,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                         totalLeaseScheduleRequest.payment_date_dir = sortDialog.sortCode
                         sortCode = sortDialog.sortCode
                         viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
+                        showLoading()
                         if (sortDialog.sortCode.toString() != "asc") {
                             binding.tvSort.text = getString(R.string.total_loan_schedule_009)
                         } else {

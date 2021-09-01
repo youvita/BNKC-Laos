@@ -20,6 +20,7 @@ import com.mobile.bnkcl.data.repository.lease.transaction.TransactionHistoryRepo
 import com.mobile.bnkcl.data.repository.notice.NoticeRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.repository.signup.SignUpRepo
+import com.mobile.bnkcl.data.repository.user.EditAccountInfoRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import dagger.Module
 import dagger.Provides
@@ -138,5 +139,12 @@ object RepositoryModule {
     fun provideFaqsDataRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  FaqsRepo{
         return FaqsRepo(context,okHttpClient)
     }
+
+    @Singleton
+    @Provides
+    fun provideEditAccountInfoRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): EditAccountInfoRepo {
+        return EditAccountInfoRepo(context, okHttpClient)
+    }
+
 
 }

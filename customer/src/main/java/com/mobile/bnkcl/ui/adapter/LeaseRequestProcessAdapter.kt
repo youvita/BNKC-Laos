@@ -35,26 +35,30 @@ class LeaseRequestProcessAdapter :
         binding.viewModel = data
         when (type) {
             1 -> {
-                binding.llApplicationNScreening.visibility = View.VISIBLE
+                binding.llApplicationResult.visibility = View.VISIBLE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
 
                 binding.tvPhaseOfProgress.text = "wait for screening"
+                binding.tvTitle.text = "Application"
             }
             2 -> {
-                binding.llApplicationNScreening.visibility = View.VISIBLE
+                binding.llApplicationResult.visibility = View.VISIBLE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
 
                 binding.tvPhaseOfProgress.text = "wait for result"
+                binding.tvTitle.text = "Screening"
             }
             3 -> {
-                binding.llApplicationNScreening.visibility = View.GONE
+                binding.llApplicationResult.visibility = View.GONE
                 binding.llApprovalResult.visibility = View.VISIBLE
                 binding.llRejectResult.visibility = View.GONE
+
+                binding.tvTitle.text = "Result of Screening"
             }
             4 -> {
-                binding.llApplicationNScreening.visibility = View.GONE
+                binding.llApplicationResult.visibility = View.GONE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.VISIBLE
             }

@@ -43,7 +43,10 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         transactionHistoryRequest.payment_date_dir = "asc"
 
         viewModel.getTransactionHistory(transactionHistoryRequest)
+        showLoading()
+
         viewModel.transactionHistoryLiveData.observe(this) {
+            successListener()
             initAdapter(it.transactionHistory!!)
         }
     }
@@ -57,6 +60,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
     private fun initAdapter(transactionHistoryData: List<TransactionHistoryData>) {
         binding.transactionRecyclerview.adapter = transactionAdapter
+        transactionAdapter.clearItemList()
         transactionAdapter.addItemList(transactionHistoryData)
 
         if (transactionHistoryData.isEmpty()) {
@@ -79,6 +83,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
                         transactionHistoryRequest.payment_date_dir = sortDialog.sortCode
                         sortCode = sortDialog.sortCode
                         viewModel.getTransactionHistory(transactionHistoryRequest)
+                        showLoading()
                         if (sortDialog.sortCode.toString() != "desc") {
                             binding.tvSort.text = getString(R.string.tran_history_002)
                         } else {

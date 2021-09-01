@@ -574,6 +574,7 @@
     <string name="edit_09">Save</string>
     <string name="edit_10">Invalid</string>
     <string name="edit_11">Gender</string>
+    <string name="edit_12">Product Number</string>
 
     <string name="bill_01">Payment Amount</string>
     <string name="mbl_payment_01">Mobile Payment</string>
@@ -645,6 +646,9 @@
     <string name="dlg_19">LOG OUT</string>
     <string name="dlg_20">You cannot sign up\n through this app. Call customer\n service and request for a change\n the phone number registered\n when you sign up.</string>
     <string name="dlg_21">Different Phone Number</string>
+    <string name="dlg_22">NOTICE</string>
+    <string name="dlg_23">Do you really want to close without saving?</string>
+    <string name="dlg_24">CONFIRM</string>
 
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
     <string name="ask_bnkc_review">BNKC will review your inquiry\n and get back to you soon</string>

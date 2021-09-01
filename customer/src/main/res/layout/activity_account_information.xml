@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <import type="com.mobile.bnkcl.ui.user.AccountInformationViewModel" />
 
         <variable
@@ -104,7 +106,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/round_solid_ffffff_15"
                         android:orientation="vertical"
-                        android:paddingBottom="55dp"
+                        android:paddingBottom="100dp"
                         android:visibility="visible">
 
                         <LinearLayout
@@ -230,7 +232,7 @@
                                                 android:layout_weight="1"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                android:text="@{profile.gender.equalsIgnoreCase(&quot;M&quot;)? @string/sign_up_18 : @string/sign_up_19 }" />
+                                                android:text="@{profile.gender.equals(`M`) ? @string/sign_up_18 : @string/sign_up_19}" />
 
 
                                         </LinearLayout>
@@ -254,7 +256,8 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="2"
                                                 android:gravity="end"
-                                                android:maxLines="1" />
+                                                android:maxLines="1"
+                                                android:text="@{profile.phone_number}" />
 
                                         </LinearLayout>
 
@@ -346,7 +349,8 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
-                                                android:maxLines="1" />
+                                                android:maxLines="1"
+                                                android:text="@{profile.account_number}" />
 
                                         </LinearLayout>
 
@@ -439,7 +443,7 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="3"
                                                 android:gravity="end"
-                                                tools:text="N/A" />
+                                                android:text="@{profile.address.more_info.concat(`, `).concat(profile.address.village.erp_code).concat(`, `).concat(profile.address.district.erp_code).concat(`, `).concat(profile.address.state.erp_code)}" />
 
                                         </LinearLayout>
 
@@ -464,7 +468,7 @@
                                                 android:layout_weight="2"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                tools:text="N/A" />
+                                                android:text="@{profile.job_type}" />
 
                                         </LinearLayout>
 
