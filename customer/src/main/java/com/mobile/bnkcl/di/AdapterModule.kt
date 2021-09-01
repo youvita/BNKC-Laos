@@ -40,4 +40,8 @@ object AdapterModule {
     @Singleton
     @Provides
     fun provideAskQuestionAdapter() = AskQuestionAdapter()
+
+    @Singleton
+    @Provides
+    fun provideFaqsAdapter() = FaqsAdapter()
 }

@@ -14,9 +14,12 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.cscenter.ClaimDataRequest
 import com.mobile.bnkcl.data.response.cscenter.ClaimItems
+import com.mobile.bnkcl.data.response.faq.FaqItemsRes
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
+import com.mobile.bnkcl.ui.adapter.FaqsAdapter
 import com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
+import com.mobile.bnkcl.ui.cscenter.viewmodel.FaqsViewModel
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,16 +27,18 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickListener {
 
-    override fun getLayoutId(): Int= R.layout.activity_c_s_center
-
     private val csCenterViewModel : CSCenterViewModel by viewModels()
+    private val faqsViewModel:FaqsViewModel by viewModels()
+
     private lateinit var claimDataRequest : ClaimDataRequest
     private lateinit var claimItemsList : ArrayList<ClaimItems>
+    private lateinit var faqItemsList : ArrayList<FaqItemsRes>
     private lateinit var collapseToolBarLayout : CollapsingToolbarLayout
     private var PAGE = 0
     private var isSending = false
     @Inject
     lateinit var adapter : AskQuestionAdapter
+
     lateinit var recyclerView: RecyclerView
     lateinit var layoutManager: LinearLayoutManager
 
@@ -51,7 +56,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
 
         initToolbar()
         initButton()
-        observeData()
+        observeClaimData()
 
         if (intent != null) {
             if (intent.getIntExtra("tab_index", 0) !== 0) {
@@ -62,7 +67,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
                 visibleAskBnk()
             } else {
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
-                visibleWebView()
+                PAGE = 0
+                visibleFaqs()
             }
         }
 
@@ -91,7 +97,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
             csCenterViewModel.getClaimData(page_no, loading)
     }
 
-    private fun observeData(){
+    private fun observeClaimData(){
 
         csCenterViewModel.claimLiveData.observe(this){
             Log.d(">>>","$it")
@@ -105,29 +111,32 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
         binding.btnAskBnk.setCheckButtonTextColor(true)
     }
 
-    private fun visibleWebView() {
-        binding.swipeRefreshAskBnkc.isRefreshing = false
-        binding.swipeRefreshAskBnkc.isEnabled = false
-        binding.llWrapAskBnk.visibility = View.GONE
-        binding.wbFaq.visibility = View.VISIBLE
+    private fun visibleFaqs() {
+//        binding.swipeRefreshAskBnkc.isRefreshing = false
+//        binding.swipeRefreshAskBnkc.isEnabled = false
+//        binding.llWrapAskBnk.visibility = View.GONE
+        binding.tvTitle.text = this.getString(R.string.faqs_ask_question)
         binding.llWrapBtn.visibility = View.GONE
         binding.tvFaq.background = getDrawable(R.drawable.round_solid_d7191f_8)
         binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_ffeeee)
         binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
         binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
+        binding.rcQuestion.visibility = View.GONE
+//        binding.rcQuestion.adapter = faqAdapter
 
     }
 
     private fun visibleAskBnk() {
         binding.nsvAsk.smoothScrollBy(0, 0)
-        binding.swipeRefreshAskBnkc.isEnabled = true
-        binding.llWrapAskBnk.visibility = View.VISIBLE
-        binding.wbFaq.visibility = View.GONE
+//        binding.swipeRefreshAskBnkc.isEnabled = true
+//        binding.llWrapAskBnk.visibility = View.VISIBLE
+        binding.tvTitle.text = this.getString(R.string.center_ask_bnkc)
         binding.llWrapBtn.visibility = View.VISIBLE
         binding.tvFaq.background = getDrawable(R.drawable.round_solid_ffeeee)
         binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_d7191f_8)
         binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
         binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
+        binding.rcQuestion.visibility = View.VISIBLE
         binding.rcQuestion.adapter = adapter
 
         binding.rcQuestion.isNestedScrollingEnabled = false
@@ -161,7 +170,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
 
             }
             R.id.tv_faq -> {
-                visibleWebView()
+
+                visibleFaqs()
                 binding.tvFaq.isClickable = false
                 binding.tvAskBnk.isClickable = true
 
@@ -172,5 +182,9 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>(), View.OnClickLi
             }
             R.id.toolbar_left_button -> onBackPressed()
         }
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_c_s_center
     }
 }

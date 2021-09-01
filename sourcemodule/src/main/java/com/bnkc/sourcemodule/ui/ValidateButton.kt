@@ -59,7 +59,7 @@ class ValidateButton : LinearLayout {
         tvCheckLabel!!.setTextAppearance(context, R.style.font_14_FFFFFF_normal)
 
 //        tvCheckLabel!!.text = if (isTextCaps) text!!.toUpperCase() else text
-        setLabelButton(text!!)
+//        setLabelButton(text!!)
         if (active) {
             setActive(true)
         } else {

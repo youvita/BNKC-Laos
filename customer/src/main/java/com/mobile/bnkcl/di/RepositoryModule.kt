@@ -10,6 +10,7 @@ import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.cscenter.ClaimDetailRepo
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
+import com.mobile.bnkcl.data.repository.faq.FaqsRepo
 import com.mobile.bnkcl.data.repository.findoffice.FindOfficeRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
@@ -130,6 +131,12 @@ object RepositoryModule {
     @Provides
     fun provideClaimDetailRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  ClaimDetailRepo{
         return ClaimDetailRepo(context,okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFaqsDataRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  FaqsRepo{
+        return FaqsRepo(context,okHttpClient)
     }
 
 }

@@ -43,6 +43,7 @@
     <!-- c/s center -->
     <string name="center_faq">FAQ</string>
     <string name="center_ask_bnkc">Ask BNKC</string>
+    <string name="faqs_ask_question">Frequently Asked Questions</string>
 
     <!-- agree term  -->
     <string name="term_condition_policy">Policy</string>

@@ -14,12 +14,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.cscenter.CSCenterActivity">
+        >
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:background="@color/color_f5f7fc"
-            android:layout_height="match_parent"
-            tools:context=".ui.settiing.SettingsActivity">
+            android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
@@ -138,15 +137,6 @@
                         android:layout_height="match_parent"
                         android:paddingBottom="@dimen/padding_95dp"
                         android:layout_marginTop="@dimen/margin_21dp">
-                        <!--faq-->
-                        <WebView
-                            android:id="@+id/wb_faq"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_20dp"
-                            android:layout_marginRight="@dimen/margin_20dp"
-                            />
-                        <!--ask bnk-->
                         <LinearLayout android:id="@+id/ll_wrap_ask_bnk"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -155,10 +145,11 @@
                             >
 
                             <TextView
+                                android:id="@+id/tv_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 style="@style/font_28_263238_normal"
-                                android:text="@string/center_ask_bnkc"
+                                tools:text="@string/center_ask_bnkc"
                                 android:paddingRight="@dimen/padding_20dp"
                                 android:paddingLeft="@dimen/padding_20dp"/>
 

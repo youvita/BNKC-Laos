@@ -1,10 +1,12 @@
 package com.mobile.bnkcl.ui.cscenter
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.binding.BindingAdapters.enableButton
@@ -52,13 +54,20 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
     }
 
     private fun onRequestToSubmit(){
-        askBNKCViewModel.getClaim("1",subject,description)
+        askBNKCViewModel.getClaim("1", subject, description)
+
     }
     private fun observeData(){
         askBNKCViewModel.claimLiveData.observe(this){
-            val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra("ACTION_TAG","ask_bnkc")
-            startActivity(intent)
+
+            if (subject.isEmpty() || description.isEmpty()){
+
+            }else{
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra("ACTION_TAG", "ask_bnkc")
+                result.launch(intent)
+            }
+
         }
     }
 
@@ -78,10 +87,10 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
     fun setEnableSubmitButton(subject: String, desc: String){
         if(subject.isEmpty() || desc.isEmpty()){
-            binding.btnSubmit.setActive(false)
+            binding.btnSubmit.enableButton(false)
         }
         else {
-            binding.btnSubmit.setActive(true)
+            binding.btnSubmit.enableButton(true)
         }
     }
 
@@ -89,7 +98,26 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         when(v?.id){
             R.id.toolbar_left_button -> onBackPressed()
 
-            R.id.btn_submit -> onRequestToSubmit()
+            R.id.btn_submit -> {
+                onRequestToSubmit()
+            }
         }
+    }
+
+
+    var result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
+        if (result.resultCode == Activity.RESULT_OK){
+
+            val data : Intent? = result.data
+            if (data != null) {
+                if (data.getIntExtra("tab_index", 0) != 0) {
+                    val intent = intent
+                    intent.putExtra("tab_index", data.getIntExtra("tab_index", 0))
+                    setResult(RESULT_OK, intent)
+                    finish()
+                }
+            }
+
+    }
     }
 }

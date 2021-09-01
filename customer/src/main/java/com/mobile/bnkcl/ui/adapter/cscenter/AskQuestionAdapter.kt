@@ -2,7 +2,6 @@ package com.mobile.bnkcl.ui.adapter.cscenter
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
@@ -11,7 +10,7 @@ import com.mobile.bnkcl.data.response.cscenter.ClaimItems
 import com.mobile.bnkcl.databinding.ItemCsQuestionBinding
 import com.mobile.bnkcl.ui.cscenter.AskBNKCDetailActivity
 
-class AskQuestionAdapter():
+class AskQuestionAdapter :
      BaseAdapter<ItemCsQuestionBinding, ClaimItems, AskQuestionAdapter.ViewHolder>() {
 
      lateinit var context: Context
@@ -33,9 +32,11 @@ class AskQuestionAdapter():
 
 //        holder.binding.tvCreateOn.text = FormatUtils.getDateFormat(data.created_on,6)
 //        Log.d(">>>>", "tvCreateOn: "+FormatUtils.getDateFormat(data.created_on,6))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            holder.binding.llWrapQuestion.setBackgroundColor(context.getColor(R.color.ask_bnk))
-        }
+       // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        //}//
+
+        holder.binding.llWrapQuestion.setBackgroundColor(context.resources.getColor(R.color.ask_bnk))
+
         if (null == data.replied_on || "".equals(data.replied_on, ignoreCase = true)) {
             holder.binding.tvAnswer.text = context.getString(R.string.cs_13)
             holder.binding.tvAnswer.background = context.getDrawable(R.drawable.round_solid_ffeeee_18)
