@@ -20,4 +20,9 @@ object Constants {
 
     // Language
     const val LANGUAGE = "LANGUAGE"
+
+
+    // C/S center
+    const val CLAIM_ID = "CLAIM_ID"
+    const val CATEGORY = "CATEGORY"
 }

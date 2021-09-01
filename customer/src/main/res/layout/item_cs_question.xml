@@ -4,108 +4,127 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <import type="com.bnkc.sourcemodule.util.FormatUtils"/>
         <variable
             name="format"
             type="FormatUtils" />
+
         <variable
             name="item"
             type="com.mobile.bnkcl.data.response.cscenter.ClaimItems" />
+
         <variable
-            name="adapter"
+            name="action"
             type="com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_wrap_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="@dimen/padding_20dp"
-        android:paddingLeft="@dimen/padding_20dp"
-        android:backgroundTint="@color/ask_bnk"
-        >
-        <LinearLayout
+        android:onClick="@{() -> action.onItemClick(item)}"
+        android:backgroundTint="@color/ask_bnk">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/padding_15dp"
+            android:paddingLeft="@dimen/padding_20dp"
+            android:paddingRight="@dimen/padding_20dp"
+            android:paddingBottom="@dimen/padding_18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/title"
+                style="@style/font15_263238_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/font15_263238_medium"
-                tools:text="hello"
-                android:text="@={item.title}"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:text="@{item.title}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="title" />
+
+
+            <TextView
+                android:id="@+id/category_name"
+                style="@style/font_13_90A4AE_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:text="@{item.category_name}"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="category name" />
+
+            <TextView
+                android:id="@+id/separate_line"
+                style="@style/font_13_90A4AE_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{` / `}"
+                app:layout_constraintBottom_toBottomOf="@+id/category_name"
+                app:layout_constraintStart_toEndOf="@+id/category_name"
+                app:layout_constraintTop_toTopOf="@+id/category_name"
+                tools:text=" / " />
+
+
+            <TextView
+                android:id="@+id/tv_create_on"
+                style="@style/font_13_90A4AE_regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@{format.Companion.getDateFormat(item.created_on, 6)}"
+                app:layout_constraintBottom_toBottomOf="@+id/separate_line"
+                app:layout_constraintStart_toEndOf="@+id/separate_line"
+                app:layout_constraintTop_toTopOf="@+id/separate_line"
+                tools:text="04-04-2020" />
+
+            <TextView
+                android:id="@+id/tv_replyOn"
+                style="@style/font_13_90A4AE_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:text="@string/cs_10"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_answer"
+                app:layout_constraintEnd_toStartOf="@+id/tv_answer"
+                app:layout_constraintTop_toTopOf="@+id/tv_answer" />
+
+            <TextView
+                android:id="@+id/tv_answer"
+                style="@style/font_13_00695C_regular"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:background="@{item.replied_on == null ? @drawable/round_solid_ffeeee_18 : @drawable/round_solid_e0f2f1_18, default = @drawable/round_solid_ffeeee_18}"
+                android:paddingStart="@dimen/padding_14dp"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingEnd="@dimen/padding_14dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:text="@{item.replied_on == null ? @string/cs_13 : @string/cs_12, default = @string/cs_13}"
+                android:textColor="@{item.replied_on == null ? @color/color_d7191f : @color/color_00695c, default = @color/color_d7191f}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_create_on"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_create_on" />
 
-                <TextView
-                    android:id="@+id/tv_category"
-                    style="@style/font_13_90A4AE_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="6dp"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    tools:text="Loan/" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tv_create_on"
-                    style="@style/font_13_90A4AE_regular"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="6dp"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@{format.Companion.getDateFormat(item.created_on, 6)}"
-                    tools:text="04-04-2020" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/color_eef5f8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_replyOn"
-                        android:text="@string/cs_10"
-                        style="@style/font_13_90A4AE_normal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center_vertical"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_answer"
-                        style="@style/font_13_00695C_regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/round_solid_e0f2f1_18"
-                        android:gravity="center_vertical|center"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="5dp"
-                        android:paddingRight="12dp"
-                        android:paddingBottom="5dp" />
-                </LinearLayout>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_eef5f8"
-                android:layout_marginTop="15dp"/>
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

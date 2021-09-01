@@ -35,11 +35,10 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
     private var disposable: Disposable? = null
 
-    @Inject
-    lateinit var sharedPrefer: CredentialSharedPrefer
+    private var systemDialog: SystemDialog? = null
 
     @Inject
-    lateinit var systemDialog: SystemDialog
+    lateinit var sharedPrefer: CredentialSharedPrefer
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -171,8 +170,14 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
                     }
                 }
             }
-            systemDialog = SystemDialog.newInstance(title, message)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
+
+            if (systemDialog == null) {
+                systemDialog = SystemDialog.newInstance(title, message)
+                systemDialog?.show(supportFragmentManager, systemDialog?.tag)
+                systemDialog?.onConfirmClicked {
+                    systemDialog = null
+                }
+            }
         }
     }
 

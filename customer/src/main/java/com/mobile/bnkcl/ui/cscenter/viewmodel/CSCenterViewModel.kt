@@ -3,6 +3,7 @@ package com.mobile.bnkcl.ui.cscenter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Resource
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -20,18 +21,13 @@ import javax.inject.Inject
 class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :BaseViewModel() {
 
     //Notice Data
-    private val _claimData: MutableLiveData<ClaimDataResponse> = MutableLiveData()
-    val claimLiveData: LiveData<ClaimDataResponse> get() = _claimData
+    private val _claimData: MutableLiveData<Resource<ClaimDataResponse>> = MutableLiveData()
+    val claimLiveData: LiveData<Resource<ClaimDataResponse>> get() = _claimData
     private val lastPage = false
     var  request = ClaimDataRequest()
 
-
-
     fun getClaimData(page_number: Int, loading: Boolean){
-
-      request = ClaimDataRequest(page_number, request.page_size, "")
-
-
+        request = ClaimDataRequest(page_number, request.page_size, "")
         viewModelScope.launch {
             claimRepo.getClaimData(request).onEach { resource ->
                 // catch error
@@ -41,15 +37,14 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
                     val message = resource.messageDes
                     RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
                 } else {
-                    _claimData.value = resource.data
+                    _claimData.value = resource
                 }
             }.launchIn(viewModelScope)
         }
     }
+
     fun isLastPage(): Boolean {
         return lastPage
     }
-
-
 
 }

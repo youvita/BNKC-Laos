@@ -1,11 +1,13 @@
 package com.mobile.bnkcl.data.response.cscenter
 
+import androidx.paging.PagedList
+import com.bnkc.library.data.type.Resource
 import com.google.gson.annotations.SerializedName
 
 class ClaimDataResponse {
 
     @SerializedName("claims")
-    var claims: ArrayList<ClaimItems>? = null
+    var claims: List<ClaimItems>? = null
 
     @SerializedName("last")
     var last: Boolean? = null

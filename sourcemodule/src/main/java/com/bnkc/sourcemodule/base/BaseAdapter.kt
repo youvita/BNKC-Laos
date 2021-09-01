@@ -51,9 +51,16 @@ abstract class BaseAdapter<B: ViewDataBinding, T ,VH: RecyclerView.ViewHolder> :
      */
     open fun addItemList(data: List<T>?) {
         if (data == null) return
-        items.clear()
         items.addAll(data)
         this.notifyItemInserted(itemCount)
+    }
+
+    /**
+     * clear all items in array list view
+     */
+    open fun clearItemList() {
+        items.clear()
+        this.notifyDataSetChanged()
     }
 
 }

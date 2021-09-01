@@ -2,7 +2,7 @@ package com.mobile.bnkcl.data.response.cscenter
 
 import com.google.gson.annotations.SerializedName
 
-class ClaimItems (
+data class ClaimItems (
     @SerializedName("id")
     var id: Int? = null,
 
@@ -11,7 +11,6 @@ class ClaimItems (
 
     @SerializedName("category_name")
     var category_name: String? = null,
-
 
     @SerializedName("title")
     var title: String? = null,
