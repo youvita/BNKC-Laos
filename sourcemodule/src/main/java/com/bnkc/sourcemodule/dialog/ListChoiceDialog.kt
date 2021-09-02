@@ -19,6 +19,7 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
     override fun getLayoutId(): Int {
         return R.layout.list_choice_dialog
     }
+    var item = 4
 //    var onConfirmClickListener: ((pos : Int) -> Unit) = { }
 
     var setOnItemListener : (pos: Int) -> Unit = {}
@@ -28,7 +29,7 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
         private const val TITLE = "title"
         private const val OBJ = "obj"
         private const val SELECTED_ITEM = "selected_item"
-        private const val item = 4
+
 
         var data : ArrayList<String> = ArrayList()
 

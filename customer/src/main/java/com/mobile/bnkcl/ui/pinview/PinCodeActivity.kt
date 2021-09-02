@@ -13,6 +13,7 @@ import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
+import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
 import com.mobile.bnkcl.ui.main.MainActivity
@@ -26,6 +27,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     private val viewModel : PinViewModel by viewModels()
 
+    var sessionId = ""
+    var needAuth = false
     var username = ""
     var pinUI : String = ""
     var countAttempt = 0
@@ -42,10 +45,6 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 //            extrasLogin = ExtrasLogin(this, intent)
             pinUI = intent.getStringExtra("pin_action").toString()
             username = intent.getStringExtra("username").toString()
-//            when (pinAction) {
-//                "login" -> setAnimateType(ANIMATE_LEFT)
-//                else -> setAnimateType(ANIMATE_NORMAL)
-//            }
 
             if (pinUI == "sign_up") {
 
@@ -56,7 +55,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 binding.pinViewModel!!.pinUI = 2
 
             } else if (pinUI == "login") {
-
+                if (intent.extras!!.containsKey(Constants.SESSION_ID)){
+                    needAuth = true
+                    sessionId = intent.getStringExtra(Constants.SESSION_ID).toString()
+                }
                 binding.pinViewModel!!.pinUI = 1
 
             } else if(pinUI == "reset"){
@@ -84,18 +86,12 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             if (pinCode.isNotEmpty()){
                 login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
             }
-//            if(pinCode == "1234")
-//                startActivity(Intent(this, LoginActivity::class.java))
-//
-//            else {
-//                binding.pinView.errorAction()
-//                binding.pinView.clearPin()
-//            }
+
         }
 
         binding.pinView.setOnErrorListener = {errorCode : Int->
             if (errorCode == NOT_MATCH_PASSWORD){
-                Toast.makeText(this,"Confirm password doesn't matched, Please try again!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Confirm password doesn't matched, Please try again", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -106,15 +102,28 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     }
 
     private fun login(pinCode : String) {
-        var deviceInfo = DeviceInfo("test", "Android", "S21", "30")
-        var loginRequestNoAuth = LoginRequestNoAuth(
-            username,
-            pinCode,
-            deviceInfo
-        )
-        viewModel.loginRequestNoAuth = loginRequestNoAuth
-        viewModel.loginNoAuth()
+        val deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+        if (needAuth){
+            val loginRequest = LoginRequest(
+                sessionId,
+                username,
+                pinCode,
+                deviceInfo
+            )
+            viewModel.logRequest = loginRequest
+            viewModel.loginWithAuth()
+        }else {
+            val loginRequestNoAuth = LoginRequestNoAuth(
+                username,
+                pinCode,
+                deviceInfo
+            )
+            viewModel.loginRequestNoAuth = loginRequestNoAuth
+            viewModel.loginNoAuth()
+        }
+
         viewModel.loginLiveData.observe(this){
+            successListener()
             Log.d("nng", it.toString())
             if (it.cust_no != null || it.cust_no != null) {
                 sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)

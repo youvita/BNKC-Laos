@@ -7,7 +7,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.lease.ApplyLeaseActivity">
+        tools:context=".ui.lease.apply.ApplyLeaseActivity">
 
         <include
             android:id="@+id/include"

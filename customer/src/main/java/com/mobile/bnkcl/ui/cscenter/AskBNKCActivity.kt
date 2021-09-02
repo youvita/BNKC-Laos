@@ -9,7 +9,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.binding.BindingAdapters.enableButton
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
@@ -81,18 +80,18 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         override fun afterTextChanged(s: Editable?) {
             subject = binding.edtSubject.text.toString()
             description = binding.edtDescription.text.toString()
-            setEnableSubmitButton(subject, description)
+            binding.btnSubmit.isEnable(subject, description)
         }
     }
 
-    fun setEnableSubmitButton(subject: String, desc: String){
-        if(subject.isEmpty() || desc.isEmpty()){
-            binding.btnSubmit.enableButton(false)
-        }
-        else {
-            binding.btnSubmit.enableButton(true)
-        }
-    }
+//    fun setEnableSubmitButton(subject: String, desc: String){
+//        if(subject.isEmpty() || desc.isEmpty()){
+//            binding.btnSubmit.set(false)
+//        }
+//        else {
+//            binding.btnSubmit.enableButton(true)
+//        }
+//    }
 
     override fun onClick(v: View?) {
         when(v?.id){

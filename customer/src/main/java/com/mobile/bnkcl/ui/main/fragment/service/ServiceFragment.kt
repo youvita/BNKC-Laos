@@ -28,6 +28,7 @@ class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
         binding = FragmentLoanServiceBinding.bind(view)
         binding.serviceViewModel = viewModel
         observeViewModel()
+
     }
 
     private fun observeViewModel() {

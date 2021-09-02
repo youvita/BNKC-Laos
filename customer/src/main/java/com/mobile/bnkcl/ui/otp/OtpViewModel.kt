@@ -13,13 +13,17 @@ import androidx.lifecycle.viewModelScope
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
+import com.mobile.bnkcl.data.request.auth.LoginRequest
+import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
+import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.otp.OTPVerifyResponse
 import com.mobile.bnkcl.data.response.otp.SendOTPResponse
@@ -37,6 +41,8 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     var isChecked : Boolean = false
     var statFocus : Int = 0
     var step : Int = 1
+
+    var sessionID : String = ""
 
     val _phoneNumberContent = MutableLiveData<String>()
     val phoneNumber : LiveData<String>
@@ -66,7 +72,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     // 0 : Login, 1 : Sign up , 2 : Forget , 3 : Reset
-    fun setUpButtonText() : String{
+    fun setUpButtonText() : String {
         Log.d(">>>>>>", "setUpTextView $uiMode")
         return when(uiMode){
             0->{
@@ -253,10 +259,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     fun continueClick(){
-        Log.d(">>>>>>", "reqLogin ::: " + phoneNumber.value)
+        Log.d(">>>>>>", "reqLogin ::: $phoneNumber -- $sessionID")
         when(uiMode){
             0->{  //Login
                 val intent = Intent(context, PinCodeActivity::class.java)
+                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
                 intent.putExtra("pin_action", "login")
                 intent.putExtra("username", phoneNumber.value)
                 context.startActivity(intent)

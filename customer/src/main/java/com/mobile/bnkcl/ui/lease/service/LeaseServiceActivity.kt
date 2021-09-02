@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseServiceBinding
-import com.mobile.bnkcl.ui.lease.ApplyLeaseActivity
+import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import dagger.hilt.android.AndroidEntryPoint

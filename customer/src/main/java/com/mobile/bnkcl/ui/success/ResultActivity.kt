@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.binding.BindingAdapters.enableButton
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityResultBinding
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity

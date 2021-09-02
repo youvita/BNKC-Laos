@@ -1,6 +1,7 @@
 package com.bnkc.sourcemodule.ui
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,138 +9,157 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.databinding.CommValidateButtonBinding
 import java.util.*
+import kotlin.collections.ArrayList
 
-class ValidateButton : LinearLayout {
+class ValidateButton @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : LinearLayout(context,attrs, defStyleAttr) {
 
-    var tvCheckLabel: TextView? = null
-    var llCheckLabel: LinearLayout? = null
+    var binding : CommValidateButtonBinding =
+        CommValidateButtonBinding.inflate(LayoutInflater.from(context), this, true);
 
     var status = false
-    private var isTextCaps: kotlin.Boolean = false
+    var textAllCaps = false
+    var text = ""
+    var background : Int = 0
+    var textColor : Int = 0
 
-    constructor(context: Context?) : super(context) {
+    var _textAllCaps = MutableLiveData<Boolean>(false)
+    var value= MutableLiveData<String>("")
+    var active = MutableLiveData<Boolean>(false)
 
-        initView(context!!, null)
-    }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(
-        context,
-        attrs
-    ) {
-
-        initView(context!!, attrs!!)
-    }
-
-    constructor(
-        context: Context?,
-        attrs: AttributeSet?,
-        defStyleAttr: Int
-    ) : super(context, attrs, defStyleAttr) {
-
-        initView(context!!, attrs!!)
-    }
-
-    fun initView(context: Context, attrs: AttributeSet?) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ValidateButton)
-        val text = a.getString(R.styleable.ValidateButton_buttonText)
-        val active = a.getBoolean(R.styleable.ValidateButton_is_active, false)
-        isTextCaps = a.getBoolean(R.styleable.ValidateButton_textAllCaps, true)
-        val background = a.getResourceId(R.styleable.ValidateButton_buttonBackground, 0)
-        val textColor = a.getColor(R.styleable.ValidateButton_buttonTextColor, 0)
-        val inflate = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-        val mView: View = inflate.inflate(R.layout.comm_validate_button, this, true)
-
-//        val viewRoot = inflate.inflate(R.layout.comm_validate_button, this, false)
-//        val binding: CommValidateButtonBinding? = DataBindingUtil.bind(viewRoot)
-//        addView(binding!!.root)
-        llCheckLabel = mView.findViewById(R.id.ll_check_button)
-        tvCheckLabel = mView.findViewById(R.id.tv_check_button)
-        tvCheckLabel!!.setTextAppearance(context, R.style.font_14_FFFFFF_normal)
-
-//        tvCheckLabel!!.text = if (isTextCaps) text!!.toUpperCase() else text
-//        setLabelButton(text!!)
-        if (active) {
-            setActive(true)
-        } else {
-            if (background != 0 || textColor != 0) {
-                setNormalButton(background, textColor)
+    init {
+        binding.model=this
+        value.observeForever {
+            binding.tvCheckButton.text = it
+        }
+        active.observeForever {
+            Log.d("nng", "active set from java :: $it")
+            if (it) {
+                setActiveButton(true)
             } else {
-                setActive(false)
+                if (background != 0 || textColor != 0) {
+                    setNormalButton(background, textColor)
+                } else {
+                    setActiveButton(false)
+                }
+            }
+        }
+        _textAllCaps.observeForever {
+            textAllCaps = it
+        }
+
+        getAttributes(attrs)
+    }
+
+    fun setActiveButton(active : Boolean){
+        if (active) {
+            binding.tvCheckButton.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
+            binding.llCheckButton.background = ContextCompat.getDrawable(context, R.drawable.selector_d7191f_8b0304)
+        } else {
+            binding.tvCheckButton.setTextColor(ContextCompat.getColor(context, R.color.color_90a4ae))
+            binding.llCheckButton.background = ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
+        }
+    }
+
+    fun getAttributes(attrs: AttributeSet?){
+        val a : TypedArray = context.obtainStyledAttributes(attrs, R.styleable.ValidateButton)
+        for (i in 0 until a.indexCount){
+            when(val attr = a.getIndex(i)){
+                R.styleable.ValidateButton_buttonText -> text = a.getString(attr).toString()
+                R.styleable.ValidateButton_is_active -> status = a.getBoolean(attr, false)
+                R.styleable.ValidateButton_textAllCaps -> textAllCaps = a.getBoolean(attr, false)
+                R.styleable.ValidateButton_buttonBackground -> background = a.getResourceId(attr, 0)
+                R.styleable.ValidateButton_buttonTextColor -> textColor = a.getInt(attr,0)
             }
         }
         a.recycle()
     }
 
     fun setNormalButton(background: Int, textColor: Int) {
-        llCheckLabel!!.setBackgroundResource(background)
-        tvCheckLabel!!.setTextColor(textColor)
+        binding.llCheckButton.setBackgroundResource(background)
+        binding.tvCheckButton.setTextColor(textColor)
     }
 
-    fun setTextAllCaps(isAllow: Boolean) {
-//        if (tvCheckLabel != null && isAllow){
-//            tvCheckLabel.setText(tvCheckLabel.getText().toString().toUpperCase());
-//        }
-        this.isTextCaps = isAllow
+    fun setTextAllCap(textAllCap: Boolean) {
+        _textAllCaps.postValue(textAllCap)
     }
 
-    fun setActive(isActive: Boolean) {
-        setCheckButtonBackGround(isActive)
-        setCheckButtonTextColor(isActive)
-        status = isActive
-    }
 
     fun isActive(): Boolean {
         return status
     }
 
     fun setLabelButton(text: String) {
-        tvCheckLabel!!.text = if (isTextCaps) text.toUpperCase() else text
+        binding.tvCheckButton.text = if (textAllCaps) text.toUpperCase() else text
     }
 
     fun setCheckButtonBackGround(isEnable: Boolean) {
         if (isEnable) {
-            llCheckLabel!!.background =
+            binding.llCheckButton.background =
                 ContextCompat.getDrawable(context, R.drawable.selector_d7191f_8b0304)
             setOnClickListener(null)
         } else {
-            llCheckLabel!!.background =
+            binding.llCheckButton.background =
                 ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
         }
     }
 
     fun setButtonBackGround(bg: Int) {
-        llCheckLabel!!.setBackgroundResource(bg)
+        binding.llCheckButton.setBackgroundResource(bg)
     }
 
     open fun setCheckButtonTextColor(isEnable: Boolean) {
         if (isEnable) {
-            tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_ffffff))
+            binding.tvCheckButton.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
         } else {
-            tvCheckLabel!!.setTextColor(context!!.resources.getColor(R.color.color_90a4ae))
+            binding.tvCheckButton.setTextColor(ContextCompat.getColor(context, R.color.color_90a4ae))
         }
     }
 
-    fun isEnable(isUpdate: Boolean, vararg params: String): Boolean { //a,b,c
-        return if (isUpdate) {
-            if (params[2].isEmpty() || params[3].isEmpty()) {
-                setActive(false)
-                false
-            } else if (params[0] == params[2] && params[1] == params[3]) {
-                setActive(false)
-                false
-            } else {
-                setActive(true)
-                true
+    fun isEnableInUpdate(isUpdate: Boolean, vararg params: String) { //a,b,c
+        val arrayList = ArrayList<String>()
+        if (isUpdate) {
+            val updateList = ArrayList<String>()
+
+            for (param in params) {
+                updateList.add(param)
+                if (param != "") {
+                    arrayList.add("T")
+                } else {
+                    arrayList.add("F")
+                }
+            }
+            for (i in arrayList.indices) {
+                if (arrayList[i] == "T") {
+                    setActive(true)
+                }
+                if (arrayList[i] == "F") {
+                    setActive(false)
+                    return
+                }
             }
         } else {
-            if (params[0].isEmpty() || params[1].isEmpty()) {
-                setActive(false)
-                false
-            } else {
-                setActive(true)
-                true
+            for (param in params) {
+                if (param != "") {
+                    arrayList.add("T")
+                } else {
+                    arrayList.add("F")
+                }
+            }
+            for (i in arrayList.indices) {
+                if (arrayList[i] == "T") {
+                    setActive(true)
+                }
+                if (arrayList[i] == "F") {
+                    setActive(false)
+                    return
+                }
             }
         }
     }
@@ -162,5 +182,14 @@ class ValidateButton : LinearLayout {
                 return
             }
         }
+    }
+
+    fun setActive(isActive: Boolean) {
+        active.postValue(isActive)
+    }
+
+    fun setValue(text : String){
+        tag = text
+        value.postValue(text)
     }
 }

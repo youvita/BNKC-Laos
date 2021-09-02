@@ -21,9 +21,12 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.request.auth.DeviceInfo
+import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -130,6 +133,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun sendOTP() {
         viewModel.sendOTPLiveData.observe(this) {
             Log.d("nng", it.toString())
+            successListener()
             pinID = it.pin_id.toString()
             binding.tvResend.setTextColor(resources.getColor(R.color.colorPrimary))
             lifeTime = it.lifetime!!
@@ -141,6 +145,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun verifyOTP() {
         viewModel.verifyOTPLiveData.observe(this){
             Log.d(">>>>>>>>", it.toString())
+            successListener()
             binding.isVerified = it.verified!!
             Log.d(">>>>>>>>", "Verified livedata " + viewModel.isVerified)
             binding.tvCorrect.visibility = View.VISIBLE
@@ -180,6 +185,12 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         viewModel.preLogin()
         viewModel.preloginLiveData.observe(this){
             Log.d("nng", it.toString())
+            successListener()
+            if (it.session_id!!.isNotEmpty()){
+                binding.otpViewModel!!.sessionID = it.session_id!!
+                binding.btnContinue.setActive(true)
+
+            }
         }
     }
 
@@ -335,13 +346,13 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     }
 
     private var tvReSendOTPClickListener = View.OnClickListener() {
-//        try {
+        try {
 //            otpViewModel.getSendOTPModel().setTo(getPhoneNo());
-//            otpViewModel.requestSendOtp();
-//            binding.edtOtp.getText().clear();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+            viewModel.sendOTP(phoneNumber);
+            binding.edtOtp.text?.clear();
+        } catch (e : Exception) {
+            e.printStackTrace();
+        }
     }
 
 }

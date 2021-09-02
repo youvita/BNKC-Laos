@@ -118,12 +118,13 @@ interest."
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.bnkc.sourcemodule.ui.ValidateButton
+                    android:id="@+id/vb_detail"
                     android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
-                    app:buttonText="For more detail"
                     app:is_active="true"
+                    app:buttonText="For more detail"
+                    android:layout_alignParentBottom="true"
                     android:layout_height="@dimen/height_50dp"
-                    android:onClick="@{() -> serviceViewModel.serviceMoreDetail()}"/>
+                    android:onClick="@{(v) -> serviceViewModel.serviceMoreDetail()}"/>
 
             </RelativeLayout>
         </com.bnkc.sourcemodule.ui.ShadowLayout>

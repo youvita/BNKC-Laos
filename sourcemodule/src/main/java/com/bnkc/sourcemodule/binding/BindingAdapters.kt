@@ -96,44 +96,56 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("text", "isChecked")
-    fun setUpAgreementText(textView: TextView, txtAgreement: String?, checked: Boolean) {
-        var txtAgreement = "I agree to BNKC\'s Terms and Conditions"
-
-        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.color_263238))
-        textView.setText(
-            Formats.getSeparateFontByLang(
-                textView.context,
-                18,
-                txtAgreement.length,
-                txtAgreement,
-                checked
-            ), TextView.BufferType.SPANNABLE
+    @BindingAdapter("textPhoneFormat")
+    fun TextView.setTextPhoneFormat(tel : String) {
+        FormatUtils.getSeparateFont(
+            context,
+            0,
+            FormatUtils.getTelFormat(tel, 0)!!.length,
+            "en",
+            FormatUtils.getTelFormat(tel, 0)
         )
     }
 
 //    @JvmStatic
-//    @BindingAdapter("textButton")
-//    fun textButton(textView: ValidateButton, str: String?) {
-//        textView.tvCheckLabel!!.text = str
+//    @BindingAdapter("text", "isChecked")
+//    fun setUpAgreementText(textView: TextView, txtAgreement: String?, checked: Boolean) {
+//        var txtAgreement = "I agree to BNKC\'s Terms and Conditions"
+//
+//        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.color_263238))
+//        textView.setText(
+//            Formats.getSeparateFontByLang(
+//                textView.context,
+//                18,
+//                txtAgreement.length,
+//                txtAgreement,
+//                checked
+//            ), TextView.BufferType.SPANNABLE
+//        )
 //    }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    @JvmStatic
-    @BindingAdapter("enableButton")
-    fun ValidateButton.enableButton(isEnable: Boolean?) {
-        if (isEnable != null && isEnable) {
-            llCheckLabel!!.background =
-                context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
-            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
-        } else {
-            llCheckLabel!!.background =
-                ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
-            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context, R.color.color_90a4ae))
+//    @JvmStatic
+//    @BindingAdapter("textButton")
+//    fun textButton(textView: ValidateButton, str: String?) {
+//        textView.text = str!!
+//    }
 
-        }
-
-    }
+//    @SuppressLint("UseCompatLoadingForDrawables")
+//    @JvmStatic
+//    @BindingAdapter("enableButton")
+//    fun ValidateButton.enableButton(isEnable: Boolean?) {
+//        if (isEnable != null && isEnable) {
+//            llCheckLabel!!.background =
+//                context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
+//            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
+//        } else {
+//            llCheckLabel!!.background =
+//                ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
+//            tvCheckLabel!!.setTextColor (ContextCompat.getColor(context, R.color.color_90a4ae))
+//
+//        }
+//
+//    }
 
     @JvmStatic
     @BindingAdapter("setNumberFormat")

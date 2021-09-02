@@ -305,7 +305,6 @@
                                 android:textColor="@{otp.sendOtp ? @color/colorPrimary : @color/color_cfd8dc}"
                                 android:gravity="center"
                                 style="@style/font15_cfd8dc_medium"
-                                android:onClick="@{(v) -> otpViewModel.resendOtp()}"
                                 />
                         </LinearLayout>
 
@@ -360,7 +359,6 @@
                         android:id="@+id/btn_continue"
                         android:layout_width="match_parent"
                         app:buttonText="Login"
-                        app:enableButton="@{isVerified}"
                         android:layout_height="50dp"
                         android:onClick="@{() -> otpViewModel.continueClick()}"/>
 

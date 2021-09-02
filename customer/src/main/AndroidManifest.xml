@@ -23,7 +23,7 @@
         tools:targetApi="m">
 
         <activity
-            android:name=".ui.lease.ApplyLeaseActivity"
+            android:name=".ui.lease.apply.ApplyLeaseActivity"
             android:screenOrientation="portrait"/>
 
         <activity
