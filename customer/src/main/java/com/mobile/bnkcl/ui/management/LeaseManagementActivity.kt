@@ -9,9 +9,9 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseManagementBinding
-import com.mobile.bnkcl.ui.full_payment.FullPaymentActivity
-import com.mobile.bnkcl.ui.history.TransactionHistoryActivity
-import com.mobile.bnkcl.ui.schedule.TotalLeaseScheduleActivity
+import com.mobile.bnkcl.ui.management.full_payment.FullPaymentActivity
+import com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity
+import com.mobile.bnkcl.ui.management.schedule.TotalLeaseScheduleActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint

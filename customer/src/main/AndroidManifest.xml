@@ -69,10 +69,10 @@
         <activity android:name=".ui.otp.OtpActivity" />
         <activity android:name=".ui.bill.BillPaymentActivity" />
         <activity android:name=".ui.management.LeaseManagementActivity" />
-        <activity android:name=".ui.mobile_payment.MobilePaymentActivity" />
-        <activity android:name=".ui.history.TransactionHistoryActivity" />
-        <activity android:name=".ui.schedule.TotalLeaseScheduleActivity" />
-        <activity android:name=".ui.full_payment.FullPaymentActivity" />
+        <activity android:name="com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity" />
+        <activity android:name="com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity" />
+        <activity android:name="com.mobile.bnkcl.ui.management.schedule.TotalLeaseScheduleActivity" />
+        <activity android:name="com.mobile.bnkcl.ui.management.full_payment.FullPaymentActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />

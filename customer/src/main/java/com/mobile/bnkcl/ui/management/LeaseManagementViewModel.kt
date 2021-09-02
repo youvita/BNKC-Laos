@@ -16,11 +16,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LeaseManagementViewModel @Inject constructor(private val leaseRepo: LeaseRepo) : BaseViewModel(){
+class LeaseManagementViewModel @Inject constructor(private val leaseRepo: LeaseRepo) :
+    BaseViewModel() {
 
     private val _lease: MutableLiveData<LeaseInfoResponse> = MutableLiveData()
     val leaseLiveData: LiveData<LeaseInfoResponse> = _lease
-    fun getLeaseInfo(contractNo: String){
+    fun getLeaseInfo(contractNo: String) {
         viewModelScope.launch {
             leaseRepo.getLeaseInfo(contractNo).onEach { resource ->
                 if (resource.status == Status.ERROR) {

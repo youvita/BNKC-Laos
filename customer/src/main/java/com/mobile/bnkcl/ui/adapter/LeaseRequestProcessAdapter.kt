@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.response.lease.LeaseInfoData
+import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationData
+import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationResponse
 import com.mobile.bnkcl.databinding.ItemLeaseRequestProcessBinding
 
 class LeaseRequestProcessAdapter :
-    BaseAdapter<ItemLeaseRequestProcessBinding, LeaseInfoData, LeaseRequestProcessAdapter.ViewHolder>() {
+    BaseAdapter<ItemLeaseRequestProcessBinding, LeaseApplicationData, LeaseRequestProcessAdapter.ViewHolder>() {
 
     var type: Int? = null
 
@@ -31,8 +32,9 @@ class LeaseRequestProcessAdapter :
         return ViewHolder(binding)
     }
 
-    override fun setBindData(holder: ViewHolder, data: LeaseInfoData, position: Int) {
-        binding.viewModel = data
+    override fun setBindData(holder: ViewHolder, data: LeaseApplicationData, position: Int) {
+        binding.leaseApplication = data
+        binding.ltdAppliedInfo.leaseApplication = data
         when (type) {
             1 -> {
                 binding.llApplicationResult.visibility = View.VISIBLE

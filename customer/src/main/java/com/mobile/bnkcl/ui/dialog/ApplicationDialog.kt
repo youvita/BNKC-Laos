@@ -6,14 +6,15 @@ import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseFullDialogFragment
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.response.lease.LeaseInfoData
+import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationData
 import com.mobile.bnkcl.databinding.DialogApplicationBinding
 import com.mobile.bnkcl.ui.adapter.LeaseRequestProcessAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ApplicationDialog(type: Int) : BaseFullDialogFragment<DialogApplicationBinding>() {
+class ApplicationDialog(private val leaseApplicationList: List<LeaseApplicationData>, val type: Int) :
+    BaseFullDialogFragment<DialogApplicationBinding>() {
 
     @Inject
     lateinit var leaseRequestProcessAdapter: LeaseRequestProcessAdapter
@@ -22,8 +23,6 @@ class ApplicationDialog(type: Int) : BaseFullDialogFragment<DialogApplicationBin
     lateinit var cardOffsetDecoration: CardOffsetDecoration
 
     private var cardRecyclerView: CardRecyclerView = CardRecyclerView()
-    private val type: Int = type
-
 
     override fun getLayoutId(): Int {
         return R.layout.dialog_application
@@ -32,20 +31,13 @@ class ApplicationDialog(type: Int) : BaseFullDialogFragment<DialogApplicationBin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = mutableListOf<LeaseInfoData>()
-        val item = LeaseInfoData()
-
-        for (i in 0..5) {
-            list.add(i, item)
-        }
-
         binding.transactionRecyclerview.adapter = leaseRequestProcessAdapter
         leaseRequestProcessAdapter.setLeaseProcessType(type)
         binding.transactionRecyclerview.removeItemDecoration(cardOffsetDecoration)
         binding.transactionRecyclerview.addItemDecoration(cardOffsetDecoration)
         cardRecyclerView.attachToRecyclerView(binding.transactionRecyclerview)
-
-        leaseRequestProcessAdapter.addItemList(list)
+        leaseRequestProcessAdapter.clearItemList()
+        leaseRequestProcessAdapter.addItemList(leaseApplicationList)
     }
 
 }

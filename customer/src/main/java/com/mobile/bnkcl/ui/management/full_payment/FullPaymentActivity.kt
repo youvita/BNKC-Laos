@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.full_payment
+package com.mobile.bnkcl.ui.management.full_payment
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -17,7 +17,7 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityFullPaymentBinding
-import com.mobile.bnkcl.ui.mobile_payment.MobilePaymentActivity
+import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint

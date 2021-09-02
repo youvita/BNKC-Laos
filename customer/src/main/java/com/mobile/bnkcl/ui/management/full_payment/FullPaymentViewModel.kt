@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.full_payment
+package com.mobile.bnkcl.ui.management.full_payment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
-import com.mobile.bnkcl.data.repository.lease.full_payment.FullPaymentRepo
+import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.request.lease.full_payment.FullPaymentRequest
 import com.mobile.bnkcl.data.response.lease.full_payment.FullPaymentResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FullPaymentViewModel @Inject constructor(private val fullPaymentRepo: FullPaymentRepo) :
+class FullPaymentViewModel @Inject constructor(private val leaseRepo: LeaseRepo) :
     BaseViewModel() {
 
     private var fullPaymentRequest: FullPaymentRequest? = null
@@ -27,7 +27,7 @@ class FullPaymentViewModel @Inject constructor(private val fullPaymentRepo: Full
     fun getFullPayment(contractNo: String, repaymentDate: String, sort: String) {
         fullPaymentRequest = FullPaymentRequest(contractNo, repaymentDate, sort)
         viewModelScope.launch {
-            fullPaymentRepo.getFullPayment(fullPaymentRequest!!)
+            leaseRepo.getFullPayment(fullPaymentRequest!!)
                 .onEach { resource ->
                     if (resource.status == Status.ERROR) {
                         val code = resource.errorCode

@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.mobile.bnkcl.ui.full_payment.FullPaymentViewModel" />
+        <import type="com.mobile.bnkcl.ui.management.full_payment.FullPaymentViewModel" />
 
         <variable
             name="fullPaymentViewModel"
@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.full_payment.FullPaymentActivity">
+        tools:context=".ui.management.full_payment.FullPaymentActivity">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"

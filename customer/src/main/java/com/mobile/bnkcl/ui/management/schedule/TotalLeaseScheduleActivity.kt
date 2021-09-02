@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.schedule
+package com.mobile.bnkcl.ui.management.schedule
 
 import android.os.Bundle
 import android.view.View

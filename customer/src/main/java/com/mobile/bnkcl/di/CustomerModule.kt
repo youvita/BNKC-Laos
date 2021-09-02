@@ -1,12 +1,10 @@
 package com.mobile.bnkcl.di
 
 import com.mobile.bnkcl.app.AppBuild
+import com.mobile.bnkcl.data.api.code.CodesApi
 import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.api.dashboard.DashboardApi
 import com.mobile.bnkcl.data.api.lease.LeaseApi
-import com.mobile.bnkcl.data.api.lease.full_payment.FullPaymentApi
-import com.mobile.bnkcl.data.api.lease.total_schedule.TotalLeaseScheduleApi
-import com.mobile.bnkcl.data.api.lease.transaction.TransactionHistoryApi
 import com.mobile.bnkcl.data.api.signup.SignUpApi
 import com.mobile.bnkcl.data.api.user.EditAccountInfoApi
 import dagger.Module
@@ -58,37 +56,19 @@ object CustomerModule {
 
     @Singleton
     @Provides
-    fun provideTotalLeaseScheduleService(retrofit: Retrofit.Builder): TotalLeaseScheduleApi{
-        return retrofit
-            .baseUrl(AppBuild.BASE_URL)
-            .build()
-            .create(TotalLeaseScheduleApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideTransactionHistoryService(retrofit: Retrofit.Builder): TransactionHistoryApi{
-        return retrofit
-            .baseUrl(AppBuild.BASE_URL)
-            .build()
-            .create(TransactionHistoryApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideFullPaymentService(retrofit: Retrofit.Builder): FullPaymentApi{
-        return retrofit
-            .baseUrl(AppBuild.BASE_URL)
-            .build()
-            .create(FullPaymentApi::class.java)
-    }
-
-    @Singleton
-    @Provides
     fun provideEditAccountInfoService(retrofit: Retrofit.Builder): EditAccountInfoApi{
         return retrofit
             .baseUrl(AppBuild.BASE_URL)
             .build()
             .create(EditAccountInfoApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCodesService(retrofit: Retrofit.Builder): CodesApi{
+        return retrofit
+            .baseUrl(AppBuild.BASE_URL)
+            .build()
+            .create(CodesApi::class.java)
     }
 }

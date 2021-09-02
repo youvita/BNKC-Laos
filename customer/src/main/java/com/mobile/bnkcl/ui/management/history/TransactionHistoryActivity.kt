@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.history
+package com.mobile.bnkcl.ui.management.history
 
 import android.os.Bundle
 import android.view.View

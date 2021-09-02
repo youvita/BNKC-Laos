@@ -7,6 +7,7 @@ import com.mobile.bnkcl.data.api.signup.SignUpApi
 import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
 import com.mobile.bnkcl.data.repository.area.AreaRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
+import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.cscenter.ClaimDetailRepo
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
@@ -14,9 +15,6 @@ import com.mobile.bnkcl.data.repository.faq.FaqsRepo
 import com.mobile.bnkcl.data.repository.findoffice.FindOfficeRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
-import com.mobile.bnkcl.data.repository.lease.full_payment.FullPaymentRepo
-import com.mobile.bnkcl.data.repository.lease.total_schedule.TotalLeaseScheduleRepo
-import com.mobile.bnkcl.data.repository.lease.transaction.TransactionHistoryRepo
 import com.mobile.bnkcl.data.repository.notice.NoticeRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
 import com.mobile.bnkcl.data.repository.signup.SignUpRepo
@@ -112,24 +110,6 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideTotalLeaseScheduleRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): TotalLeaseScheduleRepo {
-        return TotalLeaseScheduleRepo(context, okHttpClient)
-    }
-
-    @Singleton
-    @Provides
-    fun provideTransactionHistoryRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): TransactionHistoryRepo {
-        return TransactionHistoryRepo(context, okHttpClient)
-    }
-
-    @Singleton
-    @Provides
-    fun provideFullPaymentRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): FullPaymentRepo {
-        return FullPaymentRepo(context, okHttpClient)
-    }
-
-    @Singleton
-    @Provides
     fun provideClaimDetailRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  ClaimDetailRepo{
         return ClaimDetailRepo(context,okHttpClient)
     }
@@ -144,6 +124,12 @@ object RepositoryModule {
     @Provides
     fun provideEditAccountInfoRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): EditAccountInfoRepo {
         return EditAccountInfoRepo(context, okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCodesRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): CodesRepo {
+        return CodesRepo(context, okHttpClient)
     }
 
 

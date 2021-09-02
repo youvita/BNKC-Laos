@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.mobile_payment
+package com.mobile.bnkcl.ui.management.mobile_payment
 
 import android.os.Bundle
 import com.bnkc.sourcemodule.base.BaseActivity

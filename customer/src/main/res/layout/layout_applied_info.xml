@@ -2,6 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <import type="com.mobile.bnkcl.data.response.dashboard.LeaseApplicationData" />
+
+        <variable
+            name="leaseApplication"
+            type="LeaseApplicationData" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -43,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="Automobile" />
+                    android:text="@{leaseApplication.productType}" />
 
             </LinearLayout>
 
@@ -67,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="Benz" />
+                    android:text="@{leaseApplication.nameOfBrand}" />
 
             </LinearLayout>
 
@@ -91,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="E450 Coupe" />
+                    android:text="@{leaseApplication.nameOfModel}" />
 
             </LinearLayout>
 
@@ -115,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="1,000,000,000 Kip" />
+                    setNumberFormat="@{leaseApplication.productPrice}" />
 
             </LinearLayout>
 
@@ -139,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="500,000,000 Kip" />
+                    setNumberFormat="@{leaseApplication.requestAmount}" />
 
             </LinearLayout>
 
@@ -163,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="500,000,000 Kip" />
+                    setNumberFormat="@{leaseApplication.advancePayment}" />
 
             </LinearLayout>
 
@@ -187,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="36 Months" />
+                    android:text="@{leaseApplication.repaymentTerm}" />
 
             </LinearLayout>
 

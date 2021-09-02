@@ -2,7 +2,6 @@ package com.mobile.bnkcl.di
 
 import androidx.core.content.ContextCompat
 import com.mobile.bnkcl.app.AppBuild
-import com.mobile.bnkcl.data.api.lease.full_payment.FullPaymentApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

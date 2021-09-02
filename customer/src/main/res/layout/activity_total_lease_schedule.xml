@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.mobile.bnkcl.ui.schedule.TotalLeaseScheduleViewModel" />
+        <import type="com.mobile.bnkcl.ui.management.schedule.TotalLeaseScheduleViewModel" />
 
         <variable
             name="totalLeaseScheduleViewModel"
@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.schedule.TotalLeaseScheduleActivity">
+        tools:context=".ui.management.schedule.TotalLeaseScheduleActivity">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"

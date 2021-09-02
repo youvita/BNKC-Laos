@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.bnkc.library.custom.cardview.CardModeLayoutManager
 import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseFragment
@@ -19,15 +21,13 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
 import com.mobile.bnkcl.databinding.FragmentMyPageBinding
 import com.mobile.bnkcl.ui.adapter.BannerAdapter
+import com.mobile.bnkcl.ui.adapter.LeaseAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.bill.BillPaymentActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import androidx.recyclerview.widget.RecyclerView
-import com.bnkc.library.custom.cardview.CardModeLayoutManager
-import com.mobile.bnkcl.ui.adapter.LeaseAdapter
 
 
 @AndroidEntryPoint
@@ -45,7 +45,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     private lateinit var mLeaseAdapter: LeaseAdapter
     private var myLeaseBinding: FragmentMyPageBinding? = null
-    private var cardModeLayoutManager : CardModeLayoutManager? = null
+    private var cardModeLayoutManager: CardModeLayoutManager? = null
     private var mLeaseData: ArrayList<MyLeasesData>? = null
     private var mContractNoRecord: ArrayList<String>? = null
     private val mListener: MyLoanCardClickedListener? = null
@@ -53,8 +53,9 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var MLR002: Int = 0
     private var MLR003: Int = 0
     private var bannerArray: ArrayList<Int>? = null
-    private var loadingDialog: ApplicationDialog? = null
+    private var leaseDialog: ApplicationDialog? = null
     private val pageViewModel: PageViewModel by viewModels()
+    private var index: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,10 +63,20 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         savedInstanceState: Bundle?
     ): View {
 
-        myLeaseBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
+        myLeaseBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
         mLeaseAdapter = LeaseAdapter(this)
         mLeaseData = java.util.ArrayList<MyLeasesData>()
 
+        pageViewModel.getCodes("LEASE_PROGRESS_STATUS")
+
+        initLiveData()
+        initClickListener()
+        setUpBanner()
+        return myLeaseBinding!!.root
+    }
+
+    private fun initLiveData() {
         pageViewModel.getDashboard()
         pageViewModel.dashboardLiveData.observe(requireActivity()) {
             MLR001 = it.countApplication!!
@@ -75,6 +86,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             setUpDashboard(MLR001, MLR002, MLR003, it.myLeases!!.size)
 
             it.myLeases.add(MyLeasesData())
+            mLeaseAdapter.clearItemList()
             mLeaseAdapter.addItemList(it.myLeases)
             myLeaseBinding!!.leaseRecyclerview.adapter = mLeaseAdapter
             myLeaseBinding?.leaseRecyclerview?.removeItemDecoration(itemOffsetDecoration)
@@ -86,10 +98,38 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             setUpLeaseIndicator()
         }
 
-        initClickListener()
+        pageViewModel.leaseApplicationLiveData.observe(requireActivity()) {
+            when (index) {
+                1 -> {
+                    leaseDialog = ApplicationDialog(it.leaseApplications!!, 1)
+                }
+                2 -> {
+                    leaseDialog = ApplicationDialog(it.leaseApplications!!, 2)
+                }
+                3 -> {
+                    leaseDialog = ApplicationDialog(it.leaseApplications!!, 4)
+                }
+            }
+            leaseDialog?.show(requireActivity().supportFragmentManager, leaseDialog?.tag)
+        }
+    }
 
-        setUpBanner()
-        return myLeaseBinding!!.root
+    override fun onClick(v: View?) {
+
+        when (v!!.id) {
+            R.id.ll_menu1 -> {
+                pageViewModel.getLeaseApplication("Application")
+                index = 1
+            }
+            R.id.ll_menu2 -> {
+                pageViewModel.getLeaseApplication("Screening")
+                index = 2
+            }
+            R.id.ll_menu3 -> {
+                pageViewModel.getLeaseApplication("Result")
+                index = 3
+            }
+        }
     }
 
     override fun onStart() {
@@ -101,7 +141,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         myLeaseBinding!!.requestMenu.llMenu1.setOnClickListener(this)
         myLeaseBinding!!.requestMenu.llMenu2.setOnClickListener(this)
         myLeaseBinding!!.requestMenu.llMenu3.setOnClickListener(this)
-        myLeaseBinding!!.btnNotification.setOnClickListener{
+        myLeaseBinding!!.btnNotification.setOnClickListener {
             startActivity(Intent(activity, AlarmActivity::class.java))
         }
     }
@@ -114,8 +154,10 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             0
         )
 
-        cardModeLayoutManager = myLeaseBinding?.leaseRecyclerview?.layoutManager as CardModeLayoutManager
-        myLeaseBinding?.leaseRecyclerview?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        cardModeLayoutManager =
+            myLeaseBinding?.leaseRecyclerview?.layoutManager as CardModeLayoutManager
+        myLeaseBinding?.leaseRecyclerview?.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -149,24 +191,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         myLeaseBinding!!.tvLeaseInUseCnt.visibility = View.VISIBLE
         myLeaseBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(MLR004)
 
-    }
-
-    override fun onClick(v: View?) {
-
-        when (v!!.id) {
-            R.id.ll_menu1 -> {
-                loadingDialog = ApplicationDialog(1)
-                loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
-            }
-            R.id.ll_menu2 -> {
-                loadingDialog = ApplicationDialog(2)
-                loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
-            }
-            R.id.ll_menu3 -> {
-                loadingDialog = ApplicationDialog(3)
-                loadingDialog?.show(requireActivity().supportFragmentManager, loadingDialog?.tag)
-            }
-        }
     }
 
     interface MyLoanCardClickedListener {
@@ -206,6 +230,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         bannerArray!!.add(R.drawable.banner_3)
         bannerArray!!.add(R.drawable.banner_4)
 
+        mBannerAdapter.clearItemList()
         mBannerAdapter.addItemList(bannerArray)
         myLeaseBinding?.bannerRecyclerView?.adapter = mBannerAdapter
         myLeaseBinding?.bannerRecyclerView?.removeItemDecoration(itemOffsetDecoration)
@@ -218,8 +243,10 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             0
         )
 
-        cardModeLayoutManager = myLeaseBinding?.bannerRecyclerView?.layoutManager as CardModeLayoutManager
-        myLeaseBinding?.bannerRecyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        cardModeLayoutManager =
+            myLeaseBinding?.bannerRecyclerView?.layoutManager as CardModeLayoutManager
+        myLeaseBinding?.bannerRecyclerView?.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
