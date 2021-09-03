@@ -5,6 +5,7 @@
  */
 package com.bnkc.library.data.network
 
+import android.util.Log.e
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.Resource
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
+import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -37,6 +39,7 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
             when (val response = RetrofitRequest.handleNetworkRequest { createCall() }) {
                 is RetrofitResponse.Success -> {
                     RxJava.publish(RxEvent.ResponseSuccess())
+                    RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
                     setValue(Resource.Success(response.body))
                 }
                 is RetrofitResponse.Exception -> {
@@ -58,6 +61,7 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                             // Session Expired
                             withContext(Dispatchers.Main) {
                                 RxJava.publish(RxEvent.SessionExpired(response.errorTitle!!, response.errorMessage!!))
+                                RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
                             }
                             setValue((Resource.Unauthorized(response.errorTitle!!, response.errorMessage!!)))
                         }

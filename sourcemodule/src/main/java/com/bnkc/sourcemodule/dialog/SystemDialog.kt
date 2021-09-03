@@ -35,6 +35,8 @@ class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog?.setCancelable(false)
+
         binding.errorTitle   = arguments?.getString(TITLE)
         binding.errorMessage = arguments?.getString(MESSAGE)
         binding.confirm.setOnClickListener {
