@@ -56,7 +56,10 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                     when (response.code) {
                         HttpURLConnection.HTTP_UNAUTHORIZED -> {
                             // Session Expired
-                            setValue((Resource.Error(response.errorTitle!!, response.errorMessage!!, response.code)))
+                            withContext(Dispatchers.Main) {
+                                RxJava.publish(RxEvent.SessionExpired(response.errorTitle!!, response.errorMessage!!))
+                            }
+                            setValue((Resource.Unauthorized(response.errorTitle!!, response.errorMessage!!)))
                         }
                         HttpURLConnection.HTTP_INTERNAL_ERROR -> {
 
