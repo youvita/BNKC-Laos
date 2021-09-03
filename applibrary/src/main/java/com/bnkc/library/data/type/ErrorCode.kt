@@ -7,4 +7,6 @@ object ErrorCode {
     const val TIMEOUT_ERROR = 101
 
     const val SERVICE_ERROR = 102
+
+    const val UNAUTHORIZED = 401
 }

@@ -22,6 +22,7 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import io.reactivex.disposables.Disposable
@@ -54,7 +55,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
         successListener()
 
-        systemErrorListener()
+//        systemErrorListener()
     }
 
     /**
@@ -155,12 +156,11 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     /**
      * handle catch server error
      */
-    private fun systemErrorListener() {
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            var title = it.title
-            var message = it.message
+    fun errorDialog(code: Int?, errorTitle: String?, errorMessage: String?): SystemDialog {
+            var title = errorTitle
+            var message = errorMessage
             if (title == "" && message == "") {
-                when (it.code) {
+                when (code) {
                     ErrorCode.UNKNOWN_ERROR -> {
                         title = getString(R.string.title_no_network)
                         message = getString(R.string.message_pls_check_network)
@@ -170,15 +170,24 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
                     }
                 }
             }
-
-            if (systemDialog == null) {
-                systemDialog = SystemDialog.newInstance(title, message)
-                systemDialog?.show(supportFragmentManager, systemDialog?.tag)
-                systemDialog?.onConfirmClicked {
-                    systemDialog = null
-                }
+        if (systemDialog == null) {
+            systemDialog = SystemDialog.newInstance(title!!, message!!)
+            systemDialog?.show(supportFragmentManager, systemDialog?.tag)
+            systemDialog?.onConfirmClicked {
+                systemDialog = null
             }
         }
+
+        return systemDialog as SystemDialog
+    }
+
+    /**
+     * handle session error
+     */
+    fun errorSessionDialog(errorTitle: String, errorMessage: String): SystemDialog {
+        systemDialog = SystemDialog.newInstance(errorTitle, errorMessage)
+        systemDialog?.show(supportFragmentManager, systemDialog?.tag)
+        return systemDialog as SystemDialog
     }
 
     /**
@@ -194,4 +203,5 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
         disposable?.dispose()
         disposable = null
     }
+
 }
