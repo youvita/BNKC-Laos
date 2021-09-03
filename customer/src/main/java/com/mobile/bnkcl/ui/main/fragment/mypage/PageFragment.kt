@@ -175,15 +175,15 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private fun setUpDashboard(MLR001: Int, MLR002: Int, MLR003: Int, MLR004: Int) {
         myLeaseBinding!!.requestMenu.llMenu1.isSelected = this.MLR001 > 0
         myLeaseBinding!!.requestMenu.llMenu1.isEnabled = MLR001 > 0
-        myLeaseBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.my_loan_menu_001).plus(
+        myLeaseBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.menu_application).plus(
             "\n"
         ).plus(this.MLR001.toString())
         myLeaseBinding!!.requestMenu.llMenu2.isEnabled = MLR002 > 0
-        myLeaseBinding!!.requestMenu.tvMenuTitle2.text = getString(R.string.my_loan_menu_002).plus(
+        myLeaseBinding!!.requestMenu.tvMenuTitle2.text = getString(R.string.menu_screening).plus(
             "\n"
         ).plus(this.MLR002.toString())
         myLeaseBinding!!.requestMenu.llMenu3.isEnabled = MLR003 > 0
-        myLeaseBinding!!.requestMenu.tvMenuTitle3.text = getString(R.string.my_loan_menu_003).plus(
+        myLeaseBinding!!.requestMenu.tvMenuTitle3.text = getString(R.string.menu_result).plus(
             "\n"
         ).plus(this.MLR003.toString())
 

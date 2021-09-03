@@ -35,23 +35,16 @@
                 android:layout_height="?attr/actionBarSize"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp">
+                android:layout_marginTop="@dimen/margin_21dp"
+                android:paddingStart="@dimen/padding_21dp"
+                android:paddingEnd="11dp">
 
                 <ImageView
-                    android:layout_width="@dimen/height_50dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white"
                     android:layout_weight="1"
-                    android:text="Capital Lao Leasing Co, Ltd"
-                    android:textColor="@color/color_ffffff"
-                    android:textSize="@dimen/margin_18dp"
-                    android:textStyle="bold" />
+                    tools:ignore="ContentDescription" />
 
                 <ImageButton
                     android:id="@+id/btn_notification"
@@ -74,7 +67,7 @@
                 android:paddingTop="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="15dp"
-                android:text="My Lease Request (Until the last 14days)"
+                android:text="@string/main_subtitle_001"
                 app:drawableStartCompat="@drawable/ic_my_lease_req_white_ico" />
 
             <com.bnkc.sourcemodule.ui.ShadowLayout
@@ -129,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="10dp"
                             android:gravity="center_vertical"
-                            android:text="@string/main_subtitle_002"
+                            android:text="@string/lease_in_use"
                             app:drawableStartCompat="@drawable/ic_lease_in_use_ico" />
 
                         <TextView

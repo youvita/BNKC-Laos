@@ -57,7 +57,7 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         actionBar.setBackgroundActionBar(resources.getColor(R.color.white))
         actionBar.setToolbarTitleWithActionBack(
             R.drawable.ic_nav_close_dark_btn,
-            "Edit Account Information"
+            getString(R.string.edit_acc_info)
         )
         isUpdate = true
         actionBar.setOnMenuLeftClick {

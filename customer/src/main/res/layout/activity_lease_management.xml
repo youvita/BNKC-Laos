@@ -37,7 +37,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="@string/lease_01">
+                    app:title="@string/lease_management">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
@@ -124,7 +124,7 @@
                             android:layout_marginEnd="@dimen/margin_5dp"
                             android:layout_weight="1"
                             android:background="@drawable/selector_d7191f_ffffee"
-                            android:text="@string/lease_03"
+                            android:text="@string/lease_total_schedule"
                             tools:ignore="ButtonStyle" />
 
                         <Button
@@ -135,7 +135,7 @@
                             android:layout_marginStart="@dimen/margin_5dp"
                             android:layout_weight="1"
                             android:background="@drawable/selector_d7191f_8b0304"
-                            android:text="@string/lease_04"
+                            android:text="@string/lease_transaction_history"
                             tools:ignore="ButtonStyle" />
                     </LinearLayout>
 
@@ -197,7 +197,7 @@
                     android:layout_marginStart="@dimen/margin_20dp"
                     android:layout_marginEnd="@dimen/margin_20dp"
                     android:background="@drawable/selector_d7191f_ffffee"
-                    android:text="@string/lease_05" />
+                    android:text="@string/lease_check_full_payment" />
             </RelativeLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

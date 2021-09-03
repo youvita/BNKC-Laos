@@ -91,7 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="@string/tran_history_004" />
+                            android:text="@string/history_payment_date" />
 
                         <TextView
                             android:id="@+id/tv_loan_account"
@@ -116,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="@string/total_loan_schedule_004" />
+                            android:text="@string/schedule_total_amount" />
 
                         <TextView
                             android:id="@+id/tv_total_amount"
@@ -141,7 +141,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="@string/total_loan_schedule_007" />
+                            android:text="@string/schedule_principal" />
 
                         <TextView
                             android:id="@+id/tv_penalty"
@@ -166,7 +166,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="@string/total_loan_schedule_008" />
+                            android:text="@string/schedule_interest" />
 
                         <TextView
                             android:id="@+id/tv_interest"
@@ -191,7 +191,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="@string/total_loan_schedule_005" />
+                            android:text="@string/schedule_amount" />
 
                         <TextView
                             android:id="@+id/tv_balance"

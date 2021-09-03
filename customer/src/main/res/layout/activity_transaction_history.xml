@@ -32,7 +32,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="@string/tran_history_001">
+                    app:title="@string/transaction_history">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
@@ -102,7 +102,7 @@
                             android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="@string/tran_history_002" />
+                            android:text="@string/history_oldest" />
 
                         <ImageView
                             android:id="@+id/iv_item_image"

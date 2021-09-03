@@ -131,14 +131,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_31dp"
-                                    android:text="@string/edit_01" />
+                                    android:text="@string/edit_personal_info" />
 
                                 <TextView
                                     style="@style/font13_263238_medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_15dp"
-                                    android:text="@string/edit_02" />
+                                    android:text="@string/edit_name" />
 
                                 <com.mobile.bnkcl.com.view.BnkEditText
                                     android:id="@+id/edt_name"
@@ -163,7 +163,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_15dp"
-                                    android:text="@string/edit_03" />
+                                    android:text="@string/edit_dob" />
 
                                 <LinearLayout
                                     android:id="@+id/ll_dob"
@@ -209,7 +209,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_15dp"
-                                    android:text="@string/edit_04" />
+                                    android:text="@string/edit_id_number" />
 
                                 <LinearLayout
                                     android:id="@+id/ll_id_number"
@@ -238,7 +238,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_10dp"
-                                    android:text="@string/edit_11" />
+                                    android:text="@string/edit_gender" />
 
                                 <LinearLayout
                                     android:id="@+id/ll_gender"
@@ -256,7 +256,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="center_vertical"
-                                        android:text="@{profile.gender.equals(`M`) ? @string/sign_up_18 : @string/sign_up_19}"
+                                        android:text="@{profile.gender.equals(`M`) ? @string/info_male : @string/info_female}"
                                         app:drawableEndCompat="@drawable/ic_more_ico" />
 
                                 </LinearLayout>
@@ -287,14 +287,14 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/margin_31dp"
-                                        android:text="@string/edit_06" />
+                                        android:text="@string/edit_lease_info" />
 
                                     <TextView
                                         style="@style/font13_263238_medium"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/margin_15dp"
-                                        android:text="@string/edit_12" />
+                                        android:text="@string/edit_product_number" />
 
                                     <LinearLayout
                                         android:id="@+id/ll_opt_code"
@@ -313,7 +313,7 @@
                                             android:layout_marginEnd="@dimen/margin_10dp"
                                             android:layout_weight="1"
                                             android:background="@null"
-                                            android:hint="@string/edit_12"
+                                            android:hint="@string/edit_product_number"
                                             android:inputType="number"
                                             android:maxLength="7"
                                             android:paddingStart="@dimen/padding_15dp"
@@ -352,7 +352,7 @@
                                     android:layout_marginEnd="@dimen/margin_10dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/selector_d7191f_ffffee"
-                                    android:text="@string/edit_08" />
+                                    android:text="@string/edit_cancel" />
 
                                 <Button
                                     android:id="@+id/btn_save"
@@ -364,7 +364,7 @@
                                     android:background="@drawable/selector_d7191f_8b0304"
                                     android:clickable="true"
                                     android:focusable="true"
-                                    android:text="@string/edit_09" />
+                                    android:text="@string/edit_save" />
                             </LinearLayout>
 
                         </LinearLayout>

@@ -56,7 +56,7 @@
                 android:gravity="center"
                 android:minHeight="20dp"
                 android:paddingBottom="@dimen/padding_2dp"
-                android:text="@string/my_loan_menu_001" />
+                android:text="@string/menu_application" />
 
             <View
                 android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                 android:gravity="center"
                 android:minHeight="20dp"
                 android:paddingBottom="@dimen/padding_2dp"
-                android:text="Screening" />
+                android:text="@string/menu_screening" />
 
             <View
                 android:layout_width="match_parent"
@@ -176,7 +176,7 @@
                 android:gravity="center"
                 android:minHeight="20dp"
                 android:paddingBottom="@dimen/padding_2dp"
-                android:text="Result" />
+                android:text="@string/menu_result" />
 
             <View
                 android:layout_width="match_parent"

@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15dp"
-                android:text="Applied Information" />
+                android:text="@string/progress_applied_info" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Product Type" />
+                    android:text="@string/progress_product_type" />
 
                 <TextView
                     android:id="@+id/tv_product_type"
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Name of Brand" />
+                    android:text="@string/progress_name_of_brand" />
 
                 <TextView
                     android:id="@+id/tv_brand_name"
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Name of Model" />
+                    android:text="@string/progress_name_of_model" />
 
                 <TextView
                     android:id="@+id/tv_model_name"
@@ -115,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Product Price" />
+                    android:text="@string/progress_product_price" />
 
                 <TextView
                     android:id="@+id/tv_product_price"
@@ -139,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Request Amount" />
+                    android:text="@string/progress_request_amount" />
 
                 <TextView
                     android:id="@+id/tv_request_amount"
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Advance Payment" />
+                    android:text="@string/progress_advance_payment" />
 
                 <TextView
                     android:id="@+id/tv_advance_payment"
@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="Repayment Term" />
+                    android:text="@string/progress_repayment_term" />
 
                 <TextView
                     android:id="@+id/tv_repayment_term"

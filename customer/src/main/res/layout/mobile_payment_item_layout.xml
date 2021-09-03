@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center"
-            android:text="@string/mbl_payment_01"
+            android:text="@string/mbl_mobile_payment"
             app:drawableStartCompat="@drawable/ic_mobile_payment_ico" />
 
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/padding_10dp"
                 android:gravity="center"
-                android:text="@string/mbl_payment_02"
+                android:text="@string/mbl_pay_by"
                 android:textAllCaps="true"
                 app:drawableEndCompat="@drawable/ic_payment_ico"
                 app:drawableTint="@color/colorPrimary" />
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center_vertical"
-            android:text="@string/mbl_payment_03"
+            android:text="@string/mbl_bank_acc_info"
             app:drawableStartCompat="@drawable/ic_bank_acc_info_ico" />
 
         <!-- Bank Account Info. Table -->
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center"
-            android:text="@string/mbl_payment_04"
+            android:text="@string/mbl_client_info"
             app:drawableStartCompat="@drawable/ic_client_info_ico" />
 
         <LinearLayout
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="@string/mbl_payment_05" />
+                    android:text="@string/mbl_cid" />
 
                 <TextView
                     android:id="@+id/tv_cid"
@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_5dp"
-                    android:text="@string/mbl_payment_06" />
+                    android:text="@string/mbl_acc_number" />
 
                 <TextView
                     android:id="@+id/tv_account_number"

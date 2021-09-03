@@ -322,7 +322,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/margin_10dp"
-                                        android:text="@string/edit_11" />
+                                        android:text="@string/edit_gender" />
 
                                     <LinearLayout
                                         android:id="@+id/ll_gender"

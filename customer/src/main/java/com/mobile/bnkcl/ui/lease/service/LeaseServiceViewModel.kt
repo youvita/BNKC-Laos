@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.area.AreaRepo
-import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
+import com.mobile.bnkcl.ui.lease.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

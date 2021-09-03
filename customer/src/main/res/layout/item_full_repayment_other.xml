@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
         android:layout_weight="1"
-        android:text="@string/full_payment_004" />
+        android:text="@string/full_overdue_principle" />
 
     <TextView
         android:id="@+id/tv_amount"

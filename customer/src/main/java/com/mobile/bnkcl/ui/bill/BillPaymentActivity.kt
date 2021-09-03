@@ -69,7 +69,7 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
             )
         bankName.gravity = Gravity.START
         bankName.setPadding(0, 10, 0, 10)
-        bankName.text = resources.getString(R.string.full_payment_014)
+        bankName.text = resources.getString(R.string.full_bank_name)
         bankName.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
         bankName.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
         bankName.textSize = 13f
@@ -84,7 +84,7 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
             )
         currency.gravity = Gravity.START
         currency.setPadding(0, 10, 0, 10)
-        currency.text = resources.getString(R.string.full_payment_015)
+        currency.text = resources.getString(R.string.full_currency)
         currency.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
         currency.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
         currency.textSize = 13f
@@ -99,7 +99,7 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
         )
         accNum.gravity = Gravity.END
         accNum.setPadding(0, 10, 0, 10)
-        accNum.text = resources.getString(R.string.acc_info_09)
+        accNum.text = resources.getString(R.string.mbl_acc_number)
         accNum.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff))
         accNum.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
         accNum.textSize = 13f

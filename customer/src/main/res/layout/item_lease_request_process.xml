@@ -37,7 +37,7 @@
                     style="@style/font21_263238_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Application" />
+                    tools:text="Application" />
 
                 <include
                     android:id="@+id/ltd_applied_info"
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="Phase of Progress" />
+                        android:text="@string/progress_phase_of_progress" />
 
                     <TextView
                         android:id="@+id/tv_phase_of_progress"
@@ -98,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="Result" />
+                            android:text="@string/progress_result" />
 
                         <TextView
                             android:id="@+id/tv_approval"
@@ -123,7 +123,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="Dealer" />
+                            android:text="@string/progress_dealer_phase" />
 
                         <TextView
                             android:id="@+id/tv_approval_comment"
@@ -204,7 +204,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="Phase of Progress" />
+                            android:text="@string/progress_phase_of_progress" />
 
                         <TextView
                             android:id="@+id/tv_reject"
@@ -229,7 +229,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_5dp"
-                            android:text="Comment" />
+                            android:text="@string/progress_dealer_comment" />
 
                         <TextView
                             android:id="@+id/tv_reject_comment"
@@ -259,7 +259,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/selector_d7191f_8b0304"
                         android:maxLines="1"
-                        android:text="CLOSE"
+                        android:text="@string/progress_close"
                         android:textColor="@color/color_ffffff" />
 
                 </LinearLayout>

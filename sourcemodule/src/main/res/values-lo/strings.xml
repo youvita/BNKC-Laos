@@ -18,7 +18,7 @@
     <string name="menu_check_list">Check List</string>
 
     <!-- Currency -->
-    <string name="currency_usd">USD</string>
-    <string name="currency_kip">Kip</string>
+    <string name="currency_usd"> ໂດລາ ສະຫະລັດ</string>
+    <string name="currency_kip">ກິບ</string>
 
 </resources>

@@ -103,9 +103,9 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                         viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
                         showLoading()
                         if (sortDialog.sortCode.toString() != "asc") {
-                            binding.tvSort.text = getString(R.string.total_loan_schedule_009)
+                            binding.tvSort.text = getString(R.string.schedule_newest)
                         } else {
-                            binding.tvSort.text = getString(R.string.total_loan_schedule_006)
+                            binding.tvSort.text = getString(R.string.schedule_oldest)
                         }
                     }
                 }

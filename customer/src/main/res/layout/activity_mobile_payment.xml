@@ -37,7 +37,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="Pay by ?">
+                    app:title="@string/mbl_pay_by">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar_01"
@@ -97,7 +97,7 @@
                         style="@style/font13_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/mbl_payment_07" />
+                        android:text="@string/mbl_what_acc_number" />
 
                     <LinearLayout
                         android:id="@+id/ll_wing_account"
@@ -145,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_31dp"
-                        android:text="@string/mbl_payment_08" />
+                        android:text="@string/mbl_what_code" />
 
                     <LinearLayout
                         android:id="@+id/ll_wing_code"
@@ -201,7 +201,7 @@
                     android:layout_marginLeft="@dimen/margin_21dp"
                     android:layout_marginRight="@dimen/margin_21dp"
                     android:background="@drawable/round_solid_d7191f_8"
-                    android:text="@string/mbl_payment_09" />
+                    android:text="@string/mbl_pay" />
 
             </LinearLayout>
 

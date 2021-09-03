@@ -27,7 +27,7 @@
             style="@style/font15_263238_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/full_payment_03" />
+            android:text="@string/full_payment_abcd" />
 
         <TextView
             android:id="@+id/tv_full_payment_amount"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/padding_10dp"
             android:gravity="center"
-            android:text="@string/full_payment_04"
+            android:text="@string/full_payment_total_detail"
             app:drawableStartCompat="@drawable/ic_info_ico" />
 
         <!-- Principle (A)-->
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_5dp"
-                android:text="@string/full_payment_05" />
+                android:text="@string/full_payment_principal_a" />
 
             <TextView
                 android:id="@+id/tv_principle_a"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_5dp"
-                android:text="@string/full_payment_06" />
+                android:text="@string/full_payment_interest_b" />
 
             <TextView
                 android:id="@+id/tv_interest_b"
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_5dp"
-                android:text="@string/full_payment_08" />
+                android:text="@string/full_payment_other_d" />
 
             <TextView
                 style="@style/font15_263238_medium"

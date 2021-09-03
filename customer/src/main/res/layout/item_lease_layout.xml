@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:text="@string/main_content_005" />
+                        android:text="@string/page_balance" />
 
                     <TextView
                         android:id="@+id/tv_lease_balance"
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:text="@string/main_content_006" />
+                        android:text="@string/page_coming" />
 
                     <TextView
                         android:id="@+id/tv_payment_date"
@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:text="@string/main_content_007" />
+                        android:text="@string/page_total" />
 
                     <TextView
                         android:id="@+id/tv_total_payment"
@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
                             android:gravity="center_vertical"
-                            android:text="@string/main_content_009"
+                            android:text="@string/page_bill_payment"
                             app:drawableStartCompat="@drawable/ic_bill_payment_ico" />
 
                     </LinearLayout>
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
                             android:gravity="center_vertical"
-                            android:text="@string/main_content_010"
+                            android:text="@string/page_management"
                             app:drawableStartCompat="@drawable/ic_manage_ico" />
 
                     </LinearLayout>
@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="-15dp"
-                    android:text="@string/main_content_004" />
+                    android:text="@string/page_new_lease" />
 
             </LinearLayout>
 

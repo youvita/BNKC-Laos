@@ -258,7 +258,7 @@
 
     <style name="font15_d7191f_medium">
         <item name="android:textColor">@color/color_d7191f</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
     <style name="font_15_d7191f_medium">

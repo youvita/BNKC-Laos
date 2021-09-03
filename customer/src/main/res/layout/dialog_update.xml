@@ -34,7 +34,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
-                android:text="@string/dlg_01"
+                android:text="@string/dlg_new_version"
                 android:textAlignment="center"
                 android:visibility="visible" />
 
@@ -46,7 +46,7 @@
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
                 android:gravity="center_horizontal"
-                android:text="@string/dlg_02" />
+                android:text="@string/dlg_update_desc" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/selector_d7191f_8b0304"
                     android:maxLines="1"
-                    android:text="@string/dlg_03"
+                    android:text="@string/dlg_update_now"
                     android:textColor="@color/color_ffffff" />
 
             </LinearLayout>

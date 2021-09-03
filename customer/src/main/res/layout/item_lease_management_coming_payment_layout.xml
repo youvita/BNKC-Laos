@@ -40,7 +40,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/lease_16"
+                    android:text="@string/lease_coming_repayment"
                     app:drawableStartCompat="@drawable/ic_payment_ico" />
 
                 <TextView
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/lease_17" />
+                        android:text="@string/lease_coming_repayment_date" />
 
                     <TextView
                         android:id="@+id/tv_coming_repayment_date"
@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/lease_18" />
+                        android:text="@string/lease_repayment_session" />
 
                     <TextView
                         android:id="@+id/tv_repayment_session"
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/lease_19" />
+                        android:text="@string/lease_principal" />
 
                     <TextView
                         android:id="@+id/tv_principle"
@@ -169,7 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/lease_20" />
+                        android:text="@string/lease_interest" />
 
                     <TextView
                         android:id="@+id/tv_interest"
@@ -200,7 +200,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/lease_21" />
+                            android:text="@string/lease_overdue_principal" />
 
                         <TextView
                             android:id="@+id/tv_overdue_principle"
@@ -225,7 +225,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/lease_22" />
+                            android:text="@string/lease_overdue_interest" />
 
                         <TextView
                             android:id="@+id/tv_overdue_interest"
@@ -250,7 +250,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/lease_23" />
+                            android:text="@string/lease_overdue_penalty" />
 
                         <TextView
                             android:id="@+id/tv_overdue_penalty"
@@ -277,7 +277,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/lease_24" />
+                        android:text="@string/lease_total" />
 
                     <TextView
                         android:id="@+id/tv_total"
@@ -320,7 +320,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
-                        android:text="@string/lease_25" />
+                        android:text="@string/lease_penalty_message" />
 
                 </LinearLayout>
 

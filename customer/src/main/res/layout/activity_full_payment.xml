@@ -93,7 +93,7 @@
                         style="@style/font15_263238_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/full_payment_01" />
+                        android:text="@string/full_payment_repayment_date" />
 
 
                     <LinearLayout
@@ -125,7 +125,7 @@
                             android:layout_marginEnd="@dimen/margin_5dp"
                             android:layout_weight="0.4"
                             android:background="@drawable/selector_d7191f_ffffee"
-                            android:text="@string/full_payment_02"
+                            android:text="@string/full_payment_check"
                             tools:ignore="ButtonStyle" />
 
 

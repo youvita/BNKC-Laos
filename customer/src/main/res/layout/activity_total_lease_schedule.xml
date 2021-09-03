@@ -38,7 +38,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="@string/total_loan_schedule_001">
+                    app:title="@string/total_loan_schedule">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
@@ -106,7 +106,7 @@
                             android:drawablePadding="@dimen/padding_10dp"
                             android:gravity="start|center_vertical"
                             android:padding="@dimen/padding_10dp"
-                            android:text="@string/total_loan_schedule_006"
+                            android:text="@string/schedule_oldest"
                             app:drawableRightCompat="@drawable/ic_more_ico" />
 
                         <co.ceryle.segmentedbutton.SegmentedButtonGroup
@@ -235,7 +235,7 @@
                             style="@style/font15_00695c_regular"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/total_loan_schedule_002" />
+                            android:text="@string/schedule_total_principal" />
 
                         <TextView
                             android:id="@+id/tv_total_principal"
@@ -271,7 +271,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/total_loan_schedule_003" />
+                            android:text="@string/schedule_total_interest" />
 
                         <TextView
                             android:id="@+id/tv_total_interest"

@@ -5,11 +5,19 @@
 
     <data>
 
+        <import type="java.util.Locale"/>
+
+        <variable
+            name="localeCode"
+            type="String" />
+
         <import type="android.view.View" />
 
         <variable
             name="menuViewModel"
             type="com.mobile.bnkcl.ui.main.fragment.menu.MenuViewModel" />
+
+
     </data>
 
     <ScrollView
@@ -36,6 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_marginStart="@dimen/margin_21dp"
+                    android:layout_marginTop="@dimen/margin_21dp"
                     android:src="@drawable/ic_brand_bnkc_lao_leasing"
                     tools:ignore="ContentDescription" />
 
@@ -91,7 +100,7 @@
                             style="@style/font13_263238_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/nav_content_001" />
+                            android:text="@string/nav_cus_id" />
 
                         <TextView
                             android:id="@+id/tv_user_id"
@@ -133,7 +142,7 @@
                             android:autoSizeTextType="uniform"
                             android:drawablePadding="2dp"
                             android:gravity="center_vertical"
-                            android:text="@string/nav_content_002"
+                            android:text="@string/nav_notice"
                             app:drawableLeftCompat="@drawable/ic_notice_ico" />
 
                     </LinearLayout>
@@ -162,7 +171,7 @@
                             android:autoSizeTextType="uniform"
                             android:drawablePadding="2dp"
                             android:gravity="center_vertical"
-                            android:text="@string/nav_content_003"
+                            android:text="@string/nav_cs_center"
                             app:drawableLeftCompat="@drawable/ic_cs_center_ico" />
 
                     </LinearLayout>
@@ -179,34 +188,12 @@
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_home_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="Home" />
-
-                <!--            <LinearLayout-->
-                <!--                android:id="@+id/ll_home"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="@dimen/height_50dp"-->
-                <!--                android:clickable="true"-->
-                <!--                android:focusable="true"-->
-                <!--                android:gravity="center_vertical"-->
-                <!--                android:paddingLeft="@dimen/padding_24dp"-->
-                <!--                android:paddingRight="@dimen/padding_24dp">-->
-
-                <!--                <TextView-->
-                <!--                    style="@style/font15_263238_medium"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    android:drawablePadding="@dimen/padding_10dp"-->
-                <!--                    android:gravity="center_vertical"-->
-                <!--                    android:text="Home"-->
-                <!--                    app:drawableLeftCompat="@drawable/ic_home_ico" />-->
-
-                <!--            </LinearLayout>-->
+                    android:text="@string/nav_home"
+                    app:drawableLeftCompat="@drawable/ic_home_ico" />
 
                 <View
                     android:layout_width="match_parent"
@@ -231,23 +218,57 @@
                         android:layout_weight="1"
                         android:drawablePadding="@dimen/padding_10dp"
                         android:gravity="center_vertical"
-                        android:text="@string/nav_content_004"
+                        android:text="@string/nav_lang"
                         app:drawableLeftCompat="@drawable/ic_lang_ico" />
 
-                    <TextView
-                        android:id="@+id/tv_lang"
-                        style="@style/font15_d7191f_medium"
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_lang"-->
+<!--                        style="@style/font15_d7191f_medium"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:drawablePadding="@dimen/padding_10dp"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:text="English"-->
+<!--                        app:drawableEndCompat="@drawable/ic_en_flag" />-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_change_language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/padding_10dp"
-                        android:gravity="center_vertical"
-                        android:text="English"
-                        app:drawableEndCompat="@drawable/ic_en_flag" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tv_current_lang"
+                            style="@style/font15_d7191f_medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_8dp"
+                            android:text="@{localeCode == Locale.ENGLISH.language ? @string/lang_03: @string/lang_02}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/iv_flag"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="ພາສາລາວ" />
+
+                        <ImageView
+                            android:id="@+id/iv_flag"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@{localeCode == Locale.ENGLISH.language ? @drawable/ic_lang_uk_ico: @drawable/ic_lang_laos_ico}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_more_ico" />
+                        android:src="@drawable/ic_more_ico"
+                        tools:ignore="ContentDescription" />
+
                 </LinearLayout>
 
                 <View
@@ -261,224 +282,104 @@
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_fb_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="@string/nav_content_005" />
+                    android:text="@string/nav_fb_bnkc"
+                    app:drawableLeftCompat="@drawable/ic_fb_ico" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:background="@color/color_eaedf5" />
-
-                <!--        <LinearLayout-->
-                <!--            android:id="@+id/btn_company_profile"-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="56dp"-->
-                <!--            android:paddingLeft="25dp"-->
-                <!--            android:paddingRight="25dp"-->
-                <!--            android:gravity="center_vertical"-->
-                <!--            android:clickable="true">-->
-
-                <!--            <TextView-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_weight="1"-->
-                <!--                android:text="@string/nav_content_006"-->
-                <!--                android:drawableLeft="@drawable/ic_com_profile_ico"-->
-                <!--                android:gravity="center_vertical"-->
-                <!--                android:drawablePadding="10dp"-->
-                <!--                style="@style/font15_263238_medium"/>-->
-
-                <!--        </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/btn_company_profile"
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_com_profile_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="@string/nav_content_006" />
+                    android:text="@string/nav_company_profile"
+                    app:drawableLeftCompat="@drawable/ic_com_profile_ico" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:background="@color/color_eaedf5" />
-
-                <!--        <LinearLayout-->
-                <!--            android:id="@+id/btn_policy"-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="56dp"-->
-                <!--            android:paddingLeft="25dp"-->
-                <!--            android:paddingRight="25dp"-->
-                <!--            android:gravity="center_vertical"-->
-                <!--            android:clickable="true">-->
-
-                <!--            <TextView-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_weight="1"-->
-                <!--                android:text="Policy"-->
-                <!--                android:drawableLeft="@drawable/ic_policy_ico"-->
-                <!--                android:gravity="center_vertical"-->
-                <!--                android:drawablePadding="10dp"-->
-                <!--                style="@style/font15_263238_medium"/>-->
-
-                <!--        </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/btn_policy"
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_policy_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="Policy" />
+                    android:text="@string/nav_policy"
+                    app:drawableLeftCompat="@drawable/ic_policy_ico" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:background="@color/color_eaedf5" />
-
-
-                <!--        <LinearLayout-->
-                <!--            android:id="@+id/btn_setting"-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="56dp"-->
-                <!--            android:paddingLeft="25dp"-->
-                <!--            android:paddingRight="25dp"-->
-                <!--            android:gravity="center_vertical"-->
-                <!--            android:clickable="true">-->
-
-                <!--            <TextView-->
-                <!--                android:id="@+id/tv_setting"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_weight="1"-->
-                <!--                android:text="@string/nav_content_007"-->
-                <!--                android:drawableLeft="@drawable/ic_setting_ico"-->
-                <!--                android:gravity="center_vertical"-->
-                <!--                android:drawablePadding="10dp"-->
-                <!--                style="@style/font15_263238_medium"/>-->
-
-                <!--        </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/btn_setting"
                     style="@style/font15_263238_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_setting_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="@string/nav_content_007" />
+                    android:text="@string/nav_settings"
+                    app:drawableLeftCompat="@drawable/ic_setting_ico" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:background="@color/color_eaedf5" />
-
-                <!--        <LinearLayout-->
-                <!--            android:id="@+id/btn_signup"-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="56dp"-->
-                <!--            android:paddingLeft="25dp"-->
-                <!--            android:paddingRight="25dp"-->
-                <!--            android:gravity="center_vertical"-->
-                <!--            android:clickable="true">-->
-
-                <!--            <TextView-->
-                <!--                android:id="@+id/tv_sign_up"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_weight="1"-->
-                <!--                android:text="Sign Up"-->
-                <!--                android:drawableLeft="@drawable/ic_sign_up_ico"-->
-                <!--                android:gravity="center_vertical"-->
-                <!--                android:drawablePadding="10dp"-->
-                <!--                style="@style/font15_d7191f_medium"/>-->
-
-                <!--        </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/btn_sign_up"
                     style="@style/font15_d7191f_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_sign_up_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="Sign Up" />
+                    android:text="@string/nav_sign_up"
+                    app:drawableLeftCompat="@drawable/ic_sign_up_ico" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:background="@color/color_eaedf5" />
-
-
-                <!--        <LinearLayout-->
-                <!--            android:id="@+id/btn_login"-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="56dp"-->
-                <!--            android:paddingLeft="25dp"-->
-                <!--            android:paddingRight="25dp"-->
-                <!--            android:gravity="center_vertical"-->
-                <!--            android:clickable="true">-->
-
-                <!--            <TextView-->
-                <!--                android:id="@+id/tv_login"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_weight="1"-->
-                <!--                android:text="Login"-->
-                <!--                android:drawableLeft="@drawable/ic_login_ico"-->
-                <!--                android:gravity="center_vertical"-->
-                <!--                android:drawablePadding="10dp"-->
-                <!--                style="@style/font15_d7191f_medium"/>-->
-
-                <!--        </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/btn_login"
                     style="@style/font15_d7191f_medium"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:drawableLeft="@drawable/ic_login_ico"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:text="Login" />
+                    android:text="@string/nav_login"
+                    app:drawableStartCompat="@drawable/ic_login_ico" />
 
             </LinearLayout>
-
-            <!--        <ScrollView-->
-            <!--            android:id="@+id/main_menu"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintTop_toTopOf="parent"-->
-            <!--            android:orientation="vertical" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

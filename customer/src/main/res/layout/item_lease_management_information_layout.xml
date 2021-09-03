@@ -44,7 +44,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/lease_06"
+                    android:text="@string/lease_infomation"
                     app:drawableStartCompat="@drawable/ic_lease_in_use_ico" />
 
                 <ImageView
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_07" />
+                        android:text="@string/lease_account" />
 
                     <TextView
                         android:id="@+id/tv_lease_account"
@@ -108,7 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_08" />
+                        android:text="@string/lease_product_type" />
 
                     <TextView
                         android:id="@+id/tv_product_type"
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_09" />
+                        android:text="@string/lease_amount" />
 
                     <TextView
                         android:id="@+id/tv_lease_amount"
@@ -156,7 +156,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_10" />
+                        android:text="@string/lease_interest_monthly" />
 
                     <TextView
                         android:id="@+id/tv_lease_interest"
@@ -180,7 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_11" />
+                        android:text="@string/lease_term" />
 
                     <TextView
                         android:id="@+id/tv_term"
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_12" />
+                        android:text="@string/lease_disbursement_date" />
 
                     <TextView
                         android:id="@+id/tv_disbursement_date"
@@ -228,7 +228,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_13" />
+                        android:text="@string/lease_maturity_date" />
 
                     <TextView
                         android:id="@+id/tv_maturity_date"
@@ -252,7 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_14" />
+                        android:text="@string/lease_repayment_date" />
 
                     <TextView
                         android:id="@+id/tv_repayment_date"
@@ -276,7 +276,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_15" />
+                        android:text="@string/lease_monthly_repayment" />
 
                     <TextView
                         android:id="@+id/tv_monthly_payment"

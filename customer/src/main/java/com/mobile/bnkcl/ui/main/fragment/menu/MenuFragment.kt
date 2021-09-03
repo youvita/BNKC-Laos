@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
-import com.bnkcl.employeemodule.ui.EmployeeActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.FragmentMenuBinding
@@ -25,6 +24,7 @@ import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -48,6 +48,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
         viewModel.context = requireContext()
         binding.menuViewModel = viewModel
         profileData = ProfileData()
+        binding.localeCode = Locale.getDefault().language
 
         viewModel.userProfileLiveData.observe(requireActivity()) {
             profileData = it
@@ -56,10 +57,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
 
         if (mainViewModel.isLogin){
             binding.btnSignUp.visibility = View.GONE
-            binding.btnLogin.text = "Logout"
-//            binding.btnLogin.setOnClickListener {
-//
-//            }
+            binding.btnLogin.text = getString(R.string.nav_logout)
+
         }
 
         when(mainViewModel.userRole){
@@ -157,7 +156,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                 R.id.btn_company_profile -> {
                     intent = Intent(requireContext(), TermsAndConditionsActivity::class.java)
                     intent.putExtra(Constants.WEB_URL, "/pages/company_profile.html")
-                    intent.putExtra(Constants.WEB_TITLE, getString(R.string.nav_content_006))
+                    intent.putExtra(Constants.WEB_TITLE, getString(R.string.nav_company_profile))
                     startActivity(intent)
                 }
                 R.id.btn_policy -> {

@@ -37,7 +37,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="Bill Payment">
+                    app:title="@string/mbl_bill_payment">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
@@ -99,7 +99,7 @@
                             android:id="@+id/tv_full_payment_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/bill_01" />
+                            android:text="@string/full_amount" />
 
                         <TextView
                             android:id="@+id/tv_payment_amount"
@@ -109,7 +109,7 @@
                             android:layout_marginTop="@dimen/margin_5dp"
                             android:drawablePadding="@dimen/padding_10dp"
                             app:drawableStartCompat="@drawable/ic_payment_red_ico"
-                            android:text="3,650.00 USD" />
+                            tools:text="3,650.00 USD" />
                     </LinearLayout>
 
                 </LinearLayout>

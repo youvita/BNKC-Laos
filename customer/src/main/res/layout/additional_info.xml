@@ -144,15 +144,8 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:gravity="center"
-                    android:text="ETC"
+                    android:text="@string/addition_etc"
                     app:drawableStartCompat="@drawable/ic_check_ico" />
-
-                <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_5dp"
-                    android:text="(No Applicable Information)" />
 
             </LinearLayout>
 
@@ -184,14 +177,14 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:gravity="center"
-                    android:text="Account Information" />
+                    android:text="@string/addition_account_info" />
 
                 <TextView
                     style="@style/font_13_90A4AE_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/padding_5dp"
-                    android:text="(optional)" />
+                    android:text="@string/addition_optional" />
 
             </LinearLayout>
 
@@ -209,7 +202,7 @@
                     android:layout_marginEnd="@dimen/margin_10dp"
                     android:layout_weight="0.7"
                     android:background="@drawable/selector_edittext_bg"
-                    android:hint="Bank Name"
+                    android:hint="@string/addition_bank_name"
                     android:maxLength="200"
                     android:paddingStart="15sp"
                     android:paddingEnd="15sp"
@@ -223,7 +216,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@drawable/selector_edittext_bg"
-                    android:hint="Account Number"
+                    android:hint="@string/addition_account_number"
                     android:maxLength="200"
                     android:paddingStart="15sp"
                     android:paddingEnd="15sp"
@@ -252,7 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/padding_5dp"
-                    android:text="(optional)" />
+                    android:text="@string/addition_optional" />
 
             </LinearLayout>
 
@@ -271,9 +264,9 @@
                     style="@style/font15_CFD8DC_medium_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableEnd="@drawable/ic_more_ico"
                     android:gravity="center_vertical"
-                    android:hint="@string/addition_select_job_type" />
+                    android:hint="@string/addition_select_job_type"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
 
             </LinearLayout>
 

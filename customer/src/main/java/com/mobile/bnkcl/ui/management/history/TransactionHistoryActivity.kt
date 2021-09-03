@@ -85,9 +85,9 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
                         viewModel.getTransactionHistory(transactionHistoryRequest)
                         showLoading()
                         if (sortDialog.sortCode.toString() != "desc") {
-                            binding.tvSort.text = getString(R.string.tran_history_002)
+                            binding.tvSort.text = getString(R.string.history_oldest)
                         } else {
-                            binding.tvSort.text = getString(R.string.tran_history_008)
+                            binding.tvSort.text = getString(R.string.history_newest)
                         }
                     }
                 }
