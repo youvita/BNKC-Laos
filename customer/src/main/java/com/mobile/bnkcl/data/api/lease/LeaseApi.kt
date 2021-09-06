@@ -2,6 +2,7 @@ package com.mobile.bnkcl.data.api.lease
 
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
+import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
 import com.mobile.bnkcl.data.response.lease.LeaseInfoResponse
 import com.mobile.bnkcl.data.response.lease.apply.ApplyLeaseResponse
 import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
@@ -39,14 +40,13 @@ interface LeaseApi {
         @Path("contract_no") contract_no: String,
         @Query("payment_date.dir") sort_by: String?
     ): Response<TransactionHistoryResponse>
-    @GET("api/ca/lease/calculation")
+
+    @POST("/api/ca/leases/calculation")
     suspend fun getLeaseCalculate(
-        @Query("lease_amount") lease_amount: String,
-        @Query("interest_rate") interest_rate: Int,
-        @Query("repayment_term") repayment_term: Int
+        @Body leaseCalculateReq: LeaseCalculateReq
     ): Response<LeaseCalResponse>
 
-    @POST("api/ca/lease/submit-application")
+    @POST("api/ca/leases/submit-application")
     suspend fun applyLease(
         @Body applyLeaseRequest: ApplyLeaseRequest
     ): Response<ApplyLeaseResponse>

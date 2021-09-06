@@ -28,18 +28,10 @@
                 android:paddingEnd="10dp">
 
                 <ImageView
-                    android:layout_width="@dimen/height_50dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white" />
-
-                <TextView
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Capital Lao Leasing Co, Ltd"
-                    android:textColor="@color/color_ffffff"
-                    android:textSize="@dimen/margin_18dp"
-                    android:textStyle="bold"/>
+                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white" />
 
                 <ImageButton
                     android:id="@+id/btn_notification"

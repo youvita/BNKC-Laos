@@ -345,5 +345,14 @@
     <string name="tab_find_office">ຄົ້ນຫາສຳນັກງານບໍລິສັດ</string>
     <string name="tab_menu">ລາຍການ</string>
     <string name="term_and_condition">ຂ້ອຍເຫັນດີກັບເງື່ອນໄຂ ແລະ ຂໍ້ກຳນົດຂອງ ບໍລິສັດ BNK Capital Lao leasing</string>
+    <string name="calculate">Calculate</string>
+
+    <string name="result_manage_001">Total</string>
+
+    <string name="result_detail_01" >\u0020\u0020 Ins \u0020\u0020</string>
+    <string name="result_detail_02" >\u0020\u0020\u0020 Principal \u0020\u0020\u0020</string>
+    <string name="result_detail_03" >\u0020\u0020 Interest \u0020\u0020</string>
+    <string name="result_detail_04" >\u0020\u0020\u0020 Repayment \u0020\u0020\u0020</string>
+    <string name="result_detail_05" >\u0020\u0020\u0020 Balance \u0020\u0020\u0020</string>
 
 </resources>

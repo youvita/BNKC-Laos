@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.ui.ValidateButton
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.bnkc.sourcemodule.util.Formats
@@ -107,22 +108,6 @@ object BindingAdapters {
         )
     }
 
-//    @JvmStatic
-//    @BindingAdapter("text", "isChecked")
-//    fun setUpAgreementText(textView: TextView, txtAgreement: String?, checked: Boolean) {
-//        var txtAgreement = "I agree to BNKC\'s Terms and Conditions"
-//
-//        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.color_263238))
-//        textView.setText(
-//            Formats.getSeparateFontByLang(
-//                textView.context,
-//                18,
-//                txtAgreement.length,
-//                txtAgreement,
-//                checked
-//            ), TextView.BufferType.SPANNABLE
-//        )
-//    }
 
 //    @JvmStatic
 //    @BindingAdapter("textButton")
@@ -152,5 +137,12 @@ object BindingAdapters {
     fun setNumberFormat(textView: TextView, str: String?) {
         if (str == null) return
         textView.text = FormatUtils.getNumberFormat(textView.context, str)
+    }
+
+    @JvmStatic
+    @BindingAdapter("currencyFormat")
+    fun setCurrencyFormat(textView: TextView, str: String?) {
+        if (str == null) return
+        textView.text = FormatUtils.getNumberFormat(textView.context, str.split(" ")[1])
     }
 }

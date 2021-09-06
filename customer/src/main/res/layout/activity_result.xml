@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.mobile.bnkcl.ui.success.ResultViewModel"/>
+        <variable
+            name="resultViewModel"
+            type="ResultViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +37,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/ll_footer"
+                android:layout_above="@id/vb_result"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -43,7 +46,7 @@
                     android:id="@+id/iv_reg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_badge_success_g_char" />
+                    android:src="@{resultViewModel.resultImage()}" />
 
                 <TextView
                     android:id="@+id/tv_result_title"
@@ -51,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:gravity="center"
+                    android:text="@{resultViewModel.resultMsg()}"
                     tools:text="@string/register_successful"
                     style="@style/font_21_263238_normal"/>
 
@@ -60,29 +64,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:lineSpacingMultiplier="1.1"
+                    visibleGone="@{resultViewModel.showSomeView}"
+                    android:text="@{resultViewModel.resultDescription()}"
                     tools:text="@string/register_login"
                     android:textAlignment="center"
                     style="@style/font_15_263238_regular"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_footer"
+            <com.bnkc.sourcemodule.ui.ValidateButton
+                android:id="@+id/vb_result"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/height_50dp"
+                isSuccess="@{resultViewModel.resultLiveData}"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/margin_20dp"
                 android:layout_marginTop="@dimen/margin_20dp"
                 android:layout_marginRight="@dimen/margin_20dp"
                 android:layout_marginBottom="@dimen/margin_21dp"
-                android:orientation="horizontal">
+                android:onClick="@{()->resultViewModel.actionClicked()}"
+                />
 
-                <com.bnkc.sourcemodule.ui.ValidateButton
-                    android:id="@+id/vb_result"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50dp"
-                    android:layout_marginEnd="@dimen/margin_5dp"
-                    />
-            </LinearLayout>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

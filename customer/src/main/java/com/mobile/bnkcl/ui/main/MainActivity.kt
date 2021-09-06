@@ -76,7 +76,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             tabAdapter.addFragment(MenuFragment())
 
             viewPager?.adapter = tabAdapter
-
+            viewPager?.isUserInputEnabled = false
             TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
                 val binding = TabItemViewBinding.inflate(LayoutInflater.from(this))
                 binding.menuName = menuNames[position]
@@ -84,7 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 tab.customView = binding.root
             }.attach()
 
-            viewPager!!.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            viewPager!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageScrolled(
                     position: Int,
                     positionOffset: Float,
@@ -95,9 +95,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    when(position){
-                        2 -> {
-                            findOfficeFragment.loanServiceTabSelected()
+                    when (position) {
+                        3 -> {
+//                            findOfficeFragment.loanServiceTabSelected()
+                            Log.d(">>>>", "onPageSelected: Menu opening")
                         }
                     }
 

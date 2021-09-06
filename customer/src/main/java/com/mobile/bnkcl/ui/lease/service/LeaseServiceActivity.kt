@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseServiceBinding
-import com.mobile.bnkcl.ui.lease.ApplyLeaseActivity
+import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import dagger.hilt.android.AndroidEntryPoint
@@ -156,18 +156,18 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
             }
         })
 
-        binding.btnLoanCalculator.setOnClickListener(View.OnClickListener {
+        binding.btnLeaseCalculator.setOnClickListener(View.OnClickListener {
             startActivity(
                 Intent(this, LeaseCalculateActivity::class.java)
             )
         })
 
-        binding.btnApplyLoan.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, ApplyLeaseActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.putExtra("type", 1)
-            startActivity(intent)
-        })
+//        binding.btnApplyNow.setOnClickListener(View.OnClickListener {
+//            val intent = Intent(this, ApplyLeaseActivity::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            intent.putExtra("type", 1)
+//            startActivity(intent)
+//        })
     }
 
     override fun getLayoutId(): Int {

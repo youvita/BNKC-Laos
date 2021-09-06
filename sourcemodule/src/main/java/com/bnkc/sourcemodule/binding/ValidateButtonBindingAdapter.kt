@@ -1,6 +1,7 @@
 package com.bnkc.sourcemodule.binding
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -33,5 +34,24 @@ object ValidateButtonBindingAdapter {
         }
 
     }
+
+    @JvmStatic
+    @BindingAdapter("isSuccess")
+    fun ValidateButton.setSuccessOrFailButton(success : Boolean?) {
+        Log.d(">>>>>", "setSuccessOrFailButton: $success")
+        status = success!!
+        if (!success){
+            background = R.drawable.selector_d7191f_ffffee
+            textColor = ContextCompat.getColor(context, R.color.colorPrimary)
+        }
+
+    }
+
+    @JvmStatic
+    @BindingAdapter("label")
+    fun setLabelButton(view : ValidateButton,label : String) {
+        view.setValue(label)
+    }
+
 
 }

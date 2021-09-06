@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.otp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Resources.NotFoundException
@@ -89,21 +90,25 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
             if (text.endsWith("-") || text.endsWith(" ")) return
 
-            if (textLength == 3) {
-                binding.edtPhonenumber.setText(
-                    StringBuilder(text).insert(text.length - 1, "-").toString()
-                )
-                binding.edtPhonenumber.setSelection(textLength)
-            } else if (textLength == 7) {
-                binding.edtPhonenumber.setText(
-                    StringBuilder(text).insert(text.length - 1, "-").toString()
-                )
-                binding.edtPhonenumber.setSelection(textLength)
-            }else if (textLength == 11){
-                binding.edtPhonenumber.setText(
-                    StringBuilder(text).insert(text.length - 1, "-").toString()
-                )
-                binding.edtPhonenumber.setSelection(textLength)
+            when (textLength) {
+                3 -> {
+                    binding.edtPhonenumber.setText(
+                        StringBuilder(text).insert(text.length - 1, "-").toString()
+                    )
+                    binding.edtPhonenumber.setSelection(textLength)
+                }
+                7 -> {
+                    binding.edtPhonenumber.setText(
+                        StringBuilder(text).insert(text.length - 1, "-").toString()
+                    )
+                    binding.edtPhonenumber.setSelection(textLength)
+                }
+                11 -> {
+                    binding.edtPhonenumber.setText(
+                        StringBuilder(text).insert(text.length - 1, "-").toString()
+                    )
+                    binding.edtPhonenumber.setSelection(textLength)
+                }
             }
             binding.tvCorrect.visibility = View.GONE
             if (textLength <= 0) {
@@ -118,6 +123,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private val ivSendOTPClickListener = View.OnClickListener() {
         try {
+            showLoading()
             phoneNumber = binding.edtPhonenumber.text.toString().replace("-", "")
             viewModel._phoneNumberContent.value = phoneNumber
             viewModel.sendOTP(phoneNumber)
@@ -147,33 +153,32 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             Log.d(">>>>>>>>", it.toString())
             successListener()
             binding.isVerified = it.verified!!
-            Log.d(">>>>>>>>", "Verified livedata " + viewModel.isVerified)
             binding.tvCorrect.visibility = View.VISIBLE
             if (it.verified!!){
                 viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
                 preLogin()
 
-                binding.llOptCode.background = getDrawable(R.drawable.round_stroke_00695c_8)
+                binding.llOptCode.background = ContextCompat.getDrawable(this, R.drawable.round_stroke_00695c_8)
                 binding.tvCorrect.setTextColor(resources.getColor(R.color.color_00695c))
                 binding.tvCorrect.text = getString(R.string.sign_up_23)
                 binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
                     null,
                     null,
-                    getDrawable(R.drawable.ic_correct_ico),
+                    ContextCompat.getDrawable(this,R.drawable.ic_correct_ico),
                     null
                 )
-                binding.tvAgree.setTextColor(resources.getColor(R.color.color_263238))
+                binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
 
             }else{
                 countDownTimer!!.cancel()
                 binding.tvCountdown.setTextColor(resources.getColor(R.color.color_cfd8dc))
-                binding.llOptCode.background = getDrawable(R.drawable.round_stroke_d7191f_solid_ffffff_8)
+                binding.llOptCode.background = ContextCompat.getDrawable(this, R.drawable.round_stroke_d7191f_solid_ffffff_8)
                 binding.tvCorrect.setTextColor(resources.getColor(R.color.colorPrimary))
                 binding.tvCorrect.text = getString(R.string.sign_up_06)
                 binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
                     null,
                     null,
-                    getDrawable(R.drawable.ic_info_red_ico_1),
+                    ContextCompat.getDrawable(this, R.drawable.ic_info_red_ico_1),
                     null
                 )
 //                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
@@ -210,6 +215,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
                 val phoneNumber = intent.getStringExtra("PHONE_NUMBER")
+
                 when {
                     action.equals("LOGIN", ignoreCase = true) -> {
 
@@ -225,10 +231,10 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                     action.equals("FORGET", ignoreCase = true) -> {
 
                         binding.otpViewModel!!.uiMode = 2
-                        binding.llPhoneNo.setBackground(getDrawable(R.drawable.round_solid_f3f6f7_8))
-                        binding.edtPhonenumber.setFocusable(false)
-                        binding.edtPhonenumber.setEnabled(false)
-                        binding.edtPhonenumber.setTextColor(resources.getColor(R.color.color_c4d0d6))
+                        binding.llPhoneNo.background = ContextCompat.getDrawable(this, R.drawable.round_solid_f3f6f7_8)
+                        binding.edtPhonenumber.isFocusable = false
+                        binding.edtPhonenumber.isEnabled = false
+                        binding.edtPhonenumber.setTextColor(ContextCompat.getColor(this, R.color.color_c4d0d6))
 
                     }
                     action.equals("RESET", ignoreCase = true) -> {
@@ -252,15 +258,16 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
-    fun initView(){
-        binding.tvAgree.setTextColor(resources.getColor(R.color.color_cfd8dc))
+    private fun initView(){
+        binding.btnContinue.text = viewModel.setUpButtonText()
+        binding.tvAgree.setTextColor(ContextCompat.getColor(this,R.color.color_cfd8dc))
         binding.tvAgree.setText(
             Formats.getSeparateFontByLang(
                 this,
                 18,
                 txtAgreement!!.length,
                 txtAgreement,
-                binding.cbAgreement.isChecked()
+                binding.cbAgreement.isChecked
             ), TextView.BufferType.SPANNABLE
         )
     }
@@ -276,38 +283,30 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
         binding.cbAgreement.setOnClickListener {
 
-            binding.tvAgree.setOnClickListener(if (binding.cbAgreement.isChecked()) this else null)
-            if (binding.cbAgreement.isChecked()) {
-                binding.tvAgree.setTextColor(resources.getColor(R.color.color_263238))
+            binding.tvAgree.setOnClickListener(if (binding.cbAgreement.isChecked) this else null)
+            if (binding.cbAgreement.isChecked) {
+                binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
                 binding.tvAgree.setText(
                     Formats.getSeparateFontByLang(
                         this,
                         18,
                         txtAgreement!!.length,
                         txtAgreement,
-                        binding.cbAgreement.isChecked()
+                        binding.cbAgreement.isChecked
                     ), TextView.BufferType.SPANNABLE
                 )
             } else {
-                binding.tvAgree.setTextColor(resources.getColor(R.color.color_cfd8dc))
+                binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_cfd8dc))
                 binding.tvAgree.setText(
                     Formats.getSeparateFontByLang(
                         this,
                         18,
                         txtAgreement!!.length,
                         txtAgreement,
-                        binding.cbAgreement.isChecked()
+                        binding.cbAgreement.isChecked
                     ), TextView.BufferType.SPANNABLE
                 )
             }
-//            if (otpViewModel.getVerifyOTPResponse() != null) {
-//                enableContinueBtn(
-//                    otpViewModel.getVerifyOTPResponse()
-//                        .isVerified() && mOtpBinding.cbAgreement.isChecked()
-//                )
-//            } else {
-//                enableContinueBtn(false)
-//            }
 
         }
     }
@@ -327,19 +326,19 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
-    fun resendTimer(){
+    private fun resendTimer(){
         binding.tv1.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_263238))
         binding.tvCountdown.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_263238))
         val lifeTime: Int = lifeTime * 1000
         if (countDownTimer != null) countDownTimer!!.cancel()
         countDownTimer = object : CountDownTimer(lifeTime.toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                binding.tvCountdown.setText(viewModel.millisecondsToTime(millisUntilFinished))
+                binding.tvCountdown.text = viewModel.millisecondsToTime(millisUntilFinished)
             }
 
             override fun onFinish() {
                 binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
-                binding.tvCountdown.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_cfd8dc))
+                binding.tvCountdown.setTextColor(ContextCompat.getColor(this@OtpActivity, R.color.color_cfd8dc))
             }
         }.start()
         binding.tvResend.setOnClickListener(null)
@@ -347,7 +346,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private var tvReSendOTPClickListener = View.OnClickListener() {
         try {
-//            otpViewModel.getSendOTPModel().setTo(getPhoneNo());
             viewModel.sendOTP(phoneNumber);
             binding.edtOtp.text?.clear();
         } catch (e : Exception) {

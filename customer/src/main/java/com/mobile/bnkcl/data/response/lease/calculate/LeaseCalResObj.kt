@@ -18,6 +18,6 @@ data class LeaseCalResObj(
     var balance: String? = null,
 
     @SerializedName("interest")
-    var interest: Int? = 0
+    var interest: String? = null
 
 ) : Serializable

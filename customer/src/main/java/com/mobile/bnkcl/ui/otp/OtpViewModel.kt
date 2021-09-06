@@ -28,6 +28,7 @@ import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.otp.OTPVerifyResponse
 import com.mobile.bnkcl.data.response.otp.SendOTPResponse
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.ui.signup.SignUpActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -39,7 +40,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
 
     var uiMode : Int = 0
     var isChecked : Boolean = false
-    var statFocus : Int = 0
     var step : Int = 1
 
     var sessionID : String = ""
@@ -90,16 +90,16 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "" + uiMode)
         return when(uiMode){
             0->{
-                context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
+                ContextCompat.getDrawable(context, R.drawable.ic_nav_back_dark_btn)!!
             }
             1->{
-                context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
+                ContextCompat.getDrawable(context, R.drawable.ic_nav_back_dark_btn)!!
             }
             2->{
-                context.resources.getDrawable(R.drawable.ic_nav_close_dark_btn)
+                ContextCompat.getDrawable(context, R.drawable.ic_nav_close_dark_btn)!!
             }
             3->{
-                context.resources.getDrawable(R.drawable.ic_nav_close_dark_btn)
+                ContextCompat.getDrawable(context, R.drawable.ic_nav_close_dark_btn)!!
             }
             else -> {
                 context.resources.getDrawable(R.drawable.ic_nav_back_dark_btn)
@@ -269,7 +269,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 context.startActivity(intent)
             }
             2->{ //Sign up
-
+                val intent = Intent(context, SignUpActivity::class.java)
+//                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
+//                intent.putExtra("pin_action", "login")
+//                intent.putExtra("username", phoneNumber.value)
+                context.startActivity(intent)
             }
 
         }
@@ -280,16 +284,14 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         return try {
             val minutes = milliseconds / 1000 / 60
             val seconds = milliseconds / 1000 % 60
-            val secondsStr = java.lang.Long.toString(seconds)
-            val minuteStr = java.lang.Long.toString(minutes)
-            val secs: String
-            val min: String
-            min = if (secondsStr.length >= 2) {
+            val secondsStr = seconds.toString()
+            val minuteStr = minutes.toString()
+            val min: String = if (secondsStr.length >= 2) {
                 secondsStr.substring(0, 2)
             } else {
                 "0$secondsStr"
             }
-            secs = if (secondsStr.length >= 2) {
+            val secs: String = if (secondsStr.length >= 2) {
                 secondsStr.substring(0, 2)
             } else {
                 "0$secondsStr"

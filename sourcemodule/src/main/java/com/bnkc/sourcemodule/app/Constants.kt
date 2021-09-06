@@ -26,4 +26,7 @@ object Constants {
     // C/S center
     const val CLAIM_ID = "CLAIM_ID"
     const val CATEGORY = "CATEGORY"
+
+    const val SIGN_UP_FAIL = "SIGN_UP_FAIL"
+    const val SET_UP_PIN = "SET_UP_PIN"
 }

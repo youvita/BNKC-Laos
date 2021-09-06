@@ -49,7 +49,7 @@ class LeaseRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient
         try {
             val request = object: RemoteDataSource<LeaseCalResponse>(){
                 override suspend fun createCall(): Response<LeaseCalResponse> {
-                    return leaseApi.getLeaseCalculate(leaseCalculateReq.lease_amount.toString(), leaseCalculateReq.interest_rate!!.get(), leaseCalculateReq.repayment_term!!.get())
+                    return leaseApi.getLeaseCalculate(leaseCalculateReq)
                 }
             }
             request.networkRequest()

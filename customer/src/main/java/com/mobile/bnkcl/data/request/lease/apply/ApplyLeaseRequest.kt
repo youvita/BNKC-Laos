@@ -7,11 +7,17 @@ data class ApplyLeaseRequest (
     @SerializedName("product_type")
     var product_type : String? = null,
 
-    @SerializedName("brand_name")
-    var brand_name : String? = null,
+    @SerializedName("etc_status")
+    var etc_status : Boolean? = false,
 
-    @SerializedName("model_name")
-    var model_name : String? = null,
+    @SerializedName("name_of_brand")
+    var name_of_brand : String? = null,
+
+    @SerializedName("name_of_type")
+    var name_of_type : String? = null,
+
+    @SerializedName("name_of_model")
+    var name_of_model : String? = null,
 
     @SerializedName("product_price")
     var product_price : String? = null,
@@ -19,10 +25,7 @@ data class ApplyLeaseRequest (
     @SerializedName("request_amount")
     var request_amount : String? = null,
 
-    @SerializedName("advance_payment")
-    var advance_payment : String? = null,
-
     @SerializedName("repayment_term")
     var repayment_term : String? = null,
 
-        )
+    )

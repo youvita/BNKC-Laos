@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
-    private var recFindOffice: RecyclerView? = null
+
     private var objects: ArrayList<AreaDataResponse>? = ArrayList()
     private val viewModel : FindOfficeViewModel by viewModels()
     private var selectedItem = 0;
@@ -54,12 +54,9 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
         binding.btnNotification.setOnClickListener{
             startActivity(Intent(activity, AlarmActivity::class.java))
         }
-//
         val manager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerFindOffice.layoutManager = manager
-
-        viewModel.reqAreasList()
 
         binding.tvAreas.setOnClickListener(View.OnClickListener {
             if (objects != null && objects!!.size > 0) {
@@ -83,6 +80,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
 
             }
         })
+
         viewModel.reqAreasList()
         getAreas()
         getBranches()
@@ -103,18 +101,10 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
 
     fun getBranches(){
         viewModel.branchLiveData.observe(requireActivity()) {
-            val adapter = FindOfficeRecyclerAdapter(it, requireActivity().supportFragmentManager)
-            Log.d(">>>>>>>>", "getBranches ${it.size}")
+            val adapter = FindOfficeRecyclerAdapter(requireActivity().supportFragmentManager)
+            adapter.addItemList(it)
             binding.recyclerFindOffice.adapter = adapter
         }
-    }
-
-    fun loanServiceTabSelected() {
-//        viewModel.reqAreasList()
-    }
-
-    companion object {
-        private var firstReq = true
     }
 
     override fun getLayoutId(): Int {

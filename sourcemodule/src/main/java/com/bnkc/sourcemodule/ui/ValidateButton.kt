@@ -86,6 +86,17 @@ class ValidateButton @JvmOverloads constructor(
         binding.tvCheckButton.setTextColor(textColor)
     }
 
+    fun setFailButton() {
+        binding.llCheckButton.background =
+            ContextCompat.getDrawable(context, R.drawable.selector_d7191f_ffffee)
+        binding.tvCheckButton.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
+    }
+
+    fun setSuccessButton() {
+        binding.tvCheckButton.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
+        binding.llCheckButton.background = ContextCompat.getDrawable(context, R.drawable.selector_d7191f_8b0304)
+    }
+
     fun setTextAllCap(textAllCap: Boolean) {
         _textAllCaps.postValue(textAllCap)
     }

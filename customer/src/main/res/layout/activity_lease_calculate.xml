@@ -4,7 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
+    <data>
+        <import type="com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateViewModel"/>
+        <variable
+            name="leaseViewModel"
+            type="LeaseCalculateViewModel" />
+        <variable
+            name="leaseCalRequest"
+            type="com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -114,20 +122,21 @@
 
                     <com.mobile.bnkcl.com.view.BnkEditText
                         android:id="@+id/ed_lease_amt"
+                        style="@style/font15_CFD8DC_medium_input"
                         android:layout_width="match_parent"
-                        android:hint="0.00"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:maxLength="2"
+                        android:layout_height="match_parent"
+                        android:background="@null"
                         android:digits="1234567890,"
+                        android:hint="0.00"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
+                        android:maxLength="2"
+                        android:maxLines="1"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textAlignment="textEnd"
-                        android:background="@null"
-                        android:layout_height="match_parent"
-                        android:imeOptions="actionDone"
-                        style="@style/font15_CFD8DC_medium_input"/>
+                        android:singleLine="true"
+                        android:text="@{leaseCalRequest.lease_amount}"
+                        android:textAlignment="textEnd" />
 
                 </RelativeLayout>
 
@@ -188,6 +197,7 @@
                         android:id="@+id/ed_rate"
                         android:layout_width="match_parent"
                         android:hint="0.00"
+                        android:text="@{`` + leaseCalRequest.interest_rate}"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:maxLength="2"
@@ -221,7 +231,10 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:clickable="true"
+                    >
 
                     <TextView
                         android:id="@+id/tv_repayment_term"
@@ -231,7 +244,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
                         android:layout_weight="1"
-                        android:text="Select"
+                        android:text="@{``+ leaseCalRequest.repayment_term}"
                         android:visibility="visible" />
 
                     <ImageView

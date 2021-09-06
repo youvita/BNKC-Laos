@@ -79,6 +79,15 @@ object Formats {
         }
     }
 
+    fun getTypeFace(context: Context?, tag: String, type: Int): Typeface? {
+        when (type) {
+            2 -> ResourcesCompat.getFont(context!!, R.font.rubik_medium)
+            3 -> ResourcesCompat.getFont(context!!, R.font.rubik_bold)
+            else -> ResourcesCompat.getFont(context!!, R.font.rubik_regular)
+        }
+        return null
+    }
+
     fun getValueInDP(context: Context, value: Int): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,

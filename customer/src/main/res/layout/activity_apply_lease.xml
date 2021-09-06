@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <import type="com.mobile.bnkcl.ui.lease.apply.ApplyLeaseViewModel"/>
+        <variable
+            name="applyViewModel"
+            type="ApplyLeaseViewModel" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -55,7 +62,8 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:onClick="@{()->applyViewModel.selectProductType()}">
 
                     <TextView
                         android:id="@+id/tv_pro_type"
@@ -86,34 +94,56 @@
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:text="Name of Brand"/>
 
-                <LinearLayout
-                    android:id="@+id/ll_name_brand"
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/ll_name_brand"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <com.mobile.bnkcl.com.view.BnkEditText-->
+<!--                        android:id="@+id/ed_name_brand"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:hint="Input Name of Brand"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:maxLength="2"-->
+<!--                        android:digits="1234567890,"-->
+<!--                        android:inputType="number"-->
+<!--                        android:paddingStart="15dp"-->
+<!--                        android:paddingEnd="15dp"-->
+<!--                        android:textAlignment="textStart"-->
+<!--                        android:background="@null"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:imeOptions="actionDone"-->
+<!--                        style="@style/font15_CFD8DC_medium_input"/>-->
+<!--                    -->
+<!--                </LinearLayout>-->
+
+                <com.mobile.bnkcl.com.view.BnkEditText
+                    android:id="@+id/ed_name_brand"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:hint="Input Name of Brand"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:maxLength="2"
+                    android:digits="1234567890,"
+                    android:inputType="number"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textAlignment="textStart"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:layout_height="@dimen/height_50dp"
+                    android:imeOptions="actionDone"
+
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_name_brand"
-                        style="@style/font15_cfd8dc_medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
-                        android:layout_weight="1"
-                        android:text="Input Name of Brand"
-                        android:visibility="visible" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_more_ico" />
-                </LinearLayout>
+                    
+                    style="@style/font15_CFD8DC_medium_input"/>
 
                 <TextView
                     android:id="@+id/name_model"
@@ -126,34 +156,56 @@
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:text="Name of Model"/>
 
-                <LinearLayout
-                    android:id="@+id/ll_name_model"
+                <com.mobile.bnkcl.com.view.BnkEditText
+                    android:id="@+id/ed_name_model"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:hint="Input Name of Brand"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:maxLength="2"
+                    android:digits="1234567890,"
+                    android:inputType="number"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textAlignment="textStart"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:layout_height="@dimen/height_50dp"
+                    android:imeOptions="actionDone"
+
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal">
+                    
+                    style="@style/font15_CFD8DC_medium_input"/>
 
-                    <TextView
-                        android:id="@+id/tv_name_model"
-                        style="@style/font15_cfd8dc_medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
-                        android:layout_weight="1"
-                        android:text="Input Name of Model"
-                        android:visibility="visible" />
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/ll_name_model"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_more_ico" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_name_model"-->
+<!--                        style="@style/font15_cfd8dc_medium"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Input Name of Model"-->
+<!--                        android:visibility="visible" />-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:src="@drawable/ic_more_ico" />-->
+<!--                </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/pro_price"
@@ -303,7 +355,8 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:onClick="@{()->applyViewModel.repaymentTerm()}">
 
                     <TextView
                         android:id="@+id/tv_repayment_term"
@@ -469,10 +522,11 @@ Phonkeo Village Unit 14"
                 android:layout_width="match_parent"
                 app:buttonText="Submit"
                 app:textAllCaps="true"
-                app:is_active="false"
+                app:is_active="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp"
+                android:onClick="@{()->applyViewModel.applyLeaseClicked()}"/>
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

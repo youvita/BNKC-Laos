@@ -3,6 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateViewModel"/>
+        <variable
+            name="calculateViewModel"
+            type="LeaseCalculateViewModel" />
+        <import type="com.mobile.bnkcl.utilities.StringExtKt"/>
+        <variable
+            name="format"
+            type="StringExtKt" />
+        <variable
+            name="model"
+            type="com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,7 +93,7 @@
                         style="@style/font15_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/currency_val" />
+                        currencyFormat="@{model.monthly_repayment}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,7 +116,7 @@
                         style="@style/font15_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/months" />
+                        currencyFormat="@{model.total_principal_paid}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -124,7 +139,7 @@
                         style="@style/font15_263238_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/currency_val" />
+                        currencyFormat="@{model.total_interest_paid}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -168,11 +183,14 @@
             android:layout_weight="1"
             android:background="@drawable/round_solid_ffffff_15"
             android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shadowLayout">
 
             <com.bnkc.sourcemodule.ui.ShadowLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="11dp"
                 app:shadowColor="@color/color_1590a4ae_shadow"
                 app:shadowDx="0dp"
@@ -209,19 +227,19 @@
                             android:layout_weight="1"
                             android:text="@string/details" />
 
-                        <TextView
-                            android:id="@+id/tv_unit"
-                            style="@style/font15_263238_medium_en"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:background="@drawable/round_solid_f5f7fc"
-                            android:paddingStart="10dp"
-                            android:paddingTop="2dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="2dp"
-                            android:text="@string/unit_loan_result"
-                            tools:text="Unit:USD" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_unit"-->
+<!--                            style="@style/font15_263238_medium_en"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="5dp"-->
+<!--                            android:background="@drawable/round_solid_f5f7fc"-->
+<!--                            android:paddingStart="10dp"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            android:paddingEnd="10dp"-->
+<!--                            android:paddingBottom="2dp"-->
+<!--                            android:text="@string/unit_loan_result"-->
+<!--                            tools:text="Unit:USD" />-->
 
                         <ImageView
                             android:id="@+id/iv_show_detail"
