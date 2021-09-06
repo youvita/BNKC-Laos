@@ -30,15 +30,7 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
         request = ClaimDataRequest(page_number, request.page_size, "")
         viewModelScope.launch {
             claimRepo.getClaimData(request).onEach { resource ->
-                // catch error
-                if (resource.status == Status.ERROR) {
-                    val code    = resource.errorCode
-                    val title   = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _claimData.value = resource
-                }
+                _claimData.value = resource
             }.launchIn(viewModelScope)
         }
     }

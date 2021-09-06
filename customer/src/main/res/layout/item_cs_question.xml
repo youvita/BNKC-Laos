@@ -15,7 +15,7 @@
 
         <variable
             name="action"
-            type="com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter" />
+            type="com.mobile.bnkcl.ui.adapter.AskQuestionAdapter" />
 
     </data>
 

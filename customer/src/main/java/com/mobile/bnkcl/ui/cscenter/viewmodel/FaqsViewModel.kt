@@ -33,15 +33,7 @@ class FaqsViewModel @Inject constructor(private val faqsRepo: FaqsRepo) : BaseVi
 
         viewModelScope.launch {
             faqsRepo.getFaqData(request).onEach { resource ->
-                // catch error
-                if (resource.status == Status.ERROR) {
-                    val code    = resource.errorCode
-                    val title   = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _faqsData.value = resource.data
-                }
+                _faqsData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

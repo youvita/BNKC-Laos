@@ -54,6 +54,15 @@ class FormatUtils {
                         date = formatter.parse(inputDate)
                         newFormatter = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
                     }
+                    7 -> {
+
+                        formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+
+                        date = formatter.parse(inputDate)
+
+                        newFormatter = SimpleDateFormat("dd-MM-yyyy-HH:mm a", Locale.getDefault())
+
+                    }
                     else -> throw IllegalStateException("Unexpected value: $action")
                 }
                 stDate = newFormatter.format(date)

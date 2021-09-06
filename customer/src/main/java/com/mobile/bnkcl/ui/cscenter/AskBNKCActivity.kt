@@ -8,19 +8,25 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
 import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCViewModel
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.Disposable
 
 @AndroidEntryPoint
 class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListener {
     override fun getLayoutId(): Int = R.layout.activity_askbnkc
     private val askBNKCViewModel : AskBNKCViewModel by viewModels()
+    private var signUpDisposable: Disposable? = null
 
     private var subject: String = ""
     private var description : String = ""
@@ -31,10 +37,24 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
         collapseToolBarLayout =binding.collToolbar
 
+        checkError()
         initToolbar()
         initButton()
         observeData()
 
+    }
+    private fun checkError(){
+        //Session expired
+        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+        //server error
+        signUpDisposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
     }
     private fun initToolbar(){
         collapseToolBarLayout.title = this.getString(R.string.cs_02)

@@ -13,7 +13,6 @@ import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.data.repository.findoffice.FindOfficeRepo
 import com.mobile.bnkcl.data.request.findoffice.AreaRequest
 import com.mobile.bnkcl.data.request.findoffice.BranchRequest
-import com.mobile.bnkcl.data.response.area.AreaObjResponse
 import com.mobile.bnkcl.data.response.area.BranchResponse
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.data.response.user.profile.Area

@@ -45,6 +45,7 @@
     <dimen name="high_loan_progress">106dp</dimen>
 
     <dimen name="shadowD_0dp">0dp</dimen>
+    <dimen name="shadowD_5dp">5dp</dimen>
     <dimen name="shadow_radius_8dp">8dp</dimen>
     <dimen name="width_128dp">128dp</dimen>
     <dimen name="height_128dp">128dp</dimen>

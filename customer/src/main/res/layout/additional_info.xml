@@ -46,7 +46,6 @@
                 android:gravity="center"
                 android:paddingStart="@dimen/padding_15dp"
                 android:paddingEnd="@dimen/padding_15dp"
-                android:onClick="@{(v) -> addressViewModel.getCapitalData()}"
                 >
 
                 <TextView

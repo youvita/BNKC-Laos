@@ -1,8 +1,7 @@
 package com.mobile.bnkcl.di
 
-import androidx.core.content.ContextCompat
 import com.mobile.bnkcl.ui.adapter.*
-import com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter
+import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

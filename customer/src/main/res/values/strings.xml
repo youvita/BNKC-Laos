@@ -125,6 +125,12 @@
     <string name="cs_14">Inquiry is Submitted</string>
     <string name="cs_15">BNKC will review your inquiry\n and get back to you soon.</string>
     <string name="cs_16">Close</string>
+    <string name="cs_18">Inquiry is Failed</string>
+    <string name="cs_19">Internal Server Error \n (Error Code : 500) </string>
+
+    <string name="comm_try_again">Try Again</string>
+
+
 
     <string name="loan_detail"> A reasonable interest rate. Flexible installment terms and repayment plan that are catered to your need. Convenient option to apply for and repay installment at nearest BNK Capital Lao leasing office or at your business site.</string>
     <string name="product_introduction">Product Introduction</string>

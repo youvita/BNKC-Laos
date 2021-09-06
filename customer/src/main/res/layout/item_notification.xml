@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.bnkc.sourcemodule.util.FormatUtils"/>
+        <variable
+            name="format"
+            type="FormatUtils" />
         <variable
             name="item"
             type="com.mobile.bnkcl.data.response.alarm.AlarmItem" />
@@ -17,7 +20,7 @@
             app:shadowColor="@color/color_3090a4ae"
             app:shadowDx="@dimen/shadowD_0dp"
             app:shadowDy="@dimen/shadowD_0dp"
-            app:shadowRadius="@dimen/shadow_radius_8dp"
+            app:shadowRadius="@dimen/radius_4dp"
             app:shadowShape="rectangle"
             app:shadowSide="all">
 
@@ -74,7 +77,7 @@
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:layout_marginEnd="@dimen/margin_15dp"
                     android:gravity="center_vertical"
-                    android:text="@{item.created_on}"
+                    android:text="@{format.Companion.getDateFormat(item.created_on, 7)}"
                     app:layout_constraintStart_toStartOf="@+id/tv_content"
                     app:layout_constraintTop_toBottomOf="@+id/tv_content"
                     app:layout_constraintEnd_toEndOf="parent"

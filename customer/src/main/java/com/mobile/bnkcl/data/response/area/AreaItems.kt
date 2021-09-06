@@ -2,25 +2,25 @@ package com.mobile.bnkcl.data.response.area
 
 import com.google.gson.annotations.SerializedName
 
-class AreaObjResponse {
+data class AreaItems (
     @SerializedName("id")
-     var id: Long = 0
+     var id: Int = 0,
 
     @SerializedName("name")
-     var name: String? = null
+     var name: String? = null,
 
     @SerializedName ("erp_code")
-     var erp_code : String? = null
+     var erp_code : String? = null,
 
     @SerializedName("iso_code")
-     var iso_code: String? = null
+     var iso_code: String? = null,
+
+    @SerializedName("category")
+    var category: String? = null,
 
     @SerializedName("alias1")
-    var alias1: String? = null
+    var alias1: String? = null,
 
     @SerializedName("branch_count")
      var branch_count: String? = null
-
-    @SerializedName("alias2")
-    var alias2: String? = null
-}
+)

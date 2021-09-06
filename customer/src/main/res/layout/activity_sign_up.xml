@@ -7,10 +7,6 @@
         <variable
             name="signup"
             type="com.mobile.bnkcl.ui.signup.SignUpActivity" />
-        <variable
-            name="signUpViewModle"
-            type="com.mobile.bnkcl.ui.signup.SignUpViewModel" />
-
 
     </data>
 

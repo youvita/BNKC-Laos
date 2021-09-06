@@ -125,6 +125,12 @@
     <string name="cs_14">ຄຳຖາມໄດ້ສົ່ງແລ້ວ</string>
     <string name="cs_15">BNKCLຈະກວດສອບຄຳຖາມຂອງທ່ານ ແລະ ຈະຕອບຫາທ່ານໃນໄວໆນີ້</string>
     <string name="cs_16">ປິດ</string>
+    <string name="cs_18">Inquiry is Failed</string>
+    <string name="cs_19">Internal Server Error \n (Error Code : 500) </string>
+
+    <string name="comm_try_again">Try Again</string>
+
+
 
     <string name="loan_detail">ດ້ວຍອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ. ມີເງື່ອນໄຂການຂໍສິນເຊື່ອ ແລະ ແຜນການຜ່ອນຊຳລະສິນເຊື່ອທີ່ສາມາດປ່ຽນແປງຕາມຄວາມຕ້ອງການຂອງລູກຄ້າ. ເປັນທາງເລືອກໃນການສະເໜີຂໍສິນເຊື່ອ ແລະ ຊຳລະຄ່າສິນເຊື່ອທີ່ສະດວກບາຍ ໃກ້ໆບ້ານທ່ານທີ່ສຳນັກງານບໍລິສັດ ບີເອັນເຄ ແຄັບປີໂຕ ລາວ ເຊົ່າສິນເຊື່ອ ຫຼື ຊໍາລະຄ່າສິນເຊື່ອໄດ້ທີ່ບ້ານຂອງທ່ານເອງ.</string>
     <string name="product_introduction">ການແນະນໍາຜະລິດຕະພັນ</string>

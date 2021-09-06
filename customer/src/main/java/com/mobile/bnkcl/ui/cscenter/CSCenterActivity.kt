@@ -7,16 +7,21 @@ import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.Status
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.CATEGORY
 import com.bnkc.sourcemodule.app.Constants.CLAIM_ID
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
-import com.mobile.bnkcl.ui.adapter.cscenter.AskQuestionAdapter
+import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +37,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
     private var networkState: Status? = null
 
     override fun getLayoutId(): Int= R.layout.activity_c_s_center
+    private var signUpDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +45,9 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         binding.action = this@CSCenterActivity
 
+        checkError()
         initToolbar()
-//        initButton()
+        initButton()
         observeData()
 
         if (intent != null) {
@@ -65,7 +72,19 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
             binding.swipeRefreshAskBnkc.isRefreshing = false
         }
     }
-
+    private fun checkError(){
+        //Session expired
+        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+        //server error
+        signUpDisposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+    }
     private fun initToolbar(){
         collapseToolBarLayout?.title = this.getString(R.string.cs_01)
         collapseToolBarLayout?.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))

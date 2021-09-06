@@ -55,6 +55,7 @@
                     android:scrollbars="vertical"
                     android:overScrollMode="never"
                     android:divider="@null"
+                    tools:listitem="@layout/item_home_address"
                     android:descendantFocusability="blocksDescendants"
                     />
 

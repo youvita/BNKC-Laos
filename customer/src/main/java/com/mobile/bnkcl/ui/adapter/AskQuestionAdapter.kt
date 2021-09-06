@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.adapter.cscenter
+package com.mobile.bnkcl.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

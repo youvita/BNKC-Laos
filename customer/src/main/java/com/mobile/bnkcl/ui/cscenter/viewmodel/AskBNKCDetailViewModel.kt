@@ -26,15 +26,7 @@ class AskBNKCDetailViewModel @Inject constructor(private val claimRepo: ClaimDet
     fun getClaimDetailData(request: ClaimDetailReq){
         viewModelScope.launch {
             claimRepo.getClaimDetailData(request).onEach { resource ->
-                // catch error
-                if (resource.status == Status.ERROR) {
-                    val code    = resource.errorCode
-                    val title   = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _claimDetailData.value = resource.data
-                }
+                _claimDetailData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
