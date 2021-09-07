@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.bill
+package com.mobile.bnkcl.ui.management.bill
 
 import com.bnkc.sourcemodule.base.BaseViewModel
 

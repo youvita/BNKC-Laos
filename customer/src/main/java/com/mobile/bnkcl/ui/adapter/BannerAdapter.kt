@@ -6,7 +6,7 @@ import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.BannerItemLayoutBinding
 
-class BannerAdapter: BaseAdapter<BannerItemLayoutBinding, Int, BannerAdapter.ViewHolder>() {
+class BannerAdapter : BaseAdapter<BannerItemLayoutBinding, Int, BannerAdapter.ViewHolder>() {
 
     override fun getLayoutId(viewType: Int): Int {
         return R.layout.banner_item_layout
@@ -24,6 +24,6 @@ class BannerAdapter: BaseAdapter<BannerItemLayoutBinding, Int, BannerAdapter.Vie
      * provide a reference to the type of views that you are using custom view holder
      * @param binding item binding
      */
-    class ViewHolder(binding: BannerItemLayoutBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(binding: BannerItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

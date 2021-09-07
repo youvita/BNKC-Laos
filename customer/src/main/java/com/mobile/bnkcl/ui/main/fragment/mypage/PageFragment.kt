@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.library.custom.cardview.CardModeLayoutManager
 import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
@@ -23,9 +24,9 @@ import com.mobile.bnkcl.databinding.FragmentMyPageBinding
 import com.mobile.bnkcl.ui.adapter.BannerAdapter
 import com.mobile.bnkcl.ui.adapter.LeaseAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
-import com.mobile.bnkcl.ui.bill.BillPaymentActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
+import com.mobile.bnkcl.ui.management.bill.BillPaymentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,21 +39,28 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     lateinit var cardRecyclerView: CardRecyclerView
 
     @Inject
+    lateinit var cardRecyclerVieww: CardRecyclerView
+
+    @Inject
     lateinit var mBannerAdapter: BannerAdapter
 
     @Inject
     lateinit var itemOffsetDecoration: CardOffsetDecoration
 
-    private lateinit var mLeaseAdapter: LeaseAdapter
+    @Inject
+    lateinit var itemOffsetDecorationn: CardOffsetDecoration
+
+    private var mLeaseAdapter: LeaseAdapter = LeaseAdapter(this)
     private var myLeaseBinding: FragmentMyPageBinding? = null
     private var cardModeLayoutManager: CardModeLayoutManager? = null
-    private var mLeaseData: ArrayList<MyLeasesData>? = null
+    private var mLeaseData: ArrayList<MyLeasesData>? = java.util.ArrayList<MyLeasesData>()
     private var mContractNoRecord: ArrayList<String>? = null
     private val mListener: MyLoanCardClickedListener? = null
     private var MLR001: Int = 0
     private var MLR002: Int = 0
     private var MLR003: Int = 0
-    private var bannerArray: ArrayList<Int>? = null
+    private var bannerArray =
+        listOf(R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3, R.drawable.banner_4)
     private var leaseDialog: ApplicationDialog? = null
     private val pageViewModel: PageViewModel by viewModels()
     private var index: Int = 0
@@ -65,19 +73,18 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         myLeaseBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
-        mLeaseAdapter = LeaseAdapter(this)
-        mLeaseData = java.util.ArrayList<MyLeasesData>()
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            pageViewModel.getCodes("LEASE_PROGRESS_STATUS")
+            pageViewModel.getDashboard()
+        }
 
-        pageViewModel.getCodes("LEASE_PROGRESS_STATUS")
-
+        initView()
         initLiveData()
-        initClickListener()
-        setUpBanner()
+
         return myLeaseBinding!!.root
     }
 
     private fun initLiveData() {
-        pageViewModel.getDashboard()
         pageViewModel.dashboardLiveData.observe(requireActivity()) {
             MLR001 = it.countApplication!!
             MLR002 = it.countScreening!!
@@ -88,6 +95,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             it.myLeases.add(MyLeasesData())
             mLeaseAdapter.clearItemList()
             mLeaseAdapter.addItemList(it.myLeases)
+
             myLeaseBinding!!.leaseRecyclerview.adapter = mLeaseAdapter
             myLeaseBinding?.leaseRecyclerview?.removeItemDecoration(itemOffsetDecoration)
             myLeaseBinding?.leaseRecyclerview?.addItemDecoration(itemOffsetDecoration)
@@ -96,6 +104,8 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
             mLeaseData!!.addAll(it.myLeases)
             setUpLeaseIndicator()
+
+            setUpBanner()
         }
 
         pageViewModel.leaseApplicationLiveData.observe(requireActivity()) {
@@ -115,29 +125,26 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     }
 
     override fun onClick(v: View?) {
-
-        when (v!!.id) {
-            R.id.ll_menu1 -> {
-                pageViewModel.getLeaseApplication("Application")
-                index = 1
-            }
-            R.id.ll_menu2 -> {
-                pageViewModel.getLeaseApplication("Screening")
-                index = 2
-            }
-            R.id.ll_menu3 -> {
-                pageViewModel.getLeaseApplication("Result")
-                index = 3
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            when (v!!.id) {
+                R.id.ll_menu1 -> {
+                    pageViewModel.getLeaseApplication("Application")
+                    index = 1
+                }
+                R.id.ll_menu2 -> {
+                    pageViewModel.getLeaseApplication("Screening")
+                    index = 2
+                }
+                R.id.ll_menu3 -> {
+                    pageViewModel.getLeaseApplication("Result")
+                    index = 3
+                }
             }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        setUpBanner()
-    }
 
-    private fun initClickListener() {
+    private fun initView() {
         myLeaseBinding!!.requestMenu.llMenu1.setOnClickListener(this)
         myLeaseBinding!!.requestMenu.llMenu2.setOnClickListener(this)
         myLeaseBinding!!.requestMenu.llMenu3.setOnClickListener(this)
@@ -224,34 +231,31 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     }
 
     private fun setUpBanner() {
-        bannerArray = ArrayList()
-        bannerArray!!.add(R.drawable.banner_1)
-        bannerArray!!.add(R.drawable.banner_2)
-        bannerArray!!.add(R.drawable.banner_3)
-        bannerArray!!.add(R.drawable.banner_4)
 
         mBannerAdapter.clearItemList()
         mBannerAdapter.addItemList(bannerArray)
-        myLeaseBinding?.bannerRecyclerView?.adapter = mBannerAdapter
-        myLeaseBinding?.bannerRecyclerView?.removeItemDecoration(itemOffsetDecoration)
-        myLeaseBinding?.bannerRecyclerView?.addItemDecoration(itemOffsetDecoration)
-        cardRecyclerView.attachToRecyclerView(myLeaseBinding?.bannerRecyclerView)
-        cardRecyclerView.setScale(1f)
+        myLeaseBinding?.newLayout?.bannerRecyclerView?.adapter = mBannerAdapter
+
+        myLeaseBinding?.newLayout?.bannerRecyclerView?.removeItemDecoration(itemOffsetDecorationn)
+        myLeaseBinding?.newLayout?.bannerRecyclerView?.addItemDecoration(itemOffsetDecorationn)
+        cardRecyclerVieww.attachToRecyclerView(myLeaseBinding?.newLayout?.bannerRecyclerView)
+        cardRecyclerVieww.setScale(1f)
+
         addIndicator(
-            myLeaseBinding!!.llBannerIndicator,
+            myLeaseBinding!!.newLayout.llBannerIndicator,
             mBannerAdapter.itemCount,
             0
         )
 
         cardModeLayoutManager =
-            myLeaseBinding?.bannerRecyclerView?.layoutManager as CardModeLayoutManager
-        myLeaseBinding?.bannerRecyclerView?.addOnScrollListener(object :
+            myLeaseBinding?.newLayout?.bannerRecyclerView?.layoutManager as CardModeLayoutManager
+        myLeaseBinding?.newLayout?.bannerRecyclerView?.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 addIndicator(
-                    myLeaseBinding!!.llBannerIndicator,
+                    myLeaseBinding!!.newLayout.llBannerIndicator,
                     mBannerAdapter.itemCount,
                     cardModeLayoutManager!!.findLastVisibleItemPosition()
                 )

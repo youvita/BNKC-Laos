@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.signup
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -43,6 +44,7 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
         websettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 
         val header = mutableMapOf<String, String>()
+        Log.d(">>>", "initView: "+ url)
 //        header.put("Authorization", "Bearer ${sharedPrefer.getPrefer(Constants.LOGIN_TOKEN)}")
         header["Accept-Language"] = if(sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 

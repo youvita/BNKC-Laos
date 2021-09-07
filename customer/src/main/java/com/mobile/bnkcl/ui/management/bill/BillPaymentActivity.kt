@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.bill
+package com.mobile.bnkcl.ui.management.bill
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,15 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityBillPaymentBinding
 import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,26 +28,47 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
     private var TOTAL_AMOUNT: String? = null
     private var CODE_REPAYMENT_PLAN_REGULAR: String? = "C0312"
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_bill_payment
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initToolbar()
-        addBankAccountInformationTable()
+        initView()
+        initDisposable()
+
+    }
+
+    private fun initDisposable() {
+
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+    }
+
+    private fun initView() {
 
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO")
             TOTAL_AMOUNT = intent.getStringExtra("TOTAL_PAYMENT")
-            binding.tvPaymentAmount.text =
-                com.bnkc.sourcemodule.util.FormatUtils.getNumberFormat(this, TOTAL_AMOUNT!!)
+            binding.tvPaymentAmount.text = FormatUtils.getNumberFormat(this, TOTAL_AMOUNT!!)
+
+            binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
         }
 
-        binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
         binding.mobilePayment.tvCid.text = sharedPrefer.getPrefer(Constants.USER_ID)
         binding.mobilePayment.llPay.setOnClickListener(this)
+
+        addBankAccountInformationTable()
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_bill_payment
     }
 
     private fun addBankAccountInformationTable() {

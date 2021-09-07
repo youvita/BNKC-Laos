@@ -6,7 +6,8 @@
     <data>
 
         <import type="com.mobile.bnkcl.ui.setting.SettingViewModel" />
-        <import type="com.mobile.bnkcl.ui.setting.SettingActivity"/>
+
+        <import type="com.mobile.bnkcl.ui.setting.SettingActivity" />
 
         <variable
             name="settingViewModel"
@@ -33,9 +34,64 @@
             android:background="#f5f7fc"
             tools:context=".ui.settiing.SettingsActivity">
 
-            <include
-                android:id="@+id/included_layout"
-                layout="@layout/comm_collapse_toolbar" />
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_f5f7fc"
+                android:stateListAnimator="@null">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/coll_toolbar"
+                    style="@style/font_28_263238_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_120dp"
+                    app:collapsedTitleGravity="center"
+                    app:expandedTitleMargin="@dimen/margin_21dp"
+                    app:expandedTitleTextAppearance="@style/font_28_263238_bold"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:title="@string/nav_settings">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/font_18_263238_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/color_00ffffff"
+                        android:contentInsetStart="0dp"
+                        android:contentInsetEnd="0dp"
+                        android:contentInsetRight="0dp"
+                        android:gravity="center"
+                        app:collapseIcon="@null"
+                        app:contentInsetEnd="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetRight="0dp"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin">
+
+                        <ImageView
+                            android:id="@+id/toolbar_left_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:paddingStart="@dimen/margin_21dp"
+                            android:src="@drawable/ic_nav_back_dark_btn"
+                            tools:ignore="ContentDescription,RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/toolbar_right_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:paddingEnd="@dimen/margin_21dp"
+                            android:src="@drawable/ic_nav_close_dark_btn"
+                            android:visibility="invisible"
+                            tools:ignore="ContentDescription,RtlSymmetry" />
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -82,9 +138,9 @@
                                 android:id="@+id/toggle_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/height_21dp"
+                                android:background="@null"
                                 android:checked="@{settingViewModel.settingData.push_alarm_enabled.equals('Y')}"
                                 android:theme="@style/SettingSwitch"
-                                android:background="@null"
                                 android:thumb="@drawable/switch_thumb_selector"
                                 app:track="@drawable/switch_track_selector" />
 

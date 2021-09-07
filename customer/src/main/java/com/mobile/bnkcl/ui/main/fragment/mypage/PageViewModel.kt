@@ -3,9 +3,8 @@ package com.mobile.bnkcl.ui.main.fragment.mypage
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
+import com.bnkc.library.prefer.CredentialSharedPrefer
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
@@ -19,58 +18,49 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PageViewModel @Inject constructor(private val dashboardRepo: DashboardRepo, private val codesRepo: CodesRepo) :
+class PageViewModel @Inject constructor(
+    private val dashboardRepo: DashboardRepo,
+    private val codesRepo: CodesRepo
+) :
     BaseViewModel() {
-    private val _dashboardLiveData: MutableLiveData<DashboardResponse> = MutableLiveData()
-    val dashboardLiveData: LiveData<DashboardResponse> = _dashboardLiveData
-    fun getDashboard() {
-        viewModelScope.launch {
-            dashboardRepo.getDashboard().onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _dashboardLiveData.value = resource.data
-                }
-            }.launchIn(viewModelScope)
-        }
-    }
 
+    @Inject
+    lateinit var sharedPrefer: CredentialSharedPrefer
+    private val _dashboardLiveData: MutableLiveData<DashboardResponse> = MutableLiveData()
     private val _leaseApplicationLiveData: MutableLiveData<LeaseApplicationResponse> =
         MutableLiveData()
+    private val _codesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
+    val dashboardLiveData: LiveData<DashboardResponse> = _dashboardLiveData
     val leaseApplicationLiveData: LiveData<LeaseApplicationResponse> = _leaseApplicationLiveData
-    fun getLeaseApplication(lease_request_status: String) {
-        viewModelScope.launch {
-            dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _leaseApplicationLiveData.value = resource.data
-                }
-            }.launchIn(viewModelScope)
+    val codesLiveData: LiveData<CodesResponse> = _codesLiveData
+
+    fun getDashboard() {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                dashboardRepo.getDashboard().onEach { resource ->
+                    _dashboardLiveData.value = resource.data
+                }.launchIn(viewModelScope)
+            }
         }
     }
 
-    private val _codesLiveData: MutableLiveData<CodesResponse> =
-        MutableLiveData()
-    val codesLiveData: LiveData<CodesResponse> = _codesLiveData
+    fun getLeaseApplication(lease_request_status: String) {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
+                    _leaseApplicationLiveData.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
     fun getCodes(group_id: String) {
-        viewModelScope.launch {
-            codesRepo.getCodes(group_id).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                codesRepo.getCodes(group_id).onEach { resource ->
                     _codesLiveData.value = resource.data
-                }
-            }.launchIn(viewModelScope)
+                }.launchIn(viewModelScope)
+            }
         }
     }
 }

@@ -9,7 +9,8 @@ import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
 import com.mobile.bnkcl.databinding.ItemLeaseLayoutBinding
 import java.util.*
 
-class LeaseAdapter(listener: LeaseItemClickedListener): BaseAdapter<ItemLeaseLayoutBinding, MyLeasesData, LeaseAdapter.ViewHolder>() {
+class LeaseAdapter(listener: LeaseItemClickedListener) :
+    BaseAdapter<ItemLeaseLayoutBinding, MyLeasesData, LeaseAdapter.ViewHolder>() {
 
     private val myLeaseItemList: ArrayList<MyLeasesData> = ArrayList<MyLeasesData>()
     private val mListener: LeaseItemClickedListener = listener
@@ -43,7 +44,8 @@ class LeaseAdapter(listener: LeaseItemClickedListener): BaseAdapter<ItemLeaseLay
         }
     }
 
-    inner class ViewHolder(val binding: ItemLeaseLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemLeaseLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun setBinding(item: MyLeasesData, position: Int) {
             binding.leaseItem = item
 

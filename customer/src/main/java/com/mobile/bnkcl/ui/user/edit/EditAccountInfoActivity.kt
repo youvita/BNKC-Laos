@@ -1,15 +1,20 @@
 package com.mobile.bnkcl.ui.user.edit
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.EditAccountInfoData
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityEditAccountInfoBinding
 import com.mobile.bnkcl.ui.dialog.AlertEditInfoDialog
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,23 +27,39 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        profileData = ProfileData()
 
+        initView()
         initActionBar()
+        initDisposable()
         initDisablePersonalInfo()
 
+    }
+
+    private fun initView() {
+        profileData = ProfileData()
         if (intent != null) {
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
             Log.d(">>>", "onCreate: " + profileData!!.name)
         }
 
-
-
         binding.lytAddressInfo.tvJobType.text = profileData!!.job_type
 
         binding.btnCancel.setOnClickListener(this)
         binding.btnSave.setOnClickListener(this)
+    }
+
+    private fun initDisposable() {
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
     }
 
     private fun initDisablePersonalInfo() {
@@ -89,11 +110,11 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
                 editAccountInfoData.bank_name = binding.lytAddressInfo.edtBankName.text.toString()
                 editAccountInfoData.account_number =
                     binding.lytAddressInfo.edtAccountNumber.text.toString()
-                editAccountInfoViewModel.isUpdate(editAccountInfoData)
 
-                editAccountInfoViewModel.editAccountInfoLiveData.observe(this) {
-
+                if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                    editAccountInfoViewModel.isUpdate(editAccountInfoData)
                 }
+
             }
             R.id.cv_change_profile -> {
             }

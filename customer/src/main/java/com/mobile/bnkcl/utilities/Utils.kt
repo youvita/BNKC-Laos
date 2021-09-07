@@ -17,7 +17,7 @@ object Utils {
     /*
      * to hide keyboard
      */
-    private fun setHideKeyboard(context: Context, view: View) {
+    fun setHideKeyboard(context: Context, view: View) {
         try {
             //Set up touch listener for non-text box views to hide keyboard.
             if (!(view is EditText || view is ScrollView)) {

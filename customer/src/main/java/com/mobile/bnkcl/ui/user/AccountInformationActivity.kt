@@ -2,13 +2,18 @@ package com.mobile.bnkcl.ui.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,41 +22,72 @@ import dagger.hilt.android.AndroidEntryPoint
 class AccountInformationActivity : BaseActivity<ActivityAccountInformationBinding>(),
     View.OnClickListener {
 
-    private val accountInformationViewModel: AccountInformationViewModel by viewModels()
-    private var profileData: ProfileData? = null
+    private val viewModel: AccountInformationViewModel by viewModels()
+    private var profileData: ProfileData? = ProfileData()
+    private val logOutDialog = LogOutDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        profileData = ProfileData()
-        setClickListeners()
 
-        if (intent != null) {
-            profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
+        initView()
+        initDisposable()
+        initLiveData()
 
-            if (null != profileData!!.address) {
-                val moreInfo: String? = profileData!!.address!!.more_info
-                val state: String? = profileData!!.address!!.state!!.alias1 as String?
-                val district: String? = profileData!!.address!!.district!!.alias1 as String?
-                val village: String? = profileData!!.address!!.village!!.alias1 as String?
-                if (null == state || state.isEmpty()) {
-                    binding.tvAddress.text = getString(R.string.not_available)
-                } else {
-                    binding.tvAddress.text = moreInfo.plus(village).plus(district).plus(state)
-                }
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            viewModel.getAccountInformation()
+            logOutDialog.onConfirmClickedListener {
+                viewModel.logout()
+                showLoading()
+            }
+            showLoading()
+        }
+    }
+
+    private fun initDisposable() {
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
 
-        accountInformationViewModel.getAccountInformation()
-        showLoading()
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+    }
 
-        accountInformationViewModel.accountInformationLiveData.observe(this) {
+    private fun initLiveData() {
+
+        viewModel.accountInformationLiveData.observe(this) {
             successListener()
             binding.profile = it
             profileData = it
         }
+
+        viewModel.logoutLiveData.observe(this) {
+            successListener()
+            finish()
+        }
     }
 
-    private fun setClickListeners() {
+    private fun initView() {
+
+        if (intent != null) {
+            profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
+
+//            if (null != profileData!!.address) {
+//                val moreInfo: String? = profileData!!.address!!.more_info
+//                val state: String? = profileData!!.address!!.state!!.alias1
+//                val district: String? = profileData!!.address!!.district!!.alias1
+//                val village: String? = profileData!!.address!!.village!!.alias1
+//                if (null == state || state.isEmpty()) {
+//                    binding.tvAddress.text = getString(R.string.not_available)
+//                } else {
+//                    binding.tvAddress.text = moreInfo.plus(village).plus(district).plus(state)
+//                }
+//            }
+        }
+
         binding.llViewMorePersonal.setOnClickListener(this)
         binding.llMoreLeaseInfo.setOnClickListener(this)
         binding.llAdditionalInfo.setOnClickListener(this)
@@ -71,10 +107,14 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     onBackPressed()
                 }
                 R.id.tv_title_toolbar_02 -> {
-                    startActivity(Intent(applicationContext, EditAccountInfoActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
+                    startActivity(
+                        Intent(
+                            applicationContext,
+                            EditAccountInfoActivity::class.java
+                        ).putExtra("ACCOUNT_INFO", profileData)
+                    )
                 }
                 R.id.btn_logout -> {
-                    val logOutDialog = LogOutDialog()
                     logOutDialog.show(supportFragmentManager, logOutDialog.tag)
                 }
                 R.id.ll_view_more_personal -> {

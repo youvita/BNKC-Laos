@@ -1,8 +1,12 @@
 package com.mobile.bnkcl.ui.management.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.transaction.TransactionHistoryRequest
@@ -10,6 +14,7 @@ import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHisto
 import com.mobile.bnkcl.databinding.ActivityTransactionHistoryBinding
 import com.mobile.bnkcl.ui.adapter.TransactionHistoryAdapter
 import com.mobile.bnkcl.ui.dialog.SortDialog
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,17 +28,45 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
     private var sortCode: String? = "asc"
     private val viewModel: TransactionHistoryViewModel by viewModels()
     private var CONTRACT_NO: String? = null
-    private lateinit var transactionHistoryRequest: TransactionHistoryRequest
+    private var transactionHistoryRequest: TransactionHistoryRequest = TransactionHistoryRequest()
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_transaction_history
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initToolbar()
 
-        transactionHistoryRequest = TransactionHistoryRequest()
+        initView()
+        initToolbar()
+        initDisposable()
+        initLiveData()
+
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            viewModel.getTransactionHistory(transactionHistoryRequest)
+            showLoading()
+        }
+    }
+
+    private fun initLiveData() {
+
+        viewModel.transactionHistoryLiveData.observe(this) {
+            successListener()
+            initAdapter(it.transactionHistory!!)
+        }
+    }
+
+    private fun initDisposable() {
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+    }
+
+    private fun initView() {
 
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
@@ -42,13 +75,6 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         transactionHistoryRequest.contract_no = CONTRACT_NO
         transactionHistoryRequest.payment_date_dir = "asc"
 
-        viewModel.getTransactionHistory(transactionHistoryRequest)
-        showLoading()
-
-        viewModel.transactionHistoryLiveData.observe(this) {
-            successListener()
-            initAdapter(it.transactionHistory!!)
-        }
     }
 
     private fun initToolbar() {
@@ -70,6 +96,10 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
     }
 
+    override fun getLayoutId(): Int {
+        return R.layout.activity_transaction_history
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.toolbar_left_button -> {
@@ -82,8 +112,12 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
                     if (sortDialog.sortCode != null) {
                         transactionHistoryRequest.payment_date_dir = sortDialog.sortCode
                         sortCode = sortDialog.sortCode
-                        viewModel.getTransactionHistory(transactionHistoryRequest)
-                        showLoading()
+
+                        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                            viewModel.getTransactionHistory(transactionHistoryRequest)
+                            showLoading()
+                        }
+
                         if (sortDialog.sortCode.toString() != "desc") {
                             binding.tvSort.text = getString(R.string.history_oldest)
                         } else {

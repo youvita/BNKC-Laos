@@ -67,7 +67,7 @@
         <activity android:name=".ui.user.AccountInformationActivity" />
         <activity android:name=".ui.user.edit.EditAccountInfoActivity" />
         <activity android:name=".ui.otp.OtpActivity" />
-        <activity android:name=".ui.bill.BillPaymentActivity" />
+        <activity android:name="com.mobile.bnkcl.ui.management.bill.BillPaymentActivity" />
         <activity android:name=".ui.management.LeaseManagementActivity" />
         <activity android:name="com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity" />
         <activity android:name="com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity" />

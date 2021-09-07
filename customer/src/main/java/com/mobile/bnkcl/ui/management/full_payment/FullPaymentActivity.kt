@@ -13,11 +13,14 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityFullPaymentBinding
 import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,34 +38,34 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
     private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private var myCalendar = Calendar.getInstance()
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_full_payment
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         initToolbar()
-        addBankAccountInformationTable()
-        setUpClickListener()
-
-        if (intent != null) {
-            val c = Calendar.getInstance().time
-            REPAYMENT_DATE = simpleDateFormat.format(c)
-            REPAYMENT_DATE = "2021-08-23"
-//            REPAYMENT_DATE = intent.getStringExtra("REPAYMENT_DATE")
-            CONTRACT_NO = intent.getStringExtra("CONTRACT_NO")
-
-            binding.btnDate.text = REPAYMENT_DATE
-            binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
-            binding.mobilePayment.tvCid.text = sharedPrefer.getPrefer(Constants.USER_ID)
-
-            viewModel.getFullPayment(CONTRACT_NO!!, REPAYMENT_DATE!!, "asc")
-            showLoading()
-        }
-
+        initView()
         checkDate()
+        initDisposable()
         initLiveData()
 
+    }
+
+    private fun initDisposable() {
+
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_full_payment
     }
 
     private fun initLiveData() {
@@ -91,10 +94,30 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
         }
     }
 
-    private fun setUpClickListener() {
+    private fun initView() {
+
+        if (intent != null) {
+            val c = Calendar.getInstance().time
+            REPAYMENT_DATE = simpleDateFormat.format(c)
+            REPAYMENT_DATE = "2021-08-23"
+//            REPAYMENT_DATE = intent.getStringExtra("REPAYMENT_DATE")
+            CONTRACT_NO = intent.getStringExtra("CONTRACT_NO")
+
+            binding.btnDate.text = REPAYMENT_DATE
+            binding.mobilePayment.tvAccountNumber.text = CONTRACT_NO
+            binding.mobilePayment.tvCid.text = sharedPrefer.getPrefer(Constants.USER_ID)
+
+            if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                viewModel.getFullPayment(CONTRACT_NO!!, REPAYMENT_DATE!!, "asc")
+                showLoading()
+            }
+        }
+
         binding.fullPaymentInfo.llOtherInfo.setOnClickListener(this)
         binding.btnDate.setOnClickListener(this)
         binding.btnCheck.setOnClickListener(this)
+
+        addBankAccountInformationTable()
     }
 
     private fun checkDate() {
@@ -201,8 +224,10 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
                 datePickerDialog.show()
             }
             R.id.btn_check -> {
-                viewModel.getFullPayment(CONTRACT_NO!!, "2021-08-04", "asc")
-                showLoading()
+                if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                    viewModel.getFullPayment(CONTRACT_NO!!, "2021-08-04", "asc")
+                    showLoading()
+                }
             }
             R.id.ll_pay -> {
                 val intent = Intent(this, MobilePaymentActivity::class.java)

@@ -34,7 +34,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
     private var loadingDialog: LoadingDialog? = null
 
-    private var disposable: Disposable? = null
+    var disposable: Disposable? = null
 
     private var systemDialog: SystemDialog? = null
 

@@ -13,4 +13,7 @@ interface UserApi {
     @PATCH("api/ca/user/setting")
     suspend fun updateUserSetting(@Body settingData: SettingData): Response<Unit>
 
+    @GET("api/ca/auth/logout")
+    suspend fun logout(): Response<Unit>
+
 }

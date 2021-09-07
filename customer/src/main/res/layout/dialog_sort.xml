@@ -52,7 +52,7 @@
                     android:drawableStart="@drawable/selector_radio_botton_stroke_black"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:padding="@dimen/padding_10dp"
-                    android:text="From the Oldest" />
+                    android:text="@string/history_oldest" />
 
                 <RadioButton
                     android:id="@+id/rb_newest"
@@ -66,7 +66,7 @@
                     android:drawableStart="@drawable/selector_radio_botton_stroke_black"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:padding="@dimen/padding_10dp"
-                    android:text="From the Newest" />
+                    android:text="@string/history_newest" />
 
             </RadioGroup>
 

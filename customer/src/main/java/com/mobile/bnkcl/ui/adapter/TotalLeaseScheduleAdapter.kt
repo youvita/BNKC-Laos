@@ -9,7 +9,8 @@ import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseSche
 import com.mobile.bnkcl.databinding.ItemTotalLeaseScheduleLayoutBinding
 import com.mobile.bnkcl.utilities.UtilAnimation
 
-class TotalLeaseScheduleAdapter : BaseAdapter<ItemTotalLeaseScheduleLayoutBinding, TotalLeaseScheduleData, TotalLeaseScheduleAdapter.ViewHolder>() {
+class TotalLeaseScheduleAdapter :
+    BaseAdapter<ItemTotalLeaseScheduleLayoutBinding, TotalLeaseScheduleData, TotalLeaseScheduleAdapter.ViewHolder>() {
 
     override fun getLayoutId(viewType: Int): Int {
         return R.layout.item_total_lease_schedule_layout
@@ -36,5 +37,6 @@ class TotalLeaseScheduleAdapter : BaseAdapter<ItemTotalLeaseScheduleLayoutBindin
      * provide a reference to the type of views that you are using custom view holder
      * @param binding item binding
      */
-    class ViewHolder(val binding: ItemTotalLeaseScheduleLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemTotalLeaseScheduleLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

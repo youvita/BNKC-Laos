@@ -12,6 +12,7 @@ import androidx.lifecycle.observe
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
+import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
@@ -21,6 +22,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -39,10 +41,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 //        setStatusBarTransparent(this, false)
         super.onCreate(savedInstanceState)
 
+        initLanguage()
         initAppVersion()
-
+        initDisposable()
         initImageLoadingRotate()
-
         getMGData()
 
         FirebaseMessaging.getInstance().token
@@ -55,6 +57,25 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                 val token = task.result
                 Log.d("nng: ", "token:: $token")
             })
+    }
+
+    private fun initLanguage() {
+        LocaleHelper.setLanguage(this, "lo")
+    }
+
+
+    private fun initDisposable() {
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+
     }
 
     private fun initImageLoadingRotate() {
@@ -86,10 +107,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                     if (validateAppVersion(appVer, programVer)) {
 
                         confirmDialog = ConfirmDialog.newInstance(
-                                R.drawable.badge_new_version,
-                                getString(R.string.dlg_new_version),
-                                getString(R.string.dlg_update_desc),
-                                getString(R.string.dlg_update_now)
+                            R.drawable.badge_new_version,
+                            getString(R.string.dlg_new_version),
+                            getString(R.string.dlg_update_desc),
+                            getString(R.string.dlg_update_now)
                         )
                         confirmDialog.onConfirmClickedListener {
                             var marketUrl = it.c_appstore_url!!
@@ -107,10 +128,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                         if (it.c_act_yn!!) {
                             val serviceReason = it.c_act_msg
                             confirmDialog = ConfirmDialog.newInstance(
-                                    R.drawable.ic_badge_error,
-                                    getString(R.string.notice_01),
-                                    serviceReason!!,
-                                    getString(R.string.comm_confirm)
+                                R.drawable.ic_badge_error,
+                                getString(R.string.notice_01),
+                                serviceReason!!,
+                                getString(R.string.comm_confirm)
                             )
                             confirmDialog.onConfirmClickedListener {
                                 startApp()
@@ -124,10 +145,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                 } else {
                     val serviceReason = it.c_act_msg
                     confirmDialog = ConfirmDialog.newInstance(
-                            R.drawable.ic_badge_error,
-                            getString(R.string.notice_01),
-                            serviceReason!!,
-                            getString(R.string.comm_confirm)
+                        R.drawable.ic_badge_error,
+                        getString(R.string.notice_01),
+                        serviceReason!!,
+                        getString(R.string.comm_confirm)
                     )
                     confirmDialog.onConfirmClickedListener {
                         finish()
@@ -136,10 +157,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                     confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                 }
             }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
             // Catch some error when MG down service
-            val title   = getString(R.string.comm_error)
+            val title = getString(R.string.comm_error)
             val message = getString(R.string.comm_error_during_process)
             RxJava.publish(RxEvent.ServerError(ErrorCode.SERVICE_ERROR, title, message))
         }

@@ -33,17 +33,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="@dimen/margin_21dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margin_21dp"
                 android:paddingStart="@dimen/padding_21dp"
                 android:paddingEnd="11dp">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white"
                     android:layout_weight="1"
+                    android:src="@drawable/ic_brand_bnkc_lao_leasing_white"
                     tools:ignore="ContentDescription" />
 
                 <ImageButton
@@ -140,27 +140,21 @@
                             android:paddingRight="6.5dp"
                             android:paddingBottom="1.5dp"
                             tools:text="99" />
+
                     </LinearLayout>
 
-                    <!-- Lease Item View Pager -->
-                    <RelativeLayout
+                    <!-- Lease Item RecyclerView  -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lease_recyclerview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="260dp">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/lease_recyclerview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:orientation="horizontal"
-                            android:paddingStart="@dimen/padding_21dp"
-                            android:paddingEnd="25dp"
-                            app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
-                            tools:listitem="@layout/item_lease_layout" />
-
-                    </RelativeLayout>
+                        android:layout_height="260dp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/padding_21dp"
+                        android:paddingEnd="25dp"
+                        app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
+                        tools:listitem="@layout/item_lease_layout" />
 
                     <!-- Lease Item Indicator -->
                     <LinearLayout
@@ -170,26 +164,29 @@
                         android:gravity="center"
                         android:orientation="horizontal" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/banner_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-10dp"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:orientation="horizontal"
-                        android:paddingStart="@dimen/padding_21dp"
-                        android:paddingEnd="@dimen/padding_21dp"
-                        app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
-                        tools:listitem="@layout/banner_item_layout" />
+                    <include
+                        android:id="@+id/new_layout"
+                        layout="@layout/fragment_my_page_banner" />
+                    <!--                    <androidx.recyclerview.widget.RecyclerView-->
+                    <!--                        android:id="@+id/banner_recycler_view"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="-10dp"-->
+                    <!--                        android:clipToPadding="false"-->
+                    <!--                        android:nestedScrollingEnabled="false"-->
+                    <!--                        android:orientation="horizontal"-->
+                    <!--                        android:paddingStart="@dimen/padding_21dp"-->
+                    <!--                        android:paddingEnd="@dimen/padding_21dp"-->
+                    <!--                        app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"-->
+                    <!--                        tools:listitem="@layout/banner_item_layout" />-->
 
-                    <!-- Banner Item Indicator -->
-                    <LinearLayout
-                        android:id="@+id/ll_banner_indicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal" />
+                    <!--                    &lt;!&ndash; Banner Item Indicator &ndash;&gt;-->
+                    <!--                    <LinearLayout-->
+                    <!--                        android:id="@+id/ll_banner_indicator"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:orientation="horizontal" />-->
 
                 </LinearLayout>
 

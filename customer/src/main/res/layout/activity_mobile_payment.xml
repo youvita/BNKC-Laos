@@ -19,6 +19,7 @@
         tools:context=".ui.management.mobile_payment.MobilePaymentActivity">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/parent_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -29,7 +30,7 @@
                 android:stateListAnimator="@null">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/col_toolbar"
+                    android:id="@+id/coll_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:collapsedTitleGravity="center"
@@ -100,7 +101,7 @@
                         android:text="@string/mbl_what_acc_number" />
 
                     <LinearLayout
-                        android:id="@+id/ll_wing_account"
+                        android:id="@+id/ll_payment_account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10dp"
@@ -114,7 +115,7 @@
                             android:src="@drawable/ic_client_info_ico" />
 
                         <com.mobile.bnkcl.com.view.BnkEditText
-                            android:id="@+id/edt_wing_account"
+                            android:id="@+id/edt_payment_account"
                             style="@style/font15_263238_medium"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -148,7 +149,7 @@
                         android:text="@string/mbl_what_code" />
 
                     <LinearLayout
-                        android:id="@+id/ll_wing_code"
+                        android:id="@+id/ll_payment_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10dp"
@@ -163,7 +164,7 @@
                             tools:ignore="ContentDescription" />
 
                         <com.mobile.bnkcl.com.view.BnkEditText
-                            android:id="@+id/edt_wing_code"
+                            android:id="@+id/edt_payment_code"
                             style="@style/font15_263238_medium"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -193,14 +194,14 @@
                 android:layout_marginBottom="@dimen/margin_21dp"
                 android:background="@color/color_ffffff">
 
-                <Button
+                <com.bnkc.sourcemodule.ui.ValidateButton
                     android:id="@+id/btn_pay"
                     style="@style/font14_ffffff_medium"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    app:is_active="false"
                     android:layout_marginLeft="@dimen/margin_21dp"
                     android:layout_marginRight="@dimen/margin_21dp"
-                    android:background="@drawable/round_solid_d7191f_8"
                     android:text="@string/mbl_pay" />
 
             </LinearLayout>

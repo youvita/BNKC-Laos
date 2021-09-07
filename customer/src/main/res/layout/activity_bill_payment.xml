@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.mobile.bnkcl.ui.bill.BillPaymentViewModel" />
+        <import type="com.mobile.bnkcl.ui.management.bill.BillPaymentViewModel" />
 
         <variable
             name="billPaymentViewModel"
@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.bill.BillPaymentActivity">
+        tools:context=".ui.management.bill.BillPaymentActivity">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"

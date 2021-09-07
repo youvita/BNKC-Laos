@@ -49,4 +49,19 @@ class UserRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient)
             e.printStackTrace()
         }
     }
+
+    fun logout(): Flow<Resource<Unit>> = flow {
+        delay(1000)
+        try {
+            val request = object: RemoteDataSource<Unit>(){
+                override suspend fun createCall(): Response<Unit> {
+                    return userApi.logout()
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
@@ -12,6 +15,7 @@ import com.mobile.bnkcl.databinding.ActivityLeaseManagementBinding
 import com.mobile.bnkcl.ui.management.full_payment.FullPaymentActivity
 import com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity
 import com.mobile.bnkcl.ui.management.schedule.TotalLeaseScheduleActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,26 +30,33 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     private var REPAYMENT_DATE: String? = null
     private var isWarning: Boolean? = null
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_lease_management
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (intent != null) {
-            mLeaseArraylist = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<*>?
-            CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
-
-            viewModel.getLeaseInfo(CONTRACT_NO!!)
-            showLoading()
-            binding.tvLeaseType.text = CONTRACT_NO
-        }
-
+        initView()
         initToolbar()
-        setUpClickListener()
+        initDisposable()
         initLiveData()
 
+    }
+
+    private fun initDisposable() {
+
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            errorDialog(it.code, it.title, it.message)
+        }
+
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_lease_management
     }
 
     private fun initLiveData() {
@@ -70,7 +81,20 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             if (isWarning) View.VISIBLE else View.GONE
     }
 
-    private fun setUpClickListener() {
+    private fun initView() {
+
+        if (intent != null) {
+            mLeaseArraylist = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<*>?
+            CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
+
+            if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                viewModel.getLeaseInfo(CONTRACT_NO!!)
+                showLoading()
+            }
+
+            binding.tvLeaseType.text = CONTRACT_NO
+        }
+
         binding.btnTotalSchedule.setOnClickListener(this)
         binding.btnTransactionHistory.setOnClickListener(this)
         binding.leaseInfo.llLeaseInfo.setOnClickListener(this)

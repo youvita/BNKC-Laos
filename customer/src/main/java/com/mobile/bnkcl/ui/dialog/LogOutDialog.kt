@@ -3,13 +3,9 @@ package com.mobile.bnkcl.ui.dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.base.BaseDialogFragment
-import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.databinding.DialogConnectionBinding
 import com.mobile.bnkcl.databinding.DialogLogOutBinding
-import com.mobile.bnkcl.databinding.DialogUpdateBinding
 
 class LogOutDialog : BaseDialogFragment<DialogLogOutBinding>() {
 
@@ -27,6 +23,7 @@ class LogOutDialog : BaseDialogFragment<DialogLogOutBinding>() {
 //        binding.errorTitle = arguments?.getString(ConfirmDialog.TITLE)
 //        binding.errorMessage = arguments?.getString(ConfirmDialog.MESSAGE)
 //        binding.errorAct = arguments?.getString(ConfirmDialog.ACT)
+
         binding.btnLeft.setOnClickListener {
             dialog?.dismiss()
         }
