@@ -5,10 +5,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.activity.viewModels
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -69,6 +66,45 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                 loadWebViewContent(false)
             }
         }
+
+        binding.webView.setInitialScale(1)
+        val webSettings = binding.webView.settings
+        webSettings.javaScriptEnabled = true
+        webSettings.loadWithOverviewMode = true
+        webSettings.useWideViewPort = true
+        webSettings.builtInZoomControls = true
+        binding.webView.overScrollMode = View.OVER_SCROLL_NEVER
+        binding.webView.webChromeClient = object : WebChromeClient(){}
+        binding.webView.webViewClient = object : WebViewClient() {
+
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                view?.loadUrl(url!!)
+                return true
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                val width = binding.webView.width
+                val height = binding.webView.height
+                if (width < height) {
+                    val vc = binding.webView.layoutParams
+                    vc.width = height
+                    vc.height = width
+                    binding.webView.requestLayout()
+                    binding.webView.layoutParams = vc
+                }
+            }
+        }
+
+//        webSettings.domStorageEnabled = true
+//        webSettings.setAppCacheEnabled(false)
+//        webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
+//        webSettings.loadsImagesAutomatically = true
+//        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
     }
 
     private fun initDisposable() {
@@ -114,17 +150,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         if (!hide) binding.appBar.setExpanded(hide)
 
         if (binding.llWebContainer.visibility == View.VISIBLE) {
-            binding.webView.setInitialScale(1)
-            val webSettings = binding.webView.settings
-            webSettings.javaScriptEnabled = true
-            webSettings.domStorageEnabled = true
-            webSettings.setAppCacheEnabled(false)
-            webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
-            webSettings.loadsImagesAutomatically = true
-            webSettings.loadWithOverviewMode = true
-            webSettings.useWideViewPort = true
-            webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-            val url = "/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
+            val url = BuildConfig.BASE_URL +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
 
             val header = mutableMapOf<String, String>()
             header["Authorization"] = "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
@@ -132,24 +158,8 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                     .isNullOrEmpty()
             ) "lo" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
-            binding.webView.loadUrl(BuildConfig.BASE_URL + url, header)
-            binding.webView.webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(
-                    view: WebView?,
-                    request: WebResourceRequest?
-                ): Boolean {
-                    view?.loadUrl(url)
-                    return true
-                }
 
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-                }
-            }
+            binding.webView.loadUrl(url, header)
         }
     }
 
