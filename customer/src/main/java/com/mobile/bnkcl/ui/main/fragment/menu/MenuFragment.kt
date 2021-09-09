@@ -3,7 +3,6 @@ package com.mobile.bnkcl.ui.main.fragment.menu
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import com.mobile.bnkcl.databinding.FragmentMenuBinding
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
+import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.main.MainViewModel
 import com.mobile.bnkcl.ui.notice.NoticeActivity
@@ -28,7 +28,7 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
+class MenuFragment : BaseFragment<FragmentMenuBinding>(), View.OnClickListener {
 
     private val viewModel: MenuViewModel by viewModels()
     private var profileData: ProfileData? = null
@@ -50,18 +50,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
         profileData = ProfileData()
         binding.localeCode = Locale.getDefault().language
 
-        viewModel.userProfileLiveData.observe(requireActivity()) {
-            profileData = it
-            Log.d(">>>", "onViewCreated: " + profileData!!.account_number)
-        }
+        initView()
+        initLiveData()
 
-        if (mainViewModel.isLogin){
-            binding.btnSignUp.visibility = View.GONE
-            binding.btnLogin.text = getString(R.string.nav_logout)
-
-        }
-
-        when(mainViewModel.userRole){
+        when (mainViewModel.userRole) {
             0 -> { //Customer
 //                var navigationMenu = NavigationMenu(context, true)
 //                binding.mainMenu.addView(navigationMenu)
@@ -99,19 +91,25 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
             }
         }
 
-        setClickListeners()
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-            viewModel.getUserProfile()
+    private fun initView() {
+
+        if (mainViewModel.isLogin) {
+            binding.btnSignUp.visibility = View.GONE
+            binding.btnLogin.text = getString(R.string.nav_logout)
+
         }
-    }
 
-    private fun setClickListeners() {
-        binding.llProfile.setOnClickListener(this)
+        binding.llProfile.setOnClickListener(
+            if (sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) null else this
+        )
+
+        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            binding.tvUserName.text = "User Unknown"
+        }
+
         binding.llNotice.setOnClickListener(this)
         binding.llCsCenter.setOnClickListener(this)
         binding.llHome.setOnClickListener(this)
@@ -124,12 +122,44 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
         binding.btnLogin.setOnClickListener(this)
     }
 
+    private fun initLiveData() {
+
+        viewModel.userProfileLiveData.observe(requireActivity()) {
+            profileData = it
+
+            binding.tvUserName.text = it.name
+            binding.tvUserId.text = it.account_number
+        }
+
+        viewModel.logoutLiveData.observe(requireActivity()) {
+            sharedPrefer.remove(Constants.KEY_TOKEN)
+            sharedPrefer.remove(Constants.USER_ID)
+
+            val intent = Intent(requireActivity(), HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            successListener()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            viewModel.getUserProfile()
+        }
+    }
+
     override fun onClick(v: View?) {
         if (v != null) {
             val intent: Intent
-            when(v.id) {
+            when (v.id) {
                 R.id.ll_profile -> {
-                    startActivity(Intent(requireContext(), AccountInformationActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
+                    startActivity(
+                        Intent(
+                            requireContext(),
+                            AccountInformationActivity::class.java
+                        ).putExtra("ACCOUNT_INFO", profileData)
+                    )
                 }
                 R.id.ll_notice -> {
                     startActivity(Intent(requireContext(), NoticeActivity::class.java))
@@ -138,11 +168,16 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     startActivity(Intent(requireContext(), CSCenterActivity::class.java))
                 }
                 R.id.ll_home -> {
-
+                    intent = Intent(requireActivity(), HomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
                 R.id.ll_language -> {
                     val languageDialog = LanguageDialog()
-                    languageDialog.show(requireActivity().supportFragmentManager, languageDialog.tag)
+                    languageDialog.show(
+                        requireActivity().supportFragmentManager,
+                        languageDialog.tag
+                    )
                     languageDialog.onLangSelected {
                         startActivity(Intent(requireContext(), MainActivity::class.java))
                         recreateLanguageChanged()
@@ -179,15 +214,17 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() , View.OnClickListener{
                     viewModel.goToSignUp()
                 }
                 R.id.btn_login -> {
-                    if (mainViewModel.isLogin){
+                    if (mainViewModel.isLogin) {
                         val logOutDialog = LogOutDialog()
                         logOutDialog.onConfirmClickedListener {
-                            sharedPrefer.remove(Constants.USER_ID)
-                            Log.d(">>>>", "Remove ready ??? ${sharedPrefer.getPrefer(Constants.USER_ID)}")
-                            startActivity(Intent(requireContext(), OtpActivity::class.java))
+                            viewModel.logout()
+                            showLoading()
                         }
-                        logOutDialog.show(requireActivity().supportFragmentManager, logOutDialog.tag)
-                    }else{
+                        logOutDialog.show(
+                            requireActivity().supportFragmentManager,
+                            logOutDialog.tag
+                        )
+                    } else {
                         startActivity(Intent(requireContext(), OtpActivity::class.java))
                     }
                 }

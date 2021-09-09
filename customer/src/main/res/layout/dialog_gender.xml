@@ -37,7 +37,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:layout_marginBottom="@dimen/margin_10dp"
-                android:text="Gender"
+                android:text="@string/info_gender"
                 android:textAlignment="center" />
 
             <RadioGroup
@@ -56,7 +56,7 @@
                     android:drawableStart="@drawable/selector_radio_botton_stroke_black"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:padding="@dimen/padding_10dp"
-                    android:text="Male" />
+                    android:text="@string/info_male" />
 
                 <RadioButton
                     android:id="@+id/rb_female"
@@ -69,7 +69,7 @@
                     android:drawableStart="@drawable/selector_radio_botton_stroke_black"
                     android:drawablePadding="@dimen/padding_10dp"
                     android:padding="@dimen/padding_10dp"
-                    android:text="Female" />
+                    android:text="@string/info_female" />
 
             </RadioGroup>
 

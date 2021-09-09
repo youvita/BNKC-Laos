@@ -2,7 +2,6 @@ package com.mobile.bnkcl.ui.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.library.rxjava.RxEvent
@@ -13,6 +12,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
+import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
@@ -35,11 +35,12 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             viewModel.getAccountInformation()
+            showLoading()
+
             logOutDialog.onConfirmClickedListener {
                 viewModel.logout()
                 showLoading()
             }
-            showLoading()
         }
     }
 
@@ -65,6 +66,12 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         }
 
         viewModel.logoutLiveData.observe(this) {
+            sharedPrefer.remove(Constants.KEY_TOKEN)
+            sharedPrefer.remove(Constants.USER_ID)
+
+            val intent = Intent(this@AccountInformationActivity, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
             successListener()
             finish()
         }

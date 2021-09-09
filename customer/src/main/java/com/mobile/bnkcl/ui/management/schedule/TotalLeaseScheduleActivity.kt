@@ -3,6 +3,7 @@ package com.mobile.bnkcl.ui.management.schedule
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -56,6 +57,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
+            Log.d(">>>", "initView: " + CONTRACT_NO)
             totalLeaseScheduleRequest.contract_no = CONTRACT_NO
             totalLeaseScheduleRequest.payment_date_dir = "asc"
         }
@@ -122,14 +124,13 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
             webSettings.loadWithOverviewMode = true
             webSettings.useWideViewPort = true
             webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-//            val url: String = "/total-loan-schedule.html"
-            val url: String = "/customer/my-lease/$CONTRACT_NO/schedules"
+            val url = "/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
 
             val header = mutableMapOf<String, String>()
             header["Authorization"] = "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
             header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE)
                     .isNullOrEmpty()
-            ) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
+            ) "lo" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
             binding.webView.loadUrl(BuildConfig.BASE_URL + url, header)
             binding.webView.webViewClient = object : WebViewClient() {

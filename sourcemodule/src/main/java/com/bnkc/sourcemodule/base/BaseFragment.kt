@@ -58,7 +58,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         return binding
     }
 
-    private fun successListener() {
+    fun successListener() {
         introDisposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
             if (loadingDialog != null) {
                 loadingDialog?.dismiss()

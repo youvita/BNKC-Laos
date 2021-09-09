@@ -6,6 +6,7 @@ import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.base.BaseFullDialogFragment
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationData
 import com.mobile.bnkcl.databinding.DialogApplicationBinding
 import com.mobile.bnkcl.ui.adapter.LeaseRequestProcessAdapter
@@ -13,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ApplicationDialog(private val leaseApplicationList: List<LeaseApplicationData>, val type: Int) :
+class ApplicationDialog(private val leaseApplicationList: List<LeaseApplicationData>, private val productTypeList: ArrayList<CodesData>, val type: Int) :
     BaseFullDialogFragment<DialogApplicationBinding>() {
 
     @Inject
@@ -33,6 +34,7 @@ class ApplicationDialog(private val leaseApplicationList: List<LeaseApplicationD
 
         binding.transactionRecyclerview.adapter = leaseRequestProcessAdapter
         leaseRequestProcessAdapter.setLeaseProcessType(type)
+        leaseRequestProcessAdapter.setProductTypeList(productTypeList)
         binding.transactionRecyclerview.removeItemDecoration(cardOffsetDecoration)
         binding.transactionRecyclerview.addItemDecoration(cardOffsetDecoration)
         cardRecyclerView.attachToRecyclerView(binding.transactionRecyclerview)

@@ -27,12 +27,19 @@ class PageViewModel @Inject constructor(
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
     private val _dashboardLiveData: MutableLiveData<DashboardResponse> = MutableLiveData()
-    private val _leaseApplicationLiveData: MutableLiveData<LeaseApplicationResponse> =
-        MutableLiveData()
-    private val _codesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
+    private val _leaseApplicationLiveData: MutableLiveData<LeaseApplicationResponse> = MutableLiveData()
+    private val _leaseScreeningLiveData: MutableLiveData<LeaseApplicationResponse> = MutableLiveData()
+    private val _leaseResultLiveData: MutableLiveData<LeaseApplicationResponse> = MutableLiveData()
+    private val _productCodesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
+    private val _requestCodesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
+    private val _progressCodesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
     val dashboardLiveData: LiveData<DashboardResponse> = _dashboardLiveData
     val leaseApplicationLiveData: LiveData<LeaseApplicationResponse> = _leaseApplicationLiveData
-    val codesLiveData: LiveData<CodesResponse> = _codesLiveData
+    val leaseScreeningLiveData: LiveData<LeaseApplicationResponse> = _leaseScreeningLiveData
+    val leaseResultLiveData: LiveData<LeaseApplicationResponse> = _leaseResultLiveData
+    val productCodesLiveData: LiveData<CodesResponse> = _productCodesLiveData
+    val requestCodesLiveData: LiveData<CodesResponse> = _requestCodesLiveData
+    val progressCodesLiveData: LiveData<CodesResponse> = _progressCodesLiveData
 
     fun getDashboard() {
         if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
@@ -54,11 +61,51 @@ class PageViewModel @Inject constructor(
         }
     }
 
-    fun getCodes(group_id: String) {
+    fun getLeaseScreening(lease_request_status: String) {
         if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
             viewModelScope.launch {
-                codesRepo.getCodes(group_id).onEach { resource ->
-                    _codesLiveData.value = resource.data
+                dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
+                    _leaseScreeningLiveData.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun getLeaseResult(lease_request_status: String) {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
+                    _leaseResultLiveData.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun getProductTypeCodes() {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                codesRepo.getCodes("PRODUCT_TYPE").onEach { resource ->
+                    _productCodesLiveData.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun getLeaseProgressCodes() {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                codesRepo.getCodes("LEASE_PROGRESS_STATUS").onEach { resource ->
+                    _progressCodesLiveData.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun getLeaseRequestCodes() {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                codesRepo.getCodes("LEASE_REQUEST_STATUS").onEach { resource ->
+                    _requestCodesLiveData.value = resource.data
                 }.launchIn(viewModelScope)
             }
         }

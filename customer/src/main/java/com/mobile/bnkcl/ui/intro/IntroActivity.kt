@@ -30,6 +30,7 @@ import javax.inject.Inject
 class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
     private val introViewModel: IntroViewModel by viewModels()
+    private lateinit var preLang: String
 
     override fun getLayoutId(): Int = R.layout.activity_intro
 
@@ -60,7 +61,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     }
 
     private fun initLanguage() {
-        LocaleHelper.setLanguage(this, "lo")
+        preLang = sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
+        LocaleHelper.setLanguage(this, if ("" == preLang) "lo" else preLang)
     }
 
 

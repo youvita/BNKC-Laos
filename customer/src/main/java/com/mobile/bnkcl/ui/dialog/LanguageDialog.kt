@@ -8,6 +8,7 @@ import android.widget.RadioGroup
 import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.library.util.LocaleHelper
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.DialogLanguageBinding
@@ -16,7 +17,8 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(), RadioGroup.OnCheckedChangeListener {
+class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
+    RadioGroup.OnCheckedChangeListener {
 
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
@@ -32,8 +34,8 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(), RadioGroup.O
     companion object {
         @SuppressLint("ConstantLocale")
         private val getLanguages: MutableList<String> = mutableListOf(
-                "lo",
-                Locale.ENGLISH.language
+            "lo",
+            Locale.ENGLISH.language
         )
     }
 
@@ -58,14 +60,23 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(), RadioGroup.O
     private fun changeLanguage(language: String) {
         Handler().postDelayed({
             LocaleHelper.setLanguage(requireContext(), language)
+            sharedPrefer.putPrefer(
+                Constants.LANGUAGE, LocaleHelper.getLanguage(
+                    requireContext().applicationContext
+                )
+            )
             recreateLanguageChanged()
         }, 100L)
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-        when(checkedId) {
-            R.id.rb_laos -> {changeLanguage(getLanguages[0])}
-            R.id.rb_en -> {changeLanguage(getLanguages[1])}
+        when (checkedId) {
+            R.id.rb_laos -> {
+                changeLanguage(getLanguages[0])
+            }
+            R.id.rb_en -> {
+                changeLanguage(getLanguages[1])
+            }
         }
     }
 }

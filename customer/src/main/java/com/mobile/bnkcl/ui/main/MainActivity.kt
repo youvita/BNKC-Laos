@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.mobile.bnkcl.ui.main.fragment.menu.MenuFragment
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
+import com.mobile.bnkcl.ui.otp.OtpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -54,6 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         R.drawable.selector_tab_menu)
 
     private val role: Int = 1
+    private var lastIndex: Int = 0
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
@@ -95,10 +98,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
+                    lastIndex = position
                     when (position) {
                         3 -> {
 //                            findOfficeFragment.loanServiceTabSelected()
                             Log.d(">>>>", "onPageSelected: Menu opening")
+                        }
+
+                        1 -> {
+                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                                val intent = Intent(this@MainActivity, OtpActivity::class.java)
+                                intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
+                                intent.putExtra("LAST_INDEX", lastIndex)
+                                startActivity(intent)
+                            }
                         }
                     }
 

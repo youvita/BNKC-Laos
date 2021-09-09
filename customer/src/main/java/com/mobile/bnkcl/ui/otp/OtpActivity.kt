@@ -27,6 +27,8 @@ import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
+import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     var sendOtp = false
     private var countDownTimer: CountDownTimer? = null
     private var txtAgreement: String? = null
+    private var isFromPage: Boolean = false
+    private var lastIndex: Int = 0
     /**
      * text watcher event changed listener
      */
@@ -215,6 +219,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
                 val phoneNumber = intent.getStringExtra("PHONE_NUMBER")
+                lastIndex = intent.getIntExtra("LAST_INDEX", 0)
 
                 when {
                     action.equals("LOGIN", ignoreCase = true) -> {
@@ -240,6 +245,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                     action.equals("RESET", ignoreCase = true) -> {
 
                         binding.otpViewModel!!.uiMode = 3
+
+                    }
+                    action.equals("REQUIRE_LOGIN", ignoreCase = true) -> {
+
+                        isFromPage = true
 
                     }
 
@@ -350,6 +360,16 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             binding.edtOtp.text?.clear();
         } catch (e : Exception) {
             e.printStackTrace();
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if (isFromPage) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 

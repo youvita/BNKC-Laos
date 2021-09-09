@@ -145,7 +145,7 @@
 
                     <!-- Lease Item RecyclerView  -->
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/lease_recyclerview"
+                        android:id="@+id/rv_lease"
                         android:layout_width="match_parent"
                         android:layout_height="260dp"
                         android:clipToPadding="false"
@@ -164,29 +164,26 @@
                         android:gravity="center"
                         android:orientation="horizontal" />
 
-                    <include
-                        android:id="@+id/new_layout"
-                        layout="@layout/fragment_my_page_banner" />
-                    <!--                    <androidx.recyclerview.widget.RecyclerView-->
-                    <!--                        android:id="@+id/banner_recycler_view"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="-10dp"-->
-                    <!--                        android:clipToPadding="false"-->
-                    <!--                        android:nestedScrollingEnabled="false"-->
-                    <!--                        android:orientation="horizontal"-->
-                    <!--                        android:paddingStart="@dimen/padding_21dp"-->
-                    <!--                        android:paddingEnd="@dimen/padding_21dp"-->
-                    <!--                        app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"-->
-                    <!--                        tools:listitem="@layout/banner_item_layout" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/padding_21dp"
+                        android:paddingEnd="@dimen/padding_21dp"
+                        app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
+                        tools:listitem="@layout/banner_item_layout" />
 
-                    <!--                    &lt;!&ndash; Banner Item Indicator &ndash;&gt;-->
-                    <!--                    <LinearLayout-->
-                    <!--                        android:id="@+id/ll_banner_indicator"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:gravity="center"-->
-                    <!--                        android:orientation="horizontal" />-->
+                    <!-- Banner Item Indicator -->
+                    <LinearLayout
+                        android:id="@+id/ll_banner_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
 
                 </LinearLayout>
 
