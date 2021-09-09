@@ -29,4 +29,11 @@ object Constants {
 
     const val SIGN_UP_FAIL = "SIGN_UP_FAIL"
     const val SET_UP_PIN = "SET_UP_PIN"
+
+    // Web Endpoint
+    const val WB_NOTICES = "/mobile/views/notices?category=customer"
+    const val WB_POLICY = "/pages/policy.html"
+    const val WB_COM_PROFILE = "/pages/company_profile.html"
+    const val WB_TER_AND_CON = "/pages/terms_and_conditions.html"
+    const val WB_FAQS = "/mobile/views/faqs"
 }

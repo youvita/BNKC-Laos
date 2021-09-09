@@ -1,9 +1,13 @@
 package com.mobile.bnkcl.ui.cscenter
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.Status
@@ -14,6 +18,7 @@ import com.bnkc.sourcemodule.app.Constants.CATEGORY
 import com.bnkc.sourcemodule.app.Constants.CLAIM_ID
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.mobile.bnkcl.BuildConfig
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
@@ -130,7 +135,31 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_ffeeee)
         binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
         binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
+        val webSettings = binding.wbFaq.settings
+        webSettings.javaScriptEnabled = true
+        webSettings.domStorageEnabled = true
+        webSettings.setAppCacheEnabled(true)
+        webSettings.loadsImagesAutomatically = true
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        binding.wbFaq.webViewClient = object : WebViewClient(){
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                view?.loadUrl(url!!)
+                return true
+            }
 
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                view?.loadUrl("javascript:window.HTMLOUT.processHTML('<body>'+document.getElementsByTagName('html')[0].innerHTML+'</body>');")
+            }
+        }
+
+        val header = mutableMapOf<String, String>()
+        header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
+        header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
+        binding.wbFaq.loadUrl(BuildConfig.BASE_URL + Constants.WB_FAQS, header)
     }
 
     private fun visibleAskBnk() {

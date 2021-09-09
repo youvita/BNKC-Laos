@@ -329,7 +329,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         when(p0!!.id){
             R.id.tv_agree -> {
                 val intent1 = Intent(this, TermsAndConditionsActivity::class.java)
-                intent1.putExtra(Constants.WEB_URL, "/pages/terms_and_conditions.html")
+                intent1.putExtra(Constants.WEB_URL, Constants.WB_TER_AND_CON)
                 intent1.putExtra(Constants.WEB_TITLE, getString(R.string.sign_up_29))
                 startActivity(intent1)
             }
