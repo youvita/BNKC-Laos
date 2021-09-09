@@ -80,7 +80,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
 
             }
         })
-
+//        showLoading()
         viewModel.reqAreasList()
         getAreas()
         getBranches()
@@ -100,11 +100,11 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
     }
 
     fun getBranches(){
-        viewModel.branchLiveData.observe(requireActivity()) {
+        viewModel.branchLiveData.observe(requireActivity(),{
             val adapter = FindOfficeRecyclerAdapter(requireActivity().supportFragmentManager)
             adapter.addItemList(it)
             binding.recyclerFindOffice.adapter = adapter
-        }
+        })
     }
 
     override fun getLayoutId(): Int {

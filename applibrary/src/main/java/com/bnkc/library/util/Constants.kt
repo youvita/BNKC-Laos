@@ -12,4 +12,6 @@ object Constants {
     const val CHANGED = 1
     const val RESET_CHANGE = 0
 
+    const val PRODUCT_TYPE = "PRODUCT_TYPE"
+
 }

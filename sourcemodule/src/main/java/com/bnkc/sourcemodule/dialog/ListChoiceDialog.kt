@@ -20,7 +20,6 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
         return R.layout.list_choice_dialog
     }
     var item = 4
-//    var onConfirmClickListener: ((pos : Int) -> Unit) = { }
 
     var setOnItemListener : (pos: Int) -> Unit = {}
 
@@ -58,8 +57,7 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
         val adapter =
             ListChoiceAdapter(requireContext(), data, selectedItem)
 
-        val handler = Handler()
-        handler.postDelayed({
+        binding.lvLoanTerm.post {
             try {
                 val h1 = binding.lvLoanTerm.height
                 val itemHeight: Int = if (item % 2 == 0) {
@@ -69,11 +67,12 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
                 }
                 binding.lvLoanTerm.smoothScrollToPositionFromTop(selectedItem, h1 / 2 - itemHeight, 0)
             } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }, 10)
+        }
+
         binding.lvLoanTerm.adapter = adapter
         binding.lvLoanTerm.itemsCanFocus = false
-        //Measure child view to set maximum List height to show child
         //Measure child view to set maximum List height to show child
         binding.lvLoanTerm.setListViewHeightBasedOnChildren(
             binding.lvLoanTerm,
@@ -81,10 +80,9 @@ class ListChoiceDialog : BaseDialogFragment<ListChoiceDialogBinding>() {
         )
         // set on item selected
         binding.lvLoanTerm.onItemClickListener =
-            OnItemClickListener { parent, view, position, id ->
+            OnItemClickListener { _, _, position, _ ->
                 setOnItemListener(position)
                 dismiss()
-                Log.d(">>>>>", "List click $position")
             }
 
     }

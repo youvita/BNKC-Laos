@@ -39,55 +39,55 @@
                 android:orientation="vertical"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/comm_price"
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Commodity Price"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/comm_price"-->
+<!--                    style="@style/font13_263238_medium"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginTop="@dimen/margin_15dp"-->
+<!--                    android:text="@string/commodity_price"/>-->
 
-                <RelativeLayout
-                    android:id="@+id/loan_term_container"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/selector_viewgroup_bg"
-                    android:layout_height="50dp">
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/loan_term_container"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:background="@drawable/selector_viewgroup_bg"-->
+<!--                    android:layout_height="50dp">-->
 
-                    <TextView
-                        android:id="@+id/tv_term"
-                        android:layout_marginStart="15dp"
-                        android:layout_width="wrap_content"
-                        android:text="Kip"
-                        android:layout_marginEnd="20dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_height="wrap_content"
-                        style="@style/font15_263238_medium"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_term"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:text="Kip"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        style="@style/font15_263238_medium"/>-->
 
-                    <com.mobile.bnkcl.com.view.BnkEditText
-                        android:id="@+id/ed_loan_term"
-                        android:layout_width="match_parent"
-                        android:hint="0.00"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:maxLength="2"
-                        android:digits="1234567890,"
-                        android:inputType="number"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:textAlignment="textEnd"
-                        android:background="@null"
-                        android:layout_height="match_parent"
-                        android:imeOptions="actionDone"
-                        style="@style/font15_CFD8DC_medium_input"/>
+<!--                    <com.mobile.bnkcl.com.view.BnkEditText-->
+<!--                        android:id="@+id/ed_loan_term"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:hint="0.00"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:maxLength="2"-->
+<!--                        android:digits="1234567890,"-->
+<!--                        android:inputType="number"-->
+<!--                        android:paddingStart="15dp"-->
+<!--                        android:paddingEnd="15dp"-->
+<!--                        android:textAlignment="textEnd"-->
+<!--                        android:background="@null"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:imeOptions="actionDone"-->
+<!--                        style="@style/font15_CFD8DC_medium_input"/>-->
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
                 <TextView
                     android:id="@+id/lease_amt"
@@ -97,7 +97,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Lease Amount"/>
+                    android:text="@string/lease_amount"/>
 
                 <RelativeLayout
                     android:id="@+id/loan_lease_amt"
@@ -140,27 +140,27 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="@dimen/margin_15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Advance Payment"/>
+<!--                <TextView-->
+<!--                    style="@style/font13_263238_medium"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginTop="@dimen/margin_15dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:text="@string/advance_payment"/>-->
 
-                <TextView
-                    android:id="@+id/tv_advance_payment"
-                    android:layout_width="match_parent"
-                    android:text="0.00 Kip"
-                    android:paddingEnd="@dimen/margin_10dp"
-                    android:gravity="center_vertical|end"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/round_stroke_e1e5ec_e3f6f7_8"
-                    android:layout_height="@dimen/height_50dp"
-                    style="@style/font15_cfd8dc_medium"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_advance_payment"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:text="0.00 Kip"-->
+<!--                    android:paddingEnd="@dimen/margin_10dp"-->
+<!--                    android:gravity="center_vertical|end"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:background="@drawable/round_stroke_e1e5ec_e3f6f7_8"-->
+<!--                    android:layout_height="@dimen/height_50dp"-->
+<!--                    style="@style/font15_cfd8dc_medium"/>-->
 
                 <TextView
                     android:id="@+id/rate"
@@ -170,7 +170,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Interest Rate"/>
+                    android:text="@string/interest_rate"/>
 
                 <RelativeLayout
                     android:id="@+id/rl_rate"
@@ -197,7 +197,7 @@
                         android:id="@+id/ed_rate"
                         android:layout_width="match_parent"
                         android:hint="0.00"
-                        android:text="@{`` + leaseCalRequest.interest_rate}"
+                        android:text="@{leaseCalRequest.interest_rate == null ? `` : `` + leaseCalRequest.interest_rate}"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:maxLength="2"
@@ -221,7 +221,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Repayment Term"/>
+                    android:text="@string/repayment_term"/>
 
                 <LinearLayout
                     android:id="@+id/ll_repayment_term"
@@ -244,7 +244,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
                         android:layout_weight="1"
-                        android:text="@{``+ leaseCalRequest.repayment_term}"
+                        android:text="@{leaseCalRequest.repayment_term == null ? @string/select : ``+leaseCalRequest.repayment_term}"
                         android:visibility="visible" />
 
                     <ImageView
@@ -275,7 +275,7 @@
             <com.bnkc.sourcemodule.ui.ValidateButton
                 android:id="@+id/btn_calculate"
                 android:layout_width="match_parent"
-                app:buttonText="Calculate"
+                app:buttonText="@string/calculate"
                 app:textAllCaps="true"
                 app:is_active="true"
                 android:layout_marginStart="20dp"

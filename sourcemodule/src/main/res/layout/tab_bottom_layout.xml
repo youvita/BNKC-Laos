@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,6 +24,7 @@
                 android:id="@+id/main_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_toStartOf="@id/menu"
                 android:background="@drawable/top_stroke_bottom"
                 app:tabIndicator="@drawable/tab_indicator"
                 app:tabIndicatorColor="@color/color_d7191f"
@@ -36,26 +38,35 @@
                 app:tabRippleColor="@null"
                 app:tabSelectedTextColor="@color/color_d7191f"
                 app:tabTextAppearance="@style/main_tab_text_style"
-                app:tabTextColor="@color/color_cfd8dc">
+                app:tabTextColor="@color/color_cfd8dc"/>
 
-                <!--            <com.google.android.material.tabs.TabItem-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:icon="@drawable/selector_tab_myloan_on"-->
-                <!--                android:text="@string/main_bottom_menu1" />-->
+            <LinearLayout
+                android:id="@+id/menu"
+                android:background="@drawable/top_stroke_bottom"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_10dp"
+                android:paddingEnd="@dimen/margin_20dp"
+                android:layout_alignParentEnd="true">
 
-                <!--            <com.google.android.material.tabs.TabItem-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="match_parent"-->
-                <!--                android:icon="@drawable/selector_tab_loan_service"-->
-                <!--                android:text="@string/main_bottom_menu2" />-->
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tab_menu_off"
+                    />
 
-                <!--            <com.google.android.material.tabs.TabItem-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="match_parent"-->
-                <!--                android:icon="@drawable/selector_tab_find_office"-->
-                <!--                android:text="@string/main_bottom_menu3" />-->
-            </com.google.android.material.tabs.TabLayout>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Menu"
+                    android:layout_marginTop="2dp"
+                    style="@style/main_tab_text_style"/>
+            </LinearLayout>
 
         </RelativeLayout>
 

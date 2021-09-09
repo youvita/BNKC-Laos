@@ -18,6 +18,8 @@
     <string name="sign_input_identify_number">Input Identification Number</string>
     <string name="sign_existing_customer">Existing Customer</string>
 
+    <string name="select">Select</string>
+
     <!-- additional information  -->
     <string name="addition_home_address">Home Address</string>
     <string name="addition_select_capital">Select Capital</string>
@@ -362,5 +364,9 @@
     <string name="result_detail_03" >\u0020\u0020 Interest \u0020\u0020</string>
     <string name="result_detail_04" >\u0020\u0020\u0020 Repayment \u0020\u0020\u0020</string>
     <string name="result_detail_05" >\u0020\u0020\u0020 Balance \u0020\u0020\u0020</string>
+    <string name="repayment_term">Repayment Term</string>
+    <string name="advance_payment">Advance Payment</string>
+    <string name="commodity_price">Commodity Price</string>
+    <string name="apply_lease">Apply Lease</string>
 
 </resources>

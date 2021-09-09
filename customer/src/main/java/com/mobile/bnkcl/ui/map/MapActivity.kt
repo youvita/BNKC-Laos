@@ -43,6 +43,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
             branchId = intent.getLongExtra("branch_id", 0)
             Log.d(">>>>>>", "onCreate :: $branchId")
             mapViewModel.branchId = branchId
+            showLoading()
             mapViewModel.reqOffice()
 //            data = intent.getSerializableExtra("branch_info") as BranchResData
         }

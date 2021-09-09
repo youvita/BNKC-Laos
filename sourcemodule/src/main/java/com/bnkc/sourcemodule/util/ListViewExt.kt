@@ -10,7 +10,7 @@ fun ListView.setListViewHeightBasedOnChildren(listView : ListView, showItem : In
         return;
 
     var totalHeight = listView.paddingTop + listView.paddingBottom;
-    for (i in 0..listAdapter!!.count){
+    for (i in 0 until listAdapter!!.count){
         if (i>showItem-1){
             break;
         }

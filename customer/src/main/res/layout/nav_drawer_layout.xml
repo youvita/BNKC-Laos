@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-
-        <import type="android.view.View" />
-
-        <import type="java.util.Locale" />
+        <import type="java.util.Locale"/>
 
         <variable
             name="localeCode"
             type="String" />
 
+        <import type="android.view.View" />
+
         <variable
             name="menuViewModel"
             type="com.mobile.bnkcl.ui.main.MenuViewModel" />
-
-        <variable
-            name="profile"
-            type="com.mobile.bnkcl.data.response.user.ProfileData" />
-
 
     </data>
 
@@ -97,7 +90,8 @@
                             android:layout_marginBottom="@dimen/margin_5dp"
                             android:ellipsize="end"
                             android:gravity="center_vertical"
-                            android:maxLines="2" />
+                            android:maxLines="2"
+                            android:text="User Unknown" />
 
                         <TextView
                             style="@style/font13_263238_regular"
@@ -109,7 +103,8 @@
                             android:id="@+id/tv_user_id"
                             style="@style/font13_d7191f_bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="EXAMPLE3250" />
 
                     </LinearLayout>
 

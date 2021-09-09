@@ -145,4 +145,5 @@ object BindingAdapters {
         if (str == null) return
         textView.text = FormatUtils.getNumberFormat(textView.context, str.split(" ")[1])
     }
+
 }

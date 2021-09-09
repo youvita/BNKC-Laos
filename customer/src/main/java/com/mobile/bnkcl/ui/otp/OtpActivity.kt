@@ -67,6 +67,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             val inputOtp =
                 s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
             if (inputOtp.length == 6) {
+                showLoading()
                 val otp: String =
                     binding.edtOtp.text.toString().trim().replace("-", "")
 //                    binding.otpViewModel.getVerifyOTPModel().setPin(otp)
@@ -143,7 +144,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun sendOTP() {
         viewModel.sendOTPLiveData.observe(this) {
             Log.d("nng", it.toString())
-            successListener()
             pinID = it.pin_id.toString()
             binding.tvResend.setTextColor(resources.getColor(R.color.colorPrimary))
             lifeTime = it.lifetime!!
@@ -155,7 +155,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun verifyOTP() {
         viewModel.verifyOTPLiveData.observe(this){
             Log.d(">>>>>>>>", it.toString())
-            successListener()
             binding.isVerified = it.verified!!
             binding.tvCorrect.visibility = View.VISIBLE
             if (it.verified!!){

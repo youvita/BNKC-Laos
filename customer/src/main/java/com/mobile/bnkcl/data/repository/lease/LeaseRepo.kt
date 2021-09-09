@@ -10,6 +10,7 @@ import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequ
 import com.mobile.bnkcl.data.request.lease.transaction.TransactionHistoryRequest
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
+import com.mobile.bnkcl.data.response.lease.ItemResponse
 import com.mobile.bnkcl.data.response.lease.LeaseInfoResponse
 import com.mobile.bnkcl.data.response.lease.full_payment.FullPaymentResponse
 import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleResponse
@@ -132,4 +133,22 @@ class LeaseRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient
                 e.printStackTrace()
             }
         }
+
+    fun getItemCode(groupId : String): Flow<Resource<ItemResponse>> =
+    flow {
+        delay(1000)
+        try {
+            val request = object : RemoteDataSource<ItemResponse>() {
+                override suspend fun createCall(): Response<ItemResponse> {
+                    return leaseApi.getCodeLease(
+                        groupId
+                    )
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

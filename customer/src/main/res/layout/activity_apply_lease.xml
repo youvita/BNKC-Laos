@@ -94,44 +94,13 @@
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:text="Name of Brand"/>
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/ll_name_brand"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:layout_marginBottom="10dp"-->
-<!--                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
-<!--                    android:orientation="horizontal">-->
-
-<!--                    <com.mobile.bnkcl.com.view.BnkEditText-->
-<!--                        android:id="@+id/ed_name_brand"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:hint="Input Name of Brand"-->
-<!--                        android:maxLines="1"-->
-<!--                        android:singleLine="true"-->
-<!--                        android:maxLength="2"-->
-<!--                        android:digits="1234567890,"-->
-<!--                        android:inputType="number"-->
-<!--                        android:paddingStart="15dp"-->
-<!--                        android:paddingEnd="15dp"-->
-<!--                        android:textAlignment="textStart"-->
-<!--                        android:background="@null"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:imeOptions="actionDone"-->
-<!--                        style="@style/font15_CFD8DC_medium_input"/>-->
-<!--                    -->
-<!--                </LinearLayout>-->
-
                 <com.mobile.bnkcl.com.view.BnkEditText
                     android:id="@+id/ed_name_brand"
                     android:layout_width="match_parent"
                     android:hint="Input Name of Brand"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:maxLength="2"
-                    android:digits="1234567890,"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:textAlignment="textStart"
@@ -143,6 +112,35 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     
+                    style="@style/font15_CFD8DC_medium_input"/>
+
+                <TextView
+                    android:id="@+id/name_type"
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:text="Name of Type"/>
+
+                <com.mobile.bnkcl.com.view.BnkEditText
+                    android:id="@+id/ed_name_type"
+                    android:layout_width="match_parent"
+                    android:hint="Input Name of Type"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textAlignment="textStart"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:layout_height="@dimen/height_50dp"
+                    android:imeOptions="actionDone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     style="@style/font15_CFD8DC_medium_input"/>
 
                 <TextView
@@ -162,50 +160,84 @@
                     android:hint="Input Name of Brand"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:maxLength="2"
-                    android:digits="1234567890,"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:textAlignment="textStart"
                     android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                     android:layout_height="@dimen/height_50dp"
                     android:imeOptions="actionDone"
-
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     
                     style="@style/font15_CFD8DC_medium_input"/>
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/ll_name_model"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:layout_marginBottom="10dp"-->
-<!--                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
-<!--                    android:orientation="horizontal">-->
+                <CheckBox
+                    android:id="@+id/cb_etc"
+                    android:layout_marginStart="@dimen/margin_15dp"
+                    android:layout_marginBottom="@dimen/margin_5dp"
+                    android:checked="true"
+                    android:paddingStart="@dimen/margin_10dp"
+                    android:button="@drawable/selector_green_check"
+                    android:layout_width="wrap_content"
+                    android:text="ETC(No applicable type"
+                    android:layout_height="wrap_content"/>
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tv_name_model"-->
-<!--                        style="@style/font15_cfd8dc_medium"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:layout_marginStart="15dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:text="Input Name of Model"-->
-<!--                        android:visibility="visible" />-->
+                <com.mobile.bnkcl.com.view.BnkEditText
+                    android:id="@+id/ed_etc_brand"
+                    android:layout_width="match_parent"
+                    android:hint="Input name of brand"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textAlignment="textStart"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:layout_height="@dimen/height_50dp"
+                    android:imeOptions="actionDone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    style="@style/font15_CFD8DC_medium_input"/>
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:layout_marginEnd="15dp"-->
-<!--                        android:src="@drawable/ic_more_ico" />-->
-<!--                </LinearLayout>-->
+                <com.mobile.bnkcl.com.view.BnkEditText
+                    android:id="@+id/ed_etc_type"
+                    android:layout_width="match_parent"
+                    android:hint="Input name of type(SUV,SEDAN, VAN...)"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textAlignment="textStart"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:layout_height="@dimen/height_50dp"
+                    android:imeOptions="actionDone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    style="@style/font15_CFD8DC_medium_input"/>
+
+                <com.mobile.bnkcl.com.view.BnkEditText
+                    android:id="@+id/ed_etc_model"
+                    android:layout_width="match_parent"
+                    android:hint="Input name of model"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textAlignment="textStart"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:layout_height="@dimen/height_50dp"
+                    android:imeOptions="actionDone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+
+                    style="@style/font15_CFD8DC_medium_input"/>
 
                 <TextView
                     android:id="@+id/pro_price"
@@ -218,7 +250,7 @@
                     android:text="Product Price"/>
 
                 <RelativeLayout
-                    android:id="@+id/loan_term_container"
+                    android:id="@+id/pro_price_container"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
@@ -228,7 +260,7 @@
                     android:layout_height="50dp">
 
                     <TextView
-                        android:id="@+id/tv_term"
+                        android:id="@+id/tv_pro_price"
                         android:layout_marginStart="15dp"
                         android:layout_width="wrap_content"
                         android:text="Kip"
@@ -239,7 +271,7 @@
                         style="@style/font15_263238_medium"/>
 
                     <com.mobile.bnkcl.com.view.BnkEditText
-                        android:id="@+id/ed_loan_term"
+                        android:id="@+id/ed_pro_price"
                         android:layout_width="match_parent"
                         android:hint="0.00"
                         android:maxLines="1"
@@ -253,6 +285,7 @@
                         android:background="@null"
                         android:layout_height="match_parent"
                         android:imeOptions="actionDone"
+
                         style="@style/font15_CFD8DC_medium_input"/>
 
                 </RelativeLayout>

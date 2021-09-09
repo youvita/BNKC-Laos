@@ -3,6 +3,7 @@ package com.mobile.bnkcl.data.api.lease
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
+import com.mobile.bnkcl.data.response.lease.ItemResponse
 import com.mobile.bnkcl.data.response.lease.LeaseInfoResponse
 import com.mobile.bnkcl.data.response.lease.apply.ApplyLeaseResponse
 import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
@@ -50,5 +51,10 @@ interface LeaseApi {
     suspend fun applyLease(
         @Body applyLeaseRequest: ApplyLeaseRequest
     ): Response<ApplyLeaseResponse>
+
+    @GET("api/ca/common/codes")
+    suspend fun getCodeLease(
+        @Query("group_id") group_id: String
+    ): Response<ItemResponse>
 
 }

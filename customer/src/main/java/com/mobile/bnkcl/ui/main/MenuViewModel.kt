@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.ui.main.fragment.menu
+package com.mobile.bnkcl.ui.main
 
 import android.content.Intent
 import androidx.lifecycle.LiveData
