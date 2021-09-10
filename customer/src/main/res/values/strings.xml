@@ -17,6 +17,7 @@
     <string name="sign_check">check</string>
     <string name="sign_input_identify_number">Input Identification Number</string>
     <string name="sign_existing_customer">Existing Customer</string>
+    <string name="sign_new_customer">New Customer</string>
 
     <string name="select">Select</string>
 

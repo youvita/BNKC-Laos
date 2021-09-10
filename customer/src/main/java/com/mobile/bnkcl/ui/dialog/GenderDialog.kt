@@ -1,29 +1,50 @@
 package com.mobile.bnkcl.ui.dialog
 
+import android.os.Bundle
+import android.view.View
 import android.widget.RadioGroup
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.DialogGenderBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
-class GenderDialog :BaseDialogFragment<DialogGenderBinding>(), RadioGroup.OnCheckedChangeListener {
+class GenderDialog(string: String) :BaseDialogFragment<DialogGenderBinding>(),View.OnClickListener {
 
     override fun getLayoutId(): Int {
         return R.layout.dialog_gender
     }
 
-    lateinit var gender : String
-    fun setCheckGender(){
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setCheckGenderButton()
     }
 
-    override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-        when(checkedId){
-            R.id.rb_male -> {}
-            R.id.rb_female ->{}
+    var genderCode : String = string
+    var genderCheck : String? = null
+    private fun setCheckGenderButton(){
+        if (genderCheck == "M") {
+            binding.rbMale.isChecked = true
+        } else {
+            binding.rbFemale.isChecked = true
         }
+
+        binding.rbMale.setOnClickListener(this)
+        binding.rbFemale.setOnClickListener(this)
     }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.rb_male -> {
+                genderCode = "M"
+                dialog?.dismiss()
+            }
+            R.id.rb_female -> {
+                genderCode = "F"
+                dialog?.dismiss()
+            }
+        }    }
 
 
 }

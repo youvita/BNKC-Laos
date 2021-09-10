@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.data.api.code
 
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.code.CodesResponse
 import com.mobile.bnkcl.data.response.dashboard.DashboardResponse
 import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationResponse

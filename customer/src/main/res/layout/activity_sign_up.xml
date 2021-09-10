@@ -5,8 +5,15 @@
 
     <data>
         <variable
-            name="signup"
-            type="com.mobile.bnkcl.ui.signup.SignUpActivity" />
+            name="request"
+            type="com.mobile.bnkcl.data.request.auth.SignUpRequest" />
+        <variable
+            name="isVerified"
+            type="Boolean"/>
+        <variable
+            name="viewModel"
+            type="com.mobile.bnkcl.ui.signup.AddressInfoViewModel" />
+
 
     </data>
 
@@ -177,7 +184,7 @@
                                     android:id="@+id/edt_name"
                                     style="@style/font15_CFD8DC_medium_input"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="@dimen/height_50dp"
                                     android:layout_marginTop="@dimen/margin_10dp"
                                     android:background="@drawable/selector_edittext_bg"
                                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -204,7 +211,7 @@
                                 <LinearLayout
                                     android:id="@+id/ll_dob"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="@dimen/height_50dp"
                                     android:layout_marginTop="@dimen/margin_10dp"
                                     android:background="@drawable/selector_viewgroup_bg"
                                     android:orientation="horizontal">
@@ -251,7 +258,7 @@
                                     <LinearLayout
                                         android:id="@+id/ll_input_id_num"
                                         android:layout_width="@dimen/width_0dp"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="@dimen/height_50dp"
                                         android:layout_marginEnd="@dimen/margin_10dp"
                                         android:layout_weight="1"
                                         android:background="@drawable/selector_viewgroup_bg"
@@ -268,7 +275,7 @@
                                             android:digits="0123456789"
                                             android:hint="@string/sign_input_identify_number"
                                             android:inputType="number"
-                                            android:maxLength="10"
+                                            android:maxLength="9"
                                             android:paddingStart="@dimen/padding_15dp"
                                             android:paddingTop="@dimen/padding_16dp"
                                             android:paddingEnd="@dimen/padding_15dp"
@@ -287,8 +294,8 @@
                                             android:paddingTop="@dimen/padding_16dp"
                                             android:paddingEnd="@dimen/padding_10dp"
                                             android:paddingBottom="@dimen/padding_16dp"
-                                            android:text="@string/sign_existing_customer"
-                                            android:visibility="gone" />
+                                            tools:text="@string/sign_existing_customer"
+                                            android:visibility="visible" />
 
                                     </LinearLayout>
 
@@ -332,11 +339,11 @@
 
                                         <TextView
                                             android:id="@+id/tv_gender"
-                                            style="@style/font15_90a4ae_medium"
+                                            style="@style/font15_CFD8DC_medium_input"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:gravity="center_vertical"
-                                            android:text="Select Gender"
+                                            android:hint="Select Gender"
                                             app:drawableEndCompat="@drawable/ic_more_ico" />
                                     </LinearLayout>
 
@@ -368,20 +375,12 @@
                                         android:padding="@dimen/padding_5dp"
                                         android:text="(optional)" />
                                 </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
                                     <com.mobile.bnkcl.com.view.BnkEditText
                                         android:id="@+id/edt_recommend"
                                         style="@style/font15_CFD8DC_medium_input"
-                                        android:layout_width="0dp"
+                                        android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:layout_marginTop="10dp"
-                                        android:layout_marginEnd="@dimen/margin_10dp"
-                                        android:layout_weight="1"
                                         android:background="@drawable/selector_edittext_bg"
                                         android:hint="Input Recommender"
                                         android:maxLength="200"
@@ -389,7 +388,7 @@
                                         android:paddingEnd="15sp"
                                         android:singleLine="true"
                                         android:textColorHint="#cfd8dc" />
-                                </LinearLayout>
+
 
                             </LinearLayout>
 

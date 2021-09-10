@@ -5,9 +5,11 @@ import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
 import com.mobile.bnkcl.data.api.auth.AuthAPI
+import com.mobile.bnkcl.data.request.auth.IdNumReq
 import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
+import com.mobile.bnkcl.data.response.auth.IdNumRes
 import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import kotlinx.coroutines.delay
@@ -61,6 +63,23 @@ class AuthRepo(context: Context, okHttpClient: OkHttpClient) {
             request.networkRequest()
             emit(request.asLiveData().value!!)
         } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun verifyIdentification(idNumReq: IdNumReq) : Flow<Resource<IdNumRes>> = flow {
+        try {
+            val req = object  : RemoteDataSource<IdNumRes>(){
+                override suspend fun createCall(): Response<IdNumRes> {
+                    return authAPI.verifyIdentification(
+                        idNumReq.username!!,
+                        idNumReq.identification_number!!
+                    )
+                }
+            }
+            req.networkRequest()
+            emit(req.asLiveData().value!!)
+        }catch (e:java.lang.Exception){
             e.printStackTrace()
         }
     }
