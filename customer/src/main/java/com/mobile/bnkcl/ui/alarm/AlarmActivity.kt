@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.alarm.AlarmItem
@@ -31,22 +30,19 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 
         initView()
 
-//        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-            binding.lvNotifiation.adapter = adapter
-            alarmViewModel.alarmListLiveData.observe(this) {
-                if (binding.swipeRefreshNotification.isRefreshing) {
-                    binding.swipeRefreshNotification.isRefreshing = false
-                }
-                val list: MutableList<AlarmItem> = it.alarms
-//                val list: MutableList<AlarmItem> = mutableListOf() // test empty
-
-                checkUIChangeEmptyData(list)
-                if (list.isNotEmpty()) {
-                    adapter.addItemList(list)
-                }
+        binding.lvNotifiation.adapter = adapter
+        alarmViewModel.alarmListLiveData.observe(this) {
+            if (binding.swipeRefreshNotification.isRefreshing) {
+                binding.swipeRefreshNotification.isRefreshing = false
             }
-            alarmViewModel.getAlarmList()
-//        }
+            val list: MutableList<AlarmItem> = it.alarms
+
+            if (list.isNotEmpty()) {
+                adapter.addItemList(list)
+            }
+            checkUIChangeEmptyData()
+        }
+        alarmViewModel.getAlarmList()
     }
 
     private fun initView() {
@@ -54,7 +50,12 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
             onBackPressed()
         }
 
-        binding.swipeRefreshNotification.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorAccent))
+        binding.swipeRefreshNotification.setColorSchemeColors(
+            ContextCompat.getColor(
+                this,
+                R.color.colorAccent
+            )
+        )
         binding.swipeRefreshNotification.setOnRefreshListener {
             resetStartPage()
         }
@@ -85,16 +86,17 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 
     private fun resetStartPage() {
         alarmViewModel.pageNo = 0
+        adapter.clearItemList()
         alarmViewModel.getAlarmList()
     }
 
-    private fun checkUIChangeEmptyData(list: List<AlarmItem>) {
-        if (list.isEmpty()) {
-            binding.lvNotifiation.visibility = View.GONE
-            binding.llNoData.visibility = View.VISIBLE
-        } else {
+    private fun checkUIChangeEmptyData() {
+        if (adapter.itemCount > 0) {
             binding.lvNotifiation.visibility = View.VISIBLE
             binding.llNoData.visibility = View.GONE
+        } else {
+            binding.lvNotifiation.visibility = View.GONE
+            binding.llNoData.visibility = View.VISIBLE
         }
     }
 

@@ -185,13 +185,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 }
                 R.id.btn_company_profile -> {
                     intent = Intent(this, TermsAndConditionsActivity::class.java)
-                    intent.putExtra(Constants.WEB_URL, "/pages/company_profile.html")
+                    intent.putExtra(Constants.WEB_URL, Constants.WB_COM_PROFILE)
                     intent.putExtra(Constants.WEB_TITLE, getString(R.string.nav_company_profile))
                     startActivity(intent)
                 }
                 R.id.btn_policy -> {
                     intent = Intent(this, TermsAndConditionsActivity::class.java)
-                    intent.putExtra(Constants.WEB_URL, "/pages/policy.html")
+                    intent.putExtra(Constants.WEB_URL, Constants.WB_POLICY)
                     intent.putExtra(Constants.WEB_TITLE, getString(R.string.setting_03))
                     startActivity(intent)
                 }
@@ -200,7 +200,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
                         intent.putExtra(
                             "push_alarm_enabled",
-                            viewModel.userProfileLiveData.value!!.push_alarm_enabled
+                            viewModel.userProfileLiveData.value?.push_alarm_enabled
                         )
                     }
                     startActivity(intent)

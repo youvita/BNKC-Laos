@@ -26,7 +26,7 @@ class AlarmViewModel @Inject constructor(private var alarmRepo: AlarmRepo) : Bas
     val alarmListLiveData: LiveData<AlarmResponse> = _getAlarmList
     fun getAlarmList() {
         viewModelScope.launch {
-            alarmRepo.getAlarmList(AlarmRequest(pageNo, 10, "")).onEach { resource ->
+            alarmRepo.getAlarmList(AlarmRequest(pageNo, 10, "asc")).onEach { resource ->
                 if (resource.status == Status.ERROR) {
                     val code = resource.errorCode
                     val title = resource.messageTitle
