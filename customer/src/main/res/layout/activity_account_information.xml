@@ -257,7 +257,7 @@
                                                 android:layout_weight="2"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                android:text="@{profile.phone_number}" />
+                                                android:text="@{profile.phoneNumber}" />
 
                                         </LinearLayout>
 
@@ -350,7 +350,7 @@
                                                 android:layout_weight="1"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                android:text="@{profile.account_number}" />
+                                                android:text="@{profile.accountNumber}" />
 
                                         </LinearLayout>
 
@@ -443,7 +443,7 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="3"
                                                 android:gravity="end"
-                                                android:text="@{profile.address.more_info.concat(`, `).concat(profile.address.village.erp_code).concat(`, `).concat(profile.address.district.erp_code).concat(`, `).concat(profile.address.state.erp_code)}" />
+                                                android:text="@{profile.address.more_info.concat(`, `).concat(profile.address.village.erpCode).concat(`, `).concat(profile.address.district.erpCode).concat(`, `).concat(profile.address.state.erpCode)}" />
 
                                         </LinearLayout>
 
@@ -468,7 +468,7 @@
                                                 android:layout_weight="2"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                android:text="@{profile.job_type}" />
+                                                android:text="@{profile.jobType}" />
 
                                         </LinearLayout>
 

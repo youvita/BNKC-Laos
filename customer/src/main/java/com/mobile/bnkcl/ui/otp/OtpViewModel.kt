@@ -27,6 +27,7 @@ import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.otp.OTPVerifyResponse
 import com.mobile.bnkcl.data.response.otp.SendOTPResponse
+import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.signup.SignUpActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +42,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     var uiMode : Int = 0
     var isChecked : Boolean = false
     var step : Int = 1
-
+    var isFromPage: Boolean = false
     var sessionID : String = ""
 
     val _phoneNumberContent = MutableLiveData<String>()
@@ -182,6 +183,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     fun closeButton_Click(){
+        if (isFromPage) {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
         (context as Activity).finish()
     }
 
@@ -305,6 +311,10 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
             e.printStackTrace()
             ""
         }
+    }
+
+    fun setIsFromPage(isTrue: Boolean) {
+        this.isFromPage = isTrue
     }
 
 }

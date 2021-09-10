@@ -17,6 +17,8 @@
     <string name="menu_find_customer">Find Customer</string>
     <string name="menu_check_list">Check List</string>
 
+    <string name="tab_menu">Menu</string>
+
     <!-- Currency -->
     <string name="currency_usd">USD</string>
     <string name="currency_kip">Kip</string>

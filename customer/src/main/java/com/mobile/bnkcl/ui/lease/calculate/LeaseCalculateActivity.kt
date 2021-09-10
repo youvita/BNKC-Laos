@@ -2,7 +2,6 @@ package com.mobile.bnkcl.ui.lease.calculate
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +14,6 @@ import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.findoffice.BranchRequest
 import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.response.office.AreaDataResponse

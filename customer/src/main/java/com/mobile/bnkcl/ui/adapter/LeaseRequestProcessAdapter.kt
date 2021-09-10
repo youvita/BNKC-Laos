@@ -1,7 +1,6 @@
 package com.mobile.bnkcl.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +16,7 @@ class LeaseRequestProcessAdapter :
     private var type: Int? = null
     private lateinit var context: Context
     private var productTypeList: ArrayList<CodesData> = ArrayList()
+    private var listener: CloseClickedListener? = null
 
     /**
      * 1 = application
@@ -26,6 +26,10 @@ class LeaseRequestProcessAdapter :
      */
     fun setLeaseProcessType(type: Int) {
         this.type = type
+    }
+
+    fun setListener(listener: CloseClickedListener) {
+        this.listener = listener
     }
 
     fun setProductTypeList(list: ArrayList<CodesData>) {
@@ -41,12 +45,24 @@ class LeaseRequestProcessAdapter :
         return ViewHolder(binding)
     }
 
+    interface CloseClickedListener {
+        fun onCloseClicked()
+    }
+
     override fun setBindData(holder: ViewHolder, data: LeaseApplicationData, position: Int) {
         binding.leaseApplication = data
         binding.ltdAppliedInfo.leaseApplication = data
 
         for (i in 0 until productTypeList.size - 1) {
-            if (data.productType.equals(productTypeList[i].code, ignoreCase = true)) binding.ltdAppliedInfo.tvProductType.text = productTypeList[i].title
+            if (data.productType.equals(
+                    productTypeList[i].code,
+                    ignoreCase = true
+                )
+            ) binding.ltdAppliedInfo.tvProductType.text = productTypeList[i].title
+        }
+
+        binding.btnClose.setOnClickListener {
+            listener?.onCloseClicked()
         }
 
         when (type) {

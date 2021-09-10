@@ -23,7 +23,9 @@ class MainViewModel @Inject constructor(private val userRepo: UserRepo) : BaseVi
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
     private val _userProfile: MutableLiveData<ProfileData> = MutableLiveData()
+    private val _logout: MutableLiveData<Unit> = MutableLiveData()
     val userProfileLiveData: LiveData<ProfileData> = _userProfile
+    val logoutLiveData: LiveData<Unit> = _logout
 
     fun getUserProfile() {
         if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
@@ -35,4 +37,13 @@ class MainViewModel @Inject constructor(private val userRepo: UserRepo) : BaseVi
         }
     }
 
+    fun logout() {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            viewModelScope.launch {
+                userRepo.logout().onEach { resource ->
+                    _logout.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
 }

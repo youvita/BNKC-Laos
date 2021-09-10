@@ -16,7 +16,7 @@ data class Area(
     var iso_code: String? = null,
 
     @SerializedName("erp_code")
-    var erp_code: String? = null,
+    var erpCode: String? = null,
 
     @SerializedName("alias1")
     var alias1: String? = null,

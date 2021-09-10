@@ -2,7 +2,6 @@ package com.mobile.bnkcl.ui.main.fragment.office
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R

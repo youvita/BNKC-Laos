@@ -7,24 +7,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="@dimen/main_tab_height"
-            android:orientation="vertical"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorPrimary" />
-
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/main_tab_layout"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_toStartOf="@id/menu"
+                android:layout_weight="0.75"
                 android:background="@drawable/top_stroke_bottom"
                 app:tabIndicator="@drawable/tab_indicator"
                 app:tabIndicatorColor="@color/color_d7191f"
@@ -33,42 +30,39 @@
                 app:tabIndicatorHeight="3dp"
                 app:tabMode="fixed"
                 app:tabPaddingBottom="15dp"
-                app:tabPaddingEnd="20dp"
-                app:tabPaddingStart="20dp"
                 app:tabRippleColor="@null"
                 app:tabSelectedTextColor="@color/color_d7191f"
                 app:tabTextAppearance="@style/main_tab_text_style"
-                app:tabTextColor="@color/color_cfd8dc"/>
+                app:tabTextColor="@color/color_cfd8dc" />
 
             <LinearLayout
                 android:id="@+id/menu"
-                android:background="@drawable/top_stroke_bottom"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/top_stroke_bottom"
                 android:gravity="center_horizontal"
-                android:paddingTop="@dimen/margin_10dp"
-                android:paddingEnd="@dimen/margin_20dp"
-                android:layout_alignParentEnd="true">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_10dp">
 
                 <ImageView
                     android:id="@+id/icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_tab_menu_off"
-                    />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/title"
+                    style="@style/main_tab_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Menu"
-                    android:layout_marginTop="2dp"
-                    style="@style/main_tab_text_style"/>
+                    android:text="@string/tab_menu" />
+
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

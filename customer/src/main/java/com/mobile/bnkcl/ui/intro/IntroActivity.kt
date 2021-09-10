@@ -176,20 +176,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     fun startApp() {
         val user = sharedPrefer.getPrefer(Constants.USER_ID)
         Log.d(">>>>>>", "USER :: $user")
-        if (user!!.isEmpty()) {
-            startActivity(Intent(this, HomeActivity::class.java))
-        } else {
-//            val extrasLogin = ExtrasLogin(this)
-//            extrasLogin.Param.setToolbar(getString(R.string.pin_01))
-//            extrasLogin.Param.setOwner("login")
-//            extrasLogin.Param.setLabel(getString(R.string.pin_04))
-
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("username", user)
-            intent.putExtra("pin_action", "login")
-//            intent.putExtras(extrasLogin.bundle!!)
-            startActivity(intent)
-        }
+        startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
 

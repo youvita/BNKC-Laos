@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName
 data class EditAccountInfoData(
 
     @SerializedName("job_type")
-    var job_type: String? = null,
+    var jobType: String? = null,
 
     @SerializedName("bank_name")
-    var bank_name: String? = null,
+    var bankName: String? = null,
 
     @SerializedName("account_number")
-    var account_number: String? = null
+    var accountNumber: String? = null
 
 )

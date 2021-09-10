@@ -54,7 +54,6 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
         if (intent != null) {
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
-            Log.d(">>>", "initView: " + CONTRACT_NO)
             totalLeaseScheduleRequest.contract_no = CONTRACT_NO
             totalLeaseScheduleRequest.payment_date_dir = "asc"
         }

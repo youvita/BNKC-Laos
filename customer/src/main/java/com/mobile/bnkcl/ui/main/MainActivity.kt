@@ -17,10 +17,12 @@ import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityMainBinding
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
+import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
@@ -28,7 +30,9 @@ import com.mobile.bnkcl.ui.notice.NoticeActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
+import com.mobile.bnkcl.ui.user.AccountInformationActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
@@ -39,7 +43,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     private var viewPager: ViewPager2? = null
 
-    private var tabAdapter: TabViewPagerAdapter = TabViewPagerAdapter(supportFragmentManager, lifecycle)
+    private var tabAdapter: TabViewPagerAdapter =
+        TabViewPagerAdapter(supportFragmentManager, lifecycle)
 
     /**
      * menu title list
@@ -47,17 +52,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     private val menuNames = arrayOf(
         R.string.tab_service,
         R.string.tab_my_page,
-        R.string.tab_find_office)
+        R.string.tab_find_office
+    )
 
 
     /**
      * menu icons list
      */
-     private val menuIcons = arrayOf(
+    private val menuIcons = arrayOf(
         R.drawable.selector_tab_loan_service,
         R.drawable.selector_tab_mypage,
-        R.drawable.selector_tab_find_office)
+        R.drawable.selector_tab_find_office
+    )
 
+    private var profileData: ProfileData? = null
     private val role: Int = 1
     private var lastIndex: Int = 0
 
@@ -70,6 +78,62 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         viewModel.userRole = -1 //Custom : 0, Employee : 1 , Dealer : 2, Not yet login : -1
         viewModel.isLogin = sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()
         Log.d(">>>>", "Login ready ??? ${viewModel.isLogin}")
+
+        initView()
+        initBottomViewPager()
+        initLiveData()
+
+    }
+
+    private fun initLiveData() {
+
+        viewModel.userProfileLiveData.observe(this) {
+            profileData = it
+
+            binding.navMenu.tvUserName.text = it.name
+            binding.navMenu.tvUserId.text = it.accountNumber
+        }
+
+        viewModel.logoutLiveData.observe(this) {
+            sharedPrefer.remove(Constants.KEY_TOKEN)
+            sharedPrefer.remove(Constants.USER_ID)
+
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            successListener()
+        }
+    }
+
+    private fun initView() {
+
+        if (viewModel.isLogin) {
+            binding.navMenu.btnSignUp.visibility = View.GONE
+            binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
+
+        }
+
+        binding.navMenu.llProfile.setOnClickListener(
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) null else this
+        )
+
+        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            binding.navMenu.tvUserName.text = "User Unknown"
+        }
+
+        binding.navMenu.llHome.setOnClickListener(this)
+        binding.navMenu.btnLogin.setOnClickListener(this)
+        binding.navMenu.llNotice.setOnClickListener(this)
+        binding.navMenu.btnPolicy.setOnClickListener(this)
+        binding.navMenu.btnSignUp.setOnClickListener(this)
+        binding.navMenu.llLanguage.setOnClickListener(this)
+        binding.navMenu.llCsCenter.setOnClickListener(this)
+        binding.navMenu.btnSetting.setOnClickListener(this)
+        binding.navMenu.btnFacebook.setOnClickListener(this)
+        binding.navMenu.btnCompanyProfile.setOnClickListener(this)
+    }
+
+    private fun initBottomViewPager() {
         try {
 
             viewPager = binding.viewPager
@@ -132,34 +196,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 binding.drawerLayout.openDrawer(Gravity.RIGHT)
             }
 
-            setClickListeners()
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
-    private fun setClickListeners() {
-        binding.navMenu.llProfile.setOnClickListener(this)
-        binding.navMenu.llNotice.setOnClickListener(this)
-        binding.navMenu.llCsCenter.setOnClickListener(this)
-        binding.navMenu.llHome.setOnClickListener(this)
-        binding.navMenu.llLanguage.setOnClickListener(this)
-        binding.navMenu.btnFacebook.setOnClickListener(this)
-        binding.navMenu.btnCompanyProfile.setOnClickListener(this)
-        binding.navMenu.btnPolicy.setOnClickListener(this)
-        binding.navMenu.btnSetting.setOnClickListener(this)
-        binding.navMenu.btnSignUp.setOnClickListener(this)
-        binding.navMenu.btnLogin.setOnClickListener(this)
+    override fun onResume() {
+        super.onResume()
+        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            viewModel.getUserProfile()
+        }
     }
 
     override fun onClick(v: View?) {
         if (v != null) {
             val intent: Intent
-            when(v.id) {
+            when (v.id) {
                 R.id.ll_profile -> {
-//                    startActivity(Intent(this, AccountInformationActivity::class.java).putExtra("ACCOUNT_INFO", profileData))
+                    startActivity(
+                        Intent(
+                            this,
+                            AccountInformationActivity::class.java
+                        ).putExtra("ACCOUNT_INFO", profileData)
+                    )
                 }
                 R.id.ll_notice -> {
                     startActivity(Intent(this, NoticeActivity::class.java))
@@ -168,14 +227,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     startActivity(Intent(this, CSCenterActivity::class.java))
                 }
                 R.id.ll_home -> {
-
+                    intent = Intent(this, HomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
                 R.id.ll_language -> {
                     val languageDialog = LanguageDialog()
-                    languageDialog.show(supportFragmentManager, languageDialog.tag)
+                    languageDialog.show(
+                        supportFragmentManager,
+                        languageDialog.tag
+                    )
                     languageDialog.onLangSelected {
                         startActivity(Intent(this, MainActivity::class.java))
-//                        recreateLanguageChanged()
                     }
                 }
                 R.id.btn_facebook -> {
@@ -200,27 +263,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
                         intent.putExtra(
                             "push_alarm_enabled",
-                            viewModel.userProfileLiveData.value?.push_alarm_enabled
+                            viewModel.userProfileLiveData.value!!.pushAlarmEnabled
                         )
                     }
                     startActivity(intent)
                 }
                 R.id.btn_sign_up -> {
-//                    viewModel.goToSignUp()
                     val intent1 = Intent(this, OtpActivity::class.java)
                     intent1.putExtra("ACTION_TAG", "SIGN_UP")
                     startActivity(intent1)
                 }
                 R.id.btn_login -> {
-                    if (viewModel.isLogin){
+                    if (viewModel.isLogin) {
                         val logOutDialog = LogOutDialog()
                         logOutDialog.onConfirmClickedListener {
-                            sharedPrefer.remove(Constants.USER_ID)
-                            Log.d(">>>>", "Remove ready ??? ${sharedPrefer.getPrefer(Constants.USER_ID)}")
-                            startActivity(Intent(this, OtpActivity::class.java))
+                            viewModel.logout()
+                            showLoading()
                         }
-                        logOutDialog.show(this.supportFragmentManager, logOutDialog.tag)
-                    }else{
+                        logOutDialog.show(
+                            supportFragmentManager,
+                            logOutDialog.tag
+                        )
+                    } else {
                         startActivity(Intent(this, OtpActivity::class.java))
                     }
                 }

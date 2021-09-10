@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ApplicationDialog(private val leaseApplicationList: List<LeaseApplicationData>, private val productTypeList: ArrayList<CodesData>, val type: Int) :
-    BaseFullDialogFragment<DialogApplicationBinding>() {
+    BaseFullDialogFragment<DialogApplicationBinding>(), LeaseRequestProcessAdapter.CloseClickedListener {
 
     @Inject
     lateinit var leaseRequestProcessAdapter: LeaseRequestProcessAdapter
@@ -34,12 +34,17 @@ class ApplicationDialog(private val leaseApplicationList: List<LeaseApplicationD
 
         binding.transactionRecyclerview.adapter = leaseRequestProcessAdapter
         leaseRequestProcessAdapter.setLeaseProcessType(type)
+        leaseRequestProcessAdapter.setListener(this)
         leaseRequestProcessAdapter.setProductTypeList(productTypeList)
         binding.transactionRecyclerview.removeItemDecoration(cardOffsetDecoration)
         binding.transactionRecyclerview.addItemDecoration(cardOffsetDecoration)
         cardRecyclerView.attachToRecyclerView(binding.transactionRecyclerview)
         leaseRequestProcessAdapter.clearItemList()
         leaseRequestProcessAdapter.addItemList(leaseApplicationList)
+    }
+
+    override fun onCloseClicked() {
+        dismiss()
     }
 
 }

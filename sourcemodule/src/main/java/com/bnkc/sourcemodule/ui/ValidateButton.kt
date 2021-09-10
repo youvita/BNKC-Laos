@@ -197,6 +197,7 @@ class ValidateButton @JvmOverloads constructor(
 
     fun setActive(isActive: Boolean) {
         active.postValue(isActive)
+        status = isActive
     }
 
     fun setValue(text : String){

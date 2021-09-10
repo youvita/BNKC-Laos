@@ -13,6 +13,7 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
+import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.databinding.ActivityApplyLeaseBinding
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.FormatUtil

@@ -243,7 +243,7 @@
     <string name="edit_name">ຊື່</string>
     <string name="edit_dob">ວັນ ເດືອນ ປີ ເກີດ</string>
     <string name="edit_id_number">ບັດປະຈຳຕົວເລກທີ</string>
-
+    <string name="edit_updated">ຂໍ້ມູນບັນຊີໄດ້ບັນທຶກຮຽບຮ້ອຍແລ້ວ</string>
     <string name="edit_lease_info">ຂໍ້ມູນສິນເຊື່ອ</string>
 
     <string name="edit_cancel">ຍົກເລິກ</string>

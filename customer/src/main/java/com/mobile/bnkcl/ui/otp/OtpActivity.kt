@@ -45,7 +45,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private var countDownTimer: CountDownTimer? = null
     private var txtAgreement: String? = null
     private var isFromPage: Boolean = false
-    private var lastIndex: Int = 0
     /**
      * text watcher event changed listener
      */
@@ -218,7 +217,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
                 val phoneNumber = intent.getStringExtra("PHONE_NUMBER")
-                lastIndex = intent.getIntExtra("LAST_INDEX", 0)
 
                 when {
                     action.equals("LOGIN", ignoreCase = true) -> {
@@ -249,6 +247,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                     action.equals("REQUIRE_LOGIN", ignoreCase = true) -> {
 
                         isFromPage = true
+                        viewModel.setIsFromPage(isFromPage)
 
                     }
 
