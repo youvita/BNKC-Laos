@@ -40,7 +40,7 @@ data class ProfileData(
         var accountNumber: String? = null,
 
     @SerializedName("push_alarm_enabled")
-        var pushAlarmEnabled: String? = null,
+        var pushAlarmEnabled: Boolean? = null,
 
     @SerializedName("my_lease")
         var myLease: List<String>? = null

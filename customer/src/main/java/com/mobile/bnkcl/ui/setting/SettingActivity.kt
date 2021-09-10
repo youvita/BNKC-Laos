@@ -62,14 +62,13 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         binding.activity = this
 
         if (intent.hasExtra("push_alarm_enabled")) {
-            settingViewModel.push_notification_yn = intent.getStringExtra("push_alarm_enabled")
-            binding.toggleUser.isChecked = settingViewModel.push_notification_yn.equals("Y")
+            settingViewModel.push_notification_yn = intent.getBooleanExtra("push_alarm_enabled", false)
+            binding.toggleUser.isChecked = settingViewModel.push_notification_yn!!
         }
 
         binding.toggleUser.setOnCheckedChangeListener { _, isChecked ->
             val settingData = SettingData()
-            if (isChecked) settingData.push_alarm_enabled = "Y"
-            else settingData.push_alarm_enabled = "N"
+            settingData.push_alarm_enabled = isChecked
             settingViewModel.settingData = settingData
 
             settingViewModel.updateUserSetting()

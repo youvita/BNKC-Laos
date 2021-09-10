@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor(private val userRepo: UserRepo) : BaseViewModel() {
 
-    var push_notification_yn: String? = null
+    var push_notification_yn: Boolean? = null
     private val _updateUserSetting: MutableLiveData<Unit> = MutableLiveData()
     val userSettingLiveData: LiveData<Unit> = _updateUserSetting
     var settingData: SettingData? = null
