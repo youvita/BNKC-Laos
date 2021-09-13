@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +8,8 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
@@ -17,20 +20,16 @@ import com.mobile.bnkcl.data.request.auth.IdNumReq
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
 import com.mobile.bnkcl.data.response.area.AreaItems
 import com.mobile.bnkcl.data.response.code.CodesData
-import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
-import com.mobile.bnkcl.ui.dialog.GenderDialog
-import com.mobile.bnkcl.ui.dialog.SortDialog
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
-import java.lang.Exception
-import java.lang.IllegalArgumentException
-import java.lang.NullPointerException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
+
 
 @AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListener{
@@ -42,28 +41,36 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     private var codeObj : ArrayList<CodesData>? = ArrayList()
     private var genderObj : ArrayList<CodesData>? = ArrayList()
 
-    private var num = SendOTPRequest()
-    private lateinit var req : AddressData
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
     private val addressInfoViewModel: AddressInfoViewModel by viewModels()
-    private var signUpDisposable: Disposable? = null
-    private var selectedItem = 0
-
+    private var selectedCapital = -1
+    private var selectDistrict = -1
+    private var selectVillage = -1
+    private var selectGender = -1
+    private var selectJobType = -1
     private var myCalendar = Calendar.getInstance()
     var identificationNumber = ""
     var username = ""
-    private var genderCode = "M"
-
-    private var clicked : Boolean = false
-    private var clicked1 : Boolean = false
-    private var clicked2 : Boolean = false
-    private var clicked3 : Boolean = false
+    private var signUpDisposable: Disposable? = null
 
 
     override fun getLayoutId(): Int = R.layout.activity_sign_up
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+            //Session expired
+            signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
+                errorSessionDialog(it.title, it.message).onConfirmClicked {
+                    sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                }
+            }
+
+        if (intent.hasExtra(Constants.USER_ID)){
+            username = intent.getStringExtra(Constants.USER_ID).toString()
+
+        }
 
         /*observe data*/
         observeCapitalArea()
@@ -71,17 +78,18 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         observeVillage()
         observeCode()
         observeGender()
+        validateEdtAddress()
 
-        validateEdt()
 
-        binding.ivBack.setOnClickListener(this)
         /**
          *
+         * Listener
          * */
+        binding.ivBack.setOnClickListener(this)
         binding.tvDob.addTextChangedListener(mDateWatcher)
-        binding.edtIdNum.addTextChangedListener(textIdentificationNumberWatcher)
-        binding.btnCheck.setOnClickListener(btnCheckId)
 
+//        binding.edtIdNum.addTextChangedListener(textIdentificationNumberWatcher)
+        binding.btnCheck.setOnClickListener(btnCheckId)
         binding.tvNewCustomer.visibility = View.GONE
 
         /**
@@ -106,11 +114,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     R.drawable.ic_badge_general,
                     getString(R.string.addition_capital),
                     addressInfoViewModel.setUpAreaName(objCapital!!),
-                    selectedItem
+                    selectedCapital
                 )
 
                 listChoiceDialog.setOnItemListener ={ a: Int ->
-                    selectedItem = a
+                    selectedCapital = a
                     binding.lltAddress.tvCapital.text = objCapital!![a].alias1
                     binding.lltAddress.tvDistrict.text = ""
                     binding.lltAddress.tvVillage.text = ""
@@ -131,15 +139,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
          * */
         binding.lltAddress.llDistrict.setOnClickListener{
                     if (objDistrict != null && objDistrict!!.size>0){
+                        objDistrict
                         listChoiceDialog = ListChoiceDialog.newInstance(
                                 R.drawable.ic_badge_general,
                                 "District",
                                 addressInfoViewModel.setUpAreaName(objDistrict!!),
-                                selectedItem
+                                selectDistrict
                         )
 
                         listChoiceDialog.setOnItemListener = { b: Int ->
-                            selectedItem = b
+
+                            selectDistrict = b
                             binding.lltAddress.tvDistrict.text = objDistrict!![b].alias1
                             binding.lltAddress.tvVillage.text = ""
 
@@ -149,6 +159,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             )
                             addressInfoViewModel.getVillage()
                         }
+
                         listChoiceDialog.isCancelable = true
                         listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                     }
@@ -162,11 +173,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             R.drawable.ic_badge_general,
                             "Village",
                             addressInfoViewModel.setUpAreaName(objVillage!!),
-                            selectedItem
+                            selectVillage
                     )
 
                     listChoiceDialog.setOnItemListener = { b: Int ->
-                        selectedItem = b
+                        selectVillage = b
                         binding.lltAddress.tvVillage.text = objVillage!![b].alias1
                     }
 
@@ -174,7 +185,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                 }
         }
-
 
         /**
          * on gender click
@@ -186,10 +196,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                        R.drawable.ic_badge_general,
                        "Gender",
                        addressInfoViewModel.setUpGenderCode(genderObj!!),
-                        selectedItem
+                        selectGender
                )
                listChoiceDialog.setOnItemListener = {d : Int ->
-                   selectedItem = d
+                   selectGender = d
                    binding.tvGender.text = genderObj!![d].title
                }
 
@@ -209,10 +219,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                        R.drawable.ic_badge_general,
                        "Job type",
                        addressInfoViewModel.setUpCode(codeObj!!),
-                       selectedItem
+                       selectJobType
                )
                listChoiceDialog.setOnItemListener = {c : Int ->
-                   selectedItem = c
+                   selectJobType = c
                    binding.lltAddress.tvJobType.text = codeObj!![c].title
                }
 
@@ -226,8 +236,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         try {
             addressInfoViewModel.getCapitalData()
             addressInfoViewModel.capital.observe(this){
-                validateEdt()
-
+                validateEdtAddress()
                 objCapital!!.clear()
                 objCapital!!.addAll(it)
             }
@@ -240,8 +249,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         private fun observeDistrictData() {
             try {
                 addressInfoViewModel.district.observe(this){
-
-                    validateEdt()
+                    validateEdtAddress()
                     objDistrict!!.clear()
                     objDistrict!!.addAll(it)
                 }
@@ -253,12 +261,12 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         private fun observeVillage(){
             try {
                 addressInfoViewModel.village.observe(this){
-                    validateEdt()
+                    validateEdtAddress()
                     objVillage!!.clear()
                     objVillage!!.addAll(it)
                 }
 
-            }catch (e:Exception){
+            }catch (e: Exception){
                 e.printStackTrace()
             }
 
@@ -328,10 +336,16 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             && binding.tvGender.text.toString() !=""
         ) {
             binding.btnNext.setOnClickListener(this)
-            binding.btnNext.background = ContextCompat.getDrawable(this, R.drawable.selector_d7191f_8b0304)
+            binding.btnNext.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.selector_d7191f_8b0304
+            )
         } else {
             binding.btnNext.isClickable = false
-            binding.btnNext.background = ContextCompat.getDrawable(this, R.drawable.round_solid_e1e5ec_8)
+            binding.btnNext.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.round_solid_e1e5ec_8
+            )
         }
     }
 
@@ -355,11 +369,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
 
     }
-    private fun validateEdt(){
 
+
+    private fun validateEdtAddress(){
         binding.lltAddress.llVillage.isEnabled = !(binding.lltAddress.tvDistrict.text.toString() == "" || binding.lltAddress.tvCapital.text.toString() =="")
-
-
         if (binding.lltAddress.tvCapital.text.toString() =="") {
             binding.lltAddress.llDistrict.isEnabled = false
             binding.lltAddress.llVillage.isEnabled = false
@@ -370,12 +383,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
     private val btnCheckId = View.OnClickListener {
         addressInfoViewModel.idNumReq = IdNumReq(username, identificationNumber)
-       addressInfoViewModel.verifyId()
-            verifyIdentification()
+        addressInfoViewModel.verifyId()
+        verifyIdentification()
 
-            Log.d("Id", "$num")
+
     }
-
 
 
     private fun verifyIdentification(){

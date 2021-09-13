@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.notice
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.BuildConfig
@@ -16,7 +19,9 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.notice.NoticeRequest
 import com.mobile.bnkcl.databinding.ActivityNoticeBinding
 import com.mobile.bnkcl.ui.adapter.NoticeAdapter
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,6 +29,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_notice
     private val noticeViewModel:NoticeViewModel by viewModels()
+    private var signUpDisposable: Disposable? = null
 
     private lateinit var noticeRequest: NoticeRequest
     @Inject
@@ -38,7 +44,17 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
 
 //        getNoticeData()
 
+        checkError()
         initView()
+    }
+    private fun checkError(){
+        //Session expired
+        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")

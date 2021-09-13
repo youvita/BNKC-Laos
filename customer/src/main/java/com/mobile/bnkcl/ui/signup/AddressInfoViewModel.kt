@@ -4,9 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.area.AreaRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
@@ -17,7 +14,6 @@ import com.mobile.bnkcl.data.request.otp.SendOTPRequest
 import com.mobile.bnkcl.data.response.area.AreaItems
 import com.mobile.bnkcl.data.response.auth.IdNumRes
 import com.mobile.bnkcl.data.response.code.CodesData
-import com.mobile.bnkcl.data.response.code.CodesResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -27,9 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , private val authRepo: AuthRepo, private val codesRepo: CodesRepo) : BaseViewModel() {
-    val _IdNumberContent = MutableLiveData<String>()
-    val phoneNumber : LiveData<String>
-        get() = _IdNumberContent
+
 
 
     private val _capitalArea: MutableLiveData<List<AreaItems>> = MutableLiveData()
@@ -129,6 +123,9 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
         }
     }
 
+    /**
+     * set up job type data
+     * */
     private var name : ArrayList<String>? = ArrayList()
     fun setUpCode(data: ArrayList<CodesData>) : ArrayList<String>{
         name!!.clear()
@@ -154,13 +151,17 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
         }
     }
 
+    /**
+     * set up gender data
+     * */
     private var gender : ArrayList<String>? = ArrayList()
     fun setUpGenderCode(data: ArrayList<CodesData>) : ArrayList<String>{
         gender!!.clear()
-
         for (i in 0 until data?.size){
             gender!!.add(data[i].title!!)
         }
         return gender!!
     }
+
+
 }

@@ -51,10 +51,6 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-        //server error
-        signUpDisposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
     }
     private fun initToolbar(){
         collapseToolBarLayout.title = this.getString(R.string.cs_02)

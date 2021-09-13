@@ -52,10 +52,6 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-        //server error
-        signUpDisposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
     }
     private fun getClaimDetailData() {
         try {

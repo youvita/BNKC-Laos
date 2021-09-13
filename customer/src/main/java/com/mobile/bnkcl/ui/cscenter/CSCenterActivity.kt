@@ -10,6 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -23,6 +24,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
+import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,11 +87,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-        //server error
-        signUpDisposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
     }
+
     private fun initToolbar(){
         collapseToolBarLayout?.title = this.getString(R.string.cs_01)
         collapseToolBarLayout?.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))
