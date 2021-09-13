@@ -32,6 +32,7 @@ import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import kotlin.math.log
 
 @AndroidEntryPoint
@@ -106,6 +107,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     }
 
     private fun initView() {
+        binding.navMenu.localeCode = Locale.getDefault().language
 
         if (viewModel.isLogin) {
             binding.navMenu.btnSignUp.visibility = View.GONE

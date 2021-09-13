@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.main.fragment.mypage
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.util.TypedValue
@@ -18,7 +19,6 @@ import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
-import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationData
@@ -79,6 +79,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         pageBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            showLoading()
             viewModel.getProductTypeCodes()
             viewModel.getLeaseProgressCodes()
         }
@@ -114,6 +115,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             setUpLeaseIndicator()
 
             setUpBanner()
+            successListener()
             viewModel.getLeaseRequestCodes()
         }
 
@@ -338,7 +340,11 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
                     R.drawable.circle_cfd8dc, null
                 )
             val textView = TextView(requireActivity().applicationContext)
-            textView.text = Html.fromHtml("&#8226;")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                textView.text = Html.fromHtml("&#8226;", Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                textView.text = Html.fromHtml("&#8226;");
+            }
             textView.textSize = 25f
             textView.background =
                 if (i == position) ResourcesCompat.getDrawable(

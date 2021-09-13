@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.BnkEditText
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.user.EditAccountInfoData
 import com.mobile.bnkcl.data.response.user.MyLeaseData
 import com.mobile.bnkcl.data.response.user.ProfileData
@@ -42,9 +44,10 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
     private var firstIndex: Int? = 0
     private var selectedIndex: Int? = 0
     private var profileData: ProfileData? = ProfileData()
-    private var jobTypeList: ArrayList<String>? = ArrayList()
+    private var jobTypeTitleList: ArrayList<String>? = ArrayList()
     private var jobTypeCodeList: ArrayList<String>? = ArrayList()
     private val viewModel: EditAccountInfoViewModel by viewModels()
+    private var jobTypeList: ArrayList<CodesData>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +58,6 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         initDisablePersonalInfo()
         initLiveData()
 
-        viewModel.getJobTypeCodes()
     }
 
     private fun addLeaseInfo(contractNo: List<MyLeaseData>) {
@@ -87,21 +89,6 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
 
     private fun initLiveData() {
 
-        viewModel.jobCodesLiveData.observe(this) {
-            for (i in 0 until it.codes!!.size) {
-                jobTypeList!!.add(it.codes[i].title!!)
-                jobTypeCodeList!!.add(it.codes[i].code!!)
-            }
-
-            for (i in 0 until jobTypeCodeList!!.size) {
-                if (profileData!!.jobType.equals(jobTypeCodeList!![i])) {
-                    binding.lytAddressInfo.tvJobType.text = jobTypeList!![i]
-                    firstIndex = i
-                    selectedIndex = i
-                }
-            }
-        }
-
         viewModel.editAccountInfoLiveData.observe(this) {
             val inflater = layoutInflater
             val view: View = inflater.inflate(
@@ -128,6 +115,21 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
 
+            jobTypeList = intent.getSerializableExtra("JOB_TYPE") as ArrayList<CodesData>?
+
+            for (i in 0 until jobTypeList!!.size) {
+                jobTypeTitleList!!.add(jobTypeList!![i].title!!)
+                jobTypeCodeList!!.add(jobTypeList!![i].code!!)
+            }
+
+            for (i in 0 until jobTypeCodeList!!.size) {
+                if (profileData!!.jobType.equals(jobTypeCodeList!![i])) {
+                    binding.lytAddressInfo.tvJobType.text = jobTypeTitleList!![i]
+                    firstIndex = i
+                    selectedIndex = i
+                }
+            }
+
             binding.lytAddressInfo.edtBankName.setText(profileData!!.bankName.toString())
             binding.lytAddressInfo.edtAccountNumber.setText(profileData!!.accountNumber.toString())
 
@@ -148,9 +150,13 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.btnSave.isEnable(
-                    binding.lytAddressInfo.edtBankName.text?.trim().toString(),
-                    binding.lytAddressInfo.edtAccountNumber.text?.trim().toString()
+                    binding.lytAddressInfo.edtBankName.text.toString(),
+                    binding.lytAddressInfo.edtAccountNumber.text.toString()
                 )
+                if (binding.lytAddressInfo.edtBankName.text.toString() == profileData!!.bankName) {
+                    binding.btnSave.setActive(false)
+                }
+
                 if (binding.btnSave.isActive()) {
                     binding.btnSave.setOnClickListener(this@EditAccountInfoActivity)
                 } else {
@@ -171,10 +177,15 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
                 binding.btnSave.isEnable(
                     binding.lytAddressInfo.edtBankName.text.toString(),
                     binding.lytAddressInfo.edtAccountNumber.text.toString()
                 )
+                if (binding.lytAddressInfo.edtAccountNumber.text.toString() == profileData!!.accountNumber) {
+                    binding.btnSave.setActive(false)
+                }
+
                 if (binding.btnSave.isActive()) {
                     binding.btnSave.setOnClickListener(this@EditAccountInfoActivity)
                 } else {
@@ -316,7 +327,7 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
                 data.accountNumber = binding.lytAddressInfo.edtAccountNumber.text.toString()
 
                 if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                    viewModel.isUpdate(data)
+                    viewModel.editAccountInfo(data)
                 }
 
             }
@@ -324,26 +335,37 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
                 listChoiceDialog = ListChoiceDialog.newInstance(
                     R.drawable.ic_toggle_table_view_on_ico,
                     getString(R.string.addition_job_type),
-                    jobTypeList!!,
+                    jobTypeTitleList!!,
                     selectedIndex!!
                 )
                 listChoiceDialog.item = 5
 
                 listChoiceDialog.setOnItemListener = {
-                    binding.lytAddressInfo.tvJobType.text = jobTypeList!![it]
+                    binding.lytAddressInfo.tvJobType.text = jobTypeTitleList!![it]
 
-                    for (i in 0 until jobTypeList!!.size) {
-                        if (jobTypeList!![i] == jobTypeList!![it]) {
+                    for (i in 0 until jobTypeTitleList!!.size) {
+                        if (jobTypeTitleList!![i] == jobTypeTitleList!![it]) {
                             selectedIndex = i
 
                             isUpdate = i != firstIndex
                         }
+                    }
+
+                    if (binding.lytAddressInfo.tvJobType.text.toString() == jobTypeTitleList!![firstIndex!!]) {
+                        binding.btnSave.setActive(false)
+                        binding.btnSave.setOnClickListener(null)
+                    } else {
+                        binding.btnSave.setActive(true)
+                        binding.btnSave.setOnClickListener(this)
                     }
                 }
                 listChoiceDialog.isCancelable = true
                 listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
             }
             R.id.cv_change_profile -> {
+
+
+
             }
             R.id.image_profile -> {
 

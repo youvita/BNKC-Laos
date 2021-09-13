@@ -226,13 +226,14 @@
                                                 android:text="@string/info_gender" />
 
                                             <TextView
+                                                android:id="@+id/tv_gender"
                                                 style="@style/font15_263238_medium"
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                android:text="@{profile.gender.equals(`M`) ? @string/info_male : @string/info_female}" />
+                                                android:text="@{profile.gender.equals(`F`) ? @string/info_female : profile.gender.equals(`M`) ? @string/info_male : @string/not_available}" />
 
 
                                         </LinearLayout>
@@ -350,7 +351,7 @@
                                                 android:layout_weight="1"
                                                 android:gravity="end"
                                                 android:maxLines="1"
-                                                android:text="@{profile.accountNumber}" />
+                                                android:text="@{profile.accountNumber.isEmpty ? @string/not_available : profile.accountNumber}" />
 
                                         </LinearLayout>
 
@@ -443,7 +444,7 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="3"
                                                 android:gravity="end"
-                                                android:text="@{profile.address.more_info.concat(`, `).concat(profile.address.village.erpCode).concat(`, `).concat(profile.address.district.erpCode).concat(`, `).concat(profile.address.state.erpCode)}" />
+                                                android:text="@{profile.address.state.toString().isEmpty ? @string/not_available : profile.address.more_info.concat(`, `).concat(profile.address.village.erpCode).concat(`, `).concat(profile.address.district.erpCode).concat(`, `).concat(profile.address.state.erpCode)}" />
 
                                         </LinearLayout>
 
@@ -467,8 +468,47 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="2"
                                                 android:gravity="end"
-                                                android:maxLines="1"
-                                                android:text="@{profile.jobType}" />
+                                                android:maxLines="1" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:orientation="horizontal">
+
+                                            <com.mobile.bnkcl.com.view.BnkEditText
+                                                android:id="@+id/edt_bank_name"
+                                                style="@style/font15_CFD8DC_medium_input"
+                                                android:layout_width="@dimen/width_0dp"
+                                                android:layout_height="50dp"
+                                                android:layout_marginEnd="@dimen/margin_10dp"
+                                                android:layout_weight="0.7"
+                                                android:background="@drawable/selector_edittext_bg"
+                                                android:enabled="false"
+                                                android:hint="@{profile.bankName}"
+                                                android:maxLength="200"
+                                                android:paddingStart="15sp"
+                                                android:paddingEnd="15sp"
+                                                android:singleLine="true"
+                                                android:textColorHint="@color/color_263238" />
+
+                                            <com.mobile.bnkcl.com.view.BnkEditText
+                                                android:id="@+id/edt_account_number"
+                                                style="@style/font15_CFD8DC_medium_input"
+                                                android:layout_width="@dimen/width_0dp"
+                                                android:layout_height="50dp"
+                                                android:layout_weight="1"
+                                                android:background="@drawable/selector_edittext_bg"
+                                                android:digits="0123456789"
+                                                android:enabled="false"
+                                                android:hint="@{profile.accountNumber}"
+                                                android:maxLength="200"
+                                                android:paddingStart="15sp"
+                                                android:paddingEnd="15sp"
+                                                android:singleLine="true"
+                                                android:textColorHint="@color/color_263238" />
 
                                         </LinearLayout>
 

@@ -26,6 +26,10 @@ class LeaseAdapter(listener: LeaseItemClickedListener) :
         productTypeList = list
     }
 
+    fun clearLeaseItemList() {
+        productTypeList.clear()
+    }
+
     override fun setViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(binding)
     }
