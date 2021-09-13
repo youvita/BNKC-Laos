@@ -26,6 +26,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 
     @Inject
     lateinit var adapter: AlarmAdapter
+    private var isSending = false
 
     override fun getLayoutId(): Int = R.layout.activity_notification
 
@@ -37,6 +38,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         initDisposable()
 
         binding.lvNotifiation.adapter = adapter
+        adapter.clearItemList()
         alarmViewModel.alarmListLiveData.observe(this) {
             if (binding.swipeRefreshNotification.isRefreshing) {
                 binding.swipeRefreshNotification.isRefreshing = false
@@ -47,8 +49,12 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
                 adapter.addItemList(list)
             }
             checkUIChangeEmptyData()
+            successListener()
+            isSending = false
         }
         alarmViewModel.getAlarmList()
+        showLoading()
+        isSending = true
     }
 
     private fun initView() {
@@ -80,8 +86,11 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
                     if (dy > 0) {
                         if (!alarmViewModel.isLastPage()) {
                             if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                                if (isSending) return
                                 ++alarmViewModel.pageNo
                                 alarmViewModel.getAlarmList()
+                                showLoading()
+                                isSending = true
                             }
                         }
                     }
@@ -103,6 +112,8 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         alarmViewModel.pageNo = 0
         adapter.clearItemList()
         alarmViewModel.getAlarmList()
+        showLoading()
+        isSending = true
     }
 
     private fun checkUIChangeEmptyData() {
