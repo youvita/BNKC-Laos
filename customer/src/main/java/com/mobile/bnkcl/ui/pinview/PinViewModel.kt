@@ -35,14 +35,15 @@ class PinViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseVie
     fun loginNoAuth(){
         viewModelScope.launch {
             authRepo.loginUserNoAuth(loginRequestNoAuth!!).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _login.value = resource.data
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _login.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
@@ -51,15 +52,16 @@ class PinViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseVie
     fun loginWithAuth(){
         viewModelScope.launch {
             authRepo.loginUser(logRequest!!).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    Log.e(">>>>", "${resource.errorCode} === ${resource.messageTitle}")
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _login.value = resource.data
-                }
+//                if (resource.status == Status.ERROR) {
+//                    Log.e(">>>>", "${resource.errorCode} === ${resource.messageTitle}")
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _login.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

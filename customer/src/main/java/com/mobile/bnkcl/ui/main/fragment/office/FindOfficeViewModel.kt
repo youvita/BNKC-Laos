@@ -37,15 +37,16 @@ class FindOfficeViewModel @Inject constructor(var findOfficeRepo: FindOfficeRepo
         if (sharePref.getPrefer(com.bnkc.sourcemodule.app.Constants.KEY_TOKEN) != null){
             viewModelScope.launch {
                 findOfficeRepo.getAreas(areaRequest).onEach { resource ->
-                    if (resource.status == Status.ERROR) {
-                        val code = resource.errorCode
-                        val title = resource.messageTitle
-                        val message = resource.messageDes
-                        RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                    } else {
-                        _areaMuLiveData.value = resource.data?.areas
-//                    var areaObjResponse = resource.data!!.areas[0]
-                    }
+//                    if (resource.status == Status.ERROR) {
+//                        val code = resource.errorCode
+//                        val title = resource.messageTitle
+//                        val message = resource.messageDes
+//                        RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                    } else {
+//
+////                    var areaObjResponse = resource.data!!.areas[0]
+//                    }
+                    _areaMuLiveData.value = resource.data?.areas
                 }.launchIn(viewModelScope)
             }
         }
@@ -57,14 +58,15 @@ class FindOfficeViewModel @Inject constructor(var findOfficeRepo: FindOfficeRepo
     fun reqBranchList () {
         viewModelScope.launch {
             findOfficeRepo.getBranches(branchRequest!!).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _branchMuLiveData.value = resource.data?.branches
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _branchMuLiveData.value = resource.data?.branches
             }.launchIn(viewModelScope)
         }
     }

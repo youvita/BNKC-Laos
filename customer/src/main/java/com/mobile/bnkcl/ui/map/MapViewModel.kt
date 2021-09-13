@@ -29,14 +29,15 @@ class MapViewModel @Inject constructor(private val findOfficeRepo : FindOfficeRe
         Log.d(">>>>>>", "data :: $branchId")
         viewModelScope.launch {
             findOfficeRepo.getOffice(branchId).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _officeMuLiveData.value = resource.data!!
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _officeMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
     }

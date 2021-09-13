@@ -12,6 +12,9 @@ import androidx.activity.viewModels
 import androidx.annotation.IntegerRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
@@ -20,8 +23,10 @@ import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,7 +34,6 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     private val viewModel : LeaseCalculateViewModel by viewModels()
     private var selectedItem = -1
-
 
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
@@ -58,7 +62,18 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         observeViewModel()
         initView()
         initEvent()
+        checkError()
+    }
 
+    private var disposableError: Disposable? = null
+    private fun checkError(){
+        //Session expired
+        disposableError = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(com.bnkc.sourcemodule.app.Constants.KEY_TOKEN, "")//clear token when session expired
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
     }
 
     private fun observeViewModel(){

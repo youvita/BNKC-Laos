@@ -199,14 +199,15 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "sendOTP ::: " + sendOTPRequest.to)
         viewModelScope.launch {
             otpRepo.sendOTP(sendOTPRequest).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _sendOTP.value = resource.data
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _sendOTP.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
@@ -217,14 +218,15 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun verifyOTP(){
         viewModelScope.launch {
             otpRepo.OTPVerify(otpVerifyRequest!!).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _verifyOTP.value = resource.data
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _verifyOTP.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
@@ -235,14 +237,15 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun preLogin(){
         viewModelScope.launch {
             authRepo.preLogin(prelogRequest!!).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _preLogin.value = resource.data
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _preLogin.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

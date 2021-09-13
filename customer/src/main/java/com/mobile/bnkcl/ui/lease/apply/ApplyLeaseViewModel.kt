@@ -33,14 +33,15 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
     fun applyLease(){
         viewModelScope.launch {
             leaseRepo.applyLease(applyLeaseRequest).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _applyLeaseLiveData.value = resource.data
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _applyLeaseLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
@@ -50,14 +51,15 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
     fun reqLeaseItemCode(groupId :String){
         viewModelScope.launch {
             leaseRepo.getItemCode(groupId).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
-                    _productTypeMuLiveData.value = resource.data!!
-                }
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _productTypeMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
     }

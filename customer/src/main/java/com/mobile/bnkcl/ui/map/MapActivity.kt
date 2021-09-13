@@ -8,6 +8,9 @@ import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.bnkc.library.rxjava.RxEvent
+import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,8 +23,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,10 +40,21 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     @Inject
     lateinit var confirmDialog: ConfirmDialog
 
+    private var calLeaseDisposable: Disposable? = null
+    private fun checkError(){
+        //Session expired
+        calLeaseDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
+            errorSessionDialog(it.title, it.message).onConfirmClicked {
+                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarTransparent(this, true)
         super.onCreate(savedInstanceState)
-
+        checkError()
         if (intent != null) {
             branchId = intent.getLongExtra("branch_id", 0)
             Log.d(">>>>>>", "onCreate :: $branchId")
