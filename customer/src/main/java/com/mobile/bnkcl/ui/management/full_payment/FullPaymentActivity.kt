@@ -58,9 +58,9 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
             }
         }
 
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
+//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+//            errorDialog(it.code, it.title, it.message)
+//        }
 
     }
 

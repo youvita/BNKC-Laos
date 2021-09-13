@@ -61,9 +61,9 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
             }
         }
 
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
+//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+//            errorDialog(it.code, it.title, it.message)
+//        }
     }
 
     private fun initView() {

@@ -6,22 +6,30 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.com.view.BnkEditText
 import com.mobile.bnkcl.data.response.user.EditAccountInfoData
+import com.mobile.bnkcl.data.response.user.MyLeaseData
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityEditAccountInfoBinding
 import com.mobile.bnkcl.ui.dialog.AlertEditInfoDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.utilities.UtilsSize
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
@@ -48,6 +56,32 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         initLiveData()
 
         viewModel.getJobTypeCodes()
+    }
+
+    private fun addLeaseInfo(contractNo: List<MyLeaseData>) {
+
+        for (element in contractNo) {
+            val layout = binding.llLeaseProductNumber
+            layout.setBackgroundResource(R.drawable.round_solid_ffffff_8)
+            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+
+            params.setMargins(0, UtilsSize.getValueInDP(this, 10), 0, 0)
+            val res = resources.getIdentifier("round_solid_f3f6f7_8", "drawable", this.packageName)
+            val editText = BnkEditText(this)
+            editText.layoutParams = params
+            editText.textSize = 15F
+            editText.isEnabled = false
+            editText.setBackgroundResource(res)
+            editText.hint = element.contractNo
+            editText.typeface = ResourcesCompat.getFont(this, R.font.rubik_medium)
+            editText.height = UtilsSize.getValueInDP(this, 50)
+            editText.setHintTextColor(ContextCompat.getColor(this, R.color.color_c4d0d6))
+            editText.setPadding(UtilsSize.getValueInDP(this, 15), 0, 0, 0)
+            layout.addView(editText)
+        }
 
     }
 
@@ -93,9 +127,14 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         if (intent != null) {
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
+
+            binding.lytAddressInfo.edtBankName.setText(profileData!!.bankName.toString())
+            binding.lytAddressInfo.edtAccountNumber.setText(profileData!!.accountNumber.toString())
+
+            addLeaseInfo(profileData!!.myLease!!)
         }
 
-        com.mobile.bnkcl.utilities.Utils.setHideKeyboard(this, binding.parentLayout)
+        Utils.setHideKeyboard(this, binding.parentLayout)
 
         binding.btnCancel.setOnClickListener(this)
         binding.lytAddressInfo.llJobType.setOnClickListener(this)
@@ -159,9 +198,9 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
             }
         }
 
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
+//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+//            errorDialog(it.code, it.title, it.message)
+//        }
     }
 
     private fun initDisablePersonalInfo() {
@@ -175,7 +214,6 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         binding.lytAddressInfo.llVillage.setBackgroundResource(res)
         binding.lytAddressInfo.edtDetailedAddress.setBackgroundResource(res)
         binding.lytAddressInfo.edtEtc.setBackgroundResource(res)
-        binding.llProductNumber.setBackgroundResource(res)
 
         binding.edtName.isEnabled = false
         binding.edtDob.isEnabled = false
@@ -186,7 +224,6 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         binding.lytAddressInfo.llVillage.isEnabled = false
         binding.lytAddressInfo.edtDetailedAddress.isEnabled = false
         binding.lytAddressInfo.edtEtc.isEnabled = false
-        binding.edtProductNumber.isEnabled = false
 
         binding.lytAddressInfo.tvCapital.setCompoundDrawablesWithIntrinsicBounds(
             0,
@@ -227,13 +264,12 @@ class EditAccountInfoActivity : BaseActivity<ActivityEditAccountInfoBinding>(),
         )
 
         if (intent != null && profileData != null) {
-            binding.lytAddressInfo.tvCapital.text = profileData!!.address?.state?.erpCode
-            binding.lytAddressInfo.tvDistrict.text = profileData!!.address?.district?.erpCode
-            binding.lytAddressInfo.tvVillage.text = profileData!!.address?.village?.erpCode
-            binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.address?.state?.erpCode
+            binding.lytAddressInfo.tvCapital.text = profileData!!.address?.state?.alias1
+            binding.lytAddressInfo.tvDistrict.text = profileData!!.address?.district?.alias1
+            binding.lytAddressInfo.tvVillage.text = profileData!!.address?.village?.alias1
+            binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.address?.state?.alias1
             binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.etcDetailedAddress
             binding.lytAddressInfo.edtEtc.hint = profileData!!.edtStatus.toString()
-            binding.edtProductNumber.hint = profileData!!.accountNumber
         }
     }
 

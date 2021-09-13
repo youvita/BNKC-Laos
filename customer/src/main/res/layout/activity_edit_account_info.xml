@@ -257,8 +257,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="center_vertical"
-                                        android:textColor="@color/color_c4d0d6"
                                         android:text="@{profile.gender.equals(`M`) ? @string/info_male : @string/info_female}"
+                                        android:textColor="@color/color_c4d0d6"
                                         app:drawableEndCompat="@drawable/ic_more_ico"
                                         app:drawableTint="@color/color_c4d0d6" />
 
@@ -283,6 +283,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@null"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -299,44 +300,14 @@
                                         android:layout_marginTop="@dimen/margin_15dp"
                                         android:text="@string/edit_product_number" />
 
+                                    <!-- Lease product number -->
                                     <LinearLayout
-                                        android:id="@+id/ll_product_number"
+                                        android:id="@+id/ll_lease_product_number"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/margin_10dp"
-                                        android:background="@drawable/selector_viewgroup_bg"
-                                        android:orientation="horizontal">
-
-
-                                        <com.mobile.bnkcl.com.view.BnkEditText
-                                            android:id="@+id/edt_product_number"
-                                            style="@style/font15_263238_medium"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginEnd="@dimen/margin_10dp"
-                                            android:layout_weight="1"
-                                            android:background="@null"
-                                            android:hint="@string/edit_product_number"
-                                            android:inputType="number"
-                                            android:maxLength="7"
-                                            android:paddingStart="@dimen/padding_15dp"
-                                            android:paddingTop="@dimen/padding_16dp"
-                                            android:paddingBottom="@dimen/padding_16dp"
-                                            android:singleLine="true"
-                                            android:textColorHint="@color/color_cfd8dc" />
-
-                                        <TextView
-                                            android:id="@+id/tv_correct"
-                                            style="@style/font13_d7191f_bold"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginEnd="@dimen/margin_15dp"
-                                            android:drawablePadding="@dimen/padding_5dp"
-                                            android:gravity="center"
-                                            android:text="@string/edit_10"
-                                            android:visibility="gone"
-                                            app:drawableRightCompat="@drawable/ic_info_red_ico_1" />
-                                    </LinearLayout>
+                                        android:layout_marginBottom="3dp"
+                                        android:gravity="center"
+                                        android:orientation="vertical" />
 
                                 </LinearLayout>
 

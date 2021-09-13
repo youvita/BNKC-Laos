@@ -46,9 +46,9 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
             }
         }
 
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
+//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+//            errorDialog(it.code, it.title, it.message)
+//        }
     }
 
     private fun initView() {
