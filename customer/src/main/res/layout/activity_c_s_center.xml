@@ -191,6 +191,9 @@
                     android:id="@+id/btn_ask_bnk"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    app:buttonText="@string/center_ask_bnkc"
+                    app:is_active="true"
+                    app:textAllCaps="true"
                     android:layout_marginLeft="@dimen/margin_21dp"
                     android:layout_marginRight="@dimen/margin_21dp"
                     android:onClick="@{() -> action.onAskBnkClick()}"/>

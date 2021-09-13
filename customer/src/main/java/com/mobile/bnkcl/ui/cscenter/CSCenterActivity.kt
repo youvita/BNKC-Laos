@@ -54,7 +54,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         checkError()
         initToolbar()
-        initButton()
         observeData()
 
         if (intent != null) {
@@ -116,12 +115,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
                 }
             }
         }
-    }
-
-    private fun initButton(){
-        binding.btnAskBnk.setLabelButton(this.getString(R.string.cs_02))
-        binding.btnAskBnk.setButtonBackGround(R.drawable.round_solid_d7191f_8)
-        binding.btnAskBnk.setCheckButtonTextColor(true)
     }
 
     private fun visibleWebView() {
@@ -196,7 +189,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
      */
     fun onAskClick() {
         clearState()
-
         getClaimData(pageNumber, true)
         visibleAskBnk()
         binding.tvFaq.isClickable = true

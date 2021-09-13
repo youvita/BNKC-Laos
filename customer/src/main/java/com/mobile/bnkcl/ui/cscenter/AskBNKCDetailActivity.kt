@@ -79,9 +79,7 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
                 binding.tvContent.visibility = View.VISIBLE
 
                 binding.tvTitle.text = it.title
-                Log.d("Zim", "create on: ${it.created_on}")
-
-                binding.tvCreateOn.text = com.bnkc.sourcemodule.util.FormatUtils.Companion.getDateFormat(it.created_on, 1)
+                binding.tvCreateOn.text = com.bnkc.sourcemodule.util.FormatUtils.Companion.getDateFormat(it.created_on, 6)
                 binding.tvCategory.text = it.category
                 binding.tvContent.text = it.content
 

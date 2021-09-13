@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.area.AreaRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
@@ -99,9 +100,9 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
     private val _verifyId : MutableLiveData<IdNumRes> = MutableLiveData()
     val  verifyIdLiveData : LiveData<IdNumRes> = _verifyId
      var idNumReq : IdNumReq? = null
-    var num = SendOTPRequest()
+//    var num = SendOTPRequest()
     fun verifyId(){
-        idNumReq = IdNumReq(num.to.toString(), idNumReq!!.identification_number )
+//        idNumReq = IdNumReq(Constants.USER_ID, idNumReq!!.identification_number )
         viewModelScope.launch {
             authRepo.verifyIdentification(idNumReq!!).onEach { resource ->
                 _verifyId.value = resource.data

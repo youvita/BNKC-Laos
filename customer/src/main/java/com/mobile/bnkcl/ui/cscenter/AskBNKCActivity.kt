@@ -16,6 +16,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
 import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCViewModel
+import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.Utils
@@ -60,9 +61,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
     }
     private fun initButton(){
-        binding.btnSubmit.setLabelButton(this.getString(R.string.comm_submit))
         binding.btnSubmit.setOnClickListener(this)
-
         binding.edtSubject.addTextChangedListener(inputText)
         binding.edtDescription.addTextChangedListener(inputText)
 
@@ -75,15 +74,16 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
     private fun observeData(){
         askBNKCViewModel.claimLiveData.observe(this){
 
-            if (subject.isEmpty() || description.isEmpty()){
-
-            }else{
-                val intent = Intent(this, ResultActivity::class.java)
-                intent.putExtra("ACTION_TAG", "ask_bnkc")
-                result.launch(intent)
+            if (subject.isNotEmpty() && description.isNotEmpty()){
+                askResult(true)
             }
-
         }
+    }
+    private fun askResult(result: Boolean) {
+        val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra("from", AskBNKCActivity::class.java.simpleName)
+        intent.putExtra("result", result)
+        startActivity(intent)
     }
 
     private var inputText = object : TextWatcher{
@@ -97,17 +97,10 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
             subject = binding.edtSubject.text.toString()
             description = binding.edtDescription.text.toString()
             binding.btnSubmit.isEnable(subject, description)
+            binding.btnSubmit.isActive()
         }
     }
 
-//    fun setEnableSubmitButton(subject: String, desc: String){
-//        if(subject.isEmpty() || desc.isEmpty()){
-//            binding.btnSubmit.set(false)
-//        }
-//        else {
-//            binding.btnSubmit.enableButton(true)
-//        }
-//    }
 
     override fun onClick(v: View?) {
         when(v?.id){
@@ -120,19 +113,19 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
     }
 
 
-    var result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
-        if (result.resultCode == Activity.RESULT_OK){
-
-            val data : Intent? = result.data
-            if (data != null) {
-                if (data.getIntExtra("tab_index", 0) != 0) {
-                    val intent = intent
-                    intent.putExtra("tab_index", data.getIntExtra("tab_index", 0))
-                    setResult(RESULT_OK, intent)
-                    finish()
-                }
-            }
-
-    }
-    }
+//    var result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
+//        if (result.resultCode == Activity.RESULT_OK){
+//
+//            val data : Intent? = result.data
+//            if (data != null) {
+//                if (data.getIntExtra("tab_index", 0) != 0) {
+//                    val intent = intent
+//                    intent.putExtra("tab_index", data.getIntExtra("tab_index", 0))
+//                    setResult(RESULT_OK, intent)
+//                    finish()
+//                }
+//            }
+//
+//    }
+//    }
 }

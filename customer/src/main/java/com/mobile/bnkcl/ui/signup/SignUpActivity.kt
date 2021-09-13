@@ -88,7 +88,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         binding.ivBack.setOnClickListener(this)
         binding.tvDob.addTextChangedListener(mDateWatcher)
 
-//        binding.edtIdNum.addTextChangedListener(textIdentificationNumberWatcher)
+        binding.edtIdNum.addTextChangedListener(textIdentificationNumberWatcher)
         binding.btnCheck.setOnClickListener(btnCheckId)
         binding.tvNewCustomer.visibility = View.GONE
 
@@ -382,7 +382,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     }
 
     private val btnCheckId = View.OnClickListener {
-        addressInfoViewModel.idNumReq = IdNumReq(username, identificationNumber)
+
+        identificationNumber = binding.edtIdNum.text.toString()
+        addressInfoViewModel.idNumReq = IdNumReq("2012345678", identificationNumber)
         addressInfoViewModel.verifyId()
         verifyIdentification()
 
