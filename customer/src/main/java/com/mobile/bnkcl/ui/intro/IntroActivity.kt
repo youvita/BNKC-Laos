@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
@@ -19,6 +20,7 @@ import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
@@ -141,13 +143,21 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                             )
                             confirmDialog.onConfirmClickedListener {
 //                                startApp()
-                                sendPushID()
+                                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                                    sendPushID()
+                                } else {
+                                    startApp()
+                                }
                             }
                             confirmDialog.isCancelable = false
                             confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                         } else {
 //                            startApp()
-                            sendPushID()
+                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                                sendPushID()
+                            } else {
+                                startApp()
+                            }
                         }
                     }
                 } else {
@@ -175,12 +185,16 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     }
 
     /**
-     * register push id to server
+     * nng:
+     * send push id to server
+     * in case user install the app and not yet login
+     * sending user push notification without login
      */
     fun sendPushID(){
         val settingData = SettingData()
+        val deviceInfo = DeviceInfo(sharedPrefer.getPrefer(Constants.PUSH_ID), "Android", Build.MODEL, Build.VERSION.SDK_INT.toString())
         settingData.push_alarm_enabled = true
-        settingData.push_id = sharedPrefer.getPrefer(Constants.PUSH_ID)
+        settingData.device_info = deviceInfo
         settingViewModel.settingData = settingData
         settingViewModel.updateUserSetting()
         settingViewModel.userSettingLiveData.observe(this@IntroActivity) {
