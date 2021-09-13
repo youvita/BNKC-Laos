@@ -42,9 +42,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
             }
         }
 
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
+//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+//            errorDialog(it.code, it.title, it.message)
+//        }
     }
 
     override fun getLayoutId(): Int {
@@ -69,6 +69,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         binding.toggleUser.setOnCheckedChangeListener { _, isChecked ->
             val settingData = SettingData()
             settingData.push_alarm_enabled = isChecked
+            settingData.push_id = sharedPrefer.getPrefer(Constants.PUSH_ID)
             settingViewModel.settingData = settingData
 
             settingViewModel.updateUserSetting()

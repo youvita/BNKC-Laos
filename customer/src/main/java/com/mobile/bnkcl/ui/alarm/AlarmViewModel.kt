@@ -27,15 +27,15 @@ class AlarmViewModel @Inject constructor(private var alarmRepo: AlarmRepo) : Bas
     fun getAlarmList() {
         viewModelScope.launch {
             alarmRepo.getAlarmList(AlarmRequest(pageNo, 10, "asc")).onEach { resource ->
-                if (resource.status == Status.ERROR) {
-                    val code = resource.errorCode
-                    val title = resource.messageTitle
-                    val message = resource.messageDes
-                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-                } else {
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
                     _getAlarmList.value = resource.data
                     lastpage = resource.data!!.last
-                }
+//                }
             }.launchIn(viewModelScope)
         }
     }

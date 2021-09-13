@@ -11,6 +11,7 @@ object Constants {
     const val USER_ID = "USER_ID"
     const val KEY_TOKEN = "TOKEN"
     const val SESSION_ID = "SESSION_ID"
+    const val PUSH_ID = "PUSH_ID"
 
     //    MG
     const val KEY_START_URL         = "c_start_url"

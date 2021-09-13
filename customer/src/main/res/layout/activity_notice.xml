@@ -27,7 +27,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="Ask BNKC">
+                    app:title="@string/nav_notice">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"

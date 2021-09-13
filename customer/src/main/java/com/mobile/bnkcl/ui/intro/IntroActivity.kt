@@ -19,10 +19,11 @@ import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.ui.setting.SettingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -30,6 +31,8 @@ import javax.inject.Inject
 class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
     private val introViewModel: IntroViewModel by viewModels()
+    private val settingViewModel: SettingViewModel by viewModels()
+
     private lateinit var preLang: String
 
     override fun getLayoutId(): Int = R.layout.activity_intro
@@ -56,6 +59,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
                 // Get new FCM registration token
                 val token = task.result
+                sharedPrefer.putPrefer(Constants.PUSH_ID, token!!)
                 Log.d("nng: ", "token:: $token")
             })
     }
@@ -74,9 +78,9 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             }
         }
 
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            errorDialog(it.code, it.title, it.message)
-        }
+//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+//            errorDialog(it.code, it.title, it.message)
+//        }
 
     }
 
@@ -136,12 +140,14 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                                 getString(R.string.comm_confirm)
                             )
                             confirmDialog.onConfirmClickedListener {
-                                startApp()
+//                                startApp()
+                                sendPushID()
                             }
                             confirmDialog.isCancelable = false
                             confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                         } else {
-                            startApp()
+//                            startApp()
+                            sendPushID()
                         }
                     }
                 } else {
@@ -165,6 +171,22 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             val title = getString(R.string.comm_error)
             val message = getString(R.string.comm_error_during_process)
             RxJava.publish(RxEvent.ServerError(ErrorCode.SERVICE_ERROR, title, message))
+        }
+    }
+
+    /**
+     * register push id to server
+     */
+    fun sendPushID(){
+        val settingData = SettingData()
+        settingData.push_alarm_enabled = true
+        settingData.push_id = sharedPrefer.getPrefer(Constants.PUSH_ID)
+        settingViewModel.settingData = settingData
+        settingViewModel.updateUserSetting()
+        settingViewModel.userSettingLiveData.observe(this@IntroActivity) {
+            Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
+            successListener()
+            startApp()
         }
     }
 
