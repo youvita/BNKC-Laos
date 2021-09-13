@@ -130,7 +130,6 @@
                         android:hint="0.00"
                         android:imeOptions="actionDone"
                         android:inputType="number"
-                        android:maxLength="2"
                         android:maxLines="1"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
@@ -277,7 +276,7 @@
                 android:layout_width="match_parent"
                 app:buttonText="@string/calculate"
                 app:textAllCaps="true"
-                app:is_active="true"
+                app:is_active="false"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_height="50dp"/>

@@ -276,9 +276,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
             }
             2->{ //Sign up
                 val intent = Intent(context, SignUpActivity::class.java)
-//                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
+                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
 //                intent.putExtra("pin_action", "login")
-//                intent.putExtra("username", phoneNumber.value)
+                intent.putExtra(Constants.USER_ID, phoneNumber.value)
                 context.startActivity(intent)
             }
 

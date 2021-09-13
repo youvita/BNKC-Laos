@@ -35,6 +35,6 @@ class ApplyLeaseRequest {
     var request_amount : String? = null
 
     @SerializedName("repayment_term")
-    var repayment_term : String? = null
+    var repayment_term : Int? = null
 
 }

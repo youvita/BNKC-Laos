@@ -47,7 +47,7 @@ interface LeaseApi {
         @Body leaseCalculateReq: LeaseCalculateReq
     ): Response<LeaseCalResponse>
 
-    @POST("api/ca/leases/submit-application")
+    @POST("api/ca/leases/applications")
     suspend fun applyLease(
         @Body applyLeaseRequest: ApplyLeaseRequest
     ): Response<ApplyLeaseResponse>

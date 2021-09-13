@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.ui.success
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import com.mobile.bnkcl.databinding.ActivityResultBinding
 import com.mobile.bnkcl.ui.cscenter.AskBNKCActivity
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
+import com.mobile.bnkcl.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -76,9 +78,10 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                 }
                 ApplyLeaseActivity::class.java.simpleName -> {
                     if (resultStatus){
-
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     }else{
-
+                        finish()
                     }
                 }
             }

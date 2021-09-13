@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.EditText
+import android.widget.RadioGroup
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.util.Constants
@@ -94,7 +97,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                             )
                         )
                         binding.tvProType.text = itemResponses[pos].title
-                        viewModel.applyLeaseRequest?.product_type = itemResponses[pos].code
+                        viewModel.applyLeaseRequest.product_type = itemResponses[pos].code
 //                        viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
 //                        viewModel.reqBranchList()
                     }
@@ -118,10 +121,10 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                             )
                         )
                         binding.tvRepaymentTerm.text = viewModel.setUpRepaymentTermData()[pos]
-                        viewModel.applyLeaseRequest?.repayment_term =
+                        viewModel.applyLeaseRequest.repayment_term =
                             viewModel.setUpRepaymentTermData()[pos].split(
                                 " "
-                            )[0]
+                            )[0].toInt()
 //                        viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
 //                        viewModel.reqBranchList()
                     }
@@ -141,27 +144,113 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
     private fun initView(){
         binding.include.colToolbar.title = getString(R.string.apply_lease)
-        binding.edProPrice.addTextChangedListener(NumberTextWatcherForThousand(binding.edProPrice))
-        binding.edReqAmt.addTextChangedListener(NumberTextWatcherForThousand(binding.edReqAmt))
+        viewModel.applyLeaseRequest.etc_status = binding.cbEtc.isChecked
+        binding.edProPrice.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
+                }else{
+                    ""
+                }
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
+                }else{
+                    ""
+                }
+                var term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                binding.btnSubmit.isEnable(
+                    proType!!,
+                    binding.edNameBrand.text.toString(),
+                    binding.edNameModel.text.toString(),
+                    binding.edNameType.text.toString(),
+                    binding.edEtcBrand.text.toString(),
+                    binding.edEtcModel.text.toString(),
+                    binding.edEtcType.text.toString(),
+                    reqAmt!!,
+                    s.toString(),
+                    term!!.toString()
+                )
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.product_price = if (s.toString().isNotEmpty()){
+                    "LAK ".plus(s.toString())
+                }else{
+                    ""
+                }
+            }
+        })
+
+        binding.edReqAmt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
+                }else{
+                    ""
+                }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
+                }else{
+                    ""
+                }
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                binding.btnSubmit.isEnable(
+                    proType!!,
+                    binding.edNameBrand.text.toString(),
+                    binding.edNameModel.text.toString(),
+                    binding.edNameType.text.toString(),
+                    binding.edEtcBrand.text.toString(),
+                    binding.edEtcModel.text.toString(),
+                    binding.edEtcType.text.toString(),
+                    s.toString(),
+                    proPrice!!,
+                    term!!.toString()
+                )
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.request_amount = if (s.toString().isNotEmpty()){
+                    "LAK ".plus(s.toString())
+                }else{
+                    ""
+                }
+            }
+        })
 
         binding.edNameBrand.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val proType = if (viewModel.applyLeaseRequest?.product_type!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.product_type
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
                 }else{
                     ""
                 }
-                val reqAmt = if (viewModel.applyLeaseRequest?.request_amount!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.request_amount
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
                 }else{
                     ""
                 }
-                val term = if (viewModel.applyLeaseRequest?.repayment_term!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.repayment_term
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
                 }else{
                     ""
                 }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
+                }else{
+                    ""
+                }
+
                 binding.btnSubmit.isEnable(
                     proType!!,
                     s.toString(),
@@ -172,28 +261,36 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.edEtcModel.text.toString(),
                     binding.edEtcType.text.toString(),
                     reqAmt!!,
-                    term!!
+                    proPrice!!,
+                    term!!.toString()
                 )
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.name_of_brand = s.toString()
+            }
         })
 
         binding.edNameModel.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val proType = if (viewModel.applyLeaseRequest?.product_type!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.product_type
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
                 }else{
                     ""
                 }
-                val reqAmt = if (viewModel.applyLeaseRequest?.request_amount!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.request_amount
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
                 }else{
                     ""
                 }
-                val term = if (viewModel.applyLeaseRequest?.repayment_term!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.repayment_term
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
                 }else{
                     ""
                 }
@@ -202,33 +299,40 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.edNameBrand.text.toString(),
                     s.toString(),
                     binding.edNameType.text.toString(),
-                    binding.edNameModel.text.toString(),
                     binding.edEtcBrand.text.toString(),
                     binding.edEtcModel.text.toString(),
                     binding.edEtcType.text.toString(),
                     reqAmt!!,
-                    term!!
+                    proPrice!!,
+                    term!!.toString()
                 )
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.name_of_model = s.toString()
+            }
         })
 
         binding.edNameType.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val proType = if (viewModel.applyLeaseRequest?.product_type!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.product_type
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
                 }else{
                     ""
                 }
-                val reqAmt = if (viewModel.applyLeaseRequest?.request_amount!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.request_amount
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
                 }else{
                     ""
                 }
-                val term = if (viewModel.applyLeaseRequest?.repayment_term!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.repayment_term
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
                 }else{
                     ""
                 }
@@ -237,33 +341,44 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.edNameBrand.text.toString(),
                     binding.edNameModel.text.toString(),
                     s.toString(),
-                    binding.edNameModel.text.toString(),
                     binding.edEtcBrand.text.toString(),
                     binding.edEtcModel.text.toString(),
                     binding.edEtcType.text.toString(),
                     reqAmt!!,
-                    term!!
+                    proPrice!!,
+                    term!!.toString()
                 )
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.name_of_type = s.toString()
+            }
         })
+
+        binding.cbEtc.setOnCheckedChangeListener { p0, p1 ->
+            viewModel.applyLeaseRequest.etc_status = p1
+        }
 
         binding.edEtcBrand.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val proType = if (viewModel.applyLeaseRequest?.product_type!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.product_type
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
                 }else{
                     ""
                 }
-                val reqAmt = if (viewModel.applyLeaseRequest?.request_amount!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.request_amount
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
                 }else{
                     ""
                 }
-                val term = if (viewModel.applyLeaseRequest?.repayment_term!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.repayment_term
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
                 }else{
                     ""
                 }
@@ -272,33 +387,40 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.edNameBrand.text.toString(),
                     binding.edNameModel.text.toString(),
                     binding.edNameType.text.toString(),
-                    binding.edNameModel.text.toString(),
                     s.toString(),
                     binding.edEtcModel.text.toString(),
                     binding.edEtcType.text.toString(),
                     reqAmt!!,
-                    term!!
+                    proPrice!!,
+                    term!!.toString()
                 )
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.etc_name_of_brand = s.toString()
+            }
         })
 
         binding.edEtcModel.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val proType = if (viewModel.applyLeaseRequest?.product_type!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.product_type
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
                 }else{
                     ""
                 }
-                val reqAmt = if (viewModel.applyLeaseRequest?.request_amount!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.request_amount
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
                 }else{
                     ""
                 }
-                val term = if (viewModel.applyLeaseRequest?.repayment_term!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.repayment_term
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
                 }else{
                     ""
                 }
@@ -307,33 +429,40 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.edNameBrand.text.toString(),
                     binding.edNameModel.text.toString(),
                     binding.edNameType.text.toString(),
-                    binding.edNameModel.text.toString(),
                     binding.edEtcBrand.text.toString(),
                     s.toString(),
                     binding.edEtcType.text.toString(),
                     reqAmt!!,
-                    term!!
+                    proPrice!!,
+                    term!!.toString()
                 )
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.etc_name_of_model = s.toString()
+            }
         })
 
         binding.edEtcType.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val proType = if (viewModel.applyLeaseRequest?.product_type!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.product_type
+                val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                    viewModel.applyLeaseRequest.product_type
                 }else{
                     ""
                 }
-                val reqAmt = if (viewModel.applyLeaseRequest?.request_amount!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.request_amount
+                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                    viewModel.applyLeaseRequest.request_amount
                 }else{
                     ""
                 }
-                val term = if (viewModel.applyLeaseRequest?.repayment_term!!.isNotEmpty()){
-                    viewModel.applyLeaseRequest?.repayment_term
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                    viewModel.applyLeaseRequest.repayment_term
+                }else{
+                    ""
+                }
+                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                    viewModel.applyLeaseRequest.product_price
                 }else{
                     ""
                 }
@@ -342,17 +471,23 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.edNameBrand.text.toString(),
                     binding.edNameModel.text.toString(),
                     binding.edNameType.text.toString(),
-                    binding.edNameModel.text.toString(),
                     binding.edEtcBrand.text.toString(),
                     binding.edEtcModel.text.toString(),
                     s.toString(),
                     reqAmt!!,
-                    term!!
+                    proPrice!!,
+                    term!!.toString()
                 )
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                viewModel.applyLeaseRequest.etc_name_of_type = s.toString()
+            }
         })
+
+        binding.edProPrice.addTextChangedListener(NumberTextWatcherForThousand(binding.edProPrice))
+        binding.edReqAmt.addTextChangedListener(NumberTextWatcherForThousand(binding.edReqAmt))
+
     }
 
     override fun getLayoutId(): Int {

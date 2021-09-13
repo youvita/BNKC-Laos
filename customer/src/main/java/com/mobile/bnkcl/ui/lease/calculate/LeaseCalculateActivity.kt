@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.annotation.IntegerRes
 import androidx.core.content.ContextCompat
@@ -19,6 +20,7 @@ import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
+import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,6 +30,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
     private val viewModel : LeaseCalculateViewModel by viewModels()
     private var selectedItem = -1
 
+
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
@@ -36,15 +39,13 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         @SuppressLint("UseCompatLoadingForDrawables")
         override fun afterTextChanged(s: Editable?) {
-            val text: String = binding.edRate.text.toString()
-            if (text.endsWith("-") || text.endsWith(" ")) return
-
-//            binding.edRate.setText(
-//                StringBuffer(text).insert(text.length - 1, "-").toString()
-//            )
-            viewModel.leaseCalculateReq.interest_rate = Integer.parseInt(text)
+            if (s.toString().isNotEmpty()) viewModel.leaseCalculateReq.interest_rate = s.toString().toInt()
             binding.edRate.setSelection(binding.edRate.text!!.length)
-
+            binding.btnCalculate.isEnable(
+                viewModel.leaseCalculateReq.lease_amount.toString(),
+                s.toString(),
+                viewModel.leaseCalculateReq.repayment_term.toString()
+            )
             val inputOtp =
                 s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
         }
@@ -73,11 +74,11 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         binding.btnCalculate.setOnClickListener {
             showLoading()
             Log.d("nng", "leaseCalculateReq :: " + viewModel.leaseCalculateReq.lease_amount)
-            viewModel.leaseCalculateReq = LeaseCalculateReq(
-                "1000 USD",
-                1,
-                1,
-            )
+//            viewModel.leaseCalculateReq = LeaseCalculateReq(
+//                "1000 USD",
+//                1,
+//                1,
+//            )
             viewModel.calculateLease()
         }
         binding.llRepaymentTerm.setOnClickListener {
@@ -92,14 +93,46 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             listChoiceDialog.setOnItemListener = {
                     p : Int ->
                 selectedItem = p
-                var term = viewModel.setUpData()[p]
+                val term = viewModel.setUpData()[p]
                 binding.tvRepaymentTerm.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
                 binding.tvRepaymentTerm.text = term
-                viewModel.leaseCalculateReq.repayment_term = Integer.parseInt(term.split(" ")[0])
+                viewModel.leaseCalculateReq.repayment_term = term.split(" ")[0].toInt()
+                binding.btnCalculate.isEnable(
+                    binding.edLeaseAmt.text.toString(),
+                    binding.edRate.text.toString(),
+                    term
+                )
             }
             listChoiceDialog.isCancelable = true
             listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
         }
+
+        binding.edLeaseAmt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+                var term = if (viewModel.leaseCalculateReq.repayment_term != null){
+                    viewModel.leaseCalculateReq.repayment_term
+                }else{
+                    ""
+                }
+                binding.btnCalculate.isEnable(
+                    s.toString(),
+                    binding.edRate.text.toString(),
+                    term.toString()
+                )
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                viewModel.leaseCalculateReq.lease_amount = if (s.toString().isNotEmpty()){
+                    "LAK ".plus(s.toString())
+                }else{
+                    ""
+                }
+            }
+        })
+
+        binding.edLeaseAmt.addTextChangedListener(NumberTextWatcherForThousand(binding.edLeaseAmt))
     }
 
     private fun initView(){
@@ -109,6 +142,35 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_lease_calculate
+    }
+
+    class NumberTextWatcherForThousand internal constructor(var editText: EditText) : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            val value = s.toString()
+            try {
+                editText.removeTextChangedListener(this)
+                val fixedValue: String = FormatUtil.getDecimalFormattedString(value, false).toString()
+                val preSelection = editText.selectionEnd
+                s.replace(0, value.length, fixedValue)
+                val selection = preSelection + fixedValue.length - value.length
+//            DevLog.devLog(">>>>>>>", ">>>>>>>>>>> :: " + s.length)
+                editText.setSelection(Math.max(s.length, 0))
+//            try {
+//                if (editText === mBinding.edLoanAmount) { //_Auto generate of amount when user input amount in foreign currency and exchange rate
+//                    viewModel.setLOAN_AMOUNT(s.toString().replace(",".toRegex(), ""))
+//                } else if (editText === mBinding.edMonthlyIncome) {
+//                    viewModel.setMONTHLY_INCOME(s.toString().replace(",".toRegex(), ""))
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+                editText.addTextChangedListener(this)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
 }

@@ -29,10 +29,10 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
 
     private val _applyLeaseLiveData: MutableLiveData<ApplyLeaseResponse> = MutableLiveData()
     val applyLeaseLiveData: LiveData<ApplyLeaseResponse> = _applyLeaseLiveData
-    var applyLeaseRequest : ApplyLeaseRequest? = ApplyLeaseRequest()
+    var applyLeaseRequest = ApplyLeaseRequest()
     fun applyLease(){
         viewModelScope.launch {
-            leaseRepo.applyLease(applyLeaseRequest!!).onEach { resource ->
+            leaseRepo.applyLease(applyLeaseRequest).onEach { resource ->
                 if (resource.status == Status.ERROR) {
                     val code = resource.errorCode
                     val title = resource.messageTitle
