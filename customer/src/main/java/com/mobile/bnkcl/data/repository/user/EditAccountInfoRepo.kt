@@ -19,12 +19,12 @@ class EditAccountInfoRepo @Inject constructor(context: Context, okHttpClient: Ok
         RetrofitBuilder(context, okHttpClient).getRetrofit().create(EditAccountInfoApi::class.java)
     }
 
-    fun isUpdate(editAccountInfoData: EditAccountInfoData): Flow<Resource<Boolean>> = flow {
+    fun editAccountInfo(editAccountInfoData: EditAccountInfoData): Flow<Resource<Boolean>> = flow {
         delay(1000)
         try {
             val request = object : RemoteDataSource<Boolean>(){
                 override suspend fun createCall(): Response<Boolean> {
-                    return editAccountInfoApi.isUpdate(editAccountInfoData)
+                    return editAccountInfoApi.editAccountInfo(editAccountInfoData)
                 }
             }
             request.networkRequest()

@@ -69,7 +69,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
 
     fun showLoading() {
         loadingDialog = LoadingDialog()
-        loadingDialog?.show(requireFragmentManager(), loadingDialog?.tag)
+        loadingDialog?.show(childFragmentManager, loadingDialog?.tag)
     }
 
     override fun onDestroy() {

@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.library.rxjava.RxEvent
@@ -9,6 +10,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
@@ -25,6 +27,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     private val viewModel: AccountInformationViewModel by viewModels()
     private var profileData: ProfileData? = ProfileData()
     private val logOutDialog = LogOutDialog()
+    private var jobTypeList: ArrayList<CodesData>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +37,8 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         initLiveData()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-            viewModel.getAccountInformation()
-            showLoading()
+
+            viewModel.getJobTypeCodes()
 
             logOutDialog.onConfirmClickedListener {
                 viewModel.logout()
@@ -59,8 +62,24 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
     private fun initLiveData() {
 
-        viewModel.accountInformationLiveData.observe(this) {
+        viewModel.jobTypesLiveData.observe(this) {
+            jobTypeList = it.codes
+            binding.tvTitleToolbar02.setOnClickListener(this)
+
+            for (i in 0 until jobTypeList!!.size) {
+                if (profileData!!.jobType.equals(it.codes!![i].code)) {
+                    if (profileData!!.jobType.isNullOrEmpty()) {
+                        binding.tvOccupation.text = resources.getString(R.string.not_available)
+                    } else {
+                        binding.tvOccupation.text = it.codes!![i].title
+                    }
+                }
+            }
+
             successListener()
+        }
+
+        viewModel.accountInformationLiveData.observe(this) {
             binding.profile = it
             profileData = it
         }
@@ -72,7 +91,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             val intent = Intent(this@AccountInformationActivity, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            successListener()
             finish()
         }
     }
@@ -81,24 +99,15 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
         if (intent != null) {
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
-
-//            if (null != profileData!!.address) {
-//                val moreInfo: String? = profileData!!.address!!.more_info
-//                val state: String? = profileData!!.address!!.state!!.alias1
-//                val district: String? = profileData!!.address!!.district!!.alias1
-//                val village: String? = profileData!!.address!!.village!!.alias1
-//                if (null == state || state.isEmpty()) {
-//                    binding.tvAddress.text = getString(R.string.not_available)
-//                } else {
-//                    binding.tvAddress.text = moreInfo.plus(village).plus(district).plus(state)
-//                }
-//            }
+            binding.profile = profileData
         }
+
+        binding.tvGender.text = ""
+        binding.llWrapAdditionalInfo.visibility = View.GONE
 
         binding.llViewMorePersonal.setOnClickListener(this)
         binding.llMoreLeaseInfo.setOnClickListener(this)
         binding.llAdditionalInfo.setOnClickListener(this)
-        binding.tvTitleToolbar02.setOnClickListener(this)
         binding.btnLogout.setOnClickListener(this)
         binding.ivBack.setOnClickListener(this)
     }
@@ -114,12 +123,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     onBackPressed()
                 }
                 R.id.tv_title_toolbar_02 -> {
-                    startActivity(
-                        Intent(
-                            applicationContext,
-                            EditAccountInfoActivity::class.java
-                        ).putExtra("ACCOUNT_INFO", profileData)
-                    )
+
+                    val intent = Intent(this, EditAccountInfoActivity::class.java)
+                    intent.putExtra("ACCOUNT_INFO", profileData)
+                    intent.putExtra("JOB_TYPE", jobTypeList)
+                    startActivity(intent)
                 }
                 R.id.btn_logout -> {
                     logOutDialog.show(supportFragmentManager, logOutDialog.tag)
