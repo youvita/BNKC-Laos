@@ -52,6 +52,10 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                             // Unknown Error
                             code = ErrorCode.UNKNOWN_ERROR
                         }
+                        withContext(Dispatchers.Main) {
+                            RxJava.publish(RxEvent.ServerError(code, "", ""))
+                            RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
+                        }
                         setValue(Resource.Error("","", code))
                     }
                 }

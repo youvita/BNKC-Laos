@@ -55,7 +55,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
         successListener()
 
-//        systemErrorListener()
+        errorDialog()
     }
 
     /**
@@ -156,29 +156,31 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     /**
      * handle catch server error
      */
-    fun errorDialog(code: Int?, errorTitle: String?, errorMessage: String?): SystemDialog {
-            var title = errorTitle
-            var message = errorMessage
+    fun errorDialog() {
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            var title = it.title
+            var message = it.message
             if (title == "" && message == "") {
-                when (code) {
+                when (it.code) {
                     ErrorCode.UNKNOWN_ERROR -> {
                         title = getString(R.string.title_no_network)
                         message = getString(R.string.message_pls_check_network)
                     }
                     ErrorCode.TIMEOUT_ERROR -> {
-                        // TODO: Request Timeout
+                        title = getString(R.string.title_timeout)
+                        message = getString(R.string.message_timeout)
                     }
                 }
             }
-        if (systemDialog == null) {
-            systemDialog = SystemDialog.newInstance(title!!, message!!)
-            systemDialog?.show(supportFragmentManager, systemDialog?.tag)
-            systemDialog?.onConfirmClicked {
-                systemDialog = null
+
+            if (systemDialog == null) {
+                systemDialog = SystemDialog.newInstance(title, message)
+                systemDialog?.show(supportFragmentManager, systemDialog?.tag)
+                systemDialog?.onConfirmClicked {
+                    systemDialog = null
+                }
             }
         }
-
-        return systemDialog as SystemDialog
     }
 
     /**

@@ -23,4 +23,9 @@
     <string name="currency_usd"> ໂດລາ ສະຫະລັດ</string>
     <string name="currency_kip">ກິບ</string>
 
+    <string name="title_no_network">No network connection</string>
+    <string name="message_pls_check_network">Please check your internet connection and try again.</string>
+    <string name="title_timeout">Timeout</string>
+    <string name="message_timeout">Connection timeout</string>
+
 </resources>
