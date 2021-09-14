@@ -113,7 +113,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         alarmViewModel.pageNo = 0
         adapter.clearItemList()
         alarmViewModel.getAlarmList()
-        showLoading()
+//        showLoading()
         isSending = true
     }
 
