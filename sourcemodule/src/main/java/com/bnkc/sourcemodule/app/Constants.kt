@@ -11,7 +11,6 @@ object Constants {
     const val USER_ID = "USER_ID"
     const val KEY_TOKEN = "TOKEN"
     const val SESSION_ID = "SESSION_ID"
-    const val PUSH_ID = "PUSH_ID"
 
     //    MG
     const val KEY_START_URL         = "c_start_url"
@@ -30,6 +29,18 @@ object Constants {
 
     const val SIGN_UP_FAIL = "SIGN_UP_FAIL"
     const val SET_UP_PIN = "SET_UP_PIN"
+
+    object HandlePush{
+        const val ACTION_ON = "ACTION_ON"
+        const val ACTION_TYPE = "type"
+        const val ACTION_ID = "id"
+        const val ACTION_URL = "url"
+        const val PUSH_ID = "push_id"
+    }
+
+    object Push {
+        const val PUSH_ALARM = "ALARM"
+    }
 
     // Web Endpoint
     const val WB_NOTICES = "/mobile/views/notices?category=customer"
