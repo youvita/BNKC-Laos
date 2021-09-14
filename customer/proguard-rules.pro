@@ -19,3 +19,47 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontskipnonpubliclibraryclasses
+-dontobfuscate
+-forceprocessing
+-optimizationpasses 5
+
+-keep class * extends android.app.Activity
+-dontwarn okio.**
+-dontwarn retrofit2.Platform$Java8
+-dontwarn com.squareup.okhttp3.**
+-dontwarn okhttp3.internal.platform.*
+-dontwarn javax.annotation.**
+-keep class com.squareup.okhttp3.**
+-keep class okhttp3.**
+-keep interface com.squareup.okhttp3.**
+
+-keep class com.google.gson.** { *; }
+-keep class java.lang.** { *; }
+
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
+
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.-KotlinExtensions
+
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+
+#App Models
+-keep class com.mobile.bnkcl.data.** { *; }
