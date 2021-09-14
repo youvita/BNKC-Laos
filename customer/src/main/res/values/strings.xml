@@ -342,6 +342,7 @@
     <string name="dlg_22">NOTICE</string>
     <string name="dlg_23">Do you really want to close\nwithout saving?</string>
     <string name="dlg_24">CONFIRM</string>
+    <string name="under_construction">Under Construction</string>
 
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
     <string name="ask_bnkc_review">BNKC will review your inquiry\n and get back to you soon</string>

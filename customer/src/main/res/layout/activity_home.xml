@@ -11,7 +11,8 @@
             name="homeViewModel"
             type="HomeViewModel" />
 
-        <import type="java.util.Locale"/>
+        <import type="java.util.Locale" />
+
         <variable
             name="localeCode"
             type="String" />
@@ -93,6 +94,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_top">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_loan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -115,13 +115,33 @@
                             android:orientation="vertical"
                             tools:ignore="UselessParent">
 
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <FrameLayout
+                                android:id="@+id/fl_upload_ui"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/margin_21dp"
                                 android:layout_marginBottom="@dimen/margin_10dp"
-                                android:src="@drawable/ic_avatar_s" />
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+
+                                <com.bnkc.library.custom.cardview.CircleImageView
+                                    android:id="@+id/iv_loading"
+                                    android:layout_width="@dimen/width_64dp"
+                                    android:layout_height="@dimen/height_64dp"
+                                    android:scaleType="centerCrop"
+                                    tools:ignore="ContentDescription" />
+
+                                <com.bnkc.library.custom.cardview.CircleImageView
+                                    android:id="@+id/iv_profile"
+                                    android:layout_width="@dimen/width_64dp"
+                                    android:layout_height="@dimen/height_64dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_avatar_l"
+                                    tools:ignore="ContentDescription" />
+
+                            </FrameLayout>
 
                             <com.bnkc.sourcemodule.ui.ShadowLayout
                                 android:layout_width="wrap_content"

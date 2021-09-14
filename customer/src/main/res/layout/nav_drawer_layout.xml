@@ -64,25 +64,30 @@
                         android:layout_height="wrap_content"
                         android:baselineAligned="false"
                         android:gravity="center_vertical"
-                        android:padding="@dimen/padding_21dp">
+                        android:paddingStart="0dp"
+                        android:paddingTop="@dimen/padding_21dp"
+                        android:paddingEnd="@dimen/padding_21dp"
+                        android:paddingBottom="@dimen/padding_21dp">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp">
 
-                            <ImageView
+                            <com.bnkc.library.custom.cardview.CircleImageView
                                 android:id="@+id/iv_loading"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:scaleType="centerCrop"
+                                android:layout_width="@dimen/width_64dp"
+                                android:layout_height="@dimen/height_64dp"
                                 android:layout_centerInParent="true"
                                 tools:ignore="ContentDescription" />
 
-                            <ImageView
-                                android:id="@+id/img_profile"
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
+                            <com.bnkc.library.custom.cardview.CircleImageView
+                                android:id="@+id/iv_profile"
+                                android:layout_width="@dimen/width_64dp"
+                                android:layout_height="@dimen/height_64dp"
                                 android:layout_centerInParent="true"
+                                android:scaleType="centerCrop"
                                 android:src="@drawable/ic_avatar_l"
                                 tools:ignore="ContentDescription" />
 

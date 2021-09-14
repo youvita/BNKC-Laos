@@ -19,6 +19,7 @@ abstract class BaseStorageActivity<T: ViewDataBinding>: BaseActivity<T>() {
 
     protected open val appPermission: AppPermission by lazy {
         permissionsFactory.getPermission(AppPermissionsFactory.PERMISSION_STORAGE)
+        permissionsFactory.getPermission(AppPermissionsFactory.PERMISSION_CAMERA)
     }
 
     protected open fun onPermissionGranted() {}
@@ -27,6 +28,8 @@ abstract class BaseStorageActivity<T: ViewDataBinding>: BaseActivity<T>() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         appPermission.permissionResult(grantResults, {
             if (requestCode == AppPermissionsFactory.PERMISSION_STORAGE)
+                this@BaseStorageActivity.onPermissionGranted()
+            else if (requestCode == AppPermissionsFactory.PERMISSION_CAMERA)
                 this@BaseStorageActivity.onPermissionGranted()
             },
             {

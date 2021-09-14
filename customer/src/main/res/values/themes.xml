@@ -32,6 +32,16 @@
         <item name="android:background">@drawable/selector_pin_key</item>
     </style>
 
+    <!-- Theme.AppCompat.Light is not a dialog theme -->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+
+    </style>
+
     <style name="SettingSwitch" parent="Theme.AppCompat.Light">
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">#D7191F</item>

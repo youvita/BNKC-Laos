@@ -14,6 +14,8 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mobile.bnkcl.R
@@ -31,6 +33,7 @@ import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
+import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.math.log
@@ -93,6 +96,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = it.accountNumber
+
+            binding.navMenu.llProfile.setOnClickListener(this)
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -109,15 +114,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     private fun initView() {
         binding.navMenu.localeCode = Locale.getDefault().language
 
+        val url = GlideUrl(
+            sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+            LazyHeaders.Builder()
+                .addHeader(
+                    "Authorization",
+                    "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                )
+                .build()
+        )
+
+        UtilsGlide.loadCircle(this@MainActivity, url, binding.navMenu.ivProfile, binding.navMenu.ivLoading)
+
         if (viewModel.isLogin) {
             binding.navMenu.btnSignUp.visibility = View.GONE
             binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
 
         }
-
-        binding.navMenu.llProfile.setOnClickListener(
-            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) null else this
-        )
 
         if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             binding.navMenu.tvUserName.text = "User Unknown"

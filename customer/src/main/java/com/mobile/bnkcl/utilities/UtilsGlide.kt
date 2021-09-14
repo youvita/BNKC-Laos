@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -155,18 +156,7 @@ object UtilsGlide {
         }
     }
 
-    fun loadCircle(context: Context, into: ImageView?, view: View?) {
-//        val url = GlideUrl(
-//            Conf.BASE_URL + ServiceName.sProfileImgUri, LazyHeaders.Builder()
-//                .addHeader(
-//                    "Authorization",
-//                    "Bearer " + MemoryPreferenceDelegator.getInstance()
-//                        .get(Constant.LoginInfo.LOGIN_TOKEN)
-//                )
-//                .build()
-//        )
-
-        val url: String = ""
+    fun loadCircle(context: Context, url: GlideUrl, into: ImageView?, view: View?) {
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transform(CircleCrop())
         requestOptions = requestOptions.dontAnimate()
@@ -207,17 +197,7 @@ object UtilsGlide {
         }
     }
 
-    fun loadCircle(context: Context, into: ImageView?, hideView: View?, showView: View?) {
-//        val url = GlideUrl(
-//            Conf.BASE_URL + ServiceName.sProfileImgUri, LazyHeaders.Builder()
-//                .addHeader(
-//                    "Authorization",
-//                    "Bearer " + MemoryPreferenceDelegator.getInstance()
-//                        .get(Constant.LoginInfo.LOGIN_TOKEN)
-//                )
-//                .build()
-//        )
-        val url: String = ""
+    fun loadCircle(context: Context, url: GlideUrl, into: ImageView?, hideView: View?, showView: View?) {
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transform(CircleCrop())
         requestOptions = requestOptions.dontAnimate()

@@ -6,6 +6,7 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityHomeBinding
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
+import com.mobile.bnkcl.ui.dialog.UnderConstructionDialog
 import com.mobile.bnkcl.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -27,6 +28,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         binding.clLease.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.clLoan.setOnClickListener {
+            val underConstructionDialog = UnderConstructionDialog()
+            underConstructionDialog.show(this.supportFragmentManager, underConstructionDialog.tag)
         }
     }
 

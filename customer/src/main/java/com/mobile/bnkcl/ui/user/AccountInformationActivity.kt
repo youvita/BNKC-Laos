@@ -2,13 +2,14 @@ package com.mobile.bnkcl.ui.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.user.ProfileData
@@ -18,6 +19,7 @@ import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
+import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,10 +56,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
     }
 
     private fun initLiveData() {
@@ -71,12 +69,10 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     if (profileData!!.jobType.isNullOrEmpty()) {
                         binding.tvOccupation.text = resources.getString(R.string.not_available)
                     } else {
-                        binding.tvOccupation.text = it.codes!![i].title
+                        binding.tvOccupation.text = it.codes[i].title
                     }
                 }
             }
-
-            successListener()
         }
 
         viewModel.accountInformationLiveData.observe(this) {
@@ -91,11 +87,25 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             val intent = Intent(this@AccountInformationActivity, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+
+            successListener()
             finish()
         }
     }
 
     private fun initView() {
+
+        val url = GlideUrl(
+            sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+            LazyHeaders.Builder()
+                .addHeader(
+                    "Authorization",
+                    "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                )
+                .build()
+        )
+
+        UtilsGlide.loadCircle(this, url, binding.ivProfile, binding.ivLoading)
 
         if (intent != null) {
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
