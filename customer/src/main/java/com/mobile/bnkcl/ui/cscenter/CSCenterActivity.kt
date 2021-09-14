@@ -21,6 +21,7 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.BuildConfig
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.cscenter.ClaimDataResponse
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
@@ -52,6 +53,14 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         binding.action = this@CSCenterActivity
 
+        // check login status
+        if (AppLogin.PIN_TYPE == "N"){
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                startActivity(Intent(this,OtpActivity::class.java))
+            }else{
+                startActivity(Intent(this,PinCodeActivity::class.java))
+            }
+        }
         checkError()
         initToolbar()
         observeData()
@@ -72,6 +81,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         binding.swipeRefreshAskBnkc.setColorSchemeColors(ContextCompat.getColor(this,R.color.colorAccent))
         binding.swipeRefreshAskBnkc.setOnRefreshListener {
+            clearState()
             pageNumber = 0
             getClaimData(pageNumber, false)
             visibleAskBnk()

@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bnkc.library.data.type.Resource
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.request.cscenter.ClaimDataRequest
@@ -23,8 +20,9 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
     //Notice Data
     private val _claimData: MutableLiveData<Resource<ClaimDataResponse>> = MutableLiveData()
     val claimLiveData: LiveData<Resource<ClaimDataResponse>> get() = _claimData
-    private val lastPage = false
+
     var  request = ClaimDataRequest()
+    var res = ClaimDataResponse()
 
     fun getClaimData(page_number: Int, loading: Boolean){
         request = ClaimDataRequest(page_number, request.page_size, "")
@@ -35,8 +33,9 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
         }
     }
 
+
     fun isLastPage(): Boolean {
-        return lastPage
+        return res.last == false
     }
 
 }
