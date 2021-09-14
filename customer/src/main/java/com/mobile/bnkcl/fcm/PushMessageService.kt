@@ -10,12 +10,12 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.util.ComUtil
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import dagger.hilt.android.scopes.ServiceScoped
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
-@ServiceScoped
-class PushMessageService() : FirebaseMessagingService() {
+@AndroidEntryPoint
+class PushMessageService: FirebaseMessagingService() {
 
     companion object {
         const val NOTIFICATION_ID = 1010

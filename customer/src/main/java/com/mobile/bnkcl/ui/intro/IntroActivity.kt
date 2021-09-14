@@ -199,6 +199,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         settingViewModel.updateUserSetting()
         settingViewModel.userSettingLiveData.observe(this@IntroActivity) {
             Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
+            sharedPrefer.putPrefer(Constants.Push.PUSH_ALARM, "Y")
             successListener()
             startApp()
         }

@@ -96,6 +96,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private fun initLiveData() {
         settingViewModel.userSettingLiveData.observe(this@SettingActivity) {
             Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
+            sharedPrefer.putPrefer(Constants.Push.PUSH_ALARM, if (settingViewModel.settingData!!.push_alarm_enabled!!) "Y" else "N")
             successListener()
         }
     }
