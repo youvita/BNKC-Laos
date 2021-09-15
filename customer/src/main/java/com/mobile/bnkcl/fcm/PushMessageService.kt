@@ -78,8 +78,7 @@ class PushMessageService: FirebaseMessagingService() {
         }
     }
 
-    @Throws(java.lang.Exception::class)
-    private fun getTopActivity(): String? {
+    private fun getTopActivity(): String {
         val am = this.getSystemService(ACTIVITY_SERVICE) as ActivityManager
         val list = am.getRunningTasks(5)
         return if (list[0].numRunning > 0) list[0].topActivity!!.className else ""

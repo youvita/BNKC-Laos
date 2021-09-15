@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityHomeBinding

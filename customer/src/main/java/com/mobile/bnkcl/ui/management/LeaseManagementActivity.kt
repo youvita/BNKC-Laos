@@ -8,6 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
+import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
