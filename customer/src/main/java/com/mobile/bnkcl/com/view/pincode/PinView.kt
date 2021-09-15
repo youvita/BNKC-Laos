@@ -248,7 +248,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
                 setOnPinKeyClickListener(number.toString())
             }
             else if (currentPinCode.length == 3) {
-                mPinMessage!!.text = "PIN Confirm"
+                mPinMessage!!.text = context.getString(R.string.pin_confirm)
                 mCode = mPinView!!.code
                 if (TextUtils.isEmpty(mCodeValidation)) {
                     Handler().postDelayed(

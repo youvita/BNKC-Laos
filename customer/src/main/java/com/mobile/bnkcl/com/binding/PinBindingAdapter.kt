@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.databinding.BindingAdapter
+import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.BnkEditText
 import com.mobile.bnkcl.com.view.pincode.PinView
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseViewModel
@@ -16,9 +17,9 @@ object PinBindingAdapter {
     fun PinView.displayPinUI(type : Int){
         when(type){
             1 -> { //login
-                title?.text = "Log In"
+                title?.text = context.getString(R.string.nav_login)
                 mPinMessage!!.visibility = View.VISIBLE
-                mPinMessage!!.text = "Forget PIN?"
+                mPinMessage!!.text = context.getString(R.string.forget_pin_ask)
 
                 mResetPin!!.setOnClickListener {
                     setOnActionListener("reset_pin")
@@ -26,20 +27,20 @@ object PinBindingAdapter {
 
             }
             2 -> { //sign up
-                title?.text = "Set Up New PIN"
+                title?.text = context.getString(R.string.set_up_pin)
                 mPinMessage!!.visibility = View.VISIBLE
                 mResetPin!!.visibility = View.GONE
-                mPinMessage!!.text = "PIN Registration"
+                context.getString(R.string.pin_registration)
             }
             3 -> { //forget
-                title?.text = "Forget PIN"
+                title?.text = context.getString(R.string.forget_pin)
                 mPinMessage!!.visibility = View.VISIBLE
-                mPinMessage!!.text = "New PIN"
+                mPinMessage!!.text = context.getString(R.string.new_pin)
             }
             4 -> { //Reset pin
-                title?.text = "Reset PIN"
+                title?.text = context.getString(R.string.comm_reset_pin)
                 mPinMessage!!.visibility = View.VISIBLE
-                mPinMessage!!.text = "PIN Registration"
+                mPinMessage!!.text = context.getString(R.string.pin_registration)
             }
         }
     }

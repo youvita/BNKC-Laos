@@ -72,7 +72,7 @@ class PinCodeView : LinearLayout {
             val layoutParams = LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
             )
-            val margin = 5
+            val margin = resources.getDimensionPixelSize(R.dimen.code_fp_margin);
             layoutParams.setMargins(margin, margin, margin, margin)
             view.layoutParams = layoutParams
             view.isChecked = false

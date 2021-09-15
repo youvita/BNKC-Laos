@@ -36,6 +36,9 @@ class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
         binding.ivNotify.setOnClickListener {
             startActivity(Intent(activity, AlarmActivity::class.java))
         }
+        binding.vbDetail.setOnClickListener {
+            startActivity(Intent(requireActivity(), LeaseServiceActivity::class.java))
+        }
     }
 
     private fun observeViewModel() {

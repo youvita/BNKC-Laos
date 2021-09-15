@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseServiceBinding
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateActivity
+import com.mobile.bnkcl.ui.otp.OtpActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +27,16 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
         setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.leaseServiceViewModel = viewModel
+
+        // check login status
+        if (AppLogin.PIN_TYPE == "N"){
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                startActivity(Intent(this, OtpActivity::class.java))
+            }else{
+                startActivity(Intent(this, PinCodeActivity::class.java))
+            }
+        }
+
         observeViewModel()
         initView()
         initEvent()

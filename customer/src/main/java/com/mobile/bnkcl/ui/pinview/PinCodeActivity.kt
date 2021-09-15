@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.USER_ID
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -116,7 +117,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 confirmDialog = ConfirmDialog.newInstance(
                     R.drawable.ic_badge_error,
                     getString(R.string.pin_14),
-                    "Confirm password doesn't matched, Please try again",
+                    getString(R.string.pin_10),
                     getString(R.string.pin_16)
                 )
                 confirmDialog.onConfirmClickedListener {
@@ -174,9 +175,11 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         viewModel.loginLiveData.observe(this){
             successListener()
             Log.d("nng", it.toString())
+
             if (it.cust_no != null || it.cust_no != null) {
                 sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
-                sharedPrefer.putPrefer(Constants.USER_ID, username)
+                sharedPrefer.putPrefer(USER_ID, username)
+                AppLogin.PIN.code = "Y"
 
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

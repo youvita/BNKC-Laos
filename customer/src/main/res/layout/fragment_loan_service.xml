@@ -94,8 +94,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_21dp"
                             android:gravity="center"
-                            android:text="Are you a little short of money when
-you buy commodities?"
+                            android:text="@string/are_you_a_little_short_of_money_when_you_buy_commodities"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/iv_lease" />
@@ -107,8 +106,7 @@ you buy commodities?"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_10dp"
                             android:gravity="center"
-                            android:text="We lend you money at a reasonable
-interest."
+                            android:text="@string/we_lend_you_money_at_a_reasonable_interest"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_lease" />
@@ -121,10 +119,9 @@ interest."
                     android:id="@+id/vb_detail"
                     android:layout_width="match_parent"
                     app:is_active="true"
-                    app:buttonText="For more detail"
+                    app:buttonText="@string/service_more_detail"
                     android:layout_alignParentBottom="true"
-                    android:layout_height="@dimen/height_50dp"
-                    android:onClick="@{(v) -> serviceViewModel.serviceMoreDetail()}"/>
+                    android:layout_height="@dimen/height_50dp"/>
 
             </RelativeLayout>
         </com.bnkc.sourcemodule.ui.ShadowLayout>

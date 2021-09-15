@@ -156,6 +156,7 @@
     <string name="pin_11">ລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງ 5 ຄັ້ງ</string>
     <string name="pin_12">ທ່ານໄດ້ຕື່ມລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງສູງສຸດແລ້ວ. ກະລຸນາຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>
     <string name="pin_14">ລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງ, ກະລຸນາລອງໃໝ່ອິກຄັ້ງ</string>
+    <string name="pin_10">Confirm password doesn\'t matched, Please try again</string>
     <string name="pin_15">ຫຼັງຈາກບໍ່ສຳເລັດພາຍໃນ 5 ຄັ້ງ, ທ່ານຕ້ອງຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>
     <string name="pin_16">ລອງໃໝ່ອິກຄັ້ງ</string>
 
@@ -374,5 +375,19 @@
     <string name="lease_service">Lease Service</string>
     <string name="recommender">Recommender</string>
     <string name="personal_information">Personal Information</string>
+    <string name="input_name">Input Name</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="optional">(optional)</string>
+    <string name="input_recommender">Input Recommender</string>
+
+    <string name="service_more_detail">For more detail</string>
+    <string name="pin_confirm">PIN Confirm</string>
+    <string name="set_up_pin">Set Up New PIN</string>
+    <string name="forget_pin">Forget PIN</string>
+    <string name="forget_pin_ask">Forget PIN?</string>
+    <string name="new_pin">New PIN</string>
+    <string name="pin_registration">PIN Registration</string>
+    <string name="we_lend_you_money_at_a_reasonable_interest">We lend you money at a reasonable interest.</string>
+    <string name="are_you_a_little_short_of_money_when_you_buy_commodities">Are you a little short of money when you buy commodities?</string>
 
 </resources>
