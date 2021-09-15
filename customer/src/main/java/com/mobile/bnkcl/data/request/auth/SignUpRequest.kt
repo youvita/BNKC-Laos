@@ -1,6 +1,9 @@
 package com.mobile.bnkcl.data.request.auth
 
 import com.google.gson.annotations.SerializedName
+import com.mobile.bnkcl.data.request.area.AddressData
+import com.mobile.bnkcl.data.response.auth.AddressReqObj
+import java.io.Serializable
 
 data class SignUpRequest(
         @SerializedName ("phone_number")
@@ -18,7 +21,7 @@ data class SignUpRequest(
         @SerializedName("date_of_birth")
         var date_of_birth: String? = null,
 
-        @SerializedName("sex")
+        @SerializedName("gender")
         var gender: String? = null,
 
         @SerializedName("identification_number")
@@ -28,7 +31,7 @@ data class SignUpRequest(
         var etc_status: Boolean? = null,
 
         @SerializedName("address")
-        var address: String? = null,
+        var address: AddressReqObj? = null,
 
         @SerializedName("etc_detailed_address")
         var etc_detailed_address: String? = null,
@@ -45,4 +48,4 @@ data class SignUpRequest(
         @SerializedName("recommender")
         var recommender: String? = null,
 
-        )
+        ) : Serializable

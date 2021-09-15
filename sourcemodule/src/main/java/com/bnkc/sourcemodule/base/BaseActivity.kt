@@ -23,13 +23,17 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
+import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
-import com.bnkc.sourcemodule.util.UtilsActivity
+import com.bnkc.sourcemodule.util.UtilActivity
 import io.reactivex.disposables.Disposable
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 import javax.inject.Inject
 
-abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     lateinit var binding: T
 
@@ -39,19 +43,16 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
     private var systemDialog: SystemDialog? = null
 
+    @Inject
+    lateinit var sharedPrefer: CredentialSharedPrefer
+
     private var animateType = 0
 
     @IntDef(value = [ANIMATE_LEFT, ANIMATE_NORMAL])
-    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+    @Retention(
+        RetentionPolicy.SOURCE
+    )
     internal annotation class ANIMATION_DIRECTION
-
-    companion object {
-        const val ANIMATE_NORMAL = 5757
-        const val ANIMATE_LEFT = 5656
-    }
-
-    @Inject
-    lateinit var sharedPrefer: CredentialSharedPrefer
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -60,32 +61,24 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
         super.attachBaseContext(LocaleHelper.onAttach(newBase!!))
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setTransition()
-
-        performDataBinding()
-
-        successListener()
-
-        errorDialog()
+    open fun setAnimateType(@ANIMATION_DIRECTION animateType: Int) {
+        this.animateType = animateType
     }
 
-    private fun setTransition() {
-        if (!UtilsActivity.isCreated()) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (!UtilActivity.isCreated()) {
             if (animateType == ANIMATE_LEFT) {
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_left)
             } else {
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
             }
         }
-        UtilsActivity.isCreated(false)
-    }
+        performDataBinding()
 
+        successListener()
 
-    open fun setAnimateType(@ANIMATION_DIRECTION animateType: Int) {
-        this.animateType = animateType
+        errorDialog()
     }
 
     /**
@@ -188,18 +181,13 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
      */
     fun errorDialog() {
         disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            var icon = R.drawable.ic_badge_error
             var title = it.title
             var message = it.message
-            var button = getString(R.string.confirm)
-
             if (title == "" && message == "") {
                 when (it.code) {
                     ErrorCode.UNKNOWN_ERROR -> {
-                        icon = R.drawable.ic_badge_no_internet
                         title = getString(R.string.title_no_network)
                         message = getString(R.string.message_pls_check_network)
-                        button = getString(R.string.try_again)
                     }
                     ErrorCode.TIMEOUT_ERROR -> {
                         title = getString(R.string.title_timeout)
@@ -209,7 +197,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
             }
 
             if (systemDialog == null) {
-                systemDialog = SystemDialog.newInstance(icon, title, message, button)
+                systemDialog = SystemDialog.newInstance(title, message)
                 systemDialog?.show(supportFragmentManager, systemDialog?.tag)
                 systemDialog?.onConfirmClicked {
                     systemDialog = null
@@ -222,7 +210,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
      * handle session error
      */
     fun errorSessionDialog(errorTitle: String, errorMessage: String): SystemDialog {
-        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_error, errorTitle, errorMessage, getString(R.string.confirm))
+        systemDialog = SystemDialog.newInstance(errorTitle, errorMessage)
         systemDialog?.show(supportFragmentManager, systemDialog?.tag)
         return systemDialog as SystemDialog
     }
@@ -235,22 +223,22 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
         loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.dispose()
+        disposable = null
+    }
+
     override fun finish() {
         super.finish()
-        if (!UtilsActivity.isCreated()) {
+        if (!UtilActivity.isCreated()) {
             if (animateType == ANIMATE_LEFT) {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             } else {
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
             }
         }
-        UtilsActivity.isCreated(false)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable?.dispose()
-        disposable = null
+        UtilActivity.isCreated(false)
     }
 
 }

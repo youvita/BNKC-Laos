@@ -276,6 +276,7 @@
     <string name="full_payment_07">Early Repayment Fee (C)</string>
     <string name="full_payment_other_d">Other (D)</string>
 
+    <string name="lease_service">Lease Service</string>
     <string name="lease_management">Lease Management</string>
     <string name="lease_total_schedule">TOTAL SCHEDULE</string>
     <string name="lease_transaction_history">TRANSACTION HISTORY</string>
@@ -370,5 +371,7 @@
     <string name="advance_payment">Advance Payment</string>
     <string name="commodity_price">Commodity Price</string>
     <string name="apply_lease">Apply Lease</string>
+    <string name="recommender">Recommender</string>
+    <string name="personal_information">Personal Information</string>
 
 </resources>

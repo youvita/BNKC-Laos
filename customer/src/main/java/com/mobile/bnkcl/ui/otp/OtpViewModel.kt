@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -23,10 +24,12 @@ import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
+import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
 import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.otp.OTPVerifyResponse
 import com.mobile.bnkcl.data.response.otp.SendOTPResponse
+import com.mobile.bnkcl.data.response.signup.PreSignUpResponse
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.signup.SignUpActivity
@@ -44,6 +47,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     var step : Int = 1
     var isFromPage: Boolean = false
     var sessionID : String = ""
+
+    val _isSignUP = MutableLiveData<Int>()
+    val isSignUpLiveData = _isSignUP
 
     val _phoneNumberContent = MutableLiveData<String>()
     val phoneNumber : LiveData<String>
@@ -172,6 +178,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         }
     }
 
+//    fun isSignUPView() : Boolean{
+//        Log.d(">>>>>>", "" + uiMode)
+//        return (isSignUpLiveData.value == 2)
+//    }
+
     /** handle request data class */
 //    var loginRequest = LoginRequest()
 
@@ -250,6 +261,25 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         }
     }
 
+    private val _preSignUp: MutableLiveData<PreSignUpResponse> = MutableLiveData()
+    val preSignUpLiveData: LiveData<PreSignUpResponse> = _preSignUp
+    var preSignUpRequest: PreSignUpRequest? = null
+    fun preSignUp(){
+        viewModelScope.launch {
+            authRepo.preSignUp(preSignUpRequest!!).onEach { resource ->
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _preSignUp.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
+
     fun resendOtp(){
 
     }
@@ -259,16 +289,12 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     }
 
     fun agreementCheckBoxClick(){
-        if (isChecked){
-            isChecked = false
-        }else{
-            isChecked = true
-        }
+        isChecked = !isChecked
         Log.d(">>>>>>", "Hello $isChecked")
     }
 
     fun continueClick(){
-        Log.d(">>>>>>", "reqLogin ::: $phoneNumber -- $sessionID")
+        Log.d(">>>>>>", "reqLogin ::: $uiMode --- $phoneNumber -- $sessionID")
         when(uiMode){
             0->{  //Login
                 val intent = Intent(context, PinCodeActivity::class.java)
@@ -277,11 +303,21 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 intent.putExtra("username", phoneNumber.value)
                 context.startActivity(intent)
             }
-            2->{ //Sign up
+            1->{ //Sign up
                 val intent = Intent(context, SignUpActivity::class.java)
                 if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
 //                intent.putExtra("pin_action", "login")
                 intent.putExtra(Constants.USER_ID, phoneNumber.value)
+                context.startActivity(intent)
+//                _isSignUP.value = 2
+//                step = 2
+                Log.d(">>>>>>>>>>", " Go to step Sign UP $step")
+            }
+            2->{ //Forget
+                val intent = Intent(context, PinCodeActivity::class.java)
+                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
+                intent.putExtra("pin_action", "forget")
+                intent.putExtra("username", phoneNumber.value)
                 context.startActivity(intent)
             }
 
@@ -319,5 +355,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun setIsFromPage(isTrue: Boolean) {
         this.isFromPage = isTrue
     }
+
+
 
 }

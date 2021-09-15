@@ -368,5 +368,8 @@
     <string name="advance_payment">Advance Payment</string>
     <string name="commodity_price">Commodity Price</string>
     <string name="apply_lease">Apply Lease</string>
+    <string name="lease_service">Lease Service</string>
+    <string name="recommender">Recommender</string>
+    <string name="personal_information">Personal Information</string>
 
 </resources>

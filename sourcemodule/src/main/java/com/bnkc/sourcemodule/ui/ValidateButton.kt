@@ -19,6 +19,8 @@ class ValidateButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context,attrs, defStyleAttr) {
 
+    private val TAG = ValidateButton::class.java.simpleName
+
     var binding : CommValidateButtonBinding =
         CommValidateButtonBinding.inflate(LayoutInflater.from(context), this, true);
 
@@ -56,6 +58,7 @@ class ValidateButton @JvmOverloads constructor(
 
         getAttributes(attrs)
     }
+
 
     fun setActiveButton(active : Boolean){
         if (active) {
@@ -178,6 +181,7 @@ class ValidateButton @JvmOverloads constructor(
     fun isEnable(vararg params: String) { //a,b,c
         val arrayList = ArrayList<String>()
         for (param in params) {
+            Log.d(TAG, "params :: $param")
             if (param != "") {
                 arrayList.add("T")
             } else {

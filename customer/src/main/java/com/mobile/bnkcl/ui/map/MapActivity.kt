@@ -53,6 +53,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarTransparent(this, true)
+        setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         checkError()
         if (intent != null) {

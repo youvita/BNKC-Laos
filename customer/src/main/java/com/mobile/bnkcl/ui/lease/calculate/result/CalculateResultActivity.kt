@@ -11,6 +11,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.bnkc.sourcemodule.util.Formats
@@ -29,6 +30,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
+        setAnimateType(Constants.ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
         if (intent != null){

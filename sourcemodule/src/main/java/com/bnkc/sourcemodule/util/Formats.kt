@@ -13,6 +13,7 @@ object Formats {
 
     // Date
     const val DAY_MONTH_YEAR = "dd-MM-yyyy"
+    const val YEAR_MONTH_DAY = "yyyy-MM-dd"
     const val DAY_MONTH_YEAR_FROM = "yyyyMMdd"
 
     // Decimal format

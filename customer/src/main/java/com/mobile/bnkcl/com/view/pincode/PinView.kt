@@ -31,7 +31,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
      var mPinMessage: TextView? = null
      var mResetPin:TextView? = null
      var title:TextView? = null
-     val reEnterPassword : Boolean? = false
+     var reEnterPassword : Boolean = false
      var mCodeValidation = ""
      var mCode = ""
 
@@ -241,13 +241,14 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
     }
 
     private fun appendNumber(number: Int) {
-        if (reEnterPassword!!){ //Two-time pin input
+        if (reEnterPassword){ //Two-time pin input
             if (currentPinCode.length < 3)
             {
                 currentPinCode = currentPinCode.plus(number)
                 setOnPinKeyClickListener(number.toString())
             }
             else if (currentPinCode.length == 3) {
+                mPinMessage!!.text = "PIN Confirm"
                 mCode = mPinView!!.code
                 if (TextUtils.isEmpty(mCodeValidation)) {
                     Handler().postDelayed(

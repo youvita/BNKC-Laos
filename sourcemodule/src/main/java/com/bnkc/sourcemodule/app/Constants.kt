@@ -7,6 +7,9 @@ package com.bnkc.sourcemodule.app
 
 object Constants {
 
+    const val ANIMATE_LEFT = 5656
+    const val ANIMATE_NORMAL = 5757
+
     // Login info
     const val USER_ID = "USER_ID"
     const val KEY_TOKEN = "TOKEN"

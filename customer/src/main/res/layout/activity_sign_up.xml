@@ -171,7 +171,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_31dp"
                                     android:gravity="center"
-                                    android:text="Personal Information" />
+                                    android:text="@string/personal_information" />
 
                                 <TextView
                                     style="@style/font13_263238_medium"
@@ -295,7 +295,7 @@
                                             android:paddingEnd="@dimen/padding_10dp"
                                             android:paddingBottom="@dimen/padding_16dp"
                                             tools:text="@string/sign_existing_customer"
-                                            android:visibility="visible" />
+                                            android:visibility="gone" />
 
                                     </LinearLayout>
 
@@ -350,7 +350,7 @@
                                 </LinearLayout>
 
                                 <include layout="@layout/additional_info"
-                                    android:id="@+id/llt_address"/>
+                                    android:id="@+id/llt_additional"/>
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -366,7 +366,7 @@
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="@dimen/padding_10dp"
                                         android:gravity="center"
-                                        android:text="Recommender" />
+                                        android:text="@string/recommender" />
 
                                     <TextView
                                         style="@style/font_13_90A4AE_regular"
@@ -396,27 +396,62 @@
 
                     </ScrollView>
 
-                    <LinearLayout
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/btn_next"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/height_50dp"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:layout_marginLeft="@dimen/margin_21dp"-->
+<!--                        android:layout_marginRight="@dimen/margin_21dp"-->
+<!--                        android:layout_marginBottom="@dimen/margin_21dp"-->
+<!--                        android:background="@null"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <View-->
+<!--                            android:layout_marginTop="@dimen/height_50dp"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/margin_30dp"/>-->
+
+<!--                        <com.bnkc.sourcemodule.ui.ValidateButton-->
+<!--                            android:id="@+id/vb_result"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/height_50dp"-->
+<!--                            app:is_active="true"-->
+<!--                            app:buttonText="@string/comm_submit"-->
+<!--                            app:textAllCaps="true"-->
+<!--                            android:layout_marginStart="@dimen/margin_20dp"-->
+<!--                            android:layout_marginEnd="@dimen/margin_20dp"/>-->
+
+<!--                    </LinearLayout>-->
+
+                    <RelativeLayout
                         android:id="@+id/btn_next"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_50dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="@dimen/margin_21dp"
-                        android:layout_marginRight="@dimen/margin_21dp"
-                        android:layout_marginBottom="@dimen/margin_21dp"
-                        android:background="@drawable/round_solid_e1e5ec_8"
-                        android:gravity="center">
+                        android:layout_gravity="bottom"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_ffffff"
+                        android:layout_alignParentBottom="true">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@color/color_ffffff"
+                            android:layout_marginTop="30dp"
+                            android:paddingBottom="10dp"/>
 
                         <com.bnkc.sourcemodule.ui.ValidateButton
                             android:id="@+id/vb_result"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_50dp"
-                            android:layout_marginEnd="@dimen/margin_5dp"
-                            app:buttonText="Log in"
-                            app:textAllCaps="true" />
+                            app:is_active="false"
+                            app:buttonText="@string/comm_submit"
+                            app:textAllCaps="true"
+                            android:layout_marginStart="@dimen/margin_20dp"
+                            android:layout_marginEnd="@dimen/margin_20dp"/>
 
+                    </RelativeLayout>
 
-                    </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseServiceBinding
@@ -20,6 +21,7 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
+        setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.leaseServiceViewModel = viewModel
         observeViewModel()
@@ -44,7 +46,10 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
     }
 
     private fun initView(){
-        binding.include.colToolbar.title = "Lease Service"
+        binding.include.colToolbar.title = getString(R.string.lease_service)
+        binding.include.toolbarLeftButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initEvent(){
