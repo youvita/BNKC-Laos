@@ -151,7 +151,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         if (!hide) binding.appBar.setExpanded(hide)
 
         if (binding.llWebContainer.visibility == View.VISIBLE) {
-            val url = BuildConfig.BASE_URL +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
+            val url = sharedPrefer.getPrefer(Constants.KEY_START_URL) +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
 
             val header = mutableMapOf<String, String>()
             header["Authorization"] = "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)

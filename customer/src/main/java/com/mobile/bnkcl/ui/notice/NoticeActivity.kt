@@ -82,7 +82,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
         header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
-        binding.wbNotice.loadUrl(BuildConfig.BASE_URL + Constants.WB_NOTICES, header)
+        binding.wbNotice.loadUrl(sharedPrefer.getPrefer(Constants.KEY_START_URL) + Constants.WB_NOTICES, header)
     }
 
 }

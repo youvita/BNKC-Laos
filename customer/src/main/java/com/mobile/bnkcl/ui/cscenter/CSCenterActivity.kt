@@ -167,9 +167,9 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         }
 
         val header = mutableMapOf<String, String>()
-        header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
+//        header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
-        binding.wbFaq.loadUrl(com.mobile.bnkcl.BuildConfig.BASE_URL + Constants.WB_FAQS, header)
+        binding.wbFaq.loadUrl(sharedPrefer.getPrefer(Constants.KEY_START_URL) + Constants.WB_FAQS, header)
     }
 
     private fun visibleAskBnk() {

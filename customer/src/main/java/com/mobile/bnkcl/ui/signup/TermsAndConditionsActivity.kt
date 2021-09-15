@@ -48,7 +48,7 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
 //        header.put("Authorization", "Bearer ${sharedPrefer.getPrefer(Constants.LOGIN_TOKEN)}")
         header["Accept-Language"] = if(sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
-        binding.webview.loadUrl(BuildConfig.BASE_URL + url, header)
+        binding.webview.loadUrl(sharedPrefer.getPrefer(Constants.KEY_START_URL) + url, header)
         binding.webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView?,

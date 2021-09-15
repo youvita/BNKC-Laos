@@ -9,7 +9,7 @@ import com.mobile.bnkcl.BuildConfig
 
 object AppBuild {
 
-    const val BASE_URL = BuildConfig.BASE_URL
+//    const val BASE_URL = BuildConfig.BASE_URL
 
     const val MG_URL = BuildConfig.MG_URL
 
