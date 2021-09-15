@@ -10,8 +10,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
-import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -24,7 +22,6 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
-import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,14 +49,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         binding.action = this@CSCenterActivity
 
-        // check login status
-        if (AppLogin.PIN_TYPE == "N"){
-            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
-                startActivity(Intent(this, OtpActivity::class.java))
-            }else{
-                startActivity(Intent(this,PinCodeActivity::class.java))
-            }
-        }
         checkError()
         initToolbar()
         observeData()
@@ -89,9 +78,9 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         binding.segmentButton.setOnPositionChangedListener {
             if (it == 0){
-                visibleWebView()
+                onFaqClick()
             }else{
-                visibleAskBnk()
+                onAskClick()
 
             }
         }
@@ -141,10 +130,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         binding.llWrapAskBnk.visibility = View.GONE
         binding.wbFaq.visibility = View.VISIBLE
         binding.llWrapBtn.visibility = View.GONE
-//        binding.tvFaq.background = getDrawable(R.drawable.round_solid_d7191f_8)
-//        binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_ffeeee)
-//        binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
-//        binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
         val webSettings = binding.wbFaq.settings
         webSettings.javaScriptEnabled = true
         webSettings.domStorageEnabled = true
@@ -178,11 +163,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         binding.llWrapAskBnk.visibility = View.VISIBLE
         binding.wbFaq.visibility = View.GONE
         binding.llWrapBtn.visibility = View.VISIBLE
-//        binding.tvFaq.background = getDrawable(R.drawable.round_solid_ffeeee)
-//        binding.tvAskBnk.background = getDrawable(R.drawable.round_solid_d7191f_8)
-//        binding.tvFaq.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
-//        binding.tvAskBnk.setTextColor(ContextCompat.getColor(this, R.color.color_ffffff))
-
         binding.rcQuestion.isNestedScrollingEnabled = false
         binding.nsvAsk.viewTreeObserver.addOnScrollChangedListener(ViewTreeObserver.OnScrollChangedListener {
 
