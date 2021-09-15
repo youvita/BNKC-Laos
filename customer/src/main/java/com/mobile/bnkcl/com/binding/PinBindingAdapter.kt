@@ -28,10 +28,13 @@ object PinBindingAdapter {
             2 -> { //sign up
                 title?.text = "Set Up New PIN"
                 mPinMessage!!.visibility = View.VISIBLE
+                mResetPin!!.visibility = View.GONE
                 mPinMessage!!.text = "PIN Registration"
             }
             3 -> { //forget
                 title?.text = "Forget PIN"
+                mPinMessage!!.visibility = View.VISIBLE
+                mPinMessage!!.text = "New PIN"
             }
             4 -> { //Reset pin
                 title?.text = "Reset PIN"

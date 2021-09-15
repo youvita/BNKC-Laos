@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentLoanServiceBinding
+import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 
 class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
@@ -28,7 +29,13 @@ class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
         binding = FragmentLoanServiceBinding.bind(view)
         binding.serviceViewModel = viewModel
         observeViewModel()
+        initView()
+    }
 
+    private fun initView(){
+        binding.ivNotify.setOnClickListener {
+            startActivity(Intent(activity, AlarmActivity::class.java))
+        }
     }
 
     private fun observeViewModel() {

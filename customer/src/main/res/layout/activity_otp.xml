@@ -135,13 +135,13 @@
 
             </LinearLayout>
 
-            <!--sign up OTP -->
+            <!--OTP -->
             <RelativeLayout
-                android:id="@+id/rl_signup"
+                android:id="@+id/rl_otp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="21dp"
-                android:visibility="visible"
                 android:background="@drawable/round_solid_ffffff_15">
                 <ScrollView
                     android:id="@+id/sv_signup"
@@ -320,7 +320,6 @@
                     android:visibility="visible"
                     android:gravity="bottom"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="21dp"
                     android:layout_marginLeft="21dp"
                     android:layout_marginRight="21dp"
                     android:layout_marginTop="10dp">
@@ -355,21 +354,296 @@
 
                     </LinearLayout>
 
-                    <com.bnkc.sourcemodule.ui.ValidateButton
-                        android:id="@+id/btn_continue"
-                        android:layout_width="match_parent"
-                        app:buttonText="Login"
-                        android:layout_height="50dp"
-                        android:onClick="@{() -> otpViewModel.continueClick()}"/>
-
                 </LinearLayout>
-
 
             </RelativeLayout>
 
+            <!-- end of OTP-->
+            <!--sign up user information-->
+            <RelativeLayout
+                android:id="@+id/rl_signup_info"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/margin_21dp"
+                android:visibility="gone"
+                android:background="@drawable/round_solid_ffffff_15"
+                >
 
-            <!-- end of sign up OTP-->
+                <ScrollView
+                    android:id="@+id/sv_signup_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:overScrollMode="never"
+                    android:paddingLeft="@dimen/padding_21dp"
+                    android:paddingRight="@dimen/padding_21dp"
+                    android:scrollbars="none">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/ll_sign_up_user_infor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_21dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/font21_263238_medium"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_31dp"
+                                android:gravity="center"
+                                android:text="Personal Information" />
+
+                            <TextView
+                                style="@style/font13_263238_medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_21dp"
+                                android:text="@string/sign_name" />
+
+                            <com.mobile.bnkcl.com.view.BnkEditText
+                                android:id="@+id/edt_name"
+                                style="@style/font15_CFD8DC_medium_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_50dp"
+                                android:layout_marginTop="@dimen/margin_10dp"
+                                android:background="@drawable/selector_edittext_bg"
+                                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                android:hint="Input Name"
+                                android:maxLength="50"
+                                android:paddingStart="@dimen/padding_15dp"
+                                android:paddingTop="@dimen/padding_16dp"
+                                android:paddingEnd="@dimen/padding_15dp"
+                                android:paddingBottom="@dimen/padding_16dp"
+                                android:singleLine="true"
+                                android:textColor="@color/color_263238"
+                                android:textColorHint="@color/color_cfd8dc" />
+
+                            <TextView
+                                style="@style/font13_263238_medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_21dp"
+                                android:text="@string/sign_date_of_birth"
+
+                                />
+
+                            <LinearLayout
+                                android:id="@+id/ll_dob"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_50dp"
+                                android:layout_marginTop="@dimen/margin_10dp"
+                                android:background="@drawable/selector_viewgroup_bg"
+                                android:orientation="horizontal">
+
+                                <com.mobile.bnkcl.com.view.BnkEditText
+                                    android:id="@+id/tv_dob"
+                                    style="@style/font15_CFD8DC_medium_input"
+                                    android:layout_width="@dimen/width_0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:clickable="true"
+                                    android:digits="0123456789"
+                                    android:hint="@string/sign_dd_mm_yyyy"
+                                    android:inputType="date"
+                                    android:maxLength="10"
+                                    android:paddingStart="@dimen/padding_15dp"
+                                    android:paddingTop="@dimen/padding_16dp"
+                                    android:paddingEnd="@dimen/padding_15dp"
+                                    android:paddingBottom="@dimen/padding_16dp"
+                                    android:singleLine="true" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="@dimen/margin_15dp"
+                                    android:src="@drawable/ic_calendar_on_ico" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                style="@style/font13_263238_medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_21dp"
+                                android:text="@string/sign_identify_number" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_10dp">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_input_id_num"
+                                    android:layout_width="@dimen/width_0dp"
+                                    android:layout_height="@dimen/height_50dp"
+                                    android:layout_marginEnd="@dimen/margin_10dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/selector_viewgroup_bg"
+                                    android:orientation="horizontal">
+
+                                    <com.mobile.bnkcl.com.view.BnkEditText
+                                        android:id="@+id/edt_id_num"
+                                        style="@style/font15_CFD8DC_medium_input"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:background="@null"
+                                        android:clickable="true"
+                                        android:digits="0123456789"
+                                        android:hint="@string/sign_input_identify_number"
+                                        android:inputType="number"
+                                        android:maxLength="30"
+                                        android:paddingStart="@dimen/padding_15dp"
+                                        android:paddingTop="@dimen/padding_16dp"
+                                        android:paddingEnd="@dimen/padding_15dp"
+                                        android:paddingBottom="@dimen/padding_16dp"
+                                        android:singleLine="true" />
+
+                                    <TextView
+                                        android:id="@+id/tv_new_customer"
+                                        style="@style/font13_d7191f_bold"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:drawableRight="@drawable/ic_info_red_ico"
+                                        android:drawablePadding="@dimen/padding_5dp"
+                                        android:gravity="center"
+                                        android:paddingStart="@dimen/padding_10dp"
+                                        android:paddingTop="@dimen/padding_16dp"
+                                        android:paddingEnd="@dimen/padding_10dp"
+                                        android:paddingBottom="@dimen/padding_16dp"
+                                        android:text="@string/sign_existing_customer"
+                                        android:visibility="visible" />
+
+                                </LinearLayout>
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_check"
+                                    style="?android:attr/borderlessButtonStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/selector_d7191f_8b0304"
+                                    android:fontFamily="@font/rubik_medium"
+                                    android:text="@string/sign_check"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/color_ffffff"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_10dp"
+                                android:layout_marginBottom="@dimen/margin_21dp">
+
+                                <TextView
+                                    style="@style/font13_263238_medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_10dp"
+                                    android:text="@string/edit_gender" />
+
+                                <LinearLayout
+                                    android:id="@+id/ll_gender"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/height_50dp"
+                                    android:layout_marginTop="@dimen/margin_10dp"
+                                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                                    android:gravity="center"
+                                    android:paddingStart="@dimen/padding_15dp"
+                                    android:paddingEnd="@dimen/padding_15dp">
+
+                                    <TextView
+                                        android:id="@+id/tv_gender"
+                                        style="@style/font15_CFD8DC_medium_input"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:hint="Select Gender"
+                                        app:drawableEndCompat="@drawable/ic_more_ico" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <include layout="@layout/additional_info"
+                                android:id="@+id/llt_address"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center|start"
+                                android:layout_marginTop="@dimen/margin_20dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/font13_263238_medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawablePadding="@dimen/padding_10dp"
+                                    android:gravity="center"
+                                    android:text="Recommender" />
+
+                                <TextView
+                                    style="@style/font_13_90A4AE_regular"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/padding_5dp"
+                                    android:text="(optional)" />
+                            </LinearLayout>
+                            <com.mobile.bnkcl.com.view.BnkEditText
+                                android:id="@+id/edt_recommend"
+                                style="@style/font15_CFD8DC_medium_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/selector_edittext_bg"
+                                android:hint="Input Recommender"
+                                android:maxLength="200"
+                                android:paddingStart="15sp"
+                                android:paddingEnd="15sp"
+                                android:singleLine="true"
+                                android:textColorHint="#cfd8dc" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_height="wrap_content"
+                android:background="@color/color_ffffff">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/color_ffffff"
+                android:layout_marginTop="35dp"
+                android:paddingBottom="10dp"/>
+
+                <com.bnkc.sourcemodule.ui.ValidateButton
+                    android:id="@+id/btn_continue"
+                    android:layout_width="match_parent"
+                    app:buttonText="Login"
+                    app:textAllCaps="true"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:layout_marginEnd="@dimen/margin_20dp"
+                    />
+
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

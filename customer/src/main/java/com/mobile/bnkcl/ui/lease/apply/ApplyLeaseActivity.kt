@@ -16,10 +16,12 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.databinding.ActivityApplyLeaseBinding
+import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.FormatUtil
@@ -37,6 +39,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     lateinit var listChoiceDialog: ListChoiceDialog
     lateinit var itemResponses : ArrayList<ItemResponseObject>
 
+    @Inject lateinit var twoButtonDialog : TwoButtonDialog
+
     private var disposableError: Disposable? = null
     private fun checkError(){
         //Session expired
@@ -48,15 +52,30 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         }
     }
 
+    //$dnf repoquery -q clang :: commnd
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
+        setAnimateType(com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.applyViewModel = viewModel
         checkError()
         viewModel.reqLeaseItemCode(Constants.PRODUCT_TYPE)
 
         initView()
+        initEvent()
         observeViewModel()
+    }
+
+    private fun initEvent(){
+        binding.btnSubmit.setOnClickListener {
+            if (binding.btnSubmit.isActive()){
+                viewModel.applyLeaseClicked()
+            }
+        }
+        binding.include.toolbarLeftButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun observeViewModel(){
@@ -77,21 +96,12 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         viewModel.actionLiveData.observe(this, {
             when (it) {
                 "apply_lease" -> {
-                    showLoading()
-//                    viewModel.applyLeaseRequest = ApplyLeaseRequest(
-//                        "LAT002",
-//                        true,
-//                        "zxc",
-//                        "qwe",
-//                        "trew",
-//                        "13 pro max",
-//                        "ios",
-//                        "iphone",
-//                        "LAK 100.00",
-//                        "LAK 1234.00",
-//                        "12"
-//                    )
-                    viewModel.applyLease()
+                    twoButtonDialog.onConfirmClickedListener {
+                        showLoading()
+                        viewModel.applyLease()
+                    }
+                    twoButtonDialog.show(this.supportFragmentManager, twoButtonDialog.tag)
+
                 }
                 "product_type" -> {
                     listChoiceDialog = ListChoiceDialog.newInstance(

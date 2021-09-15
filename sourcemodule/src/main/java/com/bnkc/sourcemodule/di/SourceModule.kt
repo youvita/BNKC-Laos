@@ -31,4 +31,8 @@ object SourceModule {
     @Provides
     fun provideListChoiceDialog() = ListChoiceDialog()
 
+    @Singleton
+    @Provides
+    fun provideTwoButtonDialog() = TwoButtonDialog()
+
 }

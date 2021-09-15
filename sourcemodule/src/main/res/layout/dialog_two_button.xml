@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/comm_popup_ffffff_radius_5"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_badge_inform"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/alertTitle"
+                style="@style/font_21_263238_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginBottom="@dimen/margin_5dp"
+                android:text="Apply Lease"
+                android:textAlignment="center"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/alert_message"
+                style="@style/font_15_263238_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_marginBottom="@dimen/margin_5dp"
+                android:gravity="center_horizontal"
+                android:text="Would you like to apply for a lease\nconsultation with that\ninformation?" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_left"
+                    style="@style/font14_d7191f_medium"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="@dimen/margin_10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_d7191f_ffffee"
+                    android:maxLines="1"
+                    android:text="Cancel"
+                    android:textColor="@color/colorPrimary" />
+
+                <Button
+                    android:id="@+id/btn_right"
+                    style="@style/font14_ffffff_medium"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_d7191f_8b0304"
+                    android:maxLines="1"
+                    android:text="Apply"
+                    android:textColor="@color/color_ffffff" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

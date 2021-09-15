@@ -221,6 +221,7 @@
                     android:paddingEnd="15sp"
                     android:singleLine="true"
                     android:digits="0123456789"
+                    android:inputType="number"
                     android:textColorHint="#cfd8dc" />
 
             </LinearLayout>

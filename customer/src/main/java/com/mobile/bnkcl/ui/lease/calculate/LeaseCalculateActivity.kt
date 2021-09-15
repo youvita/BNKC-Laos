@@ -57,6 +57,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
+        setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.leaseCalRequest = viewModel.leaseCalculateReq
         observeViewModel()
@@ -87,14 +88,10 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     private fun initEvent(){
         binding.btnCalculate.setOnClickListener {
-            showLoading()
-            Log.d("nng", "leaseCalculateReq :: " + viewModel.leaseCalculateReq.lease_amount)
-//            viewModel.leaseCalculateReq = LeaseCalculateReq(
-//                "1000 USD",
-//                1,
-//                1,
-//            )
-            viewModel.calculateLease()
+            if (binding.btnCalculate.isActive()){
+                showLoading()
+                viewModel.calculateLease()
+            }
         }
         binding.llRepaymentTerm.setOnClickListener {
             listChoiceDialog = ListChoiceDialog.newInstance(
@@ -153,6 +150,9 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
     private fun initView(){
         binding.include.colToolbar.title = getString(R.string.calculate)
         binding.edRate.addTextChangedListener(textInterestRateWatcher)
+        binding.include.toolbarLeftButton.setOnClickListener {
+            finish()
+        }
     }
 
     override fun getLayoutId(): Int {

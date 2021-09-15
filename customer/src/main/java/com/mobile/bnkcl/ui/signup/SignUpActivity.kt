@@ -14,11 +14,13 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.area.AddressData
 import com.mobile.bnkcl.data.request.auth.IdNumReq
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
 import com.mobile.bnkcl.data.response.area.AreaItems
+import com.mobile.bnkcl.data.response.auth.AreaObj
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
@@ -54,9 +56,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     var username = ""
     private var signUpDisposable: Disposable? = null
 
+    val viewModel : SignUpViewModel by viewModels()
 
     override fun getLayoutId(): Int = R.layout.activity_sign_up
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         super.onCreate(savedInstanceState)
 
             //Session expired
@@ -69,10 +73,14 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
         if (intent.hasExtra(Constants.USER_ID)){
             username = intent.getStringExtra(Constants.USER_ID).toString()
-
+            viewModel.signUpRequest.phone_number = username
+        }
+        if (intent.hasExtra(Constants.SESSION_ID)){
+            viewModel.signUpRequest.session_id = intent.getStringExtra(Constants.SESSION_ID).toString()
         }
 
         /*observe data*/
+        observeData()
         observeCapitalArea()
         observeDistrictData()
         observeVillage()
@@ -87,10 +95,25 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
          * */
         binding.ivBack.setOnClickListener(this)
         binding.tvDob.addTextChangedListener(mDateWatcher)
-
+        binding.edtName.addTextChangedListener(nameWatcher)
         binding.edtIdNum.addTextChangedListener(textIdentificationNumberWatcher)
+        binding.edtRecommend.addTextChangedListener(recommWatcher)
+        binding.lltAdditional.edtDetailedAddress.addTextChangedListener(detailWatcher)
+        binding.lltAdditional.edtEtc.addTextChangedListener(ectWatcher)
+        binding.lltAdditional.edtBankName.addTextChangedListener(bankNameWatcher)
+        binding.lltAdditional.edtAccountNumber.addTextChangedListener(accNumberWatcher)
+
         binding.btnCheck.setOnClickListener(btnCheckId)
-        binding.tvNewCustomer.visibility = View.GONE
+//        binding.tvNewCustomer.visibility = View.GONE
+
+        binding.vbResult.setOnClickListener {
+            if (binding.vbResult.isActive()){
+                val intent = Intent(this, PinCodeActivity::class.java)
+                intent.putExtra("req_signup_obj", viewModel.signUpRequest)
+                intent.putExtra("pin_action", "sign_up")
+                startActivity(intent)
+            }
+        }
 
         /**
          * on date of birth click
@@ -107,7 +130,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
          * on capital click
          * */
 
-        binding.lltAddress.llCapital.setOnClickListener {
+        binding.lltAdditional.llCapital.setOnClickListener {
             addressInfoViewModel.getCapitalData()
             if (objCapital != null && objCapital!!.size > 0){
                 listChoiceDialog = ListChoiceDialog.newInstance(
@@ -119,14 +142,46 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
                 listChoiceDialog.setOnItemListener ={ a: Int ->
                     selectedCapital = a
-                    binding.lltAddress.tvCapital.text = objCapital!![a].alias1
-                    binding.lltAddress.tvDistrict.text = ""
-                    binding.lltAddress.tvVillage.text = ""
+                    binding.lltAdditional.tvCapital.text = objCapital!![a].alias1
+                    binding.lltAdditional.tvDistrict.text = ""
+                    binding.lltAdditional.tvVillage.text = ""
                     addressInfoViewModel.addressData = AddressData(
                         "DISTRICT",
                         objCapital!![a].id.toString()
                     )
                     addressInfoViewModel.getDistrict()
+                    val capital = objCapital!![a]
+                    val capitalData = AreaObj()
+                    capitalData.id = capital.id
+                    capitalData.name = capital.name
+                    capitalData.erp_code = capital.erp_code
+                    capitalData.iso_code = capital.iso_code
+                    capitalData.alias1 = capital.alias1
+                    capitalData.alias2 = capital.alias1
+
+                    viewModel.addressReqObj.state = capitalData
+                    viewModel.signUpRequest.address = viewModel.addressReqObj
+                    val jobType = if (viewModel.signUpRequest.job_type != null){
+                        viewModel.signUpRequest.job_type
+                    }else {
+                        ""
+                    }
+
+                    binding.vbResult.isEnable(
+                        binding.edtName.text.toString(),
+                        binding.tvDob.text.toString(),
+                        binding.edtIdNum.text.toString(),
+                        "M",
+                        "capital",
+                        "district",
+                        "village",
+                        binding.lltAdditional.edtDetailedAddress.text.toString(),
+                        binding.lltAdditional.edtEtc.text.toString(),
+                        binding.lltAdditional.edtBankName.text.toString(),
+                        binding.lltAdditional.edtAccountNumber.text.toString(),
+                        jobType!!,
+                        binding.edtRecommend.text.toString(),
+                    )
                 }
 
                 listChoiceDialog.isCancelable = true
@@ -137,7 +192,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         /**
          * on district click
          * */
-        binding.lltAddress.llDistrict.setOnClickListener{
+        binding.lltAdditional.llDistrict.setOnClickListener{
                     if (objDistrict != null && objDistrict!!.size>0){
                         objDistrict
                         listChoiceDialog = ListChoiceDialog.newInstance(
@@ -150,14 +205,46 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         listChoiceDialog.setOnItemListener = { b: Int ->
 
                             selectDistrict = b
-                            binding.lltAddress.tvDistrict.text = objDistrict!![b].alias1
-                            binding.lltAddress.tvVillage.text = ""
+                            binding.lltAdditional.tvDistrict.text = objDistrict!![b].alias1
+                            binding.lltAdditional.tvVillage.text = ""
 
                             addressInfoViewModel.villageData = AddressData(
                                     "VILLAGE",
                                     objDistrict!![b].id.toString()
                             )
                             addressInfoViewModel.getVillage()
+
+                            val district = objDistrict!![b]
+                            val districtData = AreaObj()
+                            districtData.id = district.id
+                            districtData.name = district.name
+                            districtData.erp_code = district.erp_code
+                            districtData.iso_code = district.iso_code
+                            districtData.alias1 = district.alias1
+                            districtData.alias2 = district.alias1
+                            viewModel.addressReqObj.district = districtData
+                            viewModel.signUpRequest.address = viewModel.addressReqObj
+                            val jobType = if (viewModel.signUpRequest.job_type != null){
+                                viewModel.signUpRequest.job_type
+                            }else {
+                                ""
+                            }
+                            binding.vbResult.isEnable(
+                                binding.edtName.text.toString(),
+                                binding.tvDob.text.toString(),
+                                binding.edtIdNum.text.toString(),
+                                "M",
+                                "capital",
+                                "district",
+                                "village",
+                                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                                binding.lltAdditional.edtEtc.text.toString(),
+                                binding.lltAdditional.edtBankName.text.toString(),
+                                binding.lltAdditional.edtAccountNumber.text.toString(),
+                                jobType!!,
+                                binding.edtRecommend.text.toString(),
+                            )
+
                         }
 
                         listChoiceDialog.isCancelable = true
@@ -167,7 +254,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         /**
          * on village click
          * */
-        binding.lltAddress.llVillage.setOnClickListener{
+        binding.lltAdditional.llVillage.setOnClickListener{
                 if (objVillage != null && objVillage!!.size>0){
                     listChoiceDialog = ListChoiceDialog.newInstance(
                             R.drawable.ic_badge_general,
@@ -178,7 +265,38 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
                     listChoiceDialog.setOnItemListener = { b: Int ->
                         selectVillage = b
-                        binding.lltAddress.tvVillage.text = objVillage!![b].alias1
+                        binding.lltAdditional.tvVillage.text = objVillage!![b].alias1
+                        val village = objVillage!![b]
+                        val villageData = AreaObj()
+                        villageData.id = village.id
+                        villageData.name = village.name
+                        villageData.erp_code = village.erp_code
+                        villageData.iso_code = village.iso_code
+                        villageData.alias1 = village.alias1
+                        villageData.alias2 = village.alias1
+                        viewModel.addressReqObj.village = villageData
+                        viewModel.signUpRequest.address = viewModel.addressReqObj
+                        val jobType = if (viewModel.signUpRequest.job_type != null){
+                            viewModel.signUpRequest.job_type
+                        }else {
+                            ""
+                        }
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            "M",
+                            "capital",
+                            "district",
+                            "village",
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+
                     }
 
                     listChoiceDialog.isCancelable = true
@@ -201,6 +319,28 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                listChoiceDialog.setOnItemListener = {d : Int ->
                    selectGender = d
                    binding.tvGender.text = genderObj!![d].title
+                   viewModel.signUpRequest.gender = genderObj!![d].code
+
+                   val jobType = if (viewModel.signUpRequest.job_type != null){
+                       viewModel.signUpRequest.job_type
+                   }else {
+                       ""
+                   }
+                   binding.vbResult.isEnable(
+                       binding.edtName.text.toString(),
+                       binding.tvDob.text.toString(),
+                       binding.edtIdNum.text.toString(),
+                       "M",
+                       "capital",
+                       "district",
+                       "village",
+                       binding.lltAdditional.edtDetailedAddress.text.toString(),
+                       binding.lltAdditional.edtEtc.text.toString(),
+                       binding.lltAdditional.edtBankName.text.toString(),
+                       binding.lltAdditional.edtAccountNumber.text.toString(),
+                       jobType!!,
+                       binding.edtRecommend.text.toString(),
+                   )
                }
 
                listChoiceDialog.isCancelable = true
@@ -213,7 +353,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
          * on Job type click
          * */
 
-        binding.lltAddress.llJobType.setOnClickListener{
+        binding.lltAdditional.llJobType.setOnClickListener{
            if (codeObj != null && codeObj!!.size>0){
                listChoiceDialog = ListChoiceDialog.newInstance(
                        R.drawable.ic_badge_general,
@@ -221,14 +361,53 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                        addressInfoViewModel.setUpCode(codeObj!!),
                        selectJobType
                )
+               val jobType = if (viewModel.signUpRequest.job_type != null){
+                   viewModel.signUpRequest.job_type
+               }else {
+                   ""
+               }
                listChoiceDialog.setOnItemListener = {c : Int ->
                    selectJobType = c
-                   binding.lltAddress.tvJobType.text = codeObj!![c].title
+                   binding.lltAdditional.tvJobType.text = codeObj!![c].title
+                   viewModel.signUpRequest.job_type = codeObj!![selectJobType].code
+                   binding.vbResult.isEnable(
+                       binding.edtName.text.toString(),
+                       binding.tvDob.text.toString(),
+                       binding.edtIdNum.text.toString(),
+                       "M",
+                       "capital",
+                       "district",
+                       "village",
+                       binding.lltAdditional.edtDetailedAddress.text.toString(),
+                       binding.lltAdditional.edtEtc.text.toString(),
+                       binding.lltAdditional.edtBankName.text.toString(),
+                       binding.lltAdditional.edtAccountNumber.text.toString(),
+                       jobType!!,
+                       binding.edtRecommend.text.toString(),
+                   )
                }
 
                listChoiceDialog.isCancelable = true
                listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
            }
+        }
+    }
+
+    private fun observeData(){
+//        viewModel.preSignUpLiveData.observe(this){
+//            Log.d(">>>", "Sign Up ::: ${it.session_id}")
+//            if (it.session_id!!.isNotEmpty()){
+//                viewModel.signUpRequest.session_id = it.session_id
+//                viewModel.sessionId = it.session_id!!
+//                viewModel.signUp()
+//            }
+//        }
+        viewModel.signUpLiveData.observe(this){
+            Log.d(">>>", "Sign Up ::: $it")
+//            val intent = Intent(this, PinCodeActivity::class.java)
+//            intent.putExtra("pin_action", "sign_up")
+//            intent.putExtra("username", it.username)
+//            startActivity(intent)
         }
     }
 
@@ -315,6 +494,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             if (textLength == 10) {
                 setStringDateToCalendar(s.toString())
             }
+
+            setDateRequestData(s.toString())
+
 //            validateUserInfo()
         }
     }
@@ -329,26 +511,71 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             e.printStackTrace()
         }
     }
-    private fun validateUserInfo() {
-        if (binding.tvDob.text.toString() != ""
-            && binding.tvDob.text.toString().length === 10
-            && binding.edtName.text.toString() != ""
-            && binding.tvGender.text.toString() !=""
-        ) {
-            binding.btnNext.setOnClickListener(this)
-            binding.btnNext.background = ContextCompat.getDrawable(
-                this,
-                R.drawable.selector_d7191f_8b0304
-            )
-        } else {
-            binding.btnNext.isClickable = false
-            binding.btnNext.background = ContextCompat.getDrawable(
-                this,
-                R.drawable.round_solid_e1e5ec_8
-            )
+
+    private fun setDateRequestData(stDate: String) {
+        try {
+            if (stDate.split("-").size >= 3) {
+                viewModel.signUpRequest.date_of_birth = stDate.split("-")[2].plus("-").plus(stDate.split("-")[1]).plus("-").plus(stDate.split("-")[0])
+            }
+        } catch (e: ParseException) {
+            e.printStackTrace()
         }
     }
 
+//    private fun validateUserInfo() {
+//        if (binding.tvDob.text.toString() != ""
+//            && binding.tvDob.text.toString().length === 10
+//            && binding.edtName.text.toString() != ""
+//            && binding.tvGender.text.toString() !=""
+//        ) {
+//            binding.btnNext.setOnClickListener(this)
+//            binding.btnNext.background = ContextCompat.getDrawable(
+//                this,
+//                R.drawable.selector_d7191f_8b0304
+//            )
+//        } else {
+//            binding.btnNext.isClickable = false
+//            binding.btnNext.background = ContextCompat.getDrawable(
+//                this,
+//                R.drawable.round_solid_e1e5ec_8
+//            )
+//        }
+//    }
+
+
+    private val nameWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            viewModel.signUpRequest.name = s.toString()
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                s.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType!!,
+                binding.edtRecommend.text.toString(),
+            )
+        }
+
+    }
 
     var textLength = 0
     private val textIdentificationNumberWatcher = object : TextWatcher{
@@ -365,29 +592,218 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 //            textLength = binding.edtIdNum.text.toString().length
 //
 //            binding.tvNewCustomer.visibility = View.GONE
-
+            viewModel.signUpRequest.identification_number = s.toString()
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                binding.edtName.text.toString(),
+                binding.tvDob.text.toString(),
+                s.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType!!,
+                binding.edtRecommend.text.toString(),
+            )
         }
 
     }
 
+    private val detailWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            viewModel.addressReqObj.more_info = s.toString()
+            viewModel.signUpRequest.address = viewModel.addressReqObj
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                s.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                s.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType!!,
+                binding.edtRecommend.text.toString(),
+            )
+        }
+
+    }
+
+    private val ectWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            viewModel.signUpRequest.etc_detailed_address = s.toString()
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                s.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                s.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType!!,
+                binding.edtRecommend.text.toString(),
+            )
+        }
+
+    }
+
+    private val bankNameWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            viewModel.signUpRequest.bank_name = s.toString()
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                s.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                s.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType!!,
+                binding.edtRecommend.text.toString(),
+            )
+        }
+
+    }
+
+    private val accNumberWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            viewModel.signUpRequest.account_number = s.toString()
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                s.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                s.toString(),
+                jobType!!,
+                binding.edtRecommend.text.toString(),
+            )
+        }
+
+    }
+
+    private val recommWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            viewModel.signUpRequest.recommender = s.toString()
+            val jobType = if (viewModel.signUpRequest.job_type != null){
+                viewModel.signUpRequest.job_type
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                s.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                "M",
+                "capital",
+                "district",
+                "village",
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType!!,
+                s.toString(),
+            )
+        }
+
+    }
 
     private fun validateEdtAddress(){
-        binding.lltAddress.llVillage.isEnabled = !(binding.lltAddress.tvDistrict.text.toString() == "" || binding.lltAddress.tvCapital.text.toString() =="")
-        if (binding.lltAddress.tvCapital.text.toString() =="") {
-            binding.lltAddress.llDistrict.isEnabled = false
-            binding.lltAddress.llVillage.isEnabled = false
+        binding.lltAdditional.llVillage.isEnabled = !(binding.lltAdditional.tvDistrict.text.toString() == "" || binding.lltAdditional.tvCapital.text.toString() =="")
+        if (binding.lltAdditional.tvCapital.text.toString() =="") {
+            binding.lltAdditional.llDistrict.isEnabled = false
+            binding.lltAdditional.llVillage.isEnabled = false
         }else{
-            binding.lltAddress.llDistrict.isEnabled = true
+            binding.lltAdditional.llDistrict.isEnabled = true
         }
     }
 
     private val btnCheckId = View.OnClickListener {
 
         identificationNumber = binding.edtIdNum.text.toString()
-        addressInfoViewModel.idNumReq = IdNumReq("2012345678", identificationNumber)
+        addressInfoViewModel.idNumReq = IdNumReq(username, identificationNumber)
         addressInfoViewModel.verifyId()
         verifyIdentification()
-
 
     }
 
@@ -427,8 +843,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.iv_back -> onBackPressed()
-
-
         }
     }
 }

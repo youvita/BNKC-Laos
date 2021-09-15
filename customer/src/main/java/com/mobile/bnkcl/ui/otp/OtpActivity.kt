@@ -20,18 +20,26 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
+import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
+import com.mobile.bnkcl.data.response.area.AreaItems
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.ui.signup.AddressInfoViewModel
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
@@ -144,8 +152,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         viewModel.sendOTPLiveData.observe(this) {
             Log.d("nng", it.toString())
             pinID = it.pin_id.toString()
-            binding.tvResend.setTextColor(resources.getColor(R.color.colorPrimary))
+            binding.tvResend.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
             lifeTime = it.lifetime!!
+            binding.edtOtp.isEnabled = true
             resendTimer()
             Toast.makeText(this, "OTP : ${it.pin}", Toast.LENGTH_SHORT).show()
         }
@@ -153,12 +162,17 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private fun verifyOTP() {
         viewModel.verifyOTPLiveData.observe(this){
-            Log.d(">>>>>>>>", it.toString())
+            Log.d(">>>>>>>>", " Sign UP or Login " + viewModel.sendOTPRequest.to + viewModel.otpVerifyRequest!!.pin_id)
             binding.isVerified = it.verified!!
             binding.tvCorrect.visibility = View.VISIBLE
             if (it.verified!!){
-                viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
-                preLogin()
+                if (binding.otpViewModel!!.uiMode == 0){
+                    viewModel.prelogRequest = PreLoginRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
+                    preLogin()
+                }else if (binding.otpViewModel!!.uiMode == 1){
+                    viewModel.preSignUpRequest = PreSignUpRequest(viewModel.sendOTPRequest.to, viewModel.otpVerifyRequest!!.pin_id)
+                    preSignUp()
+                }
 
                 binding.llOptCode.background = ContextCompat.getDrawable(this, R.drawable.round_stroke_00695c_8)
                 binding.tvCorrect.setTextColor(resources.getColor(R.color.color_00695c))
@@ -188,6 +202,18 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
+    private fun preSignUp() {
+        viewModel.preSignUp()
+        viewModel.preSignUpLiveData.observe(this){
+            Log.d("nng", it.toString())
+            successListener()
+            if (it.session_id!!.isNotEmpty()){
+                binding.otpViewModel!!.sessionID = it.session_id!!
+                binding.btnContinue.setActive(true)
+            }
+        }
+    }
+
     private fun preLogin() {
         viewModel.preLogin()
         viewModel.preloginLiveData.observe(this){
@@ -196,13 +222,13 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             if (it.session_id!!.isNotEmpty()){
                 binding.otpViewModel!!.sessionID = it.session_id!!
                 binding.btnContinue.setActive(true)
-
             }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
+        setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         try {
 
@@ -228,6 +254,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
                         binding.otpViewModel!!.uiMode = 1
                         binding.otpViewModel!!.step = 1
+                        viewModel._isSignUP.value = 1
 
                     }
                     action.equals("FORGET", ignoreCase = true) -> {
@@ -255,6 +282,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
             }
 
+            observeData()
+
             sendOTP()
 
             initView()
@@ -266,7 +295,28 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
+    private fun observeData(){
+        viewModel.isSignUpLiveData.observe(this, {
+            if (binding.otpViewModel!!.step == 1){
+                binding.rlOtp.visibility = View.VISIBLE
+                binding.rlSignupInfo.visibility = View.GONE
+            }else {
+                binding.rlOtp.visibility = View.GONE
+                binding.rlSignupInfo.visibility = View.VISIBLE
+
+                binding.tvStep2.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
+                binding.ivStep2.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_step_personal_info_on))
+                binding.tvStep1.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
+                binding.ivStep1.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_step_otp_off))
+
+                binding.btnContinue.setLabelButton("Submit")
+                binding.btnContinue.setActive(false)
+            }
+        })
+    }
+
     private fun initView(){
+        binding.edtOtp.isEnabled = false
         binding.btnContinue.text = viewModel.setUpButtonText()
         binding.tvAgree.setTextColor(ContextCompat.getColor(this,R.color.color_cfd8dc))
         binding.tvAgree.setText(
@@ -281,6 +331,12 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     }
 
     fun initEvent(){
+        binding.btnContinue.setOnClickListener {
+            if (binding.btnContinue.isActive()){
+                viewModel.continueClick()
+            }
+        }
+
         binding.edtPhonenumber.setOnFocusChangeListener { _, hasFocus ->
             binding.llPhoneNo.isSelected = hasFocus
         }

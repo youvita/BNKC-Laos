@@ -12,6 +12,7 @@ import com.mobile.bnkcl.ui.cscenter.AskBNKCActivity
 import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +21,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
     override fun getLayoutId(): Int = R.layout.activity_result
 
     val viewModel : ResultViewModel by viewModels()
-
+    var username : String? = null
     var resultStatus = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
 
         if (intent != null) {
             viewModel.from = intent.getStringExtra("from")!!
+            username = intent.getStringExtra("username")
             resultStatus = intent.getBooleanExtra("result", false)
             viewModel.resultLiveData = resultStatus
         }
@@ -75,9 +77,13 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                 }
                 Constants.SIGN_UP_FAIL -> {
                     if (resultStatus){
-
+                        val intent = Intent(this, PinCodeActivity::class.java)
+                        intent.putExtra("pin_action", "login")
+                        intent.putExtra("username", username)
+                        startActivity(intent)
+                        finish()
                     }else{
-
+                        finish()
                     }
                 }
                 ApplyLeaseActivity::class.java.simpleName -> {

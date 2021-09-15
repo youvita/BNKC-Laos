@@ -5,13 +5,13 @@ import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
 import com.mobile.bnkcl.data.api.auth.AuthAPI
-import com.mobile.bnkcl.data.request.auth.IdNumReq
-import com.mobile.bnkcl.data.request.auth.LoginRequest
-import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
-import com.mobile.bnkcl.data.request.auth.PreLoginRequest
+import com.mobile.bnkcl.data.request.auth.*
+import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
 import com.mobile.bnkcl.data.response.auth.IdNumRes
 import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
+import com.mobile.bnkcl.data.response.signup.PreSignUpResponse
+import com.mobile.bnkcl.data.response.signup.SignUpResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -28,6 +28,36 @@ class AuthRepo(context: Context, okHttpClient: OkHttpClient) {
             val request = object : RemoteDataSource<PreLoginResponse>(){
                 override suspend fun createCall(): Response<PreLoginResponse> {
                     return authAPI.preLogin(preLoginRequest)
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun preSignUp(preSignUpRequest: PreSignUpRequest): Flow<Resource<PreSignUpResponse>> = flow {
+        try {
+            delay(1000)
+            val request = object : RemoteDataSource<PreSignUpResponse>(){
+                override suspend fun createCall(): Response<PreSignUpResponse> {
+                    return authAPI.preSignUp(preSignUpRequest)
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun signUpUser(signUpRequest: SignUpRequest): Flow<Resource<SignUpResponse>> = flow {
+        try {
+            delay(1000)
+            val request = object : RemoteDataSource<SignUpResponse>() {
+                override suspend fun createCall(): Response<SignUpResponse> {
+                    return authAPI.signUpUser(signUpRequest)
                 }
             }
             request.networkRequest()
