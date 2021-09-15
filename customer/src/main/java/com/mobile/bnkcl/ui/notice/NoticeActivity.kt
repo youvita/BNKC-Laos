@@ -28,7 +28,6 @@ import javax.inject.Inject
 class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_notice
-    private val noticeViewModel:NoticeViewModel by viewModels()
     private var signUpDisposable: Disposable? = null
 
     private lateinit var noticeRequest: NoticeRequest
@@ -37,12 +36,6 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
-//        noticeRequest = NoticeRequest()
-
-//        getNoticeData()
 
         checkError()
         initView()
@@ -90,20 +83,6 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
         binding.wbNotice.loadUrl(BuildConfig.BASE_URL + Constants.WB_NOTICES, header)
-    }
-
-    private fun getNoticeData() {
-        try {
-            noticeViewModel.getNoticeData(noticeRequest)
-            noticeViewModel.notice.observe(this){
-                if (it != null) {
-                    Log.d("zimah", "getPreSignUpData: ${it.notices}")
-                }
-            }
-
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
     }
 
 }

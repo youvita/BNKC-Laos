@@ -49,7 +49,7 @@
     <string name="ask_answer_by_bnkc">Answered by BNKC</string>
 
     <!-- c/s center -->
-    <string name="center_faq">FAQ</string>
+    <string name="center_faq">FAQs</string>
     <string name="center_ask_bnkc">Ask BNKC</string>
 
     <!-- agree term  -->
@@ -371,6 +371,9 @@
     <string name="advance_payment">Advance Payment</string>
     <string name="commodity_price">Commodity Price</string>
     <string name="apply_lease">Apply Lease</string>
+    <string name="description">Description</string>
+    <string name="input_subject">Input Subject</string>
+    <string name="input_description">Input Description</string>
     <string name="recommender">Recommender</string>
     <string name="personal_information">Personal Information</string>
 

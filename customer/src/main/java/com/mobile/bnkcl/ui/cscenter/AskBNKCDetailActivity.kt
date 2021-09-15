@@ -75,7 +75,7 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
 
                 Log.d("title", "getClaimDetailData: ${it.title}")
                 binding.svScroll.visibility = View.VISIBLE
-                binding.llWrapContent.visibility = View.GONE
+//                binding.llWrapContent.visibility = View.GONE
                 binding.tvContent.visibility = View.VISIBLE
 
                 binding.tvTitle.text = it.title

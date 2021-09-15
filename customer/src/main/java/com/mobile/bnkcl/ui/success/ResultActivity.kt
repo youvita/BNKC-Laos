@@ -59,7 +59,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
             when(it){
                 AskBNKCActivity::class.java.simpleName -> {
                     if (resultStatus){
-                        var intent = Intent(this,MainActivity::class.java)
+                        var intent = Intent(this,CSCenterActivity::class.java)
                         startActivity(intent)
 
                     }else{
