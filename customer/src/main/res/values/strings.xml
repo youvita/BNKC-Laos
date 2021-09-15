@@ -43,9 +43,6 @@
 
     <!-- ask bnkc -->
     <string name="ask_subject">Subject</string>
-    <string name="ask_loan_amount">Loan Amount</string>
-    <string name="ask_counselling_type">Counselling Type</string>
-    <string name="ask_contents">Contents</string>
     <string name="ask_answer_by_bnkc">Answered by BNKC</string>
 
     <!-- c/s center -->
@@ -73,7 +70,6 @@
     <string name="menu_application">Application</string>
     <string name="menu_screening">Screening</string>
     <string name="menu_result">Result</string>
-    <string name="main_bottom_menu1">My Loan</string>
     <string name="main_bottom_menu3">Find Office</string>
     <string name="main_subtitle_001">My Lease Request (Until the last 14days)</string>
     <string name="lease_in_use">Lease in Use</string>
@@ -89,7 +85,7 @@
     <string name="nav_notice">NOTICE</string>
     <string name="nav_cs_center">CS/CENTER</string>
     <string name="nav_lang">Language</string>
-    <string name="nav_fb_bnkc">Facebook BNKC Capital Lao Leasing</string>
+    <string name="nav_fb_bnkc">Facebook BNKCL Capital Lao Leasing</string>
     <string name="nav_company_profile">Company Profile</string>
     <string name="nav_policy">Policy</string>
     <string name="nav_settings">Settings</string>
@@ -128,8 +124,6 @@
     <string name="cs_14">Inquiry is Submitted</string>
     <string name="cs_15">BNKC will review your inquiry\n and get back to you soon.</string>
     <string name="cs_16">Close</string>
-    <string name="cs_18">Inquiry is Failed</string>
-    <string name="cs_19">Internal Server Error \n (Error Code : 500) </string>
 
     <string name="comm_try_again">Try Again</string>
 

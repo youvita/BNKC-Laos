@@ -15,9 +15,9 @@
     <string name="sign_check">ກວດສອບ</string>
     <string name="sign_input_identify_number">ປ້ອນເລກທີບັດປະຈຳຕົວ</string>
     <string name="sign_existing_customer">ລູກຄ້າທີ່ມີຢູ່ແລ້ວ (ລູຄ້າເກົ່າ)</string>
-    <string name="sign_new_customer">New Customer</string>
+    <string name="sign_new_customer">ລູກຄ້າໃໝ່</string>
 
-    <string name="select">Select</string>
+    <string name="select">ເລືອກ</string>
 
     <!-- additional information  -->
     <string name="addition_home_address">ເຮືອນທີ່ຢູ່</string>
@@ -41,9 +41,6 @@
 
     <!-- ask bnkc -->
     <string name="ask_subject">ຫົວຂໍ້</string>
-    <string name="ask_loan_amount">Loan Amount</string>
-    <string name="ask_counselling_type">Counselling Type</string>
-    <string name="ask_contents">Contents</string>
     <string name="ask_answer_by_bnkc">ຕອບໂດຍ BNKC</string>
 
     <!-- c/s center -->
@@ -72,7 +69,6 @@
     <string name="menu_application">ຄໍາຮ້ອງຂໍສະຫມັກ</string>
     <string name="menu_screening">ການກວດສອບ</string>
     <string name="menu_result">ຜົນທີ່ໄດ້ຮັບ</string>
-    <string name="main_bottom_menu1">My Loan</string>
     <string name="main_bottom_menu3">ຄົ້ນຫາສຳນັກງານບໍລິສັດ</string>
     <string name="main_subtitle_001">ການສະເໜີເຊົ່າສິນເຊື່ອຂອງຂ້ອຍ (14 ວັນທີ່ຜ່ານມາ)</string>
     <string name="lease_in_use">ສິນເຊື່ອທີ່ດຳເນິນຢູ່</string>
@@ -89,7 +85,7 @@
     <string name="nav_notice">ແຈ້ງການ</string>
     <string name="nav_cs_center">ສູນບໍລິການລູກຄ້າ</string>
     <string name="nav_lang">ພາສາ</string>
-    <string name="nav_fb_bnkc">ເຟສບຸກ BNKCAPITAL LAO LEASING</string>
+    <string name="nav_fb_bnkc">ເຟສບຸກ BNKCL CAPITAL LAO LEASING</string>
     <string name="nav_company_profile">ປະຫວັດຂອງບໍລິສັດ</string>
     <string name="nav_policy">ນະໂຍບາຍ</string>
     <string name="nav_settings">ຕັ້ງຄ່າ</string>
@@ -128,10 +124,8 @@
     <string name="cs_14">ຄຳຖາມໄດ້ສົ່ງແລ້ວ</string>
     <string name="cs_15">BNKCLຈະກວດສອບຄຳຖາມຂອງທ່ານ ແລະ ຈະຕອບຫາທ່ານໃນໄວໆນີ້</string>
     <string name="cs_16">ປິດ</string>
-    <string name="cs_18">Inquiry is Failed</string>
-    <string name="cs_19">Internal Server Error \n (Error Code : 500) </string>
 
-    <string name="comm_try_again">Try Again</string>
+    <string name="comm_try_again">ລອງອິກຄັ້ງ</string>
 
 
 
@@ -139,8 +133,8 @@
     <string name="product_introduction">ການແນະນໍາຜະລິດຕະພັນ</string>
     <string name="interest_rate">ອັດຕາດອກເບ້ຍ</string>
 
-    <string name="requirement_documents">Requirement Documents</string>
-    <string name="loan_process">Loan Process</string>
+    <string name="requirement_documents">Documents</string>
+    <string name="loan_process">ຂະບວນການ</string>
     <string name="faqs">ຄຳຖາມທີ່ຖາມເລື້ອຍໆ</string>
 
     <string name="monthly_repayment">ຍອດຊຳລະຄືນຕໍ່ເດືອນ</string>
@@ -356,38 +350,38 @@
     <string name="tab_find_office">ຄົ້ນຫາສຳນັກງານບໍລິສັດ</string>
     <string name="tab_menu">ລາຍການ</string>
     <string name="term_and_condition">ຂ້ອຍເຫັນດີກັບເງື່ອນໄຂ ແລະ ຂໍ້ກຳນົດຂອງ ບໍລິສັດ BNK Capital Lao leasing</string>
-    <string name="calculate">Calculate</string>
+    <string name="calculate">ຄຳນວນ</string>
 
-    <string name="result_manage_001">Total</string>
+    <string name="result_manage_001">ຍອດລວມທັງໝົດ</string>
 
     <string name="result_detail_01" >\u0020\u0020 Ins \u0020\u0020</string>
     <string name="result_detail_02" >\u0020\u0020\u0020 Principal \u0020\u0020\u0020</string>
     <string name="result_detail_03" >\u0020\u0020 Interest \u0020\u0020</string>
     <string name="result_detail_04" >\u0020\u0020\u0020 Repayment \u0020\u0020\u0020</string>
     <string name="result_detail_05" >\u0020\u0020\u0020 Balance \u0020\u0020\u0020</string>
-    <string name="repayment_term">Repayment Term</string>
-    <string name="advance_payment">Advance Payment</string>
+    <string name="repayment_term">ໄລຍະເວລາການຊຳລະ</string>
+    <string name="advance_payment">ຍອດເງິນທີ່ຊຳລະກ່ອນ</string>
     <string name="commodity_price">Commodity Price</string>
-    <string name="apply_lease">Apply Lease</string>
+    <string name="apply_lease">ສະໝັກສິນເຊື່ອ</string>
     <string name="description">ລາຍລະອຽດ</string>
     <string name="input_subject">ຂຽນຫົວຂໍ້</string>
     <string name="input_description">ຂຽນລາຍລະອຽດ</string>
-    <string name="lease_service">Lease Service</string>
-    <string name="recommender">Recommender</string>
-    <string name="personal_information">Personal Information</string>
-    <string name="input_name">Input Name</string>
+    <string name="lease_service">ການບໍລິການສິນເຊື່ອ</string>
+    <string name="recommender">ຜູ້ເນາະນຳ</string>
+    <string name="personal_information">ຂໍ້ມູນສ່ວນຕົວ</string>
+    <string name="input_name">ປ້ອນຊື່</string>
     <string name="select_gender">Select Gender</string>
-    <string name="optional">(optional)</string>
-    <string name="input_recommender">Input Recommender</string>
+    <string name="optional">(ເລືອກ)</string>
+    <string name="input_recommender">ປ້ອນຊື່ຜູ້ເນາະນຳ</string>
 
-    <string name="service_more_detail">For more detail</string>
+    <string name="service_more_detail">ສໍາລັບລາຍລະອຽດເພີ່ມເຕີມ</string>
     <string name="pin_confirm">PIN Confirm</string>
-    <string name="set_up_pin">Set Up New PIN</string>
-    <string name="forget_pin">Forget PIN</string>
-    <string name="forget_pin_ask">Forget PIN?</string>
+    <string name="set_up_pin">ຕັ້ງລະຫັດຜ່ານ PIN ໃໝ່</string>
+    <string name="forget_pin">ລືມລະຫັດ PIN</string>
+    <string name="forget_pin_ask">ລືມລະຫັດ PIN?</string>
     <string name="new_pin">New PIN</string>
-    <string name="pin_registration">PIN Registration</string>
-    <string name="we_lend_you_money_at_a_reasonable_interest">We lend you money at a reasonable interest.</string>
-    <string name="are_you_a_little_short_of_money_when_you_buy_commodities">Are you a little short of money when you buy commodities?</string>
+    <string name="pin_registration">ລົງຖະບຽນລະຫັດ PIN</string>
+    <string name="we_lend_you_money_at_a_reasonable_interest">ພວກເຮົາສາມາດໃຫ້ທ່ານຢືມເງິນໃນອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ</string>
+    <string name="are_you_a_little_short_of_money_when_you_buy_commodities">ເງິນທ່ານບໍ່ພຽງພໍເມື່ອຊື້ສິນຄ້າຫຼືບໍ?</string>
 
 </resources>
