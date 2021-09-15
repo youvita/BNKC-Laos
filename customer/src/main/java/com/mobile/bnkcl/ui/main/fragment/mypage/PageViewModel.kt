@@ -81,7 +81,7 @@ class PageViewModel @Inject constructor(
         }
     }
 
-    fun getProductTypeCodes() {
+    fun getProductCodes() {
         if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
             viewModelScope.launch {
                 codesRepo.getCodes("PRODUCT_TYPE").onEach { resource ->

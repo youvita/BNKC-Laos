@@ -4,12 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
+import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
+import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.user.ProfileData
@@ -30,8 +35,12 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     private var profileData: ProfileData? = ProfileData()
     private val logOutDialog = LogOutDialog()
     private var jobTypeList: ArrayList<CodesData>? = ArrayList()
+    private val REQUEST_CODE = 1001
+    private var isUpdateProfile: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initView()
@@ -78,6 +87,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         viewModel.accountInformationLiveData.observe(this) {
             binding.profile = it
             profileData = it
+            successListener()
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -95,6 +105,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
     private fun initView() {
 
+        Glide.with(this)
+            .load(R.drawable.rotate_loading_image)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+
         val url = GlideUrl(
             sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
             LazyHeaders.Builder()
@@ -104,7 +119,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                 )
                 .build()
         )
-
         UtilsGlide.loadCircle(this, url, binding.ivProfile, binding.ivLoading)
 
         if (intent != null) {
@@ -133,11 +147,10 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     onBackPressed()
                 }
                 R.id.tv_title_toolbar_02 -> {
-
                     val intent = Intent(this, EditAccountInfoActivity::class.java)
                     intent.putExtra("ACCOUNT_INFO", profileData)
                     intent.putExtra("JOB_TYPE", jobTypeList)
-                    startActivity(intent)
+                    startActivityForResult(intent, REQUEST_CODE)
                 }
                 R.id.btn_logout -> {
                     logOutDialog.show(supportFragmentManager, logOutDialog.tag)
@@ -168,6 +181,51 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                         UtilAnimation.expand(binding.llWrapAdditionalInfo, 300)
                         binding.ivMoreAdditional.setImageResource(R.drawable.ic_fold_ico)
                     }
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        val intentBack = Intent()
+        intentBack.putExtra("IS_UPDATE_PROFILE", isUpdateProfile)
+        setResult(REQUEST_CODE, intentBack)
+        super.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_CANCELED) return
+        if (requestCode == REQUEST_CODE) {
+            if (data != null) {
+                isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
+                if (isUpdateProfile) {
+                    Glide.with(this)
+                        .load(R.drawable.rotate_loading_image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+                    val url = GlideUrl(
+                        sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+                        LazyHeaders.Builder()
+                            .addHeader(
+                                "Authorization",
+                                "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                            )
+                            .build()
+                    )
+                    UtilsGlide.loadCircle(
+                        this@AccountInformationActivity,
+                        url,
+                        binding.ivProfile,
+                        binding.ivLoading
+                    )
+                    viewModel.getAccountInformation()
+                    showLoading()
                 }
             }
         }

@@ -21,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
+import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseStorageActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bumptech.glide.Glide
@@ -58,6 +59,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private var firstIndex: Int? = 0
     private var selectedIndex: Int? = 0
     private var isUpdateInfo: Boolean? = false
+    private var isUpdateProfile: Boolean? = false
     private var isEditInfo: Boolean? = false
     private var isUpdateOnlyImage: Boolean? = false
     private var firstJobType: String = ""
@@ -71,6 +73,8 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private var photoSettingMenu: PhotoSettingMenu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(resources.getColor(R.color.color_f5f7fc))
+        setAnimateType(ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
         initView()
@@ -84,6 +88,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private fun initLiveData() {
 
         viewModel.editAccountInfoLiveData.observe(this) {
+            isUpdateProfile = true
             val inflater = layoutInflater
             val view: View = inflater.inflate(
                 R.layout.custom_toast_layout,
@@ -144,7 +149,12 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             binding.lytAddressInfo.edtBankName.setText(profileData!!.bankName.toString())
             binding.lytAddressInfo.edtAccountNumber.setText(profileData!!.accountNumber.toString())
 
-            addLeaseInfo(profileData!!.myLease!!)
+            if (profileData!!.myLease!!.isNotEmpty() && profileData!!.myLease != null) {
+                binding.edtNaLease.visibility = View.GONE
+                addLeaseInfo(profileData!!.myLease!!)
+            } else {
+                binding.edtNaLease.visibility = View.VISIBLE
+            }
         }
 
         Utils.setHideKeyboard(this, binding.parentLayout)
@@ -224,7 +234,14 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
                 data.accountNumber = binding.lytAddressInfo.edtAccountNumber.text.toString()
 
                 if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                    viewModel.editAccountInfo(data)
+                     if (viewModel.getFile() != null) {
+                        viewModel.uploadProfile()
+                    }
+                    if (binding.lytAddressInfo.edtBankName.text.toString() != profileData!!.bankName
+                        || binding.lytAddressInfo.edtAccountNumber.text.toString() != profileData!!.accountNumber
+                        || binding.lytAddressInfo.tvJobType.text != jobTypeTitleList!![firstIndex!!]){
+                        viewModel.editAccountInfo(data)
+                    }
                 }
 
             }
@@ -294,7 +311,13 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
 
     override fun onBackPressed() {
         if (isEditInfo!!) alertNotice()
-        else finish()
+        else {
+            val intent = Intent()
+            intent.putExtra("IS_UPDATE_PROFILE", isUpdateProfile)
+            if (isUpdateProfile!!)
+                setResult(RESULT_OK, intent)
+            finish()
+        }
     }
 
     private fun initDisablePersonalInfo() {
@@ -413,7 +436,12 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
 
     private fun alertNotice() {
         val alertEditInfoDialog = AlertEditInfoDialog()
-        alertEditInfoDialog.onConfirmClickedListener { finish() }
+        alertEditInfoDialog.onConfirmClickedListener {
+            val intent = Intent()
+            intent.putExtra("IS_UPDATE_PROFILE", isUpdateInfo)
+            if (isUpdateInfo!!) setResult(RESULT_OK, intent)
+            finish()
+        }
         alertEditInfoDialog.show(supportFragmentManager, alertEditInfoDialog.tag)
     }
 

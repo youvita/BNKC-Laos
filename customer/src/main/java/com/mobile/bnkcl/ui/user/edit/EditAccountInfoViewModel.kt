@@ -12,6 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -24,8 +27,8 @@ class EditAccountInfoViewModel @Inject constructor(
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
     private var file: File? = null
-    private val _editAccountInfo: MutableLiveData<Boolean> = MutableLiveData()
-    val editAccountInfoLiveData: LiveData<Boolean> = _editAccountInfo
+    private val _editAccountInfo: MutableLiveData<Unit> = MutableLiveData()
+    val editAccountInfoLiveData: LiveData<Unit> = _editAccountInfo
 
 
     fun setFile(file: File?) {
@@ -40,6 +43,26 @@ class EditAccountInfoViewModel @Inject constructor(
         if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
             viewModelScope.launch {
                 editAccountInfoRepo.editAccountInfo(editAccountInfoData).onEach { resource ->
+                    _editAccountInfo.value = resource.data
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun uploadProfile() {
+        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
+            // MultipartBody.Part is used to send also the actual filename
+            val multipartBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(
+                    "file_data", file!!.name, RequestBody.create(
+                        "image/png".toMediaTypeOrNull(),
+                        file!!
+                    )
+                )
+                .build()
+            viewModelScope.launch {
+                editAccountInfoRepo.uploadProfile(multipartBody).onEach { resource ->
                     _editAccountInfo.value = resource.data
                 }.launchIn(viewModelScope)
             }

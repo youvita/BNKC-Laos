@@ -313,6 +313,26 @@
                                         android:gravity="center"
                                         android:orientation="vertical" />
 
+                                    <com.mobile.bnkcl.com.view.BnkEditText
+                                        android:id="@+id/edt_na_lease"
+                                        style="@style/font15_c4d0d6_medium"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_marginTop="@dimen/margin_10dp"
+                                        android:layout_weight="1"
+                                        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                        android:maxLength="50"
+                                        android:visibility="gone"
+                                        android:paddingLeft="@dimen/padding_15dp"
+                                        android:paddingTop="@dimen/padding_16dp"
+                                        android:paddingRight="@dimen/padding_15dp"
+                                        android:paddingBottom="@dimen/padding_16dp"
+                                        android:singleLine="true"
+                                        android:enabled="false"
+                                        android:text="@string/not_available"
+                                        android:textColorHint="@color/color_c4d0d6"
+                                        android:background="@drawable/round_solid_f3f6f7_8" />
+
                                 </LinearLayout>
 
                             </LinearLayout>

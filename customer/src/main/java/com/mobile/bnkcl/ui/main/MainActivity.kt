@@ -37,7 +37,6 @@ import com.mobile.bnkcl.ui.user.AccountInformationActivity
 import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
@@ -126,7 +125,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 .build()
         )
 
-        UtilsGlide.loadCircle(this@MainActivity, url, binding.navMenu.ivProfile, binding.navMenu.ivLoading)
+        UtilsGlide.loadCircle(
+            this@MainActivity,
+            url,
+            binding.navMenu.ivProfile,
+            binding.navMenu.ivLoading
+        )
 
         if (viewModel.isLogin) {
             binding.navMenu.btnSignUp.visibility = View.GONE
@@ -220,9 +224,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-            viewModel.getUserProfile()
-        }
+
+        viewModel.getUserProfile()
     }
 
     override fun onClick(v: View?) {

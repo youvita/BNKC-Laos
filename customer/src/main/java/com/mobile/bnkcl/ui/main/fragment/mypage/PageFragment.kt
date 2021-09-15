@@ -80,7 +80,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             showLoading()
-            viewModel.getProductTypeCodes()
+            viewModel.getProductCodes()
             viewModel.getLeaseProgressCodes()
         }
 
