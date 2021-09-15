@@ -29,6 +29,7 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
     private var CODE_REPAYMENT_PLAN_REGULAR: String? = "C0312"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
         initToolbar()

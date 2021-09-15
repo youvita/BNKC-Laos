@@ -19,6 +19,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initLanguage()

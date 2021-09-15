@@ -27,6 +27,7 @@ class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View
     private var paymentCode: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initToolbar()

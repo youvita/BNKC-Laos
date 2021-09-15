@@ -76,6 +76,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_NORMAL)
         setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
 

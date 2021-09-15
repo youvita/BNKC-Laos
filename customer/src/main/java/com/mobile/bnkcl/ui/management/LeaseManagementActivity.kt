@@ -31,6 +31,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     private var isWarning: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initView()

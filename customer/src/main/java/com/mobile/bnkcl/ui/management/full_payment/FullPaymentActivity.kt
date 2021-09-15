@@ -39,6 +39,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
     private var myCalendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initToolbar()

@@ -32,6 +32,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initView()

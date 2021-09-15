@@ -26,6 +26,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private val settingViewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
         initToolbar()

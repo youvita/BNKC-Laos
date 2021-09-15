@@ -37,6 +37,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     private var totalLeaseScheduleRequest: TotalLeaseScheduleRequest = TotalLeaseScheduleRequest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
         initToolbar()

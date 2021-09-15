@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.IntDef
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -22,9 +23,9 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.R
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.util.UtilsActivity
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -37,6 +38,17 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     var disposable: Disposable? = null
 
     private var systemDialog: SystemDialog? = null
+
+    private var animateType = 0
+
+    @IntDef(value = [ANIMATE_LEFT, ANIMATE_NORMAL])
+    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+    internal annotation class ANIMATION_DIRECTION
+
+    companion object {
+        const val ANIMATE_NORMAL = 5757
+        const val ANIMATE_LEFT = 5656
+    }
 
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
@@ -51,11 +63,29 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setTransition()
+
         performDataBinding()
 
         successListener()
 
         errorDialog()
+    }
+
+    private fun setTransition() {
+        if (!UtilsActivity.isCreated()) {
+            if (animateType == ANIMATE_LEFT) {
+                overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_left)
+            } else {
+                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
+            }
+        }
+        UtilsActivity.isCreated(false)
+    }
+
+
+    open fun setAnimateType(@ANIMATION_DIRECTION animateType: Int) {
+        this.animateType = animateType
     }
 
     /**
@@ -198,6 +228,18 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     fun showLoading() {
         loadingDialog = LoadingDialog()
         loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
+    }
+
+    override fun finish() {
+        super.finish()
+        if (!UtilsActivity.isCreated()) {
+            if (animateType == ANIMATE_LEFT) {
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            } else {
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
+            }
+        }
+        UtilsActivity.isCreated(false)
     }
 
     override fun onDestroy() {
