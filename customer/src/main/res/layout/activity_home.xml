@@ -17,6 +17,18 @@
             name="localeCode"
             type="String" />
 
+        <variable
+            name="load"
+            type="String" />
+
+        <variable
+            name="leas"
+            type="String" />
+
+        <variable
+            name="desc"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -124,10 +136,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_21dp"
-                            android:text="@string/home_need_loan"
+                            android:text="@{load, default = @string/home_need_loan}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/iv_home_loan" />
+                            app:layout_constraintTop_toBottomOf="@id/iv_home_loan"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -163,10 +175,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_21dp"
-                            android:text="@string/home_need_lease"
+                            android:text="@{leas, default = @string/home_need_lease}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_lease" />
+                            app:layout_constraintTop_toBottomOf="@+id/iv_lease"/>
 
                         <TextView
                             android:id="@+id/tv_lease_ex"
@@ -174,10 +186,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_10dp"
-                            android:text="@string/home_lease_ex"
+                            android:text="@{desc, default = @string/home_lease_ex}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_lease" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_lease"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

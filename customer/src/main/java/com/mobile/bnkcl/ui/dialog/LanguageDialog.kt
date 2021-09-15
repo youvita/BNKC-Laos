@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.RadioGroup
-import com.bnkc.library.app.recreateLanguageChanged
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
@@ -23,7 +22,7 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
 
-    private var langSelectedListener: (() -> Unit)? = null
+    private var langSelectedListener: ((String) -> Unit)? = null
 
     private lateinit var languageCode: String
 
@@ -46,7 +45,7 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
         setCheckRadioButton()
     }
 
-    fun onLangSelected(langSelectedListener: (() -> Unit)) =
+    fun onLangSelected(langSelectedListener: ((String) -> Unit)) =
         apply { this.langSelectedListener = langSelectedListener }
 
     private fun setCheckRadioButton() {
@@ -65,7 +64,8 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
                     requireContext().applicationContext
                 )
             )
-            recreateLanguageChanged()
+            langSelectedListener?.invoke(language)
+            dismiss()
         }, 100L)
     }
 
