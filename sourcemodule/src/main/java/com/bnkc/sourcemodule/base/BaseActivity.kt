@@ -186,7 +186,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
     /**
      * handle catch server error
      */
-    fun errorDialog() {
+    private fun errorDialog() {
         disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
             var icon = R.drawable.ic_badge_error
             var title = it.title
