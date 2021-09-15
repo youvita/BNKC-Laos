@@ -5,11 +5,19 @@
 
     <data>
         <variable
+            name="errorIcon"
+            type="Integer" />
+
+        <variable
             name="errorTitle"
             type="String" />
 
         <variable
             name="errorMessage"
+            type="String" />
+
+        <variable
+            name="errorButton"
             type="String" />
     </data>
 
@@ -32,7 +40,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_badge_error" />
+                app:imageInt="@{errorIcon}"
+                tools:srcCompat="@drawable/ic_badge_error" />
 
             <TextView style="@style/font_21_263238_medium"
                 android:id="@+id/tv_title"
@@ -68,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_50dp"
                 android:gravity="center"
-                android:text="@string/confirm"
+                android:text="@{errorButton}"
                 android:layout_marginStart="@dimen/margin_20dp"
                 android:layout_marginTop="@dimen/margin_20dp"
                 android:layout_marginEnd="@dimen/margin_20dp"
@@ -76,7 +85,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_message" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_message"
+                tools:text="Confirm"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -188,13 +188,18 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
      */
     fun errorDialog() {
         disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            var icon = R.drawable.ic_badge_error
             var title = it.title
             var message = it.message
+            var button = getString(R.string.confirm)
+
             if (title == "" && message == "") {
                 when (it.code) {
                     ErrorCode.UNKNOWN_ERROR -> {
+                        icon = R.drawable.ic_badge_no_internet
                         title = getString(R.string.title_no_network)
                         message = getString(R.string.message_pls_check_network)
+                        button = getString(R.string.try_again)
                     }
                     ErrorCode.TIMEOUT_ERROR -> {
                         title = getString(R.string.title_timeout)
@@ -204,7 +209,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
             }
 
             if (systemDialog == null) {
-                systemDialog = SystemDialog.newInstance(title, message)
+                systemDialog = SystemDialog.newInstance(icon, title, message, button)
                 systemDialog?.show(supportFragmentManager, systemDialog?.tag)
                 systemDialog?.onConfirmClicked {
                     systemDialog = null
@@ -217,7 +222,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
      * handle session error
      */
     fun errorSessionDialog(errorTitle: String, errorMessage: String): SystemDialog {
-        systemDialog = SystemDialog.newInstance(errorTitle, errorMessage)
+        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_error, errorTitle, errorMessage, getString(R.string.confirm))
         systemDialog?.show(supportFragmentManager, systemDialog?.tag)
         return systemDialog as SystemDialog
     }

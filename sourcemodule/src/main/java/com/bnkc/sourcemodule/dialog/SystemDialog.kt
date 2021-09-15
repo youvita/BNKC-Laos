@@ -17,15 +17,19 @@ class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
     private var confirmClickListener: (() -> Unit)? = null
 
     companion object {
+        private const val ICON    = "icon"
         private const val TITLE   = "title"
         private const val MESSAGE = "message"
+        private const val BUTTON  = "button"
 
         @Synchronized
-        fun newInstance(title: String, message: String): SystemDialog {
+        fun newInstance(icon: Int, title: String, message: String, button: String): SystemDialog {
             return SystemDialog().apply {
                 arguments = Bundle().apply {
+                    putInt(ICON, icon)
                     putString(TITLE, title)
                     putString(MESSAGE, message)
+                    putString(BUTTON, button)
                 }
             }
         }
@@ -37,8 +41,10 @@ class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
         super.onViewCreated(view, savedInstanceState)
         dialog?.setCancelable(false)
 
+        binding.errorIcon    = arguments?.getInt(ICON)
         binding.errorTitle   = arguments?.getString(TITLE)
         binding.errorMessage = arguments?.getString(MESSAGE)
+        binding.errorButton  = arguments?.getString(BUTTON)
         binding.confirm.setOnClickListener {
             confirmClickListener?.invoke()
             dialog?.dismiss()
