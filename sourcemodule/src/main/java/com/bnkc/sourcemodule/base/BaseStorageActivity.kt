@@ -5,17 +5,25 @@
  */
 package com.bnkc.sourcemodule.base
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import android.util.Log
 import androidx.databinding.ViewDataBinding
 import com.bnkc.library.permission.AppPermission
 import com.bnkc.library.permission.AppPermissionsFactory
+import com.bnkc.sourcemodule.R
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import javax.inject.Inject
 
 abstract class BaseStorageActivity<T: ViewDataBinding>: BaseActivity<T>() {
 
     @Inject
     lateinit var permissionsFactory: AppPermissionsFactory
+
+    @Inject
+    lateinit var systemDialog: SystemDialog
 
     protected open val appPermission: AppPermission by lazy {
         permissionsFactory.getPermission(AppPermissionsFactory.PERMISSION_STORAGE)
@@ -33,8 +41,11 @@ abstract class BaseStorageActivity<T: ViewDataBinding>: BaseActivity<T>() {
                 this@BaseStorageActivity.onPermissionGranted()
             },
             {
-                //TODO: alert inform user
-                Log.d(">>>>", "permission denied")
+                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_error, getString(R.string.notice), getString(R.string.permission_denied), getString(R.string.confirm))
+                systemDialog.show(supportFragmentManager, systemDialog.tag)
+                systemDialog.onConfirmClicked {
+                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null)))
+                }
             })
     }
 

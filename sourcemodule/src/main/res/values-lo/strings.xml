@@ -29,4 +29,7 @@
     <string name="title_timeout">Timeout</string>
     <string name="message_timeout">Connection timeout</string>
 
+    <string name="notice">Notice</string>
+    <string name="permission_denied">Permission denied, please update in setting.</string>
+
 </resources>
