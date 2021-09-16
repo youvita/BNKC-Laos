@@ -13,5 +13,6 @@ object Constants {
     const val RESET_CHANGE = 0
 
     const val PRODUCT_TYPE = "PRODUCT_TYPE"
+    const val REPAYMENT_TERM = "REPAYMENT_TERM"
 
 }

@@ -18,6 +18,8 @@ import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.SignUpRequest
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
+import com.mobile.bnkcl.ui.dialog.LogOutDialog
+import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.signup.SignUpViewModel
@@ -34,6 +36,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     var sessionId = ""
     var needAuth = false
+    var from : String = ""
     var username = ""
     var pinUI : String = ""
     var countAttempt = 0
@@ -64,6 +67,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 binding.pinViewModel!!.pinUI = 3
 
             } else if (pinUI == "login") {
+                if (intent.hasExtra("from")){
+                    from = intent.getStringExtra("from").toString()
+                }
+
                 if (intent.extras!!.containsKey(Constants.SESSION_ID)){
                     needAuth = true
                     sessionId = intent.getStringExtra(Constants.SESSION_ID).toString()
@@ -80,7 +87,20 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         binding.pinView.setOnActionListener = { action : String ->
             when(action){
                 "close" -> {
-                    finish()
+                    if (pinUI == "login") {
+                        val logOutDialog = LogOutDialog()
+                        logOutDialog.onConfirmClickedListener {
+                            showLoading()
+                            viewModel.logout()
+                        }
+                        logOutDialog.show(
+                            supportFragmentManager,
+                            logOutDialog.tag
+                        )
+                    } else {
+                        finish()
+                    }
+
                 }
                 "reset_pin" -> {
                     val intent = Intent(this, OtpActivity::class.java)
@@ -144,6 +164,15 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             intent.putExtra("result", it.username != null)
             startActivity(intent)
         }
+        viewModel.logoutLiveData.observe(this) {
+            sharedPrefer.remove(Constants.KEY_TOKEN)
+            sharedPrefer.remove(USER_ID)
+
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            successListener()
+        }
     }
 
     private fun signUp(pin :String){
@@ -180,11 +209,17 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
                 sharedPrefer.putPrefer(USER_ID, username)
                 AppLogin.PIN.code = "Y"
+                if (from.isEmpty()){
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
+                    finish()
+                }else {
+                    Log.d("nng", "it.toString() " + AppLogin.PIN_TYPE)
+                    AppLogin.InterceptIntent.code = "Y"
+                    finish()
+                }
 
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
-                finish()
             }else {
                 countAttempt ++
                 if (countAttempt > 4){

@@ -2,15 +2,18 @@ package com.mobile.bnkcl.ui.main.fragment.service
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.FragmentLoanServiceBinding
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 
 class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
 
@@ -37,20 +40,21 @@ class ServiceFragment : BaseFragment<FragmentLoanServiceBinding>(){
             startActivity(Intent(activity, AlarmActivity::class.java))
         }
         binding.vbDetail.setOnClickListener {
+            Log.d(">>>>>", "Clicked .............")
             startActivity(Intent(requireActivity(), LeaseServiceActivity::class.java))
         }
     }
 
     private fun observeViewModel() {
-        viewModel.actLiveData.observe(viewLifecycleOwner, {
-            when(it){
-                "DETAIL" -> {
-                    startActivity(Intent(requireActivity(), LeaseServiceActivity::class.java))
-                }else -> {
-
-                }
-            }
-        })
+//        viewModel.actLiveData.observe(viewLifecycleOwner, {
+//            when(it){
+//                "DETAIL" -> {
+//                    startActivity(Intent(requireActivity(), LeaseServiceActivity::class.java))
+//                }else -> {
+//
+//                }
+//            }
+//        })
     }
 
     override fun getLayoutId(): Int {

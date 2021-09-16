@@ -17,7 +17,6 @@ object ValidateButtonBindingAdapter {
     @JvmStatic
     @BindingAdapter("active", "backgroundTextColor")
     fun setActiveOrNormal(view: View, active : Boolean?, bgTextColor : Int?) {
-        view.isClickable = active!!
         if (view is TextView){
             if (active!!) {
                 view.setTextColor(ContextCompat.getColor(view.context, R.color.color_ffffff))

@@ -64,6 +64,24 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
         }
     }
 
+    private val _repaymentMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    val repaymentLiveData = _repaymentMuLiveData
+    fun reqRepaymentCode(groupId :String){
+        viewModelScope.launch {
+            leaseRepo.getItemCode(groupId).onEach { resource ->
+//                if (resource.status == Status.ERROR) {
+//                    val code = resource.errorCode
+//                    val title = resource.messageTitle
+//                    val message = resource.messageDes
+//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
+//                } else {
+//
+//                }
+                _repaymentMuLiveData.value = resource.data!!
+            }.launchIn(viewModelScope)
+        }
+    }
+
     fun applyLeaseClicked(){
         _actionMuLiveData.value = "apply_lease"
     }
@@ -79,6 +97,15 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
             areaNames?.add(itemResponse[i].title!!)
         }
         return areaNames!!
+    }
+
+    var repaymentData: ArrayList<String>? = ArrayList()
+    fun setUpRepaymentData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+        repaymentData?.clear()
+        for (i in 0 until itemResponse.size){
+            repaymentData?.add(itemResponse[i].title!!)
+        }
+        return repaymentData!!
     }
 
     fun repaymentTerm(){

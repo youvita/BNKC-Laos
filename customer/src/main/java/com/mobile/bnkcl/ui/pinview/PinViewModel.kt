@@ -9,9 +9,11 @@ import androidx.lifecycle.viewModelScope
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
+import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
@@ -28,7 +30,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PinViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseViewModel(){
+class PinViewModel @Inject constructor(private val userRepo: UserRepo, private val authRepo: AuthRepo) : BaseViewModel(){
 
     var signUpRequest : SignUpRequest? = null
 
@@ -69,6 +71,16 @@ class PinViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseVie
         viewModelScope.launch {
             authRepo.signUpUser(signUpRequest!!).onEach { resource ->
                 _signUpLiveData.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _logout: MutableLiveData<Unit> = MutableLiveData()
+    val logoutLiveData: LiveData<Unit> = _logout
+    fun logout() {
+        viewModelScope.launch {
+            userRepo.logout().onEach { resource ->
+                _logout.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

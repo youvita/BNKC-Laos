@@ -27,6 +27,9 @@ import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +41,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
     lateinit var itemResponses : ArrayList<ItemResponseObject>
+    lateinit var repaymentCodes : ArrayList<ItemResponseObject>
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
@@ -60,7 +64,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         super.onCreate(savedInstanceState)
         binding.applyViewModel = viewModel
         checkError()
+
         viewModel.reqLeaseItemCode(Constants.PRODUCT_TYPE)
+        viewModel.reqRepaymentCode(Constants.REPAYMENT_TERM)
 
         initView()
         initEvent()
@@ -80,13 +86,15 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
     private fun observeViewModel(){
         viewModel.productTypeLiveData.observe(this, {
-            Log.d(">>>>>", "observeViewModel: $it")
             itemResponses = it.codes!!
             viewModel.setUpProductTypeData(itemResponses)
 
         })
+        viewModel.repaymentLiveData.observe(this, {
+            repaymentCodes = it.codes!!
+            viewModel.setUpRepaymentData(repaymentCodes)
+        })
         viewModel.applyLeaseLiveData.observe(this, {
-            Log.d(">>>>>", "observeViewModel: $it")
             if (it.lease_application_id != null && it.lease_application_id!!.isNotEmpty()) {
                 navigateResult(true)
             }
@@ -121,8 +129,34 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                         )
                         binding.tvProType.text = itemResponses[pos].title
                         viewModel.applyLeaseRequest.product_type = itemResponses[pos].code
-//                        viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
-//                        viewModel.reqBranchList()
+
+                        val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                            viewModel.applyLeaseRequest.product_price
+                        }else{
+                            ""
+                        }
+                        val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                            viewModel.applyLeaseRequest.request_amount
+                        }else{
+                            ""
+                        }
+                        val term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                            viewModel.applyLeaseRequest.repayment_term
+                        }else{
+                            ""
+                        }
+                        binding.btnSubmit.isEnable(
+                            itemResponses[pos].code!!,
+                            binding.edNameBrand.text.toString(),
+                            binding.edNameModel.text.toString(),
+                            binding.edNameType.text.toString(),
+                            binding.edEtcBrand.text.toString(),
+                            binding.edEtcModel.text.toString(),
+                            binding.edEtcType.text.toString(),
+                            reqAmt!!,
+                            proPrice!!,
+                            term!!.toString()
+                        )
                     }
                     listChoiceDialog.isCancelable = true
                     listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
@@ -131,7 +165,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     listChoiceDialog = ListChoiceDialog.newInstance(
                         R.drawable.ic_badge_error,
                         getString(R.string.repayment_term),
-                        viewModel.setUpRepaymentTermData(),
+                        viewModel.repaymentData!!,
                         repaymentSelected
                     )
 
@@ -143,13 +177,38 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                                 R.color.color_263238
                             )
                         )
-                        binding.tvRepaymentTerm.text = viewModel.setUpRepaymentTermData()[pos]
+                        binding.tvRepaymentTerm.text = repaymentCodes[pos].title
                         viewModel.applyLeaseRequest.repayment_term =
-                            viewModel.setUpRepaymentTermData()[pos].split(
-                                " "
-                            )[0].toInt()
-//                        viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
-//                        viewModel.reqBranchList()
+                            repaymentCodes[pos].code!!.toInt()
+
+                        val proType = if (viewModel.applyLeaseRequest.product_type != null){
+                            viewModel.applyLeaseRequest.product_type
+                        }else{
+                            ""
+                        }
+                        val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
+                            viewModel.applyLeaseRequest.product_price
+                        }else{
+                            ""
+                        }
+                        val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
+                            viewModel.applyLeaseRequest.request_amount
+                        }else{
+                            ""
+                        }
+                        binding.btnSubmit.isEnable(
+                            proType!!,
+                            binding.edNameBrand.text.toString(),
+                            binding.edNameModel.text.toString(),
+                            binding.edNameType.text.toString(),
+                            binding.edEtcBrand.text.toString(),
+                            binding.edEtcModel.text.toString(),
+                            binding.edEtcType.text.toString(),
+                            reqAmt!!,
+                            proPrice!!,
+                            repaymentCodes[pos].code.toString()
+                        )
+
                     }
                     listChoiceDialog.isCancelable = true
                     listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)

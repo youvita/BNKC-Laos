@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.lease.service
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -28,15 +29,6 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
         super.onCreate(savedInstanceState)
         binding.leaseServiceViewModel = viewModel
 
-        // check login status
-        if (AppLogin.PIN_TYPE == "N"){
-            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
-                startActivity(Intent(this, OtpActivity::class.java))
-            }else{
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
-        }
-
         observeViewModel()
         initView()
         initEvent()
@@ -49,13 +41,37 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
                     startActivity(Intent(this, LeaseCalculateActivity::class.java))
                 }
                 ApplyLeaseActivity::class.simpleName -> {
-                    startActivity(Intent(this, ApplyLeaseActivity::class.java))
+                    // check login status
+                    Log.d(">>>>>>>", "Apply :: " + AppLogin.PIN_TYPE)
+                    if (AppLogin.PIN.code == "N"){
+                        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                            startActivity(Intent(this, OtpActivity::class.java))
+                        }else{
+                            val intent = Intent(this, PinCodeActivity::class.java)
+                            intent.putExtra("pin_action", "login")
+                            intent.putExtra("from", LeaseServiceActivity::class.java.simpleName)
+                            intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
+                            startActivity(intent)
+                        }
+                    }else{
+                        startActivity(Intent(this, ApplyLeaseActivity::class.java))
+                    }
+
                 }
                 else -> {
 
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(">>>>>>>", "onResume :: " + AppLogin.InterceptIntent.code)
+        if (AppLogin.InterceptIntent.code == "Y"){
+            startActivity(Intent(this, ApplyLeaseActivity::class.java))
+            AppLogin.InterceptIntent.code = "N"
+        }
     }
 
     private fun initView(){

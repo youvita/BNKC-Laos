@@ -181,7 +181,6 @@ class ValidateButton @JvmOverloads constructor(
     fun isEnable(vararg params: String) { //a,b,c
         val arrayList = ArrayList<String>()
         for (param in params) {
-            Log.d(TAG, "params :: $param")
             if (param != "") {
                 arrayList.add("T")
             } else {

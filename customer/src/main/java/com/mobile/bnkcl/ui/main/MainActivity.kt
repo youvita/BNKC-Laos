@@ -10,6 +10,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -26,11 +27,14 @@ import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
+import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
 import com.mobile.bnkcl.ui.notice.NoticeActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
@@ -186,22 +190,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    if (position == 0)
-                    else Log.d(">>>>", "onPageSelected: selected $position")
                     lastIndex = position
                     when (position) {
-                        2 -> {
-//                            findOfficeFragment.loanServiceTabSelected()
-                            Log.d(">>>>", "onPageSelected: Menu opening")
-                        }
-
                         1 -> {
-                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                                val intent = Intent(this@MainActivity, OtpActivity::class.java)
-                                intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
-                                intent.putExtra("LAST_INDEX", lastIndex)
-                                startActivity(intent)
-                            }
+//                            pageFragment!!.requestData()
+//                            if (AppLogin.PIN_TYPE == "N"){
+//                                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+//                                    val intent = Intent(this@MainActivity, OtpActivity::class.java)
+//                                    intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
+//                                    intent.putExtra("LAST_INDEX", lastIndex)
+//                                    startActivity(intent)
+//                                }else{
+//                                    val loginIntent = Intent(this@MainActivity, PinCodeActivity::class.java)
+//                                    loginIntent.putExtra("pin_action", "login")
+//                                    loginIntent.putExtra("from", LeaseServiceActivity::class.java.simpleName)
+//                                    loginIntent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
+//                                    startActivity(loginIntent)
+//                                }
+//                            }
+//                            else{
+//                                pageFragment.requestData()
+//                            }
+//                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+//                                val intent = Intent(this@MainActivity, OtpActivity::class.java)
+//                                intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
+//                                intent.putExtra("LAST_INDEX", lastIndex)
+//                                startActivity(intent)
+//                            }
                         }
                     }
 
@@ -211,6 +226,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     super.onPageScrollStateChanged(state)
                 }
             })
+
 
             binding.tabBottomMenu.menu.setOnClickListener {
                 Log.d(">>>>", "Drawer opening")

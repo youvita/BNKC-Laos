@@ -17,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.library.custom.cardview.CardModeLayoutManager
 import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
+import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
+import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
@@ -28,8 +31,12 @@ import com.mobile.bnkcl.ui.adapter.BannerAdapter
 import com.mobile.bnkcl.ui.adapter.LeaseAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
+import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
+import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import com.mobile.bnkcl.ui.management.bill.BillPaymentActivity
+import com.mobile.bnkcl.ui.otp.OtpActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -78,16 +85,47 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         pageBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
-        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-            showLoading()
-            viewModel.getProductCodes()
-            viewModel.getLeaseProgressCodes()
-        }
+        requestData()
 
         initView()
         initLiveData()
 
         return pageBinding!!.root
+    }
+
+    fun requestData(){
+//        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+//            showLoading()
+//            viewModel.getProductTypeCodes()
+//            viewModel.getLeaseProgressCodes()
+//        }
+        if (AppLogin.PIN.code == "N"){
+
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                val intent = Intent(requireContext(), OtpActivity::class.java)
+//                intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
+//                intent.putExtra("LAST_INDEX", lastIndex)
+                startActivity(intent)
+            }else{
+                val loginIntent = Intent(requireContext(), PinCodeActivity::class.java)
+                loginIntent.putExtra("pin_action", "login")
+                loginIntent.putExtra("from", LeaseServiceActivity::class.java.simpleName)
+                loginIntent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
+                startActivity(loginIntent)
+            }
+        }else{
+            showLoading()
+            viewModel.getProductCodes()
+            viewModel.getLeaseProgressCodes()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (AppLogin.InterceptIntent.code == "Y"){
+            requestData()
+            AppLogin.InterceptIntent.code = "N"
+        }
     }
 
     private fun initLiveData() {
