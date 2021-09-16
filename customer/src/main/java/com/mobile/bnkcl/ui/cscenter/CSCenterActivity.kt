@@ -192,6 +192,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         visibleAskBnk()
         binding.tvFaq.isClickable = true
         binding.tvAskBnk.isClickable = false
+        binding.btnAskBnk.setActive(true)
     }
 
     /**

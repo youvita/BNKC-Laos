@@ -48,6 +48,10 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                 viewModel.showSomeView = false
             }
 
+            AskBNKCActivity::class.java.simpleName ->{
+                viewModel.showSomeView = false
+            }
+
         }
 
         binding.vbResult.text = viewModel.resultLabelButton()

@@ -32,6 +32,7 @@ import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
+import com.mobile.bnkcl.ui.intro.IntroActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
@@ -138,11 +139,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         viewModel.logoutLiveData.observe(this) {
             sharedPrefer.remove(Constants.KEY_TOKEN)
             sharedPrefer.remove(Constants.USER_ID)
+            successListener()
 
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            successListener()
+            finish()
         }
     }
 
@@ -284,7 +286,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     startActivity(Intent(this, NoticeActivity::class.java))
                 }
                 R.id.ll_cs_center -> {
-                    startActivity(Intent(this, CSCenterActivity::class.java))
+                    if (AppLogin.PIN.code == "N"){
+                        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                            startActivity(Intent(this, OtpActivity::class.java))
+
+                        }else{
+                            val intent = Intent(this, PinCodeActivity::class.java)
+                            intent.putExtra("pin_action", "login")
+                            intent.putExtra("from", MainActivity::class.java.simpleName)
+                            intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
+                            startActivity(intent)
+                        }
+                    }else{
+                        startActivity(Intent(this, CSCenterActivity::class.java))
+                    }
+
                 }
                 R.id.ll_home -> {
                     intent = Intent(this, HomeActivity::class.java)

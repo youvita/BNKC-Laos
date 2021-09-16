@@ -97,7 +97,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
             subject = binding.edtSubject.text.toString()
             description = binding.edtDescription.text.toString()
             binding.btnSubmit.isEnable(subject, description)
-            binding.btnSubmit.isActive()
+//            binding.btnSubmit.setActive(true)
         }
     }
 
