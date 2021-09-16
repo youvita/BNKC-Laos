@@ -8,7 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.databinding.ViewDataBinding
-import com.bnkc.library.prefer.TempDataClass
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.ComUtil
@@ -53,11 +53,11 @@ class PushEmptyActivity : BaseActivity<ViewDataBinding>() {
                      * case action_type is equal "2" : Loan Consultation
                      * case action_type is equal "3" : Notice (WebView)
                      */
-                    val actionType: String = TempDataClass.ACTION_TYPE
+                    val actionType: String = RunTimeDataStore.ACTION_TYPE
                     if (actionType.isNotEmpty()) {
                         when (actionType) {
                             "1", "2" -> {
-                                val actionId: String = TempDataClass.ACTION_ID
+                                val actionId: String = RunTimeDataStore.ACTION_ID
                                 if (actionId.isNotEmpty()) {
                                     val intent = Intent(
                                         this@PushEmptyActivity,
@@ -114,13 +114,13 @@ class PushEmptyActivity : BaseActivity<ViewDataBinding>() {
                                     )
                                     intent.putExtra("CATEGORY_NAME", "")
                                     startActivity(intent)
-                                    TempDataClass.ActionType.code = ""
-                                    TempDataClass.ActionId.code = ""
-                                    TempDataClass.ActionUrl.code = ""
+                                    RunTimeDataStore.ActionType.value = ""
+                                    RunTimeDataStore.ActionId.value = ""
+                                    RunTimeDataStore.ActionUrl.value = ""
                                 }
                             }
                             "3" -> {
-                                val actionUrl: String = TempDataClass.ACTION_URL
+                                val actionUrl: String = RunTimeDataStore.ACTION_URL
                                 if (actionUrl.isNotEmpty()) {
                                     val openNotice =
                                         Intent(this@PushEmptyActivity, NoticeActivity::class.java)

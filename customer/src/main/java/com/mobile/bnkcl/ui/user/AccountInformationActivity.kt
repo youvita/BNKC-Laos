@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -111,7 +112,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
 
         val url = GlideUrl(
-            sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
             LazyHeaders.Builder()
                 .addHeader(
                     "Authorization",
@@ -210,7 +211,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
                     val url = GlideUrl(
-                        sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+                        RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
                         LazyHeaders.Builder()
                             .addHeader(
                                 "Authorization",

@@ -3,17 +3,16 @@ package com.mobile.bnkcl.ui.management.schedule
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.webkit.*
 import androidx.activity.viewModels
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.util.FormatUtils
-import com.mobile.bnkcl.BuildConfig
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequest
 import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData
@@ -151,7 +150,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         if (!hide) binding.appBar.setExpanded(hide)
 
         if (binding.llWebContainer.visibility == View.VISIBLE) {
-            val url = sharedPrefer.getPrefer(Constants.KEY_START_URL) +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
+            val url = RunTimeDataStore.BaseUrl.value +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
 
             val header = mutableMapOf<String, String>()
             header["Authorization"] = "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)

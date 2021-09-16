@@ -10,7 +10,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -27,14 +27,11 @@ import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
-import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
 import com.mobile.bnkcl.ui.notice.NoticeActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
-import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
@@ -120,7 +117,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         binding.navMenu.localeCode = Locale.getDefault().language
 
         val url = GlideUrl(
-            sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
             LazyHeaders.Builder()
                 .addHeader(
                     "Authorization",

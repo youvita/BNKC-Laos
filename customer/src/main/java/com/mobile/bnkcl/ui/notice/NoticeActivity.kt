@@ -4,17 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.activity.viewModels
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.mobile.bnkcl.BuildConfig
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.notice.NoticeRequest
 import com.mobile.bnkcl.databinding.ActivityNoticeBinding
@@ -82,7 +80,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
         header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
-        binding.wbNotice.loadUrl(sharedPrefer.getPrefer(Constants.KEY_START_URL) + Constants.WB_NOTICES, header)
+        binding.wbNotice.loadUrl(RunTimeDataStore.BaseUrl.value + Constants.WB_NOTICES, header)
     }
 
 }

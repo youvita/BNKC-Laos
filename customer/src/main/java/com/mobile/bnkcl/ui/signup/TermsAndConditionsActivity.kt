@@ -7,9 +7,9 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.mobile.bnkcl.BuildConfig
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityTermsAndConditionsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +48,7 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
 //        header.put("Authorization", "Bearer ${sharedPrefer.getPrefer(Constants.LOGIN_TOKEN)}")
         header["Accept-Language"] = if(sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
-        binding.webview.loadUrl(sharedPrefer.getPrefer(Constants.KEY_START_URL) + url, header)
+        binding.webview.loadUrl(RunTimeDataStore.BaseUrl.value + url, header)
         binding.webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView?,

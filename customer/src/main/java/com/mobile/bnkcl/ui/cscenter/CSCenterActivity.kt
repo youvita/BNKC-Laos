@@ -10,6 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -154,7 +155,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         val header = mutableMapOf<String, String>()
 //        header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
-        binding.wbFaq.loadUrl(sharedPrefer.getPrefer(Constants.KEY_START_URL) + Constants.WB_FAQS, header)
+        binding.wbFaq.loadUrl(RunTimeDataStore.BaseUrl.value + Constants.WB_FAQS, header)
     }
 
     private fun visibleAskBnk() {

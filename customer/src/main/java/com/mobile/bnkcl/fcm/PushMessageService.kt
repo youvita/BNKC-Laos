@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
 import com.bnkc.library.prefer.CredentialSharedPrefer
-import com.bnkc.library.prefer.TempDataClass
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.util.ComUtil
 import com.google.firebase.messaging.FirebaseMessagingService

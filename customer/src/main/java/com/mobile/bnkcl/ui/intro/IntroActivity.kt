@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.bnkc.library.data.type.ErrorCode
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
@@ -102,9 +103,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             introViewModel.getMGData()
             introViewModel.mgDataResponse.observe(this) {
 
-                if (it != null) {
-                    sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
-                }
+//                sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
+                RunTimeDataStore.BaseUrl.value = it.c_start_url!!
 
                 val availableService = it.c_available_service
                 if (availableService!!) {

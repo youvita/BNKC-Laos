@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -165,7 +166,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
 
         val url = GlideUrl(
-            sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
             LazyHeaders.Builder()
                 .addHeader(
                     "Authorization",
