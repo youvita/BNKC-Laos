@@ -335,6 +335,7 @@
     <string name="dlg_22">ແຈ້ງການ</string>
     <string name="dlg_23">Do you really want to close without saving?</string>
     <string name="dlg_24">CONFIRM</string>
+    <string name="sort_by">Sort By</string>
     <string name="under_construction">Under Construction</string>
 
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>

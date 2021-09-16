@@ -8,26 +8,25 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.dashboard.MyLeasesData
 import com.mobile.bnkcl.databinding.ItemLeaseLayoutBinding
-import java.util.*
-import kotlin.collections.ArrayList
 
-class LeaseAdapter(listener: LeaseItemClickedListener) :
+class LeaseAdapter :
     BaseAdapter<ItemLeaseLayoutBinding, MyLeasesData, LeaseAdapter.ViewHolder>() {
 
     private val myLeaseItemList: ArrayList<MyLeasesData> = ArrayList()
     private var productTypeList: ArrayList<CodesData> = ArrayList()
-    private val mListener: LeaseItemClickedListener = listener
+    private var mListener: LeaseItemClickedListener? = null
 
     override fun getLayoutId(viewType: Int): Int {
         return R.layout.item_lease_layout
     }
 
     fun setProductTypeList(list: ArrayList<CodesData>) {
+        productTypeList.clear()
         productTypeList = list
     }
 
-    fun clearLeaseItemList() {
-        productTypeList.clear()
+    fun setItemClickListener(listener: LeaseItemClickedListener) {
+        this.mListener = listener
     }
 
     override fun setViewHolder(parent: ViewGroup): ViewHolder {
@@ -39,24 +38,28 @@ class LeaseAdapter(listener: LeaseItemClickedListener) :
         holder.setBinding(data, position)
 
         for (i in 0 until productTypeList.size - 1) {
-            if (data.leaseType.equals(productTypeList[i].code, ignoreCase = true)) holder.binding.tvProductType.text = productTypeList[i].title
+            if (data.leaseType.equals(
+                    productTypeList[i].code,
+                    ignoreCase = true
+                )
+            ) holder.binding.tvProductType.text = productTypeList[i].title
         }
 
         holder.binding.btnBillPayment.setOnClickListener {
-            mListener.onBillPaymentClicked(
+            mListener!!.onBillPaymentClicked(
                 data.contractNo,
                 position
             )
         }
         holder.binding.btnManagement.setOnClickListener {
-            mListener.onManagementClicked(
+            mListener!!.onManagementClicked(
                 data.contractNo,
                 position
             )
         }
 
         if (position == myLeaseItemList.size - 1) {
-            holder.binding.btnAddLease.setOnClickListener { mListener.onAddNewLeaseClicked() }
+            holder.binding.btnAddLease.setOnClickListener { mListener!!.onAddNewLeaseClicked() }
         }
     }
 

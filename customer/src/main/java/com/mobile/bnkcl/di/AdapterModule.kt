@@ -38,6 +38,10 @@ object AdapterModule {
 
     @Singleton
     @Provides
+    fun provideLeaseAdapter() = LeaseAdapter()
+
+    @Singleton
+    @Provides
     fun provideAskQuestionAdapter() = AskQuestionAdapter()
 
     @Singleton

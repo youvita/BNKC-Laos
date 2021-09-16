@@ -18,9 +18,7 @@ import com.bnkc.library.custom.cardview.CardModeLayoutManager
 import com.bnkc.library.custom.cardview.CardOffsetDecoration
 import com.bnkc.library.custom.cardview.CardRecyclerView
 import com.bnkc.library.data.type.AppLogin
-import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
-import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
@@ -32,7 +30,6 @@ import com.mobile.bnkcl.ui.adapter.LeaseAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
-import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import com.mobile.bnkcl.ui.management.bill.BillPaymentActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
@@ -52,12 +49,14 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     lateinit var bannerAdapter: BannerAdapter
 
     @Inject
+    lateinit var leaseAdapter: LeaseAdapter
+
+    @Inject
     lateinit var itemOffsetDecoration: CardOffsetDecoration
 
     private var LRS001: Int = 0
     private var LRS002: Int = 0
     private var LRS003: Int = 0
-    private var leaseAdapter: LeaseAdapter? = null
     private var leaseDialog1: ApplicationDialog? = null
     private var leaseDialog2: ApplicationDialog? = null
     private var leaseDialog3: ApplicationDialog? = null
@@ -85,7 +84,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         pageBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
-        requestData()
 
         initView()
         initLiveData()
@@ -93,27 +91,9 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         return pageBinding!!.root
     }
 
-    fun requestData(){
-//        if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-//            showLoading()
-//            viewModel.getProductTypeCodes()
-//            viewModel.getLeaseProgressCodes()
-//        }
-        if (AppLogin.PIN.code == "N"){
+    fun requestData() {
 
-            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
-                val intent = Intent(requireContext(), OtpActivity::class.java)
-//                intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
-//                intent.putExtra("LAST_INDEX", lastIndex)
-                startActivity(intent)
-            }else{
-                val loginIntent = Intent(requireContext(), PinCodeActivity::class.java)
-                loginIntent.putExtra("pin_action", "login")
-                loginIntent.putExtra("from", LeaseServiceActivity::class.java.simpleName)
-                loginIntent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
-                startActivity(loginIntent)
-            }
-        }else{
+        if (activity != null && isAdded) {
             showLoading()
             viewModel.getProductCodes()
             viewModel.getLeaseProgressCodes()
@@ -122,9 +102,26 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     override fun onResume() {
         super.onResume()
-        if (AppLogin.InterceptIntent.code == "Y"){
+        if (AppLogin.PIN.code == "N") {
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                val intent = Intent(requireActivity(), OtpActivity::class.java)
+                startActivity(intent)
+            } else {
+                val loginIntent =
+                    Intent(requireActivity(), PinCodeActivity::class.java)
+                loginIntent.putExtra("pin_action", "login")
+                loginIntent.putExtra(
+                    "from",
+                    LeaseServiceActivity::class.java.simpleName
+                )
+                loginIntent.putExtra(
+                    "username",
+                    sharedPrefer.getPrefer(Constants.USER_ID)
+                )
+                startActivity(loginIntent)
+            }
+        } else {
             requestData()
-            AppLogin.InterceptIntent.code = "N"
         }
     }
 
@@ -138,10 +135,10 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
             it.myLeases.add(MyLeasesData())
 
-            leaseAdapter = LeaseAdapter(this)
-            leaseAdapter!!.setProductTypeList(productTypeList!!)
-            leaseAdapter!!.clearItemList()
-            leaseAdapter!!.addItemList(it.myLeases)
+            leaseAdapter.setItemClickListener(this)
+            leaseAdapter.setProductTypeList(productTypeList!!)
+            leaseAdapter.clearItemList()
+            leaseAdapter.addItemList(it.myLeases)
 
             pageBinding!!.rvLease.adapter = leaseAdapter
             pageBinding?.rvLease?.removeItemDecoration(itemOffsetDecoration)
@@ -208,7 +205,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         addIndicator(
             pageBinding!!.llLeaseIndicator,
-            leaseAdapter!!.itemCount,
+            leaseAdapter.itemCount,
             0
         )
 
@@ -221,7 +218,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
                 super.onScrollStateChanged(recyclerView, newState)
                 addIndicator(
                     pageBinding!!.llLeaseIndicator,
-                    leaseAdapter!!.itemCount,
+                    leaseAdapter.itemCount,
                     leaseLayoutManager!!.findLastVisibleItemPosition()
                 )
 

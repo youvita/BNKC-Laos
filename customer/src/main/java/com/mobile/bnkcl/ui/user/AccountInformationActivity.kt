@@ -210,6 +210,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                         .load(R.drawable.rotate_loading_image)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+
                     val url = GlideUrl(
                         RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
                         LazyHeaders.Builder()

@@ -10,14 +10,18 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
+import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mobile.bnkcl.R
@@ -27,11 +31,13 @@ import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
 import com.mobile.bnkcl.ui.notice.NoticeActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
@@ -60,7 +66,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         R.string.tab_find_office
     )
 
-
     /**
      * menu icons list
      */
@@ -86,9 +91,38 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         Log.d(">>>>", "Login ready ??? ${viewModel.isLogin}")
 
         initView()
+        requestProfile()
         initBottomViewPager()
         initLiveData()
 
+    }
+
+    private fun requestProfile() {
+
+        if (AppLogin.PIN.code != "N") {
+            viewModel.getUserProfile()
+
+            Glide.with(this)
+                .load(R.drawable.rotate_loading_image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
+
+            val url = GlideUrl(
+                sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+                LazyHeaders.Builder()
+                    .addHeader(
+                        "Authorization",
+                        "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                    )
+                    .build()
+            )
+            UtilsGlide.loadCircle(
+                this@MainActivity,
+                url,
+                binding.navMenu.ivProfile,
+                binding.navMenu.ivLoading
+            )
+        }
     }
 
     private fun initLiveData() {
@@ -98,8 +132,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = it.accountNumber
-
-            binding.navMenu.llProfile.setOnClickListener(this)
+            successListener()
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -116,33 +149,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     private fun initView() {
         binding.navMenu.localeCode = Locale.getDefault().language
 
-        val url = GlideUrl(
-            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
-            LazyHeaders.Builder()
-                .addHeader(
-                    "Authorization",
-                    "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
-                )
-                .build()
-        )
-
-        UtilsGlide.loadCircle(
-            this@MainActivity,
-            url,
-            binding.navMenu.ivProfile,
-            binding.navMenu.ivLoading
-        )
-
         if (viewModel.isLogin) {
             binding.navMenu.btnSignUp.visibility = View.GONE
             binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
-
         }
 
-        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-            binding.navMenu.tvUserName.text = "User Unknown"
-        }
+        binding.navMenu.tvUserName.text = "User Unknown"
+        binding.navMenu.tvUserId.text = ""
 
+        binding.navMenu.llProfile.setOnClickListener(this)
         binding.navMenu.llHome.setOnClickListener(this)
         binding.navMenu.btnLogin.setOnClickListener(this)
         binding.navMenu.llNotice.setOnClickListener(this)
@@ -162,10 +177,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             tabLayout = binding.tabBottomMenu.mainTabLayout
 
             val findOfficeFragment = FindOfficeFragment()
+            val pageFragment = PageFragment()
             tabAdapter.addFragment(ServiceFragment())
             tabAdapter.addFragment(PageFragment())
             tabAdapter.addFragment(findOfficeFragment)
-//            tabAdapter.addFragment(MenuFragment())
 
             viewPager?.adapter = tabAdapter
             viewPager?.isUserInputEnabled = false
@@ -190,30 +205,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     lastIndex = position
                     when (position) {
                         1 -> {
-//                            pageFragment!!.requestData()
-//                            if (AppLogin.PIN_TYPE == "N"){
-//                                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
-//                                    val intent = Intent(this@MainActivity, OtpActivity::class.java)
-//                                    intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
-//                                    intent.putExtra("LAST_INDEX", lastIndex)
-//                                    startActivity(intent)
-//                                }else{
-//                                    val loginIntent = Intent(this@MainActivity, PinCodeActivity::class.java)
-//                                    loginIntent.putExtra("pin_action", "login")
-//                                    loginIntent.putExtra("from", LeaseServiceActivity::class.java.simpleName)
-//                                    loginIntent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
-//                                    startActivity(loginIntent)
-//                                }
-//                            }
-//                            else{
-//                                pageFragment.requestData()
-//                            }
-//                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-//                                val intent = Intent(this@MainActivity, OtpActivity::class.java)
-//                                intent.putExtra("ACTION_TAG", "REQUIRE_LOGIN")
-//                                intent.putExtra("LAST_INDEX", lastIndex)
-//                                startActivity(intent)
-//                            }
+                            if (AppLogin.PIN.code == "N") {
+                                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                                    val intent = Intent(this@MainActivity, OtpActivity::class.java)
+                                    startActivity(intent)
+                                } else {
+                                    val loginIntent =
+                                        Intent(this@MainActivity, PinCodeActivity::class.java)
+                                    loginIntent.putExtra("pin_action", "login")
+                                    loginIntent.putExtra(
+                                        "from",
+                                        LeaseServiceActivity::class.java.simpleName
+                                    )
+                                    loginIntent.putExtra(
+                                        "username",
+                                        sharedPrefer.getPrefer(Constants.USER_ID)
+                                    )
+                                    startActivity(loginIntent)
+                                }
+                            } else {
+                                pageFragment.requestData()
+                            }
                         }
                     }
 
@@ -235,23 +247,38 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        viewModel.getUserProfile()
-    }
-
     override fun onClick(v: View?) {
         if (v != null) {
             val intent: Intent
             when (v.id) {
                 R.id.ll_profile -> {
-                    startActivity(
-                        Intent(
-                            this,
-                            AccountInformationActivity::class.java
-                        ).putExtra("ACCOUNT_INFO", profileData)
-                    )
+
+                    if (AppLogin.PIN.code == "N") {
+                        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                            intent = Intent(this@MainActivity, OtpActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            val loginIntent =
+                                Intent(this@MainActivity, PinCodeActivity::class.java)
+                            loginIntent.putExtra("pin_action", "login")
+                            loginIntent.putExtra(
+                                "from",
+                                LeaseServiceActivity::class.java.simpleName
+                            )
+                            loginIntent.putExtra(
+                                "username",
+                                sharedPrefer.getPrefer(Constants.USER_ID)
+                            )
+                            startActivity(loginIntent)
+                        }
+                    } else {
+                        startActivity(
+                            Intent(
+                                this,
+                                AccountInformationActivity::class.java
+                            ).putExtra("ACCOUNT_INFO", profileData)
+                        )
+                    }
                 }
                 R.id.ll_notice -> {
                     startActivity(Intent(this, NoticeActivity::class.java))
@@ -327,6 +354,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requestProfile()
     }
 
     override fun onDestroy() {
