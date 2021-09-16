@@ -56,8 +56,8 @@
                 android:id="@+id/swipe_refresh_notification"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/margin_21dp"
-                android:layout_marginRight="@dimen/margin_21dp">
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginRight="@dimen/margin_15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

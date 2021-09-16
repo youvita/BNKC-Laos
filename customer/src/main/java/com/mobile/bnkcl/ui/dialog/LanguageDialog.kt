@@ -16,8 +16,7 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
-    RadioGroup.OnCheckedChangeListener {
+class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(), RadioGroup.OnCheckedChangeListener {
 
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
@@ -41,6 +40,8 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         languageCode = LocaleHelper.getLanguage(requireContext())
+
+        updateLocalize(languageCode)
 
         setCheckRadioButton()
     }
@@ -67,6 +68,19 @@ class LanguageDialog : BaseDialogFragment<DialogLanguageBinding>(),
             langSelectedListener?.invoke(language)
             dismiss()
         }, 100L)
+    }
+
+    /**
+     * update dialog title localize direction
+     */
+    private fun updateLocalize(code: String) {
+        when(code) {
+            "lo" -> {
+                binding.language = "ພາສາ"
+            } else -> {
+                binding.language = "Language"
+            }
+        }
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
