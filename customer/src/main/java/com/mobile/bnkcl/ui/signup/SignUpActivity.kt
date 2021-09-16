@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -66,7 +67,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             //Session expired
             signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
                 errorSessionDialog(it.title, it.message).onConfirmClicked {
-                    sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                    RunTimeDataStore.LoginToken.value = ""//clear token when session expired
                     startActivity(Intent(this, PinCodeActivity::class.java))
                 }
             }

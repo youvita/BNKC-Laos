@@ -90,7 +90,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         //Session expired
         signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
@@ -153,7 +153,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         }
 
         val header = mutableMapOf<String, String>()
-//        header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
         binding.wbFaq.loadUrl(RunTimeDataStore.BaseUrl.value + Constants.WB_FAQS, header)
     }

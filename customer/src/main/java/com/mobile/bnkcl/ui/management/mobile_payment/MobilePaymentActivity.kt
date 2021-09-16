@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import androidx.activity.viewModels
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -41,7 +42,7 @@ class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View
 
         disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                RunTimeDataStore.LoginToken.value = ""
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }

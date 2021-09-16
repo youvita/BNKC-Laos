@@ -76,7 +76,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     private fun initDisposable() {
         disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                RunTimeDataStore.LoginToken.value = ""
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }

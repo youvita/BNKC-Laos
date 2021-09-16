@@ -40,32 +40,28 @@ class EditAccountInfoViewModel @Inject constructor(
     }
 
     fun editAccountInfo(editAccountInfoData: EditAccountInfoData) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                editAccountInfoRepo.editAccountInfo(editAccountInfoData).onEach { resource ->
-                    _editAccountInfo.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            editAccountInfoRepo.editAccountInfo(editAccountInfoData).onEach { resource ->
+                _editAccountInfo.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun uploadProfile() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            // MultipartBody.Part is used to send also the actual filename
-            val multipartBody = MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart(
-                    "file_data", file!!.name, RequestBody.create(
-                        "image/png".toMediaTypeOrNull(),
-                        file!!
-                    )
+        // MultipartBody.Part is used to send also the actual filename
+        val multipartBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart(
+                "file_data", file!!.name, RequestBody.create(
+                    "image/png".toMediaTypeOrNull(),
+                    file!!
                 )
-                .build()
-            viewModelScope.launch {
-                editAccountInfoRepo.uploadProfile(multipartBody).onEach { resource ->
-                    _editAccountInfo.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+            )
+            .build()
+        viewModelScope.launch {
+            editAccountInfoRepo.uploadProfile(multipartBody).onEach { resource ->
+                _editAccountInfo.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 }

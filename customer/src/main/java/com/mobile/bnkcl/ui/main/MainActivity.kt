@@ -113,7 +113,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 LazyHeaders.Builder()
                     .addHeader(
                         "Authorization",
-                        "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                        "Bearer " + RunTimeDataStore.LoginToken.value
                     )
                     .build()
             )
@@ -137,7 +137,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         }
 
         viewModel.logoutLiveData.observe(this) {
-            sharedPrefer.remove(Constants.KEY_TOKEN)
+            RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
             successListener()
 

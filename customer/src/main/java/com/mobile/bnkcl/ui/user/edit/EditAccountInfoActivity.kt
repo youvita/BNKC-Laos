@@ -170,7 +170,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             LazyHeaders.Builder()
                 .addHeader(
                     "Authorization",
-                    "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                    "Bearer " + RunTimeDataStore.LoginToken.value
                 )
                 .build()
         )
@@ -449,7 +449,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private fun initDisposable() {
         disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                RunTimeDataStore.LoginToken.value = ""
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }

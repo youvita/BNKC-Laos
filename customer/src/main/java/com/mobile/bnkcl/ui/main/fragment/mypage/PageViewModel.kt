@@ -27,8 +27,10 @@ class PageViewModel @Inject constructor(
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
     private val _dashboardLiveData: MutableLiveData<DashboardResponse> = MutableLiveData()
-    private val _leaseApplicationLiveData: MutableLiveData<LeaseApplicationResponse> = MutableLiveData()
-    private val _leaseScreeningLiveData: MutableLiveData<LeaseApplicationResponse> = MutableLiveData()
+    private val _leaseApplicationLiveData: MutableLiveData<LeaseApplicationResponse> =
+        MutableLiveData()
+    private val _leaseScreeningLiveData: MutableLiveData<LeaseApplicationResponse> =
+        MutableLiveData()
     private val _leaseResultLiveData: MutableLiveData<LeaseApplicationResponse> = MutableLiveData()
     private val _productCodesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
     private val _requestCodesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
@@ -42,72 +44,58 @@ class PageViewModel @Inject constructor(
     val progressCodesLiveData: LiveData<CodesResponse> = _progressCodesLiveData
 
     fun getDashboard() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                dashboardRepo.getDashboard().onEach { resource ->
-                    _dashboardLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            dashboardRepo.getDashboard().onEach { resource ->
+                _dashboardLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getLeaseApplication(lease_request_status: String) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                    _leaseApplicationLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
+                _leaseApplicationLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getLeaseScreening(lease_request_status: String) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                    _leaseScreeningLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
+                _leaseScreeningLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getLeaseResult(lease_request_status: String) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                    _leaseResultLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
+                _leaseResultLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getProductCodes() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                codesRepo.getCodes("PRODUCT_TYPE").onEach { resource ->
-                    _productCodesLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            codesRepo.getCodes("PRODUCT_TYPE").onEach { resource ->
+                _productCodesLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getLeaseProgressCodes() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                codesRepo.getCodes("LEASE_PROGRESS_STATUS").onEach { resource ->
-                    _progressCodesLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            codesRepo.getCodes("LEASE_PROGRESS_STATUS").onEach { resource ->
+                _progressCodesLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getLeaseRequestCodes() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                codesRepo.getCodes("LEASE_REQUEST_STATUS").onEach { resource ->
-                    _requestCodesLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            codesRepo.getCodes("LEASE_REQUEST_STATUS").onEach { resource ->
+                _requestCodesLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 }

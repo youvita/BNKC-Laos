@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.annotation.IntegerRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -71,7 +72,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         //Session expired
         disposableError = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(com.bnkc.sourcemodule.app.Constants.KEY_TOKEN, "")//clear token when session expired
+                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }

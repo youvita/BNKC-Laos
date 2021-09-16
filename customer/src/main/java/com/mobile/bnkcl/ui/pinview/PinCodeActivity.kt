@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.USER_ID
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -165,7 +166,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             startActivity(intent)
         }
         viewModel.logoutLiveData.observe(this) {
-            sharedPrefer.remove(Constants.KEY_TOKEN)
+            RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(USER_ID)
 
             val intent = Intent(this, HomeActivity::class.java)
@@ -206,7 +207,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             Log.d("nng", it.toString())
 
             if (it.cust_no != null || it.cust_no != null) {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, it.token!!)
+                RunTimeDataStore.LoginToken.value = it.token!!
                 sharedPrefer.putPrefer(USER_ID, username)
                 AppLogin.PIN.code = "Y"
                 if (from.isEmpty()){

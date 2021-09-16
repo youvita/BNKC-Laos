@@ -40,22 +40,18 @@ class MenuViewModel @Inject constructor(private val userRepo: UserRepo) : BaseVi
     }
 
     fun getUserProfile() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                userRepo.getProfile().onEach { resource ->
-                    _userProfile.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            userRepo.getProfile().onEach { resource ->
+                _userProfile.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun logout() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                userRepo.logout().onEach { resource ->
-                    _logout.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            userRepo.logout().onEach { resource ->
+                _logout.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 

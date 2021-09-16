@@ -27,14 +27,12 @@ class FullPaymentViewModel @Inject constructor(private val leaseRepo: LeaseRepo)
 
     fun getFullPayment(contractNo: String, repaymentDate: String, sort: String) {
         fullPaymentRequest = FullPaymentRequest(contractNo, repaymentDate, sort)
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                leaseRepo.getFullPayment(fullPaymentRequest!!)
-                    .onEach { resource ->
-                        _fullPayment.value = resource.data
+        viewModelScope.launch {
+            leaseRepo.getFullPayment(fullPaymentRequest!!)
+                .onEach { resource ->
+                    _fullPayment.value = resource.data
 
-                    }.launchIn(viewModelScope)
-            }
+                }.launchIn(viewModelScope)
         }
     }
 }

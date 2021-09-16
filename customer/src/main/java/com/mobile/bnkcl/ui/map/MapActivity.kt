@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -45,7 +46,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         //Session expired
         calLeaseDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }

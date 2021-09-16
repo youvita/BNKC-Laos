@@ -111,7 +111,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
         disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                RunTimeDataStore.LoginToken.value = ""
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
@@ -153,7 +153,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
             val url = RunTimeDataStore.BaseUrl.value +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
 
             val header = mutableMapOf<String, String>()
-            header["Authorization"] = "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+            header["Authorization"] = "Bearer " + RunTimeDataStore.LoginToken.value
             header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE)
                     .isNullOrEmpty()
             ) "lo" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!

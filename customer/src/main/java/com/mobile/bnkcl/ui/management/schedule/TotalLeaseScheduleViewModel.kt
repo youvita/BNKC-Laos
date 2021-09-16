@@ -25,12 +25,10 @@ class TotalLeaseScheduleViewModel @Inject constructor(private val leaseRepo: Lea
     val totalLeaseScheduleLiveData: LiveData<TotalLeaseScheduleResponse> = _totalLeaseSchedule
 
     fun getTotalLeaseSchedule(totalLeaseScheduleRequest: TotalLeaseScheduleRequest) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                leaseRepo.getTotalLeaseSchedule(totalLeaseScheduleRequest).onEach { resource ->
-                    _totalLeaseSchedule.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            leaseRepo.getTotalLeaseSchedule(totalLeaseScheduleRequest).onEach { resource ->
+                _totalLeaseSchedule.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 }

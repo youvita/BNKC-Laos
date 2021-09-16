@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -48,7 +49,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         //Session expired
         signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }

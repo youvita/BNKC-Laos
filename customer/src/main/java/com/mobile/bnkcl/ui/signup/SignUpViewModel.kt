@@ -3,17 +3,11 @@ package com.mobile.bnkcl.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
-import com.mobile.bnkcl.data.repository.signup.SignUpRepo
 import com.mobile.bnkcl.data.request.auth.SignUpRequest
-import com.mobile.bnkcl.data.request.otp.SendOTPRequest
 import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
 import com.mobile.bnkcl.data.response.auth.AddressReqObj
-import com.mobile.bnkcl.data.response.otp.SendOTPResponse
 import com.mobile.bnkcl.data.response.signup.PreSignUpResponse
 import com.mobile.bnkcl.data.response.signup.SignUpResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

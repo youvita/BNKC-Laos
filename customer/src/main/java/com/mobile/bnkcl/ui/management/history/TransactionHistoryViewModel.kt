@@ -25,12 +25,10 @@ class TransactionHistoryViewModel @Inject constructor(private val leaseRepo: Lea
     val transactionHistoryLiveData: LiveData<TransactionHistoryResponse> = _transactionHistory
 
     fun getTransactionHistory(transactionHistoryRequest: TransactionHistoryRequest) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                leaseRepo.getTransactionHistory(transactionHistoryRequest).onEach { resource ->
-                    _transactionHistory.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            leaseRepo.getTransactionHistory(transactionHistoryRequest).onEach { resource ->
+                _transactionHistory.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 }

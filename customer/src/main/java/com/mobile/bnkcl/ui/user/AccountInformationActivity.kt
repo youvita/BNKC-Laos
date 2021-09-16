@@ -62,7 +62,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     private fun initDisposable() {
         disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")
+                RunTimeDataStore.LoginToken.value = ""
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
@@ -92,7 +92,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         }
 
         viewModel.logoutLiveData.observe(this) {
-            sharedPrefer.remove(Constants.KEY_TOKEN)
+            RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
 
             val intent = Intent(this@AccountInformationActivity, HomeActivity::class.java)
@@ -116,7 +116,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             LazyHeaders.Builder()
                 .addHeader(
                     "Authorization",
-                    "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                    "Bearer " + RunTimeDataStore.LoginToken.value
                 )
                 .build()
         )
@@ -216,7 +216,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                         LazyHeaders.Builder()
                             .addHeader(
                                 "Authorization",
-                                "Bearer " + sharedPrefer.getPrefer(Constants.KEY_TOKEN)
+                                "Bearer " + RunTimeDataStore.LoginToken.value
                             )
                             .build()
                     )

@@ -1,6 +1,7 @@
 package com.bnkc.sourcemodule.di.header
 
 
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.BuildConfig
 import com.bnkc.sourcemodule.app.Constants
@@ -28,14 +29,14 @@ class HeaderInterceptor {
     @Singleton
     fun provideHeaderInterceptor(credentialSharedPrefer: CredentialSharedPrefer): Interceptor {
         return Interceptor(fun(chain: Interceptor.Chain): Response {
-            val tokenBearer = "$BEARER ${credentialSharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
+            val tokenBearer = "$BEARER ${RunTimeDataStore.LoginToken.value}"
 
             val request = chain.request()
                     .newBuilder()
                     .header(ACCEPT_LANGUAGE, "")
                     .header(X_APP_VERSION, "")
             when {
-                !credentialSharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty() -> {
+                !tokenBearer.isNullOrEmpty() -> {
                     request.header(AUTHORIZATION, tokenBearer)
                 }
             }

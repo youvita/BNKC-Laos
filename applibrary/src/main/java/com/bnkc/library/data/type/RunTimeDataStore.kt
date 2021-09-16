@@ -11,6 +11,9 @@ sealed class RunTimeDataStore(var value: String) {
 
         // MG
         const val BASE_URL = ""
+
+        // Login Info
+        const val LOGIN_TOKEN = ""
     }
 
     object ActionType: RunTimeDataStore(ACTION_TYPE)
@@ -21,4 +24,5 @@ sealed class RunTimeDataStore(var value: String) {
 
     object BaseUrl: RunTimeDataStore(BASE_URL)
 
+    object LoginToken: RunTimeDataStore(LOGIN_TOKEN)
 }

@@ -42,7 +42,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
         //Session expired
         signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
             errorSessionDialog(it.title, it.message).onConfirmClicked {
-                sharedPrefer.putPrefer(Constants.KEY_TOKEN, "")//clear token when session expired
+                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
@@ -77,7 +77,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
         }
 
         val header = mutableMapOf<String, String>()
-        header["Authorization"] = "Bearer ${sharedPrefer.getPrefer(Constants.KEY_TOKEN)}"
+        header["Authorization"] = "Bearer ${RunTimeDataStore.LoginToken.value}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
         binding.wbNotice.loadUrl(RunTimeDataStore.BaseUrl.value + Constants.WB_NOTICES, header)

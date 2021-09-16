@@ -33,32 +33,26 @@ class AccountInformationViewModel @Inject constructor(
     val jobTypesLiveData: LiveData<CodesResponse> = _jobCodesLiveData
 
     fun getAccountInformation() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                userRepo.getProfile().onEach { resource ->
-                    _accountInformation.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            userRepo.getProfile().onEach { resource ->
+                _accountInformation.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun getJobTypeCodes() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                codesRepo.getCodes("JOB_TYPE").onEach { resource ->
-                    _jobCodesLiveData.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            codesRepo.getCodes("JOB_TYPE").onEach { resource ->
+                _jobCodesLiveData.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 
     fun logout() {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                userRepo.logout().onEach { resource ->
-                    _logout.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            userRepo.logout().onEach { resource ->
+                _logout.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 }

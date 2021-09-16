@@ -24,12 +24,10 @@ class LeaseManagementViewModel @Inject constructor(private val leaseRepo: LeaseR
     val leaseLiveData: LiveData<LeaseInfoResponse> = _lease
 
     fun getLeaseInfo(contractNo: String) {
-        if (!sharedPrefer.getPrefer(Constants.KEY_TOKEN).isNullOrEmpty()) {
-            viewModelScope.launch {
-                leaseRepo.getLeaseInfo(contractNo).onEach { resource ->
-                    _lease.value = resource.data
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch {
+            leaseRepo.getLeaseInfo(contractNo).onEach { resource ->
+                _lease.value = resource.data
+            }.launchIn(viewModelScope)
         }
     }
 }
