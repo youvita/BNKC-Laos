@@ -36,7 +36,7 @@ class HeaderInterceptor {
                     .header(ACCEPT_LANGUAGE, "")
                     .header(X_APP_VERSION, "")
             when {
-                !tokenBearer.isNullOrEmpty() -> {
+                !RunTimeDataStore.LoginToken.value.isNullOrEmpty() -> {
                     request.header(AUTHORIZATION, tokenBearer)
                 }
             }

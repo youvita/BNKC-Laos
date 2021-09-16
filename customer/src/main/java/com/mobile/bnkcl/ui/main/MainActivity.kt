@@ -337,10 +337,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 R.id.btn_setting -> {
                     intent = Intent(this, SettingActivity::class.java)
                     if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
-                        intent.putExtra(
-                            "push_alarm_enabled",
-                            viewModel.userProfileLiveData.value!!.pushAlarmEnabled
-                        )
+                        if (viewModel.userProfileLiveData.value != null) {
+                            intent.putExtra(
+                                "push_alarm_enabled",
+                                viewModel.userProfileLiveData.value!!.pushAlarmEnabled
+                            )
+                        }
                     }
                     startActivity(intent)
                 }
