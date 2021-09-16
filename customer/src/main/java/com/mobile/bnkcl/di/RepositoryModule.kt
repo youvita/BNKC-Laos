@@ -3,7 +3,6 @@ package com.mobile.bnkcl.di
 import android.content.Context
 import com.bnkc.sourcemodule.di.header.AuthInterceptorOkHttpClient
 import com.mobile.bnkcl.data.api.common.MGApi
-import com.mobile.bnkcl.data.api.signup.SignUpApi
 import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
 import com.mobile.bnkcl.data.repository.area.AreaRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
@@ -17,7 +16,6 @@ import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.repository.notice.NoticeRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
-import com.mobile.bnkcl.data.repository.signup.SignUpRepo
 import com.mobile.bnkcl.data.repository.user.EditAccountInfoRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import dagger.Module
@@ -58,16 +56,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun providePreSignUpRepo(signUpApi: SignUpApi): SignUpRepo{
-        return SignUpRepo(signUpApi)
-    }
-
-    @Singleton
-    @Provides
-    fun provideAlarmRepo(
-        @ApplicationContext context: Context,
-        @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient
-    ): AlarmRepo {
+    fun provideAlarmRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AlarmRepo {
         return AlarmRepo(context, okHttpClient)
     }
 
@@ -79,8 +68,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideNoticeRepo(@ApplicationContext context: Context,
-                          @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): NoticeRepo{
+    fun provideNoticeRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): NoticeRepo{
         return NoticeRepo(context,okHttpClient)
     }
 
