@@ -1,8 +1,8 @@
 package com.mobile.bnkcl.ui.signup
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -20,14 +20,17 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
     lateinit var url: String
 
     override fun getLayoutId(): Int = R.layout.activity_terms_and_conditions
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         init()
+
         initView()
 
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initView() {
         binding.ivBack.setOnClickListener{
             onBackPressed()
@@ -44,8 +47,6 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
         websettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 
         val header = mutableMapOf<String, String>()
-        Log.d(">>>", "initView: "+ url)
-//        header.put("Authorization", "Bearer ${sharedPrefer.getPrefer(Constants.LOGIN_TOKEN)}")
         header["Accept-Language"] = if(sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
 
         binding.webview.loadUrl(RunTimeDataStore.BaseUrl.value + url, header)
@@ -64,6 +65,7 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
+                view?.loadUrl("javascript:(function(){document.body.style.paddingLeft = '21px', document.body.style.paddingRight = '21px', document.body.style.paddingBottom = '25px'})();")
             }
         }
     }

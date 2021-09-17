@@ -3,17 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.signup.TermsAndConditionsActivity"
-        android:background="@color/color_ffffff"
-        >
-
+        android:background="@color/color_ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,14 +18,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".ui.signup.TermsAndConditionsActivity">
+
             <RelativeLayout
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/iv_back"
@@ -53,18 +47,14 @@
 
             </RelativeLayout>
 
-
             <WebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/margin_21dp"
-                android:layout_marginTop="@dimen/margin_10dp"
-                android:layout_marginRight="@dimen/margin_21dp"
-                android:layout_marginBottom="@dimen/margin_21dp"
                 android:scrollbars="none" />
 
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
