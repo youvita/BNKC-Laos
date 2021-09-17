@@ -12,7 +12,7 @@ interface DashboardApi {
     @GET("api/ca/my-leases/dashboard")
     suspend fun getDashboard(): Response<DashboardResponse>
 
-    @GET("api/ca/leases/applications")
+    @GET("api/ca/my-leases/applications")
     suspend fun getLeaseApplication(@Query("lease_request_status") lease_request_status: String?): Response<LeaseApplicationResponse>
 
 }
