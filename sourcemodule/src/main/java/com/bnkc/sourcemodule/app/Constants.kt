@@ -30,8 +30,9 @@ object Constants {
     const val CLAIM_ID = "CLAIM_ID"
     const val CATEGORY = "CATEGORY"
 
-    const val SIGN_UP_FAIL = "SIGN_UP_FAIL"
+    const val SIGN_UP = "SIGN_UP"
     const val SET_UP_PIN = "SET_UP_PIN"
+    const val RESET_PIN = "RESET_PIN"
 
     object HandlePush{
         const val ACTION_ON = "ACTION_ON"

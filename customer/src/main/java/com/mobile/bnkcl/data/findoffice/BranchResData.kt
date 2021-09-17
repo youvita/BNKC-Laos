@@ -5,8 +5,8 @@ import java.io.Serializable
 
 class BranchResData : Serializable{
 
-    @SerializedName("id")
-    var id: Long = 0
+    @SerializedName("branch_id")
+    var branch_id: Long? = null
 
     @SerializedName("name")
     var name: String? = null

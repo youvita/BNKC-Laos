@@ -1,9 +1,6 @@
 package com.mobile.bnkcl.data.api.auth
 
-import com.mobile.bnkcl.data.request.auth.LoginRequest
-import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
-import com.mobile.bnkcl.data.request.auth.PreLoginRequest
-import com.mobile.bnkcl.data.request.auth.SignUpRequest
+import com.mobile.bnkcl.data.request.auth.*
 import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
 import com.mobile.bnkcl.data.response.auth.IdNumRes
 import com.mobile.bnkcl.data.response.auth.LoginResponse
@@ -38,4 +35,8 @@ interface AuthAPI {
         @Query("username") username: String?,
         @Query("identification_number") identification_number: String
     ): Response<IdNumRes>
+
+    @POST("/api/ca/auth/reset-password")
+    suspend fun forgetPin(@Body forgetPinRequest: ForgetPinRequest): Response<Unit>
+
 }

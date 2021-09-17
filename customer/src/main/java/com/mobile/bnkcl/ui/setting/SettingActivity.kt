@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -18,6 +19,9 @@ import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivitySettingBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
+import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
+import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,17 +87,25 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         }
 
         binding.tvResetPin.setOnClickListener {
-            val intent: Intent
-            if (sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
-                intent = Intent(this, PinCodeActivity::class.java)
-                intent.putExtra("owner", "setting")
-                intent.putExtra("label", resources.getString(R.string.pin_05))
-                intent.putExtra("RESETPIN", true)
-            } else {
-                intent = Intent(this, HomeActivity::class.java)
+            if (AppLogin.PIN.code == "N"){
+                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                    startActivity(Intent(this, OtpActivity::class.java))
+                }else{
+                    goToResetIfAlreadyLogin(false)
+                }
+            }else{
+                goToResetIfAlreadyLogin(true)
             }
-            startActivity(intent)
         }
+    }
+
+    private fun goToResetIfAlreadyLogin(isAlreadyLogin : Boolean){
+        val intent = Intent(this, PinCodeActivity::class.java)
+        intent.putExtra("from", SettingActivity::class.java.simpleName)
+        intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
+        val pinAction = if (isAlreadyLogin) "reset_pin" else "login"
+        intent.putExtra("pin_action", pinAction)
+        startActivity(intent)
     }
 
     private fun initLiveData() {

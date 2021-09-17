@@ -28,7 +28,7 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
     fun resultImage() : Drawable?{
         when(from){
 
-            Constants.SIGN_UP_FAIL -> {
+            Constants.SIGN_UP -> {
                 if (resultLiveData){
                     ContextCompat.getDrawable(context, R.drawable.ic_badge_success_g_char)
                 }else{
@@ -63,7 +63,7 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
                     "PIN Reset Failed"
                 }
             }
-            Constants.SIGN_UP_FAIL -> {
+            Constants.SIGN_UP -> {
                 return if (resultLiveData){
                     "Registration Successful"
                 }else{
@@ -95,7 +95,7 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
                 }
             }
 
-            Constants.SIGN_UP_FAIL -> {
+            Constants.SIGN_UP -> {
                 if (resultLiveData){
                     "You have registered. Please Log In."
                 }else{
@@ -117,14 +117,14 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
                     "TRY AGAIN"
                 }
             }
-            Constants.SET_UP_PIN -> {
+            Constants.RESET_PIN -> {
                 return if (resultLiveData){
                     "LOG IN"
                 }else{
                     "SET UP NEW PIN"
                 }
             }
-            Constants.SIGN_UP_FAIL -> {
+            Constants.SIGN_UP -> {
                 return if (resultLiveData){
                     "LOG IN"
                 }else{
@@ -145,8 +145,8 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
     fun actionClicked(){
         when(from) {
             AskBNKCActivity::class.java.simpleName -> _actionMuLiveData.value = AskBNKCActivity::class.java.simpleName
-            Constants.SET_UP_PIN -> _actionMuLiveData.value = Constants.SET_UP_PIN
-            Constants.SIGN_UP_FAIL -> _actionMuLiveData.value = Constants.SIGN_UP_FAIL
+            Constants.RESET_PIN -> _actionMuLiveData.value = Constants.RESET_PIN
+            Constants.SIGN_UP -> _actionMuLiveData.value = Constants.SIGN_UP
             ApplyLeaseActivity::class.java.simpleName -> _actionMuLiveData.value = AskBNKCActivity::class.java.simpleName
         }
     }

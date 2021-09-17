@@ -19,6 +19,22 @@ class FormatUtil {
      */
 companion object{
 
+        fun formatPhoneNumberMask(phone: String): String? {
+            var phone = phone
+            if (phone.startsWith("0")) phone = phone.substring(1)
+            val builder = java.lang.StringBuilder()
+            for (i in 0 until phone.length) {
+                if (i < 2 || i > phone.length - 3) {
+                    builder.append(phone[i])
+                } else if (i == 2 || i == 5) {
+                    builder.append("-")
+                    builder.append("*")
+                } else {
+                    builder.append("*")
+                }
+            }
+            return builder.toString()
+        }
 //    @JvmStatic
     fun getDateFormat(inputDate: String?, action: Int): String? {
         var inputDate = inputDate

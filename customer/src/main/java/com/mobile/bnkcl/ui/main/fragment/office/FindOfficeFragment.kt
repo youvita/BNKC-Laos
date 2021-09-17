@@ -78,7 +78,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
 
             }
         })
-//        showLoading()
+        showLoading()
         viewModel.reqAreasList()
         getAreas()
         getBranches()

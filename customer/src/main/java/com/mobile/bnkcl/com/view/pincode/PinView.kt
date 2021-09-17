@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.com.view.pincode
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.database.DatabaseUtils
@@ -25,11 +26,13 @@ import com.mobile.bnkcl.utilities.UtilsSize
 import kotlin.properties.Delegates
 
 
+@SuppressLint("UseCompatLoadingForDrawables")
 class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
      var mPinView : PinCodeView? = null
      var mPinMessage: TextView? = null
      var mResetPin:TextView? = null
+     var mBackButton : ImageView? = null
      var title:TextView? = null
      var reEnterPassword : Boolean = false
      var mCodeValidation = ""
@@ -97,7 +100,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         val button8 = view.findViewById<TextView>(R.id.button_8)
         val button9 = view.findViewById<TextView>(R.id.button_9)
 
-        val closeButton = view.findViewById<ImageView>(R.id.iv_close)
+        mBackButton = view.findViewById<ImageView>(R.id.iv_close)
 
         title = view.findViewById<TextView>(R.id.tv_title_toolbar)
         mPinMessage = view.findViewById<TextView>(R.id.tv_pin_smg)
@@ -128,7 +131,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         button0.layoutParams = middle
         buttonDelete.layoutParams = last
 
-        closeButton.setOnClickListener {
+        mBackButton!!.setOnClickListener {
             setOnActionListener("close")
         }
 

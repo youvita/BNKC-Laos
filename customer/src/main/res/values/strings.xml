@@ -61,6 +61,7 @@
     <!-- Recommend -->
     <string name="comm_confirm">Confirm</string>
     <string name="comm_reset_pin">Reset Pin</string>
+    <string name="comm_reset_now">RESET NOW</string>
     <string name="comm_error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
     <string name="comm_error">Error</string>
     <string name="comm_submit">Submit</string>

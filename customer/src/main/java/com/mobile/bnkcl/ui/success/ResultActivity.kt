@@ -40,7 +40,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
 
         when(viewModel.from){
 
-            Constants.SET_UP_PIN -> {
+            Constants.RESET_PIN -> {
                 viewModel.showSomeView = false
             }
 
@@ -50,6 +50,10 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
 
             AskBNKCActivity::class.java.simpleName ->{
                 viewModel.showSomeView = false
+            }
+
+            Constants.SIGN_UP -> {
+                viewModel.showSomeView = true
             }
 
         }
@@ -65,21 +69,25 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                     if (resultStatus){
                         var intent = Intent(this,CSCenterActivity::class.java)
                         startActivity(intent)
-
+                        finish()
                     }else{
                         var intent = Intent(this,AskBNKCActivity::class.java)
                         startActivity(intent)
-
+                        finish()
                     }
                 }
-                Constants.SET_UP_PIN -> {
+                Constants.RESET_PIN -> {
                     if (resultStatus){
-
+                        val intent = Intent(this, PinCodeActivity::class.java)
+                        intent.putExtra("pin_action", "login")
+                        intent.putExtra("username", username)
+                        startActivity(intent)
+                        finish()
                     }else{
-
+                        finish()
                     }
                 }
-                Constants.SIGN_UP_FAIL -> {
+                Constants.SIGN_UP -> {
                     if (resultStatus){
                         val intent = Intent(this, PinCodeActivity::class.java)
                         intent.putExtra("pin_action", "login")
@@ -94,6 +102,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                     if (resultStatus){
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }else{
                         finish()
                     }

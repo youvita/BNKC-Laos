@@ -14,13 +14,13 @@ import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
-import com.mobile.bnkcl.data.request.auth.LoginRequest
-import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
-import com.mobile.bnkcl.data.request.auth.PreLoginRequest
-import com.mobile.bnkcl.data.request.auth.SignUpRequest
+import com.mobile.bnkcl.data.request.auth.*
+import com.mobile.bnkcl.data.request.user.PreChangeRequest
+import com.mobile.bnkcl.data.request.user.ResetPasswordRequest
 import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.signup.SignUpResponse
+import com.mobile.bnkcl.data.response.user.resetpassword.PreChangeResponse
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.signup.SignUpViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,14 +42,6 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun loginNoAuth(){
         viewModelScope.launch {
             authRepo.loginUserNoAuth(loginRequestNoAuth!!).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _login.value = resource.data
             }.launchIn(viewModelScope)
         }
@@ -81,6 +73,39 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
         viewModelScope.launch {
             userRepo.logout().onEach { resource ->
                 _logout.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _preResetMuLiveData: MutableLiveData<PreChangeResponse> = MutableLiveData()
+    val preResetLiveData: LiveData<PreChangeResponse> = _preResetMuLiveData
+    var preChangeRequest = PreChangeRequest()
+    fun preChangePassword(){
+        viewModelScope.launch {
+            userRepo.preChangePassword(preChangeRequest!!).onEach { resource ->
+                _preResetMuLiveData.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _resetMuLiveData: MutableLiveData<Unit> = MutableLiveData()
+    val resetLiveData: LiveData<Unit> = _resetMuLiveData
+    var resetPasswordRequest = ResetPasswordRequest()
+    fun resetPassword(){
+        viewModelScope.launch {
+            userRepo.resetPassword(resetPasswordRequest).onEach { resource ->
+                _resetMuLiveData.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _forgetPinMuLiveData: MutableLiveData<Unit> = MutableLiveData()
+    val forgetPinLiveData: LiveData<Unit> = _forgetPinMuLiveData
+    var forgetPinRequest = ForgetPinRequest()
+    fun forgetPIN(){
+        viewModelScope.launch {
+            authRepo.forgetPin(forgetPinRequest).onEach { resource ->
+                _resetMuLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

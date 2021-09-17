@@ -51,9 +51,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     val _isSignUP = MutableLiveData<Int>()
     val isSignUpLiveData = _isSignUP
 
-    val _phoneNumberContent = MutableLiveData<String>()
-    val phoneNumber : LiveData<String>
-        get() = _phoneNumberContent
+    var phoneNumber = ""
+
+//    val _phoneNumberContent = MutableLiveData<String>()
+//    val phoneNumber : LiveData<String>
+//        get() = _phoneNumberContent
 
     var isVerified = false
 
@@ -114,16 +116,16 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    fun setUpSendOtpImg() : Int {
-        Log.d(">>>>>>", "setUpSendOtpImg >>> " + phoneNumber.value)
-        return if (phoneNumber.value != null && phoneNumber.value!!.isEmpty()){
-            R.drawable.ic_otp_send_off_ico
-        }
-        else{
-            R.drawable.ic_otp_send_on_ico
-        }
-    }
+//    @SuppressLint("UseCompatLoadingForDrawables")
+//    fun setUpSendOtpImg() : Int {
+//        Log.d(">>>>>>", "setUpSendOtpImg >>> " + phoneNumber.value)
+//        return if (phoneNumber.value != null && phoneNumber.value!!.isEmpty()){
+//            R.drawable.ic_otp_send_off_ico
+//        }
+//        else{
+//            R.drawable.ic_otp_send_on_ico
+//        }
+//    }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     fun setUpImageStep1() : Drawable? {
@@ -131,11 +133,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         return when(step){
             1->{
                 ContextCompat.getDrawable(context, R.drawable.ic_step_otp_on)
-//                if (statFocus == 0){
-//                    context.resources.getDrawable(R.drawable.ic_step_otp_off)
-//                }else{
-//                    context.resources.getDrawable(R.drawable.ic_step_otp_on)
-//                }
             }
             else -> {
                 ContextCompat.getDrawable(context, R.drawable.ic_step_otp_off)
@@ -178,14 +175,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         }
     }
 
-//    fun isSignUPView() : Boolean{
-//        Log.d(">>>>>>", "" + uiMode)
-//        return (isSignUpLiveData.value == 2)
-//    }
-
-    /** handle request data class */
-//    var loginRequest = LoginRequest()
-
     /**
      * handle enable/disable valid login button
      */
@@ -210,14 +199,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "sendOTP ::: " + sendOTPRequest.to)
         viewModelScope.launch {
             otpRepo.sendOTP(sendOTPRequest).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _sendOTP.value = resource.data
             }.launchIn(viewModelScope)
         }
@@ -229,14 +210,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun verifyOTP(){
         viewModelScope.launch {
             otpRepo.OTPVerify(otpVerifyRequest!!).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _verifyOTP.value = resource.data
             }.launchIn(viewModelScope)
         }
@@ -248,14 +221,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun preLogin(){
         viewModelScope.launch {
             authRepo.preLogin(prelogRequest!!).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _preLogin.value = resource.data
             }.launchIn(viewModelScope)
         }
@@ -267,21 +232,9 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun preSignUp(){
         viewModelScope.launch {
             authRepo.preSignUp(preSignUpRequest!!).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _preSignUp.value = resource.data
             }.launchIn(viewModelScope)
         }
-    }
-
-    fun resendOtp(){
-
     }
 
     fun agreementViewClick(){
@@ -300,24 +253,20 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 val intent = Intent(context, PinCodeActivity::class.java)
                 if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
                 intent.putExtra("pin_action", "login")
-                intent.putExtra("username", phoneNumber.value)
+                intent.putExtra("username", phoneNumber)
                 context.startActivity(intent)
             }
             1->{ //Sign up
                 val intent = Intent(context, SignUpActivity::class.java)
                 if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
 //                intent.putExtra("pin_action", "login")
-                intent.putExtra(Constants.USER_ID, phoneNumber.value)
+                intent.putExtra(Constants.USER_ID, phoneNumber)
                 context.startActivity(intent)
-//                _isSignUP.value = 2
-//                step = 2
-                Log.d(">>>>>>>>>>", " Go to step Sign UP $step")
             }
             2->{ //Forget
                 val intent = Intent(context, PinCodeActivity::class.java)
                 if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
                 intent.putExtra("pin_action", "forget")
-                intent.putExtra("username", phoneNumber.value)
                 context.startActivity(intent)
             }
 

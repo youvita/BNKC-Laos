@@ -18,6 +18,8 @@ import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.SignUpRequest
+import com.mobile.bnkcl.data.request.user.PreChangeRequest
+import com.mobile.bnkcl.data.request.user.ResetPasswordRequest
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
@@ -34,7 +36,7 @@ import javax.inject.Inject
 class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     private val viewModel : PinViewModel by viewModels()
-
+    var confirmCurrentPassword = true
     var sessionId = ""
     var needAuth = false
     var from : String = ""
@@ -64,6 +66,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
             } else if (pinUI == "forget") {
 
+                sessionId = intent.getStringExtra(Constants.SESSION_ID).toString()
+
                 binding.pinView.reEnterPassword = true
                 binding.pinViewModel!!.pinUI = 3
 
@@ -78,8 +82,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 }
                 binding.pinViewModel!!.pinUI = 1
 
-            } else if(pinUI == "reset"){
-                binding.pinView.reEnterPassword = true
+            } else if(pinUI == "reset_pin"){
+
                 binding.pinViewModel!!.pinUI = 4
 
             }
@@ -105,7 +109,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 }
                 "reset_pin" -> {
                     val intent = Intent(this, OtpActivity::class.java)
-                    intent.putExtra("ACTION_TAG", "RESET")
+                    intent.putExtra("ACTION_TAG", "FORGET")
                     startActivity(intent)
                 }
             }
@@ -123,10 +127,11 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                         signUp(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
                     }
                     3->{
-
+                        forgetPin(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
                     }
                     4->{
-
+                        //reset
+                        resetPassword(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
                     }
                 }
             }
@@ -157,11 +162,11 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     }
 
-    private fun observeViewModel(){
-        viewModel.signUpLiveData.observe(this){
+    private fun observeViewModel() {
+        viewModel.signUpLiveData.observe(this) {
             Log.d(">>>", "Sign Up ::: $it")
             val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra("from", Constants.SIGN_UP_FAIL)
+            intent.putExtra("from", Constants.SIGN_UP)
             intent.putExtra("result", it.username != null)
             startActivity(intent)
         }
@@ -174,97 +179,135 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             startActivity(intent)
             successListener()
         }
-    }
-
-    private fun signUp(pin :String){
-        viewModel.signUpRequest?.password = pin
-        viewModel.signUp()
-    }
-
-    private fun login(pinCode : String) {
-        val deviceInfo = DeviceInfo("test", "Android", "S21", "30")
-        if (needAuth){
-            val loginRequest = LoginRequest(
-                sessionId,
-                username,
-                pinCode,
-                deviceInfo
-            )
-            viewModel.logRequest = loginRequest
-            viewModel.loginWithAuth()
-        }else {
-            val loginRequestNoAuth = LoginRequestNoAuth(
-                username,
-                pinCode,
-                deviceInfo
-            )
-            viewModel.loginRequestNoAuth = loginRequestNoAuth
-            viewModel.loginNoAuth()
+        viewModel.preResetLiveData.observe(this) {
+            Log.d(">>>", "Sign Up ::: $it")
+            setUpRegisterPinUI()
+            viewModel.resetPasswordRequest.session_id = it.session_id
+            confirmCurrentPassword = false
         }
 
-        viewModel.loginLiveData.observe(this){
-            successListener()
-            Log.d("nng", it.toString())
+        viewModel.resetLiveData.observe(this) {
+            Log.d(">>>", "Sign Up ::: $it")
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra("from", Constants.RESET_PIN)
+            intent.putExtra("result", true)
+            startActivity(intent)
 
-            if (it.cust_no != null || it.cust_no != null) {
-                RunTimeDataStore.LoginToken.value = it.token!!
-                sharedPrefer.putPrefer(USER_ID, username)
-                AppLogin.PIN.code = "Y"
-                if (from.isEmpty()){
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
-                    finish()
-                }else {
-                    Log.d("nng", "it.toString() " + AppLogin.PIN_TYPE)
-                    AppLogin.InterceptIntent.code = "Y"
-                    finish()
-                }
+        }
 
-            }else {
-                countAttempt ++
-                if (countAttempt > 4){
-                    confirmDialog = ConfirmDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.pin_11),
-                        getString(R.string.pin_12),
-                        getString(R.string.comm_reset_pin)
-                    )
-                    confirmDialog.onConfirmClickedListener {
-                        binding.pinView.clearPin()
-                        val intent = Intent(
-                            this,
-                            OtpActivity::class.java
-                        )
-                        intent.putExtra(
-                            USER_ID,
-                            username
-                        )
-                        intent.putExtra("ACTION_TAG", "RESET")
+        viewModel.forgetPinLiveData.observe(this) {
+            Log.d(">>>", "Sign Up ::: $it")
+            finish()
+
+        }
+    }
+
+    private fun setUpRegisterPinUI(){
+        binding.pinView.reEnterPassword = true
+        binding.pinViewModel!!.pinUI = 2
+    }
+
+        private fun signUp(pin: String) {
+            viewModel.signUpRequest?.password = pin
+            viewModel.signUp()
+        }
+
+        private fun login(pinCode: String) {
+            val deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+            if (needAuth) {
+                val loginRequest = LoginRequest(
+                    sessionId,
+                    username,
+                    pinCode,
+                    deviceInfo
+                )
+                viewModel.logRequest = loginRequest
+                viewModel.loginWithAuth()
+            } else {
+                val loginRequestNoAuth = LoginRequestNoAuth(
+                    username,
+                    pinCode,
+                    deviceInfo
+                )
+                viewModel.loginRequestNoAuth = loginRequestNoAuth
+                viewModel.loginNoAuth()
+            }
+
+            viewModel.loginLiveData.observe(this) {
+                successListener()
+                Log.d("nng", it.toString())
+
+                if (it.cust_no != null || it.cust_no != null) {
+                    RunTimeDataStore.LoginToken.value = it.token!!
+                    sharedPrefer.putPrefer(USER_ID, username)
+                    AppLogin.PIN.code = "Y"
+                    if (from.isEmpty()) {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
+                        finish()
+                    } else {
+                        Log.d("nng", "it.toString() " + AppLogin.PIN_TYPE)
+                        AppLogin.InterceptIntent.code = "Y"
+                        finish()
                     }
-                    confirmDialog.isCancelable = false
-                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
-                }
-                else{
-                    confirmDialog = ConfirmDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.pin_14),
-                        getString(R.string.pin_15),
-                        getString(R.string.pin_16)
-                    )
-                    confirmDialog.onConfirmClickedListener {
-                        binding.pinView.clearPin()
+
+                } else {
+                    countAttempt++
+                    if (countAttempt > 4) {
+                        confirmDialog = ConfirmDialog.newInstance(
+                            R.drawable.ic_badge_error,
+                            getString(R.string.pin_11),
+                            getString(R.string.pin_12),
+                            getString(R.string.comm_reset_pin)
+                        )
+                        confirmDialog.onConfirmClickedListener {
+                            binding.pinView.clearPin()
+                            val intent = Intent(
+                                this,
+                                OtpActivity::class.java
+                            )
+                            intent.putExtra(
+                                USER_ID,
+                                username
+                            )
+                            intent.putExtra("ACTION_TAG", "RESET")
+                            startActivity(intent)
+                        }
+                        confirmDialog.isCancelable = false
+                        confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+                    } else {
+                        confirmDialog = ConfirmDialog.newInstance(
+                            R.drawable.ic_badge_error,
+                            getString(R.string.pin_14),
+                            getString(R.string.pin_15),
+                            getString(R.string.pin_16)
+                        )
+                        confirmDialog.onConfirmClickedListener {
+                            binding.pinView.clearPin()
+                        }
+                        confirmDialog.isCancelable = false
+                        confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                     }
-                    confirmDialog.isCancelable = false
-                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                 }
             }
         }
+
+    private fun resetPassword(pin : String){
+        if (confirmCurrentPassword){
+            viewModel.preChangeRequest.password = pin
+            viewModel.preChangePassword()
+        }else{
+            viewModel.resetPasswordRequest.password = pin
+            viewModel.resetPassword()
+        }
     }
 
-    fun checkResponse(){
-
+    private fun forgetPin(pin : String){
+        viewModel.forgetPinRequest.session_id = sessionId
+        viewModel.forgetPinRequest.username = sharedPrefer.getPrefer(USER_ID)
+        viewModel.forgetPinRequest.password = pin
+        viewModel.forgetPIN()
     }
 
     override fun getLayoutId(): Int {

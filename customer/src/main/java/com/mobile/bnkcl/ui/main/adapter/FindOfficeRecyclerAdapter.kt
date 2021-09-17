@@ -96,7 +96,7 @@ class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : B
         }
         holder.binding.llViewMap.setOnClickListener { //set branch info to extra
             val intent = Intent(context, MapActivity::class.java)
-            intent.putExtra("branch_id", data.id)
+            intent.putExtra("branch_id", data.branch_id)
             context?.startActivity(intent)
         }
         holder.binding.llContact.setOnClickListener {

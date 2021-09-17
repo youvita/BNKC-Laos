@@ -21,22 +21,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MapViewModel @Inject constructor(private val findOfficeRepo : FindOfficeRepo) : BaseViewModel() {
 
-    var branchId: Long = 0
-
     private var _officeMuLiveData = MutableLiveData<BranchResData>()
     var officeLiveData : LiveData<BranchResData> = _officeMuLiveData
-    fun reqOffice() {
+    fun reqOffice(branchId : Long) {
         Log.d(">>>>>>", "data :: $branchId")
         viewModelScope.launch {
             findOfficeRepo.getOffice(branchId).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _officeMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }

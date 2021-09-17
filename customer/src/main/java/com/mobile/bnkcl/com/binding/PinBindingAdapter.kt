@@ -3,6 +3,7 @@ package com.mobile.bnkcl.com.binding
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.BnkEditText
@@ -20,6 +21,7 @@ object PinBindingAdapter {
                 title?.text = context.getString(R.string.nav_login)
                 mPinMessage!!.visibility = View.VISIBLE
                 mPinMessage!!.text = context.getString(R.string.forget_pin_ask)
+                mResetPin!!.text = context.getString(R.string.comm_reset_now)
 
                 mResetPin!!.setOnClickListener {
                     setOnActionListener("reset_pin")
@@ -27,10 +29,11 @@ object PinBindingAdapter {
 
             }
             2 -> { //sign up
+                mBackButton!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_close_white))
                 title?.text = context.getString(R.string.set_up_pin)
                 mPinMessage!!.visibility = View.VISIBLE
                 mResetPin!!.visibility = View.GONE
-                context.getString(R.string.pin_registration)
+                mPinMessage!!.text = context.getString(R.string.pin_registration)
             }
             3 -> { //forget
                 title?.text = context.getString(R.string.forget_pin)
@@ -38,9 +41,10 @@ object PinBindingAdapter {
                 mPinMessage!!.text = context.getString(R.string.new_pin)
             }
             4 -> { //Reset pin
+                mBackButton!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_close_white))
                 title?.text = context.getString(R.string.comm_reset_pin)
                 mPinMessage!!.visibility = View.VISIBLE
-                mPinMessage!!.text = context.getString(R.string.pin_registration)
+                mPinMessage!!.text = context.getString(R.string.pin_05)
             }
         }
     }

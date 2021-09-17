@@ -65,14 +65,14 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d(">>>>>>>", "onResume :: " + AppLogin.InterceptIntent.code)
-        if (AppLogin.InterceptIntent.code == "Y"){
-            startActivity(Intent(this, ApplyLeaseActivity::class.java))
-            AppLogin.InterceptIntent.code = "N"
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        Log.d(">>>>>>>", "onResume :: " + AppLogin.InterceptIntent.code)
+//        if (AppLogin.InterceptIntent.code == "Y"){
+//            startActivity(Intent(this, ApplyLeaseActivity::class.java))
+//            AppLogin.InterceptIntent.code = "N"
+//        }
+//    }
 
     private fun initView(){
         binding.include.colToolbar.title = getString(R.string.lease_service)

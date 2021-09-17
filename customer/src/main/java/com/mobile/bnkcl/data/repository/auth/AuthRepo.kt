@@ -113,4 +113,18 @@ class AuthRepo(context: Context, okHttpClient: OkHttpClient) {
             e.printStackTrace()
         }
     }
+    fun forgetPin(forgetPinRequest: ForgetPinRequest): Flow<Resource<Unit>> = flow {
+        try {
+            delay(1000)
+            val request = object : RemoteDataSource<Unit>() {
+                override suspend fun createCall(): Response<Unit> {
+                    return authAPI.forgetPin(forgetPinRequest)
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

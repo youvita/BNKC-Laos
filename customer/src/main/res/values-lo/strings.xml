@@ -380,6 +380,7 @@
     <string name="set_up_pin">ຕັ້ງລະຫັດຜ່ານ PIN ໃໝ່</string>
     <string name="forget_pin">ລືມລະຫັດ PIN</string>
     <string name="forget_pin_ask">ລືມລະຫັດ PIN?</string>
+    <string name="comm_reset_now">RESET NOW</string>
     <string name="new_pin">New PIN</string>
     <string name="pin_registration">ລົງຖະບຽນລະຫັດ PIN</string>
     <string name="we_lend_you_money_at_a_reasonable_interest">ພວກເຮົາສາມາດໃຫ້ທ່ານຢືມເງິນໃນອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ</string>

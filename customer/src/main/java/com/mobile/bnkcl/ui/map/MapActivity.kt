@@ -35,7 +35,6 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     OnCameraMoveCanceledListener, OnCameraMoveListener, OnCameraMoveStartedListener {
 
     private val mapViewModel : MapViewModel by viewModels()
-    private var branchId: Long = 0
     private var data: BranchResData? = null
 
     @Inject
@@ -58,11 +57,11 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         super.onCreate(savedInstanceState)
         checkError()
         if (intent != null) {
-            branchId = intent.getLongExtra("branch_id", 0)
-            Log.d(">>>>>>", "onCreate :: $branchId")
-            mapViewModel.branchId = branchId
+            val branchId = intent.getLongExtra("branch_id", 0)
+//            Log.d(">>>>>>", "onCreate :: $branchId")
+//            mapViewModel.branchId = branchId
             showLoading()
-            mapViewModel.reqOffice()
+            mapViewModel.reqOffice(branchId)
 //            data = intent.getSerializableExtra("branch_info") as BranchResData
         }
         binding.toolbarName.isSelected = true
