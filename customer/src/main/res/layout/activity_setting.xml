@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:paddingStart="@dimen/margin_21dp"
-                            android:src="@drawable/ic_nav_back_dark_btn"
+                            android:src="@drawable/ic_nav_close_dark_btn"
                             tools:ignore="ContentDescription,RtlSymmetry" />
 
                         <ImageView
@@ -102,7 +102,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <com.bnkc.sourcemodule.ui.ShadowLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_31dp"
                     app:shadowColor="@color/color_3090a4ae"
@@ -112,108 +112,126 @@
                     app:shadowShape="rectangle"
                     app:shadowSide="all">
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
-                        android:orientation="vertical">
+                        app:cardCornerRadius="8dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/color_e1e5ec">
 
-
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/padding_15dp">
+                            android:paddingTop="@dimen/padding_18dp"
+                            android:paddingBottom="@dimen/padding_16dp">
 
                             <TextView
+                                android:id="@+id/textView"
                                 style="@style/font15_263238_medium"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/margin_15dp"
                                 android:drawablePadding="@dimen/padding_10dp"
                                 android:gravity="center_vertical"
                                 android:text="@string/setting_01"
-                                app:drawableLeftCompat="@drawable/ic_notification_grey_ico" />
+                                app:drawableLeftCompat="@drawable/ic_notification_grey_ico"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/toggle_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/height_21dp"
+                                android:layout_marginEnd="@dimen/margin_16dp"
                                 android:background="@null"
                                 android:checked="@{settingViewModel.settingData.push_alarm_enabled.equals('Y')}"
                                 android:theme="@style/SettingSwitch"
                                 android:thumb="@drawable/switch_thumb_selector"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView"
                                 app:track="@drawable/switch_track_selector" />
 
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/height_5dp"
-                            android:background="@color/color_eef5f8" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/padding_15dp">
+                            <View
+                                android:id="@+id/view"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_5dp"
+                                android:layout_marginTop="16dp"
+                                android:background="@color/color_eef5f8"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                             <TextView
+                                android:id="@+id/textView3"
                                 style="@style/font15_263238_medium"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/margin_15dp"
+                                android:layout_marginTop="@dimen/margin_16dp"
                                 android:drawablePadding="@dimen/padding_10dp"
                                 android:gravity="center_vertical"
                                 android:text="@string/setting_02"
-                                app:drawableLeftCompat="@drawable/ic_lock_grey_ico" />
+                                app:drawableLeftCompat="@drawable/ic_lock_grey_ico"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/view" />
 
                             <TextView
                                 android:id="@+id/tv_reset_pin"
                                 style="@style/font15_d7191f_medium"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/margin_16dp"
                                 android:gravity="center"
                                 android:text="@string/setting_04"
-                                app:drawableRightCompat="@drawable/right_red_arrow_ico" />
-                        </LinearLayout>
+                                app:drawableRightCompat="@drawable/right_red_arrow_ico"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/height_1dp"
-                            android:background="@color/color_eef5f8" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </com.bnkc.sourcemodule.ui.ShadowLayout>
 
             </androidx.core.widget.NestedScrollView>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="@dimen/margin_50dp"
-                android:layout_marginRight="@dimen/margin_50dp"
-                android:layout_marginBottom="@dimen/margin_50dp"
-                android:gravity="center"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_40dp"
+                    android:layout_marginEnd="@dimen/margin_40dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
                     android:src="@drawable/ic_brand_bnkc_lao_leasing"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_app_version"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_app_version"
                     style="@style/font13_90a4ae_medium_flex"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_56dp"
                     android:gravity="center"
-                    android:text="@{`Version ` + appVersion}" />
-            </LinearLayout>
+                    android:text="@{`Version ` + appVersion}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Version 1.0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

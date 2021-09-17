@@ -402,12 +402,12 @@
     </style>
     <style name="font13_263238_regular_flex">
         <item name="android:textColor">@color/color_263238</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="fontFamily">@font/rubik_regular</item>
     </style>
     <style name="font13_90a4ae_medium_flex">
         <item name="android:textColor">@color/color_90a4ae</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
