@@ -21,7 +21,7 @@ import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
-import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.intro.IntroActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
@@ -94,13 +94,12 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
+            successListener()
 
-            val intent = Intent(this@AccountInformationActivity, HomeActivity::class.java)
+            val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-
-            successListener()
-            finish()
+            Runtime.getRuntime().exit(0);
         }
     }
 

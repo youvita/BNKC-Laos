@@ -31,8 +31,8 @@ import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.intro.IntroActivity
+import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
 import com.mobile.bnkcl.ui.main.fragment.service.ServiceFragment
@@ -109,7 +109,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
 
             val url = GlideUrl(
-                sharedPrefer.getPrefer(Constants.KEY_START_URL).plus(Constants.IMAGE_URL),
+                RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
                 LazyHeaders.Builder()
                     .addHeader(
                         "Authorization",
@@ -181,7 +181,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             val findOfficeFragment = FindOfficeFragment()
             val pageFragment = PageFragment()
             tabAdapter.addFragment(ServiceFragment())
-            tabAdapter.addFragment(PageFragment())
+            tabAdapter.addFragment(pageFragment)
             tabAdapter.addFragment(findOfficeFragment)
 
             viewPager?.adapter = tabAdapter
@@ -193,19 +193,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 tab.customView = binding.root
             }.attach()
 
-            viewPager!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                }
+            tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
 
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    lastIndex = position
-                    when (position) {
+                    when (tab?.position) {
                         1 -> {
                             if (AppLogin.PIN.code == "N") {
                                 if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
@@ -225,17 +216,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                                     )
                                     startActivity(loginIntent)
                                 }
-                            } else {
-                                pageFragment.requestData()
                             }
                         }
                     }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
 
                 }
 
-                override fun onPageScrollStateChanged(state: Int) {
-                    super.onPageScrollStateChanged(state)
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+
                 }
+
             })
 
 
@@ -286,18 +279,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     startActivity(Intent(this, NoticeActivity::class.java))
                 }
                 R.id.ll_cs_center -> {
-                    if (AppLogin.PIN.code == "N"){
-                        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+                    if (AppLogin.PIN.code == "N") {
+                        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                             startActivity(Intent(this, OtpActivity::class.java))
 
-                        }else{
+                        } else {
                             val intent = Intent(this, PinCodeActivity::class.java)
                             intent.putExtra("pin_action", "login")
                             intent.putExtra("from", MainActivity::class.java.simpleName)
                             intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
                             startActivity(intent)
                         }
-                    }else{
+                    } else {
                         startActivity(Intent(this, CSCenterActivity::class.java))
                     }
 

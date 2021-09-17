@@ -290,9 +290,11 @@
     <string name="lease_interest">ດອກເບ້ຍ</string>
     <string name="lease_overdue_principal">ຍອດຕົ້ນທືນທີ່ຄ້າງຊຳລະ</string>
     <string name="lease_overdue_interest">ຍອດດອກເບ້ຍທີ່ຄ້າງຊຳລະ</string>
-    <string name="lease_overdue_penalty">ຄ່າປັບໄໝຊຳລະຊ້າ (11 ມື້)</string>
+    <string name="lease_overdue_penalty">ຄ່າປັບໄໝຊຳລະຊ້າ</string>
     <string name="lease_total">ຍອດລວມ</string>
     <string name="lease_penalty_message">ທ່ານບໍ່ຊຳລະມື້ນີ້ ຄ່າປັບໄໝຈະເພີ່ມຂື້ນເລື້ອຍໆ</string>
+    <string name="day">ມື້</string>
+    <string name="days">ມື້</string>
 
     <string name="progress_application">ຄໍາຮ້ອງຂໍສະຫມັກ</string>
     <string name="progress_screening">ຂໍ້ມູນທີ່ນຳໃຊ້</string>

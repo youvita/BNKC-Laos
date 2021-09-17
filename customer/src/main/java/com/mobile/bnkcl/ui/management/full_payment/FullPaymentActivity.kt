@@ -41,6 +41,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
     private var myCalendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
@@ -60,10 +61,6 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
 
     }
 

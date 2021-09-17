@@ -12,44 +12,52 @@
         android:paddingRight="@dimen/padding_15dp"
         android:paddingBottom="@dimen/padding_20dp">
 
-        <TextView
-            style="@style/font15_263238_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/padding_10dp"
-            android:gravity="center"
-            android:text="@string/mbl_mobile_payment"
-            app:drawableStartCompat="@drawable/ic_mobile_payment_ico" />
-
         <LinearLayout
-            android:id="@+id/ll_pay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_46dp"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:background="@drawable/selector_d7191f_ffffee"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/tv_pay"
-                style="@style/font14_d7191f_medium"
+                style="@style/font15_263238_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/padding_10dp"
                 android:gravity="center"
-                android:text="@string/mbl_pay_by"
-                android:textAllCaps="true"
-                app:drawableEndCompat="@drawable/ic_payment_ico"
-                app:drawableTint="@color/colorPrimary" />
-        </LinearLayout>
+                android:text="@string/mbl_mobile_payment"
+                app:drawableStartCompat="@drawable/ic_mobile_payment_ico" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_1dp"
-            android:layout_marginTop="@dimen/margin_15dp"
-            android:layout_marginBottom="@dimen/margin_15dp"
-            android:background="@color/color_eef5f8" />
+            <LinearLayout
+                android:id="@+id/ll_pay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_46dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:background="@drawable/selector_d7191f_ffffee"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_pay"
+                    style="@style/font14_d7191f_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/padding_10dp"
+                    android:gravity="center"
+                    android:text="@string/mbl_pay_by"
+                    android:textAllCaps="true"
+                    app:drawableEndCompat="@drawable/ic_payment_ico"
+                    app:drawableTint="@color/colorPrimary" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_1dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:layout_marginBottom="@dimen/margin_15dp"
+                android:background="@color/color_eef5f8" />
+
+        </LinearLayout>
 
         <TextView
             style="@style/font15_263238_medium"

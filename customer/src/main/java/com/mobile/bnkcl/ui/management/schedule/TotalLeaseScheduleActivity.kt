@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.*
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -37,6 +38,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     private var totalLeaseScheduleRequest: TotalLeaseScheduleRequest = TotalLeaseScheduleRequest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
@@ -115,10 +117,6 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
 
     }
 

@@ -294,9 +294,11 @@
     <string name="lease_interest">Interest</string>
     <string name="lease_overdue_principal">Overdue Principal</string>
     <string name="lease_overdue_interest">Overdue Interest</string>
-    <string name="lease_overdue_penalty">Overdue Penalty (11 Days)</string>
+    <string name="lease_overdue_penalty">Overdue Penalty</string>
     <string name="lease_total">Total</string>
     <string name="lease_penalty_message">If you don\'t pay today, The Penalty will be increase.</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
 
     <string name="progress_application">Application</string>
     <string name="progress_screening">Screening</string>

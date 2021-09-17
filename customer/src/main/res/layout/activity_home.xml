@@ -34,6 +34,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_ffffff"
         tools:context=".ui.home.HomeActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -139,7 +140,7 @@
                             android:text="@{load, default = @string/home_need_loan}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/iv_home_loan"/>
+                            app:layout_constraintTop_toBottomOf="@id/iv_home_loan" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +179,7 @@
                             android:text="@{leas, default = @string/home_need_lease}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_lease"/>
+                            app:layout_constraintTop_toBottomOf="@+id/iv_lease" />
 
                         <TextView
                             android:id="@+id/tv_lease_ex"
@@ -189,7 +190,7 @@
                             android:text="@{desc, default = @string/home_lease_ex}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_lease"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tv_lease" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

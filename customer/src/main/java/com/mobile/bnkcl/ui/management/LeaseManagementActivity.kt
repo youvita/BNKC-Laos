@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
@@ -11,6 +12,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseManagementBinding
@@ -21,18 +23,24 @@ import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     View.OnClickListener {
 
+    @Inject
+    lateinit var listChoiceDialog: ListChoiceDialog
+
     private val viewModel: LeaseManagementViewModel by viewModels()
-    private var mLeaseArraylist: ArrayList<*>? = null
+    private var contractNoList: ArrayList<String>? = null
     private var CONTRACT_NO: String? = null
     private var REPAYMENT_DATE: String? = null
     private var isWarning: Boolean? = null
+    private var selectedIndex: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
@@ -52,10 +60,6 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             }
         }
 
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
-
     }
 
     override fun getLayoutId(): Int {
@@ -70,6 +74,21 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             REPAYMENT_DATE = it.repaymentDay
             binding.comingLeaseRepayment.tvComingRepaymentAmount.text =
                 FormatUtils.getNumberFormat(this, it.comingRepaymentAmount!!)
+            val day: String = when {
+                it.overdueParaltyDays == null -> {
+                    ""
+                }
+                it.overdueParaltyDays.toInt() == 1 -> {
+                    getString(R.string.day)
+                }
+                else -> {
+                    getString(R.string.days)
+                }
+            }
+
+            binding.comingLeaseRepayment.tvOverduePenaltyTitle.text =
+                getString(R.string.lease_overdue_penalty)
+                    .plus(" (").plus(it.overdueParaltyDays).plus(" ").plus(day).plus(")")
 
             // for warning lease management
             isWarning = true
@@ -87,7 +106,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     private fun initView() {
 
         if (intent != null) {
-            mLeaseArraylist = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<*>?
+            contractNoList = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<String>?
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
 
             if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
@@ -95,8 +114,17 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
                 showLoading()
             }
 
+            for (i in 0 until contractNoList!!.size) {
+                if (CONTRACT_NO.equals(contractNoList!![i])) {
+                    selectedIndex = i
+                }
+            }
+
             binding.tvLeaseType.text = CONTRACT_NO
         }
+
+        binding.comingLeaseRepayment.tvOverduePenaltyTitle.text =
+            getString(R.string.lease_overdue_penalty)
 
         binding.btnTotalSchedule.setOnClickListener(this)
         binding.btnTransactionHistory.setOnClickListener(this)
@@ -161,7 +189,20 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
                 )
             }
             R.id.ll_filter_lease -> {
-                // to do
+                listChoiceDialog = ListChoiceDialog.newInstance(
+                    R.drawable.ic_toggle_table_view_on_ico,
+                    getString(R.string.lease_account),
+                    contractNoList!!,
+                    selectedIndex!!
+                )
+                listChoiceDialog.item = 5
+
+                listChoiceDialog.setOnItemListener = {
+                    viewModel.getLeaseInfo(contractNoList!![it])
+                    showLoading()
+                }
+                listChoiceDialog.isCancelable = true
+                listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
             }
             R.id.btn_check_fullpayment -> {
                 val openFullPayment = Intent(this, FullPaymentActivity::class.java)

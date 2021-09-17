@@ -81,10 +81,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             }
         }
 
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
-
     }
 
     private fun initImageLoadingRotate() {

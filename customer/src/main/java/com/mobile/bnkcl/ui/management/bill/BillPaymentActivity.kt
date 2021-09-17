@@ -31,6 +31,7 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
     private var CODE_REPAYMENT_PLAN_REGULAR: String? = "C0312"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
@@ -48,10 +49,6 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
     }
 
     private fun initView() {

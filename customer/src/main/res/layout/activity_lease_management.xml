@@ -108,7 +108,7 @@
                             android:paddingRight="@dimen/padding_15dp"
                             android:paddingBottom="@dimen/padding_10dp"
                             app:drawableEndCompat="@drawable/ic_more_ico"
-                            tools:text="Automobile Lease" />
+                            tools:text="43524352345" />
                     </LinearLayout>
 
                     <LinearLayout

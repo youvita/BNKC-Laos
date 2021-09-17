@@ -37,6 +37,12 @@ class LeaseAdapter :
         binding.leaseItem = data
         holder.setBinding(data, position)
 
+        holder.binding.llAddNewLease.visibility =
+            if (data.contractNo.isNullOrEmpty()) View.VISIBLE else View.GONE
+        holder.binding.llLeaseItem.visibility =
+            if (!data.contractNo.isNullOrEmpty()) View.VISIBLE else View.GONE
+
+
         for (i in 0 until productTypeList.size - 1) {
             if (data.leaseType.equals(
                     productTypeList[i].code,
@@ -46,20 +52,28 @@ class LeaseAdapter :
         }
 
         holder.binding.btnBillPayment.setOnClickListener {
-            mListener!!.onBillPaymentClicked(
-                data.contractNo,
-                position
-            )
+            if (!data.contractNo.isNullOrEmpty()) {
+                mListener!!.onBillPaymentClicked(
+                    data.contractNo,
+                    position
+                )
+            }
         }
         holder.binding.btnManagement.setOnClickListener {
-            mListener!!.onManagementClicked(
-                data.contractNo,
-                position
-            )
+            if (!data.contractNo.isNullOrEmpty()) {
+                mListener!!.onManagementClicked(
+                    data.contractNo,
+                    position
+                )
+            }
         }
 
-        if (position == myLeaseItemList.size - 1) {
-            holder.binding.btnAddLease.setOnClickListener { mListener!!.onAddNewLeaseClicked() }
+        holder.binding.llAddNewLease.setOnClickListener{
+            mListener!!.onAddNewLeaseClicked()
+        }
+
+        holder.binding.btnAddLease.setOnClickListener{
+            mListener!!.onAddNewLeaseClicked()
         }
     }
 
@@ -68,14 +82,6 @@ class LeaseAdapter :
         fun setBinding(item: MyLeasesData, position: Int) {
             binding.leaseItem = item
 
-            // Show at new lease at last position
-            if (position == itemCount - 1) {
-                binding.llLeaseItem.visibility = View.GONE
-                binding.llAddNewLease.visibility = View.VISIBLE
-            } else {
-                binding.llLeaseItem.visibility = View.VISIBLE
-                binding.llAddNewLease.visibility = View.GONE
-            }
             binding.executePendingBindings()
         }
     }

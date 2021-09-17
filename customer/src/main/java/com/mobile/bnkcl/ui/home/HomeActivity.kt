@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
@@ -19,15 +20,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     @Inject
     lateinit var systemDialog: SystemDialog
 
-    private var title   = "Notice"
+    private var title = "Notice"
     private var message = "Under Construction"
-    private var button  = "Confirm"
+    private var button = "Confirm"
 
     override fun getLayoutId(): Int {
         return R.layout.activity_home
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_ffffff))
         setAnimateType(ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
 
@@ -42,7 +44,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         }
 
         binding.clLoan.setOnClickListener {
-            systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_error, title, message, button)
+            systemDialog =
+                SystemDialog.newInstance(R.drawable.ic_badge_error, title, message, button)
             systemDialog.show(supportFragmentManager, systemDialog.tag)
         }
     }
@@ -61,7 +64,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
      * update localize directly
      */
     private fun updateLocalize(language: String) {
-        when(language) {
+        when (language) {
             "lo" -> {
                 binding.load = "ທ່ານຕ້ອງການເງິນກູ້ບໍ?"
                 binding.leas = "ທ່ານຕ້ອງການເຊົ່າສິນເຊື່ອບໍ?"

@@ -32,6 +32,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private val settingViewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
@@ -51,9 +52,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
             }
         }
 
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
     }
 
     override fun getLayoutId(): Int {

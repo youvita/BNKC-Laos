@@ -5,7 +5,8 @@
 
     <data>
 
-        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoResponse"/>
+        <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoResponse" />
+
         <variable
             name="comingInfo"
             type="LeaseInfoResponse" />
@@ -149,11 +150,11 @@
                     <TextView
                         android:id="@+id/tv_principle"
                         style="@style/font15_263238_medium"
+                        setNumberFormat="@{comingInfo.principal}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        setNumberFormat="@{comingInfo.principal}" />
+                        android:gravity="end" />
 
                 </LinearLayout>
 
@@ -174,11 +175,11 @@
                     <TextView
                         android:id="@+id/tv_interest"
                         style="@style/font15_263238_medium"
+                        setNumberFormat="@{comingInfo.interest}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        setNumberFormat="@{comingInfo.interest}" />
+                        android:gravity="end" />
 
                 </LinearLayout>
 
@@ -205,11 +206,11 @@
                         <TextView
                             android:id="@+id/tv_overdue_principle"
                             style="@style/font_15_d7191f_medium"
+                            setNumberFormat="@{comingInfo.overduePrincipal}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                            setNumberFormat="@{comingInfo.overduePrincipal}" />
+                            android:gravity="end" />
 
                     </LinearLayout>
 
@@ -230,11 +231,11 @@
                         <TextView
                             android:id="@+id/tv_overdue_interest"
                             style="@style/font_15_d7191f_medium"
+                            setNumberFormat="@{comingInfo.overdueInterest}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                            setNumberFormat="@{comingInfo.overdueInterest}" />
+                            android:gravity="end" />
 
                     </LinearLayout>
 
@@ -246,6 +247,7 @@
                         android:minHeight="25dp">
 
                         <TextView
+                            android:id="@+id/tv_overdue_penalty_title"
                             style="@style/font15_d7191f_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -255,11 +257,11 @@
                         <TextView
                             android:id="@+id/tv_overdue_penalty"
                             style="@style/font_15_d7191f_medium"
+                            setNumberFormat="@{comingInfo.overduePenalty}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
-                            setNumberFormat="@{comingInfo.overduePenalty}" />
+                            android:gravity="end" />
 
                     </LinearLayout>
 
@@ -282,11 +284,11 @@
                     <TextView
                         android:id="@+id/tv_total"
                         style="@style/font15_263238_medium"
+                        setNumberFormat="@{comingInfo.total}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        setNumberFormat="@{comingInfo.total}" />
+                        android:gravity="end" />
 
                 </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class LeaseRequestProcessAdapter :
     private var type: Int? = null
     private lateinit var context: Context
     private var productTypeList: ArrayList<CodesData> = ArrayList()
+    private var progressTypeList: ArrayList<CodesData> = ArrayList()
     private var listener: CloseClickedListener? = null
 
     /**
@@ -34,6 +36,10 @@ class LeaseRequestProcessAdapter :
 
     fun setProductTypeList(list: ArrayList<CodesData>) {
         this.productTypeList = list
+    }
+
+    fun setProgressTypeList(list: ArrayList<CodesData>) {
+        this.progressTypeList = list
     }
 
     override fun getLayoutId(viewType: Int): Int {
@@ -61,6 +67,18 @@ class LeaseRequestProcessAdapter :
             ) binding.ltdAppliedInfo.tvProductType.text = productTypeList[i].title
         }
 
+        for (i in 0 until progressTypeList.size - 1) {
+            if (data.progressStatus.equals(
+                    progressTypeList[i].code,
+                    ignoreCase = true
+                )
+            ) {
+                binding.tvPhaseOfProgress.text = progressTypeList[i].title
+                binding.tvReject.text = progressTypeList[i].title
+                binding.tvApproval.text = progressTypeList[i].title
+            }
+        }
+
         binding.btnClose.setOnClickListener {
             listener?.onCloseClicked()
         }
@@ -81,18 +99,19 @@ class LeaseRequestProcessAdapter :
                 binding.tvTitle.text = context.getString(R.string.progress_screening)
             }
             3 -> {
-                binding.llApplicationResult.visibility = View.GONE
-                binding.llApprovalResult.visibility = View.VISIBLE
-                binding.llRejectResult.visibility = View.GONE
 
                 binding.tvTitle.text = context.getString(R.string.progress_result)
-            }
-            4 -> {
                 binding.llApplicationResult.visibility = View.GONE
                 binding.llApprovalResult.visibility = View.GONE
-                binding.llRejectResult.visibility = View.VISIBLE
+                binding.llRejectResult.visibility = View.GONE
 
-                binding.tvTitle.text = context.getString(R.string.progress_result)
+                if (data.progressStatus!! == progressTypeList[2].code) {
+                    binding.llApprovalResult.visibility = View.VISIBLE
+                    binding.llRejectResult.visibility = View.GONE
+                } else if (data.progressStatus == progressTypeList[0].code){
+                    binding.llApprovalResult.visibility = View.GONE
+                    binding.llRejectResult.visibility = View.VISIBLE
+                }
             }
         }
     }

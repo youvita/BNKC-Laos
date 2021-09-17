@@ -2,16 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--    <data>-->
-    <!--        <variable-->
-    <!--            name="myLoanViewModel"-->
-    <!--            type="com.mobile.bnk.ui.main.fragment.myloan.MyLoanViewModel" />-->
 
-    <!--        <variable-->
-    <!--            name="summary"-->
-    <!--            type="com.mobile.bnk.model.loan.Summary" />-->
+    <data>
 
-    <!--    </data>-->
+        <import type="android.view.View"/>
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -135,6 +131,7 @@
                             android:background="@drawable/selector_circle_count_background"
                             android:enabled="true"
                             android:gravity="center"
+                            android:visibility="gone"
                             android:paddingLeft="6.5dp"
                             android:paddingTop="1.5dp"
                             android:paddingRight="6.5dp"
@@ -147,7 +144,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_lease"
                         android:layout_width="match_parent"
-                        android:layout_height="260dp"
+                        android:layout_height="250dp"
                         android:clipToPadding="false"
                         android:nestedScrollingEnabled="false"
                         android:orientation="horizontal"
@@ -156,11 +153,20 @@
                         app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
                         tools:listitem="@layout/item_lease_layout" />
 
+                    <LinearLayout
+                        android:id="@+id/ll_empty_lease_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:layout_height="@dimen/height_21dp"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
+
                     <!-- Lease Item Indicator -->
                     <LinearLayout
                         android:id="@+id/ll_lease_indicator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        tools:layout_height="@dimen/height_21dp"
                         android:gravity="center"
                         android:orientation="horizontal" />
 

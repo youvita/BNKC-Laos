@@ -46,10 +46,6 @@ class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-
-//        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-//            errorDialog(it.code, it.title, it.message)
-//        }
     }
 
     private fun initView() {

@@ -29,6 +29,7 @@ import com.mobile.bnkcl.ui.adapter.BannerAdapter
 import com.mobile.bnkcl.ui.adapter.LeaseAdapter
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
 import com.mobile.bnkcl.ui.dialog.ApplicationDialog
+import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.management.LeaseManagementActivity
 import com.mobile.bnkcl.ui.management.bill.BillPaymentActivity
@@ -41,9 +42,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     LeaseAdapter.LeaseItemClickedListener, View.OnClickListener {
-
-    @Inject
-    lateinit var cardRecyclerView: CardRecyclerView
 
     @Inject
     lateinit var bannerAdapter: BannerAdapter
@@ -62,19 +60,22 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var leaseDialog3: ApplicationDialog? = null
     private val viewModel: PageViewModel by viewModels()
     private var pageBinding: FragmentMyPageBinding? = null
-    private val mListener: MyLoanCardClickedListener? = null
     private var contractList: ArrayList<String>? = ArrayList()
+    private var leaseData: ArrayList<MyLeasesData>? = ArrayList()
+    private var productTypeList: ArrayList<CodesData>? = ArrayList()
+    private var requestTypeList: ArrayList<CodesData>? = ArrayList()
+    private var progressTypeList: ArrayList<CodesData>? = ArrayList()
     private var leaseLayoutManager: CardModeLayoutManager? = null
     private var bannerLayoutManager: CardModeLayoutManager? = null
     private var leaseResultList: List<LeaseApplicationData>? = null
     private var leaseScreeningList: List<LeaseApplicationData>? = null
     private var leaseApplicationList: List<LeaseApplicationData>? = null
-    private var leaseData: ArrayList<MyLeasesData>? = ArrayList()
-    private var productTypeList: ArrayList<CodesData>? = ArrayList()
-    private var requestTypeList: ArrayList<CodesData>? = ArrayList()
-    private var progressTypeList: ArrayList<CodesData>? = ArrayList()
-    private var banners =
-        listOf(R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3, R.drawable.banner_4)
+    private var banners = listOf(
+        R.drawable.banner_1, R.drawable.banner_2,
+        R.drawable.banner_3, R.drawable.banner_4
+    )
+    private var leaseCardRecyclerView: CardRecyclerView = CardRecyclerView()
+    private var bannerCardRecyclerView: CardRecyclerView = CardRecyclerView()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,8 +83,10 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         savedInstanceState: Bundle?
     ): View {
 
-        pageBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
+        pageBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_my_page,
+            container, false
+        )
 
         initView()
         initLiveData()
@@ -91,72 +94,69 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         return pageBinding!!.root
     }
 
-    fun requestData() {
-
+    private fun requestData() {
         if (activity != null && isAdded) {
-            showLoading()
             viewModel.getProductCodes()
             viewModel.getLeaseProgressCodes()
+            showLoading()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (AppLogin.PIN.code == "N") {
-            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                val intent = Intent(requireActivity(), OtpActivity::class.java)
-                startActivity(intent)
-            } else {
-                val loginIntent =
-                    Intent(requireActivity(), PinCodeActivity::class.java)
-                loginIntent.putExtra("pin_action", "login")
-                loginIntent.putExtra(
-                    "from",
-                    LeaseServiceActivity::class.java.simpleName
-                )
-                loginIntent.putExtra(
-                    "username",
-                    sharedPrefer.getPrefer(Constants.USER_ID)
-                )
-                startActivity(loginIntent)
-            }
-        } else {
+        if (AppLogin.PIN.code != "N") {
             requestData()
         }
     }
 
+    private fun initView() {
+
+        setUpBanner()
+        leaseAdapter.setItemClickListener(this)
+
+        leaseAdapter.clearItemList()
+        leaseAdapter.addItemList(arrayListOf(MyLeasesData()))
+
+        setUpLeaseAdapter()
+
+        addIndicator(
+            pageBinding!!.llEmptyLeaseIndicator,
+            1,
+            0
+        )
+
+        pageBinding!!.btnNotification.setOnClickListener {
+            startActivity(Intent(activity, AlarmActivity::class.java))
+        }
+    }
+
     private fun initLiveData() {
+
+        viewModel.productCodesLiveData.observe(requireActivity()) {
+            productTypeList?.clear()
+            productTypeList = it.codes
+            leaseAdapter.setProductTypeList(productTypeList!!)
+            viewModel.getDashboard()
+        }
+
         viewModel.dashboardLiveData.observe(requireActivity()) {
             LRS001 = it.countApplication!!
             LRS002 = it.countScreening!!
             LRS003 = it.countResult!!
 
-            setUpDashboard(LRS001, LRS002, LRS003, it.myLeases!!.size)
 
-            it.myLeases.add(MyLeasesData())
+            it.myLeases?.add(MyLeasesData())
 
-            leaseAdapter.setItemClickListener(this)
-            leaseAdapter.setProductTypeList(productTypeList!!)
             leaseAdapter.clearItemList()
             leaseAdapter.addItemList(it.myLeases)
 
-            pageBinding!!.rvLease.adapter = leaseAdapter
-            pageBinding?.rvLease?.removeItemDecoration(itemOffsetDecoration)
-            pageBinding?.rvLease?.addItemDecoration(itemOffsetDecoration)
-            cardRecyclerView.attachToRecyclerView(pageBinding?.rvLease)
-            cardRecyclerView.setScale(1f)
+            setUpLeaseAdapter()
 
+            setUpDashboard(LRS001, LRS002, LRS003, it.myLeases!!.size - 1)
+            leaseData?.clear()
             leaseData!!.addAll(it.myLeases)
-            setUpLeaseIndicator()
-
-            setUpBanner()
-            successListener()
+            setUpLeaseIndicator(leaseAdapter.itemCount)
             viewModel.getLeaseRequestCodes()
-        }
-
-        viewModel.productCodesLiveData.observe(requireActivity()) {
-            productTypeList = it.codes
-            viewModel.getDashboard()
         }
 
         viewModel.progressCodesLiveData.observe(requireActivity()) {
@@ -165,6 +165,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         viewModel.requestCodesLiveData.observe(requireActivity()) {
             requestTypeList = it.codes
+            successListener()
 
             if (LRS001 > 0) {
                 viewModel.getLeaseApplication(it.codes!![0].code!!)
@@ -201,11 +202,19 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         }
     }
 
-    private fun setUpLeaseIndicator() {
+    private fun setUpLeaseAdapter() {
+        pageBinding!!.rvLease.adapter = leaseAdapter
+        pageBinding?.rvLease?.removeItemDecoration(itemOffsetDecoration)
+        pageBinding?.rvLease?.addItemDecoration(itemOffsetDecoration)
+        leaseCardRecyclerView.attachToRecyclerView(pageBinding?.rvLease)
+        leaseCardRecyclerView.setScale(1f)
+    }
+
+    private fun setUpLeaseIndicator(count: Int) {
 
         addIndicator(
             pageBinding!!.llLeaseIndicator,
-            leaseAdapter.itemCount,
+            count,
             0
         )
 
@@ -218,7 +227,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
                 super.onScrollStateChanged(recyclerView, newState)
                 addIndicator(
                     pageBinding!!.llLeaseIndicator,
-                    leaseAdapter.itemCount,
+                    count,
                     leaseLayoutManager!!.findLastVisibleItemPosition()
                 )
 
@@ -230,28 +239,28 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ll_menu1 -> {
-                leaseDialog1 = ApplicationDialog(leaseApplicationList!!, productTypeList!!, 1)
+                leaseDialog1 = ApplicationDialog(
+                    leaseApplicationList!!, productTypeList!!, progressTypeList!!, 1
+                )
                 leaseDialog1?.show(requireActivity().supportFragmentManager, leaseDialog1?.tag)
             }
             R.id.ll_menu2 -> {
-                leaseDialog2 = ApplicationDialog(leaseScreeningList!!, productTypeList!!, 2)
+                leaseDialog2 = ApplicationDialog(
+                    leaseScreeningList!!, productTypeList!!, progressTypeList!!, 2
+                )
                 leaseDialog2?.show(requireActivity().supportFragmentManager, leaseDialog2?.tag)
             }
             R.id.ll_menu3 -> {
-                leaseDialog3 = ApplicationDialog(leaseResultList!!, productTypeList!!, 3)
+                leaseDialog3 =
+                    ApplicationDialog(
+                        leaseResultList!!, productTypeList!!, progressTypeList!!, 3
+                    )
                 leaseDialog3?.show(requireActivity().supportFragmentManager, leaseDialog3?.tag)
             }
         }
     }
 
-    private fun initView() {
-
-        pageBinding!!.btnNotification.setOnClickListener {
-            startActivity(Intent(activity, AlarmActivity::class.java))
-        }
-    }
-
-    private fun setUpDashboard(MLR001: Int, MLR002: Int, MLR003: Int, MLR004: Int) {
+    private fun setUpDashboard(MLR001: Int, MLR002: Int, MLR003: Int, count: Int) {
 
         pageBinding!!.requestMenu.llMenu1.isEnabled = MLR001 > 0
         pageBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.menu_application).plus(
@@ -266,10 +275,12 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             "\n"
         ).plus(this.LRS003.toString())
 
-        pageBinding!!.tvLeaseInUseCnt.isEnabled = MLR004 != 0
+        pageBinding!!.tvLeaseInUseCnt.isEnabled = count != 0
         pageBinding!!.tvLeaseInUseCnt.visibility = View.VISIBLE
-        pageBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(MLR004)
+        pageBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(count)
 
+        pageBinding!!.llEmptyLeaseIndicator.visibility =
+            if (leaseAdapter.itemCount == 1) View.VISIBLE else View.GONE
     }
 
     private fun setUpBanner() {
@@ -280,8 +291,8 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         pageBinding?.rvBanner?.removeItemDecoration(itemOffsetDecoration)
         pageBinding?.rvBanner?.addItemDecoration(itemOffsetDecoration)
-        cardRecyclerView.attachToRecyclerView(pageBinding?.rvBanner)
-        cardRecyclerView.setScale(1f)
+        bannerCardRecyclerView.attachToRecyclerView(pageBinding?.rvBanner)
+        bannerCardRecyclerView.setScale(1f)
 
         addIndicator(
             pageBinding!!.llBannerIndicator,
@@ -305,10 +316,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     }
 
-    interface MyLoanCardClickedListener {
-        fun onAddNewLoanClicked()
-    }
-
     override fun onBillPaymentClicked(contractNo: String?, position: Int) {
         val intent = Intent(requireActivity(), BillPaymentActivity::class.java)
         intent.putExtra("CONTRACT_NO", contractNo)
@@ -319,6 +326,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     override fun onManagementClicked(contractNo: String?, position: Int) {
         val intent = Intent(requireActivity(), LeaseManagementActivity::class.java)
         intent.putExtra("CONTRACT_NO", contractNo)
+        contractList?.clear()
         for (i in 0 until leaseData!!.size - 1) {
             contractList!!.add(leaseData!![i].contractNo!!)
         }
@@ -327,7 +335,27 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     }
 
     override fun onAddNewLeaseClicked() {
-        mListener?.onAddNewLoanClicked()
+        if (AppLogin.PIN.code == "N") {
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                val intent = Intent(requireActivity(), OtpActivity::class.java)
+                startActivity(intent)
+            } else {
+                val loginIntent =
+                    Intent(requireActivity(), PinCodeActivity::class.java)
+                loginIntent.putExtra("pin_action", "login")
+                loginIntent.putExtra(
+                    "from",
+                    LeaseServiceActivity::class.java.simpleName
+                )
+                loginIntent.putExtra(
+                    "username",
+                    sharedPrefer.getPrefer(Constants.USER_ID)
+                )
+                startActivity(loginIntent)
+            }
+        } else {
+            startActivity(Intent(requireActivity(), ApplyLeaseActivity::class.java))
+        }
     }
 
     override fun getLayoutId(): Int {
