@@ -144,7 +144,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            finish()
+            Runtime.getRuntime().exit(0);
         }
     }
 

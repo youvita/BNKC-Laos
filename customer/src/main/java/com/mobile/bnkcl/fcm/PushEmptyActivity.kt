@@ -53,11 +53,11 @@ class PushEmptyActivity : BaseActivity<ViewDataBinding>() {
                      * case action_type is equal "2" : Loan Consultation
                      * case action_type is equal "3" : Notice (WebView)
                      */
-                    val actionType: String = RunTimeDataStore.ACTION_TYPE
+                    val actionType: String = RunTimeDataStore.ActionType.value
                     if (actionType.isNotEmpty()) {
                         when (actionType) {
                             "1", "2" -> {
-                                val actionId: String = RunTimeDataStore.ACTION_ID
+                                val actionId: String = RunTimeDataStore.ActionId.value
                                 if (actionId.isNotEmpty()) {
                                     val intent = Intent(
                                         this@PushEmptyActivity,
@@ -120,7 +120,7 @@ class PushEmptyActivity : BaseActivity<ViewDataBinding>() {
                                 }
                             }
                             "3" -> {
-                                val actionUrl: String = RunTimeDataStore.ACTION_URL
+                                val actionUrl: String = RunTimeDataStore.ActionUrl.value
                                 if (actionUrl.isNotEmpty()) {
                                     val openNotice =
                                         Intent(this@PushEmptyActivity, NoticeActivity::class.java)
