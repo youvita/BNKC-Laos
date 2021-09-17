@@ -315,6 +315,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     )
                     languageDialog.onLangSelected {
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     }
                 }
                 R.id.btn_facebook -> {
@@ -383,6 +384,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         super.onDestroy()
         tabLayout = null
         viewPager = null
+    }
+
+    override fun onBackPressed() {
+        if (viewPager?.currentItem == 0) {
+            super.onBackPressed()
+        }else {
+            viewPager?.currentItem = 0
+        }
     }
 
 }

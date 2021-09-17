@@ -38,6 +38,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         binding.clLease.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.clLoan.setOnClickListener {
