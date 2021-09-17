@@ -35,4 +35,8 @@ object SourceModule {
     @Provides
     fun provideTwoButtonDialog() = TwoButtonDialog()
 
+    @Singleton
+    @Provides
+    fun providePhotoSettingMenu() = PhotoSettingMenu()
+
 }

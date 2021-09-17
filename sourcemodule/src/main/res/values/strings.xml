@@ -32,4 +32,8 @@
     <string name="notice">Notice</string>
     <string name="permission_denied">Permission denied, please update in setting.</string>
 
+    <!-- photo setting menu -->
+    <string name="camera">Take a photo</string>
+    <string name="gallery">Choose from gallery</string>
+
 </resources>

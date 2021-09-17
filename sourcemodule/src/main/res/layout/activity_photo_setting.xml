@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_solid_ffffff_15">
+
+        <TextView
+            android:id="@+id/gallery"
+            style="@style/font15_263238_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawablePadding="17dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.01"
+            android:paddingTop="@dimen/padding_40dp"
+            android:paddingStart="@dimen/padding_20dp"
+            android:paddingEnd="@dimen/padding_20dp"
+            android:paddingBottom="@dimen/padding_20dp"
+            android:text="@string/gallery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/camera"
+            style="@style/font15_263238_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawablePadding="17dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.01"
+            android:paddingTop="@dimen/padding_20dp"
+            android:paddingStart="@dimen/padding_20dp"
+            android:paddingEnd="@dimen/padding_20dp"
+            android:paddingBottom="@dimen/padding_40dp"
+            android:text="@string/camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gallery" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.user.edit
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -24,6 +26,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseStorageActivity
+import com.bnkc.sourcemodule.data.SettingMenu
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -39,7 +42,7 @@ import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityEditAccountInfoBinding
 import com.mobile.bnkcl.ui.dialog.AlertEditInfoDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.ui.user.photo.PhotoSettingMenu
+import com.bnkc.sourcemodule.dialog.PhotoSettingMenu
 import com.mobile.bnkcl.ui.user.photo.PhotoViewModel
 import com.mobile.bnkcl.utilities.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,6 +58,9 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
+    @Inject
+    lateinit var photoSettingMenu: PhotoSettingMenu
+
     private val PICK_IMAGE = 1
     private val PICK_CAMERA = 1000
     private var firstIndex: Int? = 0
@@ -66,12 +72,13 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private var firstJobType: String = ""
     private var selectJobType: String = ""
     private var profileData: ProfileData? = ProfileData()
-    private val photoViewModel: PhotoViewModel? by viewModels()
+    private val photoViewModel: PhotoViewModel by viewModels()
     private var jobTypeList: ArrayList<CodesData>? = ArrayList()
     private var jobTypeCodeList: ArrayList<String>? = ArrayList()
     private var jobTypeTitleList: ArrayList<String>? = ArrayList()
     private val viewModel: EditAccountInfoViewModel by viewModels()
-    private var photoSettingMenu: PhotoSettingMenu? = null
+
+    private var settingMenu: SettingMenu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(resources.getColor(R.color.color_f5f7fc))
@@ -109,18 +116,18 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             binding.btnSave.setOnClickListener(null)
         }
 
-        photoViewModel!!.photoSettingLiveData.observe(this) {
-            when (it!!) {
-                PhotoViewModel.Setting.Camera -> {
-                    photoSettingMenu!!.onDismiss()
+        photoViewModel.photoSettingLiveData.observe(this) {
+            when (it) {
+                SettingMenu.Camera -> {
                     val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(takePictureIntent, PICK_CAMERA)
+//                    startActivityForResult(takePictureIntent, PICK_CAMERA)
+                    resultLauncher.launch(takePictureIntent)
                 }
-                PhotoViewModel.Setting.Gallery -> {
-                    photoSettingMenu!!.onDismiss()
+                SettingMenu.Gallery -> {
                     val galleryIntent =
                         Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    startActivityForResult(galleryIntent, PICK_IMAGE)
+//                    startActivityForResult(galleryIntent, PICK_IMAGE)
+                    resultLauncher.launch(galleryIntent)
                 }
             }
         }
@@ -456,7 +463,11 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     }
 
     private fun showPhotoMenu() {
-        photoSettingMenu = PhotoSettingMenu(this@EditAccountInfoActivity, photoViewModel)
+        photoSettingMenu.show(supportFragmentManager, null)
+        photoSettingMenu.onMenuSelected {
+            settingMenu = it
+            photoViewModel.setSettingMenu(it)
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -478,41 +489,6 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     override fun onPermissionGranted() {
         super.onPermissionGranted()
         showPhotoMenu()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_CANCELED) return
-        var file: File? = null
-        var imageUri: Uri? = null
-        var imageBitmap: Bitmap? = null
-        when (requestCode) {
-            PICK_IMAGE -> if (data != null) {
-                imageUri = data.data
-                val paths: String = getPath(this, imageUri)!!
-                file = File(paths)
-            }
-            PICK_CAMERA -> if (data != null) {
-                val extras: Bundle? = data.extras
-                if (extras != null) {
-                    imageBitmap = extras["data"] as Bitmap?
-                }
-                imageUri = getUri(applicationContext, imageBitmap!!)
-                file = File(getRealPathFromURI(imageUri))
-            }
-        }
-        assert(file != null)
-        if (file!!.exists()) {
-            viewModel.setFile(file)
-            isUpdateOnlyImage = true
-            validateButton()
-            UtilsGlide.loadCircle(
-                this@EditAccountInfoActivity,
-                imageUri,
-                binding.imageProfile,
-                null
-            )
-        }
     }
 
     private fun getRealPathFromURI(uri: Uri?): String {
@@ -552,5 +528,46 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             result = "Not found"
         }
         return result
+    }
+
+    /**
+     * replace for deprecated onActivityResult
+     */
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            var file: File? = null
+            var imageUri: Uri? = null
+            var imageBitmap: Bitmap? = null
+            val data = result.data
+
+            when (settingMenu) {
+                SettingMenu.Gallery -> if (data != null) {
+                    imageUri = data.data
+                    val paths: String = getPath(this, imageUri)!!
+                    file = File(paths)
+                }
+                SettingMenu.Camera -> if (data != null) {
+                    val extras: Bundle? = data.extras
+                    if (extras != null) {
+                        imageBitmap = extras["data"] as Bitmap?
+                    }
+                    imageUri = getUri(applicationContext, imageBitmap!!)
+                    file = File(getRealPathFromURI(imageUri))
+                }
+            }
+
+            assert(file != null)
+            if (file!!.exists()) {
+                viewModel.setFile(file)
+                isUpdateOnlyImage = true
+                validateButton()
+                UtilsGlide.loadCircle(
+                        this@EditAccountInfoActivity,
+                        imageUri,
+                        binding.imageProfile,
+                        null
+                )
+            }
+        }
     }
 }
