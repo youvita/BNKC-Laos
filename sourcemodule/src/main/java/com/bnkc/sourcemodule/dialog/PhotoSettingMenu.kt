@@ -15,13 +15,6 @@ class PhotoSettingMenu: BaseBottomSheetDialog<ActivityPhotoSettingBinding>() {
         return R.layout.activity_photo_setting
     }
 
-    /**
-     * date picker listener
-     */
-    fun onMenuSelected(menuListener: ((settingMenu: SettingMenu?) -> Unit)) =
-            apply { this.menuListener = menuListener }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,5 +28,7 @@ class PhotoSettingMenu: BaseBottomSheetDialog<ActivityPhotoSettingBinding>() {
             dismiss()
         }
     }
+
+    fun onMenuSelected(menuListener: ((settingMenu: SettingMenu?) -> Unit)) = apply { this.menuListener = menuListener }
 }
 
