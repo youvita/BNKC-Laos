@@ -27,24 +27,22 @@ class CardRecyclerView {
    private val pagerSnapHelper = PagerSnapHelper()
 
    fun attachToRecyclerView(mRecyclerView: RecyclerView?) {
-      if (this.mRecyclerView == null) {
-         this.mRecyclerView = mRecyclerView
-         mContext = mRecyclerView?.context
-         mRecyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-               super.onScrolled(recyclerView, dx, dy)
-               if (dx != 0) {
-                  mCurrentItemOffset += dx
-                  computeCurrentItemPos()
-                  onScrolledChangedCallback()
-               }
+      this.mRecyclerView = mRecyclerView
+      mContext = mRecyclerView?.context
+      mRecyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if (dx != 0) {
+               mCurrentItemOffset += dx
+               computeCurrentItemPos()
+               onScrolledChangedCallback()
             }
-         })
+         }
+      })
 
-         initWidth()
-         mRecyclerView?.onFlingListener = null
-         pagerSnapHelper.attachToRecyclerView(mRecyclerView)
-      }
+      initWidth()
+      mRecyclerView?.onFlingListener = null
+      pagerSnapHelper.attachToRecyclerView(mRecyclerView)
    }
 
    private fun initWidth() {
