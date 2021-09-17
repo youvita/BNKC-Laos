@@ -71,6 +71,7 @@
                         android:overScrollMode="never"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_notification"/>
+<!--
 
                     <LinearLayout
                         android:id="@+id/ll_no_data"
@@ -105,6 +106,7 @@
                             android:layout_height="wrap_content"
                             style="@style/font_15_263238_regular"/>
                     </LinearLayout>
+-->
 
                 </LinearLayout>
 

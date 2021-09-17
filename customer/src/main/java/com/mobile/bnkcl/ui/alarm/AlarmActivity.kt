@@ -49,7 +49,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
             if (list.isNotEmpty()) {
                 adapter.addItemList(list)
             }
-            checkUIChangeEmptyData()
+//            checkUIChangeEmptyData()
             successListener()
             isSending = false
         }
@@ -117,15 +117,15 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         isSending = true
     }
 
-    private fun checkUIChangeEmptyData() {
-        if (adapter.itemCount > 0) {
-            binding.lvNotifiation.visibility = View.VISIBLE
-            binding.llNoData.visibility = View.GONE
-        } else {
-            binding.lvNotifiation.visibility = View.GONE
-            binding.llNoData.visibility = View.VISIBLE
-        }
-    }
+//    private fun checkUIChangeEmptyData() {
+//        if (adapter.itemCount > 0) {
+//            binding.lvNotifiation.visibility = View.VISIBLE
+//            binding.llNoData.visibility = View.GONE
+//        } else {
+//            binding.lvNotifiation.visibility = View.GONE
+//            binding.llNoData.visibility = View.VISIBLE
+//        }
+//    }
 
 
 }
