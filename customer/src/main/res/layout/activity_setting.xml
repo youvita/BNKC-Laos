@@ -182,7 +182,7 @@
                                 style="@style/font15_d7191f_medium"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/margin_16dp"
+                                android:layout_marginEnd="@dimen/margin_10dp"
                                 android:gravity="center"
                                 android:text="@string/setting_04"
                                 app:drawableRightCompat="@drawable/right_red_arrow_ico"
