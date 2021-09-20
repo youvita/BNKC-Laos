@@ -25,6 +25,7 @@ import com.mobile.bnkcl.data.response.auth.AreaObj
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import java.text.ParseException
@@ -116,6 +117,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }
         }
 
+        Utils.setHideKeyboard(this, binding.rlSignupInfo)
+
         /**
          * on date of birth click
          * */
@@ -143,7 +146,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
                 listChoiceDialog.setOnItemListener ={ a: Int ->
                     selectedCapital = a
-                    binding.lltAdditional.tvCapital.text = objCapital!![a].alias1
+                    binding.lltAdditional.tvCapital.text = objCapital!![a].name
                     binding.lltAdditional.tvDistrict.text = ""
                     binding.lltAdditional.tvVillage.text = ""
                     addressInfoViewModel.addressData = AddressData(
@@ -206,7 +209,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         listChoiceDialog.setOnItemListener = { b: Int ->
 
                             selectDistrict = b
-                            binding.lltAdditional.tvDistrict.text = objDistrict!![b].alias1
+                            binding.lltAdditional.tvDistrict.text = objDistrict!![b].name
                             binding.lltAdditional.tvVillage.text = ""
 
                             addressInfoViewModel.villageData = AddressData(
@@ -266,7 +269,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
                     listChoiceDialog.setOnItemListener = { b: Int ->
                         selectVillage = b
-                        binding.lltAdditional.tvVillage.text = objVillage!![b].alias1
+                        binding.lltAdditional.tvVillage.text = objVillage!![b].name
                         val village = objVillage!![b]
                         val villageData = AreaObj()
                         villageData.id = village.id
