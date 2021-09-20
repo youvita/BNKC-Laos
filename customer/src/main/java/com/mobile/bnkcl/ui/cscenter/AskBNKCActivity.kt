@@ -11,13 +11,11 @@ import androidx.activity.viewModels
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
 import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCViewModel
-import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.Utils
@@ -84,7 +82,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("from", AskBNKCActivity::class.java.simpleName)
         intent.putExtra("result", result)
-        startActivity(intent)
+        results.launch(intent)
     }
 
     private var inputText = object : TextWatcher{
@@ -98,14 +96,16 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
             subject = binding.edtSubject.text.toString()
             description = binding.edtDescription.text.toString()
             binding.btnSubmit.isEnable(subject, description)
-//            binding.btnSubmit.setActive(true)
         }
     }
 
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.toolbar_left_button -> onBackPressed()
+            R.id.toolbar_left_button -> {
+                onBackPressed()
+                finish()
+            }
 
             R.id.btn_submit -> {
                 onRequestToSubmit()
@@ -114,19 +114,10 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
     }
 
 
-//    var result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
-//        if (result.resultCode == Activity.RESULT_OK){
-//
-//            val data : Intent? = result.data
-//            if (data != null) {
-//                if (data.getIntExtra("tab_index", 0) != 0) {
-//                    val intent = intent
-//                    intent.putExtra("tab_index", data.getIntExtra("tab_index", 0))
-//                    setResult(RESULT_OK, intent)
-//                    finish()
-//                }
-//            }
-//
-//    }
-//    }
+    var results = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
+        if (result.resultCode == Activity.RESULT_OK){
+            setResult(RESULT_OK)
+            finish()
+    }
+    }
 }

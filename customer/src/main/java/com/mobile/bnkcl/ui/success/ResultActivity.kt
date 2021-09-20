@@ -2,14 +2,12 @@ package com.mobile.bnkcl.ui.success
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityResultBinding
 import com.mobile.bnkcl.ui.cscenter.AskBNKCActivity
-import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
@@ -67,14 +65,8 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
             when(it){
                 AskBNKCActivity::class.java.simpleName -> {
                     if (resultStatus){
-                        var intent = Intent(this,CSCenterActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }else{
-                        var intent = Intent(this,AskBNKCActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
+                        setResult(RESULT_OK)
+                        finish()}
                 }
                 Constants.RESET_PIN -> {
                     if (resultStatus){

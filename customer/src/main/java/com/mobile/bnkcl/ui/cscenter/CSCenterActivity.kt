@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.ui.cscenter
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.ViewTreeObserver
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -53,18 +55,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         checkError()
         initToolbar()
         observeData()
-
-        if (intent != null) {
-            if (intent.getIntExtra("tab_index", 0) !== 0) {
-                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
-                pageNumber = 0
-                getClaimData(pageNumber, true)
-                visibleAskBnk()
-            } else {
-                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
-                visibleWebView()
-            }
-        }
+        visibleWebView()
 
         binding.nsvAsk.smoothScrollBy(0, 0)
 
@@ -208,7 +199,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
      */
     fun onAskBnkClick() {
         val intent = Intent(this, AskBNKCActivity::class.java)
-        startActivity(intent)
+        results.launch(intent)
     }
 
     /**
@@ -216,6 +207,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
      */
     fun onBackPress() {
         onBackPressed()
+        finish()
     }
 
     /**
@@ -231,6 +223,14 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
     override fun onDestroy() {
         super.onDestroy()
         networkState = null
+    }
+    var results = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
+        if (result.resultCode == Activity.RESULT_OK){
+            clearState()
+            pageNumber = 0
+            getClaimData(pageNumber, false)
+            visibleAskBnk()
+        }
     }
 
 }
