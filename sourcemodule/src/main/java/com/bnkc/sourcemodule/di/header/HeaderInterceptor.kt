@@ -33,7 +33,7 @@ class HeaderInterceptor {
 
             val request = chain.request()
                     .newBuilder()
-                    .header(ACCEPT_LANGUAGE, "")
+                    .header(ACCEPT_LANGUAGE, credentialSharedPrefer.getPrefer(Constants.LANGUAGE)!!)
                     .header(X_APP_VERSION, "")
             when {
                 !RunTimeDataStore.LoginToken.value.isNullOrEmpty() -> {
