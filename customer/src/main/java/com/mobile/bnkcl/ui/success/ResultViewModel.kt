@@ -56,7 +56,7 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
                     "Inquiry is Failed"
                 }
             }
-            Constants.SET_UP_PIN -> {
+            Constants.RESET_PIN -> {
                 return if (resultLiveData){
                     "PIN Reset Successful"
                 }else{

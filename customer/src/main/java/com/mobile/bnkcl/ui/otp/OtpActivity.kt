@@ -265,7 +265,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
                     }
                     action.equals("FORGET", ignoreCase = true) -> {
-                        val phoneNumber = sharedPrefer.getPrefer(Constants.USER_ID)
+                        var phoneNumber : String? = ""
+                        if (intent.hasExtra("username")){
+                            phoneNumber = intent.getStringExtra("username")
+                        }
+
                         binding.otpViewModel!!.uiMode = 2
                         binding.llPhoneNo.background = ContextCompat.getDrawable(
                             this,

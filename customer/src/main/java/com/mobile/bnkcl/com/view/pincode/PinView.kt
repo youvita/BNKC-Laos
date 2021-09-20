@@ -138,62 +138,63 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         button0.setOnClickListener(OnClickListener {
             val number = button0.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
         })
         button1.setOnClickListener(OnClickListener {
             val number = button1.text.toString()
-            val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            val codeLength = mPinView!!.input(number)
+            Log.d(">>>>>", "codeLength : $codeLength")
+            appendNumber(codeLength)
 
         })
         button2.setOnClickListener(OnClickListener {
             val number = button2.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
         button3.setOnClickListener(OnClickListener {
             val number = button3.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
         button4.setOnClickListener(OnClickListener {
             val number = button4.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
 
         button5.setOnClickListener(OnClickListener {
             val number = button5.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
 
         button6.setOnClickListener(OnClickListener {
             val number = button6.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
         button7.setOnClickListener(OnClickListener {
             val number = button7.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
         button8.setOnClickListener(OnClickListener {
             val number = button8.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
         button9.setOnClickListener(OnClickListener {
             val number = button9.text.toString()
             val codeLength: Int = mPinView!!.input(number)
-            appendNumber(number.toInt())
+            appendNumber(codeLength)
 
         })
 
@@ -243,22 +244,49 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         mPinView!!.clearCode()
     }
 
-    private fun appendNumber(number: Int) {
-        if (reEnterPassword){ //Two-time pin input
-            if (currentPinCode.length < 3)
-            {
-                currentPinCode = currentPinCode.plus(number)
-                setOnPinKeyClickListener(number.toString())
-            }
-            else if (currentPinCode.length == 3) {
+    private fun appendNumber(codeLength: Int) {
+        Log.d(">>>>>", "currentPinCode & Code: $currentPinCode === $mCode >> $codeLength")
+        if (codeLength == 4) {
+            if (reEnterPassword) { //Two-time pin input
+//                mPinMessage!!.text = context.getString(R.string.pin_confirm)
+//                mCode = mPinView!!.code
+//                if (currentPinCode.length < 3) {
+//                    currentPinCode = currentPinCode.plus(number)
+//                    setOnPinKeyClickListener(number.toString())
+//                } else if (currentPinCode.length == 3) {
+//                    mPinMessage!!.text = context.getString(R.string.pin_confirm)
+//                    mCode = mPinView!!.code
+//
+//                    Log.d(">>>>>", "appendNumber: $currentPinCode === $mCode")
+//                    if (TextUtils.isEmpty(mCodeValidation)) {
+//                        Handler().postDelayed(
+//                            {
+//                                mCodeValidation = mCode
+//                                clearPin()
+//                            }, 200
+//                        )
+//                        return
+//                    }
+//                    if (!TextUtils.isEmpty(mCodeValidation) && mCode == mCodeValidation) {
+//                        setOnCompletedListener(mCode)
+//                    } else {
+//                        clearPin()
+//                        errorAction()
+//                        setOnErrorListener(NOT_MATCH_PASSWORD)
+//                    }
+//
+//                }
+
                 mPinMessage!!.text = context.getString(R.string.pin_confirm)
                 mCode = mPinView!!.code
+                currentPinCode = currentPinCode.plus(mCode)
+                Log.d(">>>>>", "appendNumber: $currentPinCode === $mCode")
                 if (TextUtils.isEmpty(mCodeValidation)) {
                     Handler().postDelayed(
-                            {
-                                mCodeValidation = mCode
-                                clearPin()
-                            }, 200
+                        {
+                            mCodeValidation = mCode
+                            clearPin()
+                        }, 200
                     )
                     return
                 }
@@ -270,19 +298,18 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
                     setOnErrorListener(NOT_MATCH_PASSWORD)
                 }
 
-            }
-        }else{ //Input pin
-            if (currentPinCode.length < 3)
-            {
-                currentPinCode = currentPinCode.plus(number)
-                setOnPinKeyClickListener(number.toString())
-            }
-            else if (currentPinCode.length == 3) {
-                currentPinCode = currentPinCode.plus(number)
-                setOnCompletedListener(currentPinCode)
+            } else { //Input pin
+//                if (currentPinCode.length < 3) {
+//                    currentPinCode = currentPinCode.plus(number)
+//                    setOnPinKeyClickListener(number.toString())
+//                } else if (currentPinCode.length == 3) {
+//                    currentPinCode = currentPinCode.plus(number)
+//                    setOnCompletedListener(currentPinCode)
+//                }
+//                currentPinCode = currentPinCode.plus(mPinView!!.code)
+                setOnCompletedListener(mPinView!!.code)
             }
         }
-
     }
 
 }

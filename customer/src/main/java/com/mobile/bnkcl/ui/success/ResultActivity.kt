@@ -72,7 +72,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                     if (resultStatus){
                         val intent = Intent(this, PinCodeActivity::class.java)
                         intent.putExtra("pin_action", "login")
-                        intent.putExtra("username", username)
+                        intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
                         startActivity(intent)
                         finish()
                     }else{

@@ -34,7 +34,9 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
 
     var signUpRequest : SignUpRequest? = null
 
-    var pinUI : Int = 0
+//    var pinUI : Int = 0
+//    var _pinUi : MutableLiveData<Int> = MutableLiveData<Int>()
+//    var pinUi = _pinUi
 
     private val _login: MutableLiveData<LoginResponse> = MutableLiveData()
     val loginLiveData: LiveData<LoginResponse> = _login
@@ -80,9 +82,9 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     private val _preResetMuLiveData: MutableLiveData<PreChangeResponse> = MutableLiveData()
     val preResetLiveData: LiveData<PreChangeResponse> = _preResetMuLiveData
     var preChangeRequest = PreChangeRequest()
-    fun preChangePassword(){
+    fun preResetPassword(){
         viewModelScope.launch {
-            userRepo.preChangePassword(preChangeRequest!!).onEach { resource ->
+            userRepo.preChangePassword(preChangeRequest).onEach { resource ->
                 _preResetMuLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }

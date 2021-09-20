@@ -36,7 +36,7 @@ import javax.inject.Inject
 class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     private val viewModel : PinViewModel by viewModels()
-    var confirmCurrentPassword = true
+    var inputExistingPwd = true
     var sessionId = ""
     var needAuth = false
     var from : String = ""
@@ -53,23 +53,21 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         super.onCreate(savedInstanceState)
         binding.pinViewModel = viewModel
         if (intent != null) {
-//            extrasLogin = ExtrasLogin(this, intent)
             pinUI = intent.getStringExtra("pin_action").toString()
-            username = intent.getStringExtra("username").toString()
-
+            if (intent.hasExtra("username")){
+                username = intent.getStringExtra("username").toString()
+            }
             if (pinUI == "sign_up") {
 
                 viewModel.signUpRequest = intent.getSerializableExtra("req_signup_obj") as SignUpRequest
-
-                binding.pinView.reEnterPassword = true
-                binding.pinViewModel!!.pinUI = 2
+                setUpRegisterPinUI()
 
             } else if (pinUI == "forget") {
 
                 sessionId = intent.getStringExtra(Constants.SESSION_ID).toString()
 
                 binding.pinView.reEnterPassword = true
-                binding.pinViewModel!!.pinUI = 3
+                binding.pinUi = 3
 
             } else if (pinUI == "login") {
                 if (intent.hasExtra("from")){
@@ -80,11 +78,12 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                     needAuth = true
                     sessionId = intent.getStringExtra(Constants.SESSION_ID).toString()
                 }
-                binding.pinViewModel!!.pinUI = 1
+                binding.pinUi = 1
 
             } else if(pinUI == "reset_pin"){
 
-                binding.pinViewModel!!.pinUI = 4
+//                binding.pinView.reEnterPassword = true
+                binding.pinUi = 4
 
             }
         }
@@ -108,7 +107,9 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
                 }
                 "reset_pin" -> {
+                    binding.pinView.clearPin()
                     val intent = Intent(this, OtpActivity::class.java)
+                    intent.putExtra("username", username)
                     intent.putExtra("ACTION_TAG", "FORGET")
                     startActivity(intent)
                 }
@@ -117,9 +118,9 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         }
 
         binding.pinView.setOnCompletedListener = { pinCode : String ->
-
+            Log.d(">>>>>", "setOnCompletedListener: $pinCode --- ${binding.pinUi}")
             if (pinCode.isNotEmpty()){
-                when (viewModel.pinUI){
+                when (binding.pinUi){
                     1->{
                         login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
                     }
@@ -180,14 +181,14 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             successListener()
         }
         viewModel.preResetLiveData.observe(this) {
-            Log.d(">>>", "Sign Up ::: $it")
-            setUpRegisterPinUI()
+            Log.d(">>>", "Pre Reset ::: $it")
             viewModel.resetPasswordRequest.session_id = it.session_id
-            confirmCurrentPassword = false
+            inputExistingPwd = false
+            setUpRegisterPinUI()
         }
 
         viewModel.resetLiveData.observe(this) {
-            Log.d(">>>", "Sign Up ::: $it")
+            Log.d(">>>", "Reset ::: $it")
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("from", Constants.RESET_PIN)
             intent.putExtra("result", true)
@@ -203,8 +204,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     }
 
     private fun setUpRegisterPinUI(){
+        binding.pinView.clearPin()
         binding.pinView.reEnterPassword = true
-        binding.pinViewModel!!.pinUI = 2
+//        binding.pinUi = 4
+        binding.pinView.mPinMessage!!.text = getString(R.string.pin_registration)
     }
 
         private fun signUp(pin: String) {
@@ -294,9 +297,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         }
 
     private fun resetPassword(pin : String){
-        if (confirmCurrentPassword){
+        Log.d("nng", "resetPassword :: $inputExistingPwd")
+        if (inputExistingPwd){
             viewModel.preChangeRequest.password = pin
-            viewModel.preChangePassword()
+            viewModel.preResetPassword()
         }else{
             viewModel.resetPasswordRequest.password = pin
             viewModel.resetPassword()
@@ -305,7 +309,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     private fun forgetPin(pin : String){
         viewModel.forgetPinRequest.session_id = sessionId
-        viewModel.forgetPinRequest.username = sharedPrefer.getPrefer(USER_ID)
+        viewModel.forgetPinRequest.username = username
         viewModel.forgetPinRequest.password = pin
         viewModel.forgetPIN()
     }
