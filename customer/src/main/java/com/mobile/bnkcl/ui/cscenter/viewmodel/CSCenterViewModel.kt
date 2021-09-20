@@ -25,17 +25,11 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
     var res = ClaimDataResponse()
 
     fun getClaimData(page_number: Int, loading: Boolean){
-        request = ClaimDataRequest(page_number, request.page_size, "")
+        request = ClaimDataRequest(page_number, request.page_size, "asc")
         viewModelScope.launch {
             claimRepo.getClaimData(request).onEach { resource ->
                 _claimData.value = resource
             }.launchIn(viewModelScope)
         }
     }
-
-
-    fun isLastPage(): Boolean {
-        return res.last == false
-    }
-
 }
