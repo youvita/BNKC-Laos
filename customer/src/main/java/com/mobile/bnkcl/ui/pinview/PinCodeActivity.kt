@@ -37,6 +37,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     private val viewModel : PinViewModel by viewModels()
     var inputExistingPwd = true
+    var forceActionClick = false
     var sessionId = ""
     var needAuth = false
     var from : String = ""
@@ -60,6 +61,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             if (pinUI == "sign_up") {
 
                 viewModel.signUpRequest = intent.getSerializableExtra("req_signup_obj") as SignUpRequest
+                binding.pinUi = 2
                 setUpRegisterPinUI()
 
             } else if (pinUI == "forget") {
@@ -91,20 +93,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         binding.pinView.setOnActionListener = { action : String ->
             when(action){
                 "close" -> {
-                    if (pinUI == "login") {
-                        val logOutDialog = LogOutDialog()
-                        logOutDialog.onConfirmClickedListener {
-                            showLoading()
-                            viewModel.logout()
-                        }
-                        logOutDialog.show(
-                            supportFragmentManager,
-                            logOutDialog.tag
-                        )
-                    } else {
-                        finish()
-                    }
-
+                    onBackPressed()
                 }
                 "reset_pin" -> {
                     binding.pinView.clearPin()
@@ -119,20 +108,23 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
         binding.pinView.setOnCompletedListener = { pinCode : String ->
             Log.d(">>>>>", "setOnCompletedListener: $pinCode --- ${binding.pinUi}")
-            if (pinCode.isNotEmpty()){
-                when (binding.pinUi){
-                    1->{
-                        login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
-                    }
-                    2->{
-                        signUp(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
-                    }
-                    3->{
-                        forgetPin(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
-                    }
-                    4->{
-                        //reset
-                        resetPassword(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
+            if (!forceActionClick) {
+                forceActionClick = true
+                if (pinCode.isNotEmpty()) {
+                    when (binding.pinUi) {
+                        1 -> {
+                            login(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
+                        }
+                        2 -> {
+                            signUp(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
+                        }
+                        3 -> {
+                            forgetPin(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
+                        }
+                        4 -> {
+                            //reset
+                            resetPassword(SecureUtils.encrypt(pinCode.trim { it <= ' ' }).trim())
+                        }
                     }
                 }
             }
@@ -166,15 +158,19 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     private fun observeViewModel() {
         viewModel.signUpLiveData.observe(this) {
             Log.d(">>>", "Sign Up ::: $it")
+            forceActionClick = false
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("from", Constants.SIGN_UP)
+            if (it.username!!.isNotEmpty()) {
+                intent.putExtra("username", it.username)
+            }
             intent.putExtra("result", it.username != null)
             startActivity(intent)
         }
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(USER_ID)
-
+            forceActionClick = false
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
@@ -189,6 +185,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
         viewModel.resetLiveData.observe(this) {
             Log.d(">>>", "Reset ::: $it")
+            forceActionClick = false
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("from", Constants.RESET_PIN)
             intent.putExtra("result", true)
@@ -198,6 +195,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
         viewModel.forgetPinLiveData.observe(this) {
             Log.d(">>>", "Sign Up ::: $it")
+            forceActionClick = false
             finish()
 
         }
@@ -245,12 +243,11 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                     sharedPrefer.putPrefer(USER_ID, username)
                     AppLogin.PIN.code = "Y"
                     if (from.isEmpty()) {
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, HomeActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
                         finish()
                     } else {
-                        Log.d("nng", "it.toString() " + AppLogin.PIN_TYPE)
                         AppLogin.InterceptIntent.code = "Y"
                         finish()
                     }
@@ -316,5 +313,22 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_pin_code
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (pinUI == "login") {
+            val logOutDialog = LogOutDialog()
+            logOutDialog.onConfirmClickedListener {
+                showLoading()
+                viewModel.logout()
+            }
+            logOutDialog.show(
+                supportFragmentManager,
+                logOutDialog.tag
+            )
+        } else {
+            finish()
+        }
     }
 }

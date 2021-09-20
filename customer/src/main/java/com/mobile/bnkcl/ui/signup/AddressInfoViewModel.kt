@@ -50,10 +50,10 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
      * set up Capital area
      * */
     private var areaNames: ArrayList<String>? = ArrayList()
-    fun setUpAreaName(data : ArrayList<AreaItems>) : ArrayList<String> {
+    fun setUpAreaName(data : List<AreaItems>) : ArrayList<String> {
         areaNames!!.clear()
-        for (i in 0 until data.size){
-            areaNames!!.add(data[i].name!!)
+        for (element in data){
+            areaNames!!.add(element.name!!)
         }
         return areaNames!!
     }

@@ -83,8 +83,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
         /*observe data*/
         observeData()
-        observeCapitalArea()
-        observeDistrictData()
+
+//        observeDistrictData()
         observeVillage()
         observeCode()
         observeGender()
@@ -136,176 +136,20 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
         binding.lltAdditional.llCapital.setOnClickListener {
             addressInfoViewModel.getCapitalData()
-            if (objCapital != null && objCapital!!.size > 0){
-                listChoiceDialog = ListChoiceDialog.newInstance(
-                    R.drawable.ic_badge_general,
-                    getString(R.string.addition_capital),
-                    addressInfoViewModel.setUpAreaName(objCapital!!),
-                    selectedCapital
-                )
-
-                listChoiceDialog.setOnItemListener ={ a: Int ->
-                    selectedCapital = a
-                    binding.lltAdditional.tvCapital.text = objCapital!![a].name
-                    binding.lltAdditional.tvDistrict.text = ""
-                    binding.lltAdditional.tvVillage.text = ""
-                    addressInfoViewModel.addressData = AddressData(
-                        "DISTRICT",
-                        objCapital!![a].id.toString()
-                    )
-                    addressInfoViewModel.getDistrict()
-                    val capital = objCapital!![a]
-                    val capitalData = AreaObj()
-                    capitalData.id = capital.id
-                    capitalData.name = capital.name
-                    capitalData.erp_code = capital.erp_code
-                    capitalData.iso_code = capital.iso_code
-                    capitalData.alias1 = capital.alias1
-                    capitalData.alias2 = capital.alias1
-
-                    viewModel.addressReqObj.state = capitalData
-                    viewModel.signUpRequest.address = viewModel.addressReqObj
-                    val jobType = if (viewModel.signUpRequest.job_type != null){
-                        viewModel.signUpRequest.job_type
-                    }else {
-                        ""
-                    }
-
-                    binding.vbResult.isEnable(
-                        binding.edtName.text.toString(),
-                        binding.tvDob.text.toString(),
-                        binding.edtIdNum.text.toString(),
-                        "M",
-                        "capital",
-                        "district",
-                        "village",
-                        binding.lltAdditional.edtDetailedAddress.text.toString(),
-                        binding.lltAdditional.edtEtc.text.toString(),
-                        binding.lltAdditional.edtBankName.text.toString(),
-                        binding.lltAdditional.edtAccountNumber.text.toString(),
-                        jobType!!,
-                        binding.edtRecommend.text.toString(),
-                    )
-                }
-
-                listChoiceDialog.isCancelable = true
-                listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
-            }
+            observeCapitalArea()
         }
 
         /**
          * on district click
          * */
         binding.lltAdditional.llDistrict.setOnClickListener{
-                    if (objDistrict != null && objDistrict!!.size>0){
-                        objDistrict
-                        listChoiceDialog = ListChoiceDialog.newInstance(
-                                R.drawable.ic_badge_general,
-                                "District",
-                                addressInfoViewModel.setUpAreaName(objDistrict!!),
-                                selectDistrict
-                        )
-
-                        listChoiceDialog.setOnItemListener = { b: Int ->
-
-                            selectDistrict = b
-                            binding.lltAdditional.tvDistrict.text = objDistrict!![b].name
-                            binding.lltAdditional.tvVillage.text = ""
-
-                            addressInfoViewModel.villageData = AddressData(
-                                    "VILLAGE",
-                                    objDistrict!![b].id.toString()
-                            )
-                            addressInfoViewModel.getVillage()
-
-                            val district = objDistrict!![b]
-                            val districtData = AreaObj()
-                            districtData.id = district.id
-                            districtData.name = district.name
-                            districtData.erp_code = district.erp_code
-                            districtData.iso_code = district.iso_code
-                            districtData.alias1 = district.alias1
-                            districtData.alias2 = district.alias1
-                            viewModel.addressReqObj.district = districtData
-                            viewModel.signUpRequest.address = viewModel.addressReqObj
-                            val jobType = if (viewModel.signUpRequest.job_type != null){
-                                viewModel.signUpRequest.job_type
-                            }else {
-                                ""
-                            }
-                            binding.vbResult.isEnable(
-                                binding.edtName.text.toString(),
-                                binding.tvDob.text.toString(),
-                                binding.edtIdNum.text.toString(),
-                                "M",
-                                "capital",
-                                "district",
-                                "village",
-                                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                                binding.lltAdditional.edtEtc.text.toString(),
-                                binding.lltAdditional.edtBankName.text.toString(),
-                                binding.lltAdditional.edtAccountNumber.text.toString(),
-                                jobType!!,
-                                binding.edtRecommend.text.toString(),
-                            )
-
-                        }
-
-                        listChoiceDialog.isCancelable = true
-                        listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
-                    }
+                    observeDistrictData()
         }
         /**
          * on village click
          * */
         binding.lltAdditional.llVillage.setOnClickListener{
-                if (objVillage != null && objVillage!!.size>0){
-                    listChoiceDialog = ListChoiceDialog.newInstance(
-                            R.drawable.ic_badge_general,
-                            "Village",
-                            addressInfoViewModel.setUpAreaName(objVillage!!),
-                            selectVillage
-                    )
-
-                    listChoiceDialog.setOnItemListener = { b: Int ->
-                        selectVillage = b
-                        binding.lltAdditional.tvVillage.text = objVillage!![b].name
-                        val village = objVillage!![b]
-                        val villageData = AreaObj()
-                        villageData.id = village.id
-                        villageData.name = village.name
-                        villageData.erp_code = village.erp_code
-                        villageData.iso_code = village.iso_code
-                        villageData.alias1 = village.alias1
-                        villageData.alias2 = village.alias1
-                        viewModel.addressReqObj.village = villageData
-                        viewModel.signUpRequest.address = viewModel.addressReqObj
-                        val jobType = if (viewModel.signUpRequest.job_type != null){
-                            viewModel.signUpRequest.job_type
-                        }else {
-                            ""
-                        }
-                        binding.vbResult.isEnable(
-                            binding.edtName.text.toString(),
-                            binding.tvDob.text.toString(),
-                            binding.edtIdNum.text.toString(),
-                            "M",
-                            "capital",
-                            "district",
-                            "village",
-                            binding.lltAdditional.edtDetailedAddress.text.toString(),
-                            binding.lltAdditional.edtEtc.text.toString(),
-                            binding.lltAdditional.edtBankName.text.toString(),
-                            binding.lltAdditional.edtAccountNumber.text.toString(),
-                            jobType!!,
-                            binding.edtRecommend.text.toString(),
-                        )
-
-                    }
-
-                    listChoiceDialog.isCancelable = true
-                    listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
-                }
+                observeVillage()
         }
 
         /**
@@ -427,6 +271,62 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             e.printStackTrace()
         }
 
+        if (objCapital != null && objCapital!!.size > 0){
+            listChoiceDialog = ListChoiceDialog.newInstance(
+                R.drawable.ic_badge_general,
+                getString(R.string.addition_capital),
+                addressInfoViewModel.setUpAreaName(objCapital!!),
+                selectedCapital
+            )
+
+            listChoiceDialog.setOnItemListener ={ a: Int ->
+                selectedCapital = a
+                binding.lltAdditional.tvCapital.text = objCapital!![a].name
+                binding.lltAdditional.tvDistrict.text = ""
+                binding.lltAdditional.tvVillage.text = ""
+                addressInfoViewModel.addressData = AddressData(
+                    "DISTRICT",
+                    objCapital!![a].id.toString()
+                )
+                addressInfoViewModel.getDistrict()
+                val capital = objCapital!![a]
+                val capitalData = AreaObj()
+                capitalData.id = capital.id
+                capitalData.name = capital.name
+                capitalData.erp_code = capital.erp_code
+                capitalData.iso_code = capital.iso_code
+                capitalData.alias1 = capital.alias1
+                capitalData.alias2 = capital.alias1
+
+                viewModel.addressReqObj.state = capitalData
+                viewModel.signUpRequest.address = viewModel.addressReqObj
+                val jobType = if (viewModel.signUpRequest.job_type != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    "M",
+                    "capital",
+                    "district",
+                    "village",
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+
+            listChoiceDialog.isCancelable = true
+            listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
+        }
+
     }
 
         private fun observeDistrictData() {
@@ -438,6 +338,64 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 }
             }catch (e:Exception){
                 e.printStackTrace()
+            }
+
+            if (objDistrict != null && objDistrict!!.size>0){
+                objDistrict
+                listChoiceDialog = ListChoiceDialog.newInstance(
+                    R.drawable.ic_badge_general,
+                    "District",
+                    addressInfoViewModel.setUpAreaName(objDistrict!!),
+                    selectDistrict
+                )
+
+                listChoiceDialog.setOnItemListener = { b: Int ->
+
+                    selectDistrict = b
+                    binding.lltAdditional.tvDistrict.text = objDistrict!![b].name
+                    binding.lltAdditional.tvVillage.text = ""
+
+                    addressInfoViewModel.villageData = AddressData(
+                        "VILLAGE",
+                        objDistrict!![b].id.toString()
+                    )
+                    addressInfoViewModel.getVillage()
+
+                    val district = objDistrict!![b]
+                    val districtData = AreaObj()
+                    districtData.id = district.id
+                    districtData.name = district.name
+                    districtData.erp_code = district.erp_code
+                    districtData.iso_code = district.iso_code
+                    districtData.alias1 = district.alias1
+                    districtData.alias2 = district.alias1
+                    viewModel.addressReqObj.district = districtData
+                    viewModel.signUpRequest.address = viewModel.addressReqObj
+                    val jobType = if (viewModel.signUpRequest.job_type != null){
+                        viewModel.signUpRequest.job_type
+                    }else {
+                        ""
+                    }
+                    binding.vbResult.isEnable(
+                        binding.edtName.text.toString(),
+                        binding.tvDob.text.toString(),
+                        binding.edtIdNum.text.toString(),
+                        "M",
+                        "capital",
+                        "district",
+                        "village",
+                        binding.lltAdditional.edtDetailedAddress.text.toString(),
+                        binding.lltAdditional.edtEtc.text.toString(),
+                        binding.lltAdditional.edtBankName.text.toString(),
+                        binding.lltAdditional.edtAccountNumber.text.toString(),
+                        jobType!!,
+                        binding.edtRecommend.text.toString(),
+                    )
+
+                }
+
+                listChoiceDialog.isCancelable = true
+                listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
             }
     }
 
@@ -451,6 +409,54 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
             }catch (e: Exception){
                 e.printStackTrace()
+            }
+
+            if (objVillage != null && objVillage!!.size>0){
+                listChoiceDialog = ListChoiceDialog.newInstance(
+                    R.drawable.ic_badge_general,
+                    "Village",
+                    addressInfoViewModel.setUpAreaName(objVillage!!),
+                    selectVillage
+                )
+
+                listChoiceDialog.setOnItemListener = { b: Int ->
+                    selectVillage = b
+                    binding.lltAdditional.tvVillage.text = objVillage!![b].name
+                    val village = objVillage!![b]
+                    val villageData = AreaObj()
+                    villageData.id = village.id
+                    villageData.name = village.name
+                    villageData.erp_code = village.erp_code
+                    villageData.iso_code = village.iso_code
+                    villageData.alias1 = village.alias1
+                    villageData.alias2 = village.alias1
+                    viewModel.addressReqObj.village = villageData
+                    viewModel.signUpRequest.address = viewModel.addressReqObj
+                    val jobType = if (viewModel.signUpRequest.job_type != null){
+                        viewModel.signUpRequest.job_type
+                    }else {
+                        ""
+                    }
+                    binding.vbResult.isEnable(
+                        binding.edtName.text.toString(),
+                        binding.tvDob.text.toString(),
+                        binding.edtIdNum.text.toString(),
+                        "M",
+                        "capital",
+                        "district",
+                        "village",
+                        binding.lltAdditional.edtDetailedAddress.text.toString(),
+                        binding.lltAdditional.edtEtc.text.toString(),
+                        binding.lltAdditional.edtBankName.text.toString(),
+                        binding.lltAdditional.edtAccountNumber.text.toString(),
+                        jobType!!,
+                        binding.edtRecommend.text.toString(),
+                    )
+
+                }
+
+                listChoiceDialog.isCancelable = true
+                listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
             }
 
         }

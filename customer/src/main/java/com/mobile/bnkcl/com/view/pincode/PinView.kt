@@ -70,21 +70,6 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
 
         attributes = context.obtainStyledAttributes(attrs, R.styleable.PinView)
 
-//        .text = attributes.getString(R.styleable.PinView_titleName)
-//
-//        //TypedValue.COMPLEX_UNIT_PX is the correct way to display actual dimension programmatically
-//        tv_title_toolbar.setTextSize(
-//            TypedValue.COMPLEX_UNIT_PX,
-//            attributes.getDimensionPixelSize(R.styleable.PinView_titleTextSize, 32).toFloat()
-//        )
-//
-//        tv_title_toolbar.setTextColor(
-//            attributes.getColor(
-//                R.styleable.PinView_titleTextColor,
-//                Color.BLACK
-//            )
-//        )
-
         initPinCodeProgress()
 
         mPinView = view.findViewById<PinCodeView>(R.id.pin_view)
@@ -105,8 +90,6 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         title = view.findViewById<TextView>(R.id.tv_title_toolbar)
         mPinMessage = view.findViewById<TextView>(R.id.tv_pin_smg)
         mResetPin = view.findViewById<TextView>(R.id.tv_pin_action)
-
-        setupView()
 
         val w: Int = UtilsSize.getScreenWidth(getContext()) / 5
         val first = FrameLayout.LayoutParams(w, w)
@@ -211,13 +194,9 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         })
     }
 
-    fun setupView(){
-
-    }
-
-    fun errorAction() {
+    private fun errorAction() {
         val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        v?.vibrate(400)
+        v.vibrate(400)
         val animShake = AnimationUtils.loadAnimation(context, R.anim.shake_pf)
         mPinView!!.startAnimation(animShake)
     }
@@ -234,7 +213,7 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
 
     }
 
-    fun deleteLastPin() {
+    private fun deleteLastPin() {
         if (currentPinCode.isNotEmpty())
             currentPinCode = currentPinCode.dropLast(1)
     }
@@ -248,35 +227,6 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
         Log.d(">>>>>", "currentPinCode & Code: $currentPinCode === $mCode >> $codeLength")
         if (codeLength == 4) {
             if (reEnterPassword) { //Two-time pin input
-//                mPinMessage!!.text = context.getString(R.string.pin_confirm)
-//                mCode = mPinView!!.code
-//                if (currentPinCode.length < 3) {
-//                    currentPinCode = currentPinCode.plus(number)
-//                    setOnPinKeyClickListener(number.toString())
-//                } else if (currentPinCode.length == 3) {
-//                    mPinMessage!!.text = context.getString(R.string.pin_confirm)
-//                    mCode = mPinView!!.code
-//
-//                    Log.d(">>>>>", "appendNumber: $currentPinCode === $mCode")
-//                    if (TextUtils.isEmpty(mCodeValidation)) {
-//                        Handler().postDelayed(
-//                            {
-//                                mCodeValidation = mCode
-//                                clearPin()
-//                            }, 200
-//                        )
-//                        return
-//                    }
-//                    if (!TextUtils.isEmpty(mCodeValidation) && mCode == mCodeValidation) {
-//                        setOnCompletedListener(mCode)
-//                    } else {
-//                        clearPin()
-//                        errorAction()
-//                        setOnErrorListener(NOT_MATCH_PASSWORD)
-//                    }
-//
-//                }
-
                 mPinMessage!!.text = context.getString(R.string.pin_confirm)
                 mCode = mPinView!!.code
                 currentPinCode = currentPinCode.plus(mCode)
@@ -299,14 +249,6 @@ class PinView(context: Context, attrs: AttributeSet) : LinearLayout(context, att
                 }
 
             } else { //Input pin
-//                if (currentPinCode.length < 3) {
-//                    currentPinCode = currentPinCode.plus(number)
-//                    setOnPinKeyClickListener(number.toString())
-//                } else if (currentPinCode.length == 3) {
-//                    currentPinCode = currentPinCode.plus(number)
-//                    setOnCompletedListener(currentPinCode)
-//                }
-//                currentPinCode = currentPinCode.plus(mPinView!!.code)
                 setOnCompletedListener(mPinView!!.code)
             }
         }

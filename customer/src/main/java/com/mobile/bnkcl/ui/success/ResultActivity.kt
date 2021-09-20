@@ -11,6 +11,7 @@ import com.mobile.bnkcl.ui.cscenter.AskBNKCActivity
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -101,6 +102,20 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                 }
             }
         })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        when (viewModel.from){
+            Constants.RESET_PIN -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                finish()
+            }
+            else -> {
+                finish()
+            }
+        }
     }
 
 }
