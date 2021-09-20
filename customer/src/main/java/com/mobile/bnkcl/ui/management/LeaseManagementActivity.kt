@@ -15,6 +15,7 @@ import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.databinding.ActivityLeaseManagementBinding
 import com.mobile.bnkcl.ui.management.full_payment.FullPaymentActivity
 import com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity
@@ -33,10 +34,10 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     lateinit var listChoiceDialog: ListChoiceDialog
 
     private val viewModel: LeaseManagementViewModel by viewModels()
-    private var contractNoList: ArrayList<String>? = null
-    private var CONTRACT_NO: String? = null
-    private var REPAYMENT_DATE: String? = null
-    private var isWarning: Boolean? = null
+    private var contractNoList: ArrayList<String>? = ArrayList()
+    private var productTypeList: ArrayList<CodesData>? = ArrayList()
+    private var CONTRACT_NO: String? = ""
+    private var REPAYMENT_DATE: String? = ""
     private var selectedIndex: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,17 +69,33 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
     private fun initLiveData() {
         viewModel.leaseLiveData.observe(this) {
+
             successListener()
             binding.leaseInfo.leaseInfo = it
             binding.comingLeaseRepayment.comingInfo = it
             REPAYMENT_DATE = it.repaymentDay
+
+            binding.leaseInfo.tvRepaymentDate.text = getString(R.string.lease_every).plus(
+                " " + FormatUtils.getFormatOnlyDate(
+                    it.repaymentDay!!,
+                    sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
+                )
+            )
+
+            binding.leaseInfo.tvProductType.text = ""
+            for (i in 0 until productTypeList!!.size) {
+                if (it.productType.equals(productTypeList!![i].code, ignoreCase = true)) {
+                    binding.leaseInfo.tvProductType.text = productTypeList!![i].title
+                }
+            }
             binding.comingLeaseRepayment.tvComingRepaymentAmount.text =
                 FormatUtils.getNumberFormat(this, it.comingRepaymentAmount!!)
+
             val day: String = when {
-                it.overdueParaltyDays == null -> {
+                it.overduePenaltyDays == null || it.overduePenaltyDays == "" -> {
                     ""
                 }
-                it.overdueParaltyDays.toInt() == 1 -> {
+                it.overduePenaltyDays.toInt() == 1 -> {
                     getString(R.string.day)
                 }
                 else -> {
@@ -87,12 +104,19 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             }
 
             binding.comingLeaseRepayment.tvOverduePenaltyTitle.text =
-                getString(R.string.lease_overdue_penalty)
-                    .plus(" (").plus(it.overdueParaltyDays).plus(" ").plus(day).plus(")")
+                getString(R.string.lease_overdue_penalty).plus(" (").plus(it.overduePenaltyDays)
+                    .plus(" ").plus(day).plus(")")
 
             // for warning lease management
-            isWarning = true
-            setUpRepaymentWithWarning(isWarning!!)
+            val principal = it.overduePrincipal
+            val interest = it.overdueInterest
+            val penalty = it.overduePenalty
+            if (!principal.isNullOrEmpty() || !interest.isNullOrEmpty() || !penalty.isNullOrEmpty()) {
+                setUpRepaymentWithWarning(true)
+            } else {
+                setUpRepaymentWithWarning(false)
+            }
+
         }
     }
 
@@ -107,6 +131,8 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
         if (intent != null) {
             contractNoList = intent.getSerializableExtra("CONTRACT_NO_RECORD") as ArrayList<String>?
+            productTypeList =
+                intent.getSerializableExtra("PRODUCT_TYPE_LIST") as ArrayList<CodesData>?
             CONTRACT_NO = intent.getStringExtra("CONTRACT_NO") as String
 
             if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
@@ -123,6 +149,9 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             binding.tvLeaseType.text = CONTRACT_NO
         }
 
+        binding.leaseInfo.tvDisbursementDate.text = ""
+        binding.leaseInfo.tvMaturityDate.text = ""
+        binding.leaseInfo.tvRepaymentDate.text = ""
         binding.comingLeaseRepayment.tvOverduePenaltyTitle.text =
             getString(R.string.lease_overdue_penalty)
 

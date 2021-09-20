@@ -161,7 +161,7 @@
     <string name="history_payment_date">Payment Date</string>
     <string name="history_penalty">Penalty</string>
     <string name="history_interest">Interest</string>
-    <string name="history_principal">Fee</string>
+    <string name="history_principal">Principal</string>
     <string name="tran_history_006">Empty</string>
     <string name="tran_history_007">Transaction history does not exist</string>
     <string name="history_newest">From the Newest</string>
@@ -274,6 +274,7 @@
 
     <string name="lease_service">Lease Service</string>
     <string name="lease_management">Lease Management</string>
+    <string name="lease_every">Every</string>
     <string name="lease_total_schedule">TOTAL SCHEDULE</string>
     <string name="lease_transaction_history">TRANSACTION HISTORY</string>
     <string name="lease_check_full_payment">CHECK FULL REPAYMENT AMOUNT</string>
@@ -282,6 +283,7 @@
     <string name="lease_product_type">Product Type</string>
     <string name="lease_amount">Lease Amount</string>
     <string name="lease_interest_monthly">Interest (Monthly)</string>
+    <string name="lease_months">Months</string>
     <string name="lease_term">Term</string>
     <string name="lease_disbursement_date">Disbursement Date</string>
     <string name="lease_maturity_date">Maturity Date</string>

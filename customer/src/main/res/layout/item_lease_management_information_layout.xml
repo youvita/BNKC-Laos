@@ -5,11 +5,21 @@
 
     <data>
 
+        <import type="com.bnkc.sourcemodule.util.FormatUtils" />
+
+        <variable
+            name="format"
+            type="FormatUtils" />
+
         <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoResponse" />
 
         <variable
             name="leaseInfo"
             type="LeaseInfoResponse" />
+
+        <variable
+            name="locale"
+            type="String" />
 
     </data>
 
@@ -53,7 +63,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:src="@drawable/ic_fold_ico"
-                    android:text="910.00 USD"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
@@ -116,8 +125,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@{leaseInfo.productType}" />
+                        android:gravity="end" />
                 </LinearLayout>
 
                 <!-- Lease Amount -->
@@ -165,7 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{leaseInfo.leaseInterestRate}" />
+                        android:text="@{leaseInfo.leaseInterestRate.concat(` %`)}" />
                 </LinearLayout>
 
                 <!-- Term -->
@@ -189,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{leaseInfo.leaseTerm}" />
+                        android:text="@{leaseInfo.leaseTerm.concat(` `).concat(@string/lease_months)}" />
                 </LinearLayout>
 
                 <!-- Disbursement Date -->
@@ -213,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{leaseInfo.disbursementDate}" />
+                        android:text="@{format.Companion.getDateFormat(leaseInfo.disbursementDate, 4)}" />
                 </LinearLayout>
 
                 <!-- Maturity Date -->
@@ -237,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{leaseInfo.maturityDate}" />
+                        android:text="@{format.Companion.getDateFormat(leaseInfo.maturityDate, 4)}" />
                 </LinearLayout>
 
                 <!-- Repayment Date -->
@@ -260,8 +268,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@{leaseInfo.repaymentDay}" />
+                        android:gravity="end" />
                 </LinearLayout>
 
                 <!-- Monthly Repayment -->

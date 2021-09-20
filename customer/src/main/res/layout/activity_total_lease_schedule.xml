@@ -207,17 +207,19 @@
                 android:layout_gravity="bottom"
                 android:background="@color/color_f9fafb"
                 android:baselineAligned="false"
-                android:minHeight="95dp"
-                android:paddingLeft="@dimen/padding_20dp"
-                android:paddingTop="@dimen/padding_20dp"
-                android:paddingRight="@dimen/padding_20dp">
+                android:paddingEnd="@dimen/padding_20dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:paddingStart="@dimen/padding_20dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_10dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -250,9 +252,11 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -52,10 +53,8 @@ class EditAccountInfoViewModel @Inject constructor(
         val multipartBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart(
-                "file_data", file!!.name, RequestBody.create(
-                    "image/png".toMediaTypeOrNull(),
-                    file!!
-                )
+                "file_data", file!!.name, file!!
+                    .asRequestBody("image/png".toMediaTypeOrNull())
             )
             .build()
         viewModelScope.launch {

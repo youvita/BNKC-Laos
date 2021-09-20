@@ -67,24 +67,13 @@ class LeaseRequestProcessAdapter :
             ) binding.ltdAppliedInfo.tvProductType.text = productTypeList[i].title
         }
 
-        for (i in 0 until progressTypeList.size - 1) {
-            if (data.progressStatus.equals(
-                    progressTypeList[i].code,
-                    ignoreCase = true
-                )
-            ) {
-                binding.tvPhaseOfProgress.text = progressTypeList[i].title
-                binding.tvReject.text = progressTypeList[i].title
-                binding.tvApproval.text = progressTypeList[i].title
-            }
-        }
-
         binding.btnClose.setOnClickListener {
             listener?.onCloseClicked()
         }
 
         when (type) {
             1 -> {
+                binding.tvPhaseOfProgress.text = progressTypeList[0].title
                 binding.llApplicationResult.visibility = View.VISIBLE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
@@ -92,6 +81,7 @@ class LeaseRequestProcessAdapter :
                 binding.tvTitle.text = context.getString(R.string.progress_application)
             }
             2 -> {
+                binding.tvPhaseOfProgress.text = progressTypeList[1].title
                 binding.llApplicationResult.visibility = View.VISIBLE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
@@ -99,16 +89,17 @@ class LeaseRequestProcessAdapter :
                 binding.tvTitle.text = context.getString(R.string.progress_screening)
             }
             3 -> {
-
                 binding.tvTitle.text = context.getString(R.string.progress_result)
                 binding.llApplicationResult.visibility = View.GONE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
 
-                if (data.progressStatus!! == progressTypeList[2].code) {
+                if (data.progressStatus == progressTypeList[2].code) {
+                    binding.tvApproval.text = progressTypeList[2].title
                     binding.llApprovalResult.visibility = View.VISIBLE
                     binding.llRejectResult.visibility = View.GONE
-                } else if (data.progressStatus == progressTypeList[0].code){
+                } else if (data.progressStatus == progressTypeList[3].code){
+                    binding.tvReject.text = progressTypeList[3].title
                     binding.llApprovalResult.visibility = View.GONE
                     binding.llRejectResult.visibility = View.VISIBLE
                 }

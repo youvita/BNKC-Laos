@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="com.bnkc.sourcemodule.util.FormatUtils" />
+
+        <variable
+            name="format"
+            type="FormatUtils" />
+
         <import type="com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData" />
 
         <variable
@@ -49,7 +55,7 @@
                         android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:singleLine="true"
-                        android:text="@{totalLeaseScheduleData.paymentDate}"
+                        android:text="@{format.Companion.getDateFormat(totalLeaseScheduleData.paymentDate, 8)}"
                         app:drawableStartCompat="@drawable/ic_calendar_grey_ico"
                         tools:text="04/03/19" />
 
@@ -100,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="@{totalLeaseScheduleData.paymentDate}"
+                            android:text="@{format.Companion.getDateFormat(totalLeaseScheduleData.paymentDate, 8)}"
                             tools:text="2020-09-12" />
                     </LinearLayout>
 
@@ -121,7 +127,7 @@
                         <TextView
                             android:id="@+id/tv_total_amount"
                             style="@style/font15_263238_medium"
-                            setNumberFormat="@{totalLeaseScheduleData.totalAmount}"
+                            setNumberWithoutCurrencyFormat="@{totalLeaseScheduleData.totalAmount}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -146,7 +152,7 @@
                         <TextView
                             android:id="@+id/tv_penalty"
                             style="@style/font15_263238_medium"
-                            setNumberFormat="@{totalLeaseScheduleData.principal}"
+                            setNumberWithoutCurrencyFormat="@{totalLeaseScheduleData.principal}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -171,7 +177,7 @@
                         <TextView
                             android:id="@+id/tv_interest"
                             style="@style/font15_263238_medium"
-                            setNumberFormat="@{totalLeaseScheduleData.interest}"
+                            setNumberWithoutCurrencyFormat="@{totalLeaseScheduleData.interest}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -196,7 +202,7 @@
                         <TextView
                             android:id="@+id/tv_balance"
                             style="@style/font15_263238_medium"
-                            setNumberFormat="@{totalLeaseScheduleData.balance}"
+                            setNumberWithoutCurrencyFormat="@{totalLeaseScheduleData.balance}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

@@ -14,6 +14,7 @@ import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,10 +29,9 @@ import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseStorageActivity
 import com.bnkc.sourcemodule.data.SettingMenu
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.dialog.PhotoSettingMenu
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.BnkEditText
@@ -42,7 +42,6 @@ import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityEditAccountInfoBinding
 import com.mobile.bnkcl.ui.dialog.AlertEditInfoDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.bnkc.sourcemodule.dialog.PhotoSettingMenu
 import com.mobile.bnkcl.ui.user.photo.PhotoViewModel
 import com.mobile.bnkcl.utilities.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +80,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private var settingMenu: SettingMenu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setStatusBarColor(resources.getColor(R.color.color_f5f7fc))
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(ANIMATE_NORMAL)
         super.onCreate(savedInstanceState)
 
@@ -171,20 +170,14 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             .load(R.drawable.rotate_loading_image)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-
-        val url = GlideUrl(
-            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
-            LazyHeaders.Builder()
-                .addHeader(
-                    "Authorization",
-                    "Bearer " + RunTimeDataStore.LoginToken.value
-                )
-                .build()
-        )
-
+        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+        rotation.fillAfter = true
+        binding.ivLoading.startAnimation(rotation)
         UtilsGlide.loadCircle(
             this@EditAccountInfoActivity,
-            url, binding.imageProfile, binding.ivLoading, binding.flUploadUi
+            binding.imageProfile,
+            binding.ivLoading,
+            binding.flUploadUi
         )
 
 
@@ -242,12 +235,13 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
                 data.accountNumber = binding.lytAddressInfo.edtAccountNumber.text.toString()
 
                 if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                     if (viewModel.getFile() != null) {
+                    if (viewModel.getFile() != null) {
                         viewModel.uploadProfile()
                     }
                     if (binding.lytAddressInfo.edtBankName.text.toString() != profileData!!.bankName
                         || binding.lytAddressInfo.edtAccountNumber.text.toString() != profileData!!.accountNumber
-                        || binding.lytAddressInfo.tvJobType.text != jobTypeTitleList!![firstIndex!!]){
+                        || binding.lytAddressInfo.tvJobType.text != jobTypeTitleList!![firstIndex!!]
+                    ) {
                         viewModel.editAccountInfo(data)
                     }
                 }
@@ -533,41 +527,42 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     /**
      * replace for deprecated onActivityResult
      */
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            var file: File? = null
-            var imageUri: Uri? = null
-            var imageBitmap: Bitmap? = null
-            val data = result.data
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                var file: File? = null
+                var imageUri: Uri? = null
+                var imageBitmap: Bitmap? = null
+                val data = result.data
 
-            when (settingMenu) {
-                SettingMenu.Gallery -> if (data != null) {
-                    imageUri = data.data
-                    val paths: String = getPath(this, imageUri)!!
-                    file = File(paths)
-                }
-                SettingMenu.Camera -> if (data != null) {
-                    val extras: Bundle? = data.extras
-                    if (extras != null) {
-                        imageBitmap = extras["data"] as Bitmap?
+                when (settingMenu) {
+                    SettingMenu.Gallery -> if (data != null) {
+                        imageUri = data.data
+                        val paths: String = getPath(this, imageUri)!!
+                        file = File(paths)
                     }
-                    imageUri = getUri(applicationContext, imageBitmap!!)
-                    file = File(getRealPathFromURI(imageUri))
+                    SettingMenu.Camera -> if (data != null) {
+                        val extras: Bundle? = data.extras
+                        if (extras != null) {
+                            imageBitmap = extras["data"] as Bitmap?
+                        }
+                        imageUri = getUri(applicationContext, imageBitmap!!)
+                        file = File(getRealPathFromURI(imageUri))
+                    }
                 }
-            }
 
-            assert(file != null)
-            if (file!!.exists()) {
-                viewModel.setFile(file)
-                isUpdateOnlyImage = true
-                validateButton()
-                UtilsGlide.loadCircle(
+                assert(file != null)
+                if (file!!.exists()) {
+                    viewModel.setFile(file)
+                    isUpdateOnlyImage = true
+                    validateButton()
+                    UtilsGlide.loadCircle(
                         this@EditAccountInfoActivity,
                         imageUri,
                         binding.imageProfile,
                         null
-                )
+                    )
+                }
             }
         }
-    }
 }

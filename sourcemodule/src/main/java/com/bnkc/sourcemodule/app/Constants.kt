@@ -52,6 +52,7 @@ object Constants {
     const val WB_COM_PROFILE = "/pages/company_profile.html"
     const val WB_TER_AND_CON = "/pages/terms_and_conditions.html"
     const val WB_FAQS = "/mobile/views/faqs"
+    const val WB_BNKCL_FB = "https://www.facebook.com/bscapitallaos"
 
     // Image Endpoint
     const val IMAGE_URL = "/api/ca/user/profile-image-uri"

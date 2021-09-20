@@ -142,6 +142,13 @@ object BindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("setNumberWithoutCurrencyFormat")
+    fun setNumberWithoutCurrencyFormat(textView: TextView, str: String?) {
+        if (str == null) return
+        textView.text = FormatUtils.getNumberFormatWithoutCurrency(textView.context, str)
+    }
+
+    @JvmStatic
     @BindingAdapter("currencyFormat")
     fun setCurrencyFormat(textView: TextView, str: String?) {
         if (str == null) return

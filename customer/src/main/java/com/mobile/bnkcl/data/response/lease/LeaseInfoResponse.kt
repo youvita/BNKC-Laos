@@ -55,8 +55,8 @@ data class LeaseInfoResponse(
     @SerializedName("overdue_penalty")
     val overduePenalty: String? = null,
 
-    @SerializedName("overdue_paralty_days")
-    val overdueParaltyDays: String? = null,
+    @SerializedName("overdue_penalty_days")
+    val overduePenaltyDays: String? = null,
 
     @SerializedName("total")
     val total: String? = null,

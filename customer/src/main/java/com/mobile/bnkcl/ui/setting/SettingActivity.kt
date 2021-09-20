@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
@@ -69,13 +70,26 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         binding.activity = this
 
         if (intent.hasExtra("push_alarm_enabled")) {
-            settingViewModel.push_notification_yn = intent.getBooleanExtra("push_alarm_enabled", false)
+            settingViewModel.push_notification_yn =
+                intent.getBooleanExtra("push_alarm_enabled", false)
             binding.toggleUser.isChecked = settingViewModel.push_notification_yn!!
+        }
+
+
+        if (AppLogin.PIN.code == "N") {
+            binding.tvResetPin.isEnabled = false
+            binding.tvResetPin.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
+            binding.ivResetPinMore.setColorFilter(ContextCompat.getColor(this, R.color.color_90A4AE))
         }
 
         binding.toggleUser.setOnCheckedChangeListener { _, isChecked ->
             val settingData = SettingData()
-            val deviceInfo = DeviceInfo(sharedPrefer.getPrefer(Constants.HandlePush.PUSH_ID), "Android", Build.MODEL, Build.VERSION.SDK_INT.toString())
+            val deviceInfo = DeviceInfo(
+                sharedPrefer.getPrefer(Constants.HandlePush.PUSH_ID),
+                "Android",
+                Build.MODEL,
+                Build.VERSION.SDK_INT.toString()
+            )
             settingData.push_alarm_enabled = isChecked
             settingData.device_info = deviceInfo
             settingViewModel.settingData = settingData
@@ -85,19 +99,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         }
 
         binding.tvResetPin.setOnClickListener {
-            if (AppLogin.PIN.code == "N"){
-                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
+            if (AppLogin.PIN.code == "N") {
+                if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                     startActivity(Intent(this, OtpActivity::class.java))
-                }else{
+                } else {
                     goToResetIfAlreadyLogin(false)
                 }
-            }else{
+            } else {
                 goToResetIfAlreadyLogin(true)
             }
         }
     }
 
-    private fun goToResetIfAlreadyLogin(isAlreadyLogin : Boolean){
+    private fun goToResetIfAlreadyLogin(isAlreadyLogin: Boolean) {
         val intent = Intent(this, PinCodeActivity::class.java)
         intent.putExtra("from", SettingActivity::class.java.simpleName)
         intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
@@ -109,7 +123,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private fun initLiveData() {
         settingViewModel.userSettingLiveData.observe(this@SettingActivity) {
             Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
-            sharedPrefer.putPrefer(Constants.Push.PUSH_ALARM, if (settingViewModel.settingData!!.push_alarm_enabled!!) "Y" else "N")
+            sharedPrefer.putPrefer(
+                Constants.Push.PUSH_ALARM,
+                if (settingViewModel.settingData!!.push_alarm_enabled!!) "Y" else "N"
+            )
             successListener()
         }
     }

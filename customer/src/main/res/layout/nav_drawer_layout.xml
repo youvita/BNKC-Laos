@@ -76,10 +76,10 @@
 
                             <com.bnkc.library.custom.cardview.CircleImageView
                                 android:id="@+id/iv_loading"
-                                android:scaleType="centerCrop"
-                                android:layout_width="@dimen/width_64dp"
-                                android:layout_height="@dimen/height_64dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_centerInParent="true"
+                                android:scaleType="centerCrop"
                                 tools:ignore="ContentDescription" />
 
                             <com.bnkc.library.custom.cardview.CircleImageView
@@ -88,7 +88,6 @@
                                 android:layout_height="@dimen/height_64dp"
                                 android:layout_centerInParent="true"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_avatar_l"
                                 tools:ignore="ContentDescription" />
 
                         </RelativeLayout>
@@ -360,6 +359,7 @@
                         app:drawableLeftCompat="@drawable/ic_sign_up_ico" />
 
                     <View
+                        android:id="@+id/v_line"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="@dimen/margin_32dp"

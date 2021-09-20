@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -44,7 +45,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     lateinit var confirmDialog: ConfirmDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setStatusBarColor(resources.getColor(R.color.color_ffffff))
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_ffffff))
 //        setStatusBarTransparent(this, false)
         super.onCreate(savedInstanceState)
 
@@ -84,7 +85,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     }
 
     private fun initImageLoadingRotate() {
-        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_splash_loading)
+        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
         rotation.fillAfter = true
 
         binding.ivLoading.startAnimation(rotation)

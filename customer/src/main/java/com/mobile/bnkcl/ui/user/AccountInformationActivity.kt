@@ -3,6 +3,7 @@ package com.mobile.bnkcl.ui.user
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -13,8 +14,6 @@ import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
@@ -99,7 +98,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Runtime.getRuntime().exit(0);
+            Runtime.getRuntime().exit(0)
         }
     }
 
@@ -109,17 +108,10 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             .load(R.drawable.rotate_loading_image)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-
-        val url = GlideUrl(
-            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
-            LazyHeaders.Builder()
-                .addHeader(
-                    "Authorization",
-                    "Bearer " + RunTimeDataStore.LoginToken.value
-                )
-                .build()
-        )
-        UtilsGlide.loadCircle(this, url, binding.ivProfile, binding.ivLoading)
+        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+        rotation.fillAfter = true
+        binding.ivLoading.startAnimation(rotation)
+        UtilsGlide.loadCircle(this, binding.ivProfile, binding.ivLoading)
 
         if (intent != null) {
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
@@ -193,10 +185,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         super.onBackPressed()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -209,19 +197,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                         .load(R.drawable.rotate_loading_image)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-
-                    val url = GlideUrl(
-                        RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
-                        LazyHeaders.Builder()
-                            .addHeader(
-                                "Authorization",
-                                "Bearer " + RunTimeDataStore.LoginToken.value
-                            )
-                            .build()
-                    )
+                    val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+                    rotation.fillAfter = true
+                    binding.ivLoading.startAnimation(rotation)
                     UtilsGlide.loadCircle(
                         this@AccountInformationActivity,
-                        url,
                         binding.ivProfile,
                         binding.ivLoading
                     )

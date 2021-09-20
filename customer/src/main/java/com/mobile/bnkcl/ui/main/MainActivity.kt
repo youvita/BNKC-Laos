@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -19,8 +20,6 @@ import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -84,7 +83,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setAnimateType(ANIMATE_NORMAL)
-        setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         super.onCreate(savedInstanceState)
 
         viewModel.userRole = -1 //Custom : 0, Employee : 1 , Dealer : 2, Not yet login : -1
@@ -100,6 +99,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     private fun requestProfile() {
 
+        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
+        }
+
         if (AppLogin.PIN.code != "N") {
             viewModel.getUserProfile()
 
@@ -107,22 +110,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 .load(R.drawable.rotate_loading_image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
-
-            val url = GlideUrl(
-                RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
-                LazyHeaders.Builder()
-                    .addHeader(
-                        "Authorization",
-                        "Bearer " + RunTimeDataStore.LoginToken.value
-                    )
-                    .build()
-            )
+            val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+            rotation.fillAfter = true
+            binding.navMenu.ivLoading.startAnimation(rotation)
+            binding.navMenu.ivProfile.setImageResource(0)
             UtilsGlide.loadCircle(
                 this@MainActivity,
-                url,
                 binding.navMenu.ivProfile,
                 binding.navMenu.ivLoading
             )
+        } else {
+            binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
         }
     }
 
@@ -144,7 +142,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Runtime.getRuntime().exit(0);
+            Runtime.getRuntime().exit(0)
         }
     }
 
@@ -154,6 +152,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         if (viewModel.isLogin) {
             binding.navMenu.btnSignUp.visibility = View.GONE
             binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
+            binding.navMenu.vLine.visibility = View.GONE
         }
 
         binding.navMenu.tvUserName.text = "User Unknown"
@@ -197,7 +196,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
 
                     when (tab?.position) {
+                        0 -> {
+                            setStatusBarColor(
+                                ContextCompat.getColor(
+                                    this@MainActivity,
+                                    R.color.color_f5f7fc
+                                )
+                            )
+                        }
                         1 -> {
+                            setStatusBarColor(
+                                ContextCompat.getColor(
+                                    this@MainActivity,
+                                    R.color.colorPrimaryDark
+                                )
+                            )
+
                             if (AppLogin.PIN.code == "N") {
                                 if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                                     val intent = Intent(this@MainActivity, OtpActivity::class.java)
@@ -217,6 +231,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                                     startActivity(loginIntent)
                                 }
                             }
+                        }
+                        2 -> {
+                            setStatusBarColor(
+                                ContextCompat.getColor(
+                                    this@MainActivity,
+                                    R.color.colorPrimaryDark
+                                )
+                            )
                         }
                     }
                 }
@@ -313,7 +335,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 }
                 R.id.btn_facebook -> {
                     val facebookIntent = Intent(Intent.ACTION_VIEW)
-                    facebookIntent.data = Uri.parse("https://www.google.com")
+                    facebookIntent.data = Uri.parse(Constants.WB_BNKCL_FB)
                     startActivity(facebookIntent)
                 }
                 R.id.btn_company_profile -> {
@@ -382,7 +404,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     override fun onBackPressed() {
         if (viewPager?.currentItem == 0) {
             super.onBackPressed()
-        }else {
+        } else {
             viewPager?.currentItem = 0
         }
     }

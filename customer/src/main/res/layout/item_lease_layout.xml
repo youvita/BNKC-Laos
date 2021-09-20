@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.bnkc.sourcemodule.util.FormatUtils"/>
+        <variable
+            name="format"
+            type="FormatUtils" />
 
         <variable
             name="leaseItem"
@@ -94,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="@{leaseItem.comingRepaymentDate}"
+                        android:text="@{format.Companion.getDateFormat(leaseItem.comingRepaymentDate, 2)}"
                         tools:text="14-04-2020" />
 
                 </LinearLayout>

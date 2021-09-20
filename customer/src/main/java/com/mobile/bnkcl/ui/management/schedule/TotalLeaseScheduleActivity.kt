@@ -4,7 +4,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
-import android.webkit.*
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -76,7 +78,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         webSettings.useWideViewPort = true
         webSettings.builtInZoomControls = true
         binding.webView.overScrollMode = View.OVER_SCROLL_NEVER
-        binding.webView.webChromeClient = object : WebChromeClient(){}
+        binding.webView.webChromeClient = object : WebChromeClient() {}
         binding.webView.webViewClient = object : WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -128,8 +130,10 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         viewModel.totalLeaseScheduleLiveData.observe(this) {
             initAdapter(it.totalLeaseScheduleData!!)
             successListener()
-            binding.tvTotalInterest.text = FormatUtils.getNumberFormat(this, it.totalInterest!!)
-            binding.tvTotalPrincipal.text = FormatUtils.getNumberFormat(this, it.totalPrincipal!!)
+            binding.tvTotalInterest.text =
+                FormatUtils.getNumberFormatWithoutCurrency(this, it.totalInterest!!)
+            binding.tvTotalPrincipal.text =
+                FormatUtils.getNumberFormatWithoutCurrency(this, it.totalPrincipal!!)
         }
     }
 
@@ -148,7 +152,8 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         if (!hide) binding.appBar.setExpanded(hide)
 
         if (binding.llWebContainer.visibility == View.VISIBLE) {
-            val url = RunTimeDataStore.BaseUrl.value +"/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
+            val url =
+                RunTimeDataStore.BaseUrl.value + "/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
 
             val header = mutableMapOf<String, String>()
             header["Authorization"] = "Bearer " + RunTimeDataStore.LoginToken.value

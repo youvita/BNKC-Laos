@@ -161,7 +161,7 @@
     <string name="history_payment_date">ມື້ຊຳລະຄືນ</string>
     <string name="history_penalty">ຄ່າປັບໄໝ</string>
     <string name="history_interest">ຕົ້ນທືນ</string>
-    <string name="history_principal">ດອກເບ້ຍ</string>
+    <string name="history_principal">ຕົ້ນທືນ</string>
     <string name="tran_history_006">Empty</string>
     <string name="tran_history_007">Transaction history does not exist</string>
     <string name="history_newest">ລ່າສຸດ</string>
@@ -271,6 +271,7 @@
 
     <string name="lease_management">ການຈັດການສິນເຊື່ອ</string>
     <string name="lease_total_schedule">ຕາຕະລາງທັງໝົດ</string>
+    <string name="lease_every">ທຸກໆວັນທີ</string>
     <string name="lease_transaction_history">ປະຫວັດທຸລະກຳ</string>
     <string name="lease_check_full_payment">ກວດເບິ່ງຈຳນວນເງິນທີ່ຊຳລະທັງໝົດ</string>
     <string name="lease_infomation">ຂໍ້ມູນສິນເຊື່ອ</string>
@@ -278,6 +279,7 @@
     <string name="lease_product_type">ປະເພດສິນຄ້າ</string>
     <string name="lease_amount">ຍອດສິນເຊື່ອ</string>
     <string name="lease_interest_monthly">ດອກເບ້ຍ (ຕໍ່ເດືອນ)</string>
+    <string name="lease_months">ເດືອນ</string>
     <string name="lease_term">ໄລຍະເວລາ</string>
     <string name="lease_disbursement_date">ມື້ປ່ອຍສິນເຊື່ອ</string>
     <string name="lease_maturity_date">ມື້ຄົບກຳນົດ</string>

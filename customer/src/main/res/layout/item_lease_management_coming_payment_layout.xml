@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="com.bnkc.sourcemodule.util.FormatUtils" />
+
+        <variable
+            name="format"
+            type="FormatUtils" />
+
         <import type="com.mobile.bnkcl.data.response.lease.LeaseInfoResponse" />
 
         <variable
@@ -104,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{comingInfo.repaymentDay}" />
+                        android:text="@{format.Companion.getDateFormat(comingInfo.comingRepaymentDate, 4)}" />
 
                 </LinearLayout>
 

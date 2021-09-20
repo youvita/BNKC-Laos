@@ -63,6 +63,14 @@ class FormatUtils {
                         newFormatter = SimpleDateFormat("dd-MM-yyyy-HH:mm a", Locale.getDefault())
 
                     }
+                    8 -> {
+                        formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        if (inputDate == null) {
+                            inputDate = "2020-10-09"
+                        }
+                        date = formatter.parse(inputDate)
+                        newFormatter = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
+                    }
                     else -> throw IllegalStateException("Unexpected value: $action")
                 }
                 stDate = newFormatter.format(date)
@@ -88,7 +96,7 @@ class FormatUtils {
             return getNumberFormatWithoutCurrency(context, input) + " " + currency
         }
 
-        private fun getNumberFormatWithoutCurrency(context: Context, input: String): String {
+        fun getNumberFormatWithoutCurrency(context: Context, input: String): String {
             val number: String
             var currency: String
             var history = ""
@@ -227,6 +235,17 @@ class FormatUtils {
                 }
             }
             return result
+        }
+
+        fun getFormatOnlyDate(input: String, lang: String): String {
+            return if (lang.equals("en", ignoreCase = true)) {
+                when (input) {
+                    "01", "1", "21", "31" -> "" + input + "st"
+                    "02", "2", "22" -> "" + input + "nd"
+                    "03", "3", "23" -> "" + input + "rd"
+                    else -> "" + input + "th"
+                }
+            } else input
         }
 
         fun getSeparateFont(

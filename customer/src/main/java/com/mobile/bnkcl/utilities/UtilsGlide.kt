@@ -8,11 +8,14 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
+import com.bnkc.library.data.type.RunTimeDataStore
+import com.bnkc.sourcemodule.app.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -156,7 +159,17 @@ object UtilsGlide {
         }
     }
 
-    fun loadCircle(context: Context, url: GlideUrl, into: ImageView?, view: View?) {
+    fun loadCircle(context: Context, into: ImageView?, view: View?) {
+        val url = GlideUrl(
+            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
+            LazyHeaders.Builder()
+                .addHeader(
+                    "Authorization",
+                    "Bearer " + RunTimeDataStore.LoginToken.value
+                )
+                .build()
+        )
+
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transform(CircleCrop())
         requestOptions = requestOptions.dontAnimate()
@@ -197,7 +210,16 @@ object UtilsGlide {
         }
     }
 
-    fun loadCircle(context: Context, url: GlideUrl, into: ImageView?, hideView: View?, showView: View?) {
+    fun loadCircle(context: Context, into: ImageView?, hideView: View?, showView: View?) {
+        val url = GlideUrl(
+            RunTimeDataStore.BaseUrl.value.plus(Constants.IMAGE_URL),
+            LazyHeaders.Builder()
+                .addHeader(
+                    "Authorization",
+                    "Bearer " + RunTimeDataStore.LoginToken.value
+                )
+                .build()
+        )
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transform(CircleCrop())
         requestOptions = requestOptions.dontAnimate()
