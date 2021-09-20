@@ -65,7 +65,7 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                view?.loadUrl("javascript:(function(){document.body.style.paddingLeft = '21px', document.body.style.paddingRight = '21px', document.body.style.paddingBottom = '25px'})();")
+                view?.loadUrl("javascript:(function(){document.body.style.paddingBottom = '25px'})();")
             }
         }
     }
