@@ -69,7 +69,7 @@
     <string name="menu_application">ຄໍາຮ້ອງຂໍສະຫມັກ</string>
     <string name="menu_screening">ການກວດສອບ</string>
     <string name="menu_result">ຜົນທີ່ໄດ້ຮັບ</string>
-    <string name="main_bottom_menu3">ຄົ້ນຫາສຳນັກງານບໍລິສັດ</string>
+    <string name="main_bottom_menu3">ຄົ້ນຫາສຳນັກງານ</string>
     <string name="main_subtitle_001">ການສະເໜີເຊົ່າສິນເຊື່ອຂອງຂ້ອຍ (14 ວັນທີ່ຜ່ານມາ)</string>
     <string name="lease_in_use">ສິນເຊື່ອທີ່ດຳເນິນຢູ່</string>
 
@@ -93,6 +93,7 @@
     <string name="nav_login">ເຂົ້າສູ່ລະບົບ</string>
     <string name="nav_logout">ອອກຈາກລະບົບ</string>
     <string name="nav_home">ໜ້າຫຼັກ</string>
+    <string name="nav_user_unknown">User Unknown</string>
 
     <!--signup-->
     <string name="sign_up_01">ຂັ້ນຕອນທີ 1</string>
@@ -175,7 +176,7 @@
     <string name="history_paid_amount">ຍອດຊຳລະ</string>
     <string name="history_payment_date">ມື້ຊຳລະຄືນ</string>
     <string name="history_penalty">ຄ່າປັບໄໝ</string>
-    <string name="history_interest">ຕົ້ນທືນ</string>
+    <string name="history_interest">ດອກເບ້ຍ</string>
     <string name="history_principal">ຕົ້ນທືນ</string>
     <string name="tran_history_006">Empty</string>
     <string name="tran_history_007">Transaction history does not exist</string>
@@ -364,10 +365,10 @@
     <string name="result_manage_001">ຍອດລວມທັງໝົດ</string>
 
     <string name="result_detail_01" >\u0020\u0020 Ins \u0020\u0020</string>
-    <string name="result_detail_02" >\u0020\u0020\u0020 Principal \u0020\u0020\u0020</string>
-    <string name="result_detail_03" >\u0020\u0020 Interest \u0020\u0020</string>
-    <string name="result_detail_04" >\u0020\u0020\u0020 Repayment \u0020\u0020\u0020</string>
-    <string name="result_detail_05" >\u0020\u0020\u0020 Balance \u0020\u0020\u0020</string>
+    <string name="result_detail_02" >\u0020\u0020\u0020 ຕົ້ນທືນ \u0020\u0020\u0020</string>
+    <string name="result_detail_03" >\u0020\u0020 ດອກເບ້ຍ \u0020\u0020</string>
+    <string name="result_detail_04" >\u0020\u0020\u0020 ການຊຳລະຄືນ \u0020\u0020\u0020</string>
+    <string name="result_detail_05" >\u0020\u0020\u0020 ຍອດເຫຼືອ \u0020\u0020\u0020</string>
     <string name="repayment_term">ໄລຍະເວລາການຊຳລະ</string>
     <string name="advance_payment">ຍອດເງິນທີ່ຊຳລະກ່ອນ</string>
     <string name="commodity_price">Commodity Price</string>

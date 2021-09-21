@@ -3,6 +3,8 @@ package com.mobile.bnkcl.ui.main.fragment.mypage
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -55,10 +58,13 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var LRS001: Int = 0
     private var LRS002: Int = 0
     private var LRS003: Int = 0
+    private var currentIndex = 0
+    private var timeCounter: Runnable? = null
     private var leaseDialog1: ApplicationDialog? = null
     private var leaseDialog2: ApplicationDialog? = null
     private var leaseDialog3: ApplicationDialog? = null
     private val viewModel: PageViewModel by viewModels()
+    private val handler = Handler(Looper.getMainLooper())
     private var pageBinding: FragmentMyPageBinding? = null
     private var contractList: ArrayList<String>? = ArrayList()
     private var leaseData: ArrayList<MyLeasesData>? = ArrayList()
@@ -70,7 +76,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var leaseResultList: List<LeaseApplicationData>? = null
     private var leaseScreeningList: List<LeaseApplicationData>? = null
     private var leaseApplicationList: List<LeaseApplicationData>? = null
-    private var banners = listOf(
+    private var bannerList = listOf(
         R.drawable.banner_1, R.drawable.banner_2,
         R.drawable.banner_3, R.drawable.banner_4
     )
@@ -288,7 +294,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private fun setUpBanner() {
 
         bannerAdapter.clearItemList()
-        bannerAdapter.addItemList(banners)
+        bannerAdapter.addItemList(bannerList)
         pageBinding?.rvBanner?.adapter = bannerAdapter
 
         pageBinding?.rvBanner?.removeItemDecoration(itemOffsetDecoration)
@@ -316,6 +322,25 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             }
         })
 
+        try {
+            timeCounter = object : Runnable {
+                override fun run() {
+                    if (currentIndex + 1 > bannerAdapter.itemCount - 1) {
+                        currentIndex = 0
+                    } else {
+                        currentIndex++
+                    }
+                    bannerLayoutManager!!.smoothScrollToPosition(
+                        pageBinding!!.rvBanner,
+                        RecyclerView.State(), currentIndex
+                    )
+                    handler.postDelayed(this, 3000)
+                }
+            }
+            handler.postDelayed(timeCounter as Runnable, 3000)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onBillPaymentClicked(contractNo: String?, position: Int) {
@@ -361,8 +386,14 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         }
     }
 
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_my_page
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(timeCounter!!)
     }
 
     private fun addIndicator(
@@ -409,7 +440,9 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 textView.text = Html.fromHtml("&#8226;", Html.FROM_HTML_MODE_LEGACY)
             } else {
-                textView.text = Html.fromHtml("&#8226;")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    textView.text = Html.fromHtml("&#8226;", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                }
             }
             textView.textSize = 25f
             textView.background =

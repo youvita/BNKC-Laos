@@ -128,10 +128,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
         viewModel.userProfileLiveData.observe(this) {
             profileData = it
-
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = it.accountNumber
+
             successListener()
+
+            binding.navMenu.btnSignUp.visibility = View.GONE
+            binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
+            binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_logout_ico, 0, 0, 0);
+            binding.navMenu.vLine.visibility = View.GONE
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -149,13 +154,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     private fun initView() {
         binding.navMenu.localeCode = Locale.getDefault().language
 
-        if (viewModel.isLogin) {
-            binding.navMenu.btnSignUp.visibility = View.GONE
-            binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
-            binding.navMenu.vLine.visibility = View.GONE
-        }
-
-        binding.navMenu.tvUserName.text = "User Unknown"
+        binding.navMenu.tvUserName.text = getString(R.string.nav_user_unknown)
         binding.navMenu.tvUserId.text = ""
 
         binding.navMenu.llProfile.setOnClickListener(this)
@@ -369,22 +368,38 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 }
                 R.id.btn_login -> {
                     if (viewModel.isLogin) {
-                        val logOutDialog = LogOutDialog()
-                        logOutDialog.onConfirmClickedListener {
-                            viewModel.logout()
-                            showLoading()
+                        if (AppLogin.PIN.code == "N") {
+                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                                intent = Intent(this@MainActivity, OtpActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                val loginIntent =
+                                    Intent(this@MainActivity, PinCodeActivity::class.java)
+                                loginIntent.putExtra("pin_action", "login")
+                                loginIntent.putExtra(
+                                    "from",
+                                    LeaseServiceActivity::class.java.simpleName
+                                )
+                                loginIntent.putExtra(
+                                    "username",
+                                    sharedPrefer.getPrefer(Constants.USER_ID)
+                                )
+                                startActivity(loginIntent)
+                            }
+                        } else {
+                            val logOutDialog = LogOutDialog()
+                            logOutDialog.onConfirmClickedListener {
+                                viewModel.logout()
+                                showLoading()
+                            }
+                            logOutDialog.show(
+                                supportFragmentManager,
+                                logOutDialog.tag
+                            )
                         }
-                        logOutDialog.show(
-                            supportFragmentManager,
-                            logOutDialog.tag
-                        )
                     } else {
                         startActivity(Intent(this, OtpActivity::class.java))
                     }
-                }
-                R.id.btn_logout -> {
-                    val logOutDialog = LogOutDialog()
-                    logOutDialog.show(this.supportFragmentManager, logOutDialog.tag)
                 }
             }
         }

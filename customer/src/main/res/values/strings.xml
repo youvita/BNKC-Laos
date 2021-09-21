@@ -94,6 +94,7 @@
     <string name="nav_login">Login</string>
     <string name="nav_logout">Log Out</string>
     <string name="nav_home">Home</string>
+    <string name="nav_user_unknown">User Unknown</string>
 
     <!--signup-->
     <string name="sign_up_01">Step 1</string>
