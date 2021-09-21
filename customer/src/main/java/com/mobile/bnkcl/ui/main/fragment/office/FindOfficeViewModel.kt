@@ -74,7 +74,7 @@ class FindOfficeViewModel @Inject constructor(var findOfficeRepo: FindOfficeRepo
     fun setUpAreaName(data: ArrayList<AreaDataResponse>): ArrayList<String> {
         areaNames!!.clear()
         for (i in 0 until data.size) {
-            areaNames?.add(data[i].alias1!!)
+            areaNames?.add(data[i].name!!)
         }
         return areaNames!!
     }

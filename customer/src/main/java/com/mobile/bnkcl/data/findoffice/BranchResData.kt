@@ -20,6 +20,12 @@ class BranchResData : Serializable{
     @SerializedName("email")
     var email: String? = null
 
+    @SerializedName("fb_page_name")
+    var fb_page_name: String? = null
+
+    @SerializedName("fb_page_url")
+    var fb_page_url: String? = null
+
     @SerializedName("address")
     var address: String? = null
 

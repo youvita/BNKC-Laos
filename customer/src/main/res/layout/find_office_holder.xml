@@ -11,6 +11,9 @@
         <variable
             name="adapter"
             type="com.mobile.bnkcl.ui.main.adapter.FindOfficeRecyclerAdapter" />
+        <variable
+            name="formatUtil"
+            type="com.mobile.bnkcl.utilities.FormatUtil" />
     </data>
 
     <com.bnkc.sourcemodule.ui.ShadowLayout
@@ -59,10 +62,13 @@
                 <TextView
                     android:id="@+id/tv_office_email"
                     android:layout_width="wrap_content"
-                    android:text="@{item.email}"
+                    android:text="@{item.fb_page_name}"
+                    android:tag="@{item.fb_page_url}"
                     android:layout_marginTop="5dp"
+                    android:drawablePadding="@dimen/margin_5dp"
                     android:layout_height="wrap_content"
-                    style="@style/font15_2B3FF2_medium"/>
+                    style="@style/font15_4267B2_medium"
+                    app:drawableStartCompat="@drawable/ic_fb" />
 
                 <LinearLayout
                     android:layout_marginTop="20dp"
@@ -84,7 +90,7 @@
                             android:id="@+id/tv_contact"
                             android:layout_marginStart="5dp"
                             android:layout_width="wrap_content"
-                            textPhoneFormat="@{item.tel}"
+                            android:text="@{formatUtil.getTel(item.tel)}"
                             android:layout_height="wrap_content"
                             style="@style/font15_d7191f_medium"/>
                     </LinearLayout>

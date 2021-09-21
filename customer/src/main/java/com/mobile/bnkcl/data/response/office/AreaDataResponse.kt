@@ -15,8 +15,8 @@ data class AreaDataResponse(
     @SerializedName("iso_code")
      var iso_code: String? = null,
 
-    @SerializedName("alias1")
-    var alias1: String? = null,
+//    @SerializedName("alias1")
+//    var alias1: String? = null,
 
     @SerializedName("branch_count")
      var branch_count: Int? = null,

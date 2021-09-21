@@ -29,6 +29,7 @@ import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
+import kotlin.math.max
 
 @AndroidEntryPoint
 class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnCameraIdleListener,
@@ -39,8 +40,8 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 
     @Inject
     lateinit var confirmDialog: ConfirmDialog
-
     private var calLeaseDisposable: Disposable? = null
+
     private fun checkError(){
         //Session expired
         calLeaseDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
@@ -58,11 +59,8 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         checkError()
         if (intent != null) {
             val branchId = intent.getLongExtra("branch_id", 0)
-//            Log.d(">>>>>>", "onCreate :: $branchId")
-//            mapViewModel.branchId = branchId
             showLoading()
             mapViewModel.reqOffice(branchId)
-//            data = intent.getSerializableExtra("branch_info") as BranchResData
         }
         binding.toolbarName.isSelected = true
 
@@ -77,20 +75,21 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
             confirmDialog.onConfirmClickedListener {
                 startPhoneCall()
             }
-            confirmDialog.isCancelable = false
+            confirmDialog.isCancelable = true
             confirmDialog.show(supportFragmentManager, confirmDialog.tag)
 
         }
-        binding.ivBack.setOnClickListener { finish() }
-//        mapView = findViewById(R.id.mapView2)
         binding.mapView2.onCreate(savedInstanceState)
 
+        initView()
         observeData()
 
-//        binding.tvOffice.text = data?.name
-//        binding.toolbarName.text = data?.name
-//        binding.tvAddress.text = data?.address
-//        binding.mapView2.getMapAsync(this)
+    }
+
+    fun initView(){
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun getLayoutId(): Int {
@@ -102,9 +101,9 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
             .observe(this, {
                 if (it != null) {
                     data = it
-                    binding.tvOffice.setText(data?.name)
-                    binding.toolbarName.setText(data?.name)
-                    binding.tvAddress.setText(data?.address)
+                    binding.tvOffice.text = data?.name
+                    binding.toolbarName.text = data?.name
+                    binding.tvAddress.text = data?.address
                     binding.mapView2.getMapAsync(this)
                 }
             })
@@ -179,7 +178,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 branch,
-                if (zoomLevel!! >= 10) zoomLevel.toFloat() else Math.max(zoomLevel, 15).toFloat()
+                if (zoomLevel!! >= 10) zoomLevel.toFloat() else max(zoomLevel, 15).toFloat()
             )
         )
     }
@@ -191,9 +190,9 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     override fun onCameraMove() {}
 
     override fun onCameraMoveStarted(reason: Int) {
-        if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
-        } else if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_API_ANIMATION) {
-        } else if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION) {
+        if (reason == OnCameraMoveStartedListener.REASON_GESTURE) {
+        } else if (reason == OnCameraMoveStartedListener.REASON_API_ANIMATION) {
+        } else if (reason == OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION) {
         }
     }
 }

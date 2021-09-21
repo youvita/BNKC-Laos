@@ -297,6 +297,12 @@
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
+    <style name="font15_4267B2_medium">
+        <item name="android:textColor">@color/color_4267B2</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
     <style name="font15_263238_medium">
         <item name="android:textColor">@color/color_263238</item>
         <item name="android:textSize">15sp</item>

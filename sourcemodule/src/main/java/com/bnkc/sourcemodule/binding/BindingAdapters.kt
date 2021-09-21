@@ -101,13 +101,14 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("textPhoneFormat")
     fun TextView.setTextPhoneFormat(tel : String) {
-        FormatUtils.getSeparateFont(
-            context,
-            0,
-            FormatUtils.getTelFormat(tel, 0)!!.length,
-            "en",
-            FormatUtils.getTelFormat(tel, 0)
-        )
+//        FormatUtils.getSeparateFont(
+//            context,
+//            0,
+//            FormatUtils.getTelFormat(tel, 0)!!.length,
+//            "en",
+//            FormatUtils.getTelFormat(tel, 0)
+//        )
+
     }
 
 

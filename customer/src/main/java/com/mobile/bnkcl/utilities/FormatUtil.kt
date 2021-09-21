@@ -353,4 +353,10 @@ companion object{
         return str
     }
 
+    fun getTel(tel: String): String? {
+        var result: String? = ""
+        result = "(+856) ".plus(tel.substring(1))
+        return result
+    }
+
 }

@@ -69,7 +69,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
                 listChoiceDialog.setOnItemListener = {
                     p : Int ->
                     selectedItem = p
-                    binding.tvAreas.text = objects!![p].alias1
+                    binding.tvAreas.text = objects!![p].name
                     viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
                     viewModel.reqBranchList()
                 }
@@ -88,7 +88,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
         viewModel.areaLiveData.observe(requireActivity()) {
             objects!!.clear()
             val areaRespondObj = AreaDataResponse()
-            areaRespondObj.alias1 = getString(R.string.all)
+            areaRespondObj.name = getString(R.string.all)
             areaRespondObj.id = 0
             objects!!.add(areaRespondObj)
             objects!!.addAll(it)

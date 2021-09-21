@@ -9,6 +9,7 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.mobile.bnkcl.R
@@ -44,6 +45,7 @@ class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : B
     override fun setBindData(holder: ViewHolder, data: BranchResData, position: Int) {
         binding.item = data
 
+        binding.formatUtil = FormatUtil()
         if (position == 0) {
             if (itemCount == 1) {
                 val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(
@@ -123,10 +125,19 @@ class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : B
                     ).show()
                 }
             }
-            confirmDialog.isCancelable = false
+            confirmDialog.isCancelable = true
             confirmDialog.show(supportFragmentManager, confirmDialog.tag)
 
         }
+
+        holder.binding.tvOfficeEmail.setOnClickListener { //set branch info to extra
+            if (!data.fb_page_url.isNullOrEmpty()){
+                val facebookIntent = Intent(Intent.ACTION_VIEW)
+                facebookIntent.data = Uri.parse(data.fb_page_url)
+                context!!.startActivity(facebookIntent)
+            }
+        }
+
     }
 
 }

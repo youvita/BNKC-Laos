@@ -24,7 +24,6 @@ class MapViewModel @Inject constructor(private val findOfficeRepo : FindOfficeRe
     private var _officeMuLiveData = MutableLiveData<BranchResData>()
     var officeLiveData : LiveData<BranchResData> = _officeMuLiveData
     fun reqOffice(branchId : Long) {
-        Log.d(">>>>>>", "data :: $branchId")
         viewModelScope.launch {
             findOfficeRepo.getOffice(branchId).onEach { resource ->
                 _officeMuLiveData.value = resource.data!!
