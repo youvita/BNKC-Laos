@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -25,8 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
-    lateinit var leaseCalResponse: LeaseCalResponse
-    val viewModel : LeaseCalculateViewModel by viewModels()
+    private lateinit var leaseCalResponse: LeaseCalResponse
+    private val viewModel : LeaseCalculateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
@@ -58,7 +57,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
     }
 
     private fun initEvent(){
-        binding.llDetail.setOnClickListener(View.OnClickListener {
+        binding.llDetail.setOnClickListener {
             val matchParentMeasureSpec =
                 View.MeasureSpec.makeMeasureSpec(binding.llDetail.width, View.MeasureSpec.EXACTLY)
             val wrapContentMeasureSpec =
@@ -71,14 +70,13 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
                 UtilAnimation.expand(binding.tbContainer, 300)
                 binding.ivShowDetail.setImageResource(R.drawable.ic_fold_ico)
             }
-        })
+        }
     }
 
     private fun creatingTable() {
         val face: Typeface = Formats.getTypeFace(this, 1)!!
         val numberFace: Typeface = Formats.getTypeFace(this,  1)!!
         val numberFaceBold: Typeface = Formats.getTypeFace(this,  2)!!
-//        val stk: TableLayout = findViewById(R.id.table_main)
         val tbrow0 = TableRow(this)
         val tv0 = TextView(this)
         tv0.text = getString(R.string.result_detail_01)

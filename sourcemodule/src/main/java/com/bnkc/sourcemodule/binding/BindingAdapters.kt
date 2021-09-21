@@ -5,9 +5,6 @@
  */
 package com.bnkc.sourcemodule.binding
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -15,7 +12,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bnkc.sourcemodule.R
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.ui.ValidateButton
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.bnkc.sourcemodule.util.Formats
@@ -97,43 +93,6 @@ object BindingAdapters {
         val dayMonth = dayMonthFormat.format(date)
         tvDayMonth.text = dayMonth
     }
-
-    @JvmStatic
-    @BindingAdapter("textPhoneFormat")
-    fun TextView.setTextPhoneFormat(tel : String) {
-//        FormatUtils.getSeparateFont(
-//            context,
-//            0,
-//            FormatUtils.getTelFormat(tel, 0)!!.length,
-//            "en",
-//            FormatUtils.getTelFormat(tel, 0)
-//        )
-
-    }
-
-
-//    @JvmStatic
-//    @BindingAdapter("textButton")
-//    fun textButton(textView: ValidateButton, str: String?) {
-//        textView.text = str!!
-//    }
-
-//    @SuppressLint("UseCompatLoadingForDrawables")
-//    @JvmStatic
-//    @BindingAdapter("enableButton")
-//    fun ValidateButton.enableButton(isEnable: Boolean?) {
-//        if (isEnable != null && isEnable) {
-//            llCheckLabel!!.background =
-//                context!!.resources.getDrawable(R.drawable.selector_d7191f_8b0304)
-//            tvCheckLabel!!.setTextColor(ContextCompat.getColor(context, R.color.color_ffffff))
-//        } else {
-//            llCheckLabel!!.background =
-//                ContextCompat.getDrawable(context, R.drawable.round_solid_e1e5ec_8)
-//            tvCheckLabel!!.setTextColor (ContextCompat.getColor(context, R.color.color_90a4ae))
-//
-//        }
-//
-//    }
 
     @JvmStatic
     @BindingAdapter("setNumberFormat")

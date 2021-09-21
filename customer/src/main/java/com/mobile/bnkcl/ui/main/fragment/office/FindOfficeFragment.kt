@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bnkc.sourcemodule.base.BaseFragment
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
@@ -26,12 +25,12 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
 
     private var objects: ArrayList<AreaDataResponse>? = ArrayList()
     private val viewModel : FindOfficeViewModel by viewModels()
-    private var selectedItem = 0;
+    private var selectedItem = 0
 
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
-    var findOfficeBinding : FragmentFindOfficeBinding? = null
+    private var findOfficeBinding : FragmentFindOfficeBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +55,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerFindOffice.layoutManager = manager
 
-        binding.tvAreas.setOnClickListener(View.OnClickListener {
+        binding.tvAreas.setOnClickListener {
             if (objects != null && objects!!.size > 0) {
 
                 listChoiceDialog = ListChoiceDialog.newInstance(
@@ -66,26 +65,28 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
                     selectedItem
                 )
 
-                listChoiceDialog.setOnItemListener = {
-                    p : Int ->
+                listChoiceDialog.setOnItemListener = { p: Int ->
                     selectedItem = p
                     binding.tvAreas.text = objects!![p].name
                     viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "")
                     viewModel.reqBranchList()
                 }
                 listChoiceDialog.isCancelable = true
-                listChoiceDialog.show(requireActivity().supportFragmentManager, listChoiceDialog.tag)
+                listChoiceDialog.show(
+                    requireActivity().supportFragmentManager,
+                    listChoiceDialog.tag
+                )
 
             }
-        })
+        }
         showLoading()
         viewModel.reqAreasList()
         getAreas()
         getBranches()
     }
 
-    fun getAreas(){
-        viewModel.areaLiveData.observe(requireActivity()) {
+    private fun getAreas(){
+        viewModel.areaLiveData.observe(requireActivity(), {
             objects!!.clear()
             val areaRespondObj = AreaDataResponse()
             areaRespondObj.name = getString(R.string.all)
@@ -94,11 +95,11 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
             objects!!.addAll(it)
             viewModel.branchRequest = BranchRequest("", 1, 10, "")
             viewModel.reqBranchList()
-        }
+        })
     }
 
-    fun getBranches(){
-        viewModel.branchLiveData.observe(requireActivity(),{
+    private fun getBranches(){
+        viewModel.branchLiveData.observe(requireActivity(), {
             val adapter = FindOfficeRecyclerAdapter(requireActivity().supportFragmentManager)
             adapter.addItemList(it)
             binding.recyclerFindOffice.adapter = adapter

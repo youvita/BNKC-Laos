@@ -9,7 +9,6 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.mobile.bnkcl.R

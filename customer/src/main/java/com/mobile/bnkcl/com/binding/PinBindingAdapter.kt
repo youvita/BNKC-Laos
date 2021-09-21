@@ -26,7 +26,6 @@ object PinBindingAdapter {
                 mResetPin!!.setOnClickListener {
                     setOnActionListener("reset_pin")
                 }
-
             }
             2 -> { //sign up
                 mBackButton!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_close_white))
@@ -63,7 +62,6 @@ object PinBindingAdapter {
                     val preSelection = editText.selectionEnd
                     s.replace(0, value.length, fixedValue)
                     val selection = preSelection + fixedValue.length - value.length
-//            DevLog.devLog(">>>>>>>", ">>>>>>>>>>> :: " + s.length)
 
                     editText.setSelection(Math.max(s.length, 0))
                     editText.addTextChangedListener(this)

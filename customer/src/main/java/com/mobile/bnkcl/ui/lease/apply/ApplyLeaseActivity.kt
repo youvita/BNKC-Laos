@@ -4,11 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.EditText
-import android.widget.RadioGroup
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -20,29 +16,26 @@ import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
-import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.databinding.ActivityApplyLeaseBinding
-import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.max
 
 @AndroidEntryPoint
 class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
-    val viewModel : ApplyLeaseViewModel by viewModels()
+    private val viewModel : ApplyLeaseViewModel by viewModels()
     private var selectedItem = -1
-    var repaymentSelected = -1;
+    private var repaymentSelected = -1
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
-    lateinit var itemResponses : ArrayList<ItemResponseObject>
-    lateinit var repaymentCodes : ArrayList<ItemResponseObject>
+
+    private lateinit var itemResponses : ArrayList<ItemResponseObject>
+    private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
@@ -56,8 +49,6 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             }
         }
     }
-
-    //$dnf repoquery -q clang :: commnd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
@@ -96,10 +87,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             viewModel.setUpRepaymentData(repaymentCodes)
         })
         viewModel.applyLeaseLiveData.observe(this, {
-            if (it.lease_application_id != null && it.lease_application_id!!.isNotEmpty()) {
-                navigateResult(true)
-            }
-
+            navigateResult(it.lease_application_id != null && it.lease_application_id!!.isNotEmpty())
         })
 
         viewModel.actionLiveData.observe(this, {
@@ -241,7 +229,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }else{
                     ""
                 }
-                var term = if (viewModel.applyLeaseRequest.repayment_term != null){
+                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
                     viewModel.applyLeaseRequest.repayment_term
                 }else{
                     ""
@@ -438,7 +426,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             }
         })
 
-        binding.cbEtc.setOnCheckedChangeListener { p0, p1 ->
+        binding.cbEtc.setOnCheckedChangeListener { _, p1 ->
             viewModel.applyLeaseRequest.etc_status = p1
         }
 
@@ -577,7 +565,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         return R.layout.activity_apply_lease
     }
 
-    class NumberTextWatcherForThousand internal constructor(var editText: EditText) : TextWatcher {
+    class NumberTextWatcherForThousand internal constructor(private var editText: EditText) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun afterTextChanged(s: Editable) {
@@ -587,18 +575,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 val fixedValue: String = FormatUtil.getDecimalFormattedString(value, false).toString()
                 val preSelection = editText.selectionEnd
                 s.replace(0, value.length, fixedValue)
-                val selection = preSelection + fixedValue.length - value.length
-//            DevLog.devLog(">>>>>>>", ">>>>>>>>>>> :: " + s.length)
-                editText.setSelection(Math.max(s.length, 0))
-//            try {
-//                if (editText === mBinding.edLoanAmount) { //_Auto generate of amount when user input amount in foreign currency and exchange rate
-//                    viewModel.setLOAN_AMOUNT(s.toString().replace(",".toRegex(), ""))
-//                } else if (editText === mBinding.edMonthlyIncome) {
-//                    viewModel.setMONTHLY_INCOME(s.toString().replace(",".toRegex(), ""))
-//                }
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
+                preSelection + fixedValue.length - value.length
+                editText.setSelection(max(s.length, 0))
                 editText.addTextChangedListener(this)
             } catch (e: Exception) {
                 e.printStackTrace()

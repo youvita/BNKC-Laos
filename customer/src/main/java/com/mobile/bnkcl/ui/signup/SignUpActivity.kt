@@ -15,11 +15,9 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
-import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.area.AddressData
 import com.mobile.bnkcl.data.request.auth.IdNumReq
-import com.mobile.bnkcl.data.request.otp.SendOTPRequest
 import com.mobile.bnkcl.data.response.area.AreaItems
 import com.mobile.bnkcl.data.response.auth.AreaObj
 import com.mobile.bnkcl.data.response.code.CodesData
@@ -84,7 +82,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         /*observe data*/
         observeData()
 
-//        observeDistrictData()
         observeVillage()
         observeCode()
         observeGender()
@@ -507,7 +504,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
             setDateRequestData(s.toString())
 
-//            validateUserInfo()
         }
     }
     private fun setStringDateToCalendar(stDate: String) {
@@ -515,7 +511,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             if (stDate.length == 10) {
                 val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.US)
                 val date = sdf.parse(stDate)
-                myCalendar.time = date
+                myCalendar.time = date!!
             }
         } catch (e: ParseException) {
             e.printStackTrace()
@@ -587,7 +583,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
     }
 
-    var textLength = 0
     private val textIdentificationNumberWatcher = object : TextWatcher{
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -598,10 +593,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
         override fun afterTextChanged(s: Editable?) {
             identificationNumber = binding.edtIdNum.text.toString()
-//            binding.edtIdNum.tag = s
-//            textLength = binding.edtIdNum.text.toString().length
-//
-//            binding.tvNewCustomer.visibility = View.GONE
             viewModel.signUpRequest.identification_number = s.toString()
             val jobType = if (viewModel.signUpRequest.job_type != null){
                 viewModel.signUpRequest.job_type

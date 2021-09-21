@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -173,7 +172,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         markerOptions.position(branch)
             .title(data!!.name)
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-        val m = googleMap.addMarker(markerOptions)
+        googleMap.addMarker(markerOptions)
         // Show Sydney on the map.
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
@@ -190,9 +189,13 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     override fun onCameraMove() {}
 
     override fun onCameraMoveStarted(reason: Int) {
-        if (reason == OnCameraMoveStartedListener.REASON_GESTURE) {
-        } else if (reason == OnCameraMoveStartedListener.REASON_API_ANIMATION) {
-        } else if (reason == OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION) {
+        when (reason) {
+            OnCameraMoveStartedListener.REASON_GESTURE -> {
+            }
+            OnCameraMoveStartedListener.REASON_API_ANIMATION -> {
+            }
+            OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION -> {
+            }
         }
     }
 }

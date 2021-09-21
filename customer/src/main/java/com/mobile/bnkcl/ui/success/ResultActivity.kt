@@ -21,7 +21,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
 
     val viewModel : ResultViewModel by viewModels()
     var username : String? = null
-    var resultStatus = true
+    private var resultStatus = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

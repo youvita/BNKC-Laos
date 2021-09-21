@@ -1,28 +1,17 @@
 package com.mobile.bnkcl.ui.pinview
 
-import android.app.Activity
-import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
-import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.request.auth.*
 import com.mobile.bnkcl.data.request.user.PreChangeRequest
 import com.mobile.bnkcl.data.request.user.ResetPasswordRequest
 import com.mobile.bnkcl.data.response.auth.LoginResponse
-import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.signup.SignUpResponse
 import com.mobile.bnkcl.data.response.user.resetpassword.PreChangeResponse
-import com.mobile.bnkcl.ui.main.MainActivity
-import com.mobile.bnkcl.ui.signup.SignUpViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -33,10 +22,6 @@ import javax.inject.Inject
 class PinViewModel @Inject constructor(private val userRepo: UserRepo, private val authRepo: AuthRepo) : BaseViewModel(){
 
     var signUpRequest : SignUpRequest? = null
-
-//    var pinUI : Int = 0
-//    var _pinUi : MutableLiveData<Int> = MutableLiveData<Int>()
-//    var pinUi = _pinUi
 
     private val _login: MutableLiveData<LoginResponse> = MutableLiveData()
     val loginLiveData: LiveData<LoginResponse> = _login
