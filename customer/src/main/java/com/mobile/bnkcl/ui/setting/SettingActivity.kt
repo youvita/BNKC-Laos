@@ -3,11 +3,9 @@ package com.mobile.bnkcl.ui.setting
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
@@ -19,9 +17,6 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivitySettingBinding
-import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
-import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
@@ -52,7 +47,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
                 startActivity(Intent(this, PinCodeActivity::class.java))
             }
         }
-
     }
 
     override fun getLayoutId(): Int {
@@ -74,7 +68,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
                 intent.getBooleanExtra("push_alarm_enabled", false)
             binding.toggleUser.isChecked = settingViewModel.push_notification_yn!!
         }
-
 
         if (AppLogin.PIN.code == "N") {
             binding.tvResetPin.isEnabled = false
@@ -122,12 +115,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
 
     private fun initLiveData() {
         settingViewModel.userSettingLiveData.observe(this@SettingActivity) {
-            Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
             sharedPrefer.putPrefer(
                 Constants.Push.PUSH_ALARM,
                 if (settingViewModel.settingData!!.push_alarm_enabled!!) "Y" else "N"
             )
-            successListener()
         }
     }
 

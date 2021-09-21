@@ -224,8 +224,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      * handle to show loading
      */
     fun showLoading() {
-        loadingDialog = LoadingDialog()
-        loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog()
+            loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
+        }
     }
 
     override fun onDestroy() {
