@@ -147,7 +147,7 @@ class ResultViewModel @Inject constructor() : BaseViewModel() {
             AskBNKCActivity::class.java.simpleName -> _actionMuLiveData.value = AskBNKCActivity::class.java.simpleName
             Constants.RESET_PIN -> _actionMuLiveData.value = Constants.RESET_PIN
             Constants.SIGN_UP -> _actionMuLiveData.value = Constants.SIGN_UP
-            ApplyLeaseActivity::class.java.simpleName -> _actionMuLiveData.value = AskBNKCActivity::class.java.simpleName
+            ApplyLeaseActivity::class.java.simpleName -> _actionMuLiveData.value = ApplyLeaseActivity::class.java.simpleName
         }
     }
 

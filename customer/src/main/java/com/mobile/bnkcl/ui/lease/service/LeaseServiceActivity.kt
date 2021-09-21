@@ -45,7 +45,9 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
                     Log.d(">>>>>>>", "Apply :: " + AppLogin.PIN_TYPE)
                     if (AppLogin.PIN.code == "N"){
                         if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()){
-                            startActivity(Intent(this, OtpActivity::class.java))
+                            val intent = Intent(this, OtpActivity::class.java)
+                            intent.putExtra("from", LeaseServiceActivity::class.java.simpleName)
+                            startActivity(intent)
                         }else{
                             val intent = Intent(this, PinCodeActivity::class.java)
                             intent.putExtra("pin_action", "login")

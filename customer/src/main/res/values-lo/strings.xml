@@ -394,5 +394,25 @@
     <string name="pin_registration">ລົງຖະບຽນລະຫັດ PIN</string>
     <string name="we_lend_you_money_at_a_reasonable_interest">ພວກເຮົາສາມາດໃຫ້ທ່ານຢືມເງິນໃນອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ</string>
     <string name="are_you_a_little_short_of_money_when_you_buy_commodities">ເງິນທ່ານບໍ່ພຽງພໍເມື່ອຊື້ສິນຄ້າຫຼືບໍ?</string>
+    <string name="input_name_of_model">Input name of model</string>
+    <string name="etc_no_applicable_type">ETC(No applicable type)</string>
+    <string name="input_name_of_brand">Input name of brand</string>
+    <string name="name_of_model">Name of Model</string>
+    <string name="name_of_type">Name of Type</string>
+    <string name="name_of_brand">Name of Brand</string>
+    <string name="select_product_type">Select Product Type</string>
+    <string name="product_type">Product Type</string>
+    <string name="commodity_information">Commodity Information</string>
+    <string name="input_name_of_type">Input Name of Type</string>
+    <string name="input_name_of_type_suv_sedan_van">Input name of type(SUV,SEDAN, VAN...)</string>
+    <string name="product_price">Product Price</string>
+    <string name="kip">Kip</string>
+    <string name="lease_information">Lease Information</string>
+    <string name="request_amount">Request Amount</string>
+    <string name="name">Name</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="identification_nm">Identification NM</string>
 
 </resources>

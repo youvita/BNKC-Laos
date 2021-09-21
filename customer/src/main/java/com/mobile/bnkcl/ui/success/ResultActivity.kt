@@ -67,7 +67,8 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
                 AskBNKCActivity::class.java.simpleName -> {
                     if (resultStatus){
                         setResult(RESULT_OK)
-                        finish()}
+                        finish()
+                    }
                 }
                 Constants.RESET_PIN -> {
                     if (resultStatus){

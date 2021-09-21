@@ -33,14 +33,6 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
     fun applyLease(){
         viewModelScope.launch {
             leaseRepo.applyLease(applyLeaseRequest).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _applyLeaseLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }
@@ -51,14 +43,6 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
     fun reqLeaseItemCode(groupId :String){
         viewModelScope.launch {
             leaseRepo.getItemCode(groupId).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _productTypeMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
@@ -69,15 +53,37 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
     fun reqRepaymentCode(groupId :String){
         viewModelScope.launch {
             leaseRepo.getItemCode(groupId).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _repaymentMuLiveData.value = resource.data!!
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _typeMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    val typeLiveData = _typeMuLiveData
+    fun reqTypeCode(groupId :String){
+        viewModelScope.launch {
+            leaseRepo.getItemCode(groupId).onEach { resource ->
+                _typeMuLiveData.value = resource.data!!
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _brandMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    val brandLiveData = _brandMuLiveData
+    fun reqBrandCode(groupId :String){
+        viewModelScope.launch {
+            leaseRepo.getItemCode(groupId).onEach { resource ->
+                _brandMuLiveData.value = resource.data!!
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _modelMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    val modelLiveData = _modelMuLiveData
+    fun reqModelCode(groupId :String){
+        viewModelScope.launch {
+            leaseRepo.getItemCode(groupId).onEach { resource ->
+                _modelMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
     }
@@ -90,13 +96,29 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
         _actionMuLiveData.value = "product_type"
     }
 
-    var areaNames: ArrayList<String>? = ArrayList()
+    fun editUserInfo() {
+        _actionMuLiveData.value = "edit_info"
+    }
+
+    fun selectBrand(){
+        _actionMuLiveData.value = "brand"
+    }
+
+    fun selectType(){
+        _actionMuLiveData.value = "type"
+    }
+
+    fun selectModel() {
+        _actionMuLiveData.value = "model"
+    }
+
+    var productTypes: ArrayList<String>? = ArrayList()
     fun setUpProductTypeData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
-        areaNames?.clear()
+        productTypes?.clear()
         for (i in 0 until itemResponse.size){
-            areaNames?.add(itemResponse[i].title!!)
+            productTypes?.add(itemResponse[i].title!!)
         }
-        return areaNames!!
+        return productTypes!!
     }
 
     var repaymentData: ArrayList<String>? = ArrayList()
@@ -106,6 +128,33 @@ class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) 
             repaymentData?.add(itemResponse[i].title!!)
         }
         return repaymentData!!
+    }
+
+    var typeData: ArrayList<String>? = ArrayList()
+    fun setUpTypeData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+        typeData?.clear()
+        for (i in 0 until itemResponse.size){
+            typeData?.add(itemResponse[i].title!!)
+        }
+        return typeData!!
+    }
+
+    var brandData: ArrayList<String>? = ArrayList()
+    fun setUpBrandData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+        brandData?.clear()
+        for (i in 0 until itemResponse.size){
+            brandData?.add(itemResponse[i].title!!)
+        }
+        return brandData!!
+    }
+
+    var modelData: ArrayList<String>? = ArrayList()
+    fun setUpModelData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+        modelData?.clear()
+        for (i in 0 until itemResponse.size){
+            modelData?.add(itemResponse[i].title!!)
+        }
+        return modelData!!
     }
 
     fun repaymentTerm(){

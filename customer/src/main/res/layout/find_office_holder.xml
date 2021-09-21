@@ -64,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:text="@{item.fb_page_name}"
                     android:tag="@{item.fb_page_url}"
+                    visibleGone="@{(item.fb_page_url != null || !item.fb_page_url.empty)}"
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:drawablePadding="@dimen/margin_5dp"

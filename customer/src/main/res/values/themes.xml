@@ -159,6 +159,13 @@
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
+    <style name="font15_CFD8DC_medium_selector_input"> <!-- used -->
+        <item name="android:textColorHint">@color/color_cfd8dc</item>
+        <item name="android:textColor">@color/selector_input_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
     <style name="font15_cfd8dc_medium">
         <item name="android:textColor">@color/color_cfd8dc</item>
         <item name="android:textSize">15sp</item>

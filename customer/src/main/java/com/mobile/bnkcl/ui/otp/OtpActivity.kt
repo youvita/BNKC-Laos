@@ -67,7 +67,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 //                    binding.otpViewModel.getVerifyOTPModel().setPin(otp)
                     viewModel.otpVerifyRequest = OTPVerifyRequest(otp, pinID)
                     binding.otpViewModel!!.verifyOTP()
-                verifyOTP()
             }
             binding.tvCorrect.visibility = View.GONE
             binding.llOptCode.background = getDrawable(R.drawable.round_stroke_e1e5ec_8)
@@ -124,7 +123,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         try {
             showLoading()
             viewModel.phoneNumber = getPhoneNo().toString()
-//            viewModel._phoneNumberContent.value = phoneNumber
             viewModel.sendOTP(getPhoneNo().toString())
             binding.edtOtp.text!!.clear()
             binding.ivSendOtp.setOnClickListener(null)
@@ -144,93 +142,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             binding.edtOtp.isEnabled = true
             resendTimer()
             Toast.makeText(this, "OTP : ${it.pin}", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun verifyOTP() {
-        viewModel.verifyOTPLiveData.observe(this){
-            Log.d(
-                ">>>>>>>>",
-                " Sign UP or Login " + viewModel.sendOTPRequest.to + viewModel.otpVerifyRequest!!.pin_id
-            )
-            binding.isVerified = it.verified!!
-            binding.tvCorrect.visibility = View.VISIBLE
-            if (it.verified!!){
-                if (binding.otpViewModel!!.uiMode == 0){
-                    viewModel.prelogRequest = PreLoginRequest(
-                        viewModel.sendOTPRequest.to,
-                        viewModel.otpVerifyRequest!!.pin_id
-                    )
-                    preLogin()
-                }else if (binding.otpViewModel!!.uiMode == 1){
-                    viewModel.preSignUpRequest = PreSignUpRequest(
-                        viewModel.sendOTPRequest.to,
-                        viewModel.otpVerifyRequest!!.pin_id
-                    )
-                    preSignUp()
-                }else if(binding.otpViewModel!!.uiMode == 2){
-                    viewModel.prelogRequest = PreLoginRequest(
-                        viewModel.sendOTPRequest.to,
-                        viewModel.otpVerifyRequest!!.pin_id
-                    )
-                    preLogin()
-                }
-
-                binding.llOptCode.background = ContextCompat.getDrawable(
-                    this,
-                    R.drawable.round_stroke_00695c_8
-                )
-                binding.tvCorrect.setTextColor(resources.getColor(R.color.color_00695c))
-                binding.tvCorrect.text = getString(R.string.sign_up_23)
-                binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    ContextCompat.getDrawable(this, R.drawable.ic_correct_ico),
-                    null
-                )
-                binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
-
-            }else{
-                countDownTimer!!.cancel()
-                binding.tvCountdown.setTextColor(ContextCompat.getColor(this, R.color.color_cfd8dc))
-                binding.llOptCode.background = ContextCompat.getDrawable(
-                    this,
-                    R.drawable.round_stroke_d7191f_solid_ffffff_8
-                )
-                binding.tvCorrect.setTextColor(resources.getColor(R.color.colorPrimary))
-                binding.tvCorrect.text = getString(R.string.sign_up_06)
-                binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    ContextCompat.getDrawable(this, R.drawable.ic_info_red_ico_1),
-                    null
-                )
-//                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
-            }
-        }
-    }
-
-    private fun preSignUp() {
-        viewModel.preSignUp()
-        viewModel.preSignUpLiveData.observe(this){
-            Log.d("nng", it.toString())
-            successListener()
-            if (it.session_id!!.isNotEmpty()){
-                binding.otpViewModel!!.sessionID = it.session_id!!
-                binding.btnContinue.setActive(true)
-            }
-        }
-    }
-
-    private fun preLogin() {
-        viewModel.preLogin()
-        viewModel.preloginLiveData.observe(this){
-            Log.d("nng", it.toString())
-            successListener()
-            if (it.session_id!!.isNotEmpty()){
-                binding.otpViewModel!!.sessionID = it.session_id!!
-                binding.btnContinue.setActive(true)
-            }
         }
     }
 
@@ -328,6 +239,82 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     }
 
     private fun observeData(){
+        viewModel.preloginLiveData.observe(this){
+            Log.d("nng", it.toString())
+            successListener()
+            if (it.session_id!!.isNotEmpty()){
+                binding.otpViewModel!!.sessionID = it.session_id!!
+                binding.btnContinue.setActive(true)
+            }
+        }
+        viewModel.preSignUpLiveData.observe(this){
+            Log.d("nng", it.toString())
+            successListener()
+            if (it.session_id!!.isNotEmpty()){
+                binding.otpViewModel!!.sessionID = it.session_id!!
+                binding.btnContinue.setActive(true)
+            }
+        }
+        viewModel.verifyOTPLiveData.observe(this, androidx.lifecycle.Observer{
+            binding.isVerified = it.verified!!
+            binding.tvCorrect.visibility = View.VISIBLE
+            if (it.verified!!){
+                when (binding.otpViewModel!!.uiMode) {
+                    0 -> {
+                        viewModel.prelogRequest = PreLoginRequest(
+                            viewModel.sendOTPRequest.to,
+                            viewModel.otpVerifyRequest!!.pin_id
+                        )
+                        viewModel.preLogin()
+                    }
+                    1 -> {
+                        viewModel.preSignUpRequest = PreSignUpRequest(
+                            viewModel.sendOTPRequest.to,
+                            viewModel.otpVerifyRequest!!.pin_id
+                        )
+                        viewModel.preSignUp()
+                    }
+                    2 -> {
+                        viewModel.prelogRequest = PreLoginRequest(
+                            viewModel.sendOTPRequest.to,
+                            viewModel.otpVerifyRequest!!.pin_id
+                        )
+                        viewModel.preLogin()
+                    }
+                }
+
+                binding.llOptCode.background = ContextCompat.getDrawable(
+                    this,
+                    R.drawable.round_stroke_00695c_8
+                )
+                binding.tvCorrect.setTextColor(resources.getColor(R.color.color_00695c))
+                binding.tvCorrect.text = getString(R.string.sign_up_23)
+                binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    ContextCompat.getDrawable(this, R.drawable.ic_correct_ico),
+                    null
+                )
+                binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
+
+            }else{
+                countDownTimer!!.cancel()
+                binding.tvCountdown.setTextColor(ContextCompat.getColor(this, R.color.color_cfd8dc))
+                binding.llOptCode.background = ContextCompat.getDrawable(
+                    this,
+                    R.drawable.round_stroke_d7191f_solid_ffffff_8
+                )
+                binding.tvCorrect.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                binding.tvCorrect.text = getString(R.string.sign_up_06)
+                binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    ContextCompat.getDrawable(this, R.drawable.ic_info_red_ico_1),
+                    null
+                )
+//                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
+            }
+        })
         viewModel.isSignUpLiveData.observe(this, {
             if (binding.otpViewModel!!.step == 1) {
                 binding.rlOtp.visibility = View.VISIBLE

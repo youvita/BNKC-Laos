@@ -42,7 +42,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="30dp"
-                    android:text="Commodity Information"/>
+                    android:text="@string/commodity_information"/>
 
                 <TextView
                     style="@style/font13_263238_medium"
@@ -52,67 +52,94 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Product Type"/>
+                    android:text="@string/product_type"/>
 
-                <LinearLayout
-                    android:id="@+id/ll_loan_term"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal"
-                    android:onClick="@{()->applyViewModel.selectProductType()}">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/ll_loan_term"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:onClick="@{()->applyViewModel.selectProductType()}">-->
 
-                    <TextView
-                        android:id="@+id/tv_pro_type"
-                        style="@style/font15_cfd8dc_medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
-                        android:layout_weight="1"
-                        android:text="Select Product Type"
-                        android:visibility="visible" />
+<!--                    -->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_more_ico" />
-                </LinearLayout>
+<!--&lt;!&ndash;                    <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_gravity="center_vertical"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_marginEnd="15dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:src="@drawable/ic_more_ico" />&ndash;&gt;-->
+<!--                </LinearLayout>-->
 
                 <TextView
-                    style="@style/font13_263238_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Name of Brand"/>
-
-                <com.mobile.bnkcl.com.view.BnkEditText
-                    android:id="@+id/ed_name_brand"
+                    android:id="@+id/tv_pro_type"
+                    style="@style/font15_cfd8dc_medium"
                     android:layout_width="match_parent"
-                    android:hint="Input Name of Brand"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="text"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:textAlignment="textStart"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                     android:layout_height="@dimen/height_50dp"
-                    android:imeOptions="actionDone"
-
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:text="@string/select_product_type"
+                    android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    
-                    style="@style/font15_CFD8DC_medium_input"/>
+                    android:paddingStart="@dimen/margin_15dp"
+                    android:paddingEnd="@dimen/margin_15dp"
+                    android:visibility="visible"
+                    android:onClick="@{()->applyViewModel.selectProductType()}"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+                <TextView
+                    style="@style/font13_263238_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
+                    android:text="@string/name_of_brand"/>
+
+                <TextView
+                    android:id="@+id/tv_name_brand"
+                    style="@style/font15_cfd8dc_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
+                    android:text="@string/input_name_of_brand"
+                    android:tag=""
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="@dimen/margin_15dp"
+                    android:paddingEnd="@dimen/margin_15dp"
+                    android:visibility="visible"
+                    android:onClick="@{()->applyViewModel.selectBrand()}"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+<!--                <com.mobile.bnkcl.com.view.BnkEditText-->
+<!--                    android:id="@+id/ed_name_brand"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:hint="@string/input_name_of_brand"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingStart="15dp"-->
+<!--                    android:paddingEnd="15dp"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"-->
+<!--                    android:layout_height="@dimen/height_50dp"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    style="@style/font15_CFD8DC_medium_selector_input"/>-->
 
                 <TextView
                     android:id="@+id/name_type"
@@ -123,25 +150,44 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Name of Type"/>
+                    android:text="@string/name_of_type"/>
 
-                <com.mobile.bnkcl.com.view.BnkEditText
-                    android:id="@+id/ed_name_type"
+                <TextView
+                    android:id="@+id/tv_name_type"
+                    style="@style/font15_cfd8dc_medium"
                     android:layout_width="match_parent"
-                    android:hint="Input Name of Type"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="text"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:textAlignment="textStart"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                     android:layout_height="@dimen/height_50dp"
-                    android:imeOptions="actionDone"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
+                    android:text="@string/input_name_of_type"
+                    android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    style="@style/font15_CFD8DC_medium_input"/>
+                    android:paddingStart="@dimen/margin_15dp"
+                    android:paddingEnd="@dimen/margin_15dp"
+                    android:visibility="visible"
+                    android:onClick="@{()->applyViewModel.selectType()}"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+<!--                <com.mobile.bnkcl.com.view.BnkEditText-->
+<!--                    android:id="@+id/ed_name_type"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:hint="@string/input_name_of_type"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingStart="15dp"-->
+<!--                    android:paddingEnd="15dp"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"-->
+<!--                    android:layout_height="@dimen/height_50dp"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    style="@style/font15_CFD8DC_medium_selector_input"/>-->
 
                 <TextView
                     android:id="@+id/name_model"
@@ -152,92 +198,112 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Name of Model"/>
+                    android:text="@string/name_of_model"/>
 
-                <com.mobile.bnkcl.com.view.BnkEditText
-                    android:id="@+id/ed_name_model"
+                <TextView
+                    android:id="@+id/tv_name_model"
+                    style="@style/font15_cfd8dc_medium"
                     android:layout_width="match_parent"
-                    android:hint="Input Name of Brand"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="text"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:textAlignment="textStart"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
                     android:layout_height="@dimen/height_50dp"
-                    android:imeOptions="actionDone"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
+                    android:text="@string/input_name_of_model"
+                    android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    
-                    style="@style/font15_CFD8DC_medium_input"/>
+                    android:paddingStart="@dimen/margin_15dp"
+                    android:paddingEnd="@dimen/margin_15dp"
+                    android:visibility="visible"
+                    android:onClick="@{()->applyViewModel.selectModel()}"
+                    app:drawableEndCompat="@drawable/ic_more_ico" />
+
+<!--                <com.mobile.bnkcl.com.view.BnkEditText-->
+<!--                    android:id="@+id/ed_name_model"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:hint="@string/input_name_of_model"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingStart="15dp"-->
+<!--                    android:paddingEnd="15dp"-->
+<!--                    android:textAlignment="textStart"-->
+<!--                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"-->
+<!--                    android:layout_height="@dimen/height_50dp"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    style="@style/font15_CFD8DC_medium_selector_input"/>-->
 
                 <CheckBox
                     android:id="@+id/cb_etc"
                     android:layout_marginStart="@dimen/margin_15dp"
                     android:layout_marginBottom="@dimen/margin_5dp"
-                    android:checked="true"
+                    android:checked="false"
                     android:paddingStart="@dimen/margin_10dp"
                     android:button="@drawable/selector_green_check"
                     android:layout_width="wrap_content"
-                    android:text="ETC(No applicable type"
+                    android:text="@string/etc_no_applicable_type"
                     android:layout_height="wrap_content"/>
 
                 <com.mobile.bnkcl.com.view.BnkEditText
                     android:id="@+id/ed_etc_brand"
                     android:layout_width="match_parent"
-                    android:hint="Input name of brand"
+                    android:hint="@string/input_name_of_brand"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:inputType="text"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:textAlignment="textStart"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
                     android:layout_height="@dimen/height_50dp"
+                    android:enabled="false"
                     android:imeOptions="actionDone"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    style="@style/font15_CFD8DC_medium_input"/>
+                    style="@style/font15_CFD8DC_medium_selector_input"/>
 
                 <com.mobile.bnkcl.com.view.BnkEditText
                     android:id="@+id/ed_etc_type"
                     android:layout_width="match_parent"
-                    android:hint="Input name of type(SUV,SEDAN, VAN...)"
+                    android:hint="@string/input_name_of_type_suv_sedan_van"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:inputType="text"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:textAlignment="textStart"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
+                    android:enabled="false"
                     android:layout_height="@dimen/height_50dp"
                     android:imeOptions="actionDone"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    style="@style/font15_CFD8DC_medium_input"/>
+                    style="@style/font15_CFD8DC_medium_selector_input"/>
 
                 <com.mobile.bnkcl.com.view.BnkEditText
                     android:id="@+id/ed_etc_model"
                     android:layout_width="match_parent"
-                    android:hint="Input name of model"
+                    android:hint="@string/input_name_of_model"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:inputType="text"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:textAlignment="textStart"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
+                    android:enabled="false"
                     android:layout_height="@dimen/height_50dp"
                     android:imeOptions="actionDone"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-
-                    style="@style/font15_CFD8DC_medium_input"/>
+                    style="@style/font15_CFD8DC_medium_selector_input"/>
 
                 <TextView
                     android:id="@+id/pro_price"
@@ -247,7 +313,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Product Price"/>
+                    android:text="@string/product_price"/>
 
                 <RelativeLayout
                     android:id="@+id/pro_price_container"
@@ -263,7 +329,7 @@
                         android:id="@+id/tv_pro_price"
                         android:layout_marginStart="15dp"
                         android:layout_width="wrap_content"
-                        android:text="Kip"
+                        android:text="@string/kip"
                         android:layout_marginEnd="20dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentStart="true"
@@ -296,7 +362,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="30dp"
-                    android:text="Lease Information"/>
+                    android:text="@string/lease_information"/>
 
                 <TextView
                     style="@style/font13_263238_medium"
@@ -306,7 +372,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Request Amount"/>
+                    android:text="@string/request_amount"/>
 
                 <RelativeLayout
                     android:id="@+id/rl_req_amt"
@@ -321,7 +387,7 @@
                         android:id="@+id/tv_req_amt"
                         android:layout_marginStart="15dp"
                         android:layout_width="wrap_content"
-                        android:text="Kip"
+                        android:text="@string/kip"
                         android:layout_marginEnd="20dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentStart="true"
@@ -354,7 +420,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Advance Payment"/>
+                    android:text="@string/advance_payment"/>
 
                 <TextView
                     android:id="@+id/tv_advance_payment"
@@ -376,7 +442,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="@dimen/margin_15dp"
-                    android:text="Repayment Term"/>
+                    android:text="@string/repayment_term"/>
 
                 <LinearLayout
                     android:id="@+id/ll_repayment_term"
@@ -397,7 +463,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
                         android:layout_weight="1"
-                        android:text="Select"
+                        android:text="@string/select"
                         android:visibility="visible" />
 
                     <ImageView
@@ -415,7 +481,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="30dp"
-                    android:text="Lease Information"/>
+                    android:text="@string/lease_infomation"/>
 
                 <!--       Customer information table         -->
                 <LinearLayout
@@ -433,7 +499,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Name"
+                            android:text="@string/name"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
                             android:layout_weight="1"
@@ -451,7 +517,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Identification NM"
+                            android:text="@string/identification_nm"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
                             android:layout_weight="1"
@@ -469,7 +535,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Date of Birth"
+                            android:text="@string/date_of_birth"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
                             android:layout_weight="1"
@@ -487,7 +553,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Phone Number"
+                            android:text="@string/phone_number"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
                             android:layout_weight="1"
@@ -505,7 +571,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Address"
+                            android:text="@string/address"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
                             android:layout_weight="1"
@@ -527,7 +593,8 @@ Phonkeo Village Unit 14"
                         app:textAllCaps="true"
                         app:buttonBackground="@drawable/selector_d7191f_ffffee"
                         app:buttonTextColor="@color/colorPrimary"
-                        android:layout_height="50dp"/>
+                        android:layout_height="50dp"
+                        android:onClick="@{(v) -> applyViewModel.editUserInfo()}"/>
 
                 </LinearLayout>
 
