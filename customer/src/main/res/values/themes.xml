@@ -88,7 +88,7 @@
     <style name="font_18_263238_bold"> <!-- used-->
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/color_263238</item>
-        <item name="android:fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_bold</item>
     </style>
 
     <style name="font_18_263238_medium"> <!-- used-->

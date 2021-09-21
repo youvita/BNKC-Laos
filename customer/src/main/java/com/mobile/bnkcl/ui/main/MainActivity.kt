@@ -75,7 +75,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         R.drawable.selector_tab_find_office
     )
 
-    private var profileData: ProfileData? = null
+    private var profileData: ProfileData? = ProfileData()
+    private val REQUEST_CODE = 1001
+    private var isUpdateProfile: Boolean = false
     private val role: Int = 1
     private var lastIndex: Int = 0
 
@@ -135,7 +137,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
             binding.navMenu.btnSignUp.visibility = View.GONE
             binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
-            binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_logout_ico, 0, 0, 0);
+            binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.ic_logout_ico,
+                0,
+                0,
+                0
+            );
             binding.navMenu.vLine.visibility = View.GONE
         }
 
@@ -288,12 +295,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             startActivity(loginIntent)
                         }
                     } else {
-                        startActivity(
-                            Intent(
-                                this,
-                                AccountInformationActivity::class.java
-                            ).putExtra("ACCOUNT_INFO", profileData)
-                        )
+                        val intent1 = Intent(this, AccountInformationActivity::class.java)
+                        intent1.putExtra("ACCOUNT_INFO", profileData)
+                        startActivityForResult(intent1, REQUEST_CODE)
                     }
                 }
                 R.id.ll_notice -> {
@@ -387,6 +391,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                         startActivity(Intent(this, OtpActivity::class.java))
                     }
                 }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_CANCELED) return
+        if (requestCode == REQUEST_CODE) {
+            if (data != null) {
+                isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
             }
         }
     }

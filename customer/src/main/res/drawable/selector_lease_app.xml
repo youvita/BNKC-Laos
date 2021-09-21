@@ -3,6 +3,6 @@
     <item android:state_selected="true" android:drawable="@drawable/ic_lease_app_focus"/>
     <item android:state_pressed="true" android:drawable="@drawable/ic_lease_app_focus"/>
     <item android:state_focused="true" android:drawable="@drawable/ic_lease_app_focus"/>
+    <item android:state_enabled="true" android:drawable="@drawable/ic_lease_app_focus"/>
     <item android:state_enabled="false" android:drawable="@drawable/ic_lease_app_off"/>
-    <item android:drawable="@drawable/ic_lease_app_on"/>
 </selector>

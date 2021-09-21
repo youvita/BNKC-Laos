@@ -70,7 +70,8 @@
     <string name="menu_screening">ການກວດສອບ</string>
     <string name="menu_result">ຜົນທີ່ໄດ້ຮັບ</string>
     <string name="main_bottom_menu3">ຄົ້ນຫາສຳນັກງານ</string>
-    <string name="main_subtitle_001">ການສະເໜີເຊົ່າສິນເຊື່ອຂອງຂ້ອຍ (14 ວັນທີ່ຜ່ານມາ)</string>
+    <string name="main_subtitle_001">ການສະເໜີເຊົ່າສິນເຊື່ອຂອງຂ້ອຍ</string>
+    <string name="main_subtitle_002">(14 ວັນທີ່ຜ່ານມາ)</string>
     <string name="lease_in_use">ສິນເຊື່ອທີ່ດຳເນິນຢູ່</string>
 
     <string name="page_new_lease">ເພີ່ມການບໍລິການເຊົ່າສິນເຊື່ອໃໝ່</string>
@@ -231,7 +232,6 @@
     <string name="info_tel">ເບີໂທລະສັບ</string>
     <string name="info_lease_info">ຂໍ້ມູນສິນເຊື່ອ</string>
     <string name="info_acc_num">ເລກທີບັນຊີ</string>
-    <string name="info_09">ຂໍ້ມູນບັນຊີ</string>
     <string name="info_address">ທີ່ຢູ່</string>
     <string name="info_11">Occupation</string>
     <string name="info_log_out">ອອກຈາກລະບົບ</string>

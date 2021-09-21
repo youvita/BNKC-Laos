@@ -32,8 +32,8 @@
     <string name="addition_select_village">Select Village</string>
     <string name="addition_job_type">Job Type</string>
     <string name="addition_select_job_type">Select Job Type</string>
-    <string name="addition_etc">ETC(No applicable information)</string>
-    <string name="addition_account_info">Account information</string>
+    <string name="addition_etc">ETC (No Applicable Information)</string>
+    <string name="addition_account_info">Account Information</string>
     <string name="addition_bank_name">Bank name</string>
     <string name="addition_account_number">Account number</string>
     <string name="addition_optional">(optional)</string>
@@ -72,7 +72,8 @@
     <string name="menu_screening">Screening</string>
     <string name="menu_result">Result</string>
     <string name="main_bottom_menu3">Find Office</string>
-    <string name="main_subtitle_001">My Lease Request (Until the last 14days)</string>
+    <string name="main_subtitle_001">My Lease Request</string>
+    <string name="main_subtitle_002">(Until the last 14days)</string>
     <string name="lease_in_use">Lease in Use</string>
     <string name="page_new_lease">ADD NEW LEASE SERVICE</string>
     <string name="page_balance">Balance of Lease</string>
@@ -91,7 +92,7 @@
     <string name="nav_policy">Policy</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_sign_up">Sign Up</string>
-    <string name="nav_login">Login</string>
+    <string name="nav_login">Log In</string>
     <string name="nav_logout">Log Out</string>
     <string name="nav_home">Home</string>
     <string name="nav_user_unknown">User Unknown</string>
@@ -230,7 +231,6 @@
     <string name="info_tel">Tel</string>
     <string name="info_lease_info">Lease Information</string>
     <string name="info_acc_num">Account Number</string>
-    <string name="info_09">Account Information</string>
     <string name="info_address">Address</string>
     <string name="info_11">Occupation</string>
     <string name="info_log_out">Log Out</string>

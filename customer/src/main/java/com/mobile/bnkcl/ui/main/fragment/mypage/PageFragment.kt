@@ -59,6 +59,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var LRS002: Int = 0
     private var LRS003: Int = 0
     private var currentIndex = 0
+    private var lastIndex = 0
     private var timeCounter: Runnable? = null
     private var leaseDialog1: ApplicationDialog? = null
     private var leaseDialog2: ApplicationDialog? = null
@@ -117,6 +118,21 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     private fun initView() {
 
+        pageBinding!!.requestMenu.llMenu1.isEnabled = false
+        pageBinding!!.requestMenu.llMenu2.isEnabled = false
+        pageBinding!!.requestMenu.llMenu3.isEnabled = false
+        pageBinding!!.tvLeaseInUseCnt.isEnabled = false
+
+        pageBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.menu_application).plus(
+            "\n"
+        ).plus("0")
+        pageBinding!!.requestMenu.tvMenuTitle2.text = getString(R.string.menu_screening).plus(
+            "\n"
+        ).plus("0")
+        pageBinding!!.requestMenu.tvMenuTitle3.text = getString(R.string.menu_result).plus(
+            "\n"
+        ).plus("0")
+
         setUpBanner()
         leaseAdapter.setItemClickListener(this)
 
@@ -150,13 +166,10 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             LRS002 = it.countScreening!!
             LRS003 = it.countResult!!
 
-
             it.myLeases?.add(MyLeasesData())
 
             leaseAdapter.clearItemList()
             leaseAdapter.addItemList(it.myLeases)
-
-            setUpLeaseAdapter()
 
             setUpDashboard(LRS001, LRS002, LRS003, it.myLeases!!.size - 1)
             leaseData?.clear()
@@ -223,7 +236,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         addIndicator(
             pageBinding!!.llLeaseIndicator,
             count,
-            0
+            lastIndex
         )
 
         leaseLayoutManager =
@@ -239,6 +252,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
                     leaseLayoutManager!!.findLastVisibleItemPosition()
                 )
 
+                lastIndex = leaseLayoutManager!!.findLastVisibleItemPosition()
             }
         })
 
@@ -284,7 +298,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         ).plus(this.LRS003.toString())
 
         pageBinding!!.tvLeaseInUseCnt.isEnabled = count != 0
-        pageBinding!!.tvLeaseInUseCnt.visibility = View.VISIBLE
         pageBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(count)
 
         pageBinding!!.llEmptyLeaseIndicator.visibility =

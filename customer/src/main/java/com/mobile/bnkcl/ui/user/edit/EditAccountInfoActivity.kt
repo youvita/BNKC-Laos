@@ -119,13 +119,11 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             when (it) {
                 SettingMenu.Camera -> {
                     val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                    startActivityForResult(takePictureIntent, PICK_CAMERA)
                     resultLauncher.launch(takePictureIntent)
                 }
                 SettingMenu.Gallery -> {
                     val galleryIntent =
                         Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//                    startActivityForResult(galleryIntent, PICK_IMAGE)
                     resultLauncher.launch(galleryIntent)
                 }
             }
@@ -386,9 +384,13 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             binding.lytAddressInfo.tvCapital.text = profileData!!.address?.state?.alias1
             binding.lytAddressInfo.tvDistrict.text = profileData!!.address?.district?.alias1
             binding.lytAddressInfo.tvVillage.text = profileData!!.address?.village?.alias1
-            binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.address?.state?.alias1
-            binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.etcDetailedAddress
-            binding.lytAddressInfo.edtEtc.hint = profileData!!.edtStatus.toString()
+            binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.address!!.more_info
+            binding.lytAddressInfo.edtEtc.hint = profileData!!.etcDetailedAddress
+            if (profileData!!.edtStatus!!) {
+                binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_green_ico, 0, 0, 0)
+            } else {
+                binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_ico, 0, 0, 0)
+            }
         }
     }
 

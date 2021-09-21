@@ -99,7 +99,7 @@
                         android:layout_marginEnd="@dimen/margin_21dp"
                         android:layout_marginBottom="@dimen/margin_41dp"
                         android:gravity="start"
-                        android:src="@drawable/ic_brand_bnkc_lao_ndmf" />
+                        android:src="@drawable/ic_brand_bnkc_lao_leasing" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/margin_21dp"
-                                android:layout_marginBottom="@dimen/margin_10dp"
+                                android:layout_marginBottom="@dimen/margin_16dp"
                                 android:orientation="vertical"
                                 android:visibility="visible">
 
@@ -214,7 +214,7 @@
                                             android:paddingBottom="@dimen/padding_5dp">
 
                                             <TextView
-                                                style="@style/font15_90a4ae_medium"
+                                                style="@style/font_15_90A4AE_regular"
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
@@ -239,7 +239,7 @@
                                             android:paddingBottom="@dimen/padding_5dp">
 
                                             <TextView
-                                                style="@style/font15_90a4ae_medium"
+                                                style="@style/font_15_90A4AE_regular"
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
@@ -265,7 +265,7 @@
                                             android:orientation="horizontal">
 
                                             <TextView
-                                                style="@style/font15_90a4ae_medium"
+                                                style="@style/font_15_90A4AE_regular"
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
@@ -357,7 +357,7 @@
                                             android:orientation="horizontal">
 
                                             <TextView
-                                                style="@style/font15_90a4ae_medium"
+                                                style="@style/font_15_90A4AE_regular"
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
@@ -414,7 +414,7 @@
                                             android:layout_weight="1"
                                             android:drawablePadding="@dimen/padding_10dp"
                                             android:gravity="center_vertical"
-                                            android:text="@string/info_09"
+                                            android:text="@string/info_acc_info"
                                             app:drawableStartCompat="@drawable/ic_info_ico" />
 
                                         <ImageView
@@ -451,7 +451,7 @@
                                             android:paddingBottom="@dimen/padding_5dp">
 
                                             <TextView
-                                                style="@style/font15_90a4ae_medium"
+                                                style="@style/font_15_90A4AE_regular"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
                                                 android:layout_marginEnd="@dimen/margin_10dp"
@@ -475,7 +475,7 @@
                                             android:orientation="horizontal">
 
                                             <TextView
-                                                style="@style/font15_90a4ae_medium"
+                                                style="@style/font_15_90A4AE_regular"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
                                                 android:layout_marginEnd="@dimen/margin_10dp"
@@ -492,6 +492,14 @@
 
                                         </LinearLayout>
 
+                                        <TextView
+                                            style="@style/font_15_90A4AE_regular"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="@dimen/margin_5dp"
+                                            android:layout_marginEnd="@dimen/margin_10dp"
+                                            android:text="@string/info_acc_info" />
+
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -504,7 +512,7 @@
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="50dp"
                                                 android:layout_marginEnd="@dimen/margin_10dp"
-                                                android:layout_weight="0.7"
+                                                android:layout_weight="0.6"
                                                 android:background="@drawable/selector_edittext_bg"
                                                 android:enabled="false"
                                                 android:hint="@{profile.bankName}"

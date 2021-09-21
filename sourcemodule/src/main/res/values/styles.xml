@@ -133,7 +133,7 @@
         <item name="android:textColor">@color/color_bfc1c9</item>
         <item name="fontFamily">@font/rubik_regular</item>
     </style>
-    <style name="font_15_FFFFFF_normal">
+    <style name="font_15_ffffff_normal">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/color_ffffff</item>
         <item name="fontFamily">@font/rubik_medium</item>

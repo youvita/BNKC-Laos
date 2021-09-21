@@ -26,6 +26,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_5dp"
                 android:duplicateParentState="true">
 
                 <ImageView
@@ -54,8 +55,9 @@
                 android:layout_height="wrap_content"
                 android:duplicateParentState="true"
                 android:gravity="center"
+                android:lineSpacingExtra="3dp"
                 android:minHeight="20dp"
-                android:paddingBottom="@dimen/padding_2dp"
+                android:paddingBottom="3dp"
                 android:text="@string/menu_application" />
 
             <View
@@ -85,6 +87,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_5dp"
                 android:duplicateParentState="true">
 
                 <ImageView
@@ -114,8 +117,9 @@
                 android:layout_height="wrap_content"
                 android:duplicateParentState="true"
                 android:gravity="center"
+                android:lineSpacingExtra="3dp"
                 android:minHeight="20dp"
-                android:paddingBottom="@dimen/padding_2dp"
+                android:paddingBottom="3dp"
                 android:text="@string/menu_screening" />
 
             <View
@@ -145,6 +149,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_5dp"
                 android:duplicateParentState="true">
 
                 <ImageView
@@ -174,8 +179,9 @@
                 android:layout_height="wrap_content"
                 android:duplicateParentState="true"
                 android:gravity="center"
+                android:lineSpacingExtra="3dp"
                 android:minHeight="20dp"
-                android:paddingBottom="@dimen/padding_2dp"
+                android:paddingBottom="3dp"
                 android:text="@string/menu_result" />
 
             <View

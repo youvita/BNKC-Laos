@@ -1,9 +1,11 @@
 package com.mobile.bnkcl.ui.user
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -142,7 +144,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     val intent = Intent(this, EditAccountInfoActivity::class.java)
                     intent.putExtra("ACCOUNT_INFO", profileData)
                     intent.putExtra("JOB_TYPE", jobTypeList)
-                    startActivityForResult(intent, REQUEST_CODE)
+                    resultLauncher.launch(intent)
                 }
                 R.id.btn_logout -> {
                     logOutDialog.show(supportFragmentManager, logOutDialog.tag)
@@ -185,30 +187,32 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         super.onBackPressed()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == RESULT_CANCELED) return
-        if (requestCode == REQUEST_CODE) {
-            if (data != null) {
-                isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
-                if (isUpdateProfile) {
-                    Glide.with(this)
-                        .load(R.drawable.rotate_loading_image)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-                    val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-                    rotation.fillAfter = true
-                    binding.ivLoading.startAnimation(rotation)
-                    UtilsGlide.loadCircle(
-                        this@AccountInformationActivity,
-                        binding.ivProfile,
-                        binding.ivLoading
-                    )
-                    viewModel.getAccountInformation()
-                    showLoading()
+    /**
+     * replace for deprecated onActivityResult
+     */
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                if (result.data != null) {
+                    isUpdateProfile = result.data!!.getBooleanExtra("IS_UPDATE_PROFILE", false)
+                    if (isUpdateProfile) {
+                        Glide.with(this)
+                            .load(R.drawable.rotate_loading_image)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+                        val rotation =
+                            AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+                        rotation.fillAfter = true
+                        binding.ivLoading.startAnimation(rotation)
+                        UtilsGlide.loadCircle(
+                            this@AccountInformationActivity,
+                            binding.ivProfile,
+                            binding.ivLoading
+                        )
+                        viewModel.getAccountInformation()
+                        showLoading()
+                    }
                 }
             }
         }
-    }
 }

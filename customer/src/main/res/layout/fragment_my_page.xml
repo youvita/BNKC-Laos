@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/margin_21dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="@dimen/padding_21dp"
+                android:paddingStart="@dimen/padding_15dp"
                 android:paddingEnd="11dp">
 
                 <ImageView
@@ -53,18 +53,34 @@
 
             </LinearLayout>
 
-            <TextView
-                style="@style/font_15_FFFFFF_normal"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:paddingTop="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="15dp"
-                android:text="@string/main_subtitle_001"
-                app:drawableStartCompat="@drawable/ic_my_lease_req_white_ico" />
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/font_15_ffffff_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:paddingStart="@dimen/padding_21dp"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="@dimen/padding_5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="15dp"
+                    android:text="@string/main_subtitle_001"
+                    app:drawableStartCompat="@drawable/ic_my_lease_req_white_ico" />
+
+                <TextView
+                    style="@style/font_15_ffffff_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="15dp"
+                    android:text="@string/main_subtitle_002"/>
+
+            </LinearLayout>
 
             <com.bnkc.sourcemodule.ui.ShadowLayout
                 android:id="@+id/ll_lease_item"
@@ -131,12 +147,12 @@
                             android:background="@drawable/selector_circle_count_background"
                             android:enabled="true"
                             android:gravity="center"
-                            android:visibility="gone"
-                            android:paddingLeft="6.5dp"
+                            android:paddingStart="6.5dp"
                             android:paddingTop="1.5dp"
-                            android:paddingRight="6.5dp"
+                            android:paddingEnd="6.5dp"
                             android:paddingBottom="1.5dp"
-                            tools:text="99" />
+                            android:text="0"
+                            tools:ignore="HardcodedText" />
 
                     </LinearLayout>
 

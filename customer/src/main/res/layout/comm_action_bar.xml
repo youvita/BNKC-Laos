@@ -37,7 +37,7 @@
 
                 <TextView
                     android:id="@+id/id_action_bar_text_left"
-                    style="@style/font_18_263238_medium"
+                    style="@style/font_18_263238_bold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
