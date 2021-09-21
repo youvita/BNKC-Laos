@@ -12,6 +12,7 @@ import android.webkit.WebViewClient
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
@@ -25,6 +26,8 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
+import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -177,12 +180,25 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
      * binding method ask bank tab
      */
     fun onAskClick() {
-        clearState()
-        getClaimData(pageNumber, true)
-        visibleAskBnk()
-        binding.tvFaq.isClickable = true
-        binding.tvAskBnk.isClickable = false
-        binding.btnAskBnk.setActive(true)
+        if (AppLogin.PIN.code == "N") {
+            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+                startActivity(Intent(this, OtpActivity::class.java))
+
+            } else {
+                val intent = Intent(this, PinCodeActivity::class.java)
+                intent.putExtra("pin_action", "login")
+                intent.putExtra("from", CSCenterActivity::class.java.simpleName)
+                intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
+                startActivity(intent)
+            }
+        } else {
+            clearState()
+            getClaimData(pageNumber, true)
+            visibleAskBnk()
+            binding.tvFaq.isClickable = true
+            binding.tvAskBnk.isClickable = false
+            binding.btnAskBnk.setActive(true)
+        }
     }
 
     /**

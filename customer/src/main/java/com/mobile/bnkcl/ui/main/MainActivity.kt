@@ -300,21 +300,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                     startActivity(Intent(this, NoticeActivity::class.java))
                 }
                 R.id.ll_cs_center -> {
-                    if (AppLogin.PIN.code == "N") {
-                        if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                            startActivity(Intent(this, OtpActivity::class.java))
-
-                        } else {
-                            val intent = Intent(this, PinCodeActivity::class.java)
-                            intent.putExtra("pin_action", "login")
-                            intent.putExtra("from", MainActivity::class.java.simpleName)
-                            intent.putExtra("username", sharedPrefer.getPrefer(Constants.USER_ID))
-                            startActivity(intent)
-                        }
-                    } else {
-                        startActivity(Intent(this, CSCenterActivity::class.java))
-                    }
-
+                    startActivity(Intent(this, CSCenterActivity::class.java))
                 }
                 R.id.ll_home -> {
                     intent = Intent(this, HomeActivity::class.java)
