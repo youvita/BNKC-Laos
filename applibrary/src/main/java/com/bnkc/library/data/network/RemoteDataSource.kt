@@ -72,10 +72,15 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                         HttpURLConnection.HTTP_INTERNAL_ERROR -> {
 
                         }
-                        else -> {
-                            if (response.errorMessage != null) {
-
+                        ErrorCode.USER_EXISTS -> {
+                            withContext(Dispatchers.Main) {
+                                RxJava.publish(RxEvent.ServerError(ErrorCode.USER_EXISTS, response.errorTitle!!, response.errorMessage!!))
+                                RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
                             }
+                            setValue(Resource.Error("","", ErrorCode.USER_EXISTS))
+                        }
+                        else -> {
+
                         }
                     }
                 }

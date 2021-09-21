@@ -24,10 +24,11 @@ object RetrofitRequest {
                 var errorMessage: String? = null
                 var errorCode: String? = null
                 val jsonObject = JSONObject(response.errorBody()!!.string())
+                val jsonError = jsonObject.getJSONObject("error")
 
                 try {
-                    errorCode = jsonObject.getString("code")
-                    errorMessage = jsonObject.getString("message")
+                    errorCode = jsonError.getString("code")
+                    errorMessage = jsonError.getString("message")
                 }catch (e: Exception) {
                     e.printStackTrace()
                 }
