@@ -39,7 +39,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:text="@string/faqs"
+                    android:text="@string/product_faqs"
                     android:layout_height="wrap_content"
                     style="@style/font15_263238_medium"/>
                 <ImageView
@@ -67,23 +67,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/n_1"
+                        android:text="@string/product_faq_question_neg"
                         android:layout_height="wrap_content"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/_1_what_is_the_interest_rate_per_month"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         style="@style/font15_263238_medium"/>
                 </LinearLayout>
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="@string/negotiation"
+                    android:text="@string/product_negotiation"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="17dp"
                     android:layout_height="wrap_content"
@@ -93,24 +88,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/n_2"
+                        android:text="@string/product_faq_question_ect"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/_2_can_i_borrow_without_collateral"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="5dp"
                         style="@style/font15_263238_medium"/>
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="ect"
+                    android:text="@string/product_etc"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="17dp"
                     android:layout_height="wrap_content"

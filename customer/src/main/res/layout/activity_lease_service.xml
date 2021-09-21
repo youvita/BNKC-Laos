@@ -39,7 +39,7 @@
                 <TextView
                     android:id="@+id/tv_sub_description"
                     android:layout_width="match_parent"
-                    android:text="@string/loan_detail"
+                    android:text="@string/product_lease_detail"
                     android:padding="5dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -108,15 +108,13 @@
                                 android:layout_height="wrap_content">
                                 <TextView
                                     android:layout_width="wrap_content"
-                                    android:text="@string/interest_rate"
+                                    android:text="@string/product_installment_amount"
                                     android:layout_height="wrap_content"
                                     style="@style/font15_90a4ae_regular"/>
 
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:text="Under the commodity
-price
-"
+                                    android:text="@string/product_under_commodity_price"
                                     android:layout_weight="1"
                                     android:lineSpacingMultiplier="1.1"
                                     android:textAlignment="textEnd"
@@ -133,13 +131,13 @@ price
                                 android:layout_marginTop="10dp">
                                 <TextView
                                     android:layout_width="wrap_content"
-                                    android:text="Interest Rate"
+                                    android:text="@string/product_interest_rate"
                                     android:layout_height="wrap_content"
                                     style="@style/font15_90a4ae_regular"/>
 
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:text="0.50%~ (Flexible"
+                                    android:text="@string/product_percent_flexible"
                                     android:layout_marginStart="15dp"
                                     android:layout_weight="1"
                                     android:lineSpacingMultiplier="1.1"
@@ -157,13 +155,13 @@ price
                                 android:layout_marginTop="10dp">
                                 <TextView
                                     android:layout_width="wrap_content"
-                                    android:text="Term"
+                                    android:text="@string/product_term"
                                     android:layout_height="wrap_content"
                                     style="@style/font15_90a4ae_regular"/>
 
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:text="12~60M (Flexible)"
+                                    android:text="@string/product_m_flexible"
                                     android:layout_weight="1"
                                     android:lineSpacingMultiplier="1.1"
                                     android:textAlignment="textEnd"
@@ -177,7 +175,7 @@ price
                                 android:id="@+id/btn_lease_calculator"
                                 android:layout_width="match_parent"
                                 android:layout_marginTop="15dp"
-                                app:buttonText="@string/calculate"
+                                app:buttonText="@string/product_calculate"
                                 app:textAllCaps="true"
                                 app:buttonBackground="@drawable/selector_d7191f_ffffee"
                                 app:buttonTextColor="@color/colorPrimary"
@@ -218,7 +216,7 @@ price
                 android:layout_width="match_parent"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
-                app:buttonText="Apply Now"
+                app:buttonText="@string/product_apply_now"
                 app:is_active="true"
                 android:layout_height="50dp"
                 android:onClick="@{() -> leaseServiceViewModel.goToApplyLease()}"

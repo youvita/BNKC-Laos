@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import androidx.activity.viewModels
-import androidx.annotation.IntegerRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -19,9 +17,6 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
-import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
-import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
@@ -149,7 +144,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
     }
 
     private fun initView(){
-        binding.include.colToolbar.title = getString(R.string.calculate)
+        binding.include.colToolbar.title = getString(R.string.product_calculate)
         binding.edRate.addTextChangedListener(textInterestRateWatcher)
         binding.include.toolbarLeftButton.setOnClickListener {
             finish()

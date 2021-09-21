@@ -128,14 +128,29 @@
     <string name="comm_try_again">ລອງອິກຄັ້ງ</string>
 
 
-
-    <string name="loan_detail">ດ້ວຍອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ. ມີເງື່ອນໄຂການຂໍສິນເຊື່ອ ແລະ ແຜນການຜ່ອນຊຳລະສິນເຊື່ອທີ່ສາມາດປ່ຽນແປງຕາມຄວາມຕ້ອງການຂອງລູກຄ້າ. ເປັນທາງເລືອກໃນການສະເໜີຂໍສິນເຊື່ອ ແລະ ຊຳລະຄ່າສິນເຊື່ອທີ່ສະດວກບາຍ ໃກ້ໆບ້ານທ່ານທີ່ສຳນັກງານບໍລິສັດ ບີເອັນເຄ ແຄັບປີໂຕ ລາວ ເຊົ່າສິນເຊື່ອ ຫຼື ຊໍາລະຄ່າສິນເຊື່ອໄດ້ທີ່ບ້ານຂອງທ່ານເອງ.</string>
+    <!-- product details -->
+    <string name="product_lease_detail">ດ້ວຍອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ. ມີເງື່ອນໄຂການຂໍສິນເຊື່ອ ແລະ ແຜນການຜ່ອນຊຳລະສິນເຊື່ອທີ່ສາມາດປ່ຽນແປງຕາມຄວາມຕ້ອງການຂອງລູກຄ້າ. ເປັນທາງເລືອກໃນການສະເໜີຂໍສິນເຊື່ອ ແລະ ຊຳລະຄ່າສິນເຊື່ອທີ່ສະດວກບາຍ ໃກ້ໆບ້ານທ່ານທີ່ສຳນັກງານບໍລິສັດ ບີເອັນເຄ ແຄັບປີໂຕ ລາວ ເຊົ່າສິນເຊື່ອ ຫຼື ຊໍາລະຄ່າສິນເຊື່ອໄດ້ທີ່ບ້ານຂອງທ່ານເອງ.</string>
     <string name="product_introduction">ການແນະນໍາຜະລິດຕະພັນ</string>
-    <string name="interest_rate">ອັດຕາດອກເບ້ຍ</string>
-
-    <string name="requirement_documents">Documents</string>
-    <string name="loan_process">ຂະບວນການ</string>
-    <string name="faqs">ຄຳຖາມທີ່ຖາມເລື້ອຍໆ</string>
+    <string name="product_installment_amount">ຈຳນວນເງິນຜ່ອນຊຳລະ</string>
+    <string name="product_under_commodity_price">ພາຍໃຕ້ລາຄາສິນຄ້າ</string>
+    <string name="product_percent_flexible">0.50%~ (ສາມາດປ່ຽນແປງໄດ້)</string>
+    <string name="product_interest_rate">ອັດຕາດອກເບ້ຍ</string>
+    <string name="product_term">ລະຍະເວລາ</string>
+    <string name="product_m_flexible">12~60ເດືອນ (ສາມາດປ່ຽນແປງໄດ້)</string>
+    <string name="product_calculate">ຄຳນວນ</string>
+    <string name="product_documents">ເອກະສານ</string>
+    <string name="product_process">ຂະບວນການ</string>
+    <string name="product_faqs">ຄຳຖາມທີ່ຖາມເລື້ອຍໆ</string>
+    <string name="product_copy_id">•\u0020\u0020ສຳເນົາ ບັດປະຈຳຕົວ</string>
+    <string name="product_copy_family_book">•\u0020\u0020ສຳເນົາ ປື້ມສຳມະໂນຄົວ</string>
+    <string name="product_resdient_certification">•\u0020\u0020ໃບຢັ້ງຢືນເງິນເດືອນ ຫຼື ໃບລາຍງານຜົນໄດ້ຮັບ</string>
+    <string name="product_bank_statement">•\u0020\u0020ໃບລາຍງານຜົນໄດ້ຮັບ ຫຼື ບັນຊີສຳຮອງທະນາຄານ</string>
+    <string name="product_visit_bnkc_office">•\u0020\u0020ຢ້ຽມຊົມບໍລິສັດ BNKCL ຫຼື ຕົວແທນພວກເຮົາ ທີ່ໃກ້ທີ່ສຸດຂອງທ່ານ</string>
+    <string name="product_faq_question_neg">1.\u0020\u0020ອັດຕາດອກເບ້ຍຕໍ່ເດືອນແມ່ນເທົ່າໃດ?</string>
+    <string name="product_negotiation">ເຈລະຈາຕໍ່ລອງ</string>
+    <string name="product_faq_question_ect">2.\u0020ຂ້ອຍສາມາດຢືມໂດຍບໍ່ມີຫຼັກສັບຄໍ້າປະກັນໄດ້ບໍ?</string>
+    <string name="product_etc">ອື່ນໆ</string>
+    <string name="product_apply_now">ສະໜັກຕອນນີ້</string>
 
     <string name="monthly_repayment">ຍອດຊຳລະຄືນຕໍ່ເດືອນ</string>
     <string name="total_principal_paid">ຈຳນວນຕົ້ນທືນທີ່ຕ້ອງຈ່າຍທັງໝົດ</string>
@@ -196,18 +211,7 @@
     <string name="not_answer">ຍັງບໍ່ໄດ້ຮັບຄຳຕອບເທື່ອ</string>
     <string name="branch">ສາຂາ</string>
 
-    <string name="_1_what_is_the_interest_rate_per_month">ອັດຕາດອກເບ້ຍຕໍ່ເດືອນແມ່ນເທົ່າໃດ?</string>
-    <string name="negotiation">ເຈລະຈາຕໍ່ລອງ</string>
-    <string name="_2_can_i_borrow_without_collateral">ຂ້ອຍສາມາດຢືມໂດຍບໍ່ມີຫຼັກສັບຄໍ້າປະກັນໄດ້ບໍ?</string>
 
-    <string name="n_1">1.</string>
-    <string name="n_2">2.</string>
-
-    <string name="bullet_point">•</string>
-    <string name="visit_your_nearest_bnkc_office_or_our_agents">ຢ້ຽມຊົມບໍລິສັດ BNKCL ຫຼື ຕົວແທນພວກເຮົາ ທີ່ໃກ້ທີ່ສຸດຂອງທ່ານ</string>
-    <string name="copy_of_your_id_card">ສຳເນົາ ບັດປະຈຳຕົວ</string>
-    <string name="copy_of_family_book">ສຳເນົາ ປື້ມສຳມະໂນຄົວ</string>
-    <string name="salary_slip_or_income_statement">ໃບຢັ້ງຢືນເງິນເດືອນ ຫຼື ໃບລາຍງານຜົນໄດ້ຮັບ</string>
     <string name="unit_loan_result">Unit: %s</string>
 
     <string name="home_need_loan">ທ່ານຕ້ອງການເງິນກູ້ບໍ?</string>
@@ -350,12 +354,12 @@
     <string name="ask_error_code_500">(Error Code : 500)</string>
 
     <!-- tab bottom menu -->
-    <string name="tab_service">ການບໍລິການ</string>
+    <string name="tab_service">ບໍລິການ</string>
     <string name="tab_my_page">ໜ້າຕ່າງຂອງຂ້ອຍ</string>
-    <string name="tab_find_office">ຄົ້ນຫາສຳນັກງານບໍລິສັດ</string>
+    <string name="tab_find_office">ຄົ້ນຫາສຳນັກງານ</string>
     <string name="tab_menu">ລາຍການ</string>
     <string name="term_and_condition">ຂ້ອຍເຫັນດີກັບເງື່ອນໄຂ ແລະ ຂໍ້ກຳນົດຂອງ ບໍລິສັດ BNK Capital Lao leasing</string>
-    <string name="calculate">ຄຳນວນ</string>
+
 
     <string name="result_manage_001">ຍອດລວມທັງໝົດ</string>
 

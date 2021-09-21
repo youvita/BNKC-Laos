@@ -36,7 +36,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:text="@string/requirement_documents"
+                    android:text="@string/product_documents"
                     android:layout_height="wrap_content"
                     style="@style/font15_263238_medium"/>
                 <ImageView
@@ -50,7 +50,7 @@
                 android:id="@+id/ll_document_des"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_height="wrap_content">
 
                 <View
@@ -64,16 +64,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/bullet_point"
+                        android:text="@string/product_copy_id"
                         android:layout_height="wrap_content"
                         style="@style/font15_263238_medium"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/copy_of_your_id_card"
+                        android:text="@string/product_copy_family_book"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         style="@style/font15_263238_medium"/>
                 </LinearLayout>
 
@@ -82,35 +91,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/bullet_point"
-                        android:layout_height="wrap_content"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/copy_of_family_book"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        style="@style/font15_263238_medium"/>
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/bullet_point"
+                        android:text="@string/product_resdient_certification"
                         android:layout_height="wrap_content"
-                        style="@style/font13_263238_medium_flex"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/salary_slip_or_income_statement"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         style="@style/font15_263238_medium"/>
+
                 </LinearLayout>
 
 

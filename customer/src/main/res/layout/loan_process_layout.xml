@@ -37,7 +37,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:text="@string/loan_process"
+                    android:text="@string/product_process"
                     android:layout_height="wrap_content"
                     style="@style/font15_263238_medium"/>
                 <ImageView
@@ -65,16 +65,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="@string/bullet_point"
+                        android:text="@string/product_visit_bnkc_office"
                         android:layout_height="wrap_content"
-                        style="@style/font15_263238_medium"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/visit_your_nearest_bnkc_office_or_our_agents"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         style="@style/font15_263238_medium"/>
                 </LinearLayout>
 

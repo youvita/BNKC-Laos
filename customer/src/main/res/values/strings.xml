@@ -128,15 +128,29 @@
 
     <string name="comm_try_again">Try Again</string>
 
-
-
-    <string name="loan_detail"> A reasonable interest rate. Flexible installment terms and repayment plan that are catered to your need. Convenient option to apply for and repay installment at nearest BNK Capital Lao leasing office or at your business site.</string>
+    <!-- product details -->
+    <string name="product_lease_detail"> A reasonable interest rate. Flexible installment terms and repayment plan that are catered to your need. Convenient option to apply for and repay installment at nearest BNK Capital Lao leasing office or at your business site.</string>
     <string name="product_introduction">Product Introduction</string>
-
-    <string name="interest_rate">Interest Rate</string>
-    <string name="requirement_documents">Document</string>
-    <string name="loan_process">Process</string>
-    <string name="faqs">FAQs</string>
+    <string name="product_installment_amount">Installment Amount</string>
+    <string name="product_under_commodity_price">Under the commodity price</string>
+    <string name="product_percent_flexible">0.50%~ (Flexible)</string>
+    <string name="product_interest_rate">Interest Rate</string>
+    <string name="product_term">Term</string>
+    <string name="product_m_flexible">12~60M (Flexible)</string>
+    <string name="product_calculate">Calculate</string>
+    <string name="product_documents">Document</string>
+    <string name="product_process">Process</string>
+    <string name="product_faqs">FAQs</string>
+    <string name="product_copy_id">•\u0020\u0020Copy of your ID Card</string>
+    <string name="product_copy_family_book">•\u0020\u0020Copy of family book</string>
+    <string name="product_resdient_certification">•\u0020\u0020Resdient Certification</string>
+    <string name="product_bank_statement">•\u0020\u0020Income statement or Bank statement</string>
+    <string name="product_visit_bnkc_office">•\u0020\u0020Visit your nearest BNKCL office or our agents</string>
+    <string name="product_faq_question_neg">1.\u0020\u0020What is the Interest Rate per Month?</string>
+    <string name="product_faq_question_ect">2.\u0020Can I borrow without collateral?</string>
+    <string name="product_negotiation">Negotiation</string>
+    <string name="product_etc">etc</string>
+    <string name="product_apply_now">Apply Now</string>
 
     <string name="monthly_repayment">Monthly Repayment</string>
     <string name="total_principal_paid">Total Principal Paid</string>
@@ -196,20 +210,6 @@
     <string name="not_available">N/A</string>
     <string name="not_answer">Not Answered yet</string>
     <string name="branch">Branch</string>
-
-    <string name="_1_what_is_the_interest_rate_per_month"> What is the Interest Rate per Month?</string>
-    <string name="negotiation">Negotiation.</string>
-    <string name="_2_can_i_borrow_without_collateral"> Can I borrow without collateral?</string>
-
-    <string name="n_1">1.</string>
-    <string name="n_2">2.</string>
-
-    <string name="bullet_point">•</string>
-
-    <string name="visit_your_nearest_bnkc_office_or_our_agents">Visit your nearest BNKC office or our agents</string>
-    <string name="copy_of_your_id_card">Copy of your ID Card</string>
-    <string name="copy_of_family_book">Copy of family book</string>
-    <string name="salary_slip_or_income_statement">Salary slip or income statement</string>
 
     <string name="unit_loan_result">Unit: %s</string>
 
@@ -359,7 +359,6 @@
     <string name="tab_find_office">Find Office</string>
     <string name="tab_menu">Menu</string>
     <string name="term_and_condition">I agree to BNK Capital Lao Leasing\'s Terms and Conditions</string>
-    <string name="calculate">Calculate</string>
 
     <string name="result_manage_001">Total</string>
 
