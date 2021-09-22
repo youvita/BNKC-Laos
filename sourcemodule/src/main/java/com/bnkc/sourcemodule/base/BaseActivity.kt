@@ -102,6 +102,15 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    /**
+     * handle catch session expired
+     */
+    fun sessionExpired() {
+        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
+            handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
+        }
+    }
+
     protected open fun setStatusBarColor(color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when {
@@ -259,4 +268,9 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      * handle error override method
      */
     open fun handleError(icon: Int, title: String, message: String, button: String) {}
+
+    /**
+     * handle session expired override method
+     */
+    open fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {}
 }
