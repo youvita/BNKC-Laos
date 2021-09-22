@@ -19,9 +19,11 @@ import com.mobile.bnkcl.data.request.auth.SignUpRequest
 import com.mobile.bnkcl.databinding.ActivityPinCodeBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
+import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.SecureUtils
+import com.mobile.bnkcl.utilities.UtilActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -183,12 +185,15 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 sharedPrefer.putPrefer(USER_ID, username)
                 AppLogin.PIN.code = "Y"
                 if (from.isEmpty()) {
-                    val intent = Intent(this, HomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()
                 } else {
                     AppLogin.InterceptIntent.code = "Y"
+                    if (UtilActivity.otpActivity != null){
+                        UtilActivity.otpActivity!!.finish()
+                    }
                     finish()
                 }
 

@@ -7,14 +7,18 @@ import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
+import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
+import com.mobile.bnkcl.data.response.code.CodesResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.response.lease.apply.ApplyLeaseResponse
 import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
+import com.mobile.bnkcl.data.response.user.ProfileData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -22,10 +26,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ApplyLeaseViewModel @Inject constructor(private val leaseRepo: LeaseRepo) : BaseViewModel() {
+class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,private val userRepo: UserRepo, private val leaseRepo: LeaseRepo) : BaseViewModel() {
 
     private val _actionMuLiveData = MutableLiveData<String>()
     val actionLiveData = _actionMuLiveData
+
+    private val _jobCodesLiveData: MutableLiveData<CodesResponse> = MutableLiveData()
+    val jobTypesLiveData: LiveData<CodesResponse> = _jobCodesLiveData
+    fun getJobTypeCodes() {
+        viewModelScope.launch {
+            codesRepo.getCodes("JOB_TYPE").onEach { resource ->
+                _jobCodesLiveData.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private val _userProfile: MutableLiveData<ProfileData> = MutableLiveData()
+    val userProfileLiveData: LiveData<ProfileData> = _userProfile
+    fun getUserProfile() {
+        viewModelScope.launch {
+            userRepo.getProfile().onEach { resource ->
+                _userProfile.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
 
     private val _applyLeaseLiveData: MutableLiveData<ApplyLeaseResponse> = MutableLiveData()
     val applyLeaseLiveData: LiveData<ApplyLeaseResponse> = _applyLeaseLiveData

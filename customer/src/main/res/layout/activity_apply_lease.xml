@@ -54,27 +54,6 @@
                     android:layout_marginBottom="10dp"
                     android:text="@string/product_type"/>
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/ll_loan_term"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:layout_marginBottom="10dp"-->
-<!--                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:onClick="@{()->applyViewModel.selectProductType()}">-->
-
-<!--                    -->
-
-<!--&lt;!&ndash;                    <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_gravity="center_vertical"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_marginEnd="15dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:src="@drawable/ic_more_ico" />&ndash;&gt;-->
-<!--                </LinearLayout>-->
-
                 <TextView
                     android:id="@+id/tv_pro_type"
                     style="@style/font15_cfd8dc_medium"
@@ -123,24 +102,6 @@
                     android:onClick="@{()->applyViewModel.selectBrand()}"
                     app:drawableEndCompat="@drawable/ic_more_ico" />
 
-<!--                <com.mobile.bnkcl.com.view.BnkEditText-->
-<!--                    android:id="@+id/ed_name_brand"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:hint="@string/input_name_of_brand"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:inputType="text"-->
-<!--                    android:paddingStart="15dp"-->
-<!--                    android:paddingEnd="15dp"-->
-<!--                    android:textAlignment="textStart"-->
-<!--                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"-->
-<!--                    android:layout_height="@dimen/height_50dp"-->
-<!--                    android:imeOptions="actionDone"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:layout_marginBottom="10dp"-->
-<!--                    style="@style/font15_CFD8DC_medium_selector_input"/>-->
-
                 <TextView
                     android:id="@+id/name_type"
                     style="@style/font13_263238_medium"
@@ -171,23 +132,6 @@
                     android:onClick="@{()->applyViewModel.selectType()}"
                     app:drawableEndCompat="@drawable/ic_more_ico" />
 
-<!--                <com.mobile.bnkcl.com.view.BnkEditText-->
-<!--                    android:id="@+id/ed_name_type"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:hint="@string/input_name_of_type"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:inputType="text"-->
-<!--                    android:paddingStart="15dp"-->
-<!--                    android:paddingEnd="15dp"-->
-<!--                    android:textAlignment="textStart"-->
-<!--                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"-->
-<!--                    android:layout_height="@dimen/height_50dp"-->
-<!--                    android:imeOptions="actionDone"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:layout_marginBottom="10dp"-->
-<!--                    style="@style/font15_CFD8DC_medium_selector_input"/>-->
 
                 <TextView
                     android:id="@+id/name_model"
@@ -502,6 +446,7 @@
                             android:text="@string/name"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
+                            android:id="@+id/tv_user_name"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -520,6 +465,7 @@
                             android:text="@string/identification_nm"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
+                            android:id="@+id/tv_identification_nm"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -538,6 +484,7 @@
                             android:text="@string/date_of_birth"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
+                            android:id="@+id/tv_date_of_birth"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -556,6 +503,7 @@
                             android:text="@string/phone_number"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
+                            android:id="@+id/tv_phone_number"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -574,6 +522,7 @@
                             android:text="@string/address"
                             style="@style/font_15_90A4AE_regular"/>
                         <TextView
+                            android:id="@+id/tv_address"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

@@ -189,6 +189,21 @@ companion object{
                     }
                     result = "+856 $tmp1"
                 }
+                3 -> {
+                    var i = 0
+                    while (i < tel.length) {
+                        //023478327
+                        if (i == 3) {
+                            tmp1 += tel.substring(0, i) + " "
+                        } else if (i == 6) {
+                            tmp1 += tel.substring(3, i) + " "
+                        } else if (i == tel.length - 1) {
+                            tmp1 += tel.substring(5) + " "
+                        }
+                        i++
+                    }
+                    result = tmp1
+                }
             }
             return result
         }

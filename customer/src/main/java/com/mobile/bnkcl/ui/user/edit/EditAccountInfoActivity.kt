@@ -326,9 +326,9 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
         binding.llDob.setBackgroundResource(res)
         binding.llIdNumber.setBackgroundResource(res)
         binding.llGender.setBackgroundResource(res)
-        binding.lytAddressInfo.llCapital.setBackgroundResource(res)
-        binding.lytAddressInfo.llDistrict.setBackgroundResource(res)
-        binding.lytAddressInfo.llVillage.setBackgroundResource(res)
+//        binding.lytAddressInfo.llCapital.setBackgroundResource(res)
+//        binding.lytAddressInfo.llDistrict.setBackgroundResource(res)
+//        binding.lytAddressInfo.llVillage.setBackgroundResource(res)
         binding.lytAddressInfo.edtDetailedAddress.setBackgroundResource(res)
         binding.lytAddressInfo.edtEtc.setBackgroundResource(res)
 
@@ -336,9 +336,9 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
         binding.edtDob.isEnabled = false
         binding.llIdNumber.isEnabled = false
         binding.llGender.isEnabled = false
-        binding.lytAddressInfo.llCapital.isEnabled = false
-        binding.lytAddressInfo.llDistrict.isEnabled = false
-        binding.lytAddressInfo.llVillage.isEnabled = false
+        binding.lytAddressInfo.tvCapital.isEnabled = false
+        binding.lytAddressInfo.tvDistrict.isEnabled = false
+        binding.lytAddressInfo.tvVillage.isEnabled = false
         binding.lytAddressInfo.edtDetailedAddress.isEnabled = false
         binding.lytAddressInfo.edtEtc.isEnabled = false
 

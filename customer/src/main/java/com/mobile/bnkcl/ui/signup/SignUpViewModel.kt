@@ -19,33 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseViewModel() {
 
-   var sessionId = ""
-
-   private val _mgData: MutableLiveData<PreSignUpResponse> = MutableLiveData()
-   val mgData: LiveData<PreSignUpResponse> get() = _mgData
-
-   private val _preSignUp: MutableLiveData<PreSignUpResponse> = MutableLiveData()
-   val preSignUpLiveData: LiveData<PreSignUpResponse> = _preSignUp
-   var preSignUpRequest: PreSignUpRequest = PreSignUpRequest()
-   fun preSignUp(){
-      viewModelScope.launch {
-         authRepo.preSignUp(preSignUpRequest!!).onEach { resource ->
-            _preSignUp.value = resource.data
-         }.launchIn(viewModelScope)
-      }
-   }
-
    var addressReqObj : AddressReqObj = AddressReqObj()
-
-   private val _signUpLiveData : MutableLiveData<SignUpResponse> = MutableLiveData()
-   val signUpLiveData: LiveData<SignUpResponse> = _signUpLiveData
    var signUpRequest : SignUpRequest = SignUpRequest()
-   fun signUp(){
-      viewModelScope.launch {
-         authRepo.signUpUser(signUpRequest).onEach { resource ->
-            _signUpLiveData.value = resource.data
-         }.launchIn(viewModelScope)
-      }
-   }
 
 }

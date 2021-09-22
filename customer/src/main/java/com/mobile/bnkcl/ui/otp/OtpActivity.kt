@@ -24,8 +24,11 @@ import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
 import com.mobile.bnkcl.databinding.ActivityOtpBinding
 import com.mobile.bnkcl.ui.main.MainActivity
+import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.ui.signup.SignUpActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.utilities.UtilActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -33,10 +36,11 @@ import java.util.*
 class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     val viewModel : OtpViewModel by viewModels()
-
+    private var from : String = ""
     var lifeTime = 0
     var pinID = ""
     var sendOtp = false
+    var sessionId : String = ""
     private var countDownTimer: CountDownTimer? = null
     private var txtAgreement: String? = null
     private var isFromPage: Boolean = false
@@ -164,7 +168,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
                 when {
                     action.equals("LOGIN", ignoreCase = true) -> {
-
+                        if (intent.hasExtra("from")){
+                            from = intent.getStringExtra("from").toString()
+                        }
                         binding.otpViewModel!!.uiMode = 0
 
                     }
@@ -243,7 +249,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             Log.d("nng", it.toString())
             successListener()
             if (it.session_id!!.isNotEmpty()){
-                binding.otpViewModel!!.sessionID = it.session_id!!
+                sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)
             }
         }
@@ -251,7 +257,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             Log.d("nng", it.toString())
             successListener()
             if (it.session_id!!.isNotEmpty()){
-                binding.otpViewModel!!.sessionID = it.session_id!!
+                sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)
             }
         }
@@ -387,10 +393,31 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         )
     }
 
-    fun initEvent(){
+    private fun initEvent(){
         binding.btnContinue.setOnClickListener {
             if (binding.btnContinue.isActive()){
-                viewModel.continueClick()
+                when(viewModel.uiMode){
+                    0->{  //Login
+                        val intent = Intent(this, PinCodeActivity::class.java)
+                        if (sessionId.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionId)
+                        intent.putExtra("pin_action", "login")
+                        intent.putExtra("username", viewModel.phoneNumber)
+                        intent.putExtra("from", from)
+                        startActivity(intent)
+                    }
+                    1->{ //Sign up
+                        val intent = Intent(this, SignUpActivity::class.java)
+                        if (sessionId.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionId)
+                        intent.putExtra(Constants.USER_ID, viewModel.phoneNumber)
+                        startActivity(intent)
+                    }
+                    2->{ //Forget
+                        val intent = Intent(this, PinCodeActivity::class.java)
+                        if (sessionId.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionId)
+                        intent.putExtra("pin_action", "forget")
+                        startActivity(intent)
+                    }
+                }
             }
         }
 
@@ -487,6 +514,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        UtilActivity.otpActivity = null
     }
 
 }

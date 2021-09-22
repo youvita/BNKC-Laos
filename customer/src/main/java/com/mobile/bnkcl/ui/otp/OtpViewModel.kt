@@ -46,7 +46,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     var isChecked : Boolean = false
     var step : Int = 1
     var isFromPage: Boolean = false
-    var sessionID : String = ""
 
     val _isSignUP = MutableLiveData<Int>()
     val isSignUpLiveData = _isSignUP
@@ -244,33 +243,6 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun agreementCheckBoxClick(){
         isChecked = !isChecked
         Log.d(">>>>>>", "Hello $isChecked")
-    }
-
-    fun continueClick(){
-        Log.d(">>>>>>", "reqLogin ::: $uiMode --- $phoneNumber -- $sessionID")
-        when(uiMode){
-            0->{  //Login
-                val intent = Intent(context, PinCodeActivity::class.java)
-                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
-                intent.putExtra("pin_action", "login")
-                intent.putExtra("username", phoneNumber)
-                context.startActivity(intent)
-            }
-            1->{ //Sign up
-                val intent = Intent(context, SignUpActivity::class.java)
-                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
-//                intent.putExtra("pin_action", "login")
-                intent.putExtra(Constants.USER_ID, phoneNumber)
-                context.startActivity(intent)
-            }
-            2->{ //Forget
-                val intent = Intent(context, PinCodeActivity::class.java)
-                if (sessionID.isNotEmpty()) intent.putExtra(Constants.SESSION_ID, sessionID)
-                intent.putExtra("pin_action", "forget")
-                context.startActivity(intent)
-            }
-
-        }
     }
 
     //test countdown

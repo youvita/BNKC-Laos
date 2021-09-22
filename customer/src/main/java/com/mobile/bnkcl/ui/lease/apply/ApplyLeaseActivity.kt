@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -14,13 +16,19 @@ import com.bnkc.library.util.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.dialog.TwoButtonDialog
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
+import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityApplyLeaseBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -64,6 +72,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         binding.applyViewModel = viewModel
         checkError()
 
+        showLoading()
+        viewModel.getUserProfile()
+
         viewModel.reqLeaseItemCode(Constants.PRODUCT_TYPE)
         viewModel.reqRepaymentCode(Constants.REPAYMENT_TERM)
         viewModel.reqBrandCode(Constants.BRAND_NAME)
@@ -86,7 +97,36 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         }
     }
 
+    private fun setUpUserInfo(profileData : ProfileData?){
+        binding.tvUserName.text         = profileData?.name
+        binding.tvIdentificationNm.text = profileData?.identificationNumber
+        binding.tvDateOfBirth.text      = profileData?.dateOfBirth
+        binding.tvPhoneNumber.text      = FormatUtil.getTelFormat(profileData?.phoneNumber!! ,3)
+        binding.tvAddress.text          = profileData.etcDetailedAddress
+    }
+
+    private var jobTypeList: ArrayList<CodesData>? = ArrayList()
+    private val REQ_CODE = 1001
+    private var profileData: ProfileData? = null
     private fun observeViewModel(){
+        viewModel.jobTypesLiveData.observe(this) {
+            jobTypeList = it.codes
+//            binding.tvTitleToolbar02.setOnClickListener(this)
+
+//            for (i in 0 until jobTypeList!!.size) {
+//                if (profileData!!.jobType.equals(it.codes!![i].code)) {
+//                    if (profileData!!.jobType.isNullOrEmpty()) {
+//                        binding.tvOccupation.text = resources.getString(R.string.not_available)
+//                    } else {
+//                        binding.tvOccupation.text = it.codes[i].title
+//                    }
+//                }
+//            }
+        }
+        viewModel.userProfileLiveData.observe(this) {
+            profileData = it
+            setUpUserInfo(profileData)
+        }
         viewModel.productTypeLiveData.observe(this, {
             productCodes = it.codes!!
             viewModel.setUpProductTypeData(productCodes)
@@ -418,10 +458,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 "edit_info" -> {
                     val intent = Intent(this, EditAccountInfoActivity::class.java)
-//                    intent.putExtra("ACCOUNT_INFO", profileData)
-//                    intent.putExtra("JOB_TYPE", jobTypeList)
-//                    startActivityForResult(intent, REQUEST_CODE)
-                    startActivity(intent)
+                    intent.putExtra("ACCOUNT_INFO", profileData)
+                    intent.putExtra("JOB_TYPE", jobTypeList)
+                    startActivityForResult(intent, REQ_CODE)
                 }
             }
         })
@@ -869,6 +908,22 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_apply_lease
+    }
+
+    private var isUpdateProfile: Boolean = false
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_CANCELED) return
+        if (requestCode == REQ_CODE) {
+            if (data != null) {
+                isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
+                if (isUpdateProfile) {
+                    showLoading()
+                    viewModel.getUserProfile()
+                }
+            }
+        }
     }
 
     class NumberTextWatcherForThousand internal constructor(private var editText: EditText) : TextWatcher {
