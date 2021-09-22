@@ -16,6 +16,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
@@ -30,6 +31,9 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     private val viewModel : LeaseCalculateViewModel by viewModels()
     private var selectedItem = -1
+
+    @Inject
+    lateinit var systemDialog: SystemDialog
 
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
@@ -59,17 +63,15 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         observeViewModel()
         initView()
         initEvent()
-        checkError()
     }
 
-    private var disposableError: Disposable? = null
-    private fun checkError(){
-        //Session expired
-        disposableError = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

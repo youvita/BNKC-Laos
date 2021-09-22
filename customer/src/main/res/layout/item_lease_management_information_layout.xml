@@ -249,7 +249,7 @@
                 </LinearLayout>
 
                 <!-- Repayment Date -->
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -259,8 +259,10 @@
                         style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/margin_5dp"
-                        android:text="@string/lease_repayment_date" />
+                        android:text="@string/lease_repayment_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_repayment_date"
@@ -268,8 +270,23 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end" />
-                </LinearLayout>
+                        tools:text="Every 22"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_repayment_date_indicator"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_repayment_date_indicator"
+                        style="@style/font10_263238_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxLength="2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.25"
+                        tools:text="nd" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Monthly Repayment -->
                 <LinearLayout

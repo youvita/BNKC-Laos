@@ -7,12 +7,11 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
@@ -31,6 +30,9 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     View.OnClickListener {
 
     @Inject
+    lateinit var systemDialog: SystemDialog
+
+    @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
     private val viewModel: LeaseManagementViewModel by viewModels()
@@ -47,20 +49,18 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
         initView()
         initToolbar()
-        initDisposable()
         initLiveData()
 
     }
 
-    private fun initDisposable() {
-
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
-
     }
 
     override fun getLayoutId(): Int {
@@ -75,12 +75,13 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             binding.comingLeaseRepayment.comingInfo = it
             REPAYMENT_DATE = it.repaymentDay
 
-            binding.leaseInfo.tvRepaymentDate.text = getString(R.string.lease_every).plus(
-                " " + FormatUtils.getFormatOnlyDate(
-                    it.repaymentDay!!,
+            binding.leaseInfo.tvRepaymentDate.text =
+                getString(R.string.lease_every).plus(" ").plus(it.repaymentDay!!)
+            binding.leaseInfo.tvRepaymentDateIndicator.text =
+                FormatUtils.getFormatOnlyDateIndicator(
+                    it.repaymentDay,
                     sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
                 )
-            )
 
             binding.leaseInfo.tvProductType.text = ""
             for (i in 0 until productTypeList!!.size) {

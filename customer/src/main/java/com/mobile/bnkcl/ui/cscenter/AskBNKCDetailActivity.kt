@@ -11,6 +11,7 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.ActionBar
 import com.mobile.bnkcl.data.request.cscenter.ClaimDetailReq
@@ -20,6 +21,7 @@ import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCDetailViewModel
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
@@ -29,6 +31,8 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
     private val askBNKCDetailViewModel: AskBNKCDetailViewModel by viewModels()
     private var signUpDisposable: Disposable? = null
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
     private lateinit var claimDetailReq: ClaimDetailReq
     private lateinit var claimDetailRes: ClaimDetailRes
 
@@ -38,22 +42,21 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
         claimDetailReq = ClaimDetailReq()
         claimDetailRes = ClaimDetailRes()
 
-
-        checkError()
         getClaimDetailData()
         binding.ivBack.setOnClickListener(this)
 
     }
 
-    private fun checkError(){
-        //Session expired
-        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
+
     private fun getClaimDetailData() {
         try {
             if (this != null) {

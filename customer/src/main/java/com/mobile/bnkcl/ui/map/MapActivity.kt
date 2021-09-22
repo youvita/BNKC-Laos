@@ -13,6 +13,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.*
@@ -38,24 +39,16 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     private var data: BranchResData? = null
 
     @Inject
+    lateinit var systemDialog: SystemDialog
+
+    @Inject
     lateinit var confirmDialog: ConfirmDialog
     private var calLeaseDisposable: Disposable? = null
-
-    private fun checkError(){
-        //Session expired
-        calLeaseDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarTransparent(this, true)
         setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
-        checkError()
         if (intent != null) {
             val branchId = intent.getLongExtra("branch_id", 0)
             showLoading()
@@ -83,6 +76,16 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         initView()
         observeData()
 
+    }
+
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
+        }
     }
 
     fun initView(){

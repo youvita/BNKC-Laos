@@ -13,6 +13,7 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.notice.NoticeRequest
 import com.mobile.bnkcl.databinding.ActivityNoticeBinding
@@ -32,19 +33,22 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
     @Inject
     lateinit var noticeAdapter: NoticeAdapter
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        checkError()
         initView()
     }
-    private fun checkError(){
-        //Session expired
-        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+
+
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

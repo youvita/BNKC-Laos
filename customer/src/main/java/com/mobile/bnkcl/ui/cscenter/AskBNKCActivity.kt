@@ -12,6 +12,7 @@ import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
@@ -21,6 +22,7 @@ import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListener {
@@ -28,6 +30,8 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
     private val askBNKCViewModel : AskBNKCViewModel by viewModels()
     private var signUpDisposable: Disposable? = null
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
     private var subject: String = ""
     private var description : String = ""
     private lateinit var collapseToolBarLayout : CollapsingToolbarLayout
@@ -37,21 +41,22 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
         collapseToolBarLayout =binding.collToolbar
 
-        checkError()
         initToolbar()
         initButton()
         observeData()
 
     }
-    private fun checkError(){
-        //Session expired
-        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
+
     private fun initToolbar(){
         collapseToolBarLayout.title = this.getString(R.string.cs_02)
         collapseToolBarLayout.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))

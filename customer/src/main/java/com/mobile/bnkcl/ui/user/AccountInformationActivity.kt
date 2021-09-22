@@ -14,6 +14,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.DrawableImageViewTarget
@@ -28,16 +29,19 @@ import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AccountInformationActivity : BaseActivity<ActivityAccountInformationBinding>(),
     View.OnClickListener {
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
+
     private val viewModel: AccountInformationViewModel by viewModels()
     private var profileData: ProfileData? = ProfileData()
     private val logOutDialog = LogOutDialog()
     private var jobTypeList: ArrayList<CodesData>? = ArrayList()
-    private val REQUEST_CODE = 1001
     private var isUpdateProfile: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +50,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         super.onCreate(savedInstanceState)
 
         initView()
-        initDisposable()
         initLiveData()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
@@ -60,12 +63,13 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         }
     }
 
-    private fun initDisposable() {
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 
@@ -181,10 +185,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     }
 
     override fun onBackPressed() {
-        val intentBack = Intent()
-        intentBack.putExtra("IS_UPDATE_PROFILE", isUpdateProfile)
-        setResult(REQUEST_CODE, intentBack)
-        super.onBackPressed()
+        val intent = Intent()
+        intent.putExtra("IS_UPDATE_PROFILE", isUpdateProfile)
+        if (isUpdateProfile)
+            setResult(RESULT_OK, intent)
+        finish()
     }
 
     /**

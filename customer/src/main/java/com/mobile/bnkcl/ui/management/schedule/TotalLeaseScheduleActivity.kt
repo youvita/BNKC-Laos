@@ -15,6 +15,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequest
@@ -34,6 +35,9 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
     @Inject
     lateinit var totalLeaseScheduleAdapter: TotalLeaseScheduleAdapter
+
+    @Inject
+    lateinit var systemDialog: SystemDialog
     private val viewModel: TotalLeaseScheduleViewModel by viewModels()
     private var CONTRACT_NO: String? = null
     private var sortCode: String? = "asc"
@@ -46,7 +50,6 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
         initToolbar()
         initView()
-        initDisposable()
         initLiveData()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
@@ -111,15 +114,14 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 //        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
     }
 
-    private fun initDisposable() {
-
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
-
     }
 
     override fun getLayoutId(): Int {

@@ -21,6 +21,7 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.CATEGORY
 import com.bnkc.sourcemodule.app.Constants.CLAIM_ID
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
@@ -40,6 +41,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
     @Inject
     lateinit var adapter : AskQuestionAdapter
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
     private val csCenterViewModel : CSCenterViewModel by viewModels()
     private var collapseToolBarLayout : CollapsingToolbarLayout? = null
     private var pageNumber = 0
@@ -55,7 +58,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
         binding.action = this@CSCenterActivity
 
-        checkError()
         initToolbar()
         observeData()
         visibleWebView()
@@ -80,13 +82,14 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
             }
         }
     }
-    private fun checkError(){
-        //Session expired
-        signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

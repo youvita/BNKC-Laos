@@ -11,6 +11,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.lease.transaction.TransactionHistoryRequest
 import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData
@@ -27,6 +28,9 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
     View.OnClickListener {
 
     @Inject
+    lateinit var systemDialog: SystemDialog
+
+    @Inject
     lateinit var transactionAdapter: TransactionHistoryAdapter
     private var sortCode: String? = "asc"
     private val viewModel: TransactionHistoryViewModel by viewModels()
@@ -41,7 +45,6 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
         initView()
         initToolbar()
-        initDisposable()
         initLiveData()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
@@ -58,12 +61,13 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         }
     }
 
-    private fun initDisposable() {
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

@@ -248,6 +248,17 @@ class FormatUtils {
             } else input
         }
 
+        fun getFormatOnlyDateIndicator(input: String, lang: String): String {
+            return if (lang.equals("en", ignoreCase = true)) {
+                when (input) {
+                    "01", "1", "21", "31" -> "st"
+                    "02", "2", "22" -> "nd"
+                    "03", "3", "23" -> "rd"
+                    else -> "th"
+                }
+            } else ""
+        }
+
         fun getSeparateFont(
             mContext: Context?,
             indexStart: Int,

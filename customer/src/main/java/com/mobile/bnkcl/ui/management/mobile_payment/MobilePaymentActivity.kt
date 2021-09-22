@@ -14,12 +14,17 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityMobilePaymentBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
+import javax.inject.Inject
 
 class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View.OnClickListener {
+
+    @Inject
+    lateinit var systemDialog: SystemDialog
 
     private val viewModel: MobilePaymentViewModel by viewModels()
     private var CONTRACT_NO: String? = null
@@ -34,17 +39,16 @@ class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View
 
         initToolbar()
         initView()
-        initDisposable()
 
     }
 
-    private fun initDisposable() {
-
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

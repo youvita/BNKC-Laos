@@ -15,6 +15,7 @@ import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -46,6 +47,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
     private lateinit var productCodes : ArrayList<ItemResponseObject>
     private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
     private lateinit var typeCodes : ArrayList<ItemResponseObject>
@@ -54,23 +57,11 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
-    private var disposableError: Disposable? = null
-    private fun checkError(){
-        //Session expired
-        disposableError = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         setAnimateType(com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.applyViewModel = viewModel
-        checkError()
 
         showLoading()
         viewModel.getUserProfile()
@@ -84,6 +75,16 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         initView()
         initEvent()
         observeViewModel()
+    }
+
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
+        }
     }
 
     private fun initEvent(){

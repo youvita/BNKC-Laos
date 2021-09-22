@@ -30,6 +30,7 @@ import com.bnkc.sourcemodule.base.BaseStorageActivity
 import com.bnkc.sourcemodule.data.SettingMenu
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.dialog.PhotoSettingMenu
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.DrawableImageViewTarget
@@ -86,7 +87,6 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
 
         initView()
         initActionBar()
-        initDisposable()
         initDisablePersonalInfo()
         initLiveData()
 
@@ -449,12 +449,13 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
         alertEditInfoDialog.show(supportFragmentManager, alertEditInfoDialog.tag)
     }
 
-    private fun initDisposable() {
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

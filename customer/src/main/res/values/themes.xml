@@ -229,6 +229,12 @@
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
+    <style name="font10_263238_medium"> <!--used -->
+        <item name="android:textColor">@color/color_263238</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
     <style name="font13_263238_regular"> <!-- use-->
         <item name="android:textColor">@color/color_263238</item>
         <item name="android:textSize">13sp</item>

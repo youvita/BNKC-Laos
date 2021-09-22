@@ -12,6 +12,7 @@ import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.alarm.AlarmItem
 import com.mobile.bnkcl.databinding.ActivityNotificationBinding
@@ -26,6 +27,9 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
     private val alarmViewModel: AlarmViewModel by viewModels()
 
     @Inject
+    lateinit var systemDialog: SystemDialog
+
+    @Inject
     lateinit var adapter: AlarmAdapter
     private var isSending = false
 
@@ -36,7 +40,6 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         super.onCreate(savedInstanceState)
 
         initView()
-        initDisposable()
 
         binding.lvNotifiation.adapter = adapter
         adapter.clearItemList()
@@ -100,12 +103,13 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         })
     }
 
-    private fun initDisposable() {
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

@@ -15,6 +15,7 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.area.AddressData
 import com.mobile.bnkcl.data.request.auth.IdNumReq
@@ -44,6 +45,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     private var genderObj : ArrayList<CodesData>? = ArrayList()
 
     @Inject
+    lateinit var systemDialog: SystemDialog
+
+    @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
     private val addressInfoViewModel: AddressInfoViewModel by viewModels()
     private var selectedCapital = -1
@@ -64,14 +68,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         super.onCreate(savedInstanceState)
-
-            //Session expired
-            signUpDisposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe{
-                errorSessionDialog(it.title, it.message).onConfirmClicked {
-                    RunTimeDataStore.LoginToken.value = ""//clear token when session expired
-                    startActivity(Intent(this, PinCodeActivity::class.java))
-                }
-            }
 
         if (intent.hasExtra(Constants.USER_ID)){
             username = intent.getStringExtra(Constants.USER_ID).toString()
@@ -457,6 +453,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 selectDistrict = -1
                 selectVillage = -1
             }
+        }
+    }
+
+
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 

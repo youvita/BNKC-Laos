@@ -1,15 +1,17 @@
 package com.mobile.bnkcl.ui.main
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -76,8 +78,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     )
 
     private var profileData: ProfileData? = ProfileData()
-    private val REQUEST_CODE = 1001
     private var isUpdateProfile: Boolean = false
+    private var isGetProfile: Boolean = false
     private val role: Int = 1
     private var lastIndex: Int = 0
 
@@ -105,8 +107,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
         }
 
-        if (AppLogin.PIN.code != "N") {
+        if (AppLogin.PIN.code != "N" && !isGetProfile) {
             viewModel.getUserProfile()
+            isGetProfile = true
 
             Glide.with(this)
                 .load(R.drawable.rotate_loading_image)
@@ -121,7 +124,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 binding.navMenu.ivProfile,
                 binding.navMenu.ivLoading
             )
-        } else {
+        } else if (AppLogin.PIN.code == "N") {
             binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
         }
     }
@@ -142,7 +145,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 0,
                 0,
                 0
-            );
+            )
             binding.navMenu.vLine.visibility = View.GONE
         }
 
@@ -262,7 +265,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
             binding.tabBottomMenu.menu.setOnClickListener {
                 Log.d(">>>>", "Drawer opening")
-                binding.drawerLayout.openDrawer(Gravity.RIGHT)
+                binding.drawerLayout.openDrawer(GravityCompat.END)
             }
 
         } catch (e: Exception) {
@@ -295,9 +298,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             startActivity(loginIntent)
                         }
                     } else {
-                        val intent1 = Intent(this, AccountInformationActivity::class.java)
-                        intent1.putExtra("ACCOUNT_INFO", profileData)
-                        startActivityForResult(intent1, REQUEST_CODE)
+                        intent = Intent(this, AccountInformationActivity::class.java)
+                        intent.putExtra("ACCOUNT_INFO", profileData)
+                        resultLauncher.launch(intent)
                     }
                 }
                 R.id.ll_notice -> {
@@ -395,16 +398,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == RESULT_CANCELED) return
-        if (requestCode == REQUEST_CODE) {
-            if (data != null) {
-                isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
+    /**
+     * replace for deprecated onActivityResult
+     */
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                if (result.data != null) {
+                    isUpdateProfile = result.data!!.getBooleanExtra("IS_UPDATE_PROFILE", false)
+                    if (isUpdateProfile) isGetProfile = false
+                }
             }
         }
-    }
 
     override fun onResume() {
         super.onResume()

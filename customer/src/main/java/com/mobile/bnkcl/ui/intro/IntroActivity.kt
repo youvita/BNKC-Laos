@@ -19,6 +19,7 @@ import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mobile.bnkcl.R
@@ -42,6 +43,9 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_intro
 
     @Inject
+    lateinit var systemDialog: SystemDialog
+
+    @Inject
     lateinit var confirmDialog: ConfirmDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +55,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
         initLanguage()
         initAppVersion()
-        initDisposable()
         initImageLoadingRotate()
         getMGData()
 
@@ -73,15 +76,14 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         LocaleHelper.setLanguage(this, if ("" == preLang) "lo" else preLang)
     }
 
-
-    private fun initDisposable() {
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            errorSessionDialog(it.title, it.message).onConfirmClicked {
-                RunTimeDataStore.LoginToken.value = ""
-                startActivity(Intent(this, PinCodeActivity::class.java))
-            }
+    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
+        super.handleSessionExpired(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(icon, title, message, button)
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            RunTimeDataStore.LoginToken.value = ""
+            startActivity(Intent(this, PinCodeActivity::class.java))
         }
-
     }
 
     private fun initImageLoadingRotate() {
