@@ -8,6 +8,7 @@
 
     <!-- sign up personal information -->
     <string name="sign_up">Sign Up</string>
+    <string name="already_signed_up">You Already Signed Up</string>
     <string name="sign_step_one">Step 1</string>
     <string name="sign_step_two">Step 2</string>
     <string name="sign_name">Name</string>
@@ -111,6 +112,7 @@
     <string name="sign_up_29">Terms and Conditions</string>
     <string name="acc_info_07">Tel</string>
     <string name="acc_info_09">Account Number</string>
+    <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
 
     <!--setting-->
     <string name="setting_01">Push Notification</string>

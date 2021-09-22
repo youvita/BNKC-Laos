@@ -231,7 +231,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun preSignUp(){
         viewModelScope.launch {
             authRepo.preSignUp(preSignUpRequest!!).onEach { resource ->
-                _preSignUp.value = resource.data
+                if (resource.data != null) _preSignUp.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

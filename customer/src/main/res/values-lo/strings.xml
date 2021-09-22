@@ -347,6 +347,8 @@
     <string name="sort_by">Sort By</string>
     <string name="under_construction">Under Construction</string>
 
+    <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
+    <string name="already_signed_up">You Already Signed Up</string>
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
     <string name="ask_bnkc_review">BNKCLຈະກວດສອບຄຳຖາມຂອງທ່ານ ແລະ ຈະຕອບຫາທ່ານໃນໄວໆນີ້</string>
     <string name="ask_inquiry_failed">Inquiry is Failed</string>

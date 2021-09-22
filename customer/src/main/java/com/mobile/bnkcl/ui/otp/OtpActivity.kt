@@ -17,6 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.ConfirmDialog
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
@@ -31,6 +33,7 @@ import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.UtilActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
@@ -44,6 +47,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private var countDownTimer: CountDownTimer? = null
     private var txtAgreement: String? = null
     private var isFromPage: Boolean = false
+
+    @Inject lateinit var systemDialog: SystemDialog
+
     /**
      * text watcher event changed listener
      */
@@ -512,6 +518,18 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         if (isFromPage) {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+    }
+
+    override fun handleError(icon: Int, title: String, message: String, button: String) {
+        super.handleError(icon, title, message, button)
+        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))
+        systemDialog.show(supportFragmentManager, systemDialog.tag)
+        systemDialog.onConfirmClicked {
+            val intent = Intent(this , PinCodeActivity::class.java)
+            intent.putExtra("pin_action", "login")
+            intent.putExtra("username", viewModel.phoneNumber)
             startActivity(intent)
         }
     }
