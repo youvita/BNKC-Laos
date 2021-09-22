@@ -191,7 +191,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 AppLogin.PIN.code = "Y"
                 if (from.isEmpty()) {
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_NEW_TASK
+                    intent.flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 } else {
@@ -261,7 +261,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     }
 
     override fun onBackPressed() {
-        if (binding.pinUi == 1) {
+        if (sharedPrefer.contain(USER_ID) && !sharedPrefer.getPrefer(USER_ID).isNullOrEmpty()) {
             val logOutDialog = LogOutDialog()
             logOutDialog.onConfirmClickedListener {
                 showLoading()

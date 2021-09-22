@@ -65,7 +65,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
         showLoading()
         viewModel.getUserProfile()
-
+        viewModel.getJobTypeCodes()
         viewModel.reqLeaseItemCode(Constants.PRODUCT_TYPE)
         viewModel.reqRepaymentCode(Constants.REPAYMENT_TERM)
         viewModel.reqBrandCode(Constants.BRAND_NAME)
@@ -527,7 +527,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 if (binding.edReqAmt.text.toString().isNotEmpty()) {
                     binding.tvAdvancePayment.text =
-                        (binding.edReqAmt.text.toString().toInt() - s.toString().toInt()).toString()
+                        (s.toString().toInt() - binding.edReqAmt.text.toString().toInt()).toString()
                             .plus(" Kip")
                 }
             }
@@ -583,131 +583,11 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 if (binding.edProPrice.text.toString().isNotEmpty()) {
                     binding.tvAdvancePayment.text =
-                        (s.toString().toInt() - binding.edProPrice.text.toString().toInt()).toString()
+                        (binding.edProPrice.text.toString().toInt() - s.toString().toInt()).toString()
                             .plus(" Kip")
                 }
             }
         })
-
-//        binding.edNameBrand.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//                val proType = if (viewModel.applyLeaseRequest.product_type != null){
-//                    viewModel.applyLeaseRequest.product_type
-//                }else{
-//                    ""
-//                }
-//                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
-//                    viewModel.applyLeaseRequest.request_amount
-//                }else{
-//                    ""
-//                }
-//                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
-//                    viewModel.applyLeaseRequest.repayment_term
-//                }else{
-//                    ""
-//                }
-//                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
-//                    viewModel.applyLeaseRequest.product_price
-//                }else{
-//                    ""
-//                }
-//                binding.btnSubmit.isEnable(
-//                    proType!!,
-//                    s.toString(),
-//                    binding.edNameModel.text.toString(),
-//                    binding.edNameType.text.toString(),
-//                    reqAmt!!,
-//                    proPrice!!,
-//                    term!!.toString()
-//                )
-//
-//            }
-//
-//            override fun afterTextChanged(s: Editable) {
-//                viewModel.applyLeaseRequest.name_of_brand = s.toString()
-//            }
-//        })
-//
-//        binding.edNameModel.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//                val proType = if (viewModel.applyLeaseRequest.product_type != null){
-//                    viewModel.applyLeaseRequest.product_type
-//                }else{
-//                    ""
-//                }
-//                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
-//                    viewModel.applyLeaseRequest.request_amount
-//                }else{
-//                    ""
-//                }
-//                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
-//                    viewModel.applyLeaseRequest.repayment_term
-//                }else{
-//                    ""
-//                }
-//                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
-//                    viewModel.applyLeaseRequest.product_price
-//                }else{
-//                    ""
-//                }
-//                binding.btnSubmit.isEnable(
-//                    proType!!,
-//                    binding.edNameBrand.text.toString(),
-//                    s.toString(),
-//                    binding.edNameType.text.toString(),
-//                    reqAmt!!,
-//                    proPrice!!,
-//                    term!!.toString()
-//                )
-//
-//            }
-//
-//            override fun afterTextChanged(s: Editable) {
-//                viewModel.applyLeaseRequest.name_of_model = s.toString()
-//            }
-//        })
-//
-//        binding.edNameType.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//                val proType = if (viewModel.applyLeaseRequest.product_type != null){
-//                    viewModel.applyLeaseRequest.product_type
-//                }else{
-//                    ""
-//                }
-//                val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
-//                    viewModel.applyLeaseRequest.request_amount
-//                }else{
-//                    ""
-//                }
-//                val term = if (viewModel.applyLeaseRequest.repayment_term != null){
-//                    viewModel.applyLeaseRequest.repayment_term
-//                }else{
-//                    ""
-//                }
-//                val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
-//                    viewModel.applyLeaseRequest.product_price
-//                }else{
-//                    ""
-//                }
-//                binding.btnSubmit.isEnable(
-//                    proType!!,
-//                    binding.edNameBrand.text.toString(),
-//                    binding.edNameModel.text.toString(),
-//                    s.toString(),
-//                    reqAmt!!,
-//                    proPrice!!,
-//                    term!!.toString()
-//                )
-//            }
-//
-//            override fun afterTextChanged(s: Editable) {
-//                viewModel.applyLeaseRequest.name_of_type = s.toString()
-//            }
-//        })
-
         binding.cbEtc.setOnCheckedChangeListener { _, p1 ->
             viewModel.applyLeaseRequest.etc_status = p1
             enableEctInputFields(p1)

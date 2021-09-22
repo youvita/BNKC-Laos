@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.view.View.VISIBLE
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -160,6 +161,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         try {
+
+            UtilActivity.otpActivity = this
 
             viewModel.context = this
             binding.otpViewModel = viewModel
@@ -401,7 +404,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private fun initEvent(){
         binding.btnContinue.setOnClickListener {
-            if (binding.btnContinue.isActive()){
+            var isAgreementOk : Boolean = true
+            if(binding.llAgreement.visibility == VISIBLE){
+                isAgreementOk = binding.cbAgreement.isChecked
+            }
+            if (binding.btnContinue.isActive() && isAgreementOk){
                 when(viewModel.uiMode){
                     0->{  //Login
                         val intent = Intent(this, PinCodeActivity::class.java)

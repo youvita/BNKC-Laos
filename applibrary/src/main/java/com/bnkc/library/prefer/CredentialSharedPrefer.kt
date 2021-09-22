@@ -45,6 +45,10 @@ class CredentialSharedPrefer(context: Context) {
         sharedPreferences.edit().putString(key, value).apply()
     }
 
+    fun contain(key: String) : Boolean{
+        return sharedPreferences.contains(key)
+    }
+
     /**
      * get value prefer
      * @param key get value by access name

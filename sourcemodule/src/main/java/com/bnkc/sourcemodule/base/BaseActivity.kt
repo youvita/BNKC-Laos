@@ -219,6 +219,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                         handleError(icon, title, message, button)
                         return@subscribe
                     }
+                    ErrorCode.WRONG_PIN -> {
+                        handleError(icon, title, message, button)
+                        return@subscribe
+                    }
                 }
             }
 
