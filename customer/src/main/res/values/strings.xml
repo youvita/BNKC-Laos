@@ -253,7 +253,7 @@
     <string name="edit_gender">Gender</string>
     <string name="edit_product_number">Product Number</string>
 
-    <string name="mbl_bill_payment">BILL PAYMENT</string>
+    <string name="mbl_bill_payment">Bill Payment</string>
 
     <string name="mbl_mobile_payment">Mobile Payment</string>
     <string name="mbl_pay_by">PAY BY</string>

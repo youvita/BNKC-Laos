@@ -23,8 +23,7 @@ class LeaseRequestProcessAdapter :
     /**
      * 1 = application
      * 2 = screening
-     * 3 = approval lease
-     * 4 = reject lease
+     * 3 = result
      */
     fun setLeaseProcessType(type: Int) {
         this.type = type
@@ -73,18 +72,18 @@ class LeaseRequestProcessAdapter :
 
         when (type) {
             1 -> {
-                binding.tvPhaseOfProgress.text = progressTypeList[0].title
                 binding.llApplicationResult.visibility = View.VISIBLE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
+                binding.tvPhaseOfProgress.text = progressTypeList[0].title
 
                 binding.tvTitle.text = context.getString(R.string.progress_application)
             }
             2 -> {
-                binding.tvPhaseOfProgress.text = progressTypeList[1].title
                 binding.llApplicationResult.visibility = View.VISIBLE
                 binding.llApprovalResult.visibility = View.GONE
                 binding.llRejectResult.visibility = View.GONE
+                binding.tvPhaseOfProgress.text = progressTypeList[1].title
 
                 binding.tvTitle.text = context.getString(R.string.progress_screening)
             }

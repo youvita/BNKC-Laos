@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -100,7 +101,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     private fun getMGData() {
         try {
             introViewModel.getMGData()
-            introViewModel.mgDataResponse.observe(this) {
+            introViewModel.mgDataResponse.observe(this, Observer {
 
 //                sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
                 RunTimeDataStore.BaseUrl.value = it.c_start_url!!
@@ -173,7 +174,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                     confirmDialog.isCancelable = false
                     confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                 }
-            }
+            })
         } catch (e: Exception) {
             e.printStackTrace()
             // Catch some error when MG down service
@@ -196,12 +197,12 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         settingData.device_info = deviceInfo
         settingViewModel.settingData = settingData
         settingViewModel.updateUserSetting()
-        settingViewModel.userSettingLiveData.observe(this@IntroActivity) {
+        settingViewModel.userSettingLiveData.observe(this@IntroActivity, Observer {
             Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
             sharedPrefer.putPrefer(Constants.Push.PUSH_ALARM, "Y")
             successListener()
             startApp()
-        }
+        })
     }
 
     /**

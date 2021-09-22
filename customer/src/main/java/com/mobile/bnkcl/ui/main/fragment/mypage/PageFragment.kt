@@ -284,6 +284,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
     private fun setUpDashboard(MLR001: Int, MLR002: Int, MLR003: Int, count: Int) {
 
+        pageBinding!!.requestMenu.llMenu1.isSelected = MLR001 > 0
         pageBinding!!.requestMenu.llMenu1.isEnabled = MLR001 > 0
         pageBinding!!.requestMenu.tvMenuTitle1.text = getString(R.string.menu_application).plus(
             "\n"

@@ -99,11 +99,11 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             val inflater = layoutInflater
             val view: View = inflater.inflate(
                 R.layout.custom_toast_layout,
-                findViewById(R.id.relativeLayout1)
+                findViewById(R.id.custom_toast_layout)
             )
 
             val toast = Toast(this@EditAccountInfoActivity)
-            toast.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 200)
+            toast.setGravity(Gravity.TOP or Gravity.FILL_HORIZONTAL, 0, 200)
             toast.duration = Toast.LENGTH_LONG
             toast.view = view
             toast.show()
@@ -442,8 +442,9 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
         val alertEditInfoDialog = AlertEditInfoDialog()
         alertEditInfoDialog.onConfirmClickedListener {
             val intent = Intent()
-            intent.putExtra("IS_UPDATE_PROFILE", isUpdateInfo)
-            if (isUpdateInfo!!) setResult(RESULT_OK, intent)
+            intent.putExtra("IS_UPDATE_PROFILE", isUpdateProfile)
+            if (isUpdateProfile!!)
+                setResult(RESULT_OK, intent)
             finish()
         }
         alertEditInfoDialog.show(supportFragmentManager, alertEditInfoDialog.tag)
