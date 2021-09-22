@@ -29,40 +29,46 @@ import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.UtilActivity
 import io.reactivex.disposables.Disposable
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
 import javax.inject.Inject
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
+
+    @Inject
+    lateinit var sharedPrefer: CredentialSharedPrefer
 
     lateinit var binding: T
 
     private var loadingDialog: LoadingDialog? = null
 
-    var disposable: Disposable? = null
+    private var disposable: Disposable? = null
 
     private var systemDialog: SystemDialog? = null
-
-    @Inject
-    lateinit var sharedPrefer: CredentialSharedPrefer
 
     private var animateType = 0
 
     @IntDef(value = [ANIMATE_LEFT, ANIMATE_NORMAL])
-    @Retention(
-        RetentionPolicy.SOURCE
-    )
+    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
     internal annotation class ANIMATION_DIRECTION
 
     @LayoutRes
     abstract fun getLayoutId(): Int
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(LocaleHelper.onAttach(newBase!!))
-    }
-
     open fun setAnimateType(@ANIMATION_DIRECTION animateType: Int) {
         this.animateType = animateType
+    }
+
+    /**
+     * handle error override method
+     */
+    open fun handleError(icon: Int, title: String, message: String, button: String) {}
+
+    /**
+     * handle session expired override method
+     */
+    open fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {}
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase!!))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -184,7 +190,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         return true
     }
 
-
     /**
      * handle catch server error
      */
@@ -228,15 +233,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
     /**
-     * handle session error
-     */
-    fun errorSessionDialog(errorTitle: String, errorMessage: String): SystemDialog {
-        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_error, errorTitle, errorMessage, getString(R.string.confirm))
-        systemDialog?.show(supportFragmentManager, systemDialog?.tag)
-        return systemDialog as SystemDialog
-    }
-
-    /**
      * handle to show loading
      */
     fun showLoading() {
@@ -250,6 +246,9 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         super.onDestroy()
         disposable?.dispose()
         disposable = null
+
+        loadingDialog = null
+        systemDialog = null
     }
 
     override fun finish() {
@@ -263,14 +262,4 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
         UtilActivity.isCreated(false)
     }
-
-    /**
-     * handle error override method
-     */
-    open fun handleError(icon: Int, title: String, message: String, button: String) {}
-
-    /**
-     * handle session expired override method
-     */
-    open fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {}
 }
