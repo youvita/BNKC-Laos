@@ -36,7 +36,7 @@
                 android:id="@+id/iv_notify"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_notification_grey_ico"
+                android:src="@drawable/ic_notification_red_ico"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -56,18 +56,18 @@
             app:shadowSide="all">
 
             <RelativeLayout
-                android:layout_below="@+id/cl_top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/dialog_40dp"
+                android:layout_below="@+id/cl_top"
                 android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_10"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/dialog_40dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_lease"
-                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -118,10 +118,10 @@
                 <com.bnkc.sourcemodule.ui.ValidateButton
                     android:id="@+id/vb_detail"
                     android:layout_width="match_parent"
-                    app:is_active="true"
-                    app:buttonText="@string/service_more_detail"
+                    android:layout_height="@dimen/height_50dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_height="@dimen/height_50dp"/>
+                    app:buttonText="@string/service_more_detail"
+                    app:is_active="true" />
 
             </RelativeLayout>
         </com.bnkc.sourcemodule.ui.ShadowLayout>
