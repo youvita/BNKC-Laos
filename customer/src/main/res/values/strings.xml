@@ -384,15 +384,17 @@
     <string name="optional">(optional)</string>
     <string name="input_recommender">Input Recommender</string>
 
-    <string name="service_more_detail">For more detail</string>
+    <!-- service -->
+    <string name="service_reasonable_interest">We lend you money at a reasonable interest.</string>
+    <string name="service_buy_commodities">Are you a little short of money when you buy commodities?</string>
+    <string name="service_more_detail">For more details</string>
+
     <string name="pin_confirm">PIN Confirm</string>
     <string name="set_up_pin">Set Up New PIN</string>
     <string name="forget_pin">Forget PIN</string>
     <string name="forget_pin_ask">Forget PIN?</string>
     <string name="new_pin">New PIN</string>
     <string name="pin_registration">PIN Registration</string>
-    <string name="we_lend_you_money_at_a_reasonable_interest">We lend you money at a reasonable interest.</string>
-    <string name="are_you_a_little_short_of_money_when_you_buy_commodities">Are you a little short of money when you buy commodities?</string>
     <string name="input_name_of_model">Input name of model</string>
     <string name="etc_no_applicable_type">ETC(No applicable type)</string>
     <string name="input_name_of_brand">Input name of brand</string>

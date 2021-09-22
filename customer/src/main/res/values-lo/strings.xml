@@ -386,7 +386,11 @@
     <string name="optional">(ເລືອກ)</string>
     <string name="input_recommender">ປ້ອນຊື່ຜູ້ເນາະນຳ</string>
 
+    <!-- service -->
+    <string name="service_reasonable_interest">ພວກເຮົາສາມາດໃຫ້ທ່ານຢືມເງິນໃນອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ</string>
+    <string name="service_buy_commodities">ເງິນທ່ານບໍ່ພຽງພໍເມື່ອຊື້ສິນຄ້າຫຼືບໍ?</string>
     <string name="service_more_detail">ສໍາລັບລາຍລະອຽດເພີ່ມເຕີມ</string>
+
     <string name="pin_confirm">PIN Confirm</string>
     <string name="set_up_pin">ຕັ້ງລະຫັດຜ່ານ PIN ໃໝ່</string>
     <string name="forget_pin">ລືມລະຫັດ PIN</string>
@@ -394,8 +398,6 @@
     <string name="comm_reset_now">RESET NOW</string>
     <string name="new_pin">New PIN</string>
     <string name="pin_registration">ລົງຖະບຽນລະຫັດ PIN</string>
-    <string name="we_lend_you_money_at_a_reasonable_interest">ພວກເຮົາສາມາດໃຫ້ທ່ານຢືມເງິນໃນອັດຕາດອກເບ້ຍທີ່ເໝາະສົມ</string>
-    <string name="are_you_a_little_short_of_money_when_you_buy_commodities">ເງິນທ່ານບໍ່ພຽງພໍເມື່ອຊື້ສິນຄ້າຫຼືບໍ?</string>
     <string name="input_name_of_model">Input name of model</string>
     <string name="etc_no_applicable_type">ETC(No applicable type)</string>
     <string name="input_name_of_brand">Input name of brand</string>
