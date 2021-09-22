@@ -199,6 +199,13 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                         message = getString(R.string.message_timeout)
                     }
                 }
+            } else {
+                when(it.code) {
+                    ErrorCode.USER_EXISTS -> {
+                        handleError(icon, title, message, button)
+                        return@subscribe
+                    }
+                }
             }
 
             if (systemDialog == null) {
@@ -248,4 +255,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         UtilActivity.isCreated(false)
     }
 
+    /**
+     * handle error override method
+     */
+    open fun handleError(icon: Int, title: String, message: String, button: String) {}
 }
