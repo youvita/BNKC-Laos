@@ -17,11 +17,13 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bumptech.glide.util.Util
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -45,13 +47,23 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         override fun afterTextChanged(s: Editable?) {
             if (s.toString().isNotEmpty()) viewModel.leaseCalculateReq.interest_rate = s.toString().toInt()
             binding.edRate.setSelection(binding.edRate.text!!.length)
+
+            var amount = if(viewModel.leaseCalculateReq.lease_amount != null){
+                viewModel.leaseCalculateReq.lease_amount
+            }else {
+                ""
+            }
+            var term = if(viewModel.leaseCalculateReq.repayment_term != null){
+                viewModel.leaseCalculateReq.repayment_term
+            }else {
+                ""
+            }
+
             binding.btnCalculate.isEnable(
-                viewModel.leaseCalculateReq.lease_amount.toString(),
+                amount!!,
                 s.toString(),
-                viewModel.leaseCalculateReq.repayment_term.toString()
+                term.toString()
             )
-            val inputOtp =
-                s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
         }
     }
 
@@ -60,6 +72,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.leaseCalRequest = viewModel.leaseCalculateReq
+        Utils.setHideKeyboard(this, binding.root)
         observeViewModel()
         initView()
         initEvent()
@@ -107,6 +120,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
                 binding.tvRepaymentTerm.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
                 binding.tvRepaymentTerm.text = term
                 viewModel.leaseCalculateReq.repayment_term = term.split(" ")[0].toInt()
+
                 binding.btnCalculate.isEnable(
                     binding.edLeaseAmt.text.toString(),
                     binding.edRate.text.toString(),

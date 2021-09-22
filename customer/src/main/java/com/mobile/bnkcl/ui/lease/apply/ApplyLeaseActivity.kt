@@ -29,6 +29,7 @@ import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.utilities.Utils
 import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
@@ -62,7 +63,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         setAnimateType(com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.applyViewModel = viewModel
-
+//        Utils.setHideKeyboard(this, binding.root)
         showLoading()
         viewModel.getUserProfile()
         viewModel.getJobTypeCodes()

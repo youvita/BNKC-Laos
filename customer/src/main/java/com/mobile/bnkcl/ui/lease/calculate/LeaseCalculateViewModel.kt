@@ -30,20 +30,11 @@ class LeaseCalculateViewModel @Inject constructor(private val leaseRepo: LeaseRe
     fun calculateLease(){
         viewModelScope.launch {
             leaseRepo.getLeaseCalculate(leaseCalculateReq).onEach { resource ->
-//                if (resource.status == Status.ERROR) {
-//                    val code = resource.errorCode
-//                    val title = resource.messageTitle
-//                    val message = resource.messageDes
-//                    RxJava.publish(RxEvent.ServerError(code!!, title!!, message!!))
-//                } else {
-//
-//                }
                 _leaseCalLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
 
-    private var data: ArrayList<String>? = ArrayList()
     fun setUpData() : ArrayList<String> {
         return arrayListOf(
             "12 Months",
