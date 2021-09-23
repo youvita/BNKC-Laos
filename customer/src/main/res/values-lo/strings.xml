@@ -347,6 +347,8 @@
     <string name="sort_by">Sort By</string>
     <string name="under_construction">Under Construction</string>
 
+    <string name="not_yet_signed_up_msg">This phone number hasn’t signed\nup for BNK Account. Please Sign\nUp now.</string>
+    <string name="not_signup_yet">You Haven\'t\nSigned Up Yet</string>
     <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
     <string name="already_signed_up">You Already Signed Up</string>
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>

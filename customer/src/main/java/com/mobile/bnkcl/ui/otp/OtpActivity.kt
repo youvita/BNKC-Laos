@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
@@ -31,6 +32,7 @@ import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.UtilActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Error
 import java.util.*
 import javax.inject.Inject
 
@@ -86,6 +88,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         override fun afterTextChanged(s: Editable?) {
+            binding.btnContinue.setActive(false)
             binding.edtPhonenumber.tag = s
             val text: String = binding.edtPhonenumber.text.toString()
             textLength = binding.edtPhonenumber.text.toString().length
@@ -144,7 +147,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     // for testing
     private fun sendOTP() {
         viewModel.sendOTPLiveData.observe(this) {
-            pinID = it.pin_id.toString()
+            pinID = it.pin_id!!
             binding.tvResend.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
             lifeTime = it.lifetime!!
             binding.edtOtp.isEnabled = true
@@ -497,15 +500,41 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
-    override fun handleError(icon: Int, title: String, message: String, button: String) {
-        super.handleError(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            val intent = Intent(this , PinCodeActivity::class.java)
-            intent.putExtra("pin_action", "login")
-            intent.putExtra("username", viewModel.phoneNumber)
-            startActivity(intent)
+//    override fun handleError(icon: Int, title: String, message: String, button: String) {
+//        super.handleError(icon, title, message, button)
+//        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))
+//        systemDialog.show(supportFragmentManager, systemDialog.tag)
+//        systemDialog.onConfirmClicked {
+//            val intent = Intent(this , PinCodeActivity::class.java)
+//            intent.putExtra("pin_action", "login")
+//            intent.putExtra("username", viewModel.phoneNumber)
+//            startActivity(intent)
+//        }
+//    }
+
+    override fun handleError(code: Int) {
+        super.handleError(code)
+        when(code){
+            ErrorCode.USER_EXISTS -> {
+                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))
+                systemDialog.show(supportFragmentManager, systemDialog.tag)
+                systemDialog.onConfirmClicked {
+                    val intent = Intent(this , PinCodeActivity::class.java)
+                    intent.putExtra("pin_action", "login")
+                    intent.putExtra("username", viewModel.phoneNumber)
+                    startActivity(intent)
+                }
+            }
+            ErrorCode.USER_NOT_FOUND -> {
+                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.not_signup_yet), getString(R.string.not_yet_signed_up_msg), getString(R.string.sign_up))
+                systemDialog.show(supportFragmentManager, systemDialog.tag)
+                systemDialog.onConfirmClicked {
+                    val intent = Intent(this , SignUpActivity::class.java)
+                    intent.putExtra(Constants.SESSION_ID, pinID)
+                    intent.putExtra("username", viewModel.phoneNumber)
+                    startActivity(intent)
+                }
+            }
         }
     }
 

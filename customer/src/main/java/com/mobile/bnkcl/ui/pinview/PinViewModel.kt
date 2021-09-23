@@ -29,7 +29,7 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun loginNoAuth(){
         viewModelScope.launch {
             authRepo.loginUserNoAuth(loginRequestNoAuth!!).onEach { resource ->
-                _login.value = resource.data
+                if (resource.data != null)_login.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
@@ -38,8 +38,7 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun loginWithAuth(){
         viewModelScope.launch {
             authRepo.loginUser(logRequest!!).onEach { resource ->
-
-                _login.value = resource.data
+                if (resource.data != null) _login.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
