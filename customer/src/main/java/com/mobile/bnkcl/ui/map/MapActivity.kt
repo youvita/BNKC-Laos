@@ -51,7 +51,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         super.onCreate(savedInstanceState)
         if (intent != null) {
             val branchId = intent.getLongExtra("branch_id", 0)
-            showLoading()
+            showLoading(true)
             mapViewModel.reqOffice(branchId)
         }
         binding.toolbarName.isSelected = true

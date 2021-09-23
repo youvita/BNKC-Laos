@@ -49,7 +49,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             viewModel.getTransactionHistory(transactionHistoryRequest)
-            showLoading()
+            showLoading(true)
         }
     }
 
@@ -119,7 +119,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
                         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                             viewModel.getTransactionHistory(transactionHistoryRequest)
-                            showLoading()
+                            showLoading(true)
                         }
 
                         if (sortDialog.sortCode.toString() != "desc") {

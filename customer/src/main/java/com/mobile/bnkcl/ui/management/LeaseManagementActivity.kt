@@ -137,7 +137,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
             if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                 viewModel.getLeaseInfo(CONTRACT_NO!!)
-                showLoading()
+                showLoading(true)
             }
 
             for (i in 0 until contractNoList!!.size) {
@@ -228,7 +228,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
 
                 listChoiceDialog.setOnItemListener = {
                     viewModel.getLeaseInfo(contractNoList!![it])
-                    showLoading()
+                    showLoading(true)
                 }
                 listChoiceDialog.isCancelable = true
                 listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)

@@ -263,7 +263,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         if (sharedPrefer.contain(USER_ID) && !sharedPrefer.getPrefer(USER_ID).isNullOrEmpty()) {
             val logOutDialog = LogOutDialog()
             logOutDialog.onConfirmClickedListener {
-                showLoading()
+                showLoading(true)
                 viewModel.logout()
             }
             logOutDialog.show(

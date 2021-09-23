@@ -54,7 +54,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
-            showLoading()
+            showLoading(true)
         }
     }
 
@@ -188,7 +188,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 
                         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                             viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
-                            showLoading()
+                            showLoading(true)
                         }
 
                         if (sortDialog.sortCode.toString() != "asc") {

@@ -349,7 +349,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             )
                         }
                     }
-                    startActivity(intent)
+                    resultLauncher.launch(intent)
                 }
                 R.id.btn_sign_up -> {
                     val intent1 = Intent(this, OtpActivity::class.java)
@@ -380,7 +380,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             val logOutDialog = LogOutDialog()
                             logOutDialog.onConfirmClickedListener {
                                 viewModel.logout()
-                                showLoading()
+                                showLoading(true)
                             }
                             logOutDialog.show(
                                 supportFragmentManager,

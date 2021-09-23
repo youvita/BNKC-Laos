@@ -56,7 +56,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
             isSending = false
         }
         alarmViewModel.getAlarmList()
-        showLoading()
+            showLoading(true)
         isSending = true
     }
 
@@ -92,7 +92,7 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
                                 if (isSending) return
                                 ++alarmViewModel.pageNo
                                 alarmViewModel.getAlarmList()
-                                showLoading()
+                                showLoading(true)
                                 isSending = true
                             }
                         }

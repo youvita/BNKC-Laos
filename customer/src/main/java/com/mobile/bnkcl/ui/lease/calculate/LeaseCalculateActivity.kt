@@ -104,7 +104,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
     private fun initEvent(){
         binding.btnCalculate.setOnClickListener {
             if (binding.btnCalculate.isActive()){
-                showLoading()
+                showLoading(true)
                 viewModel.calculateLease()
             }
         }

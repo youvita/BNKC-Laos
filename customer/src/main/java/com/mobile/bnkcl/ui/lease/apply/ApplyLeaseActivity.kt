@@ -66,7 +66,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         super.onCreate(savedInstanceState)
         binding.applyViewModel = viewModel
 //        Utils.setHideKeyboard(this, binding.root)
-        showLoading()
+        showLoading(true)
         viewModel.getUserProfile()
         viewModel.getJobTypeCodes()
         viewModel.reqLeaseItemCode(Constants.PRODUCT_TYPE)
@@ -151,7 +151,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             when (it) {
                 "apply_lease" -> {
                     twoButtonDialog.onConfirmClickedListener {
-                        showLoading()
+                        showLoading(true)
                         viewModel.applyLease()
                     }
                     twoButtonDialog.show(this.supportFragmentManager, twoButtonDialog.tag)
@@ -786,7 +786,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             if (data != null) {
                 isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
                 if (isUpdateProfile) {
-                    showLoading()
+                    showLoading(true)
                     viewModel.getUserProfile()
                 }
             }

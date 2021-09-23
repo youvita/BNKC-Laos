@@ -30,6 +30,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     @Inject
     lateinit var systemDialog: SystemDialog
     private val settingViewModel: SettingViewModel by viewModels()
+    private var isUpdateProfile: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
@@ -92,7 +93,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
             settingViewModel.settingData = settingData
 
             settingViewModel.updateUserSetting()
-            showLoading()
+            showLoading(true)
         }
 
         binding.tvResetPin.setOnClickListener {
@@ -123,6 +124,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
                 Constants.Push.PUSH_ALARM,
                 if (settingViewModel.settingData!!.push_alarm_enabled!!) "Y" else "N"
             )
+
+            isUpdateProfile = true
         }
     }
 
@@ -130,10 +133,18 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         binding.appVersion = this.packageManager.getPackageInfo(this.packageName, 0).versionName
     }
 
+    override fun onBackPressed() {
+        val intent = Intent()
+        intent.putExtra("IS_UPDATE_PROFILE", isUpdateProfile)
+        if (isUpdateProfile)
+            setResult(RESULT_OK, intent)
+        finish()
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.toolbar_left_button -> {
-                finish()
+                onBackPressed()
             }
         }
     }

@@ -110,7 +110,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
 
             if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                 viewModel.getFullPayment(CONTRACT_NO!!, REPAYMENT_DATE!!, "asc")
-                showLoading()
+                showLoading(true)
             }
         }
 
@@ -227,7 +227,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
             R.id.btn_check -> {
                 if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
                     viewModel.getFullPayment(CONTRACT_NO!!, "2021-08-04", "asc")
-                    showLoading()
+                    showLoading(true)
                 }
             }
             R.id.ll_pay -> {

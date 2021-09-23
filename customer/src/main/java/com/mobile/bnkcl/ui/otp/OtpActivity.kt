@@ -70,7 +70,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             val inputOtp =
                 s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
             if (inputOtp.length == 6) {
-                showLoading()
+                showLoading(true)
                 val otp: String =
                     binding.edtOtp.text.toString().trim().replace("-", "")
 //                    binding.otpViewModel.getVerifyOTPModel().setPin(otp)
@@ -130,7 +130,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private val ivSendOTPClickListener = View.OnClickListener() {
         try {
-            showLoading()
+            showLoading(true)
             viewModel.phoneNumber = getPhoneNo().toString()
             viewModel.sendOTP(getPhoneNo().toString())
             binding.edtOtp.text!!.clear()

@@ -56,7 +56,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
             logOutDialog.onConfirmClickedListener {
                 viewModel.logout()
-                showLoading()
+                showLoading(true)
             }
         }
     }
@@ -211,7 +211,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                             binding.ivLoading
                         )
                         viewModel.getAccountInformation()
-                        showLoading()
+                        showLoading(true)
                     }
                 }
             }
