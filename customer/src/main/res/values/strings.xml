@@ -114,6 +114,8 @@
     <string name="acc_info_09">Account Number</string>
     <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
 
+    <string name="not_yet_signed_up_msg">This phone number hasn’t signed\nup for BNK Account. Please Sign\nUp now.</string>
+
     <!--setting-->
     <string name="setting_01">Push Notification</string>
     <string name="setting_02">Reset PIN</string>
@@ -165,6 +167,7 @@
     <string name="details">Details</string>
     <string name="pin_05">Existing PIN</string>
 
+    <string name="not_signup_yet">You Haven\'t\nSigned Up Yet</string>
     <string name="pin_11">Wrong PIN\n5 Times</string>
     <string name="pin_12">You have reached maximum\nfailed attempts. Please reset PIN.</string>
     <string name="pin_14">Wrong PIN. Please\nTry Again</string>

@@ -68,7 +68,11 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
                 listChoiceDialog.setOnItemListener = { p: Int ->
                     selectedItem = p
                     binding.tvAreas.text = objects!![p].name
-                    viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "ASC")
+                    if (p == 0){
+                        viewModel.branchRequest = BranchRequest("", 1, 10, "ASC")
+                    }else {
+                        viewModel.branchRequest = BranchRequest(objects!![p].id.toString(), 1, 10, "ASC")
+                    }
                     viewModel.reqBranchList()
                 }
                 listChoiceDialog.isCancelable = true

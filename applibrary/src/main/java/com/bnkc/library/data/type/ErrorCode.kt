@@ -12,6 +12,8 @@ object ErrorCode {
 
     const val USER_EXISTS = 422
 
+    const val USER_NOT_FOUND = 404
+
     const val WRONG_PIN = 420
 
 }

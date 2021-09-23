@@ -10,8 +10,10 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.IntDef
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -62,6 +64,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      * handle error override method
      */
     open fun handleError(icon: Int, title: String, message: String, button: String) {}
+
+    open fun handleError(code : Int) {}
 
     /**
      * handle session expired override method
@@ -141,16 +145,23 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     }
                 }
             } else {
-                when(it.code) {
-                    ErrorCode.USER_EXISTS -> {
-                        handleError(icon, title, message, button)
-                        return@subscribe
-                    }
-                    ErrorCode.WRONG_PIN -> {
-                        handleError(icon, title, message, button)
-                        return@subscribe
-                    }
-                }
+                Log.d(">>>>>>", "errorDialog: ${it.code}")
+                handleError(it.code)
+                return@subscribe
+//                when(it.code) {
+//                    ErrorCode.USER_EXISTS -> {
+//                        handleError(it.code)
+//                        return@subscribe
+//                    }
+//                    ErrorCode.USER_NOT_FOUND -> {
+//                        handleError(it.code)
+//                        return@subscribe
+//                    }
+//                    ErrorCode.WRONG_PIN -> {
+//                        handleError(icon, title, message, button)
+//                        return@subscribe
+//                    }
+//                }
             }
 
             if (systemDialog == null) {

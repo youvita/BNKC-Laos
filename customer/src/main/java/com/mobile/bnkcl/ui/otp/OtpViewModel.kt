@@ -198,7 +198,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "sendOTP ::: " + sendOTPRequest.to)
         viewModelScope.launch {
             otpRepo.sendOTP(sendOTPRequest).onEach { resource ->
-                _sendOTP.value = resource.data
+                if (resource.data != null) _sendOTP.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

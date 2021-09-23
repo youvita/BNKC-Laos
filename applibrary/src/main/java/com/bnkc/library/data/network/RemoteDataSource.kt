@@ -5,6 +5,7 @@
  */
 package com.bnkc.library.data.network
 
+import android.util.Log
 import android.util.Log.e
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
@@ -60,24 +61,47 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                     }
                 }
                 is RetrofitResponse.Error -> {
+                    Log.d(">>>>", "networkRequest: ${response.code} ${HttpURLConnection.HTTP_UNAUTHORIZED}")
                     when (response.code) {
                         HttpURLConnection.HTTP_UNAUTHORIZED -> {
                             // Session Expired
                             withContext(Dispatchers.Main) {
-                                RxJava.publish(RxEvent.SessionExpired(response.errorTitle!!, response.errorMessage!!))
+                                RxJava.publish(
+                                    RxEvent.SessionExpired(
+                                        response.errorTitle!!,
+                                        response.errorMessage!!
+                                    )
+                                )
                                 RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
                             }
-                            setValue((Resource.Unauthorized(response.errorTitle!!, response.errorMessage!!)))
+                            setValue(
+                                (Resource.Unauthorized(
+                                    response.errorTitle!!,
+                                    response.errorMessage!!
+                                ))
+                            )
                         }
                         HttpURLConnection.HTTP_INTERNAL_ERROR -> {
 
                         }
                         else -> {
                             withContext(Dispatchers.Main) {
-                                RxJava.publish(RxEvent.ServerError(response.code, response.errorTitle!!, response.errorMessage!!))
+                                RxJava.publish(
+                                    RxEvent.ServerError(
+                                        response.code,
+                                        response.errorTitle!!,
+                                        response.errorMessage!!
+                                    )
+                                )
                                 RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
                             }
-                            setValue(Resource.Error(response.errorTitle!!,response.errorMessage!!, response.code))
+                            setValue(
+                                Resource.Error(
+                                    response.errorTitle!!,
+                                    response.errorMessage!!,
+                                    response.code
+                                )
+                            )
                         }
                     }
                 }

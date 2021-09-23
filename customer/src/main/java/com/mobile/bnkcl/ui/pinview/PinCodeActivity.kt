@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.USER_ID
@@ -316,5 +317,50 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             confirmDialog.show(supportFragmentManager, confirmDialog.tag)
         }
     }
+
+//    override fun handleError(code: Int) {
+//        super.handleError(code)
+//        when(code){
+//            ErrorCode.WRONG_PIN -> {
+//                countAttempt++
+//                if (countAttempt > 4) {
+//                    confirmDialog = ConfirmDialog.newInstance(
+//                        R.drawable.ic_badge_error,
+//                        getString(R.string.pin_11),
+//                        getString(R.string.pin_12),
+//                        getString(R.string.setting_02)
+//                    )
+//                    confirmDialog.onConfirmClickedListener {
+//                        binding.pinView.clearPin()
+//                        val intent = Intent(
+//                            this,
+//                            OtpActivity::class.java
+//                        )
+//                        intent.putExtra(
+//                            USER_ID,
+//                            username
+//                        )
+//                        intent.putExtra("ACTION_TAG", "RESET")
+//                        startActivity(intent)
+//                    }
+//                    confirmDialog.isCancelable = false
+//                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+//                } else {
+//                    val msg = String.format(getString(R.string.pin_15), MAX_ATTEMPT_TIME - countAttempt)
+//                    confirmDialog = ConfirmDialog.newInstance(
+//                        R.drawable.ic_badge_error,
+//                        getString(R.string.pin_14),
+//                        msg,
+//                        getString(R.string.pin_16)
+//                    )
+//                    confirmDialog.onConfirmClickedListener {
+//                        binding.pinView.clearPin()
+//                    }
+//                    confirmDialog.isCancelable = false
+//                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+//                }
+//            }
+//        }
+//    }
 
 }
