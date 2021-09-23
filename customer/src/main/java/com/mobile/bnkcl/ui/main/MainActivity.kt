@@ -151,10 +151,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
 
-            val intent = Intent(this, IntroActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Runtime.getRuntime().exit(0)
+            AppLogin.PIN.code = "N"
+//            Runtime.getRuntime().exit(0)
         }
     }
 

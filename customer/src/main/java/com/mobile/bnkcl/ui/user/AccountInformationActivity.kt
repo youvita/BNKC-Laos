@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
@@ -21,6 +22,7 @@ import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
+import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.intro.IntroActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
@@ -97,10 +99,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
 
-            val intent = Intent(this, IntroActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Runtime.getRuntime().exit(0)
+            AppLogin.PIN.code = "N"
+//            Runtime.getRuntime().exit(0)
         }
     }
 

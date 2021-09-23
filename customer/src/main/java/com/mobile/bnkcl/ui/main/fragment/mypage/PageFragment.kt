@@ -81,6 +81,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         R.drawable.banner_1, R.drawable.banner_2,
         R.drawable.banner_3, R.drawable.banner_4
     )
+    private val emptyLeaseData: MyLeasesData = MyLeasesData("","","","","2021-12-12","")
     private var leaseCardRecyclerView: CardRecyclerView = CardRecyclerView()
     private var bannerCardRecyclerView: CardRecyclerView = CardRecyclerView()
 
@@ -137,7 +138,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         leaseAdapter.setItemClickListener(this)
 
         leaseAdapter.clearItemList()
-        leaseAdapter.addItemList(arrayListOf(MyLeasesData()))
+        leaseAdapter.addItemList(arrayListOf(emptyLeaseData))
 
         setUpLeaseAdapter()
 
@@ -166,7 +167,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             LRS002 = it.countScreening!!
             LRS003 = it.countResult!!
 
-            it.myLeases?.add(MyLeasesData())
+            it.myLeases?.add(emptyLeaseData)
 
             leaseAdapter.clearItemList()
             leaseAdapter.addItemList(it.myLeases)
