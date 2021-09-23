@@ -163,10 +163,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                 } else {
                     val serviceReason = it.c_act_msg
                     confirmDialog = ConfirmDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.notice_01),
+                        R.drawable.ic_badge_server_down,
+                        getString(R.string.dlg_server_down),
                         serviceReason!!,
-                        getString(R.string.comm_confirm)
+                        getString(R.string.comm_close)
                     )
                     confirmDialog.onConfirmClickedListener {
                         finish()

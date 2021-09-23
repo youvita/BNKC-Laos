@@ -34,7 +34,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
-                android:text="@string/dlg_04"
+                android:text="@string/dlg_server_down"
                 android:textAlignment="center"
                 android:visibility="visible" />
 
