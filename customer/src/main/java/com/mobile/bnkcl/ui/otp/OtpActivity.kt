@@ -15,10 +15,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.observe
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
@@ -141,12 +139,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    };
+    }
 
     // for testing
     private fun sendOTP() {
         viewModel.sendOTPLiveData.observe(this) {
-            Log.d("nng", it.toString())
             pinID = it.pin_id.toString()
             binding.tvResend.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
             lifeTime = it.lifetime!!
@@ -265,12 +262,12 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             Log.d("nng", it.toString())
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
-                binding.btnContinue.setActive(true)
+                binding.cbAgreement.isEnabled = true
             }
         }
-        viewModel.verifyOTPLiveData.observe(this, androidx.lifecycle.Observer{
+        viewModel.verifyOTPLiveData.observe(this, {
             binding.isVerified = it.verified!!
-            binding.tvCorrect.visibility = View.VISIBLE
+            binding.tvCorrect.visibility = VISIBLE
             if (it.verified!!){
                 when (binding.otpViewModel!!.uiMode) {
                     0 -> {
@@ -300,7 +297,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                     this,
                     R.drawable.round_stroke_00695c_8
                 )
-                binding.tvCorrect.setTextColor(resources.getColor(R.color.color_00695c))
+                binding.tvCorrect.setTextColor(ContextCompat.getColor(this, R.color.color_00695c))
                 binding.tvCorrect.text = getString(R.string.sign_up_23)
                 binding.tvCorrect.setCompoundDrawablesWithIntrinsicBounds(
                     null,
@@ -330,11 +327,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         })
         viewModel.isSignUpLiveData.observe(this, {
             if (binding.otpViewModel!!.step == 1) {
-                binding.rlOtp.visibility = View.VISIBLE
+                binding.rlOtp.visibility = VISIBLE
                 binding.rlSignupInfo.visibility = View.GONE
             } else {
                 binding.rlOtp.visibility = View.GONE
-                binding.rlSignupInfo.visibility = View.VISIBLE
+                binding.rlSignupInfo.visibility = VISIBLE
 
                 binding.tvStep2.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
                 binding.ivStep2.setImageDrawable(
@@ -358,11 +355,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
         viewModel.isSignUpLiveData.observe(this, {
             if (binding.otpViewModel!!.step == 1) {
-                binding.rlOtp.visibility = View.VISIBLE
+                binding.rlOtp.visibility = VISIBLE
                 binding.rlSignupInfo.visibility = View.GONE
             } else {
                 binding.rlOtp.visibility = View.GONE
-                binding.rlSignupInfo.visibility = View.VISIBLE
+                binding.rlSignupInfo.visibility = VISIBLE
 
                 binding.tvStep2.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
                 binding.ivStep2.setImageDrawable(
@@ -402,11 +399,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private fun initEvent(){
         binding.btnContinue.setOnClickListener {
-            var isAgreementOk : Boolean = true
-            if(binding.llAgreement.visibility == VISIBLE){
-                isAgreementOk = binding.cbAgreement.isChecked
-            }
-            if (binding.btnContinue.isActive() && isAgreementOk){
+            if (binding.btnContinue.isActive()){
                 when(viewModel.uiMode){
                     0->{  //Login
                         val intent = Intent(this, PinCodeActivity::class.java)
@@ -441,7 +434,13 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
 
         binding.cbAgreement.setOnClickListener {
+            var isAgreementOk = true
+            if(binding.llAgreement.visibility == VISIBLE){
+                isAgreementOk = binding.cbAgreement.isChecked
+            }
+            Log.d(">>>>", "initEvent: $isAgreementOk ")
 
+            binding.btnContinue.setActive(binding.cbAgreement.isChecked)
             binding.tvAgree.setOnClickListener(if (binding.cbAgreement.isChecked) this else null)
             if (binding.cbAgreement.isChecked) {
                 binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
@@ -486,8 +485,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     }
 
     private fun resendTimer(){
-        binding.tv1.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_263238))
-        binding.tvCountdown.setTextColor(resources.getColor(com.bnkc.sourcemodule.R.color.color_263238))
+        binding.tv1.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
+        binding.tvCountdown.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
         val lifeTime: Int = lifeTime * 1000
         if (countDownTimer != null) countDownTimer!!.cancel()
         countDownTimer = object : CountDownTimer(lifeTime.toLong(), 1000) {
@@ -508,18 +507,17 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         binding.tvResend.setOnClickListener(null)
     }
 
-    private var tvReSendOTPClickListener = View.OnClickListener() {
+    private var tvReSendOTPClickListener = View.OnClickListener {
         try {
-            viewModel.sendOTP(viewModel.phoneNumber);
-            binding.edtOtp.text?.clear();
+            viewModel.sendOTP(viewModel.phoneNumber)
+            binding.edtOtp.text?.clear()
         } catch (e: Exception) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-
         if (isFromPage) {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

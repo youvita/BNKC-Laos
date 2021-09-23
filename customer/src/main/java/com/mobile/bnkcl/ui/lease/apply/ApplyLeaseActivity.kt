@@ -1,5 +1,6 @@
 package com.mobile.bnkcl.ui.lease.apply
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -113,17 +115,6 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     private fun observeViewModel(){
         viewModel.jobTypesLiveData.observe(this) {
             jobTypeList = it.codes
-//            binding.tvTitleToolbar02.setOnClickListener(this)
-
-//            for (i in 0 until jobTypeList!!.size) {
-//                if (profileData!!.jobType.equals(it.codes!![i].code)) {
-//                    if (profileData!!.jobType.isNullOrEmpty()) {
-//                        binding.tvOccupation.text = resources.getString(R.string.not_available)
-//                    } else {
-//                        binding.tvOccupation.text = it.codes[i].title
-//                    }
-//                }
-//            }
         }
         viewModel.userProfileLiveData.observe(this) {
             profileData = it
@@ -462,7 +453,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     val intent = Intent(this, EditAccountInfoActivity::class.java)
                     intent.putExtra("ACCOUNT_INFO", profileData)
                     intent.putExtra("JOB_TYPE", jobTypeList)
-                    startActivityForResult(intent, REQ_CODE)
+                    launchSomeActivity.launch(intent)
                 }
             }
         })
@@ -788,16 +779,10 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_apply_lease
-    }
-
     private var isUpdateProfile: Boolean = false
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == RESULT_CANCELED) return
-        if (requestCode == REQ_CODE) {
+    var launchSomeActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == REQ_CODE) {
+            val data: Intent? = result.data
             if (data != null) {
                 isUpdateProfile = data.getBooleanExtra("IS_UPDATE_PROFILE", false)
                 if (isUpdateProfile) {
@@ -806,6 +791,10 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
             }
         }
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_apply_lease
     }
 
     class NumberTextWatcherForThousand internal constructor(private var editText: EditText) : TextWatcher {

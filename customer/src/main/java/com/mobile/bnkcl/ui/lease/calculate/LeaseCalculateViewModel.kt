@@ -13,6 +13,8 @@ import com.mobile.bnkcl.data.request.auth.LoginRequest
 import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
 import com.mobile.bnkcl.data.response.auth.LoginResponse
+import com.mobile.bnkcl.data.response.lease.ItemResponse
+import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,21 +32,28 @@ class LeaseCalculateViewModel @Inject constructor(private val leaseRepo: LeaseRe
     fun calculateLease(){
         viewModelScope.launch {
             leaseRepo.getLeaseCalculate(leaseCalculateReq).onEach { resource ->
-                _leaseCalLiveData.value = resource.data
+                if(resource.data != null) _leaseCalLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }
 
-    fun setUpData() : ArrayList<String> {
-        return arrayListOf(
-            "12 Months",
-            "18 Months",
-            "24 Months",
-            "36 Months",
-            "48 Months",
-            "60 Months",
-            "72 Months",
-        )
+    private val _repaymentMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    val repaymentLiveData = _repaymentMuLiveData
+    fun reqRepaymentCode(groupId :String){
+        viewModelScope.launch {
+            leaseRepo.getItemCode(groupId).onEach { resource ->
+                _repaymentMuLiveData.value = resource.data!!
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    var repaymentData: ArrayList<String>? = ArrayList()
+    fun setUpRepaymentData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+        repaymentData?.clear()
+        for (i in 0 until itemResponse.size){
+            repaymentData?.add(itemResponse[i].title!!)
+        }
+        return repaymentData!!
     }
 
 }

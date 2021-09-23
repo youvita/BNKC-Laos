@@ -3,21 +3,15 @@ package com.mobile.bnkcl.ui.lease.apply
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
-import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
 import com.mobile.bnkcl.data.response.code.CodesResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.response.lease.apply.ApplyLeaseResponse
-import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
-import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.data.response.user.ProfileData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -183,18 +177,6 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
 
     fun repaymentTerm(){
         _actionMuLiveData.value = "repayment_term"
-    }
-
-    fun setUpRepaymentTermData() : ArrayList<String> {
-        return arrayListOf(
-            "12 Months",
-            "18 Months",
-            "24 Months",
-            "36 Months",
-            "48 Months",
-            "60 Months",
-            "72 Months",
-        )
     }
 
 }

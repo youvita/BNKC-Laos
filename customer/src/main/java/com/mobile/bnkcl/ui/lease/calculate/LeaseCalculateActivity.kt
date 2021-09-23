@@ -9,23 +9,19 @@ import android.util.Log
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.observe
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
-import com.bumptech.glide.util.Util
 import com.mobile.bnkcl.R
+import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,6 +29,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     private val viewModel : LeaseCalculateViewModel by viewModels()
     private var selectedItem = -1
+    private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
 
     @Inject
     lateinit var systemDialog: SystemDialog
@@ -48,12 +45,12 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             if (s.toString().isNotEmpty()) viewModel.leaseCalculateReq.interest_rate = s.toString().toInt()
             binding.edRate.setSelection(binding.edRate.text!!.length)
 
-            var amount = if(viewModel.leaseCalculateReq.lease_amount != null){
+            val amount = if(viewModel.leaseCalculateReq.lease_amount != null){
                 viewModel.leaseCalculateReq.lease_amount
             }else {
                 ""
             }
-            var term = if(viewModel.leaseCalculateReq.repayment_term != null){
+            val term = if(viewModel.leaseCalculateReq.repayment_term != null){
                 viewModel.leaseCalculateReq.repayment_term
             }else {
                 ""
@@ -73,6 +70,9 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         super.onCreate(savedInstanceState)
         binding.leaseCalRequest = viewModel.leaseCalculateReq
         Utils.setHideKeyboard(this, binding.root)
+
+        viewModel.reqRepaymentCode(com.bnkc.library.util.Constants.PRODUCT_TYPE)
+
         observeViewModel()
         initView()
         initEvent()
@@ -95,6 +95,10 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             intent.putExtra("leaseCalResponse", it)
             startActivity(intent)
         })
+        viewModel.repaymentLiveData.observe(this, {
+            repaymentCodes = it.codes!!
+            viewModel.setUpRepaymentData(repaymentCodes)
+        })
     }
 
     private fun initEvent(){
@@ -108,7 +112,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             listChoiceDialog = ListChoiceDialog.newInstance(
                 R.drawable.ic_badge_error,
                 getString(R.string.area),
-                viewModel.setUpData(),
+                viewModel.repaymentData!!,
                 selectedItem
             )
             listChoiceDialog.item = 5
@@ -116,15 +120,15 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             listChoiceDialog.setOnItemListener = {
                     p : Int ->
                 selectedItem = p
-                val term = viewModel.setUpData()[p]
+                val term = repaymentCodes[p].title
                 binding.tvRepaymentTerm.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
                 binding.tvRepaymentTerm.text = term
-                viewModel.leaseCalculateReq.repayment_term = term.split(" ")[0].toInt()
+                viewModel.leaseCalculateReq.repayment_term = repaymentCodes[p].code!!.toInt()
 
                 binding.btnCalculate.isEnable(
                     binding.edLeaseAmt.text.toString(),
                     binding.edRate.text.toString(),
-                    term
+                    term.toString()
                 )
             }
             listChoiceDialog.isCancelable = true
@@ -135,7 +139,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
-                var term = if (viewModel.leaseCalculateReq.repayment_term != null){
+                val term = if (viewModel.leaseCalculateReq.repayment_term != null){
                     viewModel.leaseCalculateReq.repayment_term
                 }else{
                     ""
@@ -179,20 +183,8 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
             try {
                 editText.removeTextChangedListener(this)
                 val fixedValue: String = FormatUtil.getDecimalFormattedString(value, false).toString()
-                val preSelection = editText.selectionEnd
                 s.replace(0, value.length, fixedValue)
-                val selection = preSelection + fixedValue.length - value.length
-//            DevLog.devLog(">>>>>>>", ">>>>>>>>>>> :: " + s.length)
                 editText.setSelection(Math.max(s.length, 0))
-//            try {
-//                if (editText === mBinding.edLoanAmount) { //_Auto generate of amount when user input amount in foreign currency and exchange rate
-//                    viewModel.setLOAN_AMOUNT(s.toString().replace(",".toRegex(), ""))
-//                } else if (editText === mBinding.edMonthlyIncome) {
-//                    viewModel.setMONTHLY_INCOME(s.toString().replace(",".toRegex(), ""))
-//                }
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
                 editText.addTextChangedListener(this)
             } catch (e: Exception) {
                 e.printStackTrace()
