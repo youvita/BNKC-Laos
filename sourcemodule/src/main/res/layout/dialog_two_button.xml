@@ -3,6 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="errorIcon"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="errorTitle"
+            type="String" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="leftLabel"
+            type="String" />
+
+        <variable
+            name="rightLabel"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,7 +56,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
-                android:text="Apply Lease"
+                android:text="@{errorTitle}"
                 android:textAlignment="center"
                 android:visibility="visible" />
 
@@ -46,7 +68,7 @@
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
                 android:gravity="center_horizontal"
-                android:text="Would you like to apply for a lease\nconsultation with that\ninformation?" />
+                android:text="@{errorMessage}" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +87,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/selector_d7191f_ffffee"
                     android:maxLines="1"
-                    android:text="Cancel"
+                    android:text="@{leftLabel}"
                     android:textColor="@color/colorPrimary" />
 
                 <Button
@@ -76,7 +98,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/selector_d7191f_8b0304"
                     android:maxLines="1"
-                    android:text="Apply"
+                    android:text="@{rightLabel}"
                     android:textColor="@color/color_ffffff" />
 
             </LinearLayout>

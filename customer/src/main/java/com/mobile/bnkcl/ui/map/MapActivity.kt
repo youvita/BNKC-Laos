@@ -2,18 +2,22 @@ package com.mobile.bnkcl.ui.map
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.*
@@ -25,11 +29,13 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
+import com.mobile.bnkcl.utilities.BlurBuilder.blur
 import com.mobile.bnkcl.utilities.FormatUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 import kotlin.math.max
+
 
 @AndroidEntryPoint
 class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnCameraIdleListener,
@@ -41,14 +47,14 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     @Inject
     lateinit var systemDialog: SystemDialog
 
-    @Inject
-    lateinit var confirmDialog: ConfirmDialog
+    @Inject lateinit var twoButtonDialog : TwoButtonDialog
     private var calLeaseDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarTransparent(this, true)
         setAnimateType(Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
+
         if (intent != null) {
             val branchId = intent.getLongExtra("branch_id", 0)
             showLoading(true)
@@ -58,24 +64,58 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 
         val llContactBranch: LinearLayout = findViewById(R.id.ll_contact_branch)
         llContactBranch.setOnClickListener {
-            confirmDialog = ConfirmDialog.newInstance(
+            twoButtonDialog = TwoButtonDialog.newInstance(
                 R.drawable.ic_badge_call_now,
                 getString(R.string.call_now),
-                FormatUtil.getTelFormat(data!!.tel!!, 2)!!,
+                FormatUtil.getTelFormat(data?.tel!!, 2)!!,
+                getString(R.string.edit_cancel),
                 getString(R.string.call)
             )
-            confirmDialog.onConfirmClickedListener {
+            twoButtonDialog.onConfirmClickedListener {
                 startPhoneCall()
             }
-            confirmDialog.isCancelable = true
-            confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+            twoButtonDialog.show(this.supportFragmentManager, twoButtonDialog.tag)
 
         }
         binding.mapView2.onCreate(savedInstanceState)
 
         initView()
         observeData()
+        setUpBlurView()
+    }
 
+    fun drawableToBitmap(drawable: Drawable): Bitmap {
+        var bitmap: Bitmap? = null
+        if (drawable is BitmapDrawable) {
+            val bitmapDrawable = drawable
+            if (bitmapDrawable.bitmap != null) {
+                return bitmapDrawable.bitmap
+            }
+        }
+        bitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
+            Bitmap.createBitmap(
+                1,
+                1,
+                Bitmap.Config.ARGB_8888
+            ) // Single color bitmap will be created of 1x1 pixel
+        } else {
+            Bitmap.createBitmap(
+                drawable.intrinsicWidth,
+                drawable.intrinsicHeight,
+                Bitmap.Config.ARGB_8888
+            )
+        }
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+        drawable.draw(canvas)
+        return bitmap
+    }
+
+    private fun setUpBlurView(){
+        val originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.banner_1)
+
+        val blurredBitmap = blur(this, originalBitmap)
+        binding.llContactBranch.background = BitmapDrawable(resources, blurredBitmap)
     }
 
     override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {

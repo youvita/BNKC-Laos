@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
+import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.FindOfficeHolderBinding
@@ -22,8 +23,7 @@ import javax.inject.Inject
 class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : BaseAdapter<FindOfficeHolderBinding, BranchResData, FindOfficeRecyclerAdapter.ViewHolder>() {
     private var context: Context? = null
 
-    @Inject
-    lateinit var confirmDialog: ConfirmDialog
+    @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
     override fun getLayoutId(viewType: Int): Int {
         return R.layout.find_office_holder
@@ -101,13 +101,14 @@ class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : B
             context?.startActivity(intent)
         }
         holder.binding.llContact.setOnClickListener {
-            confirmDialog = ConfirmDialog.newInstance(
+            twoButtonDialog = TwoButtonDialog.newInstance(
                 R.drawable.ic_badge_call_now,
                 context!!.getString(R.string.call_now),
                 FormatUtil.getTelFormat(data.tel!!, 2)!!,
+                context!!.getString(R.string.edit_cancel),
                 context!!.getString(R.string.call)
             )
-            confirmDialog.onConfirmClickedListener {
+            twoButtonDialog.onConfirmClickedListener {
                 try {
                     val number = Uri.parse(
                         "tel:" + FormatUtil.getTelFormat(
@@ -124,8 +125,7 @@ class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : B
                     ).show()
                 }
             }
-            confirmDialog.isCancelable = true
-            confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+            twoButtonDialog.show(this.supportFragmentManager, twoButtonDialog.tag)
 
         }
 

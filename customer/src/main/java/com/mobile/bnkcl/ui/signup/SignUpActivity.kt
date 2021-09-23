@@ -184,6 +184,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         ""
                     }
 
+
+
                     binding.vbResult.isEnable(
                         binding.edtName.text.toString(),
                         binding.tvDob.text.toString(),

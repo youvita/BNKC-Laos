@@ -1,13 +1,16 @@
 package com.mobile.bnkcl.ui.lease.apply
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -150,6 +153,14 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         viewModel.actionLiveData.observe(this, {
             when (it) {
                 "apply_lease" -> {
+
+                    twoButtonDialog = TwoButtonDialog.newInstance(
+                        R.drawable.ic_badge_inform,
+                        getString(R.string.apply_lease),
+                        getString(R.string.apply_lease_smg),
+                        getString(R.string.edit_cancel),
+                        getString(R.string.apply)
+                    )
                     twoButtonDialog.onConfirmClickedListener {
                         showLoading(true)
                         viewModel.applyLease()

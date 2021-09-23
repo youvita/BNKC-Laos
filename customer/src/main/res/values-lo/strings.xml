@@ -421,4 +421,6 @@
     <string name="address">Address</string>
     <string name="identification_nm">Identification NM</string>
 
+    <string name="apply">Apply</string>
+    <string name="apply_lease_smg">Would you like to apply for a lease\nconsultation with that\ninformation?</string>
 </resources>

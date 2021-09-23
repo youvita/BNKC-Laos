@@ -21,6 +21,9 @@ android {
         targetSdkVersion build_versions.target_sdk
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
     }
 
     buildTypes {
