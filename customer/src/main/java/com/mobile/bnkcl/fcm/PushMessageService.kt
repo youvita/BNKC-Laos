@@ -4,6 +4,7 @@ import android.app.ActivityManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.util.ComUtil
@@ -71,9 +72,9 @@ class PushMessageService: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d("kosign", "onNewToken:: $token")
-        val mPushID: String? = sharedPrefer.getPrefer(Constants.HandlePush.PUSH_ID)
+        val mPushID: String? = RunTimeDataStore.PushId.value
         if ("" == mPushID || mPushID != token) {
-            sharedPrefer.putPrefer(Constants.HandlePush.PUSH_ID, token)
+            RunTimeDataStore.PushId.value = token
         }
     }
 

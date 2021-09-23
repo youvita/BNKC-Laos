@@ -35,11 +35,7 @@ object Constants {
     const val RESET_PIN = "RESET_PIN"
 
     object HandlePush{
-        const val ACTION_ON = "ACTION_ON"
-        const val ACTION_TYPE = "type"
-        const val ACTION_ID = "id"
         const val ACTION_URL = "url"
-        const val PUSH_ID = "push_id"
     }
 
     object Push {

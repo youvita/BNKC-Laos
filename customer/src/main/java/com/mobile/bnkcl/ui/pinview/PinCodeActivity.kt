@@ -1,6 +1,7 @@
 package com.mobile.bnkcl.ui.pinview
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -216,7 +217,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         }
 
         private fun login(pinCode: String) {
-            val deviceInfo = DeviceInfo("test", "Android", "S21", "30")
+            val deviceInfo = DeviceInfo(RunTimeDataStore.PushId.value, "Android", Build.MODEL, Build.VERSION.SDK_INT.toString())
             if (needAuth) {
                 val loginRequest = LoginRequest(
                     sessionId,

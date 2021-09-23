@@ -30,10 +30,11 @@ class HeaderInterceptor {
     fun provideHeaderInterceptor(credentialSharedPrefer: CredentialSharedPrefer): Interceptor {
         return Interceptor(fun(chain: Interceptor.Chain): Response {
             val tokenBearer = "$BEARER ${RunTimeDataStore.LoginToken.value}"
+            val languageCode = credentialSharedPrefer.getPrefer(Constants.LANGUAGE).orEmpty()
 
             val request = chain.request()
                     .newBuilder()
-                    .header(ACCEPT_LANGUAGE, credentialSharedPrefer.getPrefer(Constants.LANGUAGE)!!)
+                    .header(ACCEPT_LANGUAGE, if (languageCode.isNullOrEmpty()) "lo" else languageCode)
                     .header(X_APP_VERSION, "")
             when {
                 !RunTimeDataStore.LoginToken.value.isNullOrEmpty() -> {

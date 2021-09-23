@@ -67,7 +67,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
                 // Get new FCM registration token
                 val token = task.result
-                sharedPrefer.putPrefer(Constants.HandlePush.PUSH_ID, token!!)
+                RunTimeDataStore.PushId.value = token!!
                 Log.d("nng: ", "token:: $token")
             })
     }
@@ -192,7 +192,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      */
     fun sendPushID(){
         val settingData = SettingData()
-        val deviceInfo = DeviceInfo(sharedPrefer.getPrefer(Constants.HandlePush.PUSH_ID), "Android", Build.MODEL, Build.VERSION.SDK_INT.toString())
+        val deviceInfo = DeviceInfo(RunTimeDataStore.PushId.value, "Android", Build.MODEL, Build.VERSION.SDK_INT.toString())
         settingData.push_alarm_enabled = true
         settingData.device_info = deviceInfo
         settingViewModel.settingData = settingData

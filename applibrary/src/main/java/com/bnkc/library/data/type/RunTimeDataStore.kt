@@ -5,6 +5,7 @@ sealed class RunTimeDataStore(var value: String) {
     companion object {
 
         // push notification
+        const val PUSH_ID   = ""
         const val ACTION_TYPE = ""
         const val ACTION_ID = ""
         const val ACTION_URL = ""
@@ -15,6 +16,8 @@ sealed class RunTimeDataStore(var value: String) {
         // Login Info
         const val LOGIN_TOKEN = ""
     }
+
+    object PushId: RunTimeDataStore(PUSH_ID)
 
     object ActionType: RunTimeDataStore(ACTION_TYPE)
 

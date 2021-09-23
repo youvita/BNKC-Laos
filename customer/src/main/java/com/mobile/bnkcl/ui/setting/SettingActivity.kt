@@ -82,7 +82,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         binding.toggleUser.setOnCheckedChangeListener { _, isChecked ->
             val settingData = SettingData()
             val deviceInfo = DeviceInfo(
-                sharedPrefer.getPrefer(Constants.HandlePush.PUSH_ID),
+                RunTimeDataStore.PushId.value,
                 "Android",
                 Build.MODEL,
                 Build.VERSION.SDK_INT.toString()
