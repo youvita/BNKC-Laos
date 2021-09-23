@@ -352,34 +352,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                 binding.btnContinue.setActive(false)
             }
         })
-
-        viewModel.isSignUpLiveData.observe(this, {
-            if (binding.otpViewModel!!.step == 1) {
-                binding.rlOtp.visibility = VISIBLE
-                binding.rlSignupInfo.visibility = View.GONE
-            } else {
-                binding.rlOtp.visibility = View.GONE
-                binding.rlSignupInfo.visibility = VISIBLE
-
-                binding.tvStep2.setTextColor(ContextCompat.getColor(this, R.color.color_d7191f))
-                binding.ivStep2.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_step_personal_info_on
-                    )
-                )
-                binding.tvStep1.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
-                binding.ivStep1.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_step_otp_off
-                    )
-                )
-
-                binding.btnContinue.setLabelButton(getString(R.string.comm_submit))
-                binding.btnContinue.setActive(false)
-            }
-        })
     }
 
     private fun initView(){

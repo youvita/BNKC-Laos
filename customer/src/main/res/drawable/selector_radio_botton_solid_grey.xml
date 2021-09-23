@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/ic_radio_btn_on"
+        android:drawable="@drawable/ic_check_green_on_ico"
         android:state_checked="true"/>
     <item
-        android:drawable="@drawable/ic_radio_btn_disable"
+        android:drawable="@drawable/ic_check_ico"
         android:state_checked="false"/>
 </selector>

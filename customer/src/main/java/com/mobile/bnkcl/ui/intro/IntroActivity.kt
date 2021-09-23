@@ -30,6 +30,7 @@ import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingViewModel
+import com.mobile.bnkcl.ui.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -105,6 +106,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
 //                sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
                 RunTimeDataStore.BaseUrl.value = it.c_start_url!!
+//                RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
 
                 val availableService = it.c_available_service
                 if (availableService!!) {

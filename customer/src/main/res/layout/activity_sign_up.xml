@@ -225,6 +225,7 @@
                                         android:background="@null"
                                         android:clickable="true"
                                         android:digits="0123456789"
+                                        android:focusable="true"
                                         android:hint="@string/sign_dd_mm_yyyy"
                                         android:inputType="date"
                                         android:maxLength="10"
@@ -232,8 +233,7 @@
                                         android:paddingTop="@dimen/padding_16dp"
                                         android:paddingEnd="@dimen/padding_15dp"
                                         android:paddingBottom="@dimen/padding_16dp"
-                                        android:singleLine="true"
-                                        android:focusable="true" />
+                                        android:singleLine="true" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
@@ -274,6 +274,7 @@
                                             android:background="@null"
                                             android:clickable="true"
                                             android:digits="0123456789"
+                                            android:focusable="true"
                                             android:hint="@string/sign_input_identify_number"
                                             android:inputType="number"
                                             android:maxLength="30"
@@ -282,7 +283,6 @@
                                             android:paddingEnd="@dimen/padding_15dp"
                                             android:paddingBottom="@dimen/padding_16dp"
                                             android:singleLine="true"
-                                            android:focusable="true"
                                             tools:ignore="NestedWeights" />
 
                                         <TextView
@@ -296,9 +296,9 @@
                                             android:paddingTop="@dimen/padding_16dp"
                                             android:paddingEnd="@dimen/padding_10dp"
                                             android:paddingBottom="@dimen/padding_16dp"
-                                            tools:text="@string/sign_existing_customer"
                                             android:visibility="gone"
-                                            app:drawableEndCompat="@drawable/ic_info_red_ico" />
+                                            app:drawableEndCompat="@drawable/ic_info_red_ico"
+                                            tools:text="@string/sign_existing_customer" />
 
                                     </LinearLayout>
 
@@ -318,10 +318,10 @@
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:orientation="vertical"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/margin_10dp"
-                                    android:layout_marginBottom="@dimen/margin_21dp">
+                                    android:layout_marginBottom="@dimen/margin_21dp"
+                                    android:orientation="vertical">
 
                                     <TextView
                                         style="@style/font13_263238_medium"
@@ -352,8 +352,9 @@
 
                                 </LinearLayout>
 
-                                <include layout="@layout/additional_info"
-                                    android:id="@+id/llt_additional"/>
+                                <include
+                                    android:id="@+id/llt_additional"
+                                    layout="@layout/additional_info" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -378,19 +379,20 @@
                                         android:padding="@dimen/padding_5dp"
                                         android:text="@string/optional" />
                                 </LinearLayout>
-                                    <com.mobile.bnkcl.com.view.BnkEditText
-                                        android:id="@+id/edt_recommend"
-                                        style="@style/font15_CFD8DC_medium_input"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:layout_marginTop="10dp"
-                                        android:background="@drawable/selector_edittext_bg"
-                                        android:hint="@string/input_recommender"
-                                        android:maxLength="200"
-                                        android:paddingStart="15sp"
-                                        android:paddingEnd="15sp"
-                                        android:singleLine="true"
-                                        android:textColorHint="#cfd8dc" />
+
+                                <com.mobile.bnkcl.com.view.BnkEditText
+                                    android:id="@+id/edt_recommend"
+                                    style="@style/font15_CFD8DC_medium_input"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginTop="10dp"
+                                    android:background="@drawable/selector_edittext_bg"
+                                    android:hint="@string/input_recommender"
+                                    android:maxLength="200"
+                                    android:paddingStart="15sp"
+                                    android:paddingEnd="15sp"
+                                    android:singleLine="true"
+                                    android:textColorHint="#cfd8dc" />
 
 
                             </LinearLayout>
@@ -398,35 +400,6 @@
                         </RelativeLayout>
 
                     </ScrollView>
-
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/btn_next"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/height_50dp"-->
-<!--                        android:layout_alignParentBottom="true"-->
-<!--                        android:layout_marginLeft="@dimen/margin_21dp"-->
-<!--                        android:layout_marginRight="@dimen/margin_21dp"-->
-<!--                        android:layout_marginBottom="@dimen/margin_21dp"-->
-<!--                        android:background="@null"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="vertical">-->
-
-<!--                        <View-->
-<!--                            android:layout_marginTop="@dimen/height_50dp"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="@dimen/margin_30dp"/>-->
-
-<!--                        <com.bnkc.sourcemodule.ui.ValidateButton-->
-<!--                            android:id="@+id/vb_result"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="@dimen/height_50dp"-->
-<!--                            app:is_active="true"-->
-<!--                            app:buttonText="@string/comm_submit"-->
-<!--                            app:textAllCaps="true"-->
-<!--                            android:layout_marginStart="@dimen/margin_20dp"-->
-<!--                            android:layout_marginEnd="@dimen/margin_20dp"/>-->
-
-<!--                    </LinearLayout>-->
 
                     <RelativeLayout
                         android:id="@+id/btn_next"

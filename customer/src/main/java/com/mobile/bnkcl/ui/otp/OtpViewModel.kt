@@ -65,7 +65,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
                 "Login"
             }
             1->{
-                "Sign UP"
+                "Sign Up"
             }
             2->{
                 "Forget PIN"

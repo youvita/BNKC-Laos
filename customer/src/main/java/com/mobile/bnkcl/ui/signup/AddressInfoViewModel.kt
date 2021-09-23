@@ -25,7 +25,12 @@ import javax.inject.Inject
 @HiltViewModel
 class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , private val authRepo: AuthRepo, private val codesRepo: CodesRepo) : BaseViewModel() {
 
+    var isChecked : Boolean = false
 
+    fun agreementCheckBoxClick(){
+        isChecked = !isChecked
+        Log.d(">>>>>>", "Hello $isChecked")
+    }
 
     private val _capitalArea: MutableLiveData<List<AreaItems>> = MutableLiveData()
     val capital: LiveData<List<AreaItems>> get() = _capitalArea

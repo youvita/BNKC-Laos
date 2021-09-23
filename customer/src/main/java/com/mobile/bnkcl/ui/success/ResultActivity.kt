@@ -66,7 +66,9 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
             when(it){
                 AskBNKCActivity::class.java.simpleName -> {
                     if (resultStatus){
+                        val intent = Intent(this, MainActivity::class.java)
                         setResult(RESULT_OK)
+                        startActivity(intent)
                         finish()
                     }
                 }

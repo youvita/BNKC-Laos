@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.CheckBox
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -64,6 +65,14 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
     val viewModel : SignUpViewModel by viewModels()
 
+    var isChecked : Boolean = false
+    var isEnable : Boolean = false
+
+    fun etcCheckBoxClick(){
+        isChecked = !isChecked
+        Log.d(">>>>>>", "Hello $isChecked")
+    }
+
     override fun getLayoutId(): Int = R.layout.activity_sign_up
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
@@ -86,6 +95,12 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         observeGender()
 
         /**
+         * init hidden keyboard
+         * */
+
+        Utils.setHideKeyboard(this, binding.rlSignupInfo)
+
+        /**
          *
          * Listener
          * */
@@ -100,8 +115,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         binding.lltAdditional.edtAccountNumber.addTextChangedListener(accNumberWatcher)
 
         binding.btnCheck.setOnClickListener(btnCheckId)
-//        binding.tvNewCustomer.visibility = View.GONE
-
         binding.vbResult.setOnClickListener {
             if (binding.vbResult.isActive()){
                 val intent = Intent(this, PinCodeActivity::class.java)
@@ -426,6 +439,14 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
            }
         }
+
+        /**
+         * on ETC check
+         * */
+
+        binding.lltAdditional.cbEtc.setOnClickListener {
+            etcClick()
+        }
     }
 
     private fun removeToDefault(valChanged : Boolean, n: Int) {
@@ -577,26 +598,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             e.printStackTrace()
         }
     }
-
-//    private fun validateUserInfo() {
-//        if (binding.tvDob.text.toString() != ""
-//            && binding.tvDob.text.toString().length === 10
-//            && binding.edtName.text.toString() != ""
-//            && binding.tvGender.text.toString() !=""
-//        ) {
-//            binding.btnNext.setOnClickListener(this)
-//            binding.btnNext.background = ContextCompat.getDrawable(
-//                this,
-//                R.drawable.selector_d7191f_8b0304
-//            )
-//        } else {
-//            binding.btnNext.isClickable = false
-//            binding.btnNext.background = ContextCompat.getDrawable(
-//                this,
-//                R.drawable.round_solid_e1e5ec_8
-//            )
-//        }
-//    }
 
 
     private val nameWatcher = object : TextWatcher{
@@ -901,8 +902,44 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     ContextCompat.getDrawable(this, R.drawable.ic_info_red_ico_1),
                     null
                 )
+
+                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_inform, getString(R.string.dlg_21), getString(R.string.dlg_20), getString(R.string.dlg_06))
+                systemDialog.show(supportFragmentManager, systemDialog.tag)
+                systemDialog.onConfirmClicked {
+
+                }
+
+
             }
         }
+    }
+
+    private fun etcClick(){
+        if (binding.lltAdditional.cbEtc.isChecked == isChecked){
+            binding.lltAdditional.edtEtc.isEnabled = isEnable
+            binding.lltAdditional.tvCapital.isEnabled = !isEnable
+            binding.lltAdditional.edtDetailedAddress.isEnabled = !isEnable
+            binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
+
+//            binding.lltAdditional.tvDistrict.isEnabled = !isEnable
+//            binding.lltAdditional.tvVillage.isEnabled = !isEnable
+
+        }else{
+            binding.lltAdditional.edtEtc.isEnabled = !isEnable
+
+            binding.lltAdditional.tvCapital.isEnabled = isEnable
+            binding.lltAdditional.tvDistrict.isEnabled = isEnable
+            binding.lltAdditional.tvVillage.isEnabled = isEnable
+            binding.lltAdditional.edtDetailedAddress.isEnabled = isEnable
+
+            binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
+            binding.lltAdditional.tvDistrict.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
+            binding.lltAdditional.tvVillage.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
+
+
+        }
+
+
     }
 
 
