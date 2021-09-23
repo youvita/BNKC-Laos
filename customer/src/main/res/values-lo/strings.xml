@@ -60,7 +60,6 @@
 
     <!-- Recommend -->
     <string name="comm_confirm">Confirm</string>
-    <string name="comm_reset_pin">ຕັ້ງລະຫັດ PIN ຄືນໃຫມ່</string>
     <string name="comm_error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
     <string name="comm_error">Error</string>
     <string name="comm_submit">ຍືນຍັນ</string>
@@ -162,7 +161,7 @@
     <string name="currency_val">%s ໂດລາ ສະຫະລັດ</string>
     <string name="details">ລາຍລະອຽດ</string>
 
-    <string name="pin_05">Existing</string>
+    <string name="pin_05">Existing PIN</string>
 
     <string name="pin_11">ລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງ 5 ຄັ້ງ</string>
     <string name="pin_12">ທ່ານໄດ້ຕື່ມລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງສູງສຸດແລ້ວ. ກະລຸນາຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>

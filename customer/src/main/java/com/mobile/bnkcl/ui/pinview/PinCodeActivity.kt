@@ -260,7 +260,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     }
 
     override fun onBackPressed() {
-        if (sharedPrefer.contain(USER_ID) && !sharedPrefer.getPrefer(USER_ID).isNullOrEmpty()) {
+        if (sharedPrefer.contain(USER_ID) && !sharedPrefer.getPrefer(USER_ID).isNullOrEmpty() && binding.pinUi == 1) {
             val logOutDialog = LogOutDialog()
             logOutDialog.onConfirmClickedListener {
                 showLoading(true)
@@ -284,7 +284,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 R.drawable.ic_badge_error,
                 getString(R.string.pin_11),
                 getString(R.string.pin_12),
-                getString(R.string.comm_reset_pin)
+                getString(R.string.setting_02)
             )
             confirmDialog.onConfirmClickedListener {
                 binding.pinView.clearPin()

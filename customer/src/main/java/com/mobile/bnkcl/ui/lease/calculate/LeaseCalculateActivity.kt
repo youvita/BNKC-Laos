@@ -10,6 +10,7 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
+import com.bnkc.library.util.Constants.REPAYMENT_TERM
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
@@ -71,7 +72,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         binding.leaseCalRequest = viewModel.leaseCalculateReq
         Utils.setHideKeyboard(this, binding.root)
 
-        viewModel.reqRepaymentCode(com.bnkc.library.util.Constants.PRODUCT_TYPE)
+        viewModel.reqRepaymentCode(REPAYMENT_TERM)
 
         observeViewModel()
         initView()

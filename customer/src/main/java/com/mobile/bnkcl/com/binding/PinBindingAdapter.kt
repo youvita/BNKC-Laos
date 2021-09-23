@@ -41,7 +41,7 @@ object PinBindingAdapter {
             }
             4 -> { //Reset pin
                 mBackButton!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_close_white))
-                title?.text = context.getString(R.string.comm_reset_pin)
+                title?.text = context.getString(R.string.setting_02)
                 mPinMessage!!.visibility = View.VISIBLE
                 mPinMessage!!.text = context.getString(R.string.pin_05)
             }
