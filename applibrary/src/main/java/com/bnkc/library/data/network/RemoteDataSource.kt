@@ -61,25 +61,44 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                     }
                 }
                 is RetrofitResponse.Error -> {
-                    Log.d(">>>>", "networkRequest: ${response.code} ${HttpURLConnection.HTTP_UNAUTHORIZED}")
                     when (response.code) {
                         HttpURLConnection.HTTP_UNAUTHORIZED -> {
-                            // Session Expired
-                            withContext(Dispatchers.Main) {
-                                RxJava.publish(
-                                    RxEvent.SessionExpired(
-                                        response.errorTitle!!,
+                            if (response.errorTitle == "UNAUTHORIZED") {
+                                // Session Expired
+                                withContext(Dispatchers.Main) {
+                                    RxJava.publish(
+                                        RxEvent.SessionExpired(
+                                            response.errorTitle,
+                                            response.errorMessage!!
+                                        )
+                                    )
+                                    RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
+                                }
+                                setValue(
+                                    (Resource.Unauthorized(
+                                        response.errorTitle,
                                         response.errorMessage!!
+                                    ))
+                                )
+                            } else {
+                                withContext(Dispatchers.Main) {
+                                    RxJava.publish(
+                                        RxEvent.ServerError(
+                                            response.code,
+                                            response.errorTitle!!,
+                                            response.errorMessage!!
+                                        )
+                                    )
+                                    RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
+                                }
+                                setValue(
+                                    Resource.Error(
+                                        response.errorTitle!!,
+                                        response.errorMessage!!,
+                                        response.code
                                     )
                                 )
-                                RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
                             }
-                            setValue(
-                                (Resource.Unauthorized(
-                                    response.errorTitle!!,
-                                    response.errorMessage!!
-                                ))
-                            )
                         }
                         HttpURLConnection.HTTP_INTERNAL_ERROR -> {
 
