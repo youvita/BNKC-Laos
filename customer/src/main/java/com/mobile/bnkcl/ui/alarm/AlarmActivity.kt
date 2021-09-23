@@ -53,7 +53,6 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
                 adapter.addItemList(list)
             }
 //            checkUIChangeEmptyData()
-            successListener()
             isSending = false
         }
         alarmViewModel.getAlarmList()

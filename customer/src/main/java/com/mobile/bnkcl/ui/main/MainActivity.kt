@@ -136,8 +136,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = it.accountNumber
 
-            successListener()
-
             binding.navMenu.btnSignUp.visibility = View.GONE
             binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
             binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(
@@ -152,7 +150,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
-            successListener()
 
             val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

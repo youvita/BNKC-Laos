@@ -861,7 +861,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
     private fun verifyIdentification(){
         addressInfoViewModel.verifyIdLiveData.observe(this){
-            successListener()
             binding.isVerified = it.verified!!
             binding.tvNewCustomer.visibility = View.VISIBLE
 

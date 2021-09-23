@@ -162,7 +162,6 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            successListener()
         })
         viewModel.preResetLiveData.observe(this, {
             viewModel.resetPasswordRequest.session_id = it.session_id
@@ -184,7 +183,6 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         })
 
         viewModel.loginLiveData.observe(this, {
-            successListener()
             if (it.cust_no != null || it.cust_no != null) {
                 RunTimeDataStore.LoginToken.value = it.token!!
                 sharedPrefer.putPrefer(USER_ID, username)

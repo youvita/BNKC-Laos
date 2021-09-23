@@ -56,7 +56,6 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
     private fun initLiveData() {
 
         viewModel.transactionHistoryLiveData.observe(this) {
-            successListener()
             initAdapter(it.transactionHistory!!)
         }
     }

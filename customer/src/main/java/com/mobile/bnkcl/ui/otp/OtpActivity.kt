@@ -256,7 +256,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun observeData(){
         viewModel.preloginLiveData.observe(this){
             Log.d("nng", it.toString())
-            successListener()
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)
@@ -264,7 +263,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
         viewModel.preSignUpLiveData.observe(this){
             Log.d("nng", it.toString())
-            successListener()
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)

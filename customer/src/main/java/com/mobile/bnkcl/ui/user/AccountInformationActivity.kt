@@ -91,13 +91,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         viewModel.accountInformationLiveData.observe(this) {
             binding.profile = it
             profileData = it
-            successListener()
         }
 
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
-            successListener()
 
             val intent = Intent(this, IntroActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -72,7 +72,6 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
 
     private fun initLiveData() {
         viewModel.fullPaymentLiveData.observe(this) {
-            successListener()
             binding.fullPaymentInfo.fullRepaymentInfo = it
 
             binding.fullPaymentInfo.tvFullPaymentAmount.text =

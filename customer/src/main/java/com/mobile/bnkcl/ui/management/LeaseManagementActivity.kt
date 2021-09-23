@@ -70,7 +70,6 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     private fun initLiveData() {
         viewModel.leaseLiveData.observe(this) {
 
-            successListener()
             binding.leaseInfo.leaseInfo = it
             binding.comingLeaseRepayment.comingInfo = it
             REPAYMENT_DATE = it.repaymentDay

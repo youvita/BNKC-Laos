@@ -131,7 +131,6 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     private fun initLiveData() {
         viewModel.totalLeaseScheduleLiveData.observe(this) {
             initAdapter(it.totalLeaseScheduleData!!)
-            successListener()
             binding.tvTotalInterest.text =
                 FormatUtils.getNumberFormatWithoutCurrency(this, it.totalInterest!!)
             binding.tvTotalPrincipal.text =

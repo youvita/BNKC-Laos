@@ -200,7 +200,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         viewModel.leaseApplicationLiveData.observe(requireActivity()) {
 
-            successListener()
             leaseApplicationList = it.leaseApplications
             pageBinding!!.requestMenu.llMenu1.setOnClickListener(this)
 
@@ -208,7 +207,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         viewModel.leaseScreeningLiveData.observe(requireActivity()) {
 
-            successListener()
             leaseScreeningList = it.leaseApplications
             pageBinding!!.requestMenu.llMenu2.setOnClickListener(this)
 
@@ -216,7 +214,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         viewModel.leaseResultLiveData.observe(requireActivity()) {
 
-            successListener()
             leaseResultList = it.leaseApplications
             pageBinding!!.requestMenu.llMenu3.setOnClickListener(this)
 
