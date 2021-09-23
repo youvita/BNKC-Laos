@@ -323,7 +323,7 @@
     <string name="dlg_new_version">ຮູບແບບໃຫມ່ພ້ອມໃຊ້ງານ</string>
     <string name="dlg_update_desc">ມີການອັບເດດ,\nກະລຸນາອັບເດດເພື່ອໃຊ້ App ນີ້</string>
     <string name="dlg_update_now">ອັບເດດທັນທີ</string>
-    <string name="dlg_server_down">Server is Being Maintenance</string>
+    <string name="dlg_server_down">Server is\nBeing Maintenance</string>
     <string name="dlg_05">We are currently undergoing\n maintenance. Will be right back.</string>
     <string name="dlg_06">ປິດ</string>
     <string name="dlg_07">No Internet Connection</string>
