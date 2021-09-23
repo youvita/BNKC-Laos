@@ -99,22 +99,108 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     /**
      * handle catch success
      */
-    fun successListener() {
+    private fun successListener() {
         disposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
-            if (loadingDialog != null) {
-                loadingDialog?.dismiss()
-                loadingDialog = null
-            }
+            dismissLoading()
         }
     }
 
     /**
      * handle catch session expired
      */
-    fun sessionExpired() {
+    private fun sessionExpired() {
         disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
             handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
         }
+    }
+
+    /**
+     * handle catch server error
+     */
+    private fun errorDialog() {
+        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
+            var icon = R.drawable.ic_badge_error
+            var title = it.title
+            var message = it.message
+            var button = getString(R.string.confirm)
+
+            if (title == "" && message == "") {
+                when (it.code) {
+                    ErrorCode.UNKNOWN_ERROR -> {
+                        icon = R.drawable.ic_badge_no_internet
+                        title = getString(R.string.title_no_network)
+                        message = getString(R.string.message_pls_check_network)
+                        button = getString(R.string.try_again)
+                    }
+                    ErrorCode.TIMEOUT_ERROR -> {
+                        title = getString(R.string.title_timeout)
+                        message = getString(R.string.message_timeout)
+                    }
+                }
+            } else {
+                when(it.code) {
+                    ErrorCode.USER_EXISTS -> {
+                        handleError(icon, title, message, button)
+                        return@subscribe
+                    }
+                    ErrorCode.WRONG_PIN -> {
+                        handleError(icon, title, message, button)
+                        return@subscribe
+                    }
+                }
+            }
+
+            if (systemDialog == null) {
+                systemDialog = SystemDialog.newInstance(icon, title, message, button)
+                systemDialog?.show(supportFragmentManager, systemDialog?.tag)
+                systemDialog?.onConfirmClicked {
+                    systemDialog = null
+                }
+            }
+
+            dismissLoading()
+        }
+    }
+
+    /**
+     * handle to show loading
+     */
+    fun showLoading() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog()
+            loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
+        }
+    }
+
+    /**
+     * handle to dismiss loading
+     */
+    private fun dismissLoading() {
+        if (loadingDialog != null) {
+            loadingDialog?.dismiss()
+            loadingDialog = null
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.dispose()
+        disposable = null
+
+        loadingDialog = null
+        systemDialog = null
+    }
+
+    override fun finish() {
+        super.finish()
+        if (!UtilActivity.isCreated()) {
+            if (animateType == ANIMATE_LEFT) {
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            } else {
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
+            }
+        }
+        UtilActivity.isCreated(false)
     }
 
     protected open fun setStatusBarColor(color: Int) {
@@ -188,82 +274,5 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             }
         }
         return true
-    }
-
-    /**
-     * handle catch server error
-     */
-    private fun errorDialog() {
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            var icon = R.drawable.ic_badge_error
-            var title = it.title
-            var message = it.message
-            var button = getString(R.string.confirm)
-
-            if (title == "" && message == "") {
-                when (it.code) {
-                    ErrorCode.UNKNOWN_ERROR -> {
-                        icon = R.drawable.ic_badge_no_internet
-                        title = getString(R.string.title_no_network)
-                        message = getString(R.string.message_pls_check_network)
-                        button = getString(R.string.try_again)
-                    }
-                    ErrorCode.TIMEOUT_ERROR -> {
-                        title = getString(R.string.title_timeout)
-                        message = getString(R.string.message_timeout)
-                    }
-                }
-            } else {
-                when(it.code) {
-                    ErrorCode.USER_EXISTS -> {
-                        handleError(icon, title, message, button)
-                        return@subscribe
-                    }
-                    ErrorCode.WRONG_PIN -> {
-                        handleError(icon, title, message, button)
-                        return@subscribe
-                    }
-                }
-            }
-
-            if (systemDialog == null) {
-                systemDialog = SystemDialog.newInstance(icon, title, message, button)
-                systemDialog?.show(supportFragmentManager, systemDialog?.tag)
-                systemDialog?.onConfirmClicked {
-                    systemDialog = null
-                }
-            }
-        }
-    }
-
-    /**
-     * handle to show loading
-     */
-    fun showLoading() {
-        if (loadingDialog == null) {
-            loadingDialog = LoadingDialog()
-            loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable?.dispose()
-        disposable = null
-
-        loadingDialog = null
-        systemDialog = null
-    }
-
-    override fun finish() {
-        super.finish()
-        if (!UtilActivity.isCreated()) {
-            if (animateType == ANIMATE_LEFT) {
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-            } else {
-                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
-            }
-        }
-        UtilActivity.isCreated(false)
     }
 }
