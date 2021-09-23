@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.bnkc.library.data.type.ErrorCode
+import com.bnkc.library.data.type.Loading
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -101,7 +102,9 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      */
     private fun successListener() {
         disposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
-            dismissLoading()
+            if (Loading.Allow.dismiss) {
+                dismissLoading()
+            }
         }
     }
 
@@ -165,7 +168,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     /**
      * handle to show loading
      */
-    fun showLoading() {
+    fun showLoading(isLoading: Boolean) {
+        Loading.Allow.dismiss = isLoading
         if (loadingDialog == null) {
             loadingDialog = LoadingDialog()
             loadingDialog?.show(supportFragmentManager, loadingDialog?.tag)
