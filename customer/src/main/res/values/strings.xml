@@ -144,9 +144,9 @@
     <string name="product_documents">Document</string>
     <string name="product_process">Process</string>
     <string name="product_faqs">FAQs</string>
-    <string name="product_copy_id">•\u0020\u0020Copy of your ID Card</string>
-    <string name="product_copy_family_book">•\u0020\u0020Copy of family book</string>
-    <string name="product_resdient_certification">•\u0020\u0020Resdient Certification</string>
+    <string name="product_copy_id">•\u0020\u0020Copy of ID</string>
+    <string name="product_copy_family_book">•\u0020\u0020Copy of Family book</string>
+    <string name="product_resident_certification">•\u0020\u0020Resident Certification</string>
     <string name="product_bank_statement">•\u0020\u0020Income statement or Bank statement</string>
     <string name="product_visit_bnkc_office">•\u0020\u0020Visit your nearest BNKCL office or our agents</string>
     <string name="product_faq_question_neg">1.\u0020\u0020What is the Interest Rate per Month?</string>

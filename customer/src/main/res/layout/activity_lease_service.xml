@@ -214,13 +214,14 @@
             <com.bnkc.sourcemodule.ui.ValidateButton
                 android:id="@+id/btn_apply_now"
                 android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
+                android:onClick="@{() -> leaseServiceViewModel.goToApplyLease()}"
                 app:buttonText="@string/product_apply_now"
                 app:is_active="true"
-                android:layout_height="50dp"
-                android:onClick="@{() -> leaseServiceViewModel.goToApplyLease()}"
-                />
+                app:textAllCaps="true" />
+
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
