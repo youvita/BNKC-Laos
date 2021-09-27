@@ -219,7 +219,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             }
             R.id.ll_filter_lease -> {
                 listChoiceDialog = ListChoiceDialog.newInstance(
-                    R.drawable.ic_toggle_table_view_on_ico,
+                    R.drawable.ic_badge_list_icon,
                     getString(R.string.lease_account),
                     contractNoList!!,
                     selectedIndex!!

@@ -155,7 +155,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             AppLogin.PIN.code = "N"
-//            Runtime.getRuntime().exit(0)
         }
     }
 

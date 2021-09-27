@@ -12,7 +12,6 @@ import com.mobile.bnkcl.databinding.ItemLeaseLayoutBinding
 class LeaseAdapter :
     BaseAdapter<ItemLeaseLayoutBinding, MyLeasesData, LeaseAdapter.ViewHolder>() {
 
-    private val myLeaseItemList: ArrayList<MyLeasesData> = ArrayList()
     private var productTypeList: ArrayList<CodesData> = ArrayList()
     private var mListener: LeaseItemClickedListener? = null
 
@@ -36,12 +35,6 @@ class LeaseAdapter :
     override fun setBindData(holder: ViewHolder, data: MyLeasesData, position: Int) {
         binding.leaseItem = data
         holder.setBinding(data, position)
-
-        holder.binding.llAddNewLease.visibility =
-            if (data.contractNo.isNullOrEmpty()) View.VISIBLE else View.GONE
-        holder.binding.llLeaseItem.visibility =
-            if (!data.contractNo.isNullOrEmpty()) View.VISIBLE else View.GONE
-
 
         for (i in 0 until productTypeList.size - 1) {
             if (data.leaseType.equals(
@@ -68,11 +61,11 @@ class LeaseAdapter :
             }
         }
 
-        holder.binding.llAddNewLease.setOnClickListener{
+        holder.binding.llAddNewLease.setOnClickListener {
             mListener!!.onAddNewLeaseClicked()
         }
 
-        holder.binding.btnAddLease.setOnClickListener{
+        holder.binding.btnAddLease.setOnClickListener {
             mListener!!.onAddNewLeaseClicked()
         }
     }
@@ -81,6 +74,11 @@ class LeaseAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun setBinding(item: MyLeasesData, position: Int) {
             binding.leaseItem = item
+
+            binding.llAddNewLease.visibility =
+                if (position == itemCount - 1) View.VISIBLE else View.GONE
+            binding.llLeaseItem.visibility =
+                if (position == itemCount - 1) View.GONE else View.VISIBLE
 
             binding.executePendingBindings()
         }

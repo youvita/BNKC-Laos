@@ -272,13 +272,13 @@
                                                 android:text="@string/info_tel" />
 
                                             <TextView
+                                                android:id="@+id/tv_phone_number"
                                                 style="@style/font15_263238_medium"
                                                 android:layout_width="@dimen/width_0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="2"
                                                 android:gravity="end"
-                                                android:maxLines="1"
-                                                android:text="@{profile.phoneNumber}" />
+                                                android:maxLines="1" />
 
                                         </LinearLayout>
 
@@ -370,8 +370,7 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="1"
                                                 android:gravity="end"
-                                                android:maxLines="1"
-                                                android:text="@{profile.accountNumber.isEmpty ? @string/not_available : profile.accountNumber}" />
+                                                android:text="@{profile.myLease.isEmpty ? @string/not_available : profile.getLeaseText}" />
 
                                         </LinearLayout>
 
@@ -463,8 +462,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_weight="3"
-                                                android:gravity="end"
-                                                android:text="@{profile.address.state.toString().isEmpty ? @string/not_available : profile.address.more_info.concat(`, `).concat(profile.address.village.erpCode).concat(`, `).concat(profile.address.district.erpCode).concat(`, `).concat(profile.address.state.erpCode)}" />
+                                                android:gravity="end" />
 
                                         </LinearLayout>
 

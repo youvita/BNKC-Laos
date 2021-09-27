@@ -140,7 +140,7 @@
                     android:id="@+id/cb_etc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/height_5dp"
+                    android:padding="3dp"
                     android:button="@drawable/selector_radio_botton_solid_grey"
                     android:clickable="true"
                     android:checked="@{activity.checked}"

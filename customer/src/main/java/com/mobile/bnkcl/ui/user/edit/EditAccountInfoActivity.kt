@@ -247,7 +247,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             }
             R.id.ll_job_type -> {
                 listChoiceDialog = ListChoiceDialog.newInstance(
-                    R.drawable.ic_toggle_table_view_on_ico,
+                    R.drawable.ic_badge_list_icon,
                     getString(R.string.addition_job_type),
                     jobTypeTitleList!!,
                     selectedIndex!!
@@ -386,6 +386,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             binding.lytAddressInfo.tvVillage.text = profileData!!.address?.village?.alias1
             binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.address!!.more_info
             binding.lytAddressInfo.edtEtc.hint = profileData!!.etcDetailedAddress
+            binding.lytAddressInfo.cbEtc.visibility = View.GONE
             if (profileData!!.edtStatus!!) {
                 binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_green_ico, 0, 0, 0)
             } else {

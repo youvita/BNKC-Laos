@@ -23,9 +23,9 @@ import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityAccountInformationBinding
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.intro.IntroActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
+import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
@@ -93,6 +93,9 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         viewModel.accountInformationLiveData.observe(this) {
             binding.profile = it
             profileData = it
+
+            binding.tvPhoneNumber.text = FormatUtil.getTelFormat(it.phoneNumber!!, 2)
+            setAddress(profileData!!)
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -103,7 +106,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             AppLogin.PIN.code = "N"
-//            Runtime.getRuntime().exit(0)
         }
     }
 
@@ -121,6 +123,9 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         if (intent != null) {
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
+
+            binding.tvPhoneNumber.text = FormatUtil.getTelFormat(profileData?.phoneNumber!!, 2)
+            setAddress(profileData!!)
         }
 
         binding.tvGender.text = ""
@@ -135,6 +140,30 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
     override fun getLayoutId(): Int {
         return R.layout.activity_account_information
+    }
+
+    private fun setAddress(profileData: ProfileData) {
+        if (null != profileData.address) {
+            var moreInfo = ""
+            var state = ""
+            var district = ""
+            var village = ""
+
+            if (null != profileData.address!!.more_info) moreInfo =
+                profileData.address!!.more_info!!
+            if (null != profileData.address!!.state?.alias1) state =
+                profileData.address!!.state?.alias1!!
+            if (null != profileData.address!!.district?.alias1) district =
+                profileData.address!!.district?.alias1!!
+            if (null != profileData.address!!.village?.alias1) village =
+                profileData.address!!.village?.alias1!!
+            if (state.isEmpty()) binding.tvAddress.text =
+                getString(R.string.not_available) else {
+                val address = "$moreInfo, $village, $district, $state"
+                binding.tvAddress.text = address
+            }
+        }
+
     }
 
     override fun onClick(v: View?) {

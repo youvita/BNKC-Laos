@@ -3,6 +3,7 @@ package com.mobile.bnkcl.data.response.user
 import com.google.gson.annotations.SerializedName
 import com.mobile.bnkcl.data.response.user.profile.ProfileAddress
 import java.io.Serializable
+import java.lang.Exception
 
 data class ProfileData(
 
@@ -45,4 +46,19 @@ data class ProfileData(
     @SerializedName("my_leases")
     var myLease: List<MyLeaseData>? = null
 
-) : Serializable
+) : Serializable {
+    fun getLeaseText(): String? {
+        var myLeaseText = ""
+        return try {
+            if (myLease!!.isNotEmpty()) {
+                for (lease in myLease!!) {
+                    myLeaseText = myLeaseText.plus(lease.contractNo).plus("\n")
+                }
+            }
+            myLeaseText.trim { it <= ' ' }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            myLeaseText
+        }
+    }
+}
