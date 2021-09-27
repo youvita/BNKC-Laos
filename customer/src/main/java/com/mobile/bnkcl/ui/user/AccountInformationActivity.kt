@@ -115,9 +115,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             .load(R.drawable.rotate_loading_image)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-        rotation.fillAfter = true
-        binding.ivLoading.startAnimation(rotation)
+
+//        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+//        rotation.fillAfter = true
+//        binding.ivLoading.startAnimation(rotation)
+
         UtilsGlide.loadCircle(this, binding.ivProfile, binding.ivLoading)
 
         if (intent != null) {
@@ -233,10 +235,11 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                             .load(R.drawable.rotate_loading_image)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-                        val rotation =
-                            AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-                        rotation.fillAfter = true
-                        binding.ivLoading.startAnimation(rotation)
+
+//                        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+//                        rotation.fillAfter = true
+//                        binding.ivLoading.startAnimation(rotation)
+
                         UtilsGlide.loadCircle(
                             this@AccountInformationActivity,
                             binding.ivProfile,

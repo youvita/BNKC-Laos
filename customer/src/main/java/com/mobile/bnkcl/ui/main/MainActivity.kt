@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -115,9 +116,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 .load(R.drawable.rotate_loading_image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
-            val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-            rotation.fillAfter = true
-            binding.navMenu.ivLoading.startAnimation(rotation)
+
+//            val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
+//            rotation.fillAfter = true
+//            binding.navMenu.ivLoading.startAnimation(rotation)
+
             binding.navMenu.ivProfile.setImageResource(0)
             UtilsGlide.loadCircle(
                 this@MainActivity,
