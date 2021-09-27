@@ -6,12 +6,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.CheckBox
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
@@ -124,7 +121,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }
         }
 
-        Utils.setHideKeyboard(this, binding.rlSignupInfo)
 
         /**
          * on date of birth click
@@ -922,13 +918,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.lltAdditional.tvCapital.isEnabled = !isEnable
             binding.lltAdditional.edtDetailedAddress.isEnabled = !isEnable
             binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
+            binding.lltAdditional.edtDetailedAddress.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
 
-//            binding.lltAdditional.tvDistrict.isEnabled = !isEnable
-//            binding.lltAdditional.tvVillage.isEnabled = !isEnable
 
         }else{
             binding.lltAdditional.edtEtc.isEnabled = !isEnable
-
             binding.lltAdditional.tvCapital.isEnabled = isEnable
             binding.lltAdditional.tvDistrict.isEnabled = isEnable
             binding.lltAdditional.tvVillage.isEnabled = isEnable
@@ -937,7 +931,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
             binding.lltAdditional.tvDistrict.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
             binding.lltAdditional.tvVillage.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
-
+            binding.lltAdditional.edtDetailedAddress.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
 
         }
 
