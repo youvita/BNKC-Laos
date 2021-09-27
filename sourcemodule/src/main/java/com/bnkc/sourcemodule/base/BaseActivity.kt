@@ -141,8 +141,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
                 } else {
                     handleError(it.code)
-                    return@subscribe
                 }
+                return@subscribe
             }
 
             if (systemDialog == null) {
