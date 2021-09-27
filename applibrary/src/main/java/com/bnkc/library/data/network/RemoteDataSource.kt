@@ -5,8 +5,6 @@
  */
 package com.bnkc.library.data.network
 
-import android.util.Log
-import android.util.Log.e
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.net.ConnectException
-import java.net.HttpURLConnection
 import java.net.UnknownHostException
 
 abstract class RemoteDataSource<T> @MainThread constructor() {
@@ -61,70 +58,24 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                     }
                 }
                 is RetrofitResponse.Error -> {
-                    when (response.code) {
-                        HttpURLConnection.HTTP_UNAUTHORIZED -> {
-                            if (response.errorTitle == "UNAUTHORIZED") {
-                                // Session Expired
-                                withContext(Dispatchers.Main) {
-                                    RxJava.publish(
-                                        RxEvent.SessionExpired(
-                                            response.errorTitle,
-                                            response.errorMessage!!
-                                        )
-                                    )
-                                    RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
-                                }
-                                setValue(
-                                    (Resource.Unauthorized(
-                                        response.errorTitle,
-                                        response.errorMessage!!
-                                    ))
-                                )
-                            } else {
-                                withContext(Dispatchers.Main) {
-                                    RxJava.publish(
-                                        RxEvent.ServerError(
-                                            response.code,
-                                            response.errorTitle!!,
-                                            response.errorMessage!!
-                                        )
-                                    )
-                                    RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
-                                }
-                                setValue(
-                                    Resource.Error(
-                                        response.errorTitle!!,
-                                        response.errorMessage!!,
-                                        response.code
-                                    )
-                                )
-                            }
-                        }
-                        HttpURLConnection.HTTP_INTERNAL_ERROR -> {
-
-                        }
-                        else -> {
-                            withContext(Dispatchers.Main) {
-                                RxJava.publish(
-                                    RxEvent.ServerError(
+                    withContext(Dispatchers.Main) {
+                        RxJava.publish(
+                                RxEvent.ServerError(
                                         response.code,
                                         response.errorTitle!!,
                                         response.errorMessage!!
-                                    )
                                 )
-                                RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
-                            }
-                            setValue(
-                                Resource.Error(
+                        )
+                        RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
+                    }
+                    setValue(
+                            Resource.Error(
                                     response.errorTitle!!,
                                     response.errorMessage!!,
                                     response.code
-                                )
                             )
-                        }
-                    }
+                    )
                 }
-
             }
         }
     }

@@ -113,15 +113,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
     /**
-     * handle catch session expired
-     */
-    private fun sessionExpired() {
-        disposable = RxJava.listen(RxEvent.SessionExpired::class.java).subscribe {
-            handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
-        }
-    }
-
-    /**
      * handle catch server error
      */
     private fun errorDialog() {
@@ -145,23 +136,13 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     }
                 }
             } else {
-                Log.d(">>>>>>", "errorDialog: ${it.code}")
-                handleError(it.code)
-                return@subscribe
-//                when(it.code) {
-//                    ErrorCode.USER_EXISTS -> {
-//                        handleError(it.code)
-//                        return@subscribe
-//                    }
-//                    ErrorCode.USER_NOT_FOUND -> {
-//                        handleError(it.code)
-//                        return@subscribe
-//                    }
-//                    ErrorCode.WRONG_PIN -> {
-//                        handleError(icon, title, message, button)
-//                        return@subscribe
-//                    }
-//                }
+                if (title == "UNAUTHORIZED") {
+                    // handle catch session expired
+                    handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
+                } else {
+                    handleError(it.code)
+                    return@subscribe
+                }
             }
 
             if (systemDialog == null) {
