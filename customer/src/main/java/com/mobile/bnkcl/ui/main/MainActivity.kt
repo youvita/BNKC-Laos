@@ -2,13 +2,13 @@ package com.mobile.bnkcl.ui.main
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -33,7 +33,6 @@ import com.mobile.bnkcl.ui.cscenter.CSCenterActivity
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.intro.IntroActivity
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity
 import com.mobile.bnkcl.ui.main.fragment.mypage.PageFragment
 import com.mobile.bnkcl.ui.main.fragment.office.FindOfficeFragment
@@ -106,6 +105,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
         if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
+            binding.navMenu.tvUserName.text = getString(R.string.nav_user_unknown)
+            binding.navMenu.tvUserId.text = ""
         }
 
         if (AppLogin.PIN.code != "N" && !isGetProfile) {
@@ -117,10 +118,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
 
-//            val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-//            rotation.fillAfter = true
-//            binding.navMenu.ivLoading.startAnimation(rotation)
-
             binding.navMenu.ivProfile.setImageResource(0)
             UtilsGlide.loadCircle(
                 this@MainActivity,
@@ -128,8 +125,39 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 binding.navMenu.ivLoading
             )
         } else if (AppLogin.PIN.code == "N") {
-            binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
+            if (!sharedPrefer.getPrefer(Constants.IMAGE_BITMAP).isNullOrEmpty()) {
+
+                // decode image bitmap as bytes and set image as bitmap
+                val imageAsBytes: ByteArray =
+                    Base64.decode(sharedPrefer.getPrefer(Constants.IMAGE_BITMAP), Base64.DEFAULT)
+                binding.navMenu.ivProfile.setImageBitmap(
+                    BitmapFactory.decodeByteArray(
+                        imageAsBytes,
+                        0,
+                        imageAsBytes.size
+                    )
+                )
+
+                binding.navMenu.tvUserName.text = sharedPrefer.getPrefer("name")
+                binding.navMenu.tvUserId.text = sharedPrefer.getPrefer("account_number")
+
+                setUpLogOutBtn()
+            }
         }
+    }
+
+    private fun setUpLogOutBtn() {
+
+        binding.navMenu.btnSignUp.visibility = View.GONE
+        binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
+        binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.ic_logout_ico,
+            0,
+            0,
+            0
+        )
+        binding.navMenu.vLine.visibility = View.GONE
+
     }
 
     private fun initLiveData() {
@@ -139,20 +167,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = it.accountNumber
 
-            binding.navMenu.btnSignUp.visibility = View.GONE
-            binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
-            binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_logout_ico,
-                0,
-                0,
-                0
-            )
-            binding.navMenu.vLine.visibility = View.GONE
+            sharedPrefer.putPrefer("name", it.name!!)
+            sharedPrefer.putPrefer("account_number", it.accountNumber!!)
+
+            setUpLogOutBtn()
         }
 
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
+            sharedPrefer.remove(Constants.IMAGE_BITMAP)
+            sharedPrefer.remove("name")
+            sharedPrefer.remove("account_number")
 
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -275,7 +301,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v != null) {
-            val intent: Intent
+            var intent: Intent
             when (v.id) {
                 R.id.ll_profile -> {
 
@@ -361,38 +387,32 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 }
                 R.id.btn_login -> {
                     if (viewModel.isLogin) {
-                        if (AppLogin.PIN.code == "N") {
-                            if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
-                                intent = Intent(this@MainActivity, OtpActivity::class.java)
-                                intent.putExtra("pin_action", "login")
+                        val logOutDialog = LogOutDialog()
+                        logOutDialog.onConfirmClickedListener {
+
+                            if (AppLogin.PIN.code == "N") {
+                                RunTimeDataStore.LoginToken.value = ""
+                                sharedPrefer.remove(Constants.USER_ID)
+                                sharedPrefer.remove(Constants.IMAGE_BITMAP)
+                                sharedPrefer.remove("name")
+                                sharedPrefer.remove("account_number")
+
+                                intent = Intent(this, HomeActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
+                                AppLogin.PIN.code = "N"
                             } else {
-                                val loginIntent =
-                                    Intent(this@MainActivity, PinCodeActivity::class.java)
-                                loginIntent.putExtra("pin_action", "login")
-                                loginIntent.putExtra(
-                                    "from",
-                                    LeaseServiceActivity::class.java.simpleName
-                                )
-                                loginIntent.putExtra(
-                                    "username",
-                                    sharedPrefer.getPrefer(Constants.USER_ID)
-                                )
-                                startActivity(loginIntent)
-                            }
-                        } else {
-                            val logOutDialog = LogOutDialog()
-                            logOutDialog.onConfirmClickedListener {
                                 viewModel.logout()
                                 showLoading(true)
                             }
-                            logOutDialog.show(
-                                supportFragmentManager,
-                                logOutDialog.tag
-                            )
                         }
+                        logOutDialog.show(
+                            supportFragmentManager,
+                            logOutDialog.tag
+                        )
+
                     } else {
-                        val intent = Intent(this, OtpActivity::class.java)
+                        intent = Intent(this, OtpActivity::class.java)
                         intent.putExtra("pin_action", "login")
                         startActivity(intent)
                     }

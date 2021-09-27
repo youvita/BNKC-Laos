@@ -52,4 +52,5 @@ object Constants {
 
     // Image Endpoint
     const val IMAGE_URL = "/api/ca/user/profile-image-uri"
+    const val IMAGE_BITMAP = ""
 }

@@ -101,6 +101,9 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
+            sharedPrefer.remove(Constants.IMAGE_BITMAP)
+            sharedPrefer.remove("name")
+            sharedPrefer.remove("account_number")
 
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -115,10 +118,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             .load(R.drawable.loading)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-
-//        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-//        rotation.fillAfter = true
-//        binding.ivLoading.startAnimation(rotation)
 
         UtilsGlide.loadCircle(this, binding.ivProfile, binding.ivLoading)
 
@@ -235,10 +234,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                             .load(R.drawable.loading)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
-
-//                        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-//                        rotation.fillAfter = true
-//                        binding.ivLoading.startAnimation(rotation)
 
                         UtilsGlide.loadCircle(
                             this@AccountInformationActivity,

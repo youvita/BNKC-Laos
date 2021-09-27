@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
@@ -30,7 +29,6 @@ import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingViewModel
-import com.mobile.bnkcl.ui.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -192,9 +190,14 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      * in case user install the app and not yet login
      * sending user push notification without login
      */
-    fun sendPushID(){
+    fun sendPushID() {
         val settingData = SettingData()
-        val deviceInfo = DeviceInfo(RunTimeDataStore.PushId.value, "Android", Build.MODEL, Build.VERSION.SDK_INT.toString())
+        val deviceInfo = DeviceInfo(
+            RunTimeDataStore.PushId.value,
+            "Android",
+            Build.MODEL,
+            Build.VERSION.SDK_INT.toString()
+        )
         settingData.push_alarm_enabled = true
         settingData.device_info = deviceInfo
         settingViewModel.settingData = settingData

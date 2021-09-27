@@ -2,13 +2,17 @@ package com.mobile.bnkcl.utilities
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.util.Base64
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import com.bnkc.library.data.type.RunTimeDataStore
+import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -23,6 +27,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.mobile.bnkcl.R
+import java.io.ByteArrayOutputStream
+
 
 object UtilsGlide {
     private const val radiosCorner = 8
@@ -200,6 +206,25 @@ object UtilsGlide {
                         p3: DataSource?,
                         p4: Boolean
                     ): Boolean {
+
+                        /**
+                         * convert drawable to bitmap
+                         * compress and encodeToString
+                         */
+                        val sharedPrefer = CredentialSharedPrefer(context)
+                        val bitmap: Bitmap = drawableToBitmap(p0!!)!!
+
+                        val stream = ByteArrayOutputStream()
+                        bitmap.compress(
+                            Bitmap.CompressFormat.PNG,
+                            100,
+                            stream
+                        )
+                        val b: ByteArray = stream.toByteArray()
+
+                        val encoded: String = Base64.encodeToString(b, Base64.DEFAULT)
+                        sharedPrefer.putPrefer(Constants.IMAGE_BITMAP, encoded)
+
                         if (view != null) {
                             view.visibility = View.GONE
                         }
@@ -250,14 +275,31 @@ object UtilsGlide {
                         p3: DataSource?,
                         p4: Boolean
                     ): Boolean {
-                        if (hideView != null) {
-                            hideView.visibility = View.GONE
-                        }
                         return false
                     }
                 })
                 .into(into)
+
         }
+    }
+
+
+    /**
+     * convert drawable to bitmap
+     */
+    fun drawableToBitmap(drawable: Drawable): Bitmap? {
+        if (drawable is BitmapDrawable) {
+            return drawable.bitmap
+        }
+        var width = drawable.intrinsicWidth
+        width = if (width > 0) width else 1
+        var height = drawable.intrinsicHeight
+        height = if (height > 0) height else 1
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
     }
 
     fun loadCircle(context: Context?, uri: Uri?, into: ImageView?, view: View?) {

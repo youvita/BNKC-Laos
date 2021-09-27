@@ -169,10 +169,6 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
 
-//        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-//        rotation.fillAfter = true
-//        binding.ivLoading.startAnimation(rotation)
-
         UtilsGlide.loadCircle(
             this@EditAccountInfoActivity,
             binding.imageProfile,
