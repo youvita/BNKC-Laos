@@ -113,7 +113,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             isGetProfile = true
 
             Glide.with(this)
-                .load(R.drawable.rotate_loading_image)
+                .load(R.drawable.loading)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
 

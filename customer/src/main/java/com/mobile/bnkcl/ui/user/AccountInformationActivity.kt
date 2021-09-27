@@ -112,7 +112,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     private fun initView() {
 
         Glide.with(this)
-            .load(R.drawable.rotate_loading_image)
+            .load(R.drawable.loading)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
 
@@ -232,7 +232,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                     isUpdateProfile = result.data!!.getBooleanExtra("IS_UPDATE_PROFILE", false)
                     if (isUpdateProfile) {
                         Glide.with(this)
-                            .load(R.drawable.rotate_loading_image)
+                            .load(R.drawable.loading)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
 

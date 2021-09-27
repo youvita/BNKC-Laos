@@ -165,7 +165,7 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
         Utils.setHideKeyboard(this, binding.parentLayout)
 
         Glide.with(this@EditAccountInfoActivity)
-            .load(R.drawable.rotate_loading_image)
+            .load(R.drawable.loading)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
 
