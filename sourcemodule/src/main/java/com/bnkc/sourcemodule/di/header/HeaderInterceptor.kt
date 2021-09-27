@@ -36,10 +36,17 @@ class HeaderInterceptor {
                     .newBuilder()
                     .header(ACCEPT_LANGUAGE, if (languageCode.isNullOrEmpty()) "lo" else languageCode)
                     .header(X_APP_VERSION, "")
-            when {
-                !RunTimeDataStore.LoginToken.value.isNullOrEmpty() -> {
-                    request.header(AUTHORIZATION, tokenBearer)
-                }
+
+            // auth when endpoint required
+            if (RunTimeDataStore.LoginToken.value.isNotEmpty()){
+                request.header(AUTHORIZATION, tokenBearer)
+            }
+
+            // it's override auth when some endpoint not required
+            if (RunTimeDataStore.BearerEmpty.value.isEmpty()) {
+                request.header(AUTHORIZATION, "")
+
+                RunTimeDataStore.BearerEmpty.value = RunTimeDataStore.BEARER // set default value
             }
             return chain.proceed(request.build())
         })
