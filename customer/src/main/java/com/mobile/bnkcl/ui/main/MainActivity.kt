@@ -108,6 +108,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         }
 
         if (AppLogin.PIN.code != "N" && !isGetProfile) {
+            binding.navMenu.isShowMore = true
             viewModel.getUserProfile()
             isGetProfile = true
 
@@ -125,7 +126,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         } else if (AppLogin.PIN.code == "N") {
 
             binding.navMenu.tvUserName.text = if (sharedPrefer.getPrefer("name").isNullOrBlank()) getString(R.string.nav_user_unknown) else sharedPrefer.getPrefer("name")
-            binding.navMenu.tvUserId.text = if (sharedPrefer.getPrefer("account_number").isNullOrEmpty()) "" else sharedPrefer.getPrefer("account_number")
+            binding.navMenu.tvUserId.text = if (sharedPrefer.getPrefer(Constants.CUST_NO).isNullOrEmpty()) "" else sharedPrefer.getPrefer(Constants.CUST_NO)
             if (sharedPrefer.contain("name")) setUpLogOutBtn()
 
             if (!sharedPrefer.getPrefer(Constants.IMAGE_BITMAP).isNullOrEmpty()) {
@@ -169,18 +170,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
             profileData = it
             binding.navMenu.tvUserName.text = it.name
-            binding.navMenu.tvUserId.text = it.accountNumber
+            binding.navMenu.tvUserId.text = sharedPrefer.getPrefer(Constants.CUST_NO)
 
             sharedPrefer.putPrefer("name", it.name!!)
-            sharedPrefer.putPrefer("account_number", it.accountNumber!!)
         }
 
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
+            sharedPrefer.remove(Constants.CUST_NO)
             sharedPrefer.remove(Constants.IMAGE_BITMAP)
             sharedPrefer.remove("name")
-            sharedPrefer.remove("account_number")
 
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -394,9 +394,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             if (AppLogin.PIN.code == "N") {
                                 RunTimeDataStore.LoginToken.value = ""
                                 sharedPrefer.remove(Constants.USER_ID)
+                                sharedPrefer.remove(Constants.CUST_NO)
                                 sharedPrefer.remove(Constants.IMAGE_BITMAP)
                                 sharedPrefer.remove("name")
-                                sharedPrefer.remove("account_number")
 
                                 intent = Intent(this, HomeActivity::class.java)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

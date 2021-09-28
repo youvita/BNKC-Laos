@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -94,16 +93,16 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             binding.profile = it
             profileData = it
 
-            binding.tvPhoneNumber.text = FormatUtil.getTelFormat(it.phoneNumber!!, 2)
+            binding.tvPhoneNumber.text = FormatUtil.getTel(it.phoneNumber!!)
             setAddress(profileData!!)
         }
 
         viewModel.logoutLiveData.observe(this) {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(Constants.USER_ID)
+            sharedPrefer.remove(Constants.CUST_NO)
             sharedPrefer.remove(Constants.IMAGE_BITMAP)
             sharedPrefer.remove("name")
-            sharedPrefer.remove("account_number")
 
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -125,7 +124,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
 
-            binding.tvPhoneNumber.text = (if (!profileData?.phoneNumber.isNullOrEmpty()) FormatUtil.getTelFormat(profileData?.phoneNumber!!, 2) else "").toString()
+            binding.tvPhoneNumber.text = (if (!profileData?.phoneNumber.isNullOrEmpty()) FormatUtil.getTel(profileData?.phoneNumber!!) else "").toString()
             setAddress(profileData!!)
         }
 

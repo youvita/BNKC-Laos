@@ -13,11 +13,12 @@ class FormatUtil {
 
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
+
     /**
      * from 2020-09-03T11:24:42.024Z to 03-09-20
      * from 20201009 to 09/10/20
      */
-companion object{
+    companion object {
 
         fun formatPhoneNumberMask(phone: String): String? {
             var phone = phone
@@ -35,72 +36,95 @@ companion object{
             }
             return builder.toString()
         }
-//    @JvmStatic
-    fun getDateFormat(inputDate: String?, action: Int): String? {
-        var inputDate = inputDate
-        var stDate = ""
-        val date: Date
-        try {
-            val formatter: DateFormat
-            val newFormatter: DateFormat
-            when (action) {
-                1 -> {
-                    formatter =
-                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-                    date = formatter.parse(inputDate)
-                    newFormatter = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
-                }
-                2 -> {
-                    formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    date = formatter.parse(inputDate)
-                    newFormatter = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
-                }
-                3 -> {
-                    formatter = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
-                    date = formatter.parse(inputDate)
-                    newFormatter = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
-                }
-                4 -> {
-                    formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    if (inputDate == null) {
-                        inputDate = "2020-10-09"
+
+        //    @JvmStatic
+        fun getDateFormat(inputDate: String?, action: Int): String? {
+            var inputDate = inputDate
+            var stDate = ""
+            val date: Date
+            try {
+                val formatter: DateFormat
+                val newFormatter: DateFormat
+                when (action) {
+                    1 -> {
+                        formatter =
+                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                        date = formatter.parse(inputDate)
+                        newFormatter = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
                     }
-                    date = formatter.parse(inputDate)
-                    newFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-                }
-                5 -> {
-                    formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-                    if (inputDate == null) {
-                        inputDate = "2020-10-09"
+                    2 -> {
+                        formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        date = formatter.parse(inputDate)
+                        newFormatter = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
                     }
-                    date = formatter.parse(inputDate)
-                    newFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    3 -> {
+                        formatter = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+                        date = formatter.parse(inputDate)
+                        newFormatter = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
+                    }
+                    4 -> {
+                        formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        if (inputDate == null) {
+                            inputDate = "2020-10-09"
+                        }
+                        date = formatter.parse(inputDate)
+                        newFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                    }
+                    5 -> {
+                        formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                        if (inputDate == null) {
+                            inputDate = "2020-10-09"
+                        }
+                        date = formatter.parse(inputDate)
+                        newFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    }
+                    else -> throw IllegalStateException("Unexpected value: $action")
                 }
-                else -> throw IllegalStateException("Unexpected value: $action")
+                stDate = newFormatter.format(date)
+
+                /* if (inputDate.length() >=24){ //from 2020-09-03T11:24:42.024Z to 03-09-20
+
+                    formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+                    date = formatter.parse(inputDate);
+                    newFormatter  = new SimpleDateFormat("dd-MM-yy", Locale.getDefault());
+
+
+                }else if (inputDate.length()>=10){
+                    formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    date = formatter.parse(inputDate);
+                    newFormatter  = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+                } else{ //from 20201009 to 09/10/20
+                    formatter = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+                    date = formatter.parse(inputDate);
+                    newFormatter  = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+                }*/stDate = newFormatter.format(date)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            stDate = newFormatter.format(date)
-
-            /* if (inputDate.length() >=24){ //from 2020-09-03T11:24:42.024Z to 03-09-20
-
-                formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-                date = formatter.parse(inputDate);
-                newFormatter  = new SimpleDateFormat("dd-MM-yy", Locale.getDefault());
-
-
-            }else if (inputDate.length()>=10){
-                formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                date = formatter.parse(inputDate);
-                newFormatter  = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
-            } else{ //from 20201009 to 09/10/20
-                formatter = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-                date = formatter.parse(inputDate);
-                newFormatter  = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
-            }*/stDate = newFormatter.format(date)
-        } catch (e: Exception) {
-            e.printStackTrace()
+            return stDate
         }
-        return stDate
-    }
+
+        fun getTel(tel: String): String {
+            var result: String? = ""
+            var tmp1 = ""
+            val tmp = tel.replace("-", "").substring(1)
+            var i = 0
+            while (i < tmp.length) {
+                //023478327
+                if (i == 3) {
+                    tmp1 += tmp.substring(0, i) + "-"
+                } else if (i == 6) {
+                    tmp1 += tmp.substring(3, i + 1) + "-"
+                } else if (i == 9) {
+                    tmp1 += tmp.substring(7, i + 1)
+                } else if (i == tmp.length - 1) {
+                    tmp1 += tmp.substring(8)
+                }
+                i++
+            }
+            result = "+856-".plus(tmp1)
+            return result
+        }
 
         fun getTelFormat(tel: String, action: Int): String? {
             var result: String? = ""
@@ -170,11 +194,10 @@ companion object{
                     } else {
                         result = "0" + tel.substring(6)
                     }
-                }
-                else if (tel[0] == '0') { //024 900 135
+                } else if (tel[0] == '0') { //024 900 135
                     result = tel
                 }
-                2 -> if (tel.contains("-")){
+                2 -> if (tel.contains("-")) {
                     tmp = tel.replace("-", "").substring(1)
                     var i = 0
                     while (i < tmp.length) {
@@ -183,17 +206,15 @@ companion object{
                             tmp1 += tmp.substring(0, i) + "-"
                         } else if (i == 5) {
                             tmp1 += tmp.substring(2, i) + "-"
-                        }
-                        else if (i == 8) {
+                        } else if (i == 8) {
                             tmp1 += tmp.substring(5, i) + "-"
-                        }
-                        else if (i == tmp.length - 1) {
+                        } else if (i == tmp.length - 1) {
                             tmp1 += tmp.substring(8)
                         }
                         i++
                     }
                     result = "+856 $tmp1"
-                }else{
+                } else {
                     tmp = tel.substring(1)
                     result = "+856 $tmp"
                 }
@@ -387,11 +408,9 @@ companion object{
                 tmp1 += tmp.substring(0, i) + "-"
             } else if (i == 5) {
                 tmp1 += tmp.substring(2, i) + "-"
-            }
-            else if (i == 8) {
+            } else if (i == 8) {
                 tmp1 += tmp.substring(5, i) + "-"
-            }
-            else if (i == tmp.length - 1) {
+            } else if (i == tmp.length - 1) {
                 tmp1 += tmp.substring(8)
             }
             i++

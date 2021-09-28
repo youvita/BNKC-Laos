@@ -10,6 +10,7 @@ import com.bnkc.library.data.type.AppLogin
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
+import com.bnkc.sourcemodule.app.Constants.CUST_NO
 import com.bnkc.sourcemodule.app.Constants.USER_ID
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
@@ -193,6 +194,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             if (it.cust_no != null || it.cust_no != null) {
                 RunTimeDataStore.LoginToken.value = it.token!!
                 sharedPrefer.putPrefer(USER_ID, username)
+                sharedPrefer.putPrefer(CUST_NO, it.cust_no!!)
                 AppLogin.PIN.code = "Y"
                 if (from.isEmpty()) {
                     val intent = Intent(this, MainActivity::class.java)

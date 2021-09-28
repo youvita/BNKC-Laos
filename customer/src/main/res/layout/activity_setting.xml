@@ -193,10 +193,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/margin_10dp"
-                                android:src="@drawable/right_red_arrow_ico"
+                                android:src="@drawable/ic_more_arrow_ico"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                tools:ignore="ContentDescription" />
+                                tools:ignore="ContentDescription"
+                                app:tint="@color/colorPrimary" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,6 +12,7 @@ object Constants {
 
     // Login info
     const val USER_ID = "USER_ID"
+    const val CUST_NO = "CUST_NO"
 //    const val KEY_TOKEN = "TOKEN"
     const val SESSION_ID = "SESSION_ID"
 

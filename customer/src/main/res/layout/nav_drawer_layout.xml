@@ -21,6 +21,10 @@
             name="profile"
             type="com.mobile.bnkcl.data.response.user.ProfileData" />
 
+        <variable
+            name="isShowMore"
+            type="Boolean" />
+
     </data>
 
     <ScrollView
@@ -66,7 +70,6 @@
                         android:gravity="center_vertical"
                         android:paddingStart="0dp"
                         android:paddingTop="@dimen/padding_21dp"
-                        android:paddingEnd="@dimen/padding_21dp"
                         android:paddingBottom="@dimen/padding_21dp">
 
                         <RelativeLayout
@@ -99,16 +102,36 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/tv_user_name"
-                                style="@style/font_18_263238_bold"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/margin_5dp"
-                                android:ellipsize="end"
-                                android:gravity="center_vertical"
-                                android:maxLines="2"
-                                tools:text="@string/nav_user_unknown" />
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_user_name"
+                                    style="@style/font_18_263238_bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="2"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:text="@string/nav_user_unknown" />
+
+                                <ImageView
+                                    android:id="@+id/imageView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_more_arrow_ico"
+                                    android:visibility="@{isShowMore.equals(true) ? View.VISIBLE : View.GONE}"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="ContentDescription" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
                                 style="@style/font13_263238_regular"
