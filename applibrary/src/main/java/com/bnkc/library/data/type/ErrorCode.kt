@@ -8,7 +8,7 @@ object ErrorCode {
 
     const val SERVICE_ERROR = 102
 
-    const val UNAUTHORIZED = 401
+    const val UNAUTHORIZED = "UNAUTHORIZED"
 
     const val USER_EXISTS = "USER_EXISTS"
 
