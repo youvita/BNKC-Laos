@@ -141,7 +141,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     ErrorCode.USER_NOT_FOUND ,
                     ErrorCode.BAD_CREDENTIALS,
                     ErrorCode.INCORRECT_PASSWORD-> {
-                        handleError(icon, title)
+                        handleError(title, message)
                         return@subscribe
                     }
                     ErrorCode.UNAUTHORIZED -> {

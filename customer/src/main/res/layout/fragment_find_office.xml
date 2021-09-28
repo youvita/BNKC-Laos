@@ -90,7 +90,7 @@
             app:shadowSide="all"
             android:layout_marginLeft="11dp"
             android:layout_marginRight="11dp"
-            android:layout_marginTop="115dp"
+            android:layout_marginTop="130dp"
             android:layout_marginBottom="-10dp"
             >
             <TextView

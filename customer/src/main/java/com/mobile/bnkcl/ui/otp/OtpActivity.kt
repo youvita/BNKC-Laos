@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.ErrorCode
+import com.bnkc.library.data.type.Loading
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
@@ -72,7 +73,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             val inputOtp =
                 s.toString().trim { it <= ' ' }.replace("-".toRegex(), "")
             if (inputOtp.length == 6) {
-                showLoading(true)
+                showLoading(false)
                 val otp: String =
                     binding.edtOtp.text.toString().trim().replace("-", "")
 //                    binding.otpViewModel.getVerifyOTPModel().setPin(otp)
@@ -256,6 +257,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun observeData(){
         viewModel.preloginLiveData.observe(this){
             Log.d("nng", it.toString())
+            Loading.Allow.dismiss = true
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)
@@ -263,6 +265,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
         viewModel.preSignUpLiveData.observe(this){
             Log.d("nng", it.toString())
+            Loading.Allow.dismiss = true
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.cbAgreement.isEnabled = true

@@ -14,10 +14,11 @@ import android.renderscript.ScriptIntrinsicBlur
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import com.mobile.bnkcl.R
 
 
-class BlurringView(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
+class BlurringView(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
     constructor(context: Context) : this(context, null) {}
 
     fun setBlurredView(blurredView: View?) {

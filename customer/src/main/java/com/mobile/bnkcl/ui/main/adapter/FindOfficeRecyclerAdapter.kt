@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -100,6 +101,7 @@ class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : B
             intent.putExtra("branch_id", data.branch_id)
             context?.startActivity(intent)
         }
+        Log.d(">>>>>>", "setBindData: " + FormatUtil.getTelFormat(data.tel!!, 2)!!)
         holder.binding.llContact.setOnClickListener {
             twoButtonDialog = TwoButtonDialog.newInstance(
                 R.drawable.ic_badge_call_now,

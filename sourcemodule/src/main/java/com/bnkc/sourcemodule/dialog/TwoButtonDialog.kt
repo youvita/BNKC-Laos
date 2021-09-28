@@ -38,9 +38,9 @@ class TwoButtonDialog : BaseDialogFragment<DialogTwoButtonBinding>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imgTitle.background = ContextCompat.getDrawable(view.context, arguments?.getInt(
+        binding.imgTitle.setImageDrawable(ContextCompat.getDrawable(view.context, arguments?.getInt(
             ICON
-        )!!)
+        )!!))
         binding.errorTitle = arguments?.getString(TITLE)
         binding.errorMessage = arguments?.getString(MESSAGE)
         binding.leftLabel = arguments?.getString(LEFT)

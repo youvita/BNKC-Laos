@@ -170,24 +170,32 @@ companion object{
                     } else {
                         result = "0" + tel.substring(6)
                     }
-                } else if (tel[0] == '0') { //024 900 135
+                }
+                else if (tel[0] == '0') { //024 900 135
                     result = tel
                 }
-                2 -> {
-                    tmp = tel.substring(1)
+                2 -> if (tel.contains("-")){
+                    tmp = tel.replace("-", "").substring(1)
                     var i = 0
                     while (i < tmp.length) {
                         //023478327
                         if (i == 2) {
-                            tmp1 += tmp.substring(0, i) + " "
+                            tmp1 += tmp.substring(0, i) + "-"
                         } else if (i == 5) {
-                            tmp1 += tmp.substring(2, i) + " "
-                        } else if (i == tmp.length - 1) {
-                            tmp1 += tmp.substring(5) + " "
+                            tmp1 += tmp.substring(2, i) + "-"
+                        }
+                        else if (i == 8) {
+                            tmp1 += tmp.substring(5, i) + "-"
+                        }
+                        else if (i == tmp.length - 1) {
+                            tmp1 += tmp.substring(8)
                         }
                         i++
                     }
                     result = "+856 $tmp1"
+                }else{
+                    tmp = tel.substring(1)
+                    result = "+856 $tmp"
                 }
                 3 -> {
                     var i = 0
@@ -370,7 +378,7 @@ companion object{
 
     fun getTel(tel: String): String? {
         var result: String? = ""
-        result = "(+856) ".plus(tel.substring(1))
+        result = "(+856) ".plus(getTelFormat(tel, 2))
         return result
     }
 
