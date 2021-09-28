@@ -111,8 +111,11 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("currencyFormat")
     fun setCurrencyFormat(textView: TextView, str: String?) {
-        if (str == null) return
-        textView.text = FormatUtils.getNumberFormat(textView.context, str.split(" ")[1])
+        textView.text = str?.let {
+            FormatUtils.getNumberFormat(textView.context,
+                it
+            ).plus(" " + textView.context.getString(R.string.currency_kip))
+        }
     }
 
     @JvmStatic

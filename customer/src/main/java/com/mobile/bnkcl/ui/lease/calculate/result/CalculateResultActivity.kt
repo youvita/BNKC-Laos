@@ -142,7 +142,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Principal
                 val footer_2 = TextView(this)
-                footer_2.text = FormatUtils.getNumberFormat(this, leaseCalResponse.total_principal_paid!!)
+                footer_2.text = FormatUtils.getNumberFormatWithoutCurrency(this, leaseCalResponse.total_principal_paid!!)
                 footer_2.setTextColor(Color.parseColor("#050A19"))
                 footer_2.gravity = Gravity.CENTER
                 footer_2.typeface = numberFaceBold
@@ -151,7 +151,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Interest rate
                 val footer_3 = TextView(this)
-                footer_3.text = FormatUtils.getNumberFormat(this, leaseCalResponse.total_interest_paid!!)
+                footer_3.text = FormatUtils.getNumberFormatWithoutCurrency(this, leaseCalResponse.total_interest_paid!!)
                 footer_3.setTextColor(Color.parseColor("#050A19"))
                 footer_3.gravity = Gravity.CENTER
                 footer_3.typeface = numberFaceBold
@@ -160,7 +160,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Repayment
                 val footer_4 = TextView(this)
-                footer_4.text = FormatUtils.getNumberFormat(this, leaseCalResponse.monthly_repayment!!)
+                footer_4.text = FormatUtils.getNumberFormatWithoutCurrency(this, leaseCalResponse.monthly_repayment!!)
                 footer_4.setTextColor(Color.parseColor("#050A19"))
                 footer_4.gravity = Gravity.CENTER
                 footer_4.typeface = numberFaceBold
@@ -200,7 +200,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Principal
                 val t2v = TextView(this)
-                t2v.text = FormatUtils.getNumberFormat(this, dataObj.principal.toString())
+                t2v.text = FormatUtils.getNumberFormatWithoutCurrency(this, dataObj.principal.toString())
                 t2v.setTextColor(Color.parseColor("#050A19"))
                 t2v.gravity = Gravity.CENTER
                 t2v.textSize = 12f
@@ -210,7 +210,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Interest rate
                 val t3v = TextView(this)
-                t3v.text = FormatUtils.getNumberFormat(this, dataObj.interest.toString())
+                t3v.text = FormatUtils.getNumberFormatWithoutCurrency(this, dataObj.interest.toString())
                 t3v.setTextColor(Color.parseColor("#050A19"))
                 t3v.typeface = numberFace
                 t3v.textSize = 12f
@@ -220,7 +220,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Repayment
                 val t4v = TextView(this)
-                t4v.text = FormatUtils.getNumberFormat(this, dataObj.repayment.toString())
+                t4v.text = FormatUtils.getNumberFormatWithoutCurrency(this, dataObj.repayment.toString())
                 t4v.setTextColor(Color.parseColor("#050A19"))
                 t4v.typeface = numberFace
                 t4v.textSize = 12f
@@ -230,7 +230,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
 
                 //Balance
                 val t5v = TextView(this)
-                t5v.text = FormatUtils.getNumberFormat(this, dataObj.balance.toString())
+                t5v.text = FormatUtils.getNumberFormatWithoutCurrency(this, dataObj.balance.toString())
                 t5v.setTextColor(Color.parseColor("#050A19"))
                 t5v.typeface = numberFace
                 t5v.textSize = 12f

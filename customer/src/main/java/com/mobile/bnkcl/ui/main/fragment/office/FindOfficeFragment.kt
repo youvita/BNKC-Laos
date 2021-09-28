@@ -59,7 +59,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
             if (objects != null && objects!!.size > 0) {
 
                 listChoiceDialog = ListChoiceDialog.newInstance(
-                    R.drawable.ic_badge_error,
+                    R.drawable.ic_badge_general,
                     getString(R.string.area),
                     viewModel.setUpAreaName(objects!!),
                     selectedItem
