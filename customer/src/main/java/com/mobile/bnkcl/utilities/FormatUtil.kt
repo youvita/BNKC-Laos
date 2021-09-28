@@ -378,7 +378,25 @@ companion object{
 
     fun getTel(tel: String): String? {
         var result: String? = ""
-        result = "(+856) ".plus(getTelFormat(tel, 2))
+        var tmp1 = ""
+        var tmp = tel.replace("-", "").substring(1)
+        var i = 0
+        while (i < tmp.length) {
+            //023478327
+            if (i == 2) {
+                tmp1 += tmp.substring(0, i) + "-"
+            } else if (i == 5) {
+                tmp1 += tmp.substring(2, i) + "-"
+            }
+            else if (i == 8) {
+                tmp1 += tmp.substring(5, i) + "-"
+            }
+            else if (i == tmp.length - 1) {
+                tmp1 += tmp.substring(8)
+            }
+            i++
+        }
+        result = "(+856) ".plus(tmp1)
         return result
     }
 
