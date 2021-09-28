@@ -111,8 +111,8 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         }
         binding.llRepaymentTerm.setOnClickListener {
             listChoiceDialog = ListChoiceDialog.newInstance(
-                R.drawable.ic_badge_error,
-                getString(R.string.area),
+                R.drawable.ic_badge_general,
+                getString(R.string.repayment_term),
                 viewModel.repaymentData!!,
                 selectedItem
             )

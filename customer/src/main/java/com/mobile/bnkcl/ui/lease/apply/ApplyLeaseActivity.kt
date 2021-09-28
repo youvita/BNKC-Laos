@@ -170,7 +170,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 "product_type" -> {
                     listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_error,
+                        R.drawable.ic_badge_general,
                         getString(R.string.lease_product_type),
                         viewModel.productTypes!!,
                         selectedItem
@@ -229,8 +229,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 "brand" -> {
                     listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.lease_product_type),
+                        R.drawable.ic_badge_general,
+                        getString(R.string.name_of_brand),
                         viewModel.brandData!!,
                         selectedBrandItem
                     )
@@ -295,8 +295,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 "type" ->{
                     listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.lease_product_type),
+                        R.drawable.ic_badge_general,
+                        getString(R.string.name_of_type),
                         viewModel.typeData!!,
                         selectedTypeItem
                     )
@@ -347,8 +347,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
                 "model" -> {
                     listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.lease_product_type),
+                        R.drawable.ic_badge_general,
+                        getString(R.string.name_of_model),
                         viewModel.modelData!!,
                         selectedModelItem
                     )
@@ -400,7 +400,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                 "repayment_term" -> {
                     listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_error,
+                        R.drawable.ic_badge_general,
                         getString(R.string.repayment_term),
                         viewModel.repaymentData!!,
                         repaymentSelected
