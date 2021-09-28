@@ -61,7 +61,10 @@ dependencies {
     // retrofit
     implementation deps.retrofit.runtime
     implementation deps.retrofit.converter_gson
+
+    // okhttp
     implementation deps.okhttp.okhttp3_interceptor
+    implementation deps.okhttp.okhttp3_urlconnection
     implementation deps.okhttp.okhttp3
 
     // coroutine

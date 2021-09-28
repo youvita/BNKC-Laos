@@ -10,9 +10,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
+import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import java.net.CookieManager
+import java.net.CookiePolicy
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -53,13 +56,23 @@ class HeaderInterceptor {
         return logging
     }
 
+    @Provides
+    @Singleton
+    fun provideCookieJar(): CookieManager {
+        val cookieManager = CookieManager()
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ORIGINAL_SERVER)
+        return cookieManager
+    }
+
     @AuthInterceptorOkHttpClient
     @Provides
     fun provideAuthInterceptorOkHttpClient(
             logging: HttpLoggingInterceptor,
-            header: Interceptor
+            header: Interceptor,
+            cookie: CookieManager
     ): OkHttpClient {
         return OkHttpClient.Builder()
+                .cookieJar(JavaNetCookieJar(cookie))
                 .addInterceptor(header)
                 .addInterceptor(logging)
                 .retryOnConnectionFailure(true)

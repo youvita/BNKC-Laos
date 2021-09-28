@@ -40,6 +40,7 @@ deps.retrofit = retrofit
 
 def okhttp = [:]
 okhttp.okhttp3_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+okhttp.okhttp3_urlconnection = "com.squareup.okhttp3:okhttp-urlconnection:$versions.okhttp"
 okhttp.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp"
 deps.okhttp = okhttp
 
