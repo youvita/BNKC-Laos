@@ -146,7 +146,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     }
                     ErrorCode.UNAUTHORIZED -> {
                         // handle catch session expired
-                        handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
+                        handleSessionExpired(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
                         return@subscribe
                     }
                 }
