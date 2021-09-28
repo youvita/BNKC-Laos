@@ -500,18 +500,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
-//    override fun handleError(icon: Int, title: String, message: String, button: String) {
-//        super.handleError(icon, title, message, button)
-//        systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))
-//        systemDialog.show(supportFragmentManager, systemDialog.tag)
-//        systemDialog.onConfirmClicked {
-//            val intent = Intent(this , PinCodeActivity::class.java)
-//            intent.putExtra("pin_action", "login")
-//            intent.putExtra("username", viewModel.phoneNumber)
-//            startActivity(intent)
-//        }
-//    }
-
     override fun handleError(code: Any, smg :String) {
         super.handleError(code,smg)
         when(code){

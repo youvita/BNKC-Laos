@@ -139,10 +139,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 if (title == "UNAUTHORIZED") {
                     // handle catch session expired
                     handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
+
                 } else {
-                    handleError(it.title, it.message)
+                    when(it.title) {
+                        ErrorCode.USER_EXISTS,
+                        ErrorCode.USER_NOT_FOUND ,
+                        ErrorCode.BAD_CREDENTIALS,
+                        ErrorCode.INCORRECT_PASSWORD-> {
+                            handleError(icon, title)
+                            return@subscribe
+                        }
+                    }
                 }
-                return@subscribe
             }
 
             if (systemDialog == null) {
