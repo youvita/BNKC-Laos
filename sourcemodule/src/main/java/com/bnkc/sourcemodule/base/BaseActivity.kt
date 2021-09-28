@@ -136,19 +136,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     }
                 }
             } else {
-                if (title == "UNAUTHORIZED") {
-                    // handle catch session expired
-                    handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
-
-                } else {
-                    when(it.title) {
-                        ErrorCode.USER_EXISTS,
-                        ErrorCode.USER_NOT_FOUND ,
-                        ErrorCode.BAD_CREDENTIALS,
-                        ErrorCode.INCORRECT_PASSWORD-> {
-                            handleError(icon, title)
-                            return@subscribe
-                        }
+                when(it.title) {
+                    ErrorCode.USER_EXISTS,
+                    ErrorCode.USER_NOT_FOUND ,
+                    ErrorCode.BAD_CREDENTIALS,
+                    ErrorCode.INCORRECT_PASSWORD-> {
+                        handleError(icon, title)
+                        return@subscribe
+                    }
+                    ErrorCode.UNAUTHORIZED -> {
+                        // handle catch session expired
+                        handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
+                        return@subscribe
                     }
                 }
             }
