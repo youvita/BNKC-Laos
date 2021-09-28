@@ -319,11 +319,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="visible"
-                    android:gravity="bottom"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginRight="21dp">
 
                     <LinearLayout
                         android:id="@+id/ll_agreement"
@@ -337,8 +335,9 @@
                             android:id="@+id/cb_agreement"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:button="@drawable/selector_radio_botton_solid_grey"
-                            android:layout_marginEnd="10dp"
+                            android:button="@drawable/selector_radio_otp"
+                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:layout_marginEnd="@dimen/padding_10dp"
                             android:clickable="true"
                             android:enabled="false"
                             android:checked="@{otpViewModel.checked}"
@@ -348,11 +347,9 @@
                             android:id="@+id/tv_agree"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
                             android:text="@string/term_and_condition"
                             style="@style/font15_cfd8dc_regular_agreement"
                             android:onClick="@{(v) -> otpViewModel.agreementViewClick()}"/>
-
 
                     </LinearLayout>
 
