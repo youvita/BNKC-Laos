@@ -14,7 +14,6 @@ import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,8 +21,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseStorageActivity
@@ -151,8 +148,10 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
                 }
             }
 
-            binding.lytAddressInfo.edtBankName.setText(profileData!!.bankName.toString())
-            binding.lytAddressInfo.edtAccountNumber.setText(profileData!!.accountNumber.toString())
+            with(binding) {
+                lytAddressInfo.edtBankName.setText(if (profileData?.bankName.isNullOrEmpty()) "" else profileData!!.bankName.toString())
+                lytAddressInfo.edtAccountNumber.setText(if (profileData?.accountNumber.isNullOrEmpty()) "" else profileData!!.accountNumber.toString())
+            }
 
             if (profileData!!.myLease!!.isNotEmpty() && profileData!!.myLease != null) {
                 binding.edtNaLease.visibility = View.GONE
@@ -287,13 +286,13 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     }
 
     private fun validateButton() {
-        if (binding.lytAddressInfo.edtBankName.text!!.isEmpty()
+        if (isUpdateOnlyImage!!) {
+            binding.btnSave.setActive(true)
+        } else if (binding.lytAddressInfo.edtBankName.text!!.isEmpty()
             || binding.lytAddressInfo.edtAccountNumber.text!!.isEmpty()
             || binding.lytAddressInfo.tvJobType.text!!.isEmpty()
         ) {
             binding.btnSave.setActive(false)
-        } else if (isUpdateInfo!! || isUpdateOnlyImage!!) {
-            binding.btnSave.setActive(true)
         } else {
             binding.btnSave.setActive(true)
         }
@@ -383,12 +382,23 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             binding.lytAddressInfo.tvDistrict.text = profileData!!.address?.district?.alias1
             binding.lytAddressInfo.tvVillage.text = profileData!!.address?.village?.alias1
             binding.lytAddressInfo.edtDetailedAddress.hint = profileData!!.address!!.more_info
-            binding.lytAddressInfo.edtEtc.hint = profileData!!.etcDetailedAddress
+            binding.lytAddressInfo.edtEtc.hint =
+                if (profileData!!.etcDetailedAddress.isNullOrEmpty()) "" else profileData!!.etcDetailedAddress
             binding.lytAddressInfo.cbEtc.visibility = View.GONE
             if (profileData!!.edtStatus!!) {
-                binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_green_ico, 0, 0, 0)
+                binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_check_green_ico,
+                    0,
+                    0,
+                    0
+                )
             } else {
-                binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_ico, 0, 0, 0)
+                binding.lytAddressInfo.tvEtc.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_check_ico,
+                    0,
+                    0,
+                    0
+                )
             }
         }
     }

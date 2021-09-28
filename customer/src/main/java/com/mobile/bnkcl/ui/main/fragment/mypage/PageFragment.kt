@@ -431,60 +431,63 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         length: Int,
         position: Int
     ) {
-        container.removeAllViews()
-        for (i in 0 until length) {
-            val view = View(requireActivity().applicationContext)
-            val size = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                7f,
-                resources.displayMetrics
-            )
-            val margin = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                5f,
-                resources.displayMetrics
-            )
-            val marginTop = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                15f,
-                resources.displayMetrics
-            )
-            val marginBottom = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                21f,
-                resources.displayMetrics
-            )
-            val params =
-                LinearLayout.LayoutParams(size.toInt(), size.toInt())
-            params.setMargins(0, marginTop.toInt(), margin.toInt(), marginBottom.toInt())
-            view.layoutParams = params
-            view.background =
-                if (i == position) ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.circle_000000, null
-                ) else ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.circle_cfd8dc, null
+
+        if (activity != null && isAdded) {
+            container.removeAllViews()
+            for (i in 0 until length) {
+                val view = View(requireActivity().applicationContext)
+                val size = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    7f,
+                    resources.displayMetrics
                 )
-            val textView = TextView(requireActivity().applicationContext)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                textView.text = Html.fromHtml("&#8226;", Html.FROM_HTML_MODE_LEGACY)
-            } else {
+                val margin = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    5f,
+                    resources.displayMetrics
+                )
+                val marginTop = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    15f,
+                    resources.displayMetrics
+                )
+                val marginBottom = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    21f,
+                    resources.displayMetrics
+                )
+                val params =
+                    LinearLayout.LayoutParams(size.toInt(), size.toInt())
+                params.setMargins(0, marginTop.toInt(), margin.toInt(), marginBottom.toInt())
+                view.layoutParams = params
+                view.background =
+                    if (i == position) ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.circle_000000, null
+                    ) else ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.circle_cfd8dc, null
+                    )
+                val textView = TextView(requireActivity().applicationContext)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    textView.text = Html.fromHtml("&#8226;", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    textView.text = Html.fromHtml("&#8226;", Html.FROM_HTML_MODE_LEGACY)
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        textView.text = Html.fromHtml("&#8226;", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    }
                 }
+                textView.textSize = 25f
+                textView.background =
+                    if (i == position) ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.circle_000000,
+                        null
+                    ) else ResourcesCompat.getDrawable(
+                        resources, R.drawable.circle_cfd8dc, null
+                    )
+                container.addView(view)
             }
-            textView.textSize = 25f
-            textView.background =
-                if (i == position) ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.circle_000000,
-                    null
-                ) else ResourcesCompat.getDrawable(
-                    resources, R.drawable.circle_cfd8dc, null
-                )
-            container.addView(view)
+            container.postInvalidate()
         }
-        container.postInvalidate()
     }
 }

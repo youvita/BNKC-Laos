@@ -125,7 +125,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
 
-            binding.tvPhoneNumber.text = FormatUtil.getTelFormat(profileData?.phoneNumber!!, 2)
+            binding.tvPhoneNumber.text = (if (!profileData?.phoneNumber.isNullOrEmpty()) FormatUtil.getTelFormat(profileData?.phoneNumber!!, 2) else "").toString()
             setAddress(profileData!!)
         }
 

@@ -77,11 +77,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         R.drawable.selector_tab_find_office
     )
 
-    private var profileData: ProfileData? = ProfileData()
+    private var profileData: ProfileData? = null
     private var isUpdateProfile: Boolean = false
     private var isGetProfile: Boolean = false
-    private val role: Int = 1
-    private var lastIndex: Int = 0
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
@@ -102,9 +100,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     }
 
     private fun requestProfile() {
-
-        Log.d(">>>", "USER_ID: " + sharedPrefer.getPrefer(Constants.USER_ID))
-        Log.d(">>>", "AppLogin: " + AppLogin.PIN.code)
 
         if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
@@ -328,9 +323,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             startActivity(loginIntent)
                         }
                     } else {
-                        intent = Intent(this, AccountInformationActivity::class.java)
-                        intent.putExtra("ACCOUNT_INFO", profileData)
-                        resultLauncher.launch(intent)
+                        if (profileData != null) {
+                            intent = Intent(this, AccountInformationActivity::class.java)
+                            intent.putExtra("ACCOUNT_INFO", profileData)
+                            resultLauncher.launch(intent)
+                        }
                     }
                 }
                 R.id.ll_notice -> {

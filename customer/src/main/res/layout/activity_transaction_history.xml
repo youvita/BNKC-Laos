@@ -19,6 +19,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_f5f7fc"
@@ -152,6 +153,7 @@
                         android:layout_gravity="center"
                         android:background="@color/color_ffffff"
                         android:gravity="center"
+                        android:layout_marginBottom="100dp"
                         android:orientation="vertical"
                         android:visibility="gone"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior">
