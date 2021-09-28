@@ -512,8 +512,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 //        }
 //    }
 
-    override fun handleError(code: Int) {
-        super.handleError(code)
+    override fun handleError(code: Any, smg :String) {
+        super.handleError(code,smg)
         when(code){
             ErrorCode.USER_EXISTS -> {
                 systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))

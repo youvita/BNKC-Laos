@@ -69,7 +69,7 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun preResetPassword(){
         viewModelScope.launch {
             userRepo.preChangePassword(preChangeRequest).onEach { resource ->
-                _preResetMuLiveData.value = resource.data
+                if (resource.data != null)_preResetMuLiveData.value = resource.data
             }.launchIn(viewModelScope)
         }
     }

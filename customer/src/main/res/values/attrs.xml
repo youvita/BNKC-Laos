@@ -4,6 +4,24 @@
     <attr name="pf_delete_button" format="reference|integer"/>
     <attr name="pf_code_view" format="reference|integer"/>
 
+    <declare-styleable name="BlurLayout">
+        <attr name="blk_downscaleFactor" format="float" />
+        <attr name="blk_blurRadius" format="integer" />
+        <attr name="blk_fps" format="integer" />
+        <attr name="blk_cornerRadius" format="dimension" />
+        <attr name="blk_alpha" format="float" />
+    </declare-styleable>
+
+    <integer name="default_blur_radius">15</integer>
+    <integer name="default_downsample_factor">8</integer>
+    <color name="default_overlay_color">#AAFFFFFF</color>
+
+    <declare-styleable name="PxBlurringView">
+        <attr name="blurRadius" format="integer"/>
+        <attr name="downsampleFactor" format="integer"/>
+        <attr name="overlayColor" format="color"/>
+    </declare-styleable>
+
     <declare-styleable name="PinView">
         <attr name="titleName" format="string" />
         <attr name="titleTextColor" format="color" />

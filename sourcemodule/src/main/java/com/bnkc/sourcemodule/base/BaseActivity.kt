@@ -65,7 +65,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      */
     open fun handleError(icon: Int, title: String, message: String, button: String) {}
 
-    open fun handleError(code : Int) {}
+    open fun handleError(code : Any, smg : String) {}
 
     /**
      * handle session expired override method
@@ -140,7 +140,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                     // handle catch session expired
                     handleError(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
                 } else {
-                    handleError(it.code)
+                    handleError(it.title, it.message)
                 }
                 return@subscribe
             }

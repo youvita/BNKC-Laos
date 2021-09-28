@@ -168,7 +168,7 @@
     <string name="pin_12">ທ່ານໄດ້ຕື່ມລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງສູງສຸດແລ້ວ. ກະລຸນາຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>
     <string name="pin_14">ລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງ, ກະລຸນາລອງໃໝ່ອິກຄັ້ງ</string>
     <string name="pin_10">Confirm password doesn\'t matched, Please try again</string>
-    <string name="pin_15">ຫຼັງຈາກບໍ່ສຳເລັດພາຍໃນ 5 ຄັ້ງ, ທ່ານຕ້ອງຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>
+    <string name="pin_15">ຫຼັງຈາກບໍ່ສຳເລັດພາຍໃນ %d ຄັ້ງ, ທ່ານຕ້ອງຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>
     <string name="pin_16">ລອງໃໝ່ອິກຄັ້ງ</string>
 
     <!-- Transaction History -->

@@ -9,10 +9,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -29,8 +27,9 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.BlurBuilder.blur
 import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.utilities.blurview.BlurLayout
+import com.mobile.bnkcl.utilities.blurview.BlurringView
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -50,6 +49,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
     private var calLeaseDisposable: Disposable? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarTransparent(this, true)
         setAnimateType(Constants.ANIMATE_LEFT)
@@ -62,8 +62,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
         }
         binding.toolbarName.isSelected = true
 
-        val llContactBranch: LinearLayout = findViewById(R.id.ll_contact_branch)
-        llContactBranch.setOnClickListener {
+        binding.blurLayout.setOnClickListener {
             twoButtonDialog = TwoButtonDialog.newInstance(
                 R.drawable.ic_badge_call_now,
                 getString(R.string.call_now),
@@ -106,16 +105,18 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
             )
         }
         val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)
         return bitmap
     }
 
     private fun setUpBlurView(){
-        val originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.banner_1)
-
-        val blurredBitmap = blur(this, originalBitmap)
-        binding.llContactBranch.background = BitmapDrawable(resources, blurredBitmap)
+//        val originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.banner_4)
+//
+//        val blurredBitmap = blur(this, originalBitmap)
+//        binding.llContactBranch.background = BitmapDrawable(resources, blurredBitmap)
+//        val image = BitmapFactory.decodeResource(resources, R.drawable.banner_1)
+//        blurLayout?.setBitmapBlur(image)
     }
 
     override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {

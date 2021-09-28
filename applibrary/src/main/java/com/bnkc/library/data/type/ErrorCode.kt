@@ -10,10 +10,12 @@ object ErrorCode {
 
     const val UNAUTHORIZED = 401
 
-    const val USER_EXISTS = 422
+    const val USER_EXISTS = "USER_EXISTS"
 
-    const val USER_NOT_FOUND = 404
+    const val USER_NOT_FOUND = "USER_NOT_FOUND"
 
-    const val WRONG_PIN = 420
+    const val BAD_CREDENTIALS = "BAD_CREDENTIALS"
+
+    const val INCORRECT_PASSWORD = "INCORRECT_PASSWORD"
 
 }

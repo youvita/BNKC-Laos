@@ -65,7 +65,7 @@
                     android:text="@{item.fb_page_name}"
                     android:tag="@{item.fb_page_url}"
                     visibleGone="@{(item.fb_page_url != null || !item.fb_page_url.empty)}"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center_vertical"
                     android:drawablePadding="@dimen/margin_5dp"
                     android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                     app:drawableStartCompat="@drawable/ic_fb" />
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
