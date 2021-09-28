@@ -103,6 +103,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     private fun requestProfile() {
 
+        Log.d(">>>", "USER_ID: " + sharedPrefer.getPrefer(Constants.USER_ID))
+        Log.d(">>>", "AppLogin: " + AppLogin.PIN.code)
+
         if (sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
             binding.navMenu.tvUserName.text = getString(R.string.nav_user_unknown)
@@ -116,7 +119,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             Glide.with(this)
                 .load(R.drawable.loading)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.navMenu.ivLoading))
+                .into(DrawableImageViewTarget(binding.navMenu.ivLoading))
 
             binding.navMenu.ivProfile.setImageResource(0)
             UtilsGlide.loadCircle(
@@ -125,6 +128,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 binding.navMenu.ivLoading
             )
         } else if (AppLogin.PIN.code == "N") {
+
+            binding.navMenu.tvUserName.text = if (sharedPrefer.getPrefer("name").isNullOrBlank()) getString(R.string.nav_user_unknown) else sharedPrefer.getPrefer("name")
+            binding.navMenu.tvUserId.text = if (sharedPrefer.getPrefer("account_number").isNullOrEmpty()) "" else sharedPrefer.getPrefer("account_number")
+            if (sharedPrefer.contain("name")) setUpLogOutBtn()
+
             if (!sharedPrefer.getPrefer(Constants.IMAGE_BITMAP).isNullOrEmpty()) {
 
                 // decode image bitmap as bytes and set image as bitmap
@@ -137,12 +145,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                         imageAsBytes.size
                     )
                 )
-
-                binding.navMenu.tvUserName.text = sharedPrefer.getPrefer("name")
-                binding.navMenu.tvUserId.text = sharedPrefer.getPrefer("account_number")
-
-                setUpLogOutBtn()
+            } else {
+                binding.navMenu.ivProfile.setImageResource(R.drawable.ic_avatar_l)
             }
+
         }
     }
 
@@ -163,14 +169,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     private fun initLiveData() {
 
         viewModel.userProfileLiveData.observe(this) {
+
+            setUpLogOutBtn()
+
             profileData = it
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = it.accountNumber
 
             sharedPrefer.putPrefer("name", it.name!!)
             sharedPrefer.putPrefer("account_number", it.accountNumber!!)
-
-            setUpLogOutBtn()
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -189,9 +196,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     private fun initView() {
         binding.navMenu.localeCode = Locale.getDefault().language
-
-        binding.navMenu.tvUserName.text = getString(R.string.nav_user_unknown)
-        binding.navMenu.tvUserId.text = ""
 
         binding.navMenu.llProfile.setOnClickListener(this)
         binding.navMenu.llHome.setOnClickListener(this)

@@ -70,7 +70,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private var contractList: ArrayList<String>? = ArrayList()
     private var leaseData: ArrayList<MyLeasesData>? = ArrayList()
     private var productTypeList: ArrayList<CodesData>? = ArrayList()
-    private var requestTypeList: ArrayList<CodesData>? = ArrayList()
     private var progressTypeList: ArrayList<CodesData>? = ArrayList()
     private var leaseLayoutManager: CardModeLayoutManager? = null
     private var bannerLayoutManager: CardModeLayoutManager? = null
@@ -81,7 +80,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         R.drawable.banner_1, R.drawable.banner_2,
         R.drawable.banner_3, R.drawable.banner_4
     )
-    private val emptyLeaseData: MyLeasesData = MyLeasesData("","","","","2021-12-12","")
+    private val emptyLeaseData: MyLeasesData = MyLeasesData("", "", "", "", "2021-12-12", "")
     private var leaseCardRecyclerView: CardRecyclerView = CardRecyclerView()
     private var bannerCardRecyclerView: CardRecyclerView = CardRecyclerView()
 
@@ -156,67 +155,86 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
     private fun initLiveData() {
 
         viewModel.productCodesLiveData.observe(requireActivity()) {
-            productTypeList?.clear()
-            productTypeList = it.codes
-            leaseAdapter.setProductTypeList(productTypeList!!)
-            viewModel.getDashboard()
+
+            if (null != it) {
+                productTypeList?.clear()
+                productTypeList = it.codes
+                leaseAdapter.setProductTypeList(productTypeList!!)
+                viewModel.getDashboard()
+            }
+
         }
 
         viewModel.dashboardLiveData.observe(requireActivity()) {
-            LRS001 = it.countApplication!!
-            LRS002 = it.countScreening!!
-            LRS003 = it.countResult!!
 
-            it.myLeases?.add(emptyLeaseData)
+            if (null != it) {
+                LRS001 = it.countApplication!!
+                LRS002 = it.countScreening!!
+                LRS003 = it.countResult!!
 
-            leaseAdapter.clearItemList()
-            leaseAdapter.addItemList(it.myLeases)
+                it.myLeases?.add(emptyLeaseData)
 
-            setUpDashboard(LRS001, LRS002, LRS003, it.myLeases!!.size - 1)
-            leaseData?.clear()
-            leaseData!!.addAll(it.myLeases)
-            setUpLeaseIndicator(leaseAdapter.itemCount)
-            viewModel.getLeaseRequestCodes()
+                leaseAdapter.clearItemList()
+                leaseAdapter.addItemList(it.myLeases)
+
+                setUpDashboard(LRS001, LRS002, LRS003, it.myLeases!!.size - 1)
+                leaseData?.clear()
+                leaseData!!.addAll(it.myLeases)
+                setUpLeaseIndicator(leaseAdapter.itemCount)
+                viewModel.getLeaseRequestCodes()
+            }
+
         }
 
         viewModel.progressCodesLiveData.observe(requireActivity()) {
-            progressTypeList = it.codes
+
+            if (null != it) {
+                progressTypeList = it.codes
+            }
+
         }
 
         viewModel.requestCodesLiveData.observe(requireActivity()) {
-            requestTypeList = it.codes
 
-            if (LRS001 > 0) {
-                viewModel.getLeaseApplication(it.codes!![0].code!!)
+            if (null != it) {
+                if (LRS001 > 0) {
+                    viewModel.getLeaseApplication(it.codes!![0].code!!)
+                }
+
+                if (LRS002 > 0) {
+                    viewModel.getLeaseScreening(it.codes!![1].code!!)
+                }
+
+                if (LRS003 > 0) {
+                    viewModel.getLeaseResult(it.codes!![2].code!!)
+                }
             }
 
-            if (LRS002 > 0) {
-                viewModel.getLeaseScreening(it.codes!![1].code!!)
-            }
-
-            if (LRS003 > 0) {
-                viewModel.getLeaseResult(it.codes!![2].code!!)
-            }
         }
 
         viewModel.leaseApplicationLiveData.observe(requireActivity()) {
 
-            leaseApplicationList = it.leaseApplications
-            pageBinding!!.requestMenu.llMenu1.setOnClickListener(this)
+            if (null != it) {
+                leaseApplicationList = it.leaseApplications
+                pageBinding!!.requestMenu.llMenu1.setOnClickListener(this)
+            }
 
         }
 
         viewModel.leaseScreeningLiveData.observe(requireActivity()) {
 
-            leaseScreeningList = it.leaseApplications
-            pageBinding!!.requestMenu.llMenu2.setOnClickListener(this)
-
+            if (null != it) {
+                leaseScreeningList = it.leaseApplications
+                pageBinding!!.requestMenu.llMenu2.setOnClickListener(this)
+            }
         }
 
         viewModel.leaseResultLiveData.observe(requireActivity()) {
 
-            leaseResultList = it.leaseApplications
-            pageBinding!!.requestMenu.llMenu3.setOnClickListener(this)
+            if (null != it) {
+                leaseResultList = it.leaseApplications
+                pageBinding!!.requestMenu.llMenu3.setOnClickListener(this)
+            }
 
         }
     }

@@ -117,7 +117,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
         Glide.with(this)
             .load(R.drawable.loading)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+            .into(DrawableImageViewTarget(binding.ivLoading))
 
         UtilsGlide.loadCircle(this, binding.ivProfile, binding.ivLoading)
 
@@ -233,7 +233,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                         Glide.with(this)
                             .load(R.drawable.loading)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+                            .into(DrawableImageViewTarget(binding.ivLoading))
 
                         UtilsGlide.loadCircle(
                             this@AccountInformationActivity,

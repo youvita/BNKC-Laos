@@ -164,10 +164,10 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
 
         Utils.setHideKeyboard(this, binding.parentLayout)
 
-        Glide.with(this@EditAccountInfoActivity)
+        Glide.with(this)
             .load(R.drawable.loading)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into<DrawableImageViewTarget>(DrawableImageViewTarget(binding.ivLoading))
+            .into(DrawableImageViewTarget(binding.ivLoading))
 
         UtilsGlide.loadCircle(
             this@EditAccountInfoActivity,
