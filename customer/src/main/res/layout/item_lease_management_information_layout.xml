@@ -221,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{format.Companion.getDateFormat(leaseInfo.disbursementDate, 4)}" />
+                        android:text="@{leaseInfo.disbursementDate.equals(null) ? `` : format.Companion.getDateFormat(leaseInfo.disbursementDate, 4)}" />
                 </LinearLayout>
 
                 <!-- Maturity Date -->
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@{format.Companion.getDateFormat(leaseInfo.maturityDate, 4)}" />
+                        android:text="@{leaseInfo.maturityDate.equals(null) ? `` : format.Companion.getDateFormat(leaseInfo.maturityDate, 4)}" />
                 </LinearLayout>
 
                 <!-- Repayment Date -->
@@ -256,6 +256,7 @@
                     android:minHeight="@dimen/height_24dp">
 
                     <TextView
+                        android:id="@+id/textView2"
                         style="@style/font15_90a4ae_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -270,22 +271,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="Every 22"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_repayment_date_indicator"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_repayment_date_indicator"
-                        style="@style/font10_263238_medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:maxLength="2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.25"
-                        tools:text="nd" />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Monthly Repayment -->

@@ -75,11 +75,11 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             REPAYMENT_DATE = it.repaymentDay
 
             binding.leaseInfo.tvRepaymentDate.text =
-                getString(R.string.lease_every).plus(" ").plus(it.repaymentDay!!)
-            binding.leaseInfo.tvRepaymentDateIndicator.text =
-                FormatUtils.getFormatOnlyDateIndicator(
-                    it.repaymentDay,
-                    sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
+                getString(R.string.lease_every).plus(" ").plus(
+                    FormatUtils.getFormatOnlyDate(
+                        it.repaymentDay!!,
+                        sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
+                    )
                 )
 
             binding.leaseInfo.tvProductType.text = ""
