@@ -156,6 +156,7 @@
     <string name="product_apply_now">ສະໜັກຕອນນີ້</string>
 
     <!-- calculate -->
+    <string name="calculator">ເຄື່ອງຄິດໄລ່</string>
     <string name="calculate_interest_rate">ອັດຕາດອກເບ້ຍ (ຕໍ່ປີ)</string>
 
     <string name="monthly_repayment">ຍອດຊຳລະຄືນຕໍ່ເດືອນ</string>

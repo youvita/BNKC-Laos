@@ -160,6 +160,7 @@
     <string name="product_apply_now">Apply Now</string>
 
     <!-- calculate -->
+    <string name="calculator">Calculator</string>
     <string name="calculate_interest_rate">Interest Rate (Annual)</string>
 
     <string name="monthly_repayment">Monthly Repayment</string>

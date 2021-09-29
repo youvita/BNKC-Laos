@@ -219,7 +219,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
     }
 
     private fun initView(){
-        binding.include.colToolbar.title = getString(R.string.product_calculate)
+        binding.include.colToolbar.title = getString(R.string.calculator)
         binding.include.toolbarLeftButton.setOnClickListener {
             finish()
         }
