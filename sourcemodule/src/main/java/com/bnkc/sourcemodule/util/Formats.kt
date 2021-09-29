@@ -6,6 +6,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.sourcemodule.R
 
@@ -35,7 +36,7 @@ object Formats {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             ss.setSpan(
-                ForegroundColorSpan(mContext.resources.getColor(R.color.color_d7191f)),
+                ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.color_d7191f)),
                 indexStart,
                 indexEnd,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -48,7 +49,7 @@ object Formats {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             ss.setSpan(
-                ForegroundColorSpan(mContext.resources.getColor(R.color.color_d7191f)),
+                ForegroundColorSpan(ContextCompat.getColor(mContext,R.color.color_d7191f)),
                 indexStart,
                 indexEnd,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

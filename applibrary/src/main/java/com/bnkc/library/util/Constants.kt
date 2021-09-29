@@ -14,8 +14,8 @@ object Constants {
 
     const val PRODUCT_TYPE = "PRODUCT_TYPE"
     const val REPAYMENT_TERM = "REPAYMENT_TERM"
-    const val BRAND_NAME = "BRAND_NAME"
-    const val TYPE_NAME = "TYPE_NAME"
-    const val MODEL_NAME = "MODEL_NAME"
+    const val BRAND_NAME = "BRAND"
+    const val TYPE_NAME = "TYPE"
+    const val MODEL_NAME = "MODEL"
 
 }

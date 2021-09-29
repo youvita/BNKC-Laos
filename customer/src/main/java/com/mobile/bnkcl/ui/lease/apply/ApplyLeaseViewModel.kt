@@ -9,6 +9,8 @@ import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.request.lease.apply.ApplyLeaseRequest
 import com.mobile.bnkcl.data.response.code.CodesResponse
+import com.mobile.bnkcl.data.response.code.ProductResponse
+import com.mobile.bnkcl.data.response.code.ProductResponseObj
 import com.mobile.bnkcl.data.response.lease.ItemResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.response.lease.apply.ApplyLeaseResponse
@@ -76,31 +78,31 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
         }
     }
 
-    private val _typeMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    private val _typeMuLiveData : MutableLiveData<ProductResponse> = MutableLiveData<ProductResponse>()
     val typeLiveData = _typeMuLiveData
-    fun reqTypeCode(groupId :String){
+    fun reqTypeCode(cat :String, id : String){
         viewModelScope.launch {
-            leaseRepo.getItemCode(groupId).onEach { resource ->
+            codesRepo.getProductFilterCodes(cat, id).onEach { resource ->
                 _typeMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
     }
 
-    private val _brandMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    private val _brandMuLiveData : MutableLiveData<ProductResponse> = MutableLiveData<ProductResponse>()
     val brandLiveData = _brandMuLiveData
     fun reqBrandCode(groupId :String){
         viewModelScope.launch {
-            leaseRepo.getItemCode(groupId).onEach { resource ->
+            codesRepo.getProductCodes(groupId).onEach { resource ->
                 _brandMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
     }
 
-    private val _modelMuLiveData : MutableLiveData<ItemResponse> = MutableLiveData<ItemResponse>()
+    private val _modelMuLiveData : MutableLiveData<ProductResponse> = MutableLiveData<ProductResponse>()
     val modelLiveData = _modelMuLiveData
-    fun reqModelCode(groupId :String){
+    fun reqModelCode(cat :String, id : String){
         viewModelScope.launch {
-            leaseRepo.getItemCode(groupId).onEach { resource ->
+            codesRepo.getProductFilterCodes(cat, id).onEach { resource ->
                 _modelMuLiveData.value = resource.data!!
             }.launchIn(viewModelScope)
         }
@@ -149,28 +151,28 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     }
 
     var typeData: ArrayList<String>? = ArrayList()
-    fun setUpTypeData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+    fun setUpTypeData(itemResponse: List<ProductResponseObj>) : ArrayList<String> {
         typeData?.clear()
         for (i in 0 until itemResponse.size){
-            typeData?.add(itemResponse[i].title!!)
+            typeData?.add(itemResponse[i].name!!)
         }
         return typeData!!
     }
 
     var brandData: ArrayList<String>? = ArrayList()
-    fun setUpBrandData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+    fun setUpBrandData(itemResponse: List<ProductResponseObj>) : ArrayList<String> {
         brandData?.clear()
         for (i in 0 until itemResponse.size){
-            brandData?.add(itemResponse[i].title!!)
+            brandData?.add(itemResponse[i].name!!)
         }
         return brandData!!
     }
 
     var modelData: ArrayList<String>? = ArrayList()
-    fun setUpModelData(itemResponse: ArrayList<ItemResponseObject>) : ArrayList<String> {
+    fun setUpModelData(itemResponse: List<ProductResponseObj>) : ArrayList<String> {
         modelData?.clear()
         for (i in 0 until itemResponse.size){
-            modelData?.add(itemResponse[i].title!!)
+            modelData?.add(itemResponse[i].name!!)
         }
         return modelData!!
     }

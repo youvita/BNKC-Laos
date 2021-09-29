@@ -257,7 +257,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun observeData(){
         viewModel.preloginLiveData.observe(this){
             Log.d("nng", it.toString())
-            Loading.Allow.dismiss = true
+
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)
@@ -265,7 +265,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
         viewModel.preSignUpLiveData.observe(this){
             Log.d("nng", it.toString())
-            Loading.Allow.dismiss = true
+
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.cbAgreement.isEnabled = true
@@ -274,6 +274,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         viewModel.verifyOTPLiveData.observe(this, {
             binding.isVerified = it.verified!!
             binding.tvCorrect.visibility = VISIBLE
+            dismissLoading()
             if (it.verified!!){
                 when (binding.otpViewModel!!.uiMode) {
                     0 -> {

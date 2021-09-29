@@ -139,7 +139,7 @@ object SecureUtils {
             e.printStackTrace()
         }
         try {
-            key = getKey("bnkcmfi")
+            key = getKey("bnkclmfi")
         } catch (e: Exception) {
             e.printStackTrace()
         }

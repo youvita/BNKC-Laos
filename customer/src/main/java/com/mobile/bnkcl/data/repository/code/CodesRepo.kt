@@ -7,6 +7,7 @@ import com.bnkc.sourcemodule.app.RetrofitBuilder
 import com.mobile.bnkcl.data.api.code.CodesApi
 import com.mobile.bnkcl.data.api.dashboard.DashboardApi
 import com.mobile.bnkcl.data.response.code.CodesResponse
+import com.mobile.bnkcl.data.response.code.ProductResponse
 import com.mobile.bnkcl.data.response.dashboard.DashboardResponse
 import com.mobile.bnkcl.data.response.dashboard.LeaseApplicationResponse
 import kotlinx.coroutines.delay
@@ -28,6 +29,36 @@ class CodesRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient
             val request = object: RemoteDataSource<CodesResponse>(){
                 override suspend fun createCall(): Response<CodesResponse> {
                     return codesApi.getCodes(group_id)
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getProductCodes(group_id : String): Flow<Resource<ProductResponse>> = flow {
+        delay(1000)
+        try {
+            val request = object: RemoteDataSource<ProductResponse>(){
+                override suspend fun createCall(): Response<ProductResponse> {
+                    return codesApi.getProductCodes(group_id)
+                }
+            }
+            request.networkRequest()
+            emit(request.asLiveData().value!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getProductFilterCodes(cat :String,id : String): Flow<Resource<ProductResponse>> = flow {
+        delay(1000)
+        try {
+            val request = object: RemoteDataSource<ProductResponse>(){
+                override suspend fun createCall(): Response<ProductResponse> {
+                    return codesApi.getProductCodes(cat, id)
                 }
             }
             request.networkRequest()

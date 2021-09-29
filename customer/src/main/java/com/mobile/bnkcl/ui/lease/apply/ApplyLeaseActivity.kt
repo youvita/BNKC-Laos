@@ -27,6 +27,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
+import com.mobile.bnkcl.data.response.code.ProductResponseObj
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.response.user.ProfileData
 import com.mobile.bnkcl.databinding.ActivityApplyLeaseBinding
@@ -57,9 +58,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     lateinit var systemDialog: SystemDialog
     private lateinit var productCodes : ArrayList<ItemResponseObject>
     private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
-    private lateinit var typeCodes : ArrayList<ItemResponseObject>
-    private lateinit var brandCodes : ArrayList<ItemResponseObject>
-    private lateinit var modelCodes : ArrayList<ItemResponseObject>
+    private lateinit var typeCodes : List<ProductResponseObj>
+    private lateinit var brandCodes : List<ProductResponseObj>
+    private lateinit var modelCodes : List<ProductResponseObj>
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
@@ -75,8 +76,6 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         viewModel.reqLeaseItemCode(Constants.PRODUCT_TYPE)
         viewModel.reqRepaymentCode(Constants.REPAYMENT_TERM)
         viewModel.reqBrandCode(Constants.BRAND_NAME)
-        viewModel.reqTypeCode(Constants.TYPE_NAME)
-        viewModel.reqModelCode(Constants.MODEL_NAME)
 
         initView()
         initEvent()
@@ -134,15 +133,15 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         })
 
         viewModel.typeLiveData.observe(this, {
-            typeCodes = it.codes!!
+            typeCodes = it.products!!
             viewModel.setUpTypeData(typeCodes)
         })
         viewModel.brandLiveData.observe(this, {
-            brandCodes = it.codes!!
+            brandCodes = it.products!!
             viewModel.setUpBrandData(brandCodes)
         })
         viewModel.modelLiveData.observe(this, {
-            modelCodes = it.codes!!
+            modelCodes = it.products!!
             viewModel.setUpModelData(modelCodes)
         })
 
@@ -243,9 +242,11 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                                 R.color.color_263238
                             )
                         )
-                        binding.tvNameBrand.text = brandCodes[pos].title
-                        binding.tvNameBrand.tag = brandCodes[pos].title
-                        viewModel.applyLeaseRequest.name_of_brand = brandCodes[pos].code
+                        binding.tvNameBrand.text = brandCodes[pos].name
+                        binding.tvNameBrand.tag = brandCodes[pos].name
+                        viewModel.applyLeaseRequest.name_of_brand = brandCodes[pos].erpCode
+
+                        viewModel.reqTypeCode(Constants.TYPE_NAME, brandCodes[pos].id.toString())
 
                         val proType = if (viewModel.applyLeaseRequest.product_type != null){
                             viewModel.applyLeaseRequest.product_type
@@ -282,7 +283,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 //                        }
                         binding.btnSubmit.isEnable(
                             proType!!,
-                            brandCodes[pos].code!!,
+                            brandCodes[pos].name!!,
                             binding.tvNameModel.tag.toString(),
                             binding.tvNameType.tag.toString(),
                             reqAmt!!,
@@ -309,9 +310,12 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                                 R.color.color_263238
                             )
                         )
-                        binding.tvNameType.text = typeCodes[pos].title
-                        binding.tvNameType.tag = typeCodes[pos].title
-                        viewModel.applyLeaseRequest.name_of_type = typeCodes[pos].code
+                        binding.tvNameType.text = typeCodes[pos].name
+                        binding.tvNameType.tag = typeCodes[pos].name
+                        viewModel.applyLeaseRequest.name_of_type = typeCodes[pos].erpCode
+
+                        viewModel.reqModelCode(Constants.MODEL_NAME, typeCodes[pos].id.toString())
+
                         val proType = if (viewModel.applyLeaseRequest.product_type != null){
                             viewModel.applyLeaseRequest.product_type
                         }else{
@@ -336,7 +340,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                             proType!!,
                             binding.tvNameBrand.tag.toString(),
                             binding.tvNameModel.tag.toString(),
-                            typeCodes[pos].code!!,
+                            typeCodes[pos].erpCode!!,
                             reqAmt!!,
                             proPrice!!,
                             term!!.toString()
@@ -361,9 +365,10 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                                 R.color.color_263238
                             )
                         )
-                        binding.tvNameModel.text = modelCodes[pos].title
-                        binding.tvNameModel.tag = modelCodes[pos].title
-                        viewModel.applyLeaseRequest.name_of_model = modelCodes[pos].code
+                        binding.tvNameModel.text = modelCodes[pos].name
+                        binding.tvNameModel.tag = modelCodes[pos].name
+                        viewModel.applyLeaseRequest.name_of_model = modelCodes[pos].erpCode
+
                         val proType = if (viewModel.applyLeaseRequest.product_type != null){
                             viewModel.applyLeaseRequest.product_type
                         }else{
@@ -387,7 +392,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                         binding.btnSubmit.isEnable(
                             proType!!,
                             binding.tvNameBrand.tag.toString(),
-                            modelCodes[pos].code!!,
+                            modelCodes[pos].erpCode!!,
                             binding.tvNameType.tag.toString(),
                             reqAmt!!,
                             proPrice!!,

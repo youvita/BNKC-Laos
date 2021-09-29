@@ -106,6 +106,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      */
     private fun successListener() {
         disposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
+            Log.d(">>>>>", "successListener: ${Loading.Allow.dismiss}")
             if (Loading.Allow.dismiss) {
                 dismissLoading()
             }
@@ -178,7 +179,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     /**
      * handle to dismiss loading
      */
-    private fun dismissLoading() {
+    fun dismissLoading() {
         if (loadingDialog != null) {
             loadingDialog?.dismiss()
             loadingDialog = null
