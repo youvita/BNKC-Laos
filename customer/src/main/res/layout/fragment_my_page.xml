@@ -56,7 +56,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/height_21dp">
 
                 <TextView
                     style="@style/font_15_ffffff_normal"
@@ -66,7 +67,6 @@
                     android:paddingStart="@dimen/padding_21dp"
                     android:gravity="center_vertical"
                     android:paddingEnd="@dimen/padding_5dp"
-                    android:paddingTop="20dp"
                     android:paddingBottom="15dp"
                     android:text="@string/main_subtitle_001"
                     app:drawableStartCompat="@drawable/ic_my_lease_req_white_ico" />
@@ -76,7 +76,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingTop="20dp"
                     android:paddingBottom="15dp"
                     android:text="@string/main_subtitle_002"/>
 
@@ -87,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="11dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-30dp"
                 android:layout_marginRight="11dp"
                 android:layout_marginBottom="-10dp"
                 android:minHeight="120dp"

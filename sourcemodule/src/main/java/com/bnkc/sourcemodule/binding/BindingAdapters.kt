@@ -114,7 +114,7 @@ object BindingAdapters {
         textView.text = str?.let {
             FormatUtils.getNumberFormat(textView.context,
                 it
-            ).plus(" " + textView.context.getString(R.string.currency_kip))
+            )
         }
     }
 

@@ -26,7 +26,7 @@
                 android:orientation="horizontal"
                 android:paddingStart="20dp"
                 android:paddingEnd="10dp"
-                android:layout_marginTop="@dimen/margin_30dp">
+                android:layout_marginTop="@dimen/height_21dp">
 
                 <ImageView
                     android:layout_weight="1"
@@ -65,7 +65,7 @@
                     android:id="@+id/nsv_find_office"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="45dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_find_office"

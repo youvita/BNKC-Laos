@@ -20,6 +20,7 @@
             android:id="@+id/cl_top"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="@dimen/height_21dp"
             android:layout_marginStart="@dimen/margin_20dp"
             android:layout_marginEnd="@dimen/margin_20dp">
 
@@ -45,15 +46,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.bnkc.sourcemodule.ui.ShadowLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             app:shadowDx="0dp"
             app:shadowDy="0dp"
-            app:shadowColor="@color/color_90a4ae_shadow"
+            app:shadowColor="@color/color_5090a4ae_shadow"
             app:shadowRadius="15dp"
             app:shadowShape="rectangle"
-            app:shadowSide="all">
+            app:shadowSide="all"
+            android:layout_marginBottom="@dimen/margin_10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"

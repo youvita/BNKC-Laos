@@ -3,12 +3,12 @@ package com.mobile.bnkcl.ui.map
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -28,8 +28,6 @@ import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.blurview.BlurLayout
-import com.mobile.bnkcl.utilities.blurview.BlurringView
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -130,6 +128,13 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     }
 
     fun initView(){
+//        binding.blurView.setBlurRadius(
+//            TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP,
+//                10f,
+//                resources.displayMetrics
+//            )
+//        )
         binding.ivBack.setOnClickListener {
             finish()
         }

@@ -67,12 +67,12 @@ class ShadowLayout @JvmOverloads constructor(
             paddingBottom = effect.toInt()
         }
         if (mShadowDy != 0.0f) {
-            rectBottom = rectBottom - mShadowDy
-            paddingBottom = paddingBottom + mShadowDy.toInt()
+            rectBottom -= mShadowDy
+            paddingBottom += mShadowDy.toInt()
         }
         if (mShadowDx != 0.0f) {
-            rectRight = rectRight - mShadowDx
-            paddingRight = paddingRight + mShadowDx.toInt()
+            rectRight -= mShadowDx
+            paddingRight += mShadowDx.toInt()
         }
         mRectF.left = rectLeft
         mRectF.top = rectTop

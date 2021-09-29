@@ -46,7 +46,8 @@
     <color name="color_2B3FF2">#2B3FF2</color>
     <color name="color_000000">#000000</color>
     <color name="color_B6C1C7">#B6C1C7</color>
-    <color name="color_90a4ae_shadow">#2090a4ae</color>
+    <color name="color_2090a4ae_shadow">#2090a4ae</color>
+    <color name="color_5090a4ae_shadow">#5090a4ae</color>
     <color name="color_3090a4ae_shadow">#3090a4ae</color>
     <color name="color_1590a4ae_shadow">#1590a4ae</color>
 

@@ -19,11 +19,9 @@ android {
         applicationId "com.mobile.bnkcl"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        renderscriptTargetApi 21
+        renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {

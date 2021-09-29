@@ -24,22 +24,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/blur_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:orientation="vertical"
+            android:background="@drawable/round_solid_ffffff_8"
             app:layout_constraintBottom_toBottomOf="@+id/mapView2">
-
-            <com.mobile.bnkcl.utilities.blurview.RealtimeBlurView
-                android:id="@+id/blur_view"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                app:realtimeBlurRadius="@dimen/padding_10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_call_btn" />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
 
         <RelativeLayout
