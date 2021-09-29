@@ -309,7 +309,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                         R.drawable.ic_badge_error,
                         getString(R.string.pin_11),
                         getString(R.string.pin_12),
-                        getString(R.string.setting_02)
+                        getString(R.string.setting_reset_pin)
                     )
                     confirmDialog.onConfirmClickedListener {
                         binding.pinView.clearPin()

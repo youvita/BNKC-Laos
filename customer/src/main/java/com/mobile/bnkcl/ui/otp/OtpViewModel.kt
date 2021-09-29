@@ -5,34 +5,23 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
-import android.view.View
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
-import com.mobile.bnkcl.data.request.auth.LoginRequest
-import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
 import com.mobile.bnkcl.data.request.otp.SendOTPRequest
 import com.mobile.bnkcl.data.request.signup.PreSignUpRequest
-import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.otp.OTPVerifyResponse
 import com.mobile.bnkcl.data.response.otp.SendOTPResponse
 import com.mobile.bnkcl.data.response.signup.PreSignUpResponse
 import com.mobile.bnkcl.ui.main.MainActivity
-import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.ui.signup.SignUpActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -62,19 +51,19 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "setUpTextView $uiMode")
         return when(uiMode){
             0->{
-                "Login"
+                context.getString(R.string.nav_login)
             }
             1->{
-                "Sign Up"
+                context.getString(R.string.nav_sign_up)
             }
             2->{
-                "Forget PIN"
+                context.getString(R.string.forget_pin)
             }
             3->{
-                "Reset PIN"
+                context.getString(R.string.setting_reset_pin)
             }
             else -> {
-                "Login"
+                context.getString(R.string.nav_login)
             }
         }
     }
@@ -84,10 +73,10 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "setUpTextView $uiMode")
         return when(uiMode){
             0->{
-                "Login"
+                context.getString(R.string.nav_login)
             }
             else -> {
-                "Continue"
+                context.getString(R.string.sign_up_continue)
             }
         }
     }

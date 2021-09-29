@@ -37,7 +37,7 @@
                     style="@style/font21_263238_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Application" />
+                    tools:text="@string/menu_application" />
 
                 <include
                     android:id="@+id/ltd_applied_info"
@@ -73,8 +73,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        tools:text="Wait for screening / result" />
+                        android:gravity="end" />
 
                 </LinearLayout>
 
@@ -86,7 +85,7 @@
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/height_24dp"
                     android:orientation="vertical"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -177,7 +176,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="@dimen/margin_15dp"
-                            android:text="The results may vary depending on the result of the examination." />
+                            android:text="@string/progress_approval_message" />
 
                     </LinearLayout>
 
@@ -191,7 +190,7 @@
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/height_24dp"
                     android:orientation="vertical"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"

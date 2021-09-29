@@ -16,6 +16,7 @@
     <string name="sign_input_identify_number">ປ້ອນເລກທີບັດປະຈຳຕົວ</string>
     <string name="sign_existing_customer">ລູກຄ້າທີ່ມີຢູ່ແລ້ວ (ລູຄ້າເກົ່າ)</string>
     <string name="sign_new_customer">ລູກຄ້າໃໝ່</string>
+    <string name="sign_up_continue">ດຳເນິນຕໍ່</string>
 
     <string name="select">ເລືອກ</string>
 
@@ -112,10 +113,10 @@
     <string name="acc_info_09">ເລກທີບັນຊີ</string>
 
     <!--setting-->
-    <string name="setting_01">ແຈ້ງເຕືອນ</string>
-    <string name="setting_02">ຕັ້ງລະຫັດ PIN ຄືນໃໝ່</string>
-    <string name="setting_03">ນະໂຍບາຍ</string>
-    <string name="setting_04">ຕັ້ງໃໝ່</string>
+    <string name="setting_push_noti">ແຈ້ງເຕືອນ</string>
+    <string name="setting_reset_pin">ຕັ້ງລະຫັດ PIN ຄືນໃໝ່</string>
+    <string name="setting_policy">ນະໂຍບາຍ</string>
+    <string name="setting_reset">ຕັ້ງໃໝ່</string>
 
     <!--c\s center-->
     <string name="cs_01">ສູນບໍລິການລູກຄ້າ</string>
@@ -162,7 +163,7 @@
     <string name="currency_val">%s ໂດລາ ສະຫະລັດ</string>
     <string name="details">ລາຍລະອຽດ</string>
 
-    <string name="pin_05">Existing PIN</string>
+    <string name="pin_05">ລະຫັດ PIN ເດີມ</string>
 
     <string name="pin_11">ລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງ 5 ຄັ້ງ</string>
     <string name="pin_12">ທ່ານໄດ້ຕື່ມລະຫັດຜ່ານບໍ່ຖຶກຕ້ອງສູງສຸດແລ້ວ. ກະລຸນາຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່</string>
@@ -265,6 +266,7 @@
     <string name="mbl_what_code">/? Code (SMS)</string>
     <string name="mbl_pay">ຊຳລະ</string>
 
+    <string name="full_payment_repayment_amount">ຍອດຊຳລະເຕັມຈຳນວນ</string>
     <string name="full_payment_repayment_date">ມື້ຊຳລະ</string>
     <string name="full_payment_check">ກວດຄືນ</string>
     <string name="full_payment_abcd">ຍອດຊຳລະເຕັມຈຳນວນ (ກ+ຂ+ຄ+ງ)</string>
@@ -315,6 +317,7 @@
     <string name="progress_advance_payment">ຍອດເງິນທີ່ຊຳລະກ່ອນ</string>
     <string name="progress_repayment_term">ໄລຍະເວລາການຊຳລະ</string>
     <string name="progress_phase_of_progress">ຄວາມຄືບໜ້າການດຳເນິນງານ</string>
+    <string name="progress_approval_message">ຜົນໄດ້ຮັບອາດຈະແຕກຕ່າງກັນອອກໄປ ຂຶ້ນກັບຜົນຂອງການກວດສອບປະເມີນຜົນ</string>
 
     <string name="progress_dealer_phase">ຕົວແທນຈຳໜ່າຍ</string>
     <string name="progress_dealer_comment">ຄຳຄິດເຫັນ</string>
@@ -347,10 +350,10 @@
     <string name="sort_by">Sort By</string>
     <string name="under_construction">Under Construction</string>
 
-    <string name="not_yet_signed_up_msg">This phone number hasn’t signed\nup for BNK Account. Please Sign\nUp now.</string>
-    <string name="not_signup_yet">You Haven\'t\nSigned Up Yet</string>
-    <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
-    <string name="already_signed_up">You Already Signed Up</string>
+    <string name="not_yet_signed_up_msg">ເບີໂທລະສັບຂອງທ່ານຍັງຍັງບໍ່ໄດ້ລົງທະບຽນບັນຊີ BNK ເທື່ອ, ກະລຸນາລົງທະບຽນດຽວນີ້</string>
+    <string name="not_signup_yet">ທ່ານຍັງບໍ່ໄດ້ລົງທະບຽນເທື່ອ</string>
+    <string name="already_signed_up_msg">ເບີໂທລະສັບໄດ້ຖຶກລົງຖະບຽນຮຽບຮ້ອຍແລ້ວ. ກະລຸນາເຂົ້າສູ່ລະບົບໂດຍໃຊ້ລະຫັດ PIN</string>
+    <string name="already_signed_up">ທ່ານໄດ້ລົງຖະບຽນຮຽບຮ້ອຍແລ້ວ</string>
     <string name="sign_failed_pin_number">PIN Number enty error and re-entry request \n statement</string>
     <string name="ask_bnkc_review">BNKCLຈະກວດສອບຄຳຖາມຂອງທ່ານ ແລະ ຈະຕອບຫາທ່ານໃນໄວໆນີ້</string>
     <string name="ask_inquiry_failed">Inquiry is Failed</string>
@@ -384,7 +387,7 @@
     <string name="recommender">ຜູ້ເນາະນຳ</string>
     <string name="personal_information">ຂໍ້ມູນສ່ວນຕົວ</string>
     <string name="input_name">ປ້ອນຊື່</string>
-    <string name="select_gender">Select Gender</string>
+    <string name="select_gender">ເລືອກເພດ</string>
     <string name="optional">(ເລືອກ)</string>
     <string name="input_recommender">ປ້ອນຊື່ຜູ້ເນາະນຳ</string>
 
@@ -393,34 +396,34 @@
     <string name="service_buy_commodities">ເງິນທ່ານບໍ່ພຽງພໍເມື່ອຊື້ສິນຄ້າຫຼືບໍ?</string>
     <string name="service_more_detail">ສໍາລັບລາຍລະອຽດເພີ່ມເຕີມ</string>
 
-    <string name="pin_confirm">PIN Confirm</string>
+    <string name="pin_confirm">ຍືນຍັນລະຫັດ PIN</string>
     <string name="set_up_pin">ຕັ້ງລະຫັດຜ່ານ PIN ໃໝ່</string>
     <string name="forget_pin">ລືມລະຫັດ PIN</string>
     <string name="forget_pin_ask">ລືມລະຫັດ PIN?</string>
-    <string name="comm_reset_now">RESET NOW</string>
+    <string name="comm_reset_now">ຕັ້ງລະຫັດຜ່ານຄືນໃຫມ່ທັນທີ</string>
     <string name="new_pin">New PIN</string>
     <string name="pin_registration">ລົງຖະບຽນລະຫັດ PIN</string>
-    <string name="input_name_of_model">Input name of model</string>
-    <string name="etc_no_applicable_type">ETC(No applicable type)</string>
-    <string name="input_name_of_brand">Input name of brand</string>
-    <string name="name_of_model">Name of Model</string>
-    <string name="name_of_type">Name of Type</string>
-    <string name="name_of_brand">Name of Brand</string>
-    <string name="select_product_type">Select Product Type</string>
-    <string name="product_type">Product Type</string>
-    <string name="commodity_information">Commodity Information</string>
-    <string name="input_name_of_type">Input Name of Type</string>
-    <string name="input_name_of_type_suv_sedan_van">Input name of type(SUV,SEDAN, VAN...)</string>
-    <string name="product_price">Product Price</string>
-    <string name="kip">Kip</string>
-    <string name="lease_information">Lease Information</string>
-    <string name="request_amount">Request Amount</string>
-    <string name="name">Name</string>
-    <string name="date_of_birth">Date of Birth</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="address">Address</string>
-    <string name="identification_nm">Identification NM</string>
+    <string name="input_name_of_model">ປ້ອນຊື່ລຸ້ນຂອງສິນຄ້າ</string>
+    <string name="etc_no_applicable_type">ອື່ນໆ (ບໍ່ມີປະເພດທີ່ກ່ຽວຂ້ອງ)</string>
+    <string name="input_name_of_brand">ປ້ອນຊື່ຍີ່ຫໍ້ສິນຄ້າ</string>
+    <string name="name_of_model">ຊື່ລຸ້ນຂອງສິນຄ້າ</string>
+    <string name="name_of_type">ຊື່ປະເພດສິນຄ້າ</string>
+    <string name="name_of_brand">ຊື່ຍີ່ຫໍ້ສິນຄ້າ</string>
+    <string name="select_product_type">ເລືອກປະເພດສິນຄ້າ</string>
+    <string name="product_type">ປະເພດສິນຄ້າ</string>
+    <string name="commodity_information">ຂໍ້ມູນສິນຄ້າ</string>
+    <string name="input_name_of_type">ປ້ອນຊື່ປະເພດສິນຄ້າ</string>
+    <string name="input_name_of_type_suv_sedan_van">ປ້ອນຊື່ປະເພດສິນຄ້າ (ລົດອະເນດປະສົງ, ລົດເກັງ, ລົດຕູ້…)</string>
+    <string name="product_price">ລາຄາສິນຄ້າ</string>
+    <string name="kip">ກິບ</string>
+    <string name="lease_information">ຂໍ້ມູນສິນເຊື່ອ</string>
+    <string name="request_amount">ຈຳນວນເງິນທີ່ສະເໜີ</string>
+    <string name="name">ຊື່</string>
+    <string name="date_of_birth">ວັນ ເດືອນ ປີ ເກີດ</string>
+    <string name="phone_number">ເບີໂທລະສັບ</string>
+    <string name="address">ທີ່ຢູ່</string>
+    <string name="identification_nm">ເລກທີ ບັດປະຈຳຕົວ</string>
 
-    <string name="apply">Apply</string>
+    <string name="apply">ສະໜັກ</string>
     <string name="apply_lease_smg">Would you like to apply for a lease\nconsultation with that\ninformation?</string>
 </resources>

@@ -528,9 +528,8 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
                             android:lineHeight="@dimen/margin_25dp"
-                            android:text="Vientiane Capital \n
-Phonkeo Village Unit 14"
-                            style="@style/font15_263238_medium"/>
+                            style="@style/font15_263238_medium"
+                            tools:targetApi="p" />
 
                     </LinearLayout>
 
@@ -538,7 +537,7 @@ Phonkeo Village Unit 14"
                         android:id="@+id/btn_loan_calculator"
                         android:layout_width="match_parent"
                         android:layout_marginTop="15dp"
-                        app:buttonText="Edit"
+                        app:buttonText="@string/info_edit"
                         app:textAllCaps="true"
                         app:buttonBackground="@drawable/selector_d7191f_ffffee"
                         app:buttonTextColor="@color/colorPrimary"
@@ -567,7 +566,7 @@ Phonkeo Village Unit 14"
             <com.bnkc.sourcemodule.ui.ValidateButton
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
-                app:buttonText="Submit"
+                app:buttonText="@string/comm_submit"
                 app:textAllCaps="true"
                 app:is_active="false"
                 android:layout_marginStart="20dp"

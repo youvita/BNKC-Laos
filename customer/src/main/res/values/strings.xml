@@ -113,14 +113,15 @@
     <string name="acc_info_07">Tel</string>
     <string name="acc_info_09">Account Number</string>
     <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
+    <string name="sign_up_continue">CONTINUE</string>
 
     <string name="not_yet_signed_up_msg">This phone number hasn’t signed\nup for BNK Account. Please Sign\nUp now.</string>
 
     <!--setting-->
-    <string name="setting_01">Push Notification</string>
-    <string name="setting_02">Reset PIN</string>
-    <string name="setting_03">Policy</string>
-    <string name="setting_04">RESET</string>
+    <string name="setting_push_noti">Push Notification</string>
+    <string name="setting_reset_pin">Reset PIN</string>
+    <string name="setting_policy">Policy</string>
+    <string name="setting_reset">RESET</string>
 
     <!--c\s center-->
     <string name="cs_01">C/S Center</string>
@@ -269,6 +270,7 @@
     <string name="mbl_what_code">/? Code (SMS)</string>
     <string name="mbl_pay">PAY</string>
 
+    <string name="full_payment_repayment_amount">Full Repayment Amount</string>
     <string name="full_payment_repayment_date">Repayment Date</string>
     <string name="full_payment_check">CHECK</string>
     <string name="full_payment_abcd">Full Repayment (A+B+C+D)</string>
@@ -320,6 +322,7 @@
     <string name="progress_advance_payment">Advance payment</string>
     <string name="progress_repayment_term">Repayment term</string>
     <string name="progress_phase_of_progress">Phase of Progress</string>
+    <string name="progress_approval_message">The results may vary depending on the result of the examination.</string>
 
     <string name="progress_dealer_phase">Dealer</string>
     <string name="progress_dealer_comment">Comment</string>
@@ -392,7 +395,7 @@
     <string name="service_buy_commodities">Are you a little short of money when you buy commodities?</string>
     <string name="service_more_detail">For more details</string>
 
-    <string name="pin_confirm">PIN Confirm</string>
+    <string name="pin_confirm">PIN Confirmation</string>
     <string name="set_up_pin">Set Up New PIN</string>
     <string name="forget_pin">Forget PIN</string>
     <string name="forget_pin_ask">Forget PIN?</string>
@@ -414,7 +417,7 @@
     <string name="lease_information">Lease Information</string>
     <string name="request_amount">Request Amount</string>
     <string name="name">Name</string>
-    <string name="identification_nm">Identification NM</string>
+    <string name="identification_nm">Identification Number</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="phone_number">Phone Number</string>
     <string name="address">Address</string>

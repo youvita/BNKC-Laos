@@ -37,7 +37,7 @@
                     app:expandedTitleMargin="@dimen/margin_21dp"
                     app:expandedTitleTextAppearance="@style/font_28_263238_bold"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:title="Full Repayment Amount">
+                    app:title="@string/full_payment_repayment_amount">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"

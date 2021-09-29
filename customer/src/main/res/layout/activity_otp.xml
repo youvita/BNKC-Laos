@@ -48,13 +48,14 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="21dp"
                 android:onClick="@{(v)->otpViewModel.closeButton_Click()}"/>
+
             <TextView
                 android:id="@+id/tv_title_toolbar"
+                style="@style/font_18_263238_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{otpViewModel.setUpToolbarTitle()}"
                 android:layout_centerInParent="true"
-                style="@style/font_18_263238_bold"/>
+                android:text="@{otpViewModel.setUpToolbarTitle()}" />
 
 
         </RelativeLayout>
@@ -641,12 +642,11 @@
                 <com.bnkc.sourcemodule.ui.ValidateButton
                     android:id="@+id/btn_continue"
                     android:layout_width="match_parent"
-                    app:buttonText="Login"
-                    app:textAllCaps="true"
                     android:layout_height="50dp"
                     android:layout_marginStart="@dimen/margin_20dp"
                     android:layout_marginEnd="@dimen/margin_20dp"
-                    />
+                    app:buttonText="Login"
+                    app:textAllCaps="true" />
 
             </RelativeLayout>
         </LinearLayout>

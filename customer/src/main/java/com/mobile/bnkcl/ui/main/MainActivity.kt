@@ -366,7 +366,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 R.id.btn_policy -> {
                     intent = Intent(this, TermsAndConditionsActivity::class.java)
                     intent.putExtra(Constants.WEB_URL, Constants.WB_POLICY)
-                    intent.putExtra(Constants.WEB_TITLE, getString(R.string.setting_03))
+                    intent.putExtra(Constants.WEB_TITLE, getString(R.string.setting_policy))
                     startActivity(intent)
                 }
                 R.id.btn_setting -> {

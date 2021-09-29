@@ -133,7 +133,7 @@
                                 android:layout_marginStart="@dimen/margin_15dp"
                                 android:drawablePadding="@dimen/padding_10dp"
                                 android:gravity="center_vertical"
-                                android:text="@string/setting_01"
+                                android:text="@string/setting_push_noti"
                                 app:drawableLeftCompat="@drawable/ic_notification_grey_ico"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -171,7 +171,7 @@
                                 android:layout_marginTop="@dimen/margin_16dp"
                                 android:drawablePadding="@dimen/padding_10dp"
                                 android:gravity="center_vertical"
-                                android:text="@string/setting_02"
+                                android:text="@string/setting_reset_pin"
                                 app:drawableLeftCompat="@drawable/ic_lock_grey_ico"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +183,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="@string/setting_04"
+                                android:text="@string/setting_reset"
                                 app:layout_constraintBottom_toBottomOf="@+id/textView3"
                                 app:layout_constraintEnd_toStartOf="@+id/iv_reset_pin_more"
                                 app:layout_constraintTop_toTopOf="@+id/textView3" />

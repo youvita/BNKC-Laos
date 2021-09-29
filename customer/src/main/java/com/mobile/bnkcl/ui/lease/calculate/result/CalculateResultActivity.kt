@@ -47,7 +47,7 @@ class CalculateResultActivity : BaseActivity<ActivityCalculateResultBinding>() {
         val actionBar = binding.toolbar
         actionBar.setToolbarTitleWithActionBack(
             R.drawable.ic_nav_close_dark_btn,
-            "Result"
+            getString(R.string.menu_result)
         )
         actionBar.setOnMenuLeftClick { onBackPressed() }
     }
