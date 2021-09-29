@@ -66,6 +66,15 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private fun initView() {
         binding.activity = this
 
+        if (sharedPrefer.getPrefer(Constants.USER_ID)?.isEmpty()!!) {
+            binding.toggleUser.isChecked = if (sharedPrefer.getPrefer("is_enable")!!.isEmpty()
+            ) true else sharedPrefer.getPrefer("is_enable").toBoolean()
+        }
+        if (AppLogin.PIN.code == "N" && sharedPrefer.getPrefer(Constants.USER_ID)!!.isNotEmpty()) {
+            binding.toggleUser.isChecked = if (sharedPrefer.getPrefer("is_enable")!!.isEmpty()
+            ) true else sharedPrefer.getPrefer("is_enable").toBoolean()
+        }
+
         if (intent.hasExtra("push_alarm_enabled")) {
             settingViewModel.push_notification_yn =
                 intent.getBooleanExtra("push_alarm_enabled", false)
@@ -75,7 +84,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         if (AppLogin.PIN.code == "N") {
             binding.tvResetPin.isEnabled = false
             binding.tvResetPin.setTextColor(ContextCompat.getColor(this, R.color.color_90A4AE))
-            binding.ivResetPinMore.setColorFilter(ContextCompat.getColor(this, R.color.color_90A4AE))
+            binding.ivResetPinMore.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.color_90A4AE
+                )
+            )
         }
 
         binding.toggleUser.setOnCheckedChangeListener { _, isChecked ->
@@ -121,6 +135,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
             sharedPrefer.putPrefer(
                 Constants.Push.PUSH_ALARM,
                 if (settingViewModel.settingData!!.push_alarm_enabled!!) "Y" else "N"
+            )
+
+            if (sharedPrefer.getPrefer(Constants.USER_ID)?.isEmpty()!! || AppLogin.PIN.code == "N"
+            ) sharedPrefer.putPrefer(
+                "is_enable",
+                settingViewModel.settingData!!.push_alarm_enabled.toString()
             )
 
             isUpdateProfile = true

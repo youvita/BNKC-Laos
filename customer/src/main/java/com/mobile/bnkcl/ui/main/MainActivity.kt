@@ -125,8 +125,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             )
         } else if (AppLogin.PIN.code == "N") {
 
-            binding.navMenu.tvUserName.text = if (sharedPrefer.getPrefer("name").isNullOrBlank()) getString(R.string.nav_user_unknown) else sharedPrefer.getPrefer("name")
-            binding.navMenu.tvUserId.text = if (sharedPrefer.getPrefer(Constants.CUST_NO).isNullOrEmpty()) "" else sharedPrefer.getPrefer(Constants.CUST_NO)
+            binding.navMenu.tvUserName.text = if (sharedPrefer.getPrefer("name").isNullOrBlank()
+            ) getString(R.string.nav_user_unknown) else sharedPrefer.getPrefer("name")
+            binding.navMenu.tvUserId.text = if (sharedPrefer.getPrefer(Constants.CUST_NO).isNullOrEmpty()
+            ) "" else sharedPrefer.getPrefer(Constants.CUST_NO)
             if (sharedPrefer.contain("name")) setUpLogOutBtn()
 
             if (!sharedPrefer.getPrefer(Constants.IMAGE_BITMAP).isNullOrEmpty()) {
@@ -376,6 +378,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                             intent.putExtra(
                                 "push_alarm_enabled",
                                 viewModel.userProfileLiveData.value!!.pushAlarmEnabled
+                            )
+                        } else {
+                            intent.putExtra(
+                                "push_alarm_enabled",
+                                sharedPrefer.getPrefer("is_enable").toBoolean()
                             )
                         }
                     }
