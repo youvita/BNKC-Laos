@@ -337,7 +337,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@drawable/selector_radio_otp"
-                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:layout_marginTop="@dimen/margin_4dp"
                             android:layout_marginEnd="@dimen/padding_10dp"
                             android:clickable="true"
                             android:enabled="false"

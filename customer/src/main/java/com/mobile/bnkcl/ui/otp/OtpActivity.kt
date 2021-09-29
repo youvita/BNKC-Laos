@@ -367,7 +367,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         binding.tvAgree.setText(
             Formats.getSeparateFontByLang(
                 this,
-                18,
+                36,
                 txtAgreement!!.length,
                 txtAgreement,
                 binding.cbAgreement.isChecked
