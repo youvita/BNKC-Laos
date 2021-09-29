@@ -15,12 +15,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import com.bnkc.library.data.type.ErrorCode
-import com.bnkc.library.data.type.Loading
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
-import com.bnkc.sourcemodule.util.Formats
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
@@ -33,7 +32,6 @@ import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.UtilActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Error
 import java.util.*
 import javax.inject.Inject
 
@@ -49,6 +47,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private var countDownTimer: CountDownTimer? = null
     private var txtAgreement: String? = null
     private var isFromPage: Boolean = false
+    private var isVerifiedOTP: Boolean = false
 
     @Inject lateinit var systemDialog: SystemDialog
 
@@ -168,10 +167,14 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             viewModel.context = this
             binding.otpViewModel = viewModel
             binding.isVerified = false
-            txtAgreement = getString(R.string.sign_up_28)
             binding.agreement = txtAgreement
             binding.edtOtp.addTextChangedListener(textOtpWatcher)
             binding.edtPhonenumber.addTextChangedListener(textPhoneNumberWatcher)
+            txtAgreement = if (Locale.getDefault().language.equals("en")) {
+                "I agree to BNK Capital Lao Leasing\'s <font color='#D7191F'><b>Terms and Conditions</b></font>"
+            } else {
+                "ຂ້ອຍເຫັນດີກັບ <font color='#D7191F'><b>ເງື່ອນໄຂ ແລະ ຂໍ້ກຳນົດຂອງ</b></font> ບໍລິສັດ BNK Capital Lao leasing"
+            }
 
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
@@ -268,7 +271,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
-                binding.cbAgreement.isEnabled = true
+                isVerifiedOTP = true
             }
         }
         viewModel.verifyOTPLiveData.observe(this, {
@@ -365,15 +368,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         binding.edtOtp.isEnabled = false
         binding.btnContinue.text = viewModel.setUpButtonText()
         binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_cfd8dc))
-        binding.tvAgree.setText(
-            Formats.getSeparateFontByLang(
-                this,
-                36,
-                txtAgreement!!.length,
-                txtAgreement,
-                binding.cbAgreement.isChecked
-            ), TextView.BufferType.SPANNABLE
-        )
+        binding.tvAgree.text = getString(R.string.sign_up_28)
     }
 
     private fun initEvent(){
@@ -419,30 +414,14 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             }
             Log.d(">>>>", "initEvent: $isAgreementOk ")
 
-            binding.btnContinue.setActive(binding.cbAgreement.isChecked)
+            binding.btnContinue.setActive(binding.cbAgreement.isChecked && isVerifiedOTP)
             binding.tvAgree.setOnClickListener(if (binding.cbAgreement.isChecked) this else null)
             if (binding.cbAgreement.isChecked) {
                 binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
-                binding.tvAgree.setText(
-                    Formats.getSeparateFontByLang(
-                        this,
-                        18,
-                        txtAgreement!!.length,
-                        txtAgreement,
-                        binding.cbAgreement.isChecked
-                    ), TextView.BufferType.SPANNABLE
-                )
+                binding.tvAgree.setText(HtmlCompat.fromHtml(txtAgreement!!, HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE)
             } else {
                 binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_cfd8dc))
-                binding.tvAgree.setText(
-                    Formats.getSeparateFontByLang(
-                        this,
-                        18,
-                        txtAgreement!!.length,
-                        txtAgreement,
-                        binding.cbAgreement.isChecked
-                    ), TextView.BufferType.SPANNABLE
-                )
+                binding.tvAgree.text = getString(R.string.sign_up_28)
             }
 
         }

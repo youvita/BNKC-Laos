@@ -340,7 +340,6 @@
                             android:layout_marginTop="@dimen/margin_4dp"
                             android:layout_marginEnd="@dimen/padding_10dp"
                             android:clickable="true"
-                            android:enabled="false"
                             android:checked="@{otpViewModel.checked}"
                             android:focusable="true"
                             android:onClick="@{(v) -> otpViewModel.agreementCheckBoxClick()}"/>
