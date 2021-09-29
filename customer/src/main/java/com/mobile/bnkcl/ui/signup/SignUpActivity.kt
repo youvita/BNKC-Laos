@@ -18,6 +18,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.area.AddressData
 import com.mobile.bnkcl.data.request.auth.IdNumReq
 import com.mobile.bnkcl.data.response.area.AreaItems
+import com.mobile.bnkcl.data.response.auth.AddressReqObj
 import com.mobile.bnkcl.data.response.auth.AreaObj
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
@@ -257,21 +258,79 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     }else {
                         ""
                     }
-                    binding.vbResult.isEnable(
-                        binding.edtName.text.toString(),
-                        binding.tvDob.text.toString(),
-                        binding.edtIdNum.text.toString(),
-                        "M",
-                        "capital",
-                        "district",
-                        "village",
-                        binding.lltAdditional.edtDetailedAddress.text.toString(),
-                        binding.lltAdditional.edtEtc.text.toString(),
-                        binding.lltAdditional.edtBankName.text.toString(),
-                        binding.lltAdditional.edtAccountNumber.text.toString(),
-                        jobType!!,
-                        binding.edtRecommend.text.toString(),
-                    )
+                    var gender = if (viewModel.signUpRequest.gender != null){
+                        viewModel.signUpRequest.gender
+                    }else {
+                        ""
+                    }
+
+                    var address = ""
+                    if (binding.lltAdditional.cbEtc.isChecked){
+                        address = viewModel.signUpRequest.etc_detailed_address!!
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            address,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }else {
+                        val capital = if (viewModel.addressReqObj.state != null){
+                            viewModel.signUpRequest.job_type
+                        }else {
+                            ""
+                        }
+                        var district = if (viewModel.addressReqObj.district != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        var village = if (viewModel.addressReqObj.village != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        var detail = if (viewModel.addressReqObj.more_info != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            capital!!,
+                            district!!,
+                            village!!,
+                            detail!!,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }
+
+//                    binding.vbResult.isEnable(
+//                        binding.edtName.text.toString(),
+//                        binding.tvDob.text.toString(),
+//                        binding.edtIdNum.text.toString(),
+//                        gender!!,
+//                        binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                        binding.lltAdditional.edtEtc.text.toString(),
+//                        binding.lltAdditional.edtBankName.text.toString(),
+//                        binding.lltAdditional.edtAccountNumber.text.toString(),
+//                        jobType!!,
+//                        binding.edtRecommend.text.toString(),
+//                    )
                     removeToDefault(valChanged, 1)
                 }
 
@@ -912,7 +971,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
     }
 
+    var tempAddressObj : AddressReqObj? = null
     private fun etcClick(){
+        tempAddressObj = viewModel.addressReqObj
         if (binding.lltAdditional.cbEtc.isChecked == isChecked){
             binding.lltAdditional.edtEtc.isEnabled = isEnable
             binding.lltAdditional.tvCapital.isEnabled = !isEnable
@@ -920,6 +981,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
             binding.lltAdditional.edtDetailedAddress.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
 
+            viewModel.addressReqObj = AddressReqObj()
+            viewModel.signUpRequest.etc_detailed_address = binding.lltAdditional.edtEtc.text.toString()
 
         }else{
             binding.lltAdditional.edtEtc.isEnabled = !isEnable
@@ -927,6 +990,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.lltAdditional.tvDistrict.isEnabled = isEnable
             binding.lltAdditional.tvVillage.isEnabled = isEnable
             binding.lltAdditional.edtDetailedAddress.isEnabled = isEnable
+
+            viewModel.addressReqObj = tempAddressObj!!
+            tempAddressObj = viewModel.addressReqObj
 
             binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
             binding.lltAdditional.tvDistrict.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))

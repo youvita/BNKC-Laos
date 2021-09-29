@@ -488,6 +488,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private var tvReSendOTPClickListener = View.OnClickListener {
         try {
+            showLoading(false)
             viewModel.sendOTP(viewModel.phoneNumber)
             binding.edtOtp.text?.clear()
         } catch (e: Exception) {
