@@ -24,32 +24,32 @@ class FormatUtil {
          * Used to append % in the input text Rate ex : 12.4%
          */
         fun getPercentageFormattedString(value: String): String? {
-            var value = value
             var history = ""
-            var fixedValue = ""
-            if (value.length == 3 && value[1] == '.') { // #case : input dot manually and have 2 digit already ex: 12
+            if (value.length == 3 && value[2] == '.') { // #case : input dot manually and have 2 digit already ex: 12
                 history = value
             } else {
-                if (value.length == 3 && value[1] != '.') { // #case : input dot manually
-                    fixedValue = value
-                    value = if (value[fixedValue.length - 1] == '.') {
-                        fixedValue.replace(".", "").substring(0, fixedValue.length - 1)
-                    } else if (value[1] == '.') {
-                        fixedValue
-                    } else {
-                        fixedValue.replace(".", "").substring(
-                            0,
-                            value.replace("%", "").length - 1
-                        ) + "." + value[fixedValue.length - 1].toString() + ""
+                if (value.length == 1 && value[0] == '%') { // #case : user delete all number we have to append nothing to EditText
+                    history = ""
+                }
+                else if (value.length == 3 && value[1] != '.') { // #case : input dot manually
+                    history = when {
+                        value[value.length - 1] == '.' -> {
+                            value.replace(".", "").substring(0, value.length - 1)
+                        }
+                        value[1] == '.' -> {
+                            value
+                        }
+                        else -> {
+                            value.replace(".", "").substring(
+                                0,
+                                value.length - 1
+                            ).plus(".").plus(value[value.length - 1].toString())
+                        }
                     }
-                    history = value
                 } else {
                     history = value
                 }
             }
-//            if (history.toInt() > 99){
-//                history = history.substring(0,2).plus(".").plus(history.substring(2))
-//            }
             return history
         }
 

@@ -24,6 +24,7 @@ import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.max
 
 @AndroidEntryPoint
 class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
@@ -37,33 +38,6 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
-
-    private val textInterestRateWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        @SuppressLint("UseCompatLoadingForDrawables")
-        override fun afterTextChanged(s: Editable?) {
-            if (s.toString().isNotEmpty()) viewModel.leaseCalculateReq.interest_rate = s.toString().toInt()
-            binding.edRate.setSelection(binding.edRate.text!!.length)
-
-            val amount = if(viewModel.leaseCalculateReq.lease_amount != null){
-                viewModel.leaseCalculateReq.lease_amount
-            }else {
-                ""
-            }
-            val term = if(viewModel.leaseCalculateReq.repayment_term != null){
-                viewModel.leaseCalculateReq.repayment_term
-            }else {
-                ""
-            }
-
-            binding.btnCalculate.isEnable(
-                amount!!,
-                s.toString(),
-                term.toString()
-            )
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
@@ -170,7 +144,24 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
         binding.edRate.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val amount = if (viewModel.leaseCalculateReq.lease_amount != null) {
+                    viewModel.leaseCalculateReq.lease_amount
+                } else {
+                    ""
+                }
+                val term = if (viewModel.leaseCalculateReq.repayment_term != null) {
+                    viewModel.leaseCalculateReq.repayment_term
+                } else {
+                    ""
+                }
+                binding.btnCalculate.isEnable(
+                    amount!!,
+                    s.toString(),
+                    term.toString()
+                )
+
+            }
 
             @SuppressLint("UseCompatLoadingForDrawables")
             override fun afterTextChanged(s: Editable?) {
@@ -181,32 +172,17 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
                     val preSelection = binding.edRate.selectionEnd
                     s?.replace(0, value.length, fixedValue)
                     val selection = preSelection + fixedValue.length - value.length
-//                    if (binding.edRate.selectionEnd == s?.length) {
-//                        binding.edRate.setSelection(s.length - 1)
-//                    } else {
-//                        binding.edRate.setSelection(selection)
-//                    }
-                    binding.edRate.setSelection(selection)
-                    if (s.toString().isNotEmpty()) viewModel.leaseCalculateReq.interest_rate =
-                        s.toString().toInt()
-
-                    val amount = if (viewModel.leaseCalculateReq.lease_amount != null) {
-                        viewModel.leaseCalculateReq.lease_amount
+                    if (binding.edRate.selectionEnd == s.toString().length) {
+                        binding.edRate.setSelection(max(s.toString().length,0)) //(s.toString().length - 1).coerceAtLeast(0)
                     } else {
-                        ""
-                    }
-                    val term = if (viewModel.leaseCalculateReq.repayment_term != null) {
-                        viewModel.leaseCalculateReq.repayment_term
-                    } else {
-                        ""
+                        binding.edRate.setSelection(max(selection,0))
                     }
 
-                    binding.btnCalculate.isEnable(
-                        amount!!,
-                        s.toString(),
-                        term.toString()
-                    )
+                    if (s.toString().isNotEmpty())
+                        viewModel.leaseCalculateReq.interest_rate = s.toString().toFloat()
                     binding.edRate.addTextChangedListener(this)
+
+
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }

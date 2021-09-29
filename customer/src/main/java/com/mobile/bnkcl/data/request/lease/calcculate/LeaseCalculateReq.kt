@@ -10,7 +10,7 @@ data class LeaseCalculateReq (
     var lease_amount: String? = null,
 
     @SerializedName("interest_rate")
-    var interest_rate: Int ? = null,
+    var interest_rate: Float ? = null,
 
     @SerializedName("repayment_term")
     var repayment_term: Int? = null
