@@ -159,6 +159,9 @@
     <string name="product_etc">etc</string>
     <string name="product_apply_now">Apply Now</string>
 
+    <!-- calculate -->
+    <string name="calculate_interest_rate">Interest Rate (Annual)</string>
+
     <string name="monthly_repayment">Monthly Repayment</string>
     <string name="total_principal_paid">Total Principal Paid</string>
     <string name="total_interest_paid">Total Interest Paid</string>

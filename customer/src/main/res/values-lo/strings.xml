@@ -155,6 +155,9 @@
     <string name="product_etc">ອື່ນໆ</string>
     <string name="product_apply_now">ສະໜັກຕອນນີ້</string>
 
+    <!-- calculate -->
+    <string name="calculate_interest_rate">ອັດຕາດອກເບ້ຍ (ຕໍ່ປີ)</string>
+
     <string name="monthly_repayment">ຍອດຊຳລະຄືນຕໍ່ເດືອນ</string>
     <string name="total_principal_paid">ຈຳນວນຕົ້ນທືນທີ່ຕ້ອງຈ່າຍທັງໝົດ</string>
     <string name="total_interest_paid">ຈຳນວນດອກເບ້ຍທີ່ຕ້ອງຈ່າຍທັງໝົດ</string>
