@@ -48,7 +48,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>(){
             }
 
             AskBNKCActivity::class.java.simpleName ->{
-                viewModel.showSomeView = false
+                viewModel.showSomeView = true
             }
 
             Constants.SIGN_UP -> {
