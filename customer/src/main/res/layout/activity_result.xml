@@ -31,7 +31,7 @@
                 android:layout_marginStart="@dimen/margin_20dp"
                 android:layout_marginTop="@dimen/margin_50dp"
                 android:layout_marginEnd="@dimen/margin_20dp"
-                android:src="@drawable/ic_brand_bnkc_lao_ndmf"
+                android:src="@drawable/ic_brand_bnkc_lao_leasing"
                 android:visibility="visible" />
 
             <LinearLayout
