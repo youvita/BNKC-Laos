@@ -202,7 +202,7 @@
             <com.bnkc.sourcemodule.ui.ValidateButton
                 android:id="@+id/btn_calculate"
                 android:layout_width="match_parent"
-                app:buttonText="@string/product_calculate"
+                app:buttonText="@string/calculate"
                 app:textAllCaps="true"
                 app:is_active="false"
                 android:layout_marginStart="20dp"
