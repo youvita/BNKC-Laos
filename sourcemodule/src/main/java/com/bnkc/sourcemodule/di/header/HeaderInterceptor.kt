@@ -60,7 +60,7 @@ class HeaderInterceptor {
     @Singleton
     fun provideCookieJar(): CookieManager {
         val cookieManager = CookieManager()
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ORIGINAL_SERVER)
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
         return cookieManager
     }
 
