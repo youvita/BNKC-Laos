@@ -180,24 +180,81 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     }else {
                         ""
                     }
+                    var gender = if (viewModel.signUpRequest.gender != null){
+                        viewModel.signUpRequest.gender
+                    }else {
+                        ""
+                    }
 
+                    if (binding.lltAdditional.cbEtc.isChecked){
+                        val address = viewModel.signUpRequest.etc_detailed_address!!
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            address,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }else {
+                        val capital = if (viewModel.addressReqObj.state != null){
+                            viewModel.signUpRequest.job_type
+                        }else {
+                            ""
+                        }
+                        val district = if (viewModel.addressReqObj.district != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        val village = if (viewModel.addressReqObj.village != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        val detail = if (viewModel.addressReqObj.more_info != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            capital!!,
+                            district!!,
+                            village!!,
+                            detail!!,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }
 
-
-                    binding.vbResult.isEnable(
-                        binding.edtName.text.toString(),
-                        binding.tvDob.text.toString(),
-                        binding.edtIdNum.text.toString(),
-                        "M",
-                        "capital",
-                        "district",
-                        "village",
-                        binding.lltAdditional.edtDetailedAddress.text.toString(),
-                        binding.lltAdditional.edtEtc.text.toString(),
-                        binding.lltAdditional.edtBankName.text.toString(),
-                        binding.lltAdditional.edtAccountNumber.text.toString(),
-                        jobType!!,
-                        binding.edtRecommend.text.toString(),
-                    )
+//                    binding.vbResult.isEnable(
+//                        binding.edtName.text.toString(),
+//                        binding.tvDob.text.toString(),
+//                        binding.edtIdNum.text.toString(),
+//                        "M",
+//                        "capital",
+//                        "district",
+//                        "village",
+//                        binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                        binding.lltAdditional.edtEtc.text.toString(),
+//                        binding.lltAdditional.edtBankName.text.toString(),
+//                        binding.lltAdditional.edtAccountNumber.text.toString(),
+//                        jobType!!,
+//                        binding.edtRecommend.text.toString(),
+//                    )
 
                     removeToDefault(valChanged, 2)
                 }
@@ -374,21 +431,82 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     }else {
                         ""
                     }
-                    binding.vbResult.isEnable(
-                        binding.edtName.text.toString(),
-                        binding.tvDob.text.toString(),
-                        binding.edtIdNum.text.toString(),
-                        "M",
-                        "capital",
-                        "district",
-                        "village",
-                        binding.lltAdditional.edtDetailedAddress.text.toString(),
-                        binding.lltAdditional.edtEtc.text.toString(),
-                        binding.lltAdditional.edtBankName.text.toString(),
-                        binding.lltAdditional.edtAccountNumber.text.toString(),
-                        jobType!!,
-                        binding.edtRecommend.text.toString(),
-                    )
+
+                    var gender = if (viewModel.signUpRequest.gender != null){
+                        viewModel.signUpRequest.gender
+                    }else {
+                        ""
+                    }
+
+                    if (binding.lltAdditional.cbEtc.isChecked){
+                        val address = viewModel.signUpRequest.etc_detailed_address!!
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            address,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }else {
+                        val capital = if (viewModel.addressReqObj.state != null){
+                            viewModel.signUpRequest.job_type
+                        }else {
+                            ""
+                        }
+                        val district = if (viewModel.addressReqObj.district != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        val village = if (viewModel.addressReqObj.village != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        val detail = if (viewModel.addressReqObj.more_info != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            capital!!,
+                            district!!,
+                            village!!,
+                            detail!!,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }
+
+//                    binding.vbResult.isEnable(
+//                        binding.edtName.text.toString(),
+//                        binding.tvDob.text.toString(),
+//                        binding.edtIdNum.text.toString(),
+//                        "M",
+//                        "capital",
+//                        "district",
+//                        "village",
+//                        binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                        binding.lltAdditional.edtEtc.text.toString(),
+//                        binding.lltAdditional.edtBankName.text.toString(),
+//                        binding.lltAdditional.edtAccountNumber.text.toString(),
+//                        jobType!!,
+//                        binding.edtRecommend.text.toString(),
+//                    )
 
                 }
 
@@ -425,21 +543,82 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                    }else {
                        ""
                    }
-                   binding.vbResult.isEnable(
-                       binding.edtName.text.toString(),
-                       binding.tvDob.text.toString(),
-                       binding.edtIdNum.text.toString(),
-                       "M",
-                       "capital",
-                       "district",
-                       "village",
-                       binding.lltAdditional.edtDetailedAddress.text.toString(),
-                       binding.lltAdditional.edtEtc.text.toString(),
-                       binding.lltAdditional.edtBankName.text.toString(),
-                       binding.lltAdditional.edtAccountNumber.text.toString(),
-                       jobType!!,
-                       binding.edtRecommend.text.toString(),
-                   )
+
+                   var gender = if (viewModel.signUpRequest.gender != null){
+                       viewModel.signUpRequest.gender
+                   }else {
+                       ""
+                   }
+
+                   if (binding.lltAdditional.cbEtc.isChecked){
+                       val address = viewModel.signUpRequest.etc_detailed_address!!
+                       binding.vbResult.isEnable(
+                           binding.edtName.text.toString(),
+                           binding.tvDob.text.toString(),
+                           binding.edtIdNum.text.toString(),
+                           gender!!,
+                           address,
+                           binding.lltAdditional.edtDetailedAddress.text.toString(),
+                           binding.lltAdditional.edtEtc.text.toString(),
+                           binding.lltAdditional.edtBankName.text.toString(),
+                           binding.lltAdditional.edtAccountNumber.text.toString(),
+                           jobType!!,
+                           binding.edtRecommend.text.toString(),
+                       )
+                   }else {
+                       val capital = if (viewModel.addressReqObj.state != null){
+                           viewModel.signUpRequest.job_type
+                       }else {
+                           ""
+                       }
+                       val district = if (viewModel.addressReqObj.district != null){
+                           viewModel.signUpRequest.gender
+                       }else {
+                           ""
+                       }
+                       val village = if (viewModel.addressReqObj.village != null){
+                           viewModel.signUpRequest.gender
+                       }else {
+                           ""
+                       }
+                       val detail = if (viewModel.addressReqObj.more_info != null){
+                           viewModel.signUpRequest.gender
+                       }else {
+                           ""
+                       }
+                       binding.vbResult.isEnable(
+                           binding.edtName.text.toString(),
+                           binding.tvDob.text.toString(),
+                           binding.edtIdNum.text.toString(),
+                           gender!!,
+                           capital!!,
+                           district!!,
+                           village!!,
+                           detail!!,
+                           binding.lltAdditional.edtDetailedAddress.text.toString(),
+                           binding.lltAdditional.edtEtc.text.toString(),
+                           binding.lltAdditional.edtBankName.text.toString(),
+                           binding.lltAdditional.edtAccountNumber.text.toString(),
+                           jobType!!,
+                           binding.edtRecommend.text.toString(),
+                       )
+                   }
+
+//                   binding.vbResult.isEnable(
+//                       binding.edtName.text.toString(),
+//                       binding.tvDob.text.toString(),
+//                       binding.edtIdNum.text.toString(),
+//                       "M",
+//                       "capital",
+//                       "district",
+//                       "village",
+//                       binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                       binding.lltAdditional.edtEtc.text.toString(),
+//                       binding.lltAdditional.edtBankName.text.toString(),
+//                       binding.lltAdditional.edtAccountNumber.text.toString(),
+//                       jobType!!,
+//                       binding.edtRecommend.text.toString(),
+//                   )
                }
 
                listChoiceDialog.isCancelable = true
@@ -475,21 +654,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                        )
                    )
                    viewModel.signUpRequest.job_type = codeObj!![selectJobType].code
-                   binding.vbResult.isEnable(
-                       binding.edtName.text.toString(),
-                       binding.tvDob.text.toString(),
-                       binding.edtIdNum.text.toString(),
-                       "M",
-                       "capital",
-                       "district",
-                       "village",
-                       binding.lltAdditional.edtDetailedAddress.text.toString(),
-                       binding.lltAdditional.edtEtc.text.toString(),
-                       binding.lltAdditional.edtBankName.text.toString(),
-                       binding.lltAdditional.edtAccountNumber.text.toString(),
-                       jobType!!,
-                       binding.edtRecommend.text.toString(),
-                   )
+                   var gender = if (viewModel.signUpRequest.gender != null){
+                        viewModel.signUpRequest.gender
+                    }else {
+                        ""
+                    }
+
+                    if (binding.lltAdditional.cbEtc.isChecked){
+                        val address = viewModel.signUpRequest.etc_detailed_address!!
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            address,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }else {
+                        val capital = if (viewModel.addressReqObj.state != null){
+                            viewModel.signUpRequest.job_type
+                        }else {
+                            ""
+                        }
+                        val district = if (viewModel.addressReqObj.district != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        val village = if (viewModel.addressReqObj.village != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        val detail = if (viewModel.addressReqObj.more_info != null){
+                            viewModel.signUpRequest.gender
+                        }else {
+                            ""
+                        }
+                        binding.vbResult.isEnable(
+                            binding.edtName.text.toString(),
+                            binding.tvDob.text.toString(),
+                            binding.edtIdNum.text.toString(),
+                            gender!!,
+                            capital!!,
+                            district!!,
+                            village!!,
+                            detail!!,
+                            binding.lltAdditional.edtDetailedAddress.text.toString(),
+                            binding.lltAdditional.edtEtc.text.toString(),
+                            binding.lltAdditional.edtBankName.text.toString(),
+                            binding.lltAdditional.edtAccountNumber.text.toString(),
+                            jobType!!,
+                            binding.edtRecommend.text.toString(),
+                        )
+                    }
+//                   binding.vbResult.isEnable(
+//                       binding.edtName.text.toString(),
+//                       binding.tvDob.text.toString(),
+//                       binding.edtIdNum.text.toString(),
+//                       "M",
+//                       "capital",
+//                       "district",
+//                       "village",
+//                       binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                       binding.lltAdditional.edtEtc.text.toString(),
+//                       binding.lltAdditional.edtBankName.text.toString(),
+//                       binding.lltAdditional.edtAccountNumber.text.toString(),
+//                       jobType!!,
+//                       binding.edtRecommend.text.toString(),
+//                   )
                }
 
                listChoiceDialog.isCancelable = true
@@ -672,21 +910,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                s.toString(),
-                binding.tvDob.text.toString(),
-                binding.edtIdNum.text.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                binding.lltAdditional.edtEtc.text.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                s.toString(),
+//                binding.tvDob.text.toString(),
+//                binding.edtIdNum.text.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                binding.lltAdditional.edtEtc.text.toString(),
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
+//            )
         }
 
     }
@@ -707,21 +1004,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                binding.edtName.text.toString(),
-                binding.tvDob.text.toString(),
-                s.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                binding.lltAdditional.edtEtc.text.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                binding.edtName.text.toString(),
+//                binding.tvDob.text.toString(),
+//                s.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                binding.lltAdditional.edtEtc.text.toString(),
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
+//            )
         }
 
     }
@@ -742,21 +1098,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                s.toString(),
-                binding.tvDob.text.toString(),
-                binding.edtIdNum.text.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                s.toString(),
-                binding.lltAdditional.edtEtc.text.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                s.toString(),
+//                binding.tvDob.text.toString(),
+//                binding.edtIdNum.text.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                s.toString(),
+//                binding.lltAdditional.edtEtc.text.toString(),
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
+//            )
         }
 
     }
@@ -776,21 +1191,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                s.toString(),
-                binding.tvDob.text.toString(),
-                binding.edtIdNum.text.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                s.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                s.toString(),
+//                binding.tvDob.text.toString(),
+//                binding.edtIdNum.text.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                s.toString(),
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
+//            )
         }
 
     }
@@ -810,21 +1284,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                s.toString(),
-                binding.tvDob.text.toString(),
-                binding.edtIdNum.text.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                binding.lltAdditional.edtEtc.text.toString(),
-                s.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                s.toString(),
+//                binding.tvDob.text.toString(),
+//                binding.edtIdNum.text.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                binding.lltAdditional.edtEtc.text.toString(),
+//                s.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
+//            )
         }
 
     }
@@ -844,21 +1377,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                s.toString(),
-                binding.tvDob.text.toString(),
-                binding.edtIdNum.text.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                binding.lltAdditional.edtEtc.text.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                s.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                s.toString(),
+//                binding.tvDob.text.toString(),
+//                binding.edtIdNum.text.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                binding.lltAdditional.edtEtc.text.toString(),
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                s.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
+//            )
         }
 
     }
@@ -878,21 +1470,80 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             }else {
                 ""
             }
-            binding.vbResult.isEnable(
-                s.toString(),
-                binding.tvDob.text.toString(),
-                binding.edtIdNum.text.toString(),
-                "M",
-                "capital",
-                "district",
-                "village",
-                binding.lltAdditional.edtDetailedAddress.text.toString(),
-                binding.lltAdditional.edtEtc.text.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                s.toString(),
-            )
+            var gender = if (viewModel.signUpRequest.gender != null){
+                viewModel.signUpRequest.gender
+            }else {
+                ""
+            }
+
+            if (binding.lltAdditional.cbEtc.isChecked){
+                val address = viewModel.signUpRequest.etc_detailed_address!!
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    address,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }else {
+                val capital = if (viewModel.addressReqObj.state != null){
+                    viewModel.signUpRequest.job_type
+                }else {
+                    ""
+                }
+                val district = if (viewModel.addressReqObj.district != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val village = if (viewModel.addressReqObj.village != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                val detail = if (viewModel.addressReqObj.more_info != null){
+                    viewModel.signUpRequest.gender
+                }else {
+                    ""
+                }
+                binding.vbResult.isEnable(
+                    binding.edtName.text.toString(),
+                    binding.tvDob.text.toString(),
+                    binding.edtIdNum.text.toString(),
+                    gender!!,
+                    capital!!,
+                    district!!,
+                    village!!,
+                    detail!!,
+                    binding.lltAdditional.edtDetailedAddress.text.toString(),
+                    binding.lltAdditional.edtEtc.text.toString(),
+                    binding.lltAdditional.edtBankName.text.toString(),
+                    binding.lltAdditional.edtAccountNumber.text.toString(),
+                    jobType!!,
+                    binding.edtRecommend.text.toString(),
+                )
+            }
+//            binding.vbResult.isEnable(
+//                s.toString(),
+//                binding.tvDob.text.toString(),
+//                binding.edtIdNum.text.toString(),
+//                "M",
+//                "capital",
+//                "district",
+//                "village",
+//                binding.lltAdditional.edtDetailedAddress.text.toString(),
+//                binding.lltAdditional.edtEtc.text.toString(),
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                s.toString(),
+//            )
         }
 
     }

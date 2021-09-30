@@ -332,7 +332,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                     ContextCompat.getDrawable(this, R.drawable.ic_info_red_ico_1),
                     null
                 )
-//                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
+                binding.tvResend.setOnClickListener(tvReSendOTPClickListener)
             }
         })
         viewModel.isSignUpLiveData.observe(this, {
@@ -467,7 +467,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
 
     private var tvReSendOTPClickListener = View.OnClickListener {
         try {
-            showLoading(false)
+            showLoading(true)
             viewModel.sendOTP(viewModel.phoneNumber)
             binding.edtOtp.text?.clear()
         } catch (e: Exception) {
