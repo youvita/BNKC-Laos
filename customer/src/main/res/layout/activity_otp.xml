@@ -191,7 +191,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:paddingStart="15dp"
-                                android:hint="00-000-000"
+                                android:hint="000-0000-0000"
                                 android:textColorHint="#cfd8dc"
                                 style="@style/font15_radio_medium_not_km"
                                 android:background="@null"

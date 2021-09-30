@@ -2,6 +2,7 @@ package com.mobile.bnkcl.ui.signup
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -22,6 +23,7 @@ class TermsAndConditionsActivity : BaseActivity<ActivityTermsAndConditionsBindin
     override fun getLayoutId(): Int = R.layout.activity_terms_and_conditions
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStatusBarColor(Color.WHITE)
         super.onCreate(savedInstanceState)
 
         init()

@@ -83,7 +83,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         if (intent.hasExtra(Constants.SESSION_ID)){
             viewModel.signUpRequest.session_id = intent.getStringExtra(Constants.SESSION_ID).toString()
         }
-
+        viewModel.addressReqObj = AddressReqObj()
         /*observe data*/
         addressInfoViewModel.getCapitalData()
         observeCapitalArea()
@@ -172,7 +172,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     capitalData.alias1 = capital.alias1
                     capitalData.alias2 = capital.alias1
 
-                    viewModel.addressReqObj.state = capitalData
+                    viewModel.addressReqObj?.state = capitalData
                     viewModel.signUpRequest.address = viewModel.addressReqObj
 
                     val jobType = if (viewModel.signUpRequest.job_type != null){
@@ -202,23 +202,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.edtRecommend.text.toString(),
                         )
                     }else {
-                        val capital = if (viewModel.addressReqObj.state != null){
-                            viewModel.signUpRequest.job_type
+                        val capital = if (viewModel.addressReqObj?.state != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val district = if (viewModel.addressReqObj.district != null){
-                            viewModel.signUpRequest.gender
+                        val district = if (viewModel.addressReqObj?.district != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val village = if (viewModel.addressReqObj.village != null){
-                            viewModel.signUpRequest.gender
+                        val village = if (viewModel.addressReqObj?.village != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val detail = if (viewModel.addressReqObj.more_info != null){
-                            viewModel.signUpRequest.gender
+                        val detail = if (viewModel.addressReqObj?.more_info != null){
+                            viewModel.addressReqObj?.more_info
                         }else {
                             ""
                         }
@@ -227,9 +227,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.tvDob.text.toString(),
                             binding.edtIdNum.text.toString(),
                             gender!!,
-                            capital!!,
-                            district!!,
-                            village!!,
+                            capital,
+                            district,
+                            village,
                             detail!!,
                             binding.lltAdditional.edtDetailedAddress.text.toString(),
                             binding.lltAdditional.edtEtc.text.toString(),
@@ -304,7 +304,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     districtData.iso_code = district.iso_code
                     districtData.alias1 = district.alias1
                     districtData.alias2 = district.alias1
-                    viewModel.addressReqObj.district = districtData
+                    viewModel.addressReqObj?.district = districtData
                     viewModel.signUpRequest.address = viewModel.addressReqObj
 //                    binding.lltAdditional.tvVillage.isEnabled = true
                     valChanged = !objDistrict!![b].name.equals(resetCapitalVal)
@@ -338,23 +338,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.edtRecommend.text.toString(),
                         )
                     }else {
-                        val capital = if (viewModel.addressReqObj.state != null){
-                            viewModel.signUpRequest.job_type
+                        val capital = if (viewModel.addressReqObj?.state != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        var district = if (viewModel.addressReqObj.district != null){
-                            viewModel.signUpRequest.gender
+                        val dis = if (viewModel.addressReqObj?.district != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        var village = if (viewModel.addressReqObj.village != null){
-                            viewModel.signUpRequest.gender
+                        val village = if (viewModel.addressReqObj?.village != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        var detail = if (viewModel.addressReqObj.more_info != null){
-                            viewModel.signUpRequest.gender
+                        val detail = if (viewModel.addressReqObj?.more_info != null){
+                            "Y"
                         }else {
                             ""
                         }
@@ -363,10 +363,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.tvDob.text.toString(),
                             binding.edtIdNum.text.toString(),
                             gender!!,
-                            capital!!,
-                            district!!,
-                            village!!,
-                            detail!!,
+                            capital,
+                            dis,
+                            village,
+                            detail,
                             binding.lltAdditional.edtDetailedAddress.text.toString(),
                             binding.lltAdditional.edtEtc.text.toString(),
                             binding.lltAdditional.edtBankName.text.toString(),
@@ -424,7 +424,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     villageData.iso_code = village.iso_code
                     villageData.alias1 = village.alias1
                     villageData.alias2 = village.alias1
-                    viewModel.addressReqObj.village = villageData
+                    viewModel.addressReqObj?.village = villageData
                     viewModel.signUpRequest.address = viewModel.addressReqObj
                     val jobType = if (viewModel.signUpRequest.job_type != null){
                         viewModel.signUpRequest.job_type
@@ -454,23 +454,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.edtRecommend.text.toString(),
                         )
                     }else {
-                        val capital = if (viewModel.addressReqObj.state != null){
-                            viewModel.signUpRequest.job_type
+                        val capital = if (viewModel.addressReqObj?.state != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val district = if (viewModel.addressReqObj.district != null){
-                            viewModel.signUpRequest.gender
+                        val district = if (viewModel.addressReqObj?.district != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val village = if (viewModel.addressReqObj.village != null){
-                            viewModel.signUpRequest.gender
+                        val vil = if (viewModel.addressReqObj?.village != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val detail = if (viewModel.addressReqObj.more_info != null){
-                            viewModel.signUpRequest.gender
+                        val detail = if (viewModel.addressReqObj?.more_info != null){
+                            viewModel.addressReqObj?.more_info
                         }else {
                             ""
                         }
@@ -479,9 +479,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.tvDob.text.toString(),
                             binding.edtIdNum.text.toString(),
                             gender!!,
-                            capital!!,
-                            district!!,
-                            village!!,
+                            capital,
+                            district,
+                            vil,
                             detail!!,
                             binding.lltAdditional.edtDetailedAddress.text.toString(),
                             binding.lltAdditional.edtEtc.text.toString(),
@@ -544,7 +544,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                        ""
                    }
 
-                   var gender = if (viewModel.signUpRequest.gender != null){
+                   val gender = if (viewModel.signUpRequest.gender != null){
                        viewModel.signUpRequest.gender
                    }else {
                        ""
@@ -566,23 +566,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                            binding.edtRecommend.text.toString(),
                        )
                    }else {
-                       val capital = if (viewModel.addressReqObj.state != null){
-                           viewModel.signUpRequest.job_type
+                       val capital = if (viewModel.addressReqObj?.state != null){
+                           "Y"
                        }else {
                            ""
                        }
-                       val district = if (viewModel.addressReqObj.district != null){
-                           viewModel.signUpRequest.gender
+                       val district = if (viewModel.addressReqObj?.district != null){
+                           "Y"
                        }else {
                            ""
                        }
-                       val village = if (viewModel.addressReqObj.village != null){
-                           viewModel.signUpRequest.gender
+                       val village = if (viewModel.addressReqObj?.village != null){
+                           "Y"
                        }else {
                            ""
                        }
-                       val detail = if (viewModel.addressReqObj.more_info != null){
-                           viewModel.signUpRequest.gender
+                       val detail = if (viewModel.addressReqObj?.more_info != null){
+                           viewModel.addressReqObj?.more_info
                        }else {
                            ""
                        }
@@ -591,9 +591,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                            binding.tvDob.text.toString(),
                            binding.edtIdNum.text.toString(),
                            gender!!,
-                           capital!!,
-                           district!!,
-                           village!!,
+                           capital,
+                           district,
+                           village,
                            detail!!,
                            binding.lltAdditional.edtDetailedAddress.text.toString(),
                            binding.lltAdditional.edtEtc.text.toString(),
@@ -676,23 +676,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.edtRecommend.text.toString(),
                         )
                     }else {
-                        val capital = if (viewModel.addressReqObj.state != null){
-                            viewModel.signUpRequest.job_type
+                        val capital = if (viewModel.addressReqObj?.state != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val district = if (viewModel.addressReqObj.district != null){
-                            viewModel.signUpRequest.gender
+                        val district = if (viewModel.addressReqObj?.district != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val village = if (viewModel.addressReqObj.village != null){
-                            viewModel.signUpRequest.gender
+                        val village = if (viewModel.addressReqObj?.village != null){
+                            "Y"
                         }else {
                             ""
                         }
-                        val detail = if (viewModel.addressReqObj.more_info != null){
-                            viewModel.signUpRequest.gender
+                        val detail = if (viewModel.addressReqObj?.more_info != null){
+                            viewModel.addressReqObj?.more_info
                         }else {
                             ""
                         }
@@ -701,9 +701,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.tvDob.text.toString(),
                             binding.edtIdNum.text.toString(),
                             gender!!,
-                            capital!!,
-                            district!!,
-                            village!!,
+                            capital,
+                            district,
+                            village,
                             detail!!,
                             binding.lltAdditional.edtDetailedAddress.text.toString(),
                             binding.lltAdditional.edtEtc.text.toString(),
@@ -932,23 +932,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    "Y"
                 }else {
                     ""
                 }
@@ -957,9 +957,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
+                    capital,
+                    district,
+                    village,
                     detail!!,
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
@@ -1026,23 +1026,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    viewModel.addressReqObj?.more_info
                 }else {
                     ""
                 }
@@ -1051,9 +1051,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
+                    capital,
+                    district,
+                    village,
                     detail!!,
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
@@ -1091,7 +1091,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
 
         override fun afterTextChanged(s: Editable?) {
-            viewModel.addressReqObj.more_info = s.toString()
+            viewModel.addressReqObj?.more_info = s.toString()
             viewModel.signUpRequest.address = viewModel.addressReqObj
             val jobType = if (viewModel.signUpRequest.job_type != null){
                 viewModel.signUpRequest.job_type
@@ -1120,23 +1120,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    viewModel.addressReqObj?.more_info
                 }else {
                     ""
                 }
@@ -1145,10 +1145,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
-                    detail!!,
+                    capital,
+                    district,
+                    village,
+                    detail.toString(),
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
                     binding.lltAdditional.edtBankName.text.toString(),
@@ -1185,7 +1185,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
 
         override fun afterTextChanged(s: Editable?) {
-            viewModel.signUpRequest.etc_detailed_address = s.toString()
+            viewModel.addressReqObj?.more_info = s.toString()
             val jobType = if (viewModel.signUpRequest.job_type != null){
                 viewModel.signUpRequest.job_type
             }else {
@@ -1213,23 +1213,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    viewModel.addressReqObj?.more_info
                 }else {
                     ""
                 }
@@ -1238,10 +1238,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
-                    detail!!,
+                    capital,
+                    district,
+                    village,
+                    detail.toString(),
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
                     binding.lltAdditional.edtBankName.text.toString(),
@@ -1306,23 +1306,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    viewModel.addressReqObj?.more_info
                 }else {
                     ""
                 }
@@ -1331,10 +1331,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
-                    detail!!,
+                    capital,
+                    district,
+                    village,
+                    detail.toString(),
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
                     binding.lltAdditional.edtBankName.text.toString(),
@@ -1399,23 +1399,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    viewModel.addressReqObj?.more_info
                 }else {
                     ""
                 }
@@ -1424,10 +1424,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
-                    detail!!,
+                    capital,
+                    district,
+                    village,
+                    detail.toString(),
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
                     binding.lltAdditional.edtBankName.text.toString(),
@@ -1492,23 +1492,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.edtRecommend.text.toString(),
                 )
             }else {
-                val capital = if (viewModel.addressReqObj.state != null){
-                    viewModel.signUpRequest.job_type
+                val capital = if (viewModel.addressReqObj?.state != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val district = if (viewModel.addressReqObj.district != null){
-                    viewModel.signUpRequest.gender
+                val district = if (viewModel.addressReqObj?.district != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val village = if (viewModel.addressReqObj.village != null){
-                    viewModel.signUpRequest.gender
+                val village = if (viewModel.addressReqObj?.village != null){
+                    "Y"
                 }else {
                     ""
                 }
-                val detail = if (viewModel.addressReqObj.more_info != null){
-                    viewModel.signUpRequest.gender
+                val detail = if (viewModel.addressReqObj?.more_info != null){
+                    viewModel.addressReqObj?.more_info
                 }else {
                     ""
                 }
@@ -1517,10 +1517,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    capital!!,
-                    district!!,
-                    village!!,
-                    detail!!,
+                    capital,
+                    district,
+                    village,
+                    detail.toString(),
                     binding.lltAdditional.edtDetailedAddress.text.toString(),
                     binding.lltAdditional.edtEtc.text.toString(),
                     binding.lltAdditional.edtBankName.text.toString(),
@@ -1622,9 +1622,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
     }
 
-    var tempAddressObj : AddressReqObj? = null
+    var tmpAddress : AddressReqObj? = null
     private fun etcClick(){
-        tempAddressObj = viewModel.addressReqObj
+        val address = if(viewModel.signUpRequest.etc_detailed_address != null) viewModel.signUpRequest.etc_detailed_address else ""
+        val gender = if(viewModel.signUpRequest.gender != null) viewModel.signUpRequest.gender!! else ""
+        val jobType = if(viewModel.signUpRequest.job_type != null) viewModel.signUpRequest.gender!! else ""
         if (binding.lltAdditional.cbEtc.isChecked == isChecked){
             binding.lltAdditional.edtEtc.isEnabled = isEnable
             binding.lltAdditional.tvCapital.isEnabled = !isEnable
@@ -1632,8 +1634,24 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
             binding.lltAdditional.edtDetailedAddress.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_000000))
 
-            viewModel.addressReqObj = AddressReqObj()
+            tmpAddress = viewModel.addressReqObj
+            viewModel.addressReqObj = null
+
             viewModel.signUpRequest.etc_detailed_address = binding.lltAdditional.edtEtc.text.toString()
+
+            binding.vbResult.isEnable(
+                binding.edtName.text.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                gender,
+                address!!,
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType,
+                binding.edtRecommend.text.toString(),
+            )
 
         }else{
             binding.lltAdditional.edtEtc.isEnabled = !isEnable
@@ -1642,16 +1660,53 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.lltAdditional.tvVillage.isEnabled = isEnable
             binding.lltAdditional.edtDetailedAddress.isEnabled = isEnable
 
-            viewModel.addressReqObj = tempAddressObj!!
-            tempAddressObj = viewModel.addressReqObj
+            viewModel.addressReqObj = tmpAddress
+            tmpAddress = viewModel.addressReqObj
+            viewModel.signUpRequest.etc_detailed_address = ""
 
             binding.lltAdditional.tvCapital.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
             binding.lltAdditional.tvDistrict.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
             binding.lltAdditional.tvVillage.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
             binding.lltAdditional.edtDetailedAddress.setTextColor(ContextCompat.getColor(this, com.bnkc.sourcemodule.R.color.color_90a4ae))
 
-        }
+            val capital = if (tmpAddress?.state != null){
+                "Y"
+            }else {
+                ""
+            }
+            val district = if (tmpAddress?.district != null){
+                "Y"
+            }else {
+                ""
+            }
+            val village = if (tmpAddress?.village != null){
+                "Y"
+            }else {
+                ""
+            }
+            val detail = if (tmpAddress?.more_info != null){
+                tmpAddress?.more_info
+            }else {
+                ""
+            }
+            binding.vbResult.isEnable(
+                binding.edtName.text.toString(),
+                binding.tvDob.text.toString(),
+                binding.edtIdNum.text.toString(),
+                gender,
+                capital,
+                district,
+                village,
+                detail.toString(),
+                binding.lltAdditional.edtDetailedAddress.text.toString(),
+                binding.lltAdditional.edtEtc.text.toString(),
+                binding.lltAdditional.edtBankName.text.toString(),
+                binding.lltAdditional.edtAccountNumber.text.toString(),
+                jobType,
+                binding.edtRecommend.text.toString(),
+            )
 
+        }
 
     }
 

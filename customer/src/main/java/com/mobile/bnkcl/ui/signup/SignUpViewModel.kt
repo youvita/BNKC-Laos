@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private val authRepo: AuthRepo) : BaseViewModel() {
 
-   var addressReqObj : AddressReqObj = AddressReqObj()
+   var addressReqObj : AddressReqObj? = null
    var signUpRequest : SignUpRequest = SignUpRequest()
 
 }

@@ -91,29 +91,25 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             binding.btnContinue.setActive(false)
             binding.edtPhonenumber.tag = s
             val text: String = binding.edtPhonenumber.text.toString()
-            textLength = binding.edtPhonenumber.text.toString().length
-
-            if (text.startsWith("0")) {
-                binding.edtPhonenumber.setText("")
-                return
-            }
+            textLength = text.length
 
             if (text.endsWith("-") || text.endsWith(" ")) return
 
+            if (text.isNotEmpty()) {
+                if (text[0] != '0'){
+                    binding.edtPhonenumber.setText("0$text")
+                    binding.edtPhonenumber.setSelection(textLength)
+                }
+            }
+
             when (textLength) {
-                3 -> {
+                4 -> {
                     binding.edtPhonenumber.setText(
                         StringBuilder(text).insert(text.length - 1, "-").toString()
                     )
                     binding.edtPhonenumber.setSelection(textLength)
                 }
-                7 -> {
-                    binding.edtPhonenumber.setText(
-                        StringBuilder(text).insert(text.length - 1, "-").toString()
-                    )
-                    binding.edtPhonenumber.setSelection(textLength)
-                }
-                11 -> {
+                9 -> {
                     binding.edtPhonenumber.setText(
                         StringBuilder(text).insert(text.length - 1, "-").toString()
                     )
@@ -121,7 +117,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                 }
             }
             binding.tvCorrect.visibility = View.GONE
-            if (textLength <= 0) {
+            if (text.isEmpty()) {
                 binding.ivSendOtp.setImageResource(R.drawable.ic_otp_send_off_ico)
                 binding.ivSendOtp.setOnClickListener(null)
             } else {
@@ -260,7 +256,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private fun observeData(){
         viewModel.preloginLiveData.observe(this){
             Log.d("nng", it.toString())
-
+            dismissLoading()
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 binding.btnContinue.setActive(true)
@@ -268,7 +264,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
         viewModel.preSignUpLiveData.observe(this){
             Log.d("nng", it.toString())
-
+            dismissLoading()
             if (it.session_id!!.isNotEmpty()){
                 sessionId = it.session_id!!
                 isVerifiedOTP = true
@@ -277,7 +273,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         viewModel.verifyOTPLiveData.observe(this, {
             binding.isVerified = it.verified!!
             binding.tvCorrect.visibility = VISIBLE
-            dismissLoading()
             if (it.verified!!){
                 when (binding.otpViewModel!!.uiMode) {
                     0 -> {
@@ -318,6 +313,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                 binding.tvAgree.setTextColor(ContextCompat.getColor(this, R.color.color_263238))
 
             }else{
+                dismissLoading()
                 countDownTimer!!.cancel()
                 binding.tvCountdown.setTextColor(ContextCompat.getColor(this, R.color.color_cfd8dc))
                 binding.llOptCode.background = ContextCompat.getDrawable(

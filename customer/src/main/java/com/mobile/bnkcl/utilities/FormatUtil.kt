@@ -57,10 +57,10 @@ class FormatUtil {
             var phone = phone
             if (phone.startsWith("0")) phone = phone.substring(1)
             val builder = java.lang.StringBuilder()
-            for (i in 0 until phone.length) {
-                if (i < 2 || i > phone.length - 3) {
+            for (i in phone.indices) {
+                if (i < 3 || i > phone.length - 3) {
                     builder.append(phone[i])
-                } else if (i == 2 || i == 5) {
+                } else if (i == 3 || i == 7) {
                     builder.append("-")
                     builder.append("*")
                 } else {
@@ -237,12 +237,10 @@ class FormatUtil {
                         //023478327
                         if (i == 2) {
                             tmp1 += tmp.substring(0, i) + "-"
-                        } else if (i == 5) {
+                        } else if (i == 6) {
                             tmp1 += tmp.substring(2, i) + "-"
-                        } else if (i == 8) {
-                            tmp1 += tmp.substring(5, i) + "-"
-                        } else if (i == tmp.length - 1) {
-                            tmp1 += tmp.substring(8)
+                        } else if (i == 9) {
+                            tmp1 += tmp.substring(6, tmp.length)
                         }
                         i++
                     }
@@ -439,12 +437,10 @@ class FormatUtil {
             //023478327
             if (i == 2) {
                 tmp1 += tmp.substring(0, i) + "-"
-            } else if (i == 5) {
+            } else if (i == 6) {
                 tmp1 += tmp.substring(2, i) + "-"
-            } else if (i == 8) {
-                tmp1 += tmp.substring(5, i) + "-"
-            } else if (i == tmp.length - 1) {
-                tmp1 += tmp.substring(8)
+            } else if (i == 9) {
+                tmp1 += tmp.substring(6, tmp.length)
             }
             i++
         }

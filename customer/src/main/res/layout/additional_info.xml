@@ -166,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/selector_edittext_bg"
+                android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
                 android:hint="@string/addition_input_detail_address"
                 android:maxLength="200"
                 android:paddingStart="15sp"
