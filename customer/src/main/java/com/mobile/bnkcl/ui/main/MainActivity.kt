@@ -127,8 +127,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
             binding.navMenu.tvUserName.text = if (sharedPrefer.getPrefer("name").isNullOrBlank()
             ) getString(R.string.nav_user_unknown) else sharedPrefer.getPrefer("name")
-            binding.navMenu.tvUserId.text = if (sharedPrefer.getPrefer(Constants.CUST_NO).isNullOrEmpty()
-            ) "" else sharedPrefer.getPrefer(Constants.CUST_NO)
+            binding.navMenu.tvUserId.text =
+                if (sharedPrefer.getPrefer(Constants.CUST_NO).isNullOrEmpty()
+                ) "" else sharedPrefer.getPrefer(Constants.CUST_NO)
             if (sharedPrefer.contain("name")) setUpLogOutBtn()
 
             if (!sharedPrefer.getPrefer(Constants.IMAGE_BITMAP).isNullOrEmpty()) {
@@ -171,10 +172,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             setUpLogOutBtn()
 
             profileData = it
+            isUpdateProfile = false
             binding.navMenu.tvUserName.text = it.name
             binding.navMenu.tvUserId.text = sharedPrefer.getPrefer(Constants.CUST_NO)
 
             sharedPrefer.putPrefer("name", it.name!!)
+
+            binding.navMenu.btnSetting.setOnClickListener(this)
         }
 
         viewModel.logoutLiveData.observe(this) {
@@ -202,9 +206,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         binding.navMenu.btnSignUp.setOnClickListener(this)
         binding.navMenu.llLanguage.setOnClickListener(this)
         binding.navMenu.llCsCenter.setOnClickListener(this)
-        binding.navMenu.btnSetting.setOnClickListener(this)
         binding.navMenu.btnFacebook.setOnClickListener(this)
         binding.navMenu.btnCompanyProfile.setOnClickListener(this)
+        if (AppLogin.PIN.code == "N" ||
+            sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()
+        ) binding.navMenu.btnSetting.setOnClickListener(this)
     }
 
     private fun initBottomViewPager() {
@@ -444,6 +450,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
+        if (AppLogin.PIN.code == "N" || sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
+            binding.navMenu.btnSetting.setOnClickListener(this)
+        } else {
+            binding.navMenu.btnSetting.setOnClickListener(if (isUpdateProfile) null else this)
+        }
+
         requestProfile()
     }
 
