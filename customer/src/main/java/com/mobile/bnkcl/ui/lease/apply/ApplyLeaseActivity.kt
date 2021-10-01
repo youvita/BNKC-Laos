@@ -58,9 +58,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     lateinit var systemDialog: SystemDialog
     private lateinit var productCodes : ArrayList<ItemResponseObject>
     private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
-    private lateinit var typeCodes : List<ProductResponseObj>
+    private lateinit var typeCodes : ArrayList<ProductResponseObj>
     private lateinit var brandCodes : List<ProductResponseObj>
-    private lateinit var modelCodes : List<ProductResponseObj>
+    private lateinit var modelCodes : ArrayList<ProductResponseObj>
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
@@ -69,7 +69,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         setAnimateType(com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT)
         super.onCreate(savedInstanceState)
         binding.applyViewModel = viewModel
-//        Utils.setHideKeyboard(this, binding.root)
+        Utils.setHideKeyboard(this, binding.root)
         showLoading(true)
         viewModel.getUserProfile()
         viewModel.getJobTypeCodes()
@@ -133,7 +133,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         })
 
         viewModel.typeLiveData.observe(this, {
-            typeCodes = it.products!!
+            typeCodes = (it.products as ArrayList<ProductResponseObj>?)!!
             viewModel.setUpTypeData(typeCodes)
         })
         viewModel.brandLiveData.observe(this, {
@@ -141,7 +141,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             viewModel.setUpBrandData(brandCodes)
         })
         viewModel.modelLiveData.observe(this, {
-            modelCodes = it.products!!
+            modelCodes = (it.products as ArrayList<ProductResponseObj>?)!!
             viewModel.setUpModelData(modelCodes)
         })
 
@@ -177,12 +177,12 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                     listChoiceDialog.setOnItemListener = { pos: Int ->
                         selectedItem = pos
-                        binding.tvProType.setTextColor(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.color_263238
-                            )
-                        )
+//                        binding.tvProType.setTextColor(
+//                            ContextCompat.getColor(
+//                                this,
+//                                R.color.color_263238
+//                            )
+//                        )
                         binding.tvProType.text = productCodes[pos].title
                         viewModel.applyLeaseRequest.product_type = productCodes[pos].code
 
@@ -236,16 +236,10 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                     listChoiceDialog.setOnItemListener = { pos: Int ->
                         selectedBrandItem = pos
-                        binding.tvNameBrand.setTextColor(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.color_263238
-                            )
-                        )
                         binding.tvNameBrand.text = brandCodes[pos].name
                         binding.tvNameBrand.tag = brandCodes[pos].name
                         viewModel.applyLeaseRequest.name_of_brand = brandCodes[pos].erpCode
-
+                        binding.tvNameType.isEnabled = true
                         viewModel.reqTypeCode(Constants.TYPE_NAME, brandCodes[pos].id.toString())
 
                         val proType = if (viewModel.applyLeaseRequest.product_type != null){
@@ -268,19 +262,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                         }else{
                             ""
                         }
-//                        if(viewModel.applyLeaseRequest.etc_status!!){
-//                            binding.btnSubmit.isEnable(
-//                                itemResponses[pos].code!!,
-//                                binding.edEtcBrand.text.toString(),
-//                                binding.edEtcModel.text.toString(),
-//                                binding.edEtcType.text.toString(),
-//                                reqAmt!!,
-//                                proPrice!!,
-//                                term!!.toString()
-//                            )
-//                        }else {
-//
-//                        }
+
                         binding.btnSubmit.isEnable(
                             proType!!,
                             brandCodes[pos].name!!,
@@ -290,6 +272,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                             proPrice!!,
                             term!!.toString()
                         )
+                        removeToDefault(2)
                     }
                     listChoiceDialog.isCancelable = true
                     listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
@@ -304,15 +287,16 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                     listChoiceDialog.setOnItemListener = { pos: Int ->
                         selectedTypeItem = pos
-                        binding.tvNameType.setTextColor(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.color_263238
-                            )
-                        )
+//                        binding.tvNameType.setTextColor(
+//                            ContextCompat.getColor(
+//                                this,
+//                                R.color.color_263238
+//                            )
+//                        )
                         binding.tvNameType.text = typeCodes[pos].name
                         binding.tvNameType.tag = typeCodes[pos].name
                         viewModel.applyLeaseRequest.name_of_type = typeCodes[pos].erpCode
+                        binding.tvNameModel.isEnabled = true
 
                         viewModel.reqModelCode(Constants.MODEL_NAME, typeCodes[pos].id.toString())
 
@@ -345,6 +329,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                             proPrice!!,
                             term!!.toString()
                         )
+                        removeToDefault(1)
                     }
                     listChoiceDialog.isCancelable = true
                     listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
@@ -359,12 +344,12 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                     listChoiceDialog.setOnItemListener = { pos: Int ->
                         selectedModelItem = pos
-                        binding.tvNameModel.setTextColor(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.color_263238
-                            )
-                        )
+//                        binding.tvNameModel.setTextColor(
+//                            ContextCompat.getColor(
+//                                this,
+//                                R.color.color_263238
+//                            )
+//                        )
                         binding.tvNameModel.text = modelCodes[pos].name
                         binding.tvNameModel.tag = modelCodes[pos].name
                         viewModel.applyLeaseRequest.name_of_model = modelCodes[pos].erpCode
@@ -413,12 +398,6 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                     listChoiceDialog.setOnItemListener = { pos: Int ->
                         repaymentSelected = pos
-                        binding.tvRepaymentTerm.setTextColor(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.color_263238
-                            )
-                        )
                         binding.tvRepaymentTerm.text = repaymentCodes[pos].title
                         viewModel.applyLeaseRequest.repayment_term =
                             repaymentCodes[pos].code!!.toInt()
@@ -473,6 +452,34 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 }
             }
         })
+    }
+
+    private fun removeToDefault(n: Int) {
+        when (n) {
+            1 -> {
+                //set default text before select item
+                viewModel.applyLeaseRequest.name_of_model = ""
+                //reset selected index in list
+                selectedModelItem = -1
+                //Previous list
+                modelCodes.clear()
+                binding.tvNameModel.isEnabled = true
+            }
+            2 -> {
+                //set default text before select item
+                viewModel.applyLeaseRequest.name_of_brand = ""
+                viewModel.applyLeaseRequest.name_of_model = ""
+                //reset selected index in list
+                typeCodes.clear()
+                modelCodes.clear()
+                binding.tvNameType.isEnabled = true
+                binding.tvNameModel.isEnabled = false
+//                communeId = 0
+                //reset selected index in list
+                selectedBrandItem = -1
+                selectedModelItem = -1
+            }
+        }
     }
 
     private fun navigateResult(result: Boolean) {

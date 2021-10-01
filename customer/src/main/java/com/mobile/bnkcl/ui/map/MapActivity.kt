@@ -2,13 +2,9 @@ package com.mobile.bnkcl.ui.map
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.TypedValue
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.bnkc.library.data.type.RunTimeDataStore
@@ -28,6 +24,8 @@ import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.utilities.blurview.BlurView
+import com.mobile.bnkcl.utilities.blurview.SupportRenderScriptBlur
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -78,43 +76,16 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 
         initView()
         observeData()
-        setUpBlurView()
-    }
-
-    fun drawableToBitmap(drawable: Drawable): Bitmap {
-        var bitmap: Bitmap? = null
-        if (drawable is BitmapDrawable) {
-            val bitmapDrawable = drawable
-            if (bitmapDrawable.bitmap != null) {
-                return bitmapDrawable.bitmap
-            }
-        }
-        bitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
-            Bitmap.createBitmap(
-                1,
-                1,
-                Bitmap.Config.ARGB_8888
-            ) // Single color bitmap will be created of 1x1 pixel
-        } else {
-            Bitmap.createBitmap(
-                drawable.intrinsicWidth,
-                drawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
-            )
-        }
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        return bitmap
     }
 
     private fun setUpBlurView(){
-//        val originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.banner_4)
-//
-//        val blurredBitmap = blur(this, originalBitmap)
-//        binding.llContactBranch.background = BitmapDrawable(resources, blurredBitmap)
-//        val image = BitmapFactory.decodeResource(resources, R.drawable.banner_1)
-//        blurLayout?.setBitmapBlur(image)
+        val windowBackground = window.decorView.background
+
+        binding.blurLayout.setupWith(binding.root)
+            .setFrameClearDrawable(windowBackground)
+            ?.setBlurAlgorithm(SupportRenderScriptBlur(this))
+            ?.setBlurRadius(15f)
+            ?.setHasFixedTransformationMatrix(true)
     }
 
     override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
@@ -128,13 +99,6 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     }
 
     fun initView(){
-//        binding.blurView.setBlurRadius(
-//            TypedValue.applyDimension(
-//                TypedValue.COMPLEX_UNIT_DIP,
-//                10f,
-//                resources.displayMetrics
-//            )
-//        )
         binding.ivBack.setOnClickListener {
             finish()
         }
@@ -152,6 +116,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
                     binding.tvOffice.text = data?.name
                     binding.toolbarName.text = data?.name
                     binding.tvAddress.text = data?.address
+                    setUpBlurView()
                     binding.mapView2.getMapAsync(this)
                 }
             })

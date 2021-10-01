@@ -51,4 +51,6 @@
     <color name="color_3090a4ae_shadow">#3090a4ae</color>
     <color name="color_1590a4ae_shadow">#1590a4ae</color>
 
+    <color name="overlayColorWhite">#65FFFFFF</color>
+
 </resources>

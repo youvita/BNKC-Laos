@@ -56,22 +56,21 @@
 
                 <TextView
                     android:id="@+id/tv_pro_type"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:text="@string/select_product_type"
+                    android:hint="@string/select_product_type"
                     android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    android:visibility="visible"
                     android:onClick="@{()->applyViewModel.selectProductType()}"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <TextView
                     style="@style/font13_263238_medium"
@@ -85,13 +84,13 @@
 
                 <TextView
                     android:id="@+id/tv_name_brand"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
-                    android:text="@string/input_name_of_brand"
+                    android:hint="@string/input_name_of_brand"
                     android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -100,7 +99,7 @@
                     android:paddingEnd="@dimen/margin_15dp"
                     android:visibility="visible"
                     android:onClick="@{()->applyViewModel.selectBrand()}"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <TextView
                     android:id="@+id/name_type"
@@ -115,22 +114,22 @@
 
                 <TextView
                     android:id="@+id/tv_name_type"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
-                    android:text="@string/input_name_of_type"
+                    android:hint="@string/input_name_of_type"
                     android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    android:visibility="visible"
+                    android:enabled="false"
                     android:onClick="@{()->applyViewModel.selectType()}"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
 
                 <TextView
@@ -146,40 +145,22 @@
 
                 <TextView
                     android:id="@+id/tv_name_model"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
-                    android:text="@string/input_name_of_model"
+                    android:hint="@string/input_name_of_model"
                     android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    android:visibility="visible"
+                    android:enabled="false"
                     android:onClick="@{()->applyViewModel.selectModel()}"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
-
-<!--                <com.mobile.bnkcl.com.view.BnkEditText-->
-<!--                    android:id="@+id/ed_name_model"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:hint="@string/input_name_of_model"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:inputType="text"-->
-<!--                    android:paddingStart="15dp"-->
-<!--                    android:paddingEnd="15dp"-->
-<!--                    android:textAlignment="textStart"-->
-<!--                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"-->
-<!--                    android:layout_height="@dimen/height_50dp"-->
-<!--                    android:imeOptions="actionDone"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:layout_marginBottom="10dp"-->
-<!--                    style="@style/font15_CFD8DC_medium_selector_input"/>-->
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <CheckBox
                     android:id="@+id/cb_etc"
@@ -388,35 +369,23 @@
                     android:layout_marginTop="@dimen/margin_15dp"
                     android:text="@string/repayment_term"/>
 
-                <LinearLayout
-                    android:id="@+id/ll_repayment_term"
+                <TextView
+                    android:id="@+id/tv_repayment_term"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/height_50dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
+                    android:hint="@string/select"
+                    android:tag=""
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/round_stroke_e1e5ec_solid_ffffff_corner_8"
-                    android:orientation="horizontal"
-                    android:onClick="@{()->applyViewModel.repaymentTerm()}">
-
-                    <TextView
-                        android:id="@+id/tv_repayment_term"
-                        style="@style/font15_cfd8dc_medium"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
-                        android:layout_weight="1"
-                        android:text="@string/select"
-                        android:visibility="visible" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_more_ico" />
-                </LinearLayout>
+                    android:paddingStart="@dimen/margin_15dp"
+                    android:paddingEnd="@dimen/margin_15dp"
+                    android:onClick="@{()->applyViewModel.selectProductType()}"
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <TextView
                     style="@style/font21_263238_medium"

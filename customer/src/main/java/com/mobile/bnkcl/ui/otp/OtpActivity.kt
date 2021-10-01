@@ -20,6 +20,7 @@ import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bumptech.glide.util.Util
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
@@ -31,6 +32,7 @@ import com.mobile.bnkcl.ui.signup.SignUpActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.UtilActivity
+import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -171,7 +173,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             } else {
                 "ຂ້ອຍເຫັນດີກັບ <font color='#D7191F'><b>ເງື່ອນໄຂ ແລະ ຂໍ້ກຳນົດຂອງ</b></font> ບໍລິສັດ BNK Capital Lao leasing"
             }
-
+            Utils.setHideKeyboard(this, binding.llWrapContent)
             if (intent != null) {
                 val action = intent.getStringExtra("ACTION_TAG")
 

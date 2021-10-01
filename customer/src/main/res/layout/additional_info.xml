@@ -49,20 +49,20 @@
 
                 <TextView
                     android:id="@+id/tv_capital"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
-                    android:text="@string/addition_select_capital"
+                    android:hint="@string/addition_select_capital"
                     android:tag=""
                     android:enabled="true"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <TextView
                     style="@style/font13_263238_medium"
@@ -74,20 +74,20 @@
 
                 <TextView
                     android:id="@+id/tv_district"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
-                    android:text="@string/addition_select_district"
+                    android:hint="@string/addition_select_district"
                     android:tag=""
                     android:enabled="false"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <TextView
                     style="@style/font13_263238_medium"
@@ -98,20 +98,20 @@
 
                 <TextView
                     android:id="@+id/tv_village"
-                    style="@style/font15_cfd8dc_medium"
+                    style="@style/font15_CFD8DC_medium_selector_input"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_50dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
-                    android:text="@string/addition_select_village"
+                    android:hint="@string/addition_select_village"
                     android:tag=""
                     android:enabled="false"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    app:drawableEndCompat="@drawable/ic_more_ico" />
+                    app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <com.mobile.bnkcl.com.view.BnkEditText
                     android:id="@+id/edt_detailed_address"
@@ -119,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/selector_edittext_bg"
+                    android:background="@drawable/select_round_ffffff_f3f6f7_stroke"
                     android:hint="@string/addition_input_detail_address"
                     android:maxLength="200"
                     android:paddingStart="15sp"
@@ -143,9 +143,8 @@
                     android:padding="3dp"
                     android:button="@drawable/selector_radio_botton_solid_grey"
                     android:clickable="true"
-                    android:checked="@{activity.checked}"
-                    android:focusable="true"
-                    android:onClick="@{(v) -> activity.etcCheckBoxClick()}"/>
+                    android:checked="false"
+                    android:focusable="true"/>
 
 
                 <TextView
