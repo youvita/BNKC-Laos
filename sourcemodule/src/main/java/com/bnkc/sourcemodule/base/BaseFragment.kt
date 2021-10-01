@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.bnkc.library.data.type.Loading
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -58,18 +59,30 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         return binding
     }
 
+    /**
+     * handle to dismiss loading
+     */
+    private fun dismissLoading() {
+        if (loadingDialog != null) {
+            loadingDialog?.dismiss()
+            loadingDialog = null
+        }
+    }
+
     fun successListener() {
         introDisposable = RxJava.listen(RxEvent.ResponseSuccess::class.java).subscribe {
-            if (loadingDialog != null) {
-                loadingDialog?.dismiss()
-                loadingDialog = null
+            if (Loading.Allow.dismiss) {
+                dismissLoading()
             }
         }
     }
 
-    fun showLoading() {
-        loadingDialog = LoadingDialog()
-        loadingDialog?.show(childFragmentManager, loadingDialog?.tag)
+    fun showLoading(isLoading: Boolean) {
+        Loading.Allow.dismiss = isLoading
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog()
+            loadingDialog?.show(childFragmentManager, loadingDialog?.tag)
+        }
     }
 
     override fun onDestroy() {

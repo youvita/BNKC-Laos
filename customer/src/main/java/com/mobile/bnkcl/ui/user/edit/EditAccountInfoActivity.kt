@@ -62,10 +62,10 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     private val PICK_CAMERA = 1000
     private var firstIndex: Int? = 0
     private var selectedIndex: Int? = 0
-    private var isUpdateInfo: Boolean? = false
     private var isUpdateProfile: Boolean? = false
     private var isEditInfo: Boolean? = false
     private var isUpdateOnlyImage: Boolean? = false
+    private var isUpdateOnlyInfo: Boolean? = false
     private var firstJobType: String = ""
     private var selectJobType: String = ""
     private var profileData: ProfileData? = ProfileData()
@@ -105,8 +105,10 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             toast.view = view
             toast.show()
 
-            isUpdateInfo = false
             isEditInfo = false
+            isUpdateOnlyImage = false
+            isUpdateOnlyInfo = false
+            viewModel.setFile(null)
 
             binding.btnSave.setActive(false)
             binding.btnSave.setOnClickListener(null)
@@ -193,7 +195,6 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             }
 
             override fun afterTextChanged(s: Editable?) {
-                isUpdateInfo = true
                 validateButton()
             }
 
@@ -208,7 +209,6 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
             }
 
             override fun afterTextChanged(s: Editable?) {
-                isUpdateInfo = true
                 validateButton()
             }
 
@@ -233,9 +233,11 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
                     if (viewModel.getFile() != null) {
                         viewModel.uploadProfile()
                     }
-                    if (binding.lytAddressInfo.edtBankName.text.toString() != profileData!!.bankName
-                        || binding.lytAddressInfo.edtAccountNumber.text.toString() != profileData!!.accountNumber
-                        || binding.lytAddressInfo.tvJobType.text != jobTypeTitleList!![firstIndex!!]
+                    if (binding.lytAddressInfo.edtBankName.text!!.isNotEmpty()
+                        && binding.lytAddressInfo.edtAccountNumber.text!!.isNotEmpty()
+                        && binding.lytAddressInfo.tvJobType.text!!.isNotEmpty()
+                        && isUpdateOnlyInfo!!
+
                     ) {
                         viewModel.editAccountInfo(data)
                     }
@@ -264,7 +266,6 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
                         }
                     }
 
-                    isUpdateInfo = true
                     validateButton()
                 }
                 listChoiceDialog.isCancelable = true
@@ -286,15 +287,26 @@ class EditAccountInfoActivity : BaseStorageActivity<ActivityEditAccountInfoBindi
     }
 
     private fun validateButton() {
-        if (isUpdateOnlyImage!!) {
-            binding.btnSave.setActive(true)
-        } else if (binding.lytAddressInfo.edtBankName.text!!.isEmpty()
+
+        var isEmptyInfo = false
+        if (binding.lytAddressInfo.edtBankName.text!!.isEmpty()
             || binding.lytAddressInfo.edtAccountNumber.text!!.isEmpty()
             || binding.lytAddressInfo.tvJobType.text!!.isEmpty()
-        ) {
-            binding.btnSave.setActive(false)
-        } else {
+        ) isEmptyInfo = true
+
+        if (isUpdateOnlyImage!!) {
             binding.btnSave.setActive(true)
+        } else if (!isEmptyInfo &&
+            (binding.lytAddressInfo.edtBankName.text.toString() != profileData!!.bankName
+                    || binding.lytAddressInfo.edtAccountNumber.text.toString() != profileData!!.accountNumber
+                    || binding.lytAddressInfo.tvJobType.text != jobTypeTitleList!![firstIndex!!]
+                    )
+
+        ) {
+            if (!isUpdateOnlyImage!!) isUpdateOnlyInfo = true
+            binding.btnSave.setActive(true)
+        } else {
+            binding.btnSave.setActive(false)
         }
 
         if (binding.btnSave.isActive()) {

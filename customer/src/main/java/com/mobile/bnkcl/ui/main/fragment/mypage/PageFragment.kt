@@ -105,7 +105,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         if (activity != null && isAdded) {
             viewModel.getProductCodes()
             viewModel.getLeaseProgressCodes()
-            showLoading()
+            showLoading(false)
         }
     }
 
@@ -182,6 +182,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
                 leaseData!!.addAll(it.myLeases)
                 setUpLeaseIndicator(leaseAdapter.itemCount)
                 viewModel.getLeaseRequestCodes()
+                if (LRS001 == 0 && LRS002 == 0 && LRS003 == 0) showLoading(true)
             }
 
         }
@@ -199,14 +200,17 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
             if (null != it) {
                 if (LRS001 > 0) {
                     viewModel.getLeaseApplication(it.codes!![0].code!!)
+                    showLoading(true)
                 }
 
                 if (LRS002 > 0) {
                     viewModel.getLeaseScreening(it.codes!![1].code!!)
+                    showLoading(true)
                 }
 
                 if (LRS003 > 0) {
                     viewModel.getLeaseResult(it.codes!![2].code!!)
+                    showLoading(true)
                 }
             }
 

@@ -38,6 +38,7 @@ abstract class BaseAdapter<B: ViewDataBinding, T ,VH: RecyclerView.ViewHolder> :
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
+        holder.setIsRecyclable(false)
         setBindData(holder, items[position], position)
     }
 

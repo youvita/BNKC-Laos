@@ -38,14 +38,15 @@ class ApplicationDialog(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.transactionRecyclerview.adapter = leaseRequestProcessAdapter
+        binding.rvLeaseApplication.adapter = leaseRequestProcessAdapter
         leaseRequestProcessAdapter.setLeaseProcessType(type)
         leaseRequestProcessAdapter.setListener(this)
         leaseRequestProcessAdapter.setProductTypeList(productTypeList)
         leaseRequestProcessAdapter.setProgressTypeList(progressTypeList)
-        binding.transactionRecyclerview.removeItemDecoration(cardOffsetDecoration)
-        binding.transactionRecyclerview.addItemDecoration(cardOffsetDecoration)
-        cardRecyclerView.attachToRecyclerView(binding.transactionRecyclerview)
+        binding.rvLeaseApplication.removeItemDecoration(cardOffsetDecoration)
+        binding.rvLeaseApplication.addItemDecoration(cardOffsetDecoration)
+        cardRecyclerView.attachToRecyclerView(binding.rvLeaseApplication)
+        cardRecyclerView.setScale(1f)
         leaseRequestProcessAdapter.clearItemList()
         leaseRequestProcessAdapter.addItemList(leaseApplicationList)
     }
