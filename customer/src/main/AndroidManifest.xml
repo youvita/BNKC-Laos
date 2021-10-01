@@ -52,7 +52,6 @@
         <activity android:name=".ui.success.ResultActivity" />
         <activity android:name=".ui.notice.NoticeActivity" />
         <activity android:name=".ui.signup.SignUpActivity"/>
-        <activity android:name=".ui.success.AskBNKCRegisterSuccessActivity"/>
         <activity android:name=".ui.response.ResponseActivity" />
         <activity android:name=".ui.pinview.PinCodeActivity" />
         <activity android:name=".ui.intro.IntroActivity">
