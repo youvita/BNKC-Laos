@@ -12,10 +12,10 @@
     <application
         android:name=".app.AppApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_dev"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_dev_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BNKC_LAOS"
         android:usesCleartextTraffic="true"

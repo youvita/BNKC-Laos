@@ -5,6 +5,7 @@ import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.*
 import androidx.activity.viewModels
@@ -108,6 +109,9 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                     binding.webView.requestLayout()
                     binding.webView.layoutParams = vc
                 }
+
+                var cookies = CookieManager.getInstance().getCookie(url)
+                Log.d("nng", "Cookies:>>>> $cookies")
             }
 
             override fun shouldInterceptRequest(
@@ -115,6 +119,11 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                 request: WebResourceRequest?
             ): WebResourceResponse? {
                 request!!.requestHeaders
+//                request.requestHeaders["authorization"] = "Bearer " + RunTimeDataStore.LoginToken.value
+//                request.requestHeaders["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(
+//                    Constants.LANGUAGE
+//                )!!
+//                request.requestHeaders["cookie"] = RunTimeDataStore.JsessionId.value
                 return null
             }
         }
@@ -194,6 +203,9 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 //                cookieManager.setCookie(RunTimeDataStore.BaseUrl.value, item)
 //            }
             header["Cookie"] = RunTimeDataStore.JsessionId.value
+
+            Log.d("nng","Authorization:>>>Bearer ${RunTimeDataStore.LoginToken.value}")
+            Log.d("nng","cookie:>>>${RunTimeDataStore.JsessionId.value}")
 
             binding.webView.loadUrl(url, header)
         }
