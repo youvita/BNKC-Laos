@@ -3,11 +3,15 @@ package com.mobile.bnkcl.ui.alarm
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
+import android.view.ViewTreeObserver.OnScrollChangedListener
+import android.widget.AbsListView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.library.data.type.RunTimeDataStore
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
@@ -75,31 +79,49 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
             resetStartPage()
         }
 
-        binding.lvNotifiation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.nsvAlarm.viewTreeObserver.addOnScrollChangedListener {
+            val view = binding.nsvAlarm.getChildAt(binding.nsvAlarm.childCount -1) as View
+            val diff = view.bottom - (binding.nsvAlarm.height + binding.nsvAlarm.scrollY)
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (!binding.swipeRefreshNotification.isRefreshing) {
-                    val layoutManager: LinearLayoutManager =
-                        binding.lvNotifiation.layoutManager as LinearLayoutManager
-                    val visibleItemCount = layoutManager.childCount
-                    val totalItemCount = layoutManager.itemCount
-                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
-//                    val lastVisible = layoutManager.findLastVisibleItemPosition()
-                    if (dy > 0) {
-                        if (!alarmViewModel.isLastPage()) {
-                            if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
-                                if (isSending) return
-                                ++alarmViewModel.pageNo
-                                alarmViewModel.getAlarmList()
-                                showLoading(true)
-                                isSending = true
-                            }
-                        }
-                    }
+            if (diff == 0){
+
+                if (!alarmViewModel.isLastPage()){
+//                    if (alarmViewModel.pageNo==0) return@addOnScrollChangedListener
+                    ++alarmViewModel.pageNo
+                    alarmViewModel.getAlarmList()
+                    showLoading(true)
+
                 }
+
             }
-        })
+        }
+
+//        binding.lvNotifiation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                if (!binding.swipeRefreshNotification.isRefreshing) {
+//
+//                    val visibleItemCount = layoutManager.childCount
+//                    val totalItemCount = layoutManager.itemCount
+//
+//                    val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+//
+////                    val lastVisible = layoutManager.findLastVisibleItemPosition()
+//                    if (dy > 0) {
+//                        if (!alarmViewModel.isLastPage()) {
+//                            if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+//                                if (isSending) return
+//                                ++alarmViewModel.pageNo
+//                                alarmViewModel.getAlarmList()
+//                                showLoading(true)
+//                                isSending = true
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        })
     }
 
     override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
@@ -113,8 +135,10 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
     }
 
     private fun resetStartPage() {
-        alarmViewModel.pageNo = 0
+        binding.lvNotifiation.removeAllViews()
         adapter.clearItemList()
+
+        alarmViewModel.pageNo = 0
         alarmViewModel.getAlarmList()
 //        showLoading()
         isSending = true

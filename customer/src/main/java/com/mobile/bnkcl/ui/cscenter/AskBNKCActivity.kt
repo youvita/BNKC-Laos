@@ -45,7 +45,13 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         initButton()
         observeData()
 
+        /**
+         * init hidden keyboard
+         * */
+
+        Utils.setHideKeyboard(this, binding.wrapContent)
     }
+
 
     override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
         super.handleSessionExpired(icon, title, message, button)
