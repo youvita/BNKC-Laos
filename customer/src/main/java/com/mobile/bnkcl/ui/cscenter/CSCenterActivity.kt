@@ -54,6 +54,7 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
         collapseToolBarLayout = binding.colToolbar
 
         binding.action = this@CSCenterActivity

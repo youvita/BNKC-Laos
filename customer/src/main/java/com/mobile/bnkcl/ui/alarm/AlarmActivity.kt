@@ -40,8 +40,8 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_notification
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
         super.onCreate(savedInstanceState)
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
 
         initView()
 

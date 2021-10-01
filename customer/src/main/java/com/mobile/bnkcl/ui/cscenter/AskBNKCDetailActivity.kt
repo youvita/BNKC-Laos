@@ -38,6 +38,7 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
 
         claimDetailReq = ClaimDetailReq()
         claimDetailRes = ClaimDetailRes()

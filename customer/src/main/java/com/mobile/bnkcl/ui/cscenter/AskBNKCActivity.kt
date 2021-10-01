@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -38,6 +39,7 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
 
         collapseToolBarLayout =binding.collToolbar
 
