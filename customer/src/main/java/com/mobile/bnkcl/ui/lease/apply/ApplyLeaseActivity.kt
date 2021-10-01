@@ -58,9 +58,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     lateinit var systemDialog: SystemDialog
     private lateinit var productCodes : ArrayList<ItemResponseObject>
     private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
-    private lateinit var typeCodes : ArrayList<ProductResponseObj>
-    private lateinit var brandCodes : List<ProductResponseObj>
-    private lateinit var modelCodes : ArrayList<ProductResponseObj>
+    private var typeCodes : ArrayList<ProductResponseObj>? = ArrayList()
+    private var brandCodes : List<ProductResponseObj>? = ArrayList()
+    private var modelCodes : ArrayList<ProductResponseObj>? = ArrayList()
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
 
@@ -177,12 +177,6 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
                     listChoiceDialog.setOnItemListener = { pos: Int ->
                         selectedItem = pos
-//                        binding.tvProType.setTextColor(
-//                            ContextCompat.getColor(
-//                                this,
-//                                R.color.color_263238
-//                            )
-//                        )
                         binding.tvProType.text = productCodes[pos].title
                         viewModel.applyLeaseRequest.product_type = productCodes[pos].code
 
@@ -214,9 +208,9 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                         }else {
                             binding.btnSubmit.isEnable(
                                 productCodes[pos].code!!,
-                                binding.tvNameBrand.text.toString(),
-                                binding.tvNameModel.text.toString(),
-                                binding.tvNameType.text.toString(),
+                                binding.tvNameBrand.tag.toString(),
+                                binding.tvNameType.tag.toString(),
+                                binding.tvNameModel.tag.toString(),
                                 reqAmt!!,
                                 proPrice!!,
                                 term!!.toString()
@@ -227,165 +221,165 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                 }
                 "brand" -> {
-                    listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_general,
-                        getString(R.string.name_of_brand),
-                        viewModel.brandData!!,
-                        selectedBrandItem
-                    )
-
-                    listChoiceDialog.setOnItemListener = { pos: Int ->
-                        selectedBrandItem = pos
-                        binding.tvNameBrand.text = brandCodes[pos].name
-                        binding.tvNameBrand.tag = brandCodes[pos].name
-                        viewModel.applyLeaseRequest.name_of_brand = brandCodes[pos].erpCode
-                        binding.tvNameType.isEnabled = true
-                        viewModel.reqTypeCode(Constants.TYPE_NAME, brandCodes[pos].id.toString())
-
-                        val proType = if (viewModel.applyLeaseRequest.product_type != null){
-                            viewModel.applyLeaseRequest.product_type
-                        }else{
-                            ""
-                        }
-                        val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
-                            viewModel.applyLeaseRequest.product_price
-                        }else{
-                            ""
-                        }
-                        val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
-                            viewModel.applyLeaseRequest.request_amount
-                        }else{
-                            ""
-                        }
-                        val term = if (viewModel.applyLeaseRequest.repayment_term != null){
-                            viewModel.applyLeaseRequest.repayment_term
-                        }else{
-                            ""
-                        }
-
-                        binding.btnSubmit.isEnable(
-                            proType!!,
-                            brandCodes[pos].name!!,
-                            binding.tvNameModel.tag.toString(),
-                            binding.tvNameType.tag.toString(),
-                            reqAmt!!,
-                            proPrice!!,
-                            term!!.toString()
+                    if (brandCodes != null && brandCodes!!.isNotEmpty()) {
+                        listChoiceDialog = ListChoiceDialog.newInstance(
+                            R.drawable.ic_badge_general,
+                            getString(R.string.name_of_brand),
+                            viewModel.brandData!!,
+                            selectedBrandItem
                         )
-                        removeToDefault(2)
+
+                        listChoiceDialog.setOnItemListener = { pos: Int ->
+                            selectedBrandItem = pos
+                            binding.tvNameBrand.text = brandCodes?.get(pos)!!.name
+                            binding.tvNameBrand.tag = brandCodes?.get(pos)!!.erpCode
+                            viewModel.applyLeaseRequest.name_of_brand = brandCodes!![pos].erpCode
+
+                            viewModel.reqTypeCode(
+                                Constants.TYPE_NAME,
+                                brandCodes!![pos].id.toString()
+                            )
+                            removeToDefault(2)
+                            val proType = if (viewModel.applyLeaseRequest.product_type != null) {
+                                viewModel.applyLeaseRequest.product_type
+                            } else {
+                                ""
+                            }
+                            val proPrice = if (viewModel.applyLeaseRequest.product_price != null) {
+                                viewModel.applyLeaseRequest.product_price
+                            } else {
+                                ""
+                            }
+                            val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null) {
+                                viewModel.applyLeaseRequest.request_amount
+                            } else {
+                                ""
+                            }
+                            val term = if (viewModel.applyLeaseRequest.repayment_term != null) {
+                                viewModel.applyLeaseRequest.repayment_term
+                            } else {
+                                ""
+                            }
+
+                            binding.btnSubmit.isEnable(
+                                proType!!,
+                                binding.tvNameBrand.tag.toString(),
+                                binding.tvNameType.tag.toString(),
+                                binding.tvNameModel.tag.toString(),
+                                reqAmt!!,
+                                proPrice!!,
+                                term!!.toString()
+                            )
+
+                        }
+                        listChoiceDialog.isCancelable = true
+                        listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                     }
-                    listChoiceDialog.isCancelable = true
-                    listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                 }
                 "type" ->{
-                    listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_general,
-                        getString(R.string.name_of_type),
-                        viewModel.typeData!!,
-                        selectedTypeItem
-                    )
-
-                    listChoiceDialog.setOnItemListener = { pos: Int ->
-                        selectedTypeItem = pos
-//                        binding.tvNameType.setTextColor(
-//                            ContextCompat.getColor(
-//                                this,
-//                                R.color.color_263238
-//                            )
-//                        )
-                        binding.tvNameType.text = typeCodes[pos].name
-                        binding.tvNameType.tag = typeCodes[pos].name
-                        viewModel.applyLeaseRequest.name_of_type = typeCodes[pos].erpCode
-                        binding.tvNameModel.isEnabled = true
-
-                        viewModel.reqModelCode(Constants.MODEL_NAME, typeCodes[pos].id.toString())
-
-                        val proType = if (viewModel.applyLeaseRequest.product_type != null){
-                            viewModel.applyLeaseRequest.product_type
-                        }else{
-                            ""
-                        }
-                        val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
-                            viewModel.applyLeaseRequest.product_price
-                        }else{
-                            ""
-                        }
-                        val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
-                            viewModel.applyLeaseRequest.request_amount
-                        }else{
-                            ""
-                        }
-                        val term = if (viewModel.applyLeaseRequest.repayment_term != null){
-                            viewModel.applyLeaseRequest.repayment_term
-                        }else{
-                            ""
-                        }
-                        binding.btnSubmit.isEnable(
-                            proType!!,
-                            binding.tvNameBrand.tag.toString(),
-                            binding.tvNameModel.tag.toString(),
-                            typeCodes[pos].erpCode!!,
-                            reqAmt!!,
-                            proPrice!!,
-                            term!!.toString()
+                    if (typeCodes != null && typeCodes!!.isNotEmpty()) {
+                        listChoiceDialog = ListChoiceDialog.newInstance(
+                            R.drawable.ic_badge_general,
+                            getString(R.string.name_of_type),
+                            viewModel.typeData!!,
+                            selectedTypeItem
                         )
-                        removeToDefault(1)
+
+                        listChoiceDialog.setOnItemListener = { pos: Int ->
+                            selectedTypeItem = pos
+                            binding.tvNameType.text = typeCodes?.get(pos)!!.name
+                            binding.tvNameType.tag = typeCodes?.get(pos)!!.erpCode
+                            viewModel.applyLeaseRequest.name_of_type = typeCodes!![pos].erpCode
+
+                            viewModel.reqModelCode(
+                                Constants.MODEL_NAME,
+                                typeCodes!![pos].id.toString()
+                            )
+                            removeToDefault(1)
+                            val proType = if (viewModel.applyLeaseRequest.product_type != null) {
+                                viewModel.applyLeaseRequest.product_type
+                            } else {
+                                ""
+                            }
+                            val proPrice = if (viewModel.applyLeaseRequest.product_price != null) {
+                                viewModel.applyLeaseRequest.product_price
+                            } else {
+                                ""
+                            }
+                            val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null) {
+                                viewModel.applyLeaseRequest.request_amount
+                            } else {
+                                ""
+                            }
+                            val term = if (viewModel.applyLeaseRequest.repayment_term != null) {
+                                viewModel.applyLeaseRequest.repayment_term
+                            } else {
+                                ""
+                            }
+                            binding.btnSubmit.isEnable(
+                                proType!!,
+                                binding.tvNameBrand.tag.toString(),
+                                binding.tvNameType.tag.toString(),
+                                binding.tvNameModel.tag.toString(),
+                                reqAmt!!,
+                                proPrice!!,
+                                term!!.toString()
+                            )
+
+                        }
+                        listChoiceDialog.isCancelable = true
+                        listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                     }
-                    listChoiceDialog.isCancelable = true
-                    listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                 }
                 "model" -> {
-                    listChoiceDialog = ListChoiceDialog.newInstance(
-                        R.drawable.ic_badge_general,
-                        getString(R.string.name_of_model),
-                        viewModel.modelData!!,
-                        selectedModelItem
-                    )
-
-                    listChoiceDialog.setOnItemListener = { pos: Int ->
-                        selectedModelItem = pos
-//                        binding.tvNameModel.setTextColor(
-//                            ContextCompat.getColor(
-//                                this,
-//                                R.color.color_263238
-//                            )
-//                        )
-                        binding.tvNameModel.text = modelCodes[pos].name
-                        binding.tvNameModel.tag = modelCodes[pos].name
-                        viewModel.applyLeaseRequest.name_of_model = modelCodes[pos].erpCode
-
-                        val proType = if (viewModel.applyLeaseRequest.product_type != null){
-                            viewModel.applyLeaseRequest.product_type
-                        }else{
-                            ""
-                        }
-                        val proPrice = if (viewModel.applyLeaseRequest.product_price != null){
-                            viewModel.applyLeaseRequest.product_price
-                        }else{
-                            ""
-                        }
-                        val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null){
-                            viewModel.applyLeaseRequest.request_amount
-                        }else{
-                            ""
-                        }
-                        val term = if (viewModel.applyLeaseRequest.repayment_term != null){
-                            viewModel.applyLeaseRequest.repayment_term
-                        }else{
-                            ""
-                        }
-                        binding.btnSubmit.isEnable(
-                            proType!!,
-                            binding.tvNameBrand.tag.toString(),
-                            modelCodes[pos].erpCode!!,
-                            binding.tvNameType.tag.toString(),
-                            reqAmt!!,
-                            proPrice!!,
-                            term!!.toString()
+                    if (modelCodes != null && modelCodes!!.isNotEmpty()) {
+                        listChoiceDialog = ListChoiceDialog.newInstance(
+                            R.drawable.ic_badge_general,
+                            getString(R.string.name_of_model),
+                            viewModel.modelData!!,
+                            selectedModelItem
                         )
+
+                        listChoiceDialog.setOnItemListener = { pos: Int ->
+                            selectedModelItem = pos
+
+                            binding.tvNameModel.text = modelCodes?.get(pos)!!.name
+                            binding.tvNameModel.tag = modelCodes!![pos].erpCode
+                            viewModel.applyLeaseRequest.name_of_model = modelCodes!![pos].erpCode
+
+                            val proType = if (viewModel.applyLeaseRequest.product_type != null) {
+                                viewModel.applyLeaseRequest.product_type
+                            } else {
+                                ""
+                            }
+                            val proPrice = if (viewModel.applyLeaseRequest.product_price != null) {
+                                viewModel.applyLeaseRequest.product_price
+                            } else {
+                                ""
+                            }
+                            val reqAmt = if (viewModel.applyLeaseRequest.request_amount != null) {
+                                viewModel.applyLeaseRequest.request_amount
+                            } else {
+                                ""
+                            }
+                            val term = if (viewModel.applyLeaseRequest.repayment_term != null) {
+                                viewModel.applyLeaseRequest.repayment_term
+                            } else {
+                                ""
+                            }
+                            binding.btnSubmit.isEnable(
+                                proType!!,
+                                binding.tvNameBrand.tag.toString(),
+                                binding.tvNameType.tag.toString(),
+                                binding.tvNameModel.tag.toString(),
+                                reqAmt!!,
+                                proPrice!!,
+                                term!!.toString()
+                            )
+                        }
+                        listChoiceDialog.isCancelable = true
+                        listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                     }
-                    listChoiceDialog.isCancelable = true
-                    listChoiceDialog.show(supportFragmentManager, listChoiceDialog.tag)
                 }
 
                 "repayment_term" -> {
@@ -432,8 +426,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                             binding.btnSubmit.isEnable(
                                 proType!!,
                                 binding.tvNameBrand.tag.toString(),
-                                binding.tvNameModel.tag.toString(),
                                 binding.tvNameType.tag.toString(),
+                                binding.tvNameModel.tag.toString(),
                                 reqAmt!!,
                                 proPrice!!,
                                 repaymentCodes[pos].code.toString()
@@ -462,16 +456,22 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 //reset selected index in list
                 selectedModelItem = -1
                 //Previous list
-                modelCodes.clear()
+                modelCodes?.clear()
                 binding.tvNameModel.isEnabled = true
+                binding.tvNameModel.tag = ""
+                binding.tvNameModel.text = ""
             }
             2 -> {
                 //set default text before select item
-                viewModel.applyLeaseRequest.name_of_brand = ""
+                viewModel.applyLeaseRequest.name_of_type = ""
                 viewModel.applyLeaseRequest.name_of_model = ""
+                binding.tvNameType.tag = ""
+                binding.tvNameModel.tag = ""
+                binding.tvNameType.text = ""
+                binding.tvNameModel.text = ""
                 //reset selected index in list
-                typeCodes.clear()
-                modelCodes.clear()
+                typeCodes?.clear()
+                modelCodes?.clear()
                 binding.tvNameType.isEnabled = true
                 binding.tvNameModel.isEnabled = false
 //                communeId = 0
@@ -524,8 +524,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.btnSubmit.isEnable(
                         proType!!,
                         binding.tvNameBrand.tag.toString(),
-                        binding.tvNameModel.tag.toString(),
                         binding.tvNameType.tag.toString(),
+                        binding.tvNameModel.tag.toString(),
                         reqAmt!!,
                         s.toString(),
                         term!!.toString()
@@ -536,14 +536,16 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
             override fun afterTextChanged(s: Editable) {
                 viewModel.applyLeaseRequest.product_price = if (s.toString().isNotEmpty()){
-                    "LAK ".plus(s.toString())
+                    "LAK ".plus(s.toString().replace(",", ""))
                 }else{
                     ""
                 }
                 if (binding.edReqAmt.text.toString().isNotEmpty()) {
+                    val advancePayment =
+                        viewModel.applyLeaseRequest.product_price!!.split(" ")[1].toInt() - viewModel.applyLeaseRequest.request_amount!!.split(" ")[1].toInt()
                     binding.tvAdvancePayment.text =
-                        (s.toString().toInt() - binding.edReqAmt.text.toString().toInt()).toString()
-                            .plus(" Kip")
+                        advancePayment.toString()
+                            .plus(" ${getString(R.string.kip)}")
                 }
             }
         })
@@ -551,6 +553,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         binding.edReqAmt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                viewModel.applyLeaseRequest.request_amount = s.toString().replace(",", "")
                 val proType = if (viewModel.applyLeaseRequest.product_type != null){
                     viewModel.applyLeaseRequest.product_type
                 }else{
@@ -580,8 +583,8 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                     binding.btnSubmit.isEnable(
                         proType!!,
                         binding.tvNameBrand.tag.toString(),
-                        binding.tvNameModel.tag.toString(),
                         binding.tvNameType.tag.toString(),
+                        binding.tvNameModel.tag.toString(),
                         s.toString(),
                         proPrice!!,
                         term!!.toString()
@@ -592,19 +595,20 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
 
             override fun afterTextChanged(s: Editable) {
                 viewModel.applyLeaseRequest.request_amount = if (s.toString().isNotEmpty()){
-                    "LAK ".plus(s.toString())
+                    "LAK ".plus(s.toString().replace(",", ""))
                 }else{
                     ""
                 }
                 if (binding.edProPrice.text.toString().isNotEmpty()) {
+                    val advancePayment =
+                        viewModel.applyLeaseRequest.product_price!!.split(" ")[1].toInt() - viewModel.applyLeaseRequest.request_amount!!.split(" ")[1].toInt()
                     binding.tvAdvancePayment.text =
-                        (binding.edProPrice.text.toString().toInt() - s.toString().toInt()).toString()
-                            .plus(" Kip")
+                        advancePayment.toString()
+                            .plus(" ${getString(R.string.kip)}")
                 }
             }
         })
         binding.cbEtc.setOnCheckedChangeListener { _, p1 ->
-            viewModel.applyLeaseRequest.etc_status = p1
             enableEctInputFields(p1)
         }
 
@@ -731,6 +735,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     }
 
     private fun enableEctInputFields(enableEctInput : Boolean){
+        viewModel.applyLeaseRequest.etc_status = enableEctInput
         val proType = if (viewModel.applyLeaseRequest.product_type != null){
             viewModel.applyLeaseRequest.product_type
         }else{
@@ -752,18 +757,18 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
             ""
         }
         if (enableEctInput){
+            binding.edEtcBrand.isEnabled = true
             binding.edEtcType.isEnabled = true
             binding.edEtcModel.isEnabled = true
-            binding.edEtcBrand.isEnabled = true
-            viewModel.applyLeaseRequest.etc_name_of_type = binding.edEtcType.text.toString()
             viewModel.applyLeaseRequest.etc_name_of_brand = binding.edEtcBrand.text.toString()
+            viewModel.applyLeaseRequest.etc_name_of_type = binding.edEtcType.text.toString()
             viewModel.applyLeaseRequest.etc_name_of_model = binding.edEtcModel.text.toString()
 
+            binding.tvNameBrand.isEnabled = false
             binding.tvNameType.isEnabled = false
             binding.tvNameModel.isEnabled = false
-            binding.tvNameBrand.isEnabled = false
-            viewModel.applyLeaseRequest.name_of_type = ""
             viewModel.applyLeaseRequest.name_of_brand = ""
+            viewModel.applyLeaseRequest.name_of_type = ""
             viewModel.applyLeaseRequest.name_of_model = ""
 
             binding.btnSubmit.isEnable(
@@ -776,25 +781,25 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 term!!.toString()
             )
         }else{
-            binding.tvNameType.isEnabled = true
-            binding.tvNameModel.isEnabled = true
             binding.tvNameBrand.isEnabled = true
-            viewModel.applyLeaseRequest.name_of_type = binding.tvNameType.tag.toString()
+            binding.tvNameType.isEnabled = binding.tvNameBrand.isEnabled
+            binding.tvNameModel.isEnabled =  binding.tvNameType.isEnabled && binding.tvNameType.tag.toString().isNotEmpty()
+
             viewModel.applyLeaseRequest.name_of_brand = binding.tvNameBrand.tag.toString()
+            viewModel.applyLeaseRequest.name_of_type = binding.tvNameType.tag.toString()
             viewModel.applyLeaseRequest.name_of_model = binding.tvNameModel.tag.toString()
 
+            binding.edEtcBrand.isEnabled = false
             binding.edEtcType.isEnabled = false
             binding.edEtcModel.isEnabled = false
-            binding.edEtcBrand.isEnabled = false
-            viewModel.applyLeaseRequest.etc_name_of_type = ""
             viewModel.applyLeaseRequest.etc_name_of_brand = ""
+            viewModel.applyLeaseRequest.etc_name_of_type = ""
             viewModel.applyLeaseRequest.etc_name_of_model = ""
-
             binding.btnSubmit.isEnable(
                 proType!!,
                 viewModel.applyLeaseRequest.name_of_brand!!,
-                viewModel.applyLeaseRequest.name_of_model!!,
                 viewModel.applyLeaseRequest.name_of_type!!,
+                viewModel.applyLeaseRequest.name_of_model!!,
                 reqAmt!!,
                 proPrice!!,
                 term!!.toString()

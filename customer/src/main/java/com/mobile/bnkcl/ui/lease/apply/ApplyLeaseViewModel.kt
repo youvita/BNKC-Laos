@@ -151,27 +151,27 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     }
 
     var typeData: ArrayList<String>? = ArrayList()
-    fun setUpTypeData(itemResponse: List<ProductResponseObj>) : ArrayList<String> {
+    fun setUpTypeData(itemResponse: ArrayList<ProductResponseObj>?) : ArrayList<String> {
         typeData?.clear()
-        for (i in 0 until itemResponse.size){
+        for (i in 0 until itemResponse!!.size){
             typeData?.add(itemResponse[i].name!!)
         }
         return typeData!!
     }
 
     var brandData: ArrayList<String>? = ArrayList()
-    fun setUpBrandData(itemResponse: List<ProductResponseObj>) : ArrayList<String> {
+    fun setUpBrandData(itemResponse: List<ProductResponseObj>?) : ArrayList<String> {
         brandData?.clear()
-        for (i in 0 until itemResponse.size){
-            brandData?.add(itemResponse[i].name!!)
+        for (element in itemResponse!!){
+            brandData?.add(element.name!!)
         }
         return brandData!!
     }
 
     var modelData: ArrayList<String>? = ArrayList()
-    fun setUpModelData(itemResponse: List<ProductResponseObj>) : ArrayList<String> {
+    fun setUpModelData(itemResponse: ArrayList<ProductResponseObj>?) : ArrayList<String> {
         modelData?.clear()
-        for (i in 0 until itemResponse.size){
+        for (i in 0 until itemResponse!!.size){
             modelData?.add(itemResponse[i].name!!)
         }
         return modelData!!

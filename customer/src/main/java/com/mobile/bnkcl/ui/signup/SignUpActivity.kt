@@ -170,6 +170,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     viewModel.addressReqObj?.state = capitalData
                     viewModel.signUpRequest.address = viewModel.addressReqObj
 
+                    removeToDefault(valChanged, 2)
+
                     val jobType = if (viewModel.signUpRequest.job_type != null){
                         viewModel.signUpRequest.job_type
                     }else {
@@ -216,7 +218,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.edtRecommend.text.toString(),
                         )
 
-                    removeToDefault(valChanged, 2)
                 }
 
                 listChoiceDialog.isCancelable = true
@@ -231,7 +232,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             var resetCapitalVal = ""
             var valChanged = false
             if (objDistrict != null && objDistrict!!.size>0){
-                objDistrict
                 listChoiceDialog = ListChoiceDialog.newInstance(
                     R.drawable.ic_badge_general,
                     "District",
@@ -269,7 +269,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 //                    binding.lltAdditional.tvVillage.isEnabled = true
                     valChanged = !objDistrict!![b].name.equals(resetCapitalVal)
                     resetCapitalVal = objDistrict!![b].name!!
-
+                    removeToDefault(valChanged, 1)
                     val jobType = if (viewModel.signUpRequest.job_type != null){
                         viewModel.signUpRequest.job_type
                     }else {
@@ -315,7 +315,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         jobType!!,
                         binding.edtRecommend.text.toString(),
                     )
-                    removeToDefault(valChanged, 1)
                 }
 
                 listChoiceDialog.isCancelable = true
@@ -399,7 +398,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         jobType!!,
                         binding.edtRecommend.text.toString(),
                     )
-
                 }
 
                 listChoiceDialog.isCancelable = true
@@ -601,20 +599,23 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         when (n) {
             1 -> {
                 //set default text before select item
-                viewModel.signUpRequest.address?.village = null
+                viewModel.addressReqObj?.village = null
                 //reset selected index in list
                 selectVillage = -1
                 //Previous list
                 objVillage?.clear()
+                binding.lltAdditional.tvVillage.text = ""
                 binding.lltAdditional.tvVillage.isEnabled = true
             }
             2 -> {
                 //set default text before select item
-                viewModel.signUpRequest.address?.district = null
-                viewModel.signUpRequest.address?.village = null
+                viewModel.addressReqObj?.district = null
+                viewModel.addressReqObj?.village = null
                 //reset selected index in list
                 objDistrict!!.clear()
                 objVillage!!.clear()
+                binding.lltAdditional.tvDistrict.text = ""
+                binding.lltAdditional.tvVillage.text = ""
                 binding.lltAdditional.tvDistrict.isEnabled = true
                 binding.lltAdditional.tvVillage.isEnabled = false
 //                communeId = 0
@@ -1213,16 +1214,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
     }
 
-//    private fun validateEdtAddress(){
-//        binding.lltAdditional.llVillage.isEnabled = !(binding.lltAdditional.tvDistrict.text.toString() == "" || binding.lltAdditional.tvCapital.text.toString() =="")
-//        if (binding.lltAdditional.tvCapital.text.toString() =="") {
-//            binding.lltAdditional.llDistrict.isEnabled = false
-//            binding.lltAdditional.llVillage.isEnabled = false
-//        }else{
-//            binding.lltAdditional.llDistrict.isEnabled = true
-//        }
-//    }
-
     private val btnCheckId = View.OnClickListener {
 
         identificationNumber = binding.edtIdNum.text.toString()
@@ -1282,7 +1273,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
                 }
 
-
             }
         }
     }
@@ -1302,7 +1292,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
             tmpAddress = viewModel.addressReqObj
             viewModel.addressReqObj = AddressReqObj()
-
+            viewModel.signUpRequest.address = viewModel.addressReqObj
             viewModel.signUpRequest.etc_detailed_address = binding.lltAdditional.edtEtc.text.toString()
             val address = if(viewModel.signUpRequest.etc_detailed_address != null) viewModel.signUpRequest.etc_detailed_address else ""
             binding.vbResult.isEnable(
@@ -1323,8 +1313,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
             viewModel.addressReqObj = tmpAddress
             tmpAddress = viewModel.addressReqObj
+            viewModel.signUpRequest.address = tmpAddress
             viewModel.signUpRequest.etc_detailed_address = ""
-            binding.lltAdditional.tvCapital.isEnabled = tmpAddress?.state != null
+            binding.lltAdditional.tvCapital.isEnabled = true
             binding.lltAdditional.tvDistrict.isEnabled = binding.lltAdditional.tvCapital.isEnabled
             binding.lltAdditional.tvVillage.isEnabled = binding.lltAdditional.tvDistrict.isEnabled && tmpAddress?.district != null
 
@@ -1366,7 +1357,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
 
     }
-
 
     override fun onClick(v: View?) {
         when(v!!.id){

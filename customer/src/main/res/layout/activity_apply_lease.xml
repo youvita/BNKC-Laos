@@ -384,7 +384,7 @@
                     android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/margin_15dp"
                     android:paddingEnd="@dimen/margin_15dp"
-                    android:onClick="@{()->applyViewModel.selectProductType()}"
+                    android:onClick="@{()->applyViewModel.repaymentTerm()}"
                     app:drawableEndCompat="@drawable/selector_ico_more" />
 
                 <TextView
@@ -420,7 +420,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
-                            android:text="Ko Youngwon"
+                            tools:text="Ko Youngwon"
                             style="@style/font15_263238_medium"/>
                     </LinearLayout>
                     <LinearLayout
@@ -439,7 +439,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
-                            android:text="01050080340"
+                            tools:text="01050080340"
                             style="@style/font15_263238_medium"/>
                     </LinearLayout>
                     <LinearLayout
@@ -458,7 +458,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
-                            android:text="12-09-83"
+                            tools:text="12-09-83"
                             style="@style/font15_263238_medium"/>
                     </LinearLayout>
                     <LinearLayout
@@ -477,7 +477,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
-                            android:text="020 5608 8075"
+                            tools:text="020 5608 8075"
                             style="@style/font15_263238_medium"/>
                     </LinearLayout>
                     <LinearLayout
