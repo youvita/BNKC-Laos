@@ -10,6 +10,7 @@ import com.mobile.bnkcl.data.request.auth.*
 import com.mobile.bnkcl.data.request.user.PreChangeRequest
 import com.mobile.bnkcl.data.request.user.ResetPasswordRequest
 import com.mobile.bnkcl.data.response.auth.LoginResponse
+import com.mobile.bnkcl.data.response.auth.PreLoginResponse
 import com.mobile.bnkcl.data.response.signup.SignUpResponse
 import com.mobile.bnkcl.data.response.user.resetpassword.PreChangeResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +23,17 @@ import javax.inject.Inject
 class PinViewModel @Inject constructor(private val userRepo: UserRepo, private val authRepo: AuthRepo) : BaseViewModel(){
 
     var signUpRequest : SignUpRequest? = null
+
+    private val _preLogin: MutableLiveData<PreLoginResponse> = MutableLiveData()
+    val preLoginLiveData: LiveData<PreLoginResponse> = _preLogin
+    var preLogRequest: PreLoginRequest? = null
+    fun preLogin(){
+        viewModelScope.launch {
+            authRepo.preLogin(preLogRequest!!).onEach { resource ->
+                _preLogin.value = resource.data
+            }.launchIn(viewModelScope)
+        }
+    }
 
     private val _login: MutableLiveData<LoginResponse> = MutableLiveData()
     val loginLiveData: LiveData<LoginResponse> = _login

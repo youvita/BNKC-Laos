@@ -50,6 +50,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private var txtAgreement: String? = null
     private var isFromPage: Boolean = false
     private var isVerifiedOTP: Boolean = false
+    var mustShowDialog = false
 
     @Inject lateinit var systemDialog: SystemDialog
 
@@ -117,6 +118,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
                     )
                     binding.edtPhonenumber.setSelection(textLength)
                 }
+            }
+            if (s.toString().isNotEmpty()) {
+                viewModel.phoneNumber = s.toString().replace("-", "")
             }
             binding.tvCorrect.visibility = View.GONE
             if (text.isEmpty()) {
@@ -260,16 +264,20 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             Log.d("nng", it.toString())
             dismissLoading()
             if (it.session_id!!.isNotEmpty()){
-                sessionId = it.session_id!!
-                binding.btnContinue.setActive(true)
+
+                    sessionId = it.session_id!!
+                    binding.btnContinue.setActive(true)
+
             }
         }
         viewModel.preSignUpLiveData.observe(this){
             Log.d("nng", it.toString())
             dismissLoading()
             if (it.session_id!!.isNotEmpty()){
-                sessionId = it.session_id!!
-                isVerifiedOTP = true
+
+                    sessionId = it.session_id!!
+                    isVerifiedOTP = true
+
             }
         }
         viewModel.verifyOTPLiveData.observe(this, {
@@ -486,24 +494,37 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         super.handleError(code,smg)
         when(code){
             ErrorCode.USER_EXISTS -> {
-                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.already_signed_up), getString(R.string.already_signed_up_msg), getString(R.string.nav_login))
+                systemDialog = SystemDialog.newInstance(
+                    R.drawable.ic_badge_signed_up,
+                    getString(R.string.already_signed_up),
+                    getString(R.string.already_signed_up_msg),
+                    getString(R.string.nav_login))
                 systemDialog.show(supportFragmentManager, systemDialog.tag)
                 systemDialog.onConfirmClicked {
-                    val intent = Intent(this , PinCodeActivity::class.java)
+                    val intent = Intent(this, PinCodeActivity::class.java)
                     intent.putExtra("pin_action", "login")
+                    intent.putExtra(Constants.SESSION_ID, pinID)
                     intent.putExtra("username", viewModel.phoneNumber)
+                    intent.putExtra("req_session_again", true)
                     startActivity(intent)
                 }
             }
             ErrorCode.USER_NOT_FOUND -> {
-                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_signed_up, getString(R.string.not_signup_yet), getString(R.string.not_yet_signed_up_msg), getString(R.string.sign_up))
-                systemDialog.show(supportFragmentManager, systemDialog.tag)
-                systemDialog.onConfirmClicked {
-                    val intent = Intent(this , SignUpActivity::class.java)
-                    intent.putExtra(Constants.SESSION_ID, pinID)
-                    intent.putExtra("username", viewModel.phoneNumber)
-                    startActivity(intent)
-                }
+                    systemDialog = SystemDialog.newInstance(
+                        R.drawable.ic_badge_signed_up,
+                        getString(R.string.not_signup_yet),
+                        getString(R.string.not_yet_signed_up_msg),
+                        getString(R.string.sign_up)
+                    )
+                    systemDialog.show(supportFragmentManager, systemDialog.tag)
+                    systemDialog.onConfirmClicked {
+                        Log.d(">>>>", "initEvent: ${viewModel.phoneNumber} ")
+                        val intent = Intent(this, SignUpActivity::class.java)
+                        intent.putExtra(Constants.SESSION_ID, pinID)
+                        intent.putExtra(Constants.USER_ID, viewModel.phoneNumber)
+                        intent.putExtra("req_session_again", true)
+                        startActivity(intent)
+                    }
             }
         }
     }

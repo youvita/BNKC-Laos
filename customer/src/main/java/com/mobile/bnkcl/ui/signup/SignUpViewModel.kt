@@ -22,4 +22,15 @@ class SignUpViewModel @Inject constructor(private val authRepo: AuthRepo) : Base
    var addressReqObj : AddressReqObj? = null
    var signUpRequest : SignUpRequest = SignUpRequest()
 
+   private val _preSignUp: MutableLiveData<PreSignUpResponse> = MutableLiveData()
+   val preSignUpLiveData: LiveData<PreSignUpResponse> = _preSignUp
+   var preSignUpRequest: PreSignUpRequest? = null
+   fun preSignUp(){
+      viewModelScope.launch {
+         authRepo.preSignUp(preSignUpRequest!!).onEach { resource ->
+            if (resource.data != null) _preSignUp.value = resource.data
+         }.launchIn(viewModelScope)
+      }
+   }
+
 }

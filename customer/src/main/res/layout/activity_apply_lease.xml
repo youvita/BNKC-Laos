@@ -14,7 +14,9 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.lease.apply.ApplyLeaseActivity">
+        tools:context=".ui.lease.apply.ApplyLeaseActivity"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
 
         <include
             android:id="@+id/include"

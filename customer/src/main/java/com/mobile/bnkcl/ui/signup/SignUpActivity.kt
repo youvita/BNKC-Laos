@@ -78,6 +78,13 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         if (intent.hasExtra(Constants.SESSION_ID)){
             viewModel.signUpRequest.session_id = intent.getStringExtra(Constants.SESSION_ID).toString()
         }
+
+//        if (intent.hasExtra("req_session_again")){
+//
+//            viewModel.preSignUpRequest?.pin_id = viewModel.signUpRequest.session_id
+//            viewModel.preSignUpRequest?.username = username
+//            viewModel.preSignUp()
+//        }
         viewModel.addressReqObj = AddressReqObj()
         /*observe data*/
         addressInfoViewModel.getCapitalData()
@@ -86,6 +93,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         observeVillage()
         observeCode()
         observeGender()
+        observeData()
         viewModel.signUpRequest.etc_status = binding.lltAdditional.cbEtc.isChecked
         /**
          * init hidden keyboard
@@ -1229,7 +1237,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
             binding.isVerified = it.verified!!
             binding.tvNewCustomer.visibility = View.VISIBLE
 
-            if (it.verified!!){
+            if (!it.verified!!){
                 binding.llInputIdNum.background = ContextCompat.getDrawable(
                     this,
                     R.drawable.round_stroke_00695c_8
@@ -1356,6 +1364,18 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
 
         }
 
+    }
+
+    private fun observeData(){
+        viewModel.preSignUpLiveData.observe(this){
+            Log.d("nng", it.toString())
+            dismissLoading()
+            if (it.session_id!!.isNotEmpty()){
+
+                viewModel.signUpRequest.session_id = it.session_id!!
+
+            }
+        }
     }
 
     override fun onClick(v: View?) {

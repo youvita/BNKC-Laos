@@ -45,6 +45,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     private var pinUI : String = ""
     private var countAttempt = 0
     private val MAX_ATTEMPT_TIME = 5
+    var reqSession = false
 
     @Inject
     lateinit var confirmDialog: ConfirmDialog
@@ -60,6 +61,13 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             if (intent.hasExtra("username")){
                 username = intent.getStringExtra("username").toString()
             }
+            if (intent.hasExtra(Constants.SESSION_ID)){
+                viewModel.preLogRequest?.pin_id = intent.getStringExtra(Constants.SESSION_ID).toString()
+            }
+//            if (intent.hasExtra("req_session_again")){
+//                reqSession = intent.getBooleanExtra("req_session_again", false)
+//                viewModel.preLogRequest?.username = username
+//            }
             when (pinUI) {
                 "sign_up" -> {
                     viewModel.signUpRequest =
@@ -106,6 +114,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
         binding.pinView.setOnCompletedListener = { pinCode: String ->
             Log.d(">>>>>>>>", "onCreate: $pinCode ::: $forceActionClick")
+//            if (reqSession){
+//                reqSession = false
+//                viewModel.preLogin()
+//            }
             if (!forceActionClick) {
                 forceActionClick = true
                 if (pinCode.isNotEmpty()) {
@@ -151,6 +163,15 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
     }
 
     private fun observeViewModel() {
+        viewModel.preLoginLiveData.observe(this){
+            Log.d("nng", it.toString())
+            dismissLoading()
+            if (it.session_id!!.isNotEmpty()){
+
+                sessionId = it.session_id!!
+
+            }
+        }
         viewModel.signUpLiveData.observe(this, {
             forceActionClick = false
             val intent = Intent(this, ResultActivity::class.java)
@@ -198,7 +219,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 AppLogin.PIN.code = "Y"
                 if (from.isEmpty()) {
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()
                 } else {
