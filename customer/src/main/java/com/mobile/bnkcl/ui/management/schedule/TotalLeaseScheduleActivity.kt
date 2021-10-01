@@ -1,17 +1,15 @@
 package com.mobile.bnkcl.ui.management.schedule
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -85,7 +83,13 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         binding.webView.webViewClient = object : WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                view?.loadUrl(url!!)
+                val header = mutableMapOf<String, String>()
+                header["Authorization"] = "Bearer " + RunTimeDataStore.LoginToken.value
+                header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(
+                    Constants.LANGUAGE
+                )!!
+                header["Cookie"] = RunTimeDataStore.JsessionId.value
+                view?.loadUrl(url!!, header)
                 return true
             }
 
@@ -105,8 +109,27 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                     binding.webView.layoutParams = vc
                 }
             }
+
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                request!!.requestHeaders
+                return null
+            }
         }
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) {
+                WebView.setWebContentsDebuggingEnabled(true)
+            }
+            webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            val cookieManager = CookieManager.getInstance()
+            cookieManager.setAcceptCookie(true)
+            cookieManager.setAcceptThirdPartyCookies(binding.webView, true)
+
+        }
 //        webSettings.domStorageEnabled = true
 //        webSettings.setAppCacheEnabled(false)
 //        webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
@@ -153,15 +176,24 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         if (!hide) binding.appBar.setExpanded(hide)
 
         if (binding.llWebContainer.visibility == View.VISIBLE) {
-            val url =
-                RunTimeDataStore.BaseUrl.value + "/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
+//            val url = RunTimeDataStore.BaseUrl.value + "/mobile/views/my-lease/$CONTRACT_NO/schedules?lang=lo&category=customer"
+            val url = RunTimeDataStore.BaseUrl.value + "/mobile/views/my-lease/$CONTRACT_NO/schedules?category=customer"
+
+//            val cookieManager = CookieManager.getInstance()
+//            cookieManager.setAcceptCookie(true)
+//            cookieManager.setAcceptThirdPartyCookies(binding.webView, true)
 
             val header = mutableMapOf<String, String>()
             header["Authorization"] = "Bearer " + RunTimeDataStore.LoginToken.value
-            header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE)
-                    .isNullOrEmpty()
-            ) "lo" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
+            header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(
+                Constants.LANGUAGE
+            )!!
 
+//            val cookieList = cookieManager.getCookie(url).split(";")
+//            cookieList.forEach{ item ->
+//                cookieManager.setCookie(RunTimeDataStore.BaseUrl.value, item)
+//            }
+            header["Cookie"] = RunTimeDataStore.JsessionId.value
 
             binding.webView.loadUrl(url, header)
         }

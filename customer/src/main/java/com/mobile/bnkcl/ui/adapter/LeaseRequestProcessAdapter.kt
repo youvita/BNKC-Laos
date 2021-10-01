@@ -110,6 +110,6 @@ class LeaseRequestProcessAdapter :
      * provide a reference to the type of views that you are using custom view holder
      * @param binding item binding
      */
-    class ViewHolder(binding: ItemLeaseRequestProcessBinding) :
+    class ViewHolder(val binding: ItemLeaseRequestProcessBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

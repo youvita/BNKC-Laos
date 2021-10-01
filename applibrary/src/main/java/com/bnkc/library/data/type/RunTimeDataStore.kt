@@ -17,6 +17,8 @@ sealed class RunTimeDataStore(var value: String) {
         const val LOGIN_TOKEN = ""
 
         const val BEARER = "bearer"
+
+        const val JSESSIONID = ""
     }
 
     object PushId: RunTimeDataStore(PUSH_ID)
@@ -32,4 +34,6 @@ sealed class RunTimeDataStore(var value: String) {
     object LoginToken: RunTimeDataStore(LOGIN_TOKEN)
 
     object BearerEmpty: RunTimeDataStore(BEARER)
+
+    object JsessionId: RunTimeDataStore(JSESSIONID)
 }

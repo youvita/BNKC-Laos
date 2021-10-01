@@ -5,6 +5,7 @@
  */
 package com.bnkc.library.data.network
 
+import com.bnkc.library.data.type.RunTimeDataStore
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -14,6 +15,12 @@ object RetrofitRequest {
         return try {
             val response = call.invoke()
             if (response.isSuccessful) {
+                val cookies = response.headers()["set-cookie"]
+                if (cookies != null) {
+                    val jsessionid = cookies.split(";").toTypedArray()
+                    if (RunTimeDataStore.JsessionId.value.isEmpty())
+                        RunTimeDataStore.JsessionId.value = jsessionid[0]
+                }
                 val body = response.body()
                 if (body == null) {
                     RetrofitResponse.Error(response.code())

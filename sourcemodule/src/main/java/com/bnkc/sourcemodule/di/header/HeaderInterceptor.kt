@@ -23,6 +23,7 @@ const val AUTHORIZATION = "Authorization"
 const val BEARER = "Bearer"
 const val ACCEPT_LANGUAGE = "Accept-Language"
 const val X_APP_VERSION = "X-App-Version"
+const val COOKIE = "Cookie"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -36,13 +37,17 @@ class HeaderInterceptor {
             val languageCode = credentialSharedPrefer.getPrefer(Constants.LANGUAGE).orEmpty()
 
             val request = chain.request()
-                    .newBuilder()
-                    .header(ACCEPT_LANGUAGE, if (languageCode.isEmpty()) "lo" else languageCode)
-                    .header(X_APP_VERSION, "")
+                .newBuilder()
+                .header(ACCEPT_LANGUAGE, if (languageCode.isEmpty()) "lo" else languageCode)
+                .header(X_APP_VERSION, "")
 
             // auth when endpoint required
-            if (RunTimeDataStore.LoginToken.value.isNotEmpty()){
+            if (RunTimeDataStore.LoginToken.value.isNotEmpty()) {
                 request.header(AUTHORIZATION, tokenBearer)
+            }
+
+            if (RunTimeDataStore.JsessionId.value.isNotEmpty()) {
+                request.header(COOKIE, RunTimeDataStore.JsessionId.value)
             }
             return chain.proceed(request.build())
         })
@@ -60,7 +65,7 @@ class HeaderInterceptor {
     @Singleton
     fun provideCookieJar(): CookieManager {
         val cookieManager = CookieManager()
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ORIGINAL_SERVER)
         return cookieManager
     }
 

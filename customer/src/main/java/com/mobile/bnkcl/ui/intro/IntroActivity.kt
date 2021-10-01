@@ -102,9 +102,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             introViewModel.getMGData()
             introViewModel.mgDataResponse.observe(this, Observer {
 
-//                sharedPrefer.putPrefer(Constants.KEY_START_URL, it.c_start_url!!)
                 RunTimeDataStore.BaseUrl.value = it.c_start_url!!
-//                RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
+//                RunTimeDataStore.BaseUrl.value = "http://192.168.178.74:8080"
 
                 val availableService = it.c_available_service
                 if (availableService!!) {

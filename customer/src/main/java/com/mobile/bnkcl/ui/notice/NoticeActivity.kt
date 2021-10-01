@@ -83,6 +83,7 @@ class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
         val header = mutableMapOf<String, String>()
         header["Authorization"] = "Bearer ${RunTimeDataStore.LoginToken.value}"
         header["Accept-Language"] = if (sharedPrefer.getPrefer(Constants.LANGUAGE).isNullOrEmpty()) "en" else sharedPrefer.getPrefer(Constants.LANGUAGE)!!
+        header["X-App-Version"] = "20210705"
 
         binding.wbNotice.loadUrl(RunTimeDataStore.BaseUrl.value + Constants.WB_NOTICES, header)
     }
