@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.otp
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -16,9 +15,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 
 
-class OTPRepo(context: Context, okHttpClient: OkHttpClient) {
+class OTPRepo(okHttpClient: OkHttpClient) {
 
-    private val otpApi: OTPApi by lazy { RetrofitBuilder(context, okHttpClient).getRetrofit().create(OTPApi::class.java) }
+    private val otpApi: OTPApi by lazy { RetrofitBuilder(okHttpClient).getRetrofit().create(OTPApi::class.java) }
 
     fun sendOTP(sendOTPRequest: SendOTPRequest): Flow<Resource<SendOTPResponse>> = flow {
         try {

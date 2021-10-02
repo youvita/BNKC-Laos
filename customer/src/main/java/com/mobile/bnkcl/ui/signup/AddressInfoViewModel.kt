@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.area.AreaRepo
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.code.CodesRepo
@@ -42,7 +44,11 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
         try {
             viewModelScope.launch {
                 areaRepo.getCapitalData().onEach { resource ->
-                    _capitalArea.value = resource.data?.areas
+                    if (resource.status == Status.ERROR) {
+                        setError(ErrorItem(null, resource.code, resource.message, null))
+                    } else {
+                        _capitalArea.value = resource.data?.areas
+                    }
                 }.launchIn(viewModelScope)
             }
         }catch (e:Exception){
@@ -75,7 +81,11 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
         try {
             viewModelScope.launch {
                 areaRepo.getAddressData(addressData!!).onEach { resource ->
-                    _districtArea.value = resource.data?.areas
+                    if (resource.status == Status.ERROR) {
+                        setError(ErrorItem(null, resource.code, resource.message, null))
+                    } else {
+                        _districtArea.value = resource.data?.areas
+                    }
                 }.launchIn(viewModelScope)
             }
         }catch (e:Exception){
@@ -93,7 +103,11 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
         try {
             viewModelScope.launch {
                 areaRepo.getAddressData(villageData!!).onEach { resource ->
-                    _villageArea.value = resource.data?.areas
+                    if (resource.status == Status.ERROR) {
+                        setError(ErrorItem(null, resource.code, resource.message, null))
+                    } else {
+                        _villageArea.value = resource.data?.areas
+                    }
                 }.launchIn(viewModelScope)
             }
         }catch (e:Exception){
@@ -110,7 +124,11 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
 //        idNumReq = IdNumReq(Constants.USER_ID, idNumReq!!.identification_number )
         viewModelScope.launch {
             authRepo.verifyIdentification(idNumReq!!).onEach { resource ->
-                _verifyId.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _verifyId.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -123,8 +141,11 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
     fun getCodes(group_id: String) {
         viewModelScope.launch {
             codesRepo.getCodes(group_id).onEach { resource ->
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
                     _codesLiveData.value = resource.data!!.codes
-
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -151,8 +172,11 @@ class AddressInfoViewModel @Inject constructor(private val areaRepo: AreaRepo , 
     fun getGender(group_id: String) {
         viewModelScope.launch {
             codesRepo.getCodes(group_id).onEach { resource ->
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
                     _genderLiveData.value = resource.data!!.codes
-
+                }
             }.launchIn(viewModelScope)
         }
     }

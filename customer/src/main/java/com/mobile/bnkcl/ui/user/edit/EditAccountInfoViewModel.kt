@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.user.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.user.EditAccountInfoRepo
 import com.mobile.bnkcl.data.response.user.EditAccountInfoData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,7 +45,11 @@ class EditAccountInfoViewModel @Inject constructor(
     fun editAccountInfo(editAccountInfoData: EditAccountInfoData) {
         viewModelScope.launch {
             editAccountInfoRepo.editAccountInfo(editAccountInfoData).onEach { resource ->
-                _editAccountInfo.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _editAccountInfo.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -59,7 +65,11 @@ class EditAccountInfoViewModel @Inject constructor(
             .build()
         viewModelScope.launch {
             editAccountInfoRepo.uploadProfile(multipartBody).onEach { resource ->
-                _editAccountInfo.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _editAccountInfo.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

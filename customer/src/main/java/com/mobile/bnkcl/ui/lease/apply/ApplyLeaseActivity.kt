@@ -1,30 +1,20 @@
 package com.mobile.bnkcl.ui.lease.apply
 
-import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.dialog.TwoButtonDialog
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.data.response.code.ProductResponseObj
@@ -36,9 +26,7 @@ import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
 import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.Utils
-import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 import kotlin.math.max
 
@@ -54,8 +42,6 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
     private lateinit var productCodes : ArrayList<ItemResponseObject>
     private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
     private var typeCodes : ArrayList<ProductResponseObj>? = ArrayList()
@@ -80,16 +66,7 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
         initView()
         initEvent()
         observeViewModel()
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
+        handleError()
     }
 
     private fun initEvent(){
@@ -840,6 +817,25 @@ class ApplyLeaseActivity : BaseActivity<ActivityApplyLeaseBinding>() {
                 editText.addTextChangedListener(this)
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
             }
         }
     }

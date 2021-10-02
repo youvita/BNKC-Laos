@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.user
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -14,10 +13,10 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import javax.inject.Inject
 
-class EditAccountInfoRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
+class EditAccountInfoRepo @Inject constructor(okHttpClient: OkHttpClient) {
 
     private val editAccountInfoApi: EditAccountInfoApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(EditAccountInfoApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(EditAccountInfoApi::class.java)
     }
 
     fun editAccountInfo(editAccountInfoData: EditAccountInfoData): Flow<Resource<Unit>> = flow {

@@ -22,8 +22,8 @@ abstract class BaseCameraActivity<T: ViewDataBinding>: BaseActivity<T>() {
     @Inject
     lateinit var permissionsFactory: AppPermissionsFactory
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialo?
 
     protected open val appPermission: AppPermission by lazy {
         permissionsFactory.getPermission(AppPermissionsFactory.PERMISSION_CAMERA)

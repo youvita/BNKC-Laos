@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.auth
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -18,9 +17,9 @@ import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import retrofit2.Response
 
-class AuthRepo(context: Context, okHttpClient: OkHttpClient) {
+class AuthRepo(okHttpClient: OkHttpClient) {
 
-    private val authAPI: AuthAPI by lazy { RetrofitBuilder(context, okHttpClient).getRetrofit().create(AuthAPI::class.java) }
+    private val authAPI: AuthAPI by lazy { RetrofitBuilder(okHttpClient).getRetrofit().create(AuthAPI::class.java) }
 
     fun preLogin(preLoginRequest: PreLoginRequest): Flow<Resource<PreLoginResponse>> = flow {
         try {

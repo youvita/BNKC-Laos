@@ -3,7 +3,9 @@ package com.mobile.bnkcl.ui.setting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.response.user.SettingData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,8 +25,12 @@ class SettingViewModel @Inject constructor(private val userRepo: UserRepo) : Bas
     fun updateUserSetting() {
         viewModelScope.launch {
             userRepo.updateUserSetting(settingData!!).onEach { resource ->
-                _updateUserSetting.value = resource.data
-                push_notification_yn = settingData!!.push_alarm_enabled
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _updateUserSetting.value = resource.data
+                    push_notification_yn = settingData!!.push_alarm_enabled
+                }
             }.launchIn(viewModelScope)
         }
     }

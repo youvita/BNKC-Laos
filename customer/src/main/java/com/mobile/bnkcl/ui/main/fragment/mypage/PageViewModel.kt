@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.main.fragment.mypage
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.dashboard.DashboardRepo
 import com.mobile.bnkcl.data.response.code.CodesResponse
@@ -46,7 +48,11 @@ class PageViewModel @Inject constructor(
     fun getDashboard() {
         viewModelScope.launch {
             dashboardRepo.getDashboard().onEach { resource ->
-                _dashboardLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _dashboardLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -54,7 +60,11 @@ class PageViewModel @Inject constructor(
     fun getLeaseApplication(lease_request_status: String) {
         viewModelScope.launch {
             dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                _leaseApplicationLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _leaseApplicationLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -62,7 +72,11 @@ class PageViewModel @Inject constructor(
     fun getLeaseScreening(lease_request_status: String) {
         viewModelScope.launch {
             dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                _leaseScreeningLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _leaseScreeningLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -70,7 +84,11 @@ class PageViewModel @Inject constructor(
     fun getLeaseResult(lease_request_status: String) {
         viewModelScope.launch {
             dashboardRepo.getLeaseApplication(lease_request_status).onEach { resource ->
-                _leaseResultLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _leaseResultLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -78,7 +96,11 @@ class PageViewModel @Inject constructor(
     fun getProductCodes() {
         viewModelScope.launch {
             codesRepo.getCodes("PRODUCT_TYPE").onEach { resource ->
-                _productCodesLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _productCodesLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -86,7 +108,11 @@ class PageViewModel @Inject constructor(
     fun getLeaseProgressCodes() {
         viewModelScope.launch {
             codesRepo.getCodes("LEASE_PROGRESS_STATUS").onEach { resource ->
-                _progressCodesLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _progressCodesLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -94,7 +120,11 @@ class PageViewModel @Inject constructor(
     fun getLeaseRequestCodes() {
         viewModelScope.launch {
             codesRepo.getCodes("LEASE_REQUEST_STATUS").onEach { resource ->
-                _requestCodesLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _requestCodesLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

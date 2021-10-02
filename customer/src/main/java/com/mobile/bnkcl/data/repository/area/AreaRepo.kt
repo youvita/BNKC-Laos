@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.area
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -12,9 +11,9 @@ import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import retrofit2.Response
 
-class AreaRepo(context: Context, okHttpClient: OkHttpClient){
+class AreaRepo(okHttpClient: OkHttpClient){
     private val areaApi: AreaApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(AreaApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(AreaApi::class.java)
     }
     //get all capital data
     fun getCapitalData() : Flow<Resource<AreaRes>> = flow{

@@ -7,6 +7,7 @@ import com.bnkc.library.data.type.Status
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.cscenter.ClaimDetailRepo
 import com.mobile.bnkcl.data.request.cscenter.ClaimDetailReq
 import com.mobile.bnkcl.data.response.cscenter.ClaimDetailRes
@@ -26,7 +27,11 @@ class AskBNKCDetailViewModel @Inject constructor(private val claimRepo: ClaimDet
     fun getClaimDetailData(request: ClaimDetailReq){
         viewModelScope.launch {
             claimRepo.getClaimDetailData(request).onEach { resource ->
-                _claimDetailData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _claimDetailData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

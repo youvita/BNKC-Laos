@@ -3,18 +3,10 @@ package com.mobile.bnkcl.ui.alarm
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.ViewTreeObserver
-import android.view.ViewTreeObserver.OnScrollChangedListener
-import android.widget.AbsListView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
@@ -31,10 +23,8 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
     private val alarmViewModel: AlarmViewModel by viewModels()
 
     @Inject
-    lateinit var systemDialog: SystemDialog
-
-    @Inject
     lateinit var adapter: AlarmAdapter
+
     private var isSending = false
 
     override fun getLayoutId(): Int = R.layout.activity_notification
@@ -44,6 +34,8 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
 
         initView()
+
+        handleError()
 
         binding.lvNotifiation.adapter = adapter
         adapter.clearItemList()
@@ -124,16 +116,6 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 //        })
     }
 
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
-    }
-
     private fun resetStartPage() {
         binding.lvNotifiation.removeAllViews()
         adapter.clearItemList()
@@ -153,6 +135,25 @@ class AlarmActivity : BaseActivity<ActivityNotificationBinding>() {
 //            binding.llNoData.visibility = View.VISIBLE
 //        }
 //    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        alarmViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
+        }
+    }
 
 
 }

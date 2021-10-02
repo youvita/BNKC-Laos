@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.alarm
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -13,9 +12,9 @@ import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import retrofit2.Response
 
-class AlarmRepo(context: Context, okHttpClient: OkHttpClient) {
+class AlarmRepo(okHttpClient: OkHttpClient) {
 
-    private val alarmApi: AlarmAPI by lazy { RetrofitBuilder(context, okHttpClient).getRetrofit().create(AlarmAPI::class.java) }
+    private val alarmApi: AlarmAPI by lazy { RetrofitBuilder(okHttpClient).getRetrofit().create(AlarmAPI::class.java) }
 
     fun getAlarmList(alarmRequest: AlarmRequest): Flow<Resource<AlarmResponse>> = flow {
         try {

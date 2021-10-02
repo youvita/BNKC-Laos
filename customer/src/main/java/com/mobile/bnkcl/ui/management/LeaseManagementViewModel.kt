@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.management
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.response.lease.LeaseInfoResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +28,11 @@ class LeaseManagementViewModel @Inject constructor(private val leaseRepo: LeaseR
     fun getLeaseInfo(contractNo: String) {
         viewModelScope.launch {
             leaseRepo.getLeaseInfo(contractNo).onEach { resource ->
-                _lease.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _lease.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

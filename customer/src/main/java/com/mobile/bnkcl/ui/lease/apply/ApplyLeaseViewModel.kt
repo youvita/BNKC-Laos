@@ -3,7 +3,9 @@ package com.mobile.bnkcl.ui.lease.apply
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
@@ -32,7 +34,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun getJobTypeCodes() {
         viewModelScope.launch {
             codesRepo.getCodes("JOB_TYPE").onEach { resource ->
-                _jobCodesLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _jobCodesLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -42,7 +48,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun getUserProfile() {
         viewModelScope.launch {
             userRepo.getProfile().onEach { resource ->
-                _userProfile.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _userProfile.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -53,7 +63,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun applyLease(){
         viewModelScope.launch {
             leaseRepo.applyLease(applyLeaseRequest).onEach { resource ->
-                _applyLeaseLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _applyLeaseLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -63,7 +77,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun reqLeaseItemCode(groupId :String){
         viewModelScope.launch {
             leaseRepo.getItemCode(groupId).onEach { resource ->
-                _productTypeMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _productTypeMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -73,7 +91,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun reqRepaymentCode(groupId :String){
         viewModelScope.launch {
             leaseRepo.getItemCode(groupId).onEach { resource ->
-                _repaymentMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _repaymentMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -83,7 +105,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun reqTypeCode(cat :String, id : String){
         viewModelScope.launch {
             codesRepo.getProductFilterCodes(cat, id).onEach { resource ->
-                _typeMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _typeMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -93,7 +119,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun reqBrandCode(groupId :String){
         viewModelScope.launch {
             codesRepo.getProductCodes(groupId).onEach { resource ->
-                _brandMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _brandMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -103,7 +133,11 @@ class ApplyLeaseViewModel @Inject constructor(private val codesRepo: CodesRepo,p
     fun reqModelCode(cat :String, id : String){
         viewModelScope.launch {
             codesRepo.getProductFilterCodes(cat, id).onEach { resource ->
-                _modelMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _modelMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }

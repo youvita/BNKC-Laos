@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.lease
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -24,10 +23,10 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import javax.inject.Inject
 
-class LeaseRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
+class LeaseRepo @Inject constructor(okHttpClient: OkHttpClient) {
 
     private val leaseApi: LeaseApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(LeaseApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(LeaseApi::class.java)
     }
 
     fun getLeaseInfo(contractNo: String): Flow<Resource<LeaseInfoResponse>> = flow {

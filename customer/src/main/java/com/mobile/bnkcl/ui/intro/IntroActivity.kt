@@ -13,8 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -43,9 +41,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_intro
 
     @Inject
-    lateinit var systemDialog: SystemDialog
-
-    @Inject
     lateinit var confirmDialog: ConfirmDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +51,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         initLanguage()
         initAppVersion()
         initImageLoadingRotate()
-        getMGData()
+//        getMGData()
+        handleError()
 
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener(OnCompleteListener { task ->
@@ -69,21 +65,15 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                 RunTimeDataStore.PushId.value = token!!
                 Log.d("nng: ", "token:: $token")
             })
+
+        RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
+
+        startApp()
     }
 
     private fun initLanguage() {
         preLang = sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
         LocaleHelper.setLanguage(this, if ("" == preLang) "lo" else preLang)
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
     }
 
     private fun initImageLoadingRotate() {
@@ -102,8 +92,9 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             introViewModel.getMGData()
             introViewModel.mgDataResponse.observe(this, Observer {
 
-                RunTimeDataStore.BaseUrl.value = it.c_start_url!!
+//                RunTimeDataStore.BaseUrl.value = it.c_start_url!!
 //                RunTimeDataStore.BaseUrl.value = "http://192.168.178.74:8080"
+                RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
 
                 val availableService = it.c_available_service
                 if (availableService!!) {
@@ -179,7 +170,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             // Catch some error when MG down service
             val title = getString(R.string.comm_error)
             val message = getString(R.string.comm_error_during_process)
-            RxJava.publish(RxEvent.ServerError(ErrorCode.SERVICE_ERROR, title, message))
+//            RxJava.publish(RxEvent.ServerError(ErrorCode.SERVICE_ERROR, title, message))
         }
     }
 
@@ -265,5 +256,24 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             e.printStackTrace()
         }
         return strVersion
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        introViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
+        }
     }
 }

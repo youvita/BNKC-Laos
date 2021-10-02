@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.management.schedule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.request.lease.total_schedule.TotalLeaseScheduleRequest
 import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleResponse
@@ -27,7 +29,11 @@ class TotalLeaseScheduleViewModel @Inject constructor(private val leaseRepo: Lea
     fun getTotalLeaseSchedule(totalLeaseScheduleRequest: TotalLeaseScheduleRequest) {
         viewModelScope.launch {
             leaseRepo.getTotalLeaseSchedule(totalLeaseScheduleRequest).onEach { resource ->
-                _totalLeaseSchedule.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _totalLeaseSchedule.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

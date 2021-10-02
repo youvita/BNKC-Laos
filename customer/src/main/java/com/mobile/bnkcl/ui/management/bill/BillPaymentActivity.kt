@@ -9,27 +9,18 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityBillPaymentBinding
 import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
-import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnClickListener {
-
-    @Inject
-    lateinit var systemDialog: SystemDialog
 
     private var CONTRACT_NO: String? = null
     private var TOTAL_AMOUNT: String? = null
@@ -43,16 +34,6 @@ class BillPaymentActivity : BaseActivity<ActivityBillPaymentBinding>(), View.OnC
         initToolbar()
         initView()
 
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
     }
 
     private fun initView() {

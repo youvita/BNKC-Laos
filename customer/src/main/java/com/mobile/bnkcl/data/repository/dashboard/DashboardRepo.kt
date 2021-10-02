@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.dashboard
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -16,14 +15,14 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import javax.inject.Inject
 
-class DashboardRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
+class DashboardRepo @Inject constructor(okHttpClient: OkHttpClient) {
 
     private val dashboardApi: DashboardApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(DashboardApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(DashboardApi::class.java)
     }
 
     private val codesApi: CodesApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(CodesApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(CodesApi::class.java)
     }
 
     fun getDashboard(): Flow<Resource<DashboardResponse>> = flow {

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bnkc.library.data.type.Resource
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.request.cscenter.ClaimDataRequest
 import com.mobile.bnkcl.data.response.cscenter.ClaimDataResponse
@@ -28,7 +30,11 @@ class CSCenterViewModel @Inject constructor(private val claimRepo: ClaimRepo) :B
         request = ClaimDataRequest(page_number, request.page_size, "asc")
         viewModelScope.launch {
             claimRepo.getClaimData(request).onEach { resource ->
-                _claimData.value = resource
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _claimData.value = resource
+                }
             }.launchIn(viewModelScope)
         }
     }

@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.user
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -17,10 +16,10 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import javax.inject.Inject
 
-class UserRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
+class UserRepo @Inject constructor(okHttpClient: OkHttpClient) {
 
     private val userApi: UserApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(UserApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(UserApi::class.java)
     }
 
     fun getProfile(): Flow<Resource<ProfileData>> = flow {

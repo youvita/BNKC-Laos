@@ -3,8 +3,10 @@ package com.mobile.bnkcl.ui.main.fragment.office
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.data.repository.findoffice.FindOfficeRepo
 import com.mobile.bnkcl.data.request.findoffice.AreaRequest
@@ -31,7 +33,11 @@ class FindOfficeViewModel @Inject constructor(private var findOfficeRepo: FindOf
     fun reqAreasList() {
         viewModelScope.launch {
             findOfficeRepo.getAreas(areaRequest).onEach { resource ->
-                _areaMuLiveData.value = resource.data?.areas
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _areaMuLiveData.value = resource.data?.areas
+                }
             }.launchIn(viewModelScope)
         }
 
@@ -42,7 +48,11 @@ class FindOfficeViewModel @Inject constructor(private var findOfficeRepo: FindOf
     fun reqBranchList() {
         viewModelScope.launch {
             findOfficeRepo.getBranches(branchRequest!!).onEach { resource ->
-                _branchMuLiveData.value = resource.data?.branches
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _branchMuLiveData.value = resource.data?.branches
+                }
             }.launchIn(viewModelScope)
         }
     }

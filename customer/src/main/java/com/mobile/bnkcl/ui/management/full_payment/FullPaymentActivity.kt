@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -34,8 +35,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnClickListener {
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
     private val viewModel: FullPaymentViewModel by viewModels()
     private var REPAYMENT_DATE: String? = null
     private var CONTRACT_NO: String? = null
@@ -53,17 +54,7 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
         initView()
         checkDate()
         initLiveData()
-
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
+        handleError()
     }
 
     override fun getLayoutId(): Int {
@@ -368,6 +359,25 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
                 tableRow.addView(textView)
             }
             binding.mobilePayment.tableLayout.addView(tableRow)
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
 }

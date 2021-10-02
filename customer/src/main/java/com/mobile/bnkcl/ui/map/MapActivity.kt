@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -38,9 +39,6 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 
     private val mapViewModel : MapViewModel by viewModels()
     private var data: BranchResData? = null
-
-    @Inject
-    lateinit var systemDialog: SystemDialog
 
     @Inject lateinit var twoButtonDialog : TwoButtonDialog
     private var calLeaseDisposable: Disposable? = null
@@ -76,6 +74,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
 
         initView()
         observeData()
+        handleError()
     }
 
     private fun setUpBlurView(){
@@ -86,16 +85,6 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
             ?.setBlurAlgorithm(SupportRenderScriptBlur(this))
             ?.setBlurRadius(15f)
             ?.setHasFixedTransformationMatrix(true)
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
     }
 
     fun initView(){
@@ -209,6 +198,25 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
             OnCameraMoveStartedListener.REASON_API_ANIMATION -> {
             }
             OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION -> {
+            }
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        mapViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
             }
         }
     }

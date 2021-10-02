@@ -3,7 +3,9 @@ package com.mobile.bnkcl.ui.intro
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.intro.MGRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.response.common.MGDataResponse
@@ -26,7 +28,11 @@ class IntroViewModel @Inject constructor(
     fun getMGData() {
         viewModelScope.launch {
             mgRepo.getMGData().onEach { resource ->
-                _mgDataResponse.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _mgDataResponse.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

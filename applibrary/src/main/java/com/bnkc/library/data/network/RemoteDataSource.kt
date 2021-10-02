@@ -41,7 +41,7 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                     setValue(Resource.Success(response.body))
                 }
                 is RetrofitResponse.Exception -> {
-                    var code = ErrorCode.TIMEOUT_ERROR
+                    var code = ErrorCode.SERVICE_ERROR
                     val throwable = response.throwable
                     if (throwable is CancellationException) {
                         return@withContext
@@ -50,31 +50,11 @@ abstract class RemoteDataSource<T> @MainThread constructor() {
                             // Unknown Error
                             code = ErrorCode.UNKNOWN_ERROR
                         }
-                        withContext(Dispatchers.Main) {
-                            RxJava.publish(RxEvent.ServerError(code, "", ""))
-                            RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
-                        }
-                        setValue(Resource.Error("","", code))
+                        setValue(Resource.Error(code,""))
                     }
                 }
                 is RetrofitResponse.Error -> {
-                    withContext(Dispatchers.Main) {
-                        RxJava.publish(
-                                RxEvent.ServerError(
-                                        response.code,
-                                        response.errorTitle!!,
-                                        response.errorMessage!!
-                                )
-                        )
-                        RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
-                    }
-                    setValue(
-                            Resource.Error(
-                                    response.errorTitle!!,
-                                    response.errorMessage!!,
-                                    response.code
-                            )
-                    )
+                    setValue(Resource.Error(response.code, response.message))
                 }
             }
         }

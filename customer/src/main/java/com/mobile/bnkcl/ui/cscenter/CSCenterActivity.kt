@@ -13,10 +13,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.CATEGORY
 import com.bnkc.sourcemodule.app.Constants.CLAIM_ID
@@ -27,7 +26,6 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
 import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
-import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
@@ -41,8 +39,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
     @Inject
     lateinit var adapter : AskQuestionAdapter
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
     private val csCenterViewModel : CSCenterViewModel by viewModels()
     private var collapseToolBarLayout : CollapsingToolbarLayout? = null
     private var pageNumber = 0
@@ -84,16 +80,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
         }
     }
 
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
-    }
-
     private fun initToolbar(){
         collapseToolBarLayout?.title = this.getString(R.string.cs_01)
         collapseToolBarLayout?.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))
@@ -121,6 +107,8 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
                 }
             }
         }
+
+        handleError()
     }
 
     private fun visibleWebView() {
@@ -250,6 +238,25 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
             pageNumber = 0
             getClaimData(pageNumber, false)
             visibleAskBnk()
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        csCenterViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
 

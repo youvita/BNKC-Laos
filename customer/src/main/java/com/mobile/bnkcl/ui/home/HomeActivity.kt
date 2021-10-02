@@ -17,8 +17,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
 
     private var title = "Notice"
     private var message = "Under Construction"

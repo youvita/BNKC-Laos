@@ -3,7 +3,9 @@ package com.mobile.bnkcl.ui.pinview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.request.auth.*
@@ -30,7 +32,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun preLogin(){
         viewModelScope.launch {
             authRepo.preLogin(preLogRequest!!).onEach { resource ->
-                _preLogin.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _preLogin.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -41,7 +47,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun loginNoAuth(){
         viewModelScope.launch {
             authRepo.loginUserNoAuth(loginRequestNoAuth!!).onEach { resource ->
-                if (resource.data != null)_login.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    if (resource.data != null) _login.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -50,7 +60,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun loginWithAuth(){
         viewModelScope.launch {
             authRepo.loginUser(logRequest!!).onEach { resource ->
-                if (resource.data != null) _login.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    if (resource.data != null) _login.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -60,7 +74,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun signUp(){
         viewModelScope.launch {
             authRepo.signUpUser(signUpRequest!!).onEach { resource ->
-                _signUpLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _signUpLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -81,7 +99,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun preResetPassword(){
         viewModelScope.launch {
             userRepo.preChangePassword(preChangeRequest).onEach { resource ->
-                if (resource.data != null)_preResetMuLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    if (resource.data != null) _preResetMuLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -92,7 +114,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun resetPassword(){
         viewModelScope.launch {
             userRepo.resetPassword(resetPasswordRequest).onEach { resource ->
-                _resetMuLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _resetMuLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -103,7 +129,11 @@ class PinViewModel @Inject constructor(private val userRepo: UserRepo, private v
     fun forgetPIN(){
         viewModelScope.launch {
             authRepo.forgetPin(forgetPinRequest).onEach { resource ->
-                _resetMuLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _resetMuLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

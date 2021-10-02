@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.ui.management.mobile_payment
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,23 +7,13 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import androidx.activity.viewModels
-import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityMobilePaymentBinding
-import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
-import javax.inject.Inject
 
 class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View.OnClickListener {
-
-    @Inject
-    lateinit var systemDialog: SystemDialog
 
     private val viewModel: MobilePaymentViewModel by viewModels()
     private var CONTRACT_NO: String? = null
@@ -40,16 +29,6 @@ class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View
         initToolbar()
         initView()
 
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
     }
 
     private fun initView() {

@@ -17,10 +17,10 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.bnkc.library.data.type.ErrorCode
+import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
-import com.bumptech.glide.util.Util
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.PreLoginRequest
 import com.mobile.bnkcl.data.request.otp.OTPVerifyRequest
@@ -35,7 +35,6 @@ import com.mobile.bnkcl.utilities.UtilActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
@@ -51,8 +50,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
     private var isFromPage: Boolean = false
     private var isVerifiedOTP: Boolean = false
     var mustShowDialog = false
-
-    @Inject lateinit var systemDialog: SystemDialog
 
     /**
      * text watcher event changed listener
@@ -241,6 +238,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
             initView()
 
             initEvent()
+
+            handleError()
 
         } catch (e: NotFoundException) {
             e.printStackTrace()
@@ -490,48 +489,46 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>(), View.OnClickListener {
         }
     }
 
-    override fun handleError(code: Any, smg :String) {
-        super.handleError(code,smg)
-        when(code){
-            ErrorCode.USER_EXISTS -> {
-                systemDialog = SystemDialog.newInstance(
-                    R.drawable.ic_badge_signed_up,
-                    getString(R.string.already_signed_up),
-                    getString(R.string.already_signed_up_msg),
-                    getString(R.string.nav_login))
-                systemDialog.show(supportFragmentManager, systemDialog.tag)
-                systemDialog.onConfirmClicked {
-                    val intent = Intent(this, PinCodeActivity::class.java)
-                    intent.putExtra("pin_action", "login")
-                    intent.putExtra(Constants.SESSION_ID, pinID)
-                    intent.putExtra("username", viewModel.phoneNumber)
-                    intent.putExtra("req_session_again", true)
-                    startActivity(intent)
-                }
-            }
-            ErrorCode.USER_NOT_FOUND -> {
-                    systemDialog = SystemDialog.newInstance(
-                        R.drawable.ic_badge_signed_up,
-                        getString(R.string.not_signup_yet),
-                        getString(R.string.not_yet_signed_up_msg),
-                        getString(R.string.sign_up)
-                    )
-                    systemDialog.show(supportFragmentManager, systemDialog.tag)
-                    systemDialog.onConfirmClicked {
-                        Log.d(">>>>", "initEvent: ${viewModel.phoneNumber} ")
+    override fun onDestroy() {
+        super.onDestroy()
+        UtilActivity.otpActivity = null
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                when(error.code) {
+                    ErrorCode.UNAUTHORIZED -> { // session expired
+                        if (error.code == ErrorCode.UNAUTHORIZED) {
+                            RunTimeDataStore.LoginToken.value = ""
+                            startActivity(Intent(this, PinCodeActivity::class.java))
+                            finish()
+                        }
+                    }
+                    ErrorCode.USER_EXISTS -> {
+                        val intent = Intent(this, PinCodeActivity::class.java)
+                        intent.putExtra("pin_action", "login")
+                        intent.putExtra(Constants.SESSION_ID, pinID)
+                        intent.putExtra("username", viewModel.phoneNumber)
+                        intent.putExtra("req_session_again", true)
+                        startActivity(intent)
+                    }
+                    ErrorCode.USER_NOT_FOUND -> {
                         val intent = Intent(this, SignUpActivity::class.java)
                         intent.putExtra(Constants.SESSION_ID, pinID)
                         intent.putExtra(Constants.USER_ID, viewModel.phoneNumber)
                         intent.putExtra("req_session_again", true)
                         startActivity(intent)
                     }
+                }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        UtilActivity.otpActivity = null
     }
 
 }

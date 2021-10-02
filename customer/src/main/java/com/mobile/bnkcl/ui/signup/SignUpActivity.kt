@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
@@ -42,9 +43,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     private var objVillage : ArrayList<AreaItems>? = ArrayList()
     private var codeObj : ArrayList<CodesData>? = ArrayList()
     private var genderObj : ArrayList<CodesData>? = ArrayList()
-
-    @Inject
-    lateinit var systemDialog: SystemDialog
 
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
@@ -94,6 +92,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         observeCode()
         observeGender()
         observeData()
+        handleError()
         viewModel.signUpRequest.etc_status = binding.lltAdditional.cbEtc.isChecked
         /**
          * init hidden keyboard
@@ -631,17 +630,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 selectDistrict = -1
                 selectVillage = -1
             }
-        }
-    }
-
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 
@@ -1381,6 +1369,38 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.iv_back -> onBackPressed()
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
+        }
+        addressInfoViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
 }

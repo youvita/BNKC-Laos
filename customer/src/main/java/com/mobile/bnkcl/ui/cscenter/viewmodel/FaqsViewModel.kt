@@ -4,13 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.faq.FaqsRepo
-import com.mobile.bnkcl.data.request.cscenter.ClaimDataRequest
 import com.mobile.bnkcl.data.request.faq.FaqReq
-import com.mobile.bnkcl.data.response.cscenter.ClaimDataResponse
 import com.mobile.bnkcl.data.response.faq.FaqRes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -33,7 +30,11 @@ class FaqsViewModel @Inject constructor(private val faqsRepo: FaqsRepo) : BaseVi
 
         viewModelScope.launch {
             faqsRepo.getFaqData(request).onEach { resource ->
-                _faqsData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _faqsData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

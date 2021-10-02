@@ -17,10 +17,10 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import javax.inject.Inject
 
-class CodesRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
+class CodesRepo @Inject constructor(okHttpClient: OkHttpClient) {
 
     private val codesApi: CodesApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(CodesApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(CodesApi::class.java)
     }
 
     fun getCodes(group_id : String): Flow<Resource<CodesResponse>> = flow {

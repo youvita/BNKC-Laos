@@ -27,17 +27,17 @@ class MenuViewModel @Inject constructor(private val userRepo: UserRepo) : BaseVi
     val userProfileLiveData: LiveData<ProfileData> = _userProfile
     val logoutLiveData: LiveData<Unit> = _logout
 
-    fun goToLogin() {
-        val intent1 = Intent(context, PinCodeActivity::class.java)
-        intent1.putExtra("pin_action", "login")
-        context.startActivity(intent1)
-    }
-
-    fun goToSignUp() {
-        val intent1 = Intent(context, OtpActivity::class.java)
-        intent1.putExtra("ACTION_TAG", "SIGN_UP")
-        context.startActivity(intent1)
-    }
+//    fun goToLogin() {
+//        val intent1 = Intent(context, PinCodeActivity::class.java)
+//        intent1.putExtra("pin_action", "login")
+//        context.startActivity(intent1)
+//    }
+//
+//    fun goToSignUp() {
+//        val intent1 = Intent(context, OtpActivity::class.java)
+//        intent1.putExtra("ACTION_TAG", "SIGN_UP")
+//        context.startActivity(intent1)
+//    }
 
     fun getUserProfile() {
         viewModelScope.launch {

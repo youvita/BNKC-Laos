@@ -10,6 +10,7 @@ import android.view.View
 import android.webkit.*
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
@@ -35,8 +36,6 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
     @Inject
     lateinit var totalLeaseScheduleAdapter: TotalLeaseScheduleAdapter
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
     private val viewModel: TotalLeaseScheduleViewModel by viewModels()
     private var CONTRACT_NO: String? = null
     private var sortCode: String? = "asc"
@@ -50,6 +49,7 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
         initToolbar()
         initView()
         initLiveData()
+        handleError()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             viewModel.getTotalLeaseSchedule(totalLeaseScheduleRequest)
@@ -146,16 +146,6 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
 //        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
     }
 
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
-    }
-
     override fun getLayoutId(): Int {
         return R.layout.activity_total_lease_schedule
     }
@@ -241,6 +231,25 @@ class TotalLeaseScheduleActivity : BaseActivity<ActivityTotalLeaseScheduleBindin
                             binding.tvSort.text = getString(R.string.schedule_oldest)
                         }
                     }
+                }
+            }
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
                 }
             }
         }

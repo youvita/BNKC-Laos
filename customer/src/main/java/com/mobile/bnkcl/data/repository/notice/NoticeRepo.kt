@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.data.repository.notice
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
@@ -13,9 +12,9 @@ import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import retrofit2.Response
 
-class NoticeRepo(context: Context, okHttpClient: OkHttpClient) {
+class NoticeRepo(okHttpClient: OkHttpClient) {
     private val noticeApi: NoticeApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(NoticeApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(NoticeApi::class.java)
     }
 
     fun getNoticeData(request: NoticeRequest): Flow<Resource<NoticeDataResponse>> = flow {

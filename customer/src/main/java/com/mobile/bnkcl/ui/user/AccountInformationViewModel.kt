@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.user
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.code.CodesRepo
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.response.code.CodesResponse
@@ -35,7 +37,11 @@ class AccountInformationViewModel @Inject constructor(
     fun getAccountInformation() {
         viewModelScope.launch {
             userRepo.getProfile().onEach { resource ->
-                _accountInformation.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _accountInformation.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -43,7 +49,11 @@ class AccountInformationViewModel @Inject constructor(
     fun getJobTypeCodes() {
         viewModelScope.launch {
             codesRepo.getCodes("JOB_TYPE").onEach { resource ->
-                _jobCodesLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _jobCodesLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -51,7 +61,11 @@ class AccountInformationViewModel @Inject constructor(
     fun logout() {
         viewModelScope.launch {
             userRepo.logout().onEach { resource ->
-                _logout.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _logout.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

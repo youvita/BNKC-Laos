@@ -9,7 +9,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.repository.auth.AuthRepo
 import com.mobile.bnkcl.data.repository.otp.OTPRepo
@@ -187,7 +189,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "sendOTP ::: " + sendOTPRequest.to)
         viewModelScope.launch {
             otpRepo.sendOTP(sendOTPRequest).onEach { resource ->
-                if (resource.data != null) _sendOTP.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    if (resource.data != null) _sendOTP.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -198,7 +204,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun verifyOTP(){
         viewModelScope.launch {
             otpRepo.OTPVerify(otpVerifyRequest!!).onEach { resource ->
-                _verifyOTP.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _verifyOTP.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -209,7 +219,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun preLogin(){
         viewModelScope.launch {
             authRepo.preLogin(prelogRequest!!).onEach { resource ->
-                _preLogin.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _preLogin.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -220,7 +234,11 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
     fun preSignUp(){
         viewModelScope.launch {
             authRepo.preSignUp(preSignUpRequest!!).onEach { resource ->
-                if (resource.data != null) _preSignUp.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    if (resource.data != null) _preSignUp.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

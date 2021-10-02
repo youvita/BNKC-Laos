@@ -6,22 +6,17 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.com.view.ActionBar
 import com.mobile.bnkcl.data.request.cscenter.ClaimDetailReq
 import com.mobile.bnkcl.data.response.cscenter.ClaimDetailRes
 import com.mobile.bnkcl.databinding.ActivityAskBNKCDetailBinding
 import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCDetailViewModel
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
@@ -29,10 +24,7 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
 
     override fun getLayoutId(): Int = R.layout.activity_ask_b_n_k_c_detail
     private val askBNKCDetailViewModel: AskBNKCDetailViewModel by viewModels()
-    private var signUpDisposable: Disposable? = null
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
     private lateinit var claimDetailReq: ClaimDetailReq
     private lateinit var claimDetailRes: ClaimDetailRes
 
@@ -46,16 +38,7 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
         getClaimDetailData()
         binding.ivBack.setOnClickListener(this)
 
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
+        handleError()
     }
 
     private fun getClaimDetailData() {
@@ -124,6 +107,25 @@ class AskBNKCDetailActivity : BaseActivity<ActivityAskBNKCDetailBinding>(), View
 
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        askBNKCDetailViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
 

@@ -2,21 +2,17 @@ package com.mobile.bnkcl.ui.lease.calculate
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Resource
 import com.bnkc.library.data.type.Status
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.base.BaseViewModel
-import com.mobile.bnkcl.data.api.lease.LeaseApi
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
-import com.mobile.bnkcl.data.request.auth.LoginRequest
-import com.mobile.bnkcl.data.request.auth.LoginRequestNoAuth
 import com.mobile.bnkcl.data.request.lease.calcculate.LeaseCalculateReq
-import com.mobile.bnkcl.data.response.auth.LoginResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponse
 import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
-import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -32,7 +28,11 @@ class LeaseCalculateViewModel @Inject constructor(private val leaseRepo: LeaseRe
     fun calculateLease(){
         viewModelScope.launch {
             leaseRepo.getLeaseCalculate(leaseCalculateReq).onEach { resource ->
-                if(resource.data != null) _leaseCalLiveData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    if (resource.data != null) _leaseCalLiveData.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -42,7 +42,11 @@ class LeaseCalculateViewModel @Inject constructor(private val leaseRepo: LeaseRe
     fun reqRepaymentCode(groupId :String){
         viewModelScope.launch {
             leaseRepo.getItemCode(groupId).onEach { resource ->
-                _repaymentMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _repaymentMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }

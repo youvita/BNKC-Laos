@@ -9,6 +9,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -31,8 +32,8 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
     private val askBNKCViewModel : AskBNKCViewModel by viewModels()
     private var signUpDisposable: Disposable? = null
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
     private var subject: String = ""
     private var description : String = ""
     private lateinit var collapseToolBarLayout : CollapsingToolbarLayout
@@ -54,17 +55,6 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
         Utils.setHideKeyboard(this, binding.wrapContent)
     }
 
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
-    }
-
     private fun initToolbar(){
         collapseToolBarLayout.title = this.getString(R.string.cs_02)
         collapseToolBarLayout.setExpandedTitleTypeface(Utils.getTypeFace(this, 3))
@@ -79,6 +69,25 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
 
     }
 
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        askBNKCViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
+        }
+    }
+
     private fun onRequestToSubmit(){
         askBNKCViewModel.getClaim("1", subject, description)
 
@@ -90,6 +99,8 @@ class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListe
                 askResult(true)
             }
         }
+
+        handleError()
     }
     private fun askResult(result: Boolean) {
         val intent = Intent(this, ResultActivity::class.java)

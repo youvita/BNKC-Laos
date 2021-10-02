@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.user.UserRepo
 import com.mobile.bnkcl.data.response.user.ProfileData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +32,11 @@ class MainViewModel @Inject constructor(private val userRepo: UserRepo) : BaseVi
     fun getUserProfile() {
         viewModelScope.launch {
             userRepo.getProfile().onEach { resource ->
-                _userProfile.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _userProfile.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }
@@ -38,7 +44,11 @@ class MainViewModel @Inject constructor(private val userRepo: UserRepo) : BaseVi
     fun logout() {
         viewModelScope.launch {
             userRepo.logout().onEach { resource ->
-                _logout.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _logout.value = resource.data
+                }
             }.launchIn(viewModelScope)
         }
     }

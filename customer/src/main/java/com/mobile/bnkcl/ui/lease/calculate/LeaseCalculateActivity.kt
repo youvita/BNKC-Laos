@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.util.Constants.REPAYMENT_TERM
 import com.bnkc.sourcemodule.app.Constants
@@ -30,11 +31,9 @@ import kotlin.math.max
 class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
 
     private val viewModel : LeaseCalculateViewModel by viewModels()
+
     private var selectedItem = -1
     private lateinit var repaymentCodes : ArrayList<ItemResponseObject>
-
-    @Inject
-    lateinit var systemDialog: SystemDialog
 
     @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
@@ -51,16 +50,7 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         observeViewModel()
         initView()
         initEvent()
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
+        handleError()
     }
 
     private fun observeViewModel(){
@@ -198,6 +188,25 @@ class LeaseCalculateActivity : BaseActivity<ActivityLeaseCalculateBinding>() {
         binding.include.colToolbar.title = getString(R.string.calculator)
         binding.include.toolbarLeftButton.setOnClickListener {
             finish()
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
 

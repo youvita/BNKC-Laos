@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.annotation.IntDef
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +27,7 @@ import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.bnkc.sourcemodule.dialog.LoadingDialog
 import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.bnkc.sourcemodule.util.UtilActivity
@@ -39,13 +39,14 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     @Inject
     lateinit var sharedPrefer: CredentialSharedPrefer
 
+    @Inject
+    lateinit var systemDialog: SystemDialog
+
     lateinit var binding: T
 
     private var loadingDialog: LoadingDialog? = null
 
     private var disposable: Disposable? = null
-
-    private var systemDialog: SystemDialog? = null
 
     private var animateType = 0
 
@@ -59,18 +60,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     open fun setAnimateType(@ANIMATION_DIRECTION animateType: Int) {
         this.animateType = animateType
     }
-
-    /**
-     * handle error override method
-     */
-    open fun handleError(icon: Int, title: String, message: String, button: String) {}
-
-    open fun handleError(code : Any, smg : String) {}
-
-    /**
-     * handle session expired override method
-     */
-    open fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {}
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase!!))
@@ -88,8 +77,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         performDataBinding()
 
         successListener()
-
-        errorDialog()
     }
 
     /**
@@ -114,55 +101,39 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
     /**
-     * handle catch server error
+     * handle get error message
      */
-    private fun errorDialog() {
-        disposable = RxJava.listen(RxEvent.ServerError::class.java).subscribe {
-            var icon = R.drawable.ic_badge_error
-            var title = it.title
-            var message = it.message
-            var button = getString(R.string.confirm)
+    fun getErrorMessage(errorItem: ErrorItem): ErrorItem {
+        var icon = R.drawable.ic_badge_error
+        var title = errorItem.code
+        var message = errorItem.message
+        var button = getString(R.string.confirm)
 
-            if (title == "" && message == "") {
-                when (it.code) {
-                    ErrorCode.UNKNOWN_ERROR -> {
-                        icon = R.drawable.ic_badge_no_internet
-                        title = getString(R.string.title_no_network)
-                        message = getString(R.string.message_pls_check_network)
-                        button = getString(R.string.try_again)
-                    }
-                    ErrorCode.TIMEOUT_ERROR -> {
-                        title = getString(R.string.title_timeout)
-                        message = getString(R.string.message_timeout)
-                    }
-                }
-            } else {
-                when(it.title) {
-                    ErrorCode.USER_EXISTS,
-                    ErrorCode.USER_NOT_FOUND ,
-                    ErrorCode.BAD_CREDENTIALS,
-                    ErrorCode.INCORRECT_PASSWORD-> {
-                        handleError(title, message)
-                        return@subscribe
-                    }
-                    ErrorCode.UNAUTHORIZED -> {
-                        // handle catch session expired
-                        handleSessionExpired(R.drawable.ic_badge_error, it.title, it.message, getString(R.string.confirm))
-                        return@subscribe
-                    }
-                }
+        when(errorItem.code) {
+            ErrorCode.UNKNOWN_ERROR -> {
+                icon = R.drawable.ic_badge_no_internet
+                title = getString(R.string.title_no_network)
+                message = getString(R.string.message_pls_check_network)
+                button = getString(R.string.try_again)
             }
+            ErrorCode.SERVICE_ERROR -> {
 
-            if (systemDialog == null) {
-                systemDialog = SystemDialog.newInstance(icon, title, message, button)
-                systemDialog?.show(supportFragmentManager, systemDialog?.tag)
-                systemDialog?.onConfirmClicked {
-                    systemDialog = null
-                }
             }
-
-            dismissLoading()
+            ErrorCode.USER_EXISTS -> {
+                icon = R.drawable.ic_badge_signed_up
+                title = getString(R.string.already_signed_up)
+                message = getString(R.string.already_signed_up_msg)
+                button = getString(R.string.login)
+            }
+            ErrorCode.USER_NOT_FOUND -> {
+                icon = R.drawable.ic_badge_signed_up
+                title = getString(R.string.not_signed_up_yet)
+                message = getString(R.string.not_yet_signed_up_msg)
+                button = getString(R.string.sign_up)
+            }
         }
+        dismissLoading()
+        return ErrorItem(icon, title, message, button)
     }
 
     /**
@@ -192,7 +163,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         disposable = null
 
         loadingDialog = null
-        systemDialog = null
     }
 
     override fun finish() {

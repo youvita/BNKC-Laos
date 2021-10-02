@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
@@ -20,13 +21,10 @@ import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickListener {
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
     private val settingViewModel: SettingViewModel by viewModels()
     private var isUpdateProfile: Boolean = false
 
@@ -39,17 +37,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         initAppVersion()
         initView()
         initLiveData()
-
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
+        handleError()
     }
 
     override fun getLayoutId(): Int {
@@ -163,6 +151,25 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         when (v?.id) {
             R.id.toolbar_left_button -> {
                 onBackPressed()
+            }
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        settingViewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
             }
         }
     }

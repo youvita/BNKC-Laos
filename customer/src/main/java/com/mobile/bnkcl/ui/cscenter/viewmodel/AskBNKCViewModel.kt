@@ -3,7 +3,9 @@ package com.mobile.bnkcl.ui.cscenter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.cscenter.ClaimRepo
 import com.mobile.bnkcl.data.request.cscenter.ClaimReq
 import com.mobile.bnkcl.data.response.cscenter.ClaimRes
@@ -21,14 +23,15 @@ class AskBNKCViewModel @Inject constructor(private val claimRepo: ClaimRepo) : B
     private var claimReq = ClaimReq()
 
     fun getClaim(category: String, subject : String, description : String){
-
         claimReq = ClaimReq(category,subject,description)
-
         viewModelScope.launch {
             claimRepo.getClaim(claimReq).onEach { resource ->
-                _claimData.value = resource.data
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _claimData.value = resource.data
+                }
             }.launchIn(viewModelScope)
-
         }
     }
-    }
+}

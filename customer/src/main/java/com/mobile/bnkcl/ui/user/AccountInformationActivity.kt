@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.AppLogin
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
@@ -34,8 +35,8 @@ import javax.inject.Inject
 class AccountInformationActivity : BaseActivity<ActivityAccountInformationBinding>(),
     View.OnClickListener {
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
 
     private val viewModel: AccountInformationViewModel by viewModels()
     private var profileData: ProfileData? = ProfileData()
@@ -50,6 +51,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
 
         initView()
         initLiveData()
+        handleError()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
 
@@ -59,16 +61,6 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                 viewModel.logout()
                 showLoading(true)
             }
-        }
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 
@@ -124,7 +116,8 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             profileData = intent.getSerializableExtra("ACCOUNT_INFO") as ProfileData?
             binding.profile = profileData
 
-            binding.tvPhoneNumber.text = (if (!profileData?.phoneNumber.isNullOrEmpty()) FormatUtil.getTel(profileData?.phoneNumber!!) else "").toString()
+            binding.tvPhoneNumber.text =
+                (if (!profileData?.phoneNumber.isNullOrEmpty()) FormatUtil.getTel(profileData?.phoneNumber!!) else "").toString()
             setAddress(profileData!!)
         }
 
@@ -245,4 +238,29 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                 }
             }
         }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(
+                error.icon!!,
+                error.code!!,
+                error.message!!,
+                error.button!!
+            )
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
+        }
+    }
+
 }

@@ -1,23 +1,20 @@
 package com.mobile.bnkcl.data.repository.cscenter
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
 import com.bnkc.sourcemodule.app.RetrofitBuilder
-import com.mobile.bnkcl.data.api.cscenter.ClaimApi
 import com.mobile.bnkcl.data.api.cscenter.ClaimDetailApi
 import com.mobile.bnkcl.data.request.cscenter.ClaimDetailReq
 import com.mobile.bnkcl.data.response.cscenter.ClaimDetailRes
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import retrofit2.Response
 
-class ClaimDetailRepo(context: Context, okHttpClient: OkHttpClient) {
+class ClaimDetailRepo(okHttpClient: OkHttpClient) {
 
     private val claimApi : ClaimDetailApi by lazy {
-        RetrofitBuilder(context, okHttpClient).getRetrofit().create(ClaimDetailApi::class.java)
+        RetrofitBuilder(okHttpClient).getRetrofit().create(ClaimDetailApi::class.java)
     }
 
     fun getClaimDetailData(request : ClaimDetailReq) : Flow<Resource<ClaimDetailRes>> = flow{

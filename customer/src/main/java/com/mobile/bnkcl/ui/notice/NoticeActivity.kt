@@ -1,7 +1,6 @@
 package com.mobile.bnkcl.ui.notice
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
@@ -9,47 +8,27 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.notice.NoticeRequest
 import com.mobile.bnkcl.databinding.ActivityNoticeBinding
 import com.mobile.bnkcl.ui.adapter.NoticeAdapter
-import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class NoticeActivity : BaseActivity<ActivityNoticeBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_notice
-    private var signUpDisposable: Disposable? = null
 
-    private lateinit var noticeRequest: NoticeRequest
     @Inject
     lateinit var noticeAdapter: NoticeAdapter
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initView()
-    }
-
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")

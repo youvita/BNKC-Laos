@@ -36,4 +36,14 @@
     <string name="camera">Take a photo</string>
     <string name="gallery">Choose from gallery</string>
 
+    <!-- sign up -->
+    <string name="already_signed_up">You Already Signed Up</string>
+    <string name="already_signed_up_msg">Phone number has already registered. Please login using PIN.</string>
+    <string name="not_signed_up_yet">You Haven\'t\nSigned Up Yet</string>
+    <string name="not_yet_signed_up_msg">This phone number hasn’t signed\nup for BNK Account. Please Sign\nUp now.</string>
+
+    <!-- general -->
+    <string name="login">Log In</string>
+    <string name="sign_up">Sign Up</string>
+
 </resources>

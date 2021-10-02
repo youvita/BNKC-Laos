@@ -1,9 +1,7 @@
 package com.mobile.bnkcl.data.repository.findoffice
 
-import android.content.Context
 import com.bnkc.library.data.network.RemoteDataSource
 import com.bnkc.library.data.type.Resource
-import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.RetrofitBuilder
 import com.mobile.bnkcl.data.api.office.FindOfficeAPI
 import com.mobile.bnkcl.data.findoffice.BranchResData
@@ -18,9 +16,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import javax.inject.Inject
 
-class FindOfficeRepo @Inject constructor(context: Context, okHttpClient: OkHttpClient) {
+class FindOfficeRepo @Inject constructor(okHttpClient: OkHttpClient) {
 
-    private val findAPI: FindOfficeAPI by lazy { RetrofitBuilder(context, okHttpClient).getRetrofit().create(
+    private val findAPI: FindOfficeAPI by lazy { RetrofitBuilder(okHttpClient).getRetrofit().create(
         FindOfficeAPI::class.java) }
 
     fun getAreas(areaRequest: AreaRequest): Flow<Resource<AreaResponse>> = flow {

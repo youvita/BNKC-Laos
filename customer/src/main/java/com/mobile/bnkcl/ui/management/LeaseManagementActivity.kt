@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
@@ -30,9 +31,6 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
     View.OnClickListener {
 
     @Inject
-    lateinit var systemDialog: SystemDialog
-
-    @Inject
     lateinit var listChoiceDialog: ListChoiceDialog
 
     private val viewModel: LeaseManagementViewModel by viewModels()
@@ -50,17 +48,7 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
         initView()
         initToolbar()
         initLiveData()
-
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
-        }
+        handleError()
     }
 
     override fun getLayoutId(): Int {
@@ -116,7 +104,6 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
             } else {
                 setUpRepaymentWithWarning(false)
             }
-
         }
     }
 
@@ -238,6 +225,25 @@ class LeaseManagementActivity : BaseActivity<ActivityLeaseManagementBinding>(),
                 openFullPayment.putExtra("REPAYMENT_DATE", REPAYMENT_DATE)
                 openFullPayment.putExtra("CONTRACT_NO", CONTRACT_NO)
                 startActivity(openFullPayment)
+            }
+        }
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
             }
         }
     }

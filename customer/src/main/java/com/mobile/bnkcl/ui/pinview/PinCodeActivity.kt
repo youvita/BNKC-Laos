@@ -26,6 +26,7 @@ import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
+import com.mobile.bnkcl.ui.signup.SignUpActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.SecureUtils
 import com.mobile.bnkcl.utilities.UtilActivity
@@ -49,8 +50,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
     @Inject
     lateinit var confirmDialog: ConfirmDialog
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_263238))
@@ -160,6 +161,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
 
         observeViewModel()
 
+        handleError()
     }
 
     private fun observeViewModel() {
@@ -306,64 +308,142 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         }
     }
 
-    override fun handleError(code: Any, smg : String) {
-        super.handleError(code, smg)
-        forceActionClick = false
-        when(code){
-            ErrorCode.INCORRECT_PASSWORD -> {
-                confirmDialog = ConfirmDialog.newInstance(
-                    R.drawable.ic_badge_error,
-                    getString(R.string.comm_error),
-                    smg,
-                    getString(R.string.comm_confirm)
-                )
-                confirmDialog.onConfirmClickedListener {
-                    binding.pinView.clearPin()
+//    override fun handleError(code: Any, smg : String) {
+//        super.handleError(code, smg)
+//        forceActionClick = false
+//        when(code){
+//            ErrorCode.INCORRECT_PASSWORD -> {
+//                confirmDialog = ConfirmDialog.newInstance(
+//                    R.drawable.ic_badge_error,
+//                    getString(R.string.comm_error),
+//                    smg,
+//                    getString(R.string.comm_confirm)
+//                )
+//                confirmDialog.onConfirmClickedListener {
+//                    binding.pinView.clearPin()
+//                }
+//                confirmDialog.isCancelable = false
+//                confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+//            }
+//            ErrorCode.BAD_CREDENTIALS -> {
+//                countAttempt++
+//                if (countAttempt > 4) {
+//                    confirmDialog = ConfirmDialog.newInstance(
+//                        R.drawable.ic_badge_error,
+//                        getString(R.string.pin_11),
+//                        getString(R.string.pin_12),
+//                        getString(R.string.setting_reset_pin)
+//                    )
+//                    confirmDialog.onConfirmClickedListener {
+//                        binding.pinView.clearPin()
+//                        val intent = Intent(
+//                            this,
+//                            OtpActivity::class.java
+//                        )
+//                        intent.putExtra(
+//                            USER_ID,
+//                            username
+//                        )
+//                        intent.putExtra("ACTION_TAG", "RESET")
+//                        startActivity(intent)
+//                    }
+//                    confirmDialog.isCancelable = false
+//                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+//                } else {
+//                    val msg = String.format(getString(R.string.pin_15), MAX_ATTEMPT_TIME - countAttempt)
+//                    confirmDialog = ConfirmDialog.newInstance(
+//                        R.drawable.ic_badge_error,
+//                        getString(R.string.pin_14),
+//                        msg,
+//                        getString(R.string.pin_16)
+//                    )
+//                    confirmDialog.onConfirmClickedListener {
+//                        binding.pinView.clearPin()
+//                    }
+//                    confirmDialog.isCancelable = false
+//                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+//                }
+//            }
+//        }
+//
+//    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            forceActionClick = false
+            when(it.code){
+                ErrorCode.INCORRECT_PASSWORD -> {
+                    confirmDialog = ConfirmDialog.newInstance(
+                        R.drawable.ic_badge_error,
+                        getString(R.string.comm_error),
+                        it.message!!,
+                        getString(R.string.comm_confirm)
+                    )
+                    confirmDialog.onConfirmClickedListener {
+                        binding.pinView.clearPin()
+                    }
+                    confirmDialog.isCancelable = false
+                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                 }
-                confirmDialog.isCancelable = false
-                confirmDialog.show(supportFragmentManager, confirmDialog.tag)
-            }
-            ErrorCode.BAD_CREDENTIALS -> {
-                countAttempt++
-                if (countAttempt > 4) {
-                    confirmDialog = ConfirmDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.pin_11),
-                        getString(R.string.pin_12),
-                        getString(R.string.setting_reset_pin)
-                    )
-                    confirmDialog.onConfirmClickedListener {
-                        binding.pinView.clearPin()
-                        val intent = Intent(
-                            this,
-                            OtpActivity::class.java
+                ErrorCode.BAD_CREDENTIALS -> {
+                    countAttempt++
+                    if (countAttempt > 4) {
+                        confirmDialog = ConfirmDialog.newInstance(
+                            R.drawable.ic_badge_error,
+                            getString(R.string.pin_11),
+                            getString(R.string.pin_12),
+                            getString(R.string.setting_reset_pin)
                         )
-                        intent.putExtra(
-                            USER_ID,
-                            username
+                        confirmDialog.onConfirmClickedListener {
+                            binding.pinView.clearPin()
+                            val intent = Intent(
+                                this,
+                                OtpActivity::class.java
+                            )
+                            intent.putExtra(
+                                USER_ID,
+                                username
+                            )
+                            intent.putExtra("ACTION_TAG", "RESET")
+                            startActivity(intent)
+                        }
+                        confirmDialog.isCancelable = false
+                        confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+                    } else {
+                        val msg = String.format(getString(R.string.pin_15), MAX_ATTEMPT_TIME - countAttempt)
+                        confirmDialog = ConfirmDialog.newInstance(
+                            R.drawable.ic_badge_error,
+                            getString(R.string.pin_14),
+                            msg,
+                            getString(R.string.pin_16)
                         )
-                        intent.putExtra("ACTION_TAG", "RESET")
-                        startActivity(intent)
+                        confirmDialog.onConfirmClickedListener {
+                            binding.pinView.clearPin()
+                        }
+                        confirmDialog.isCancelable = false
+                        confirmDialog.show(supportFragmentManager, confirmDialog.tag)
                     }
-                    confirmDialog.isCancelable = false
-                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
-                } else {
-                    val msg = String.format(getString(R.string.pin_15), MAX_ATTEMPT_TIME - countAttempt)
-                    confirmDialog = ConfirmDialog.newInstance(
-                        R.drawable.ic_badge_error,
-                        getString(R.string.pin_14),
-                        msg,
-                        getString(R.string.pin_16)
-                    )
-                    confirmDialog.onConfirmClickedListener {
-                        binding.pinView.clearPin()
+                } else -> {
+                val error = getErrorMessage(it)
+                systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+                systemDialog.show(supportFragmentManager, systemDialog.tag)
+                systemDialog.onConfirmClicked {
+                    when (error.code) {
+                        ErrorCode.UNAUTHORIZED -> { // session expired
+                            if (error.code == ErrorCode.UNAUTHORIZED) {
+                                RunTimeDataStore.LoginToken.value = ""
+                                startActivity(Intent(this, PinCodeActivity::class.java))
+                                finish()
+                            }
+                        }
                     }
-                    confirmDialog.isCancelable = false
-                    confirmDialog.show(supportFragmentManager, confirmDialog.tag)
+                }
                 }
             }
         }
-
     }
 
 }

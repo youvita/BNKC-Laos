@@ -1,6 +1,5 @@
 package com.mobile.bnkcl.di
 
-import android.content.Context
 import com.bnkc.sourcemodule.di.header.AuthInterceptorOkHttpClient
 import com.mobile.bnkcl.data.api.common.MGApi
 import com.mobile.bnkcl.data.repository.alarm.AlarmRepo
@@ -21,7 +20,6 @@ import com.mobile.bnkcl.data.repository.user.UserRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
@@ -38,87 +36,86 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideOTPRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): OTPRepo {
-        return OTPRepo(context, okHttpClient)
+    fun provideOTPRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): OTPRepo {
+        return OTPRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideAuthRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AuthRepo {
-        return AuthRepo(context, okHttpClient)
+    fun provideAuthRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AuthRepo {
+        return AuthRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideUserRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): UserRepo {
-        return UserRepo(context, okHttpClient)
+    fun provideUserRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): UserRepo {
+        return UserRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideAlarmRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AlarmRepo {
-        return AlarmRepo(context, okHttpClient)
+    fun provideAlarmRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AlarmRepo {
+        return AlarmRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideDashboardRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): DashboardRepo {
-        return DashboardRepo(context, okHttpClient)
+    fun provideDashboardRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): DashboardRepo {
+        return DashboardRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideNoticeRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): NoticeRepo{
-        return NoticeRepo(context,okHttpClient)
+    fun provideNoticeRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): NoticeRepo{
+        return NoticeRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideFindOfficeRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): FindOfficeRepo {
-        return FindOfficeRepo(context,okHttpClient)
+    fun provideFindOfficeRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): FindOfficeRepo {
+        return FindOfficeRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideAreaRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AreaRepo{
-        return AreaRepo(context,okHttpClient)
+    fun provideAreaRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): AreaRepo{
+        return AreaRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideLeaseRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): LeaseRepo {
-        return LeaseRepo(context, okHttpClient)
+    fun provideLeaseRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): LeaseRepo {
+        return LeaseRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideClaimRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): ClaimRepo{
-        return ClaimRepo(context, okHttpClient)
+    fun provideClaimRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): ClaimRepo{
+        return ClaimRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideClaimDetailRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  ClaimDetailRepo{
-        return ClaimDetailRepo(context,okHttpClient)
+    fun provideClaimDetailRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  ClaimDetailRepo{
+        return ClaimDetailRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideFaqsDataRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  FaqsRepo{
-        return FaqsRepo(context,okHttpClient)
+    fun provideFaqsDataRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) :  FaqsRepo{
+        return FaqsRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideEditAccountInfoRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): EditAccountInfoRepo {
-        return EditAccountInfoRepo(context, okHttpClient)
+    fun provideEditAccountInfoRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): EditAccountInfoRepo {
+        return EditAccountInfoRepo(okHttpClient)
     }
 
     @Singleton
     @Provides
-    fun provideCodesRepo(@ApplicationContext context: Context, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): CodesRepo {
-        return CodesRepo(context, okHttpClient)
+    fun provideCodesRepo(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): CodesRepo {
+        return CodesRepo(okHttpClient)
     }
-
 
 }

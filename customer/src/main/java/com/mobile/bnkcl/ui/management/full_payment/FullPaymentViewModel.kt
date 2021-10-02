@@ -3,9 +3,11 @@ package com.mobile.bnkcl.ui.management.full_payment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.library.prefer.CredentialSharedPrefer
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.repository.lease.LeaseRepo
 import com.mobile.bnkcl.data.request.lease.full_payment.FullPaymentRequest
 import com.mobile.bnkcl.data.response.lease.full_payment.FullPaymentResponse
@@ -30,7 +32,11 @@ class FullPaymentViewModel @Inject constructor(private val leaseRepo: LeaseRepo)
         viewModelScope.launch {
             leaseRepo.getFullPayment(fullPaymentRequest!!)
                 .onEach { resource ->
-                    _fullPayment.value = resource.data
+                    if (resource.status == Status.ERROR) {
+                        setError(ErrorItem(null, resource.code, resource.message, null))
+                    } else {
+                        _fullPayment.value = resource.data
+                    }
 
                 }.launchIn(viewModelScope)
         }

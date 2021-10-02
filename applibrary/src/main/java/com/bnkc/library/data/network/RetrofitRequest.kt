@@ -23,7 +23,7 @@ object RetrofitRequest {
                 }
                 val body = response.body()
                 if (body == null) {
-                    RetrofitResponse.Error(response.code())
+                    RetrofitResponse.Error(response.message())
                 } else {
                     RetrofitResponse.Success(body)
                 }
@@ -39,7 +39,7 @@ object RetrofitRequest {
                 }catch (e: Exception) {
                     e.printStackTrace()
                 }
-                RetrofitResponse.Error(response.code(), errorCode, errorMessage)
+                RetrofitResponse.Error(errorCode, errorMessage)
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()

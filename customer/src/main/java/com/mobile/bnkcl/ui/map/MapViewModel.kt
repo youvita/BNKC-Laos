@@ -3,7 +3,9 @@ package com.mobile.bnkcl.ui.map
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.bnkc.library.data.type.Status
 import com.bnkc.sourcemodule.base.BaseViewModel
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.data.repository.findoffice.FindOfficeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +23,11 @@ class MapViewModel @Inject constructor(private val findOfficeRepo : FindOfficeRe
     fun reqOffice(branchId : Long) {
         viewModelScope.launch {
             findOfficeRepo.getOffice(branchId).onEach { resource ->
-                _officeMuLiveData.value = resource.data!!
+                if (resource.status == Status.ERROR) {
+                    setError(ErrorItem(null, resource.code, resource.message, null))
+                } else {
+                    _officeMuLiveData.value = resource.data!!
+                }
             }.launchIn(viewModelScope)
         }
     }

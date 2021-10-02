@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.bnkc.library.data.type.AppLogin
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.dialog.SystemDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityLeaseServiceBinding
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
@@ -66,6 +67,13 @@ class LeaseServiceActivity : BaseActivity<ActivityLeaseServiceBinding>() {
                 }
             }
         })
+
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+        }
+
     }
 
 //    override fun onResume() {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.rxjava.RxEvent
 import com.bnkc.library.rxjava.RxJava
@@ -27,8 +28,8 @@ import javax.inject.Inject
 class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBinding>(),
     View.OnClickListener {
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
 
     @Inject
     lateinit var transactionAdapter: TransactionHistoryAdapter
@@ -46,6 +47,7 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         initView()
         initToolbar()
         initLiveData()
+        handleError()
 
         if (!sharedPrefer.getPrefer(Constants.USER_ID).isNullOrEmpty()) {
             viewModel.getTransactionHistory(transactionHistoryRequest)
@@ -57,16 +59,6 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
 
         viewModel.transactionHistoryLiveData.observe(this) {
             initAdapter(it.transactionHistory!!)
-        }
-    }
-
-    override fun handleSessionExpired(icon: Int, title: String, message: String, button: String) {
-        super.handleSessionExpired(icon, title, message, button)
-        systemDialog = SystemDialog.newInstance(icon, title, message, button)
-        systemDialog.show(supportFragmentManager, systemDialog.tag)
-        systemDialog.onConfirmClicked {
-            RunTimeDataStore.LoginToken.value = ""
-            startActivity(Intent(this, PinCodeActivity::class.java))
         }
     }
 
@@ -133,5 +125,22 @@ class TransactionHistoryActivity : BaseActivity<ActivityTransactionHistoryBindin
         }
     }
 
-
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        viewModel.handleError.observe(this) {
+            val error = getErrorMessage(it)
+            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            systemDialog.onConfirmClicked {
+                // session expired
+                if (error.code == ErrorCode.UNAUTHORIZED) {
+                    RunTimeDataStore.LoginToken.value = ""
+                    startActivity(Intent(this, PinCodeActivity::class.java))
+                    finish()
+                }
+            }
+        }
+    }
 }

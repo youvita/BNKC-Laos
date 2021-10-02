@@ -22,8 +22,8 @@ abstract class BaseStorageActivity<T: ViewDataBinding>: BaseActivity<T>() {
     @Inject
     lateinit var permissionsFactory: AppPermissionsFactory
 
-    @Inject
-    lateinit var systemDialog: SystemDialog
+//    @Inject
+//    lateinit var systemDialog: SystemDialog
 
     protected open val appPermission: AppPermission by lazy {
         permissionsFactory.getPermission(AppPermissionsFactory.PERMISSION_STORAGE)
