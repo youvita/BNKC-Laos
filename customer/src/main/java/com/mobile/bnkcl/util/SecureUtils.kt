@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.util
 
 import android.util.Base64
 import org.bouncycastle.jce.provider.BouncyCastleProvider

@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.util
 
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.service.LeaseServiceActivity

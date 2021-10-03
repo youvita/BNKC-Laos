@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.util
 
 import java.text.NumberFormat
 import java.util.*

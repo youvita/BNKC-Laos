@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.utilities.UtilsSize.getScreenWidth
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.mobile.bnkcl.util.UtilsSize.getScreenWidth
 
 import java.util.*
 

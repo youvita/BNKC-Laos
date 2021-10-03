@@ -9,7 +9,7 @@
         <variable
             name="calculateViewModel"
             type="LeaseCalculateViewModel" />
-        <import type="com.mobile.bnkcl.utilities.StringExtKt"/>
+        <import type="com.mobile.bnkcl.util.StringExtKt"/>
         <variable
             name="format"
             type="StringExtKt" />

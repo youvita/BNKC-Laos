@@ -9,7 +9,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.BnkEditText
 import com.mobile.bnkcl.com.view.pincode.PinView
 import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseViewModel
-import com.mobile.bnkcl.utilities.FormatUtil
+import com.mobile.bnkcl.util.FormatUtil
 
 object PinBindingAdapter {
 

@@ -24,8 +24,8 @@ import com.mobile.bnkcl.databinding.ActivityApplyLeaseBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
-import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.FormatUtil
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.max

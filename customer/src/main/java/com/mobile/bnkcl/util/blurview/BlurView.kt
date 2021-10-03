@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities.blurview
+package com.mobile.bnkcl.util.blurview
 
 import android.content.Context
 import android.graphics.Canvas
@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.NonNull
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.utilities.blurview.BlockingBlurController.Companion.TRANSPARENT
+import com.mobile.bnkcl.util.blurview.BlockingBlurController.Companion.TRANSPARENT
 
 
 class BlurView : FrameLayout {

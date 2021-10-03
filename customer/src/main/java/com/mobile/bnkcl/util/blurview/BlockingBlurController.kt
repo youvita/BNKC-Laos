@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities.blurview
+package com.mobile.bnkcl.util.blurview
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -9,8 +9,8 @@ import android.view.ViewTreeObserver
 import androidx.annotation.ColorInt
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
-import com.mobile.bnkcl.utilities.blurview.BlurController.Companion.DEFAULT_BLUR_RADIUS
-import com.mobile.bnkcl.utilities.blurview.BlurController.Companion.DEFAULT_SCALE_FACTOR
+import com.mobile.bnkcl.util.blurview.BlurController.Companion.DEFAULT_BLUR_RADIUS
+import com.mobile.bnkcl.util.blurview.BlurController.Companion.DEFAULT_SCALE_FACTOR
 
 
 class BlockingBlurController(

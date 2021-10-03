@@ -42,7 +42,7 @@ import com.mobile.bnkcl.databinding.ActivityEditAccountInfoBinding
 import com.mobile.bnkcl.ui.dialog.AlertEditInfoDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.photo.PhotoViewModel
-import com.mobile.bnkcl.utilities.*
+import com.mobile.bnkcl.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File

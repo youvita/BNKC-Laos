@@ -27,8 +27,8 @@ import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
-import com.mobile.bnkcl.utilities.SecureUtils
-import com.mobile.bnkcl.utilities.UtilActivity
+import com.mobile.bnkcl.util.SecureUtils
+import com.mobile.bnkcl.util.UtilActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

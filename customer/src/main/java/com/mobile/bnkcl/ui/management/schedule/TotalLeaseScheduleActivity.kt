@@ -24,7 +24,7 @@ import com.mobile.bnkcl.databinding.ActivityTotalLeaseScheduleBinding
 import com.mobile.bnkcl.ui.adapter.TotalLeaseScheduleAdapter
 import com.mobile.bnkcl.ui.dialog.SortDialog
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

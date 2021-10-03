@@ -18,7 +18,7 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.calculate.LeaseCalResponse
 import com.mobile.bnkcl.databinding.ActivityCalculateResultBinding
 import com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateViewModel
-import com.mobile.bnkcl.utilities.*
+import com.mobile.bnkcl.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

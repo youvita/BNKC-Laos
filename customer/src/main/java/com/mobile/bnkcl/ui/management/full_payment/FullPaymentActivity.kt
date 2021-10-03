@@ -23,8 +23,8 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityFullPaymentBinding
 import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.UtilAnimation
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.UtilAnimation
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*

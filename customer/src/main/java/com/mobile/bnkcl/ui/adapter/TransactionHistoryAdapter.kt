@@ -7,7 +7,7 @@ import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.transaction_history.TransactionHistoryData
 import com.mobile.bnkcl.databinding.ItemTransactionHistoryLayoutBinding
-import com.mobile.bnkcl.utilities.UtilAnimation
+import com.mobile.bnkcl.util.UtilAnimation
 
 class TransactionHistoryAdapter :
     BaseAdapter<ItemTransactionHistoryLayoutBinding, TransactionHistoryData, TransactionHistoryAdapter.ViewHolder>() {

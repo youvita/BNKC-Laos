@@ -19,7 +19,7 @@ import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivitySettingBinding
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +27,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
 
     private val settingViewModel: SettingViewModel by viewModels()
     private var isUpdateProfile: Boolean = false
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_setting
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBarColor(ContextCompat.getColor(this, R.color.color_f5f7fc))
@@ -38,10 +42,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         initView()
         initLiveData()
         handleError()
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_setting
     }
 
     private fun initToolbar() {

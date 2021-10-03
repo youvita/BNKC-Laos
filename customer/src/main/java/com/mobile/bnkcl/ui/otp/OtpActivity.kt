@@ -30,9 +30,9 @@ import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.signup.SignUpActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
-import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.UtilActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.FormatUtil
+import com.mobile.bnkcl.util.UtilActivity
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 

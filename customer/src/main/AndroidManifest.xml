@@ -22,6 +22,22 @@
         tools:overrideLibrary="androidx.security.identity.credential"
         tools:targetApi="m">
 
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/map_api_key" />
+
+        <activity android:name=".ui.intro.IntroActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.lease.apply.ApplyLeaseActivity"
             android:screenOrientation="portrait"/>
@@ -38,43 +54,74 @@
             android:name=".ui.lease.calculate.LeaseCalculateActivity"
             android:screenOrientation="portrait"/>
 
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/map_api_key" />
+        <activity android:name=".ui.map.MapActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.map.MapActivity" />
-        <activity android:name=".ui.notice.NoticeDetailActivity" />
-        <activity android:name=".ui.alarm.AlarmActivity" />
-        <activity android:name=".ui.signup.TermsAndConditionsActivity" />
-        <activity android:name=".ui.cscenter.AskBNKCActivity" />
-        <activity android:name=".ui.cscenter.AskBNKCDetailActivity" />
-        <activity android:name=".ui.cscenter.CSCenterActivity" />
-        <activity android:name=".ui.success.ResultActivity" />
-        <activity android:name=".ui.notice.NoticeActivity" />
-        <activity android:name=".ui.signup.SignUpActivity"/>
-        <activity android:name=".ui.response.ResponseActivity" />
-        <activity android:name=".ui.pinview.PinCodeActivity" />
-        <activity android:name=".ui.intro.IntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ui.notice.NoticeDetailActivity"
+            android:screenOrientation="portrait"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.home.HomeActivity" />
-        <activity android:name=".ui.setting.SettingActivity" />
-        <activity android:name=".ui.user.AccountInformationActivity" />
-        <activity android:name=".ui.user.edit.EditAccountInfoActivity" />
-        <activity android:name=".ui.otp.OtpActivity" />
-        <activity android:name="com.mobile.bnkcl.ui.management.bill.BillPaymentActivity" />
-        <activity android:name=".ui.management.LeaseManagementActivity" />
-        <activity android:name="com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity" />
-        <activity android:name="com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity" />
-        <activity android:name="com.mobile.bnkcl.ui.management.schedule.TotalLeaseScheduleActivity" />
-        <activity android:name="com.mobile.bnkcl.ui.management.full_payment.FullPaymentActivity" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.alarm.AlarmActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.signup.TermsAndConditionsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cscenter.AskBNKCActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cscenter.AskBNKCDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cscenter.CSCenterActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.success.ResultActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.notice.NoticeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.signup.SignUpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.response.ResponseActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.pinview.PinCodeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.setting.SettingActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.user.AccountInformationActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.user.edit.EditAccountInfoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.otp.OtpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.management.bill.BillPaymentActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.management.LeaseManagementActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.management.mobile_payment.MobilePaymentActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.management.history.TransactionHistoryActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.management.schedule.TotalLeaseScheduleActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.management.full_payment.FullPaymentActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".fcm.PushMessageService"

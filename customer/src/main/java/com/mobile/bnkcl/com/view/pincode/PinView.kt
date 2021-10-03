@@ -3,9 +3,7 @@ package com.mobile.bnkcl.com.view.pincode
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
-import android.database.DatabaseUtils
 import android.graphics.Color
-import android.media.Image
 import android.os.Handler
 import android.os.Vibrator
 import android.text.TextUtils
@@ -20,9 +18,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.databinding.DataBindingUtil
 import com.mobile.bnkcl.R
-import com.mobile.bnkcl.utilities.UtilsSize
+import com.mobile.bnkcl.util.UtilsSize
 import kotlin.properties.Delegates
 
 

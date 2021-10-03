@@ -28,9 +28,8 @@ import com.mobile.bnkcl.ui.adapter.AskQuestionAdapter
 import com.mobile.bnkcl.ui.cscenter.viewmodel.CSCenterViewModel
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -46,7 +45,6 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
     private var networkState: Status? = null
 
     override fun getLayoutId(): Int= R.layout.activity_c_s_center
-    private var signUpDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,15 +1,12 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.util
 
 import android.animation.Animator
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.animation.ValueAnimator
-import com.mobile.bnkcl.utilities.UtilAnimation
-import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.content.Context
 import android.view.ViewGroup
 import android.view.animation.Animation
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.Transformation

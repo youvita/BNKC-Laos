@@ -1,12 +1,8 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.util
 
 import android.app.Service
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 
 /**
  * kotlin Extension function

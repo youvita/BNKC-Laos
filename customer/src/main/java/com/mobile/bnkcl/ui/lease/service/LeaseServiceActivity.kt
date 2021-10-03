@@ -16,7 +16,7 @@ import com.mobile.bnkcl.ui.lease.apply.ApplyLeaseActivity
 import com.mobile.bnkcl.ui.lease.calculate.LeaseCalculateActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.UtilAnimation
+import com.mobile.bnkcl.util.UtilAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

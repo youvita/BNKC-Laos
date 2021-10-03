@@ -7,10 +7,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
@@ -48,8 +46,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 
         initLanguage()
         initAppVersion()
-        initImageLoadingRotate()
-//        getMGData()
+        getMGData()
         handleError()
 
         FirebaseMessaging.getInstance().token
@@ -63,22 +60,11 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                 RunTimeDataStore.PushId.value = token!!
                 Log.d("nng: ", "token:: $token")
             })
-
-        RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
-
-        startApp()
     }
 
     private fun initLanguage() {
         preLang = sharedPrefer.getPrefer(Constants.LANGUAGE).toString()
         LocaleHelper.setLanguage(this, if ("" == preLang) "lo" else preLang)
-    }
-
-    private fun initImageLoadingRotate() {
-        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate_circle_loading)
-        rotation.fillAfter = true
-
-        binding.ivLoading.startAnimation(rotation)
     }
 
     private fun initAppVersion() {
@@ -88,11 +74,11 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     private fun getMGData() {
         try {
             introViewModel.getMGData()
-            introViewModel.mgDataResponse.observe(this, Observer {
+            introViewModel.mgDataResponse.observe(this, {
 
-//                RunTimeDataStore.BaseUrl.value = it.c_start_url!!
+                RunTimeDataStore.BaseUrl.value = it.c_start_url!!
 //                RunTimeDataStore.BaseUrl.value = "http://192.168.178.74:8080"
-                RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
+//                RunTimeDataStore.BaseUrl.value = "https://bnkclmfi.kosign.dev"
 
                 val availableService = it.c_available_service
                 if (availableService!!) {
@@ -174,7 +160,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      * in case user install the app and not yet login
      * sending user push notification without login
      */
-    fun sendPushID() {
+    private fun sendPushID() {
         val settingData = SettingData()
         val deviceInfo = DeviceInfo(
             RunTimeDataStore.PushId.value,
@@ -186,7 +172,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         settingData.device_info = deviceInfo
         settingViewModel.settingData = settingData
         settingViewModel.updateUserSetting()
-        settingViewModel.userSettingLiveData.observe(this@IntroActivity, Observer {
+        settingViewModel.userSettingLiveData.observe(this@IntroActivity, {
             Log.d("nng", "checked: ${settingViewModel.settingData!!.push_alarm_enabled}")
             sharedPrefer.putPrefer(Constants.Push.PUSH_ALARM, "Y")
             startApp()
@@ -198,9 +184,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      * if auto login -> request login and then start main
      * else go -> login screen
      */
-    fun startApp() {
-        val user = sharedPrefer.getPrefer(Constants.USER_ID)
-        Log.d(">>>>>>", "USER :: $user")
+    private fun startApp() {
         startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
@@ -210,7 +194,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      *  appVersion = 1.0.11 , validateVersion 1.0.11 => need update return true
      *  appVersion = 1.1.0  , validateVersion 1.0.10 => no update return false
      */
-    fun validateAppVersion(appVersion: String, validateVersion: String): Boolean {
+    private fun validateAppVersion(appVersion: String, validateVersion: String): Boolean {
         try {
             val appVersions = appVersion.split(".")
             val valVersions = validateVersion.split(".")
@@ -239,7 +223,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     /**
      * get app version name
      */
-    fun getAppVersionName(): String {
+    private fun getAppVersionName(): String {
         val manager = application.packageManager
         val info: PackageInfo
         var strVersion = ""

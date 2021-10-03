@@ -16,7 +16,7 @@ import com.bnkc.sourcemodule.util.FormatUtils
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityBillPaymentBinding
 import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

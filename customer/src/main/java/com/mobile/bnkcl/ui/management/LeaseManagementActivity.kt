@@ -21,8 +21,8 @@ import com.mobile.bnkcl.ui.management.full_payment.FullPaymentActivity
 import com.mobile.bnkcl.ui.management.history.TransactionHistoryActivity
 import com.mobile.bnkcl.ui.management.schedule.TotalLeaseScheduleActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.UtilAnimation
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.UtilAnimation
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

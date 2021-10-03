@@ -21,8 +21,8 @@ import com.mobile.bnkcl.data.response.lease.ItemResponseObject
 import com.mobile.bnkcl.databinding.ActivityLeaseCalculateBinding
 import com.mobile.bnkcl.ui.lease.calculate.result.CalculateResultActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.FormatUtil
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.max

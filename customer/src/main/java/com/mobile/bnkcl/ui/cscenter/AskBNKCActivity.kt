@@ -19,18 +19,16 @@ import com.mobile.bnkcl.databinding.ActivityAskbnkcBinding
 import com.mobile.bnkcl.ui.cscenter.viewmodel.AskBNKCViewModel
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.Disposable
 
 @AndroidEntryPoint
 class AskBNKCActivity : BaseActivity<ActivityAskbnkcBinding>(),View.OnClickListener {
-    override fun getLayoutId(): Int = R.layout.activity_askbnkc
-    private val askBNKCViewModel : AskBNKCViewModel by viewModels()
-    private var signUpDisposable: Disposable? = null
 
-//    @Inject
-//    lateinit var systemDialog: SystemDialog
+    override fun getLayoutId(): Int = R.layout.activity_askbnkc
+
+    private val askBNKCViewModel : AskBNKCViewModel by viewModels()
+
     private var subject: String = ""
     private var description : String = ""
     private lateinit var collapseToolBarLayout : CollapsingToolbarLayout

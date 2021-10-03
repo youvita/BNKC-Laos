@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities
+package com.mobile.bnkcl.util
 
 import android.content.Context
 import com.bnkc.library.prefer.CredentialSharedPrefer

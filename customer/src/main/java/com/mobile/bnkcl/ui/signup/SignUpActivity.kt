@@ -24,7 +24,7 @@ import com.mobile.bnkcl.data.response.auth.AreaObj
 import com.mobile.bnkcl.data.response.code.CodesData
 import com.mobile.bnkcl.databinding.ActivitySignUpBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import java.text.ParseException

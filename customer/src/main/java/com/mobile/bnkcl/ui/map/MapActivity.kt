@@ -23,8 +23,8 @@ import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
-import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.blurview.SupportRenderScriptBlur
+import com.mobile.bnkcl.util.FormatUtil
+import com.mobile.bnkcl.util.blurview.SupportRenderScriptBlur
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject

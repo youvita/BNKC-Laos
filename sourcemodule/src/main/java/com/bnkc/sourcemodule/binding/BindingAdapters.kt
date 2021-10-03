@@ -5,6 +5,7 @@
  */
 package com.bnkc.sourcemodule.binding
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -63,6 +64,16 @@ object BindingAdapters {
     fun setImageSrc(view: ImageView, image: Int?) {
         image?.let {
             view.setImageDrawable(ContextCompat.getDrawable(view.context, it))
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("imageDrawable")
+    fun setImageDrawable(view: ImageView, image: Drawable?) {
+        image?.let {
+            Glide.with(view.context)
+                    .load(image)
+                    .into(view)
         }
     }
 

@@ -13,7 +13,7 @@
             type="com.mobile.bnkcl.ui.main.adapter.FindOfficeRecyclerAdapter" />
         <variable
             name="formatUtil"
-            type="com.mobile.bnkcl.utilities.FormatUtil" />
+            type="com.mobile.bnkcl.util.FormatUtil" />
     </data>
 
     <com.bnkc.sourcemodule.ui.ShadowLayout

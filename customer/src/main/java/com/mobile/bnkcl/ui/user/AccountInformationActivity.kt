@@ -25,9 +25,9 @@ import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.user.edit.EditAccountInfoActivity
-import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.UtilAnimation
-import com.mobile.bnkcl.utilities.UtilsGlide
+import com.mobile.bnkcl.util.FormatUtil
+import com.mobile.bnkcl.util.UtilAnimation
+import com.mobile.bnkcl.util.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

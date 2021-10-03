@@ -1,4 +1,4 @@
-package com.mobile.bnkcl.utilities.blurview
+package com.mobile.bnkcl.util.blurview
 
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt

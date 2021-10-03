@@ -11,14 +11,13 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bnkc.sourcemodule.base.BaseAdapter
-import com.bnkc.sourcemodule.dialog.ConfirmDialog
 import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.FindOfficeHolderBinding
 import com.mobile.bnkcl.ui.map.MapActivity
-import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.UtilsSize
+import com.mobile.bnkcl.util.FormatUtil
+import com.mobile.bnkcl.util.UtilsSize
 import javax.inject.Inject
 
 class FindOfficeRecyclerAdapter(var supportFragmentManager: FragmentManager) : BaseAdapter<FindOfficeHolderBinding, BranchResData, FindOfficeRecyclerAdapter.ViewHolder>() {

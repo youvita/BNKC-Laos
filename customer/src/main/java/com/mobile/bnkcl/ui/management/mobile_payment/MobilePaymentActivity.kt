@@ -11,7 +11,7 @@ import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityMobilePaymentBinding
-import com.mobile.bnkcl.utilities.Utils
+import com.mobile.bnkcl.util.Utils
 
 class MobilePaymentActivity : BaseActivity<ActivityMobilePaymentBinding>(), View.OnClickListener {
 

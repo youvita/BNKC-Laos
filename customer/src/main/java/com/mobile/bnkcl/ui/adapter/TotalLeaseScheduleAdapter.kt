@@ -7,7 +7,7 @@ import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.lease.total_lease_schedules.TotalLeaseScheduleData
 import com.mobile.bnkcl.databinding.ItemTotalLeaseScheduleLayoutBinding
-import com.mobile.bnkcl.utilities.UtilAnimation
+import com.mobile.bnkcl.util.UtilAnimation
 
 class TotalLeaseScheduleAdapter :
     BaseAdapter<ItemTotalLeaseScheduleLayoutBinding, TotalLeaseScheduleData, TotalLeaseScheduleAdapter.ViewHolder>() {

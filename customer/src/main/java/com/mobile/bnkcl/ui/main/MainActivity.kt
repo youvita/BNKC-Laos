@@ -19,7 +19,6 @@ import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
 import com.bumptech.glide.Glide
@@ -44,7 +43,7 @@ import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingActivity
 import com.mobile.bnkcl.ui.signup.TermsAndConditionsActivity
 import com.mobile.bnkcl.ui.user.AccountInformationActivity
-import com.mobile.bnkcl.utilities.UtilsGlide
+import com.mobile.bnkcl.util.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -467,6 +466,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
+        // close drawer when back pressed
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            binding.drawerLayout.closeDrawers()
+            return
+        }
+
         if (viewPager?.currentItem == 0) {
             super.onBackPressed()
         } else {

@@ -9,7 +9,7 @@ import com.bnkc.sourcemodule.base.BaseAdapter
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.response.faq.FaqItemsRes
 import com.mobile.bnkcl.databinding.ItemFaqsBinding
-import com.mobile.bnkcl.utilities.UtilAnimation
+import com.mobile.bnkcl.util.UtilAnimation
 
 class FaqsAdapter : BaseAdapter<ItemFaqsBinding,FaqItemsRes,FaqsAdapter.ViewHolder>(){
     lateinit var context: Context
