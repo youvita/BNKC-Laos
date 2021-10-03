@@ -20,7 +20,7 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.CATEGORY
 import com.bnkc.sourcemodule.app.Constants.CLAIM_ID
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityCSCenterBinding
@@ -247,9 +247,9 @@ class CSCenterActivity : BaseActivity<ActivityCSCenterBinding>() {
     private fun handleError() {
         csCenterViewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""

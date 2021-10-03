@@ -11,13 +11,12 @@ import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mobile.bnkcl.R
@@ -25,7 +24,6 @@ import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.response.user.SettingData
 import com.mobile.bnkcl.databinding.ActivityIntroBinding
 import com.mobile.bnkcl.ui.home.HomeActivity
-import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.ui.setting.SettingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -167,10 +165,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
             })
         } catch (e: Exception) {
             e.printStackTrace()
-            // Catch some error when MG down service
-            val title = getString(R.string.comm_error)
-            val message = getString(R.string.comm_error_during_process)
-//            RxJava.publish(RxEvent.ServerError(ErrorCode.SERVICE_ERROR, title, message))
         }
     }
 
@@ -264,15 +258,10 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
     private fun handleError() {
         introViewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
-                // session expired
-                if (error.code == ErrorCode.UNAUTHORIZED) {
-                    RunTimeDataStore.LoginToken.value = ""
-                    startActivity(Intent(this, PinCodeActivity::class.java))
-                    finish()
-                }
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
+                finish()
             }
         }
     }

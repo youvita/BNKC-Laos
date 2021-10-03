@@ -5,14 +5,13 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityHomeBinding
 import com.mobile.bnkcl.ui.dialog.LanguageDialog
 import com.mobile.bnkcl.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
@@ -44,9 +43,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         }
 
         binding.clLoan.setOnClickListener {
-            systemDialog =
-                SystemDialog.newInstance(R.drawable.ic_badge_error, title, message, button)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
+            alertDialog =
+                AlertDialog.newInstance(R.drawable.ic_badge_error, title, message, button)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
         }
     }
 

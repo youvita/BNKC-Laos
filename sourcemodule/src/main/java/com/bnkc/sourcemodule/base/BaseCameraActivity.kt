@@ -9,12 +9,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.databinding.ViewDataBinding
 import com.bnkc.library.permission.AppPermission
 import com.bnkc.library.permission.AppPermissionsFactory
 import com.bnkc.sourcemodule.R
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import javax.inject.Inject
 
 abstract class BaseCameraActivity<T: ViewDataBinding>: BaseActivity<T>() {
@@ -38,9 +37,9 @@ abstract class BaseCameraActivity<T: ViewDataBinding>: BaseActivity<T>() {
                 this@BaseCameraActivity.onPermissionGranted()
             },
             {
-                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_error, getString(R.string.notice), getString(R.string.permission_denied), getString(R.string.confirm))
-                systemDialog.show(supportFragmentManager, systemDialog.tag)
-                systemDialog.onConfirmClicked {
+                alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_error, getString(R.string.notice), getString(R.string.permission_denied), getString(R.string.confirm))
+                alertDialog.show(supportFragmentManager, alertDialog.tag)
+                alertDialog.onConfirmClicked {
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null)))
                 }
             })

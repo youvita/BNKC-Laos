@@ -29,7 +29,7 @@ import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.bnkc.sourcemodule.dialog.LoadingDialog
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.bnkc.sourcemodule.util.UtilActivity
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -40,7 +40,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     lateinit var sharedPrefer: CredentialSharedPrefer
 
     @Inject
-    lateinit var systemDialog: SystemDialog
+    lateinit var alertDialog: AlertDialog
 
     lateinit var binding: T
 
@@ -104,32 +104,38 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
      * handle get error message
      */
     fun getErrorMessage(errorItem: ErrorItem): ErrorItem {
-        var icon = R.drawable.ic_badge_error
-        var title = errorItem.code
+
+        // ============= default ===============
+        var icon    = R.drawable.ic_badge_error
+        var title   = errorItem.code
         var message = errorItem.message
-        var button = getString(R.string.confirm)
+        var button  = getString(R.string.confirm)
+        // =====================================
 
         when(errorItem.code) {
             ErrorCode.UNKNOWN_ERROR -> {
-                icon = R.drawable.ic_badge_no_internet
-                title = getString(R.string.title_no_network)
-                message = getString(R.string.message_pls_check_network)
-                button = getString(R.string.try_again)
+                icon    = R.drawable.ic_badge_no_internet
+                title   = getString(R.string.no_network_title)
+                message = getString(R.string.no_network_message)
+                button  = getString(R.string.try_again)
             }
             ErrorCode.SERVICE_ERROR -> {
-
+                icon    = R.drawable.ic_badge_error
+                title   = getString(R.string.error)
+                message = getString(R.string.error_during_process)
+                button  = getString(R.string.confirm)
             }
             ErrorCode.USER_EXISTS -> {
-                icon = R.drawable.ic_badge_signed_up
-                title = getString(R.string.already_signed_up)
+                icon    = R.drawable.ic_badge_signed_up
+                title   = getString(R.string.already_signed_up)
                 message = getString(R.string.already_signed_up_msg)
-                button = getString(R.string.login)
+                button  = getString(R.string.login)
             }
             ErrorCode.USER_NOT_FOUND -> {
-                icon = R.drawable.ic_badge_signed_up
-                title = getString(R.string.not_signed_up_yet)
+                icon    = R.drawable.ic_badge_signed_up
+                title   = getString(R.string.not_signed_up_yet)
                 message = getString(R.string.not_yet_signed_up_msg)
-                button = getString(R.string.sign_up)
+                button  = getString(R.string.sign_up)
             }
         }
         dismissLoading()

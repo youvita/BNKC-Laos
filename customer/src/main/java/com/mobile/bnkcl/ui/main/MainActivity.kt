@@ -19,6 +19,7 @@ import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
+import com.bnkc.sourcemodule.data.error.ErrorItem
 import com.bnkc.sourcemodule.databinding.TabItemViewBinding
 import com.bnkc.sourcemodule.ui.TabViewPagerAdapter
 import com.bumptech.glide.Glide

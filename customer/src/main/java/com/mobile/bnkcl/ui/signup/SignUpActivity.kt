@@ -14,7 +14,7 @@ import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.DatePickerDialog
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.area.AddressData
 import com.mobile.bnkcl.data.request.auth.IdNumReq
@@ -1263,9 +1263,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     null
                 )
 
-                systemDialog = SystemDialog.newInstance(R.drawable.ic_badge_inform, getString(R.string.dlg_21), getString(R.string.dlg_20), getString(R.string.dlg_06))
-                systemDialog.show(supportFragmentManager, systemDialog.tag)
-                systemDialog.onConfirmClicked {
+                alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_inform, getString(R.string.dlg_21), getString(R.string.dlg_20), getString(R.string.dlg_06))
+                alertDialog.show(supportFragmentManager, alertDialog.tag)
+                alertDialog.onConfirmClicked {
 
                 }
 
@@ -1378,9 +1378,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
     private fun handleError() {
         viewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""
@@ -1391,9 +1391,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
         }
         addressInfoViewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""

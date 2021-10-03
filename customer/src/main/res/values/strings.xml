@@ -1,5 +1,5 @@
 <resources>
-
+    <!-- map -->
     <string name="map_api_key" translatable="false">AIzaSyB4_a8kx86WFi9NFatDeNeDwXVvm-Km7N8</string>
 
     <!-- register success -->
@@ -63,8 +63,6 @@
     <string name="comm_confirm">Confirm</string>
     <string name="comm_close">CLOSE</string>
     <string name="comm_reset_now">RESET NOW</string>
-    <string name="comm_error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
-    <string name="comm_error">Error</string>
     <string name="comm_submit">Submit</string>
 
     <!-- MainActivity -->
@@ -371,7 +369,7 @@
     <string name="tab_service">Service</string>
     <string name="tab_my_page">My Page</string>
     <string name="tab_find_office">Find Office</string>
-    <string name="tab_menu">Menu</string>
+    <string name="menu">Menu</string>
     <string name="term_and_condition">I agree to BNK Capital Lao Leasing\'s Terms and Conditions</string>
 
     <string name="result_manage_001">Total</string>

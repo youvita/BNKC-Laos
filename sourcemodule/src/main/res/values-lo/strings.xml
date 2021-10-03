@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nav Drawer -->
+    <!-- nav drawer -->
     <string name="nav_content_001">Customer ID</string>
     <string name="nav_content_002">NOTICE</string>
     <string name="nav_content_003">CS/CENTER</string>
@@ -10,25 +10,23 @@
     <string name="nav_content_007">Settings</string>
     <string name="nav_content_008">ភាសា</string>
 
-    <string name="confirm">Confirm</string>
-    <string name="try_again">Try Again</string>
-
-    <!-- Menu bottom navigation view  -->
+    <!-- menu bottom navigation view  -->
     <string name="menu_nav_notice">Notice</string>
     <string name="menu_find_customer">Find Customer</string>
     <string name="menu_check_list">Check List</string>
+    <string name="menu">ລາຍການ</string>
 
-    <string name="tab_menu">ລາຍການ</string>
-
-    <!-- Currency -->
+    <!-- currency -->
     <string name="currency_usd"> ໂດລາ ສະຫະລັດ</string>
     <string name="currency_kip">ກິບ</string>
 
-    <string name="title_no_network">No network connection</string>
-    <string name="message_pls_check_network">Please check your internet connection and try again.</string>
-    <string name="title_timeout">Timeout</string>
-    <string name="message_timeout">Connection timeout</string>
+    <!-- error -->
+    <string name="no_network_title">No network connection</string>
+    <string name="no_network_message">Please check your internet connection and try again.</string>
+    <string name="error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
+    <string name="error">Error</string>
 
+    <!-- permission -->
     <string name="notice">Notice</string>
     <string name="permission_denied">Permission denied, please update in setting.</string>
 
@@ -45,5 +43,7 @@
     <!-- general -->
     <string name="login">Log In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="confirm">Confirm</string>
+    <string name="try_again">Try Again</string>
 
 </resources>

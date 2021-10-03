@@ -15,12 +15,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
-import com.bnkc.library.rxjava.RxEvent
-import com.bnkc.library.rxjava.RxJava
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.databinding.ActivityFullPaymentBinding
 import com.mobile.bnkcl.ui.management.mobile_payment.MobilePaymentActivity
@@ -30,7 +28,6 @@ import com.mobile.bnkcl.utilities.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnClickListener {
@@ -368,9 +365,9 @@ class FullPaymentActivity : BaseActivity<ActivityFullPaymentBinding>(), View.OnC
     private fun handleError() {
         viewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""

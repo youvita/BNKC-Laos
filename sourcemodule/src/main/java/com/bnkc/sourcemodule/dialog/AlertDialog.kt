@@ -12,7 +12,7 @@ import com.bnkc.sourcemodule.R
 import com.bnkc.sourcemodule.base.BaseDialogFragment
 import com.bnkc.sourcemodule.databinding.DialogSystemBinding
 
-class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
+class AlertDialog: BaseDialogFragment<DialogSystemBinding>() {
 
     private var confirmClickListener: (() -> Unit)? = null
 
@@ -23,8 +23,8 @@ class SystemDialog: BaseDialogFragment<DialogSystemBinding>() {
         private const val BUTTON  = "button"
 
         @Synchronized
-        fun newInstance(icon: Int, title: String, message: String, button: String): SystemDialog {
-            return SystemDialog().apply {
+        fun newInstance(icon: Int, title: String, message: String, button: String): AlertDialog {
+            return AlertDialog().apply {
                 arguments = Bundle().apply {
                     putInt(ICON, icon)
                     putString(TITLE, title)

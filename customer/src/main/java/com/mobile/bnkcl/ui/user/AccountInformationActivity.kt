@@ -13,7 +13,7 @@ import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_LEFT
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.DrawableImageViewTarget
@@ -29,7 +29,6 @@ import com.mobile.bnkcl.utilities.FormatUtil
 import com.mobile.bnkcl.utilities.UtilAnimation
 import com.mobile.bnkcl.utilities.UtilsGlide
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AccountInformationActivity : BaseActivity<ActivityAccountInformationBinding>(),
@@ -245,14 +244,14 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
     private fun handleError() {
         viewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(
+            alertDialog = AlertDialog.newInstance(
                 error.icon!!,
                 error.code!!,
                 error.message!!,
                 error.button!!
             )
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""

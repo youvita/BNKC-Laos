@@ -4,14 +4,13 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.bnkc.sourcemodule.dialog.TwoButtonDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,7 +24,6 @@ import com.mobile.bnkcl.data.findoffice.BranchResData
 import com.mobile.bnkcl.databinding.ActivityMapBinding
 import com.mobile.bnkcl.ui.pinview.PinCodeActivity
 import com.mobile.bnkcl.utilities.FormatUtil
-import com.mobile.bnkcl.utilities.blurview.BlurView
 import com.mobile.bnkcl.utilities.blurview.SupportRenderScriptBlur
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.Disposable
@@ -208,9 +206,9 @@ class MapActivity : BaseActivity<ActivityMapBinding>() , OnMapReadyCallback, OnC
     private fun handleError() {
         mapViewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""

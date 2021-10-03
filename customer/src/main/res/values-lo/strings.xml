@@ -62,8 +62,6 @@
     <!-- Recommend -->
     <string name="comm_confirm">Confirm</string>
     <string name="comm_close">ປິດ</string>
-    <string name="comm_error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
-    <string name="comm_error">Error</string>
     <string name="comm_submit">ຍືນຍັນ</string>
 
     <!-- Main - My Loan Request Menu -->
@@ -370,7 +368,7 @@
     <string name="tab_service">ບໍລິການ</string>
     <string name="tab_my_page">ໜ້າຕ່າງຂອງຂ້ອຍ</string>
     <string name="tab_find_office">ຄົ້ນຫາສຳນັກງານ</string>
-    <string name="tab_menu">ລາຍການ</string>
+    <string name="menu">ລາຍການ</string>
     <string name="term_and_condition">ຂ້ອຍເຫັນດີກັບເງື່ອນໄຂ ແລະ ຂໍ້ກຳນົດຂອງ ບໍລິສັດ BNK Capital Lao leasing</string>
 
 

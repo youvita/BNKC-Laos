@@ -14,7 +14,7 @@ import com.bnkc.sourcemodule.app.Constants.CUST_NO
 import com.bnkc.sourcemodule.app.Constants.USER_ID
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.com.view.pincode.NOT_MATCH_PASSWORD
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
@@ -26,7 +26,6 @@ import com.mobile.bnkcl.ui.dialog.LogOutDialog
 import com.mobile.bnkcl.ui.home.HomeActivity
 import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.otp.OtpActivity
-import com.mobile.bnkcl.ui.signup.SignUpActivity
 import com.mobile.bnkcl.ui.success.ResultActivity
 import com.mobile.bnkcl.utilities.SecureUtils
 import com.mobile.bnkcl.utilities.UtilActivity
@@ -378,7 +377,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                 ErrorCode.INCORRECT_PASSWORD -> {
                     confirmDialog = ConfirmDialog.newInstance(
                         R.drawable.ic_badge_error,
-                        getString(R.string.comm_error),
+                        getString(R.string.error),
                         it.message!!,
                         getString(R.string.comm_confirm)
                     )
@@ -428,9 +427,9 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
                     }
                 } else -> {
                 val error = getErrorMessage(it)
-                systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-                systemDialog.show(supportFragmentManager, systemDialog.tag)
-                systemDialog.onConfirmClicked {
+                alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+                alertDialog.show(supportFragmentManager, alertDialog.tag)
+                alertDialog.onConfirmClicked {
                     when (error.code) {
                         ErrorCode.UNAUTHORIZED -> { // session expired
                             if (error.code == ErrorCode.UNAUTHORIZED) {

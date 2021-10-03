@@ -21,7 +21,7 @@ object SourceModule {
 
     @Singleton
     @Provides
-    fun provideSystemDialog() = SystemDialog()
+    fun provideAlertDialog() = AlertDialog()
 
     @Singleton
     @Provides

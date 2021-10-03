@@ -12,7 +12,7 @@ import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.ANIMATE_NORMAL
 import com.bnkc.sourcemodule.base.BaseActivity
-import com.bnkc.sourcemodule.dialog.SystemDialog
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.auth.DeviceInfo
 import com.mobile.bnkcl.data.response.user.SettingData
@@ -161,9 +161,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private fun handleError() {
         settingViewModel.handleError.observe(this) {
             val error = getErrorMessage(it)
-            systemDialog = SystemDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
-            systemDialog.show(supportFragmentManager, systemDialog.tag)
-            systemDialog.onConfirmClicked {
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
                 // session expired
                 if (error.code == ErrorCode.UNAUTHORIZED) {
                     RunTimeDataStore.LoginToken.value = ""

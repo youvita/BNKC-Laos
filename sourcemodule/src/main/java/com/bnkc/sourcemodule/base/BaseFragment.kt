@@ -62,7 +62,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     /**
      * handle to dismiss loading
      */
-    private fun dismissLoading() {
+    fun dismissLoading() {
         if (loadingDialog != null) {
             loadingDialog?.dismiss()
             loadingDialog = null

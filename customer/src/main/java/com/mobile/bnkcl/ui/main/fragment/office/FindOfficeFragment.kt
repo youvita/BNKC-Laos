@@ -9,12 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bnkc.sourcemodule.base.BaseFragment
+import com.bnkc.sourcemodule.dialog.AlertDialog
 import com.bnkc.sourcemodule.dialog.ListChoiceDialog
+import com.google.android.gms.common.internal.ConnectionErrorMessages.getErrorMessage
 import com.mobile.bnkcl.R
 import com.mobile.bnkcl.data.request.findoffice.BranchRequest
 import com.mobile.bnkcl.data.response.office.AreaDataResponse
 import com.mobile.bnkcl.databinding.FragmentFindOfficeBinding
 import com.mobile.bnkcl.ui.alarm.AlarmActivity
+import com.mobile.bnkcl.ui.main.MainActivity
 import com.mobile.bnkcl.ui.main.adapter.FindOfficeRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -87,6 +90,7 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
         viewModel.reqAreasList()
         getAreas()
         getBranches()
+        handleError()
     }
 
     private fun getAreas(){
@@ -112,5 +116,18 @@ class FindOfficeFragment : BaseFragment<FragmentFindOfficeBinding>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_find_office
+    }
+
+    /**
+     * catch error
+     */
+    private fun handleError() {
+        var alertDialog: AlertDialog
+        viewModel.handleError.observe(activity as MainActivity) {
+            val error = (activity as MainActivity).getErrorMessage(it)
+            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog.show((activity as MainActivity).supportFragmentManager, alertDialog.tag)
+            dismissLoading()
+        }
     }
 }
