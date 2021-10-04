@@ -405,7 +405,7 @@
     <string name="new_pin">New PIN</string>
     <string name="pin_registration">PIN Registration</string>
     <string name="input_name_of_model">Input name of model</string>
-    <string name="etc_no_applicable_type">ETC(No applicable type)</string>
+    <string name="etc_no_applicable_type">ETC(No Applicable Type)</string>
     <string name="input_name_of_brand">Input name of brand</string>
     <string name="name_of_model">Name of Model</string>
     <string name="name_of_type">Name of Type</string>
@@ -414,7 +414,7 @@
     <string name="product_type">Product Type</string>
     <string name="commodity_information">Commodity Information</string>
     <string name="input_name_of_type">Input Name of Type</string>
-    <string name="input_name_of_type_suv_sedan_van">Input name of type(SUV,SEDAN, VAN...)</string>
+    <string name="input_name_of_type_suv_sedan_van">Input name of type(SUV,SEDAN, VAN…)</string>
     <string name="product_price">Product Price</string>
     <string name="kip">Kip</string>
     <string name="lease_information">Lease Information</string>

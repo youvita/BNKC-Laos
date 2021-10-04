@@ -62,8 +62,6 @@
                 android:id="@+id/tv_message"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/padding_20dp"
-                android:paddingEnd="@dimen/padding_20dp"
                 android:gravity="center"
                 android:text="@{errorMessage}"
                 app:layout_constraintBottom_toTopOf="@+id/confirm"
