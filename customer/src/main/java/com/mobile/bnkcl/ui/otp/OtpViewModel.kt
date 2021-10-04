@@ -75,7 +75,7 @@ class OtpViewModel @Inject constructor(private val otpRepo: OTPRepo, private val
         Log.d(">>>>>>", "setUpTextView $uiMode")
         return when(uiMode){
             0->{
-                context.getString(R.string.nav_login)
+                context.getString(R.string.continues)
             }
             else -> {
                 context.getString(R.string.sign_up_continue)
