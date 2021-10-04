@@ -23,8 +23,10 @@
     <!-- error -->
     <string name="no_network_title">No Internet Connection</string>
     <string name="no_network_message">Please check your internet connection and try again.</string>
-    <string name="service_during_process">We are currently undergoing\n maintenance. Will be right back.</string>
-    <string name="service_unavailable">Server is\nBeing Maintenance</string>
+    <string name="server_currently_under_maintenance">We are currently undergoing\n maintenance. Will be right back.</string>
+    <string name="server_maintenance">Server is\nBeing Maintenance</string>
+    <string name="service_during_process">The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</string>
+    <string name="service_unavailable">Service Unavailable</string>
 
     <!-- permission -->
     <string name="notice">Notice</string>

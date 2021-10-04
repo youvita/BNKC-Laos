@@ -248,5 +248,13 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
                 finish()
             }
         }
+
+        settingViewModel.handleError.observe(this) {
+            alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_error, getString(R.string.service_unavailable), getString(R.string.service_during_process), getString(R.string.close))
+            alertDialog.show(supportFragmentManager, alertDialog.tag)
+            alertDialog.onConfirmClicked {
+                finish()
+            }
+        }
     }
 }
