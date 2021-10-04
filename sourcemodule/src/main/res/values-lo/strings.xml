@@ -23,8 +23,8 @@
     <!-- error -->
     <string name="no_network_title">No network connection</string>
     <string name="no_network_message">Please check your internet connection and try again.</string>
-    <string name="error_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
-    <string name="error">Error</string>
+    <string name="service_during_process">We are currently undergoing\n maintenance. Will be right back.</string>
+    <string name="service_unavailable">Server is\nBeing Maintenance</string>
 
     <!-- permission -->
     <string name="notice">Notice</string>
@@ -45,5 +45,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="confirm">Confirm</string>
     <string name="try_again">Try Again</string>
+    <string name="error">Error</string>
+    <string name="close">Close</string>
 
 </resources>
