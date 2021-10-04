@@ -154,13 +154,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     private fun setUpLogOutBtn() {
 
         binding.navMenu.btnSignUp.visibility = View.GONE
-        binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
-        binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(
-            R.drawable.ic_logout_ico,
-            0,
-            0,
-            0
-        )
+        binding.navMenu.btnLogin.visibility = View.GONE
+//        binding.navMenu.btnLogin.text = getString(R.string.nav_logout)
+//        binding.navMenu.btnLogin.setCompoundDrawablesWithIntrinsicBounds(
+//            R.drawable.ic_logout_ico,
+//            0,
+//            0,
+//            0
+//        )
         binding.navMenu.vLine.visibility = View.GONE
 
     }
