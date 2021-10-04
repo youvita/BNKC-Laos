@@ -120,10 +120,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 button  = getString(R.string.try_again)
             }
             ErrorCode.SERVICE_ERROR -> {
-                icon    = R.drawable.ic_badge_server_down
-                title   = getString(R.string.service_unavailable)
+                icon    = R.drawable.ic_badge_error
+                title   = getString(R.string.error)
                 message = getString(R.string.service_during_process)
-                button  = getString(R.string.close)
+                button  = getString(R.string.confirm)
             }
             ErrorCode.USER_EXISTS -> {
                 icon    = R.drawable.ic_badge_signed_up

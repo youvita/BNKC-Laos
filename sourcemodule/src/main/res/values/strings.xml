@@ -25,8 +25,7 @@
     <string name="no_network_message">Please check your internet connection and try again.</string>
     <string name="server_currently_under_maintenance">We are currently undergoing\n maintenance. Will be right back.</string>
     <string name="server_maintenance">Server is\nBeing Maintenance</string>
-    <string name="service_during_process">The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</string>
-    <string name="service_unavailable">Service Unavailable</string>
+    <string name="service_during_process">A temporary error has occurred due to system check. Please try again another time.</string>
 
     <!-- permission -->
     <string name="notice">Notice</string>

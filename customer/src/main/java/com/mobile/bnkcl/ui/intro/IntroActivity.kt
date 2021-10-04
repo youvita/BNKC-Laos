@@ -241,8 +241,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      */
     private fun handleError() {
         introViewModel.handleError.observe(this) {
-            val error = getErrorMessage(it)
-            alertDialog = AlertDialog.newInstance(error.icon!!, error.code!!, error.message!!, error.button!!)
+            alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_server_down, getString(R.string.server_maintenance), getString(R.string.server_currently_under_maintenance), getString(R.string.close))
             alertDialog.show(supportFragmentManager, alertDialog.tag)
             alertDialog.onConfirmClicked {
                 finish()
@@ -250,7 +249,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         }
 
         settingViewModel.handleError.observe(this) {
-            alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_error, getString(R.string.service_unavailable), getString(R.string.service_during_process), getString(R.string.close))
+            alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_server_down, getString(R.string.server_maintenance), getString(R.string.server_currently_under_maintenance), getString(R.string.close))
             alertDialog.show(supportFragmentManager, alertDialog.tag)
             alertDialog.onConfirmClicked {
                 finish()
