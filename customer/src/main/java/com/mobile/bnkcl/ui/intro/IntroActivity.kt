@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.library.util.LocaleHelper
 import com.bnkc.sourcemodule.app.Constants
@@ -241,7 +242,21 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
      */
     private fun handleError() {
         introViewModel.handleError.observe(this) {
-            alertDialog = AlertDialog.newInstance(R.drawable.ic_badge_server_down, getString(R.string.server_maintenance), getString(R.string.server_currently_under_maintenance), getString(R.string.close))
+            val error   = getErrorMessage(it)
+            var icon    = error.icon
+            var code    = error.code
+            var message = error.message
+            var button  = error.button
+
+            // MG down service
+            if (it.code != ErrorCode.UNKNOWN_ERROR) {
+                icon    = R.drawable.ic_badge_server_down
+                code    = getString(R.string.server_maintenance)
+                message = getString(R.string.server_currently_under_maintenance)
+                button  = getString(R.string.close)
+            }
+
+            alertDialog = AlertDialog.newInstance(icon!!, code!!, message!!, button!!)
             alertDialog.show(supportFragmentManager, alertDialog.tag)
             alertDialog.onConfirmClicked {
                 finish()
