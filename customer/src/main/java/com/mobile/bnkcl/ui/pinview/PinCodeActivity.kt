@@ -182,6 +182,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             }
             intent.putExtra("result", it.username != null)
             startActivity(intent)
+            finish()
         })
         viewModel.logoutLiveData.observe(this, {
             RunTimeDataStore.LoginToken.value = ""
@@ -190,6 +191,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            finish()
         })
         viewModel.preResetLiveData.observe(this, {
             viewModel.resetPasswordRequest.session_id = it.session_id
@@ -204,6 +206,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
             intent.putExtra("from", Constants.RESET_PIN)
             intent.putExtra("result", true)
             startActivity(intent)
+            finish()
         })
 
         viewModel.forgetPinLiveData.observe(this, {
