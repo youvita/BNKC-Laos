@@ -84,6 +84,16 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
             binding.profile = it
             profileData = it
 
+            for (i in 0 until jobTypeList!!.size) {
+                if (jobTypeList!![i].code.equals(it.jobType)) {
+                    if (jobTypeList!![i].code.isNullOrEmpty()) {
+                        binding.tvOccupation.text = resources.getString(R.string.not_available)
+                    } else {
+                        binding.tvOccupation.text = jobTypeList!![i].title
+                    }
+                }
+            }
+
             binding.tvPhoneNumber.text = FormatUtil.getTel(it.phoneNumber!!)
             setAddress(profileData!!)
         }
@@ -151,7 +161,7 @@ class AccountInformationActivity : BaseActivity<ActivityAccountInformationBindin
                 profileData.address!!.village?.alias1!!
             if (state.isEmpty()) binding.tvAddress.text =
                 getString(R.string.not_available) else {
-                val address = "$moreInfo, $village, $district, $state"
+                val address = "${moreInfo.trim()}, ${village.trim()}, ${district.trim()}, ${state.trim()}"
                 binding.tvAddress.text = address
             }
         }
