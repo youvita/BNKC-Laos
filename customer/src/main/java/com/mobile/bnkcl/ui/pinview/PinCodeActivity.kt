@@ -11,6 +11,7 @@ import com.bnkc.library.data.type.ErrorCode
 import com.bnkc.library.data.type.RunTimeDataStore
 import com.bnkc.sourcemodule.app.Constants
 import com.bnkc.sourcemodule.app.Constants.CUST_NO
+import com.bnkc.sourcemodule.app.Constants.IMAGE_BITMAP
 import com.bnkc.sourcemodule.app.Constants.USER_ID
 import com.bnkc.sourcemodule.base.BaseActivity
 import com.bnkc.sourcemodule.dialog.ConfirmDialog
@@ -187,6 +188,10 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding>() {
         viewModel.logoutLiveData.observe(this, {
             RunTimeDataStore.LoginToken.value = ""
             sharedPrefer.remove(USER_ID)
+            sharedPrefer.remove(CUST_NO)
+            sharedPrefer.remove(IMAGE_BITMAP)
+            sharedPrefer.remove("name")
+            AppLogin.PIN.code = "N"
             forceActionClick = false
             val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
