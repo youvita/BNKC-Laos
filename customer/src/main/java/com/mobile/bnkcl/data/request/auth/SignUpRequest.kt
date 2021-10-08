@@ -34,7 +34,7 @@ data class SignUpRequest(
         var address: AddressReqObj? = null,
 
         @SerializedName("etc_detailed_address")
-        var etc_detailed_address: String? = null,
+        var etc_detailed_address: String = "",
 
         @SerializedName("bank_name")
         var bank_name: String? = null,

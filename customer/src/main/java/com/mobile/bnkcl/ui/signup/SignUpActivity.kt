@@ -218,11 +218,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             cap,
                             district,
                             village,
-                            detail!!,
-                            binding.lltAdditional.edtBankName.text.toString(),
-                            binding.lltAdditional.edtAccountNumber.text.toString(),
-                            jobType!!,
-                            binding.edtRecommend.text.toString(),
+                            detail!!
+//                            binding.lltAdditional.edtBankName.text.toString(),
+//                            binding.lltAdditional.edtAccountNumber.text.toString(),
+//                            jobType!!,
+//                            binding.edtRecommend.text.toString(),
                         )
 
                 }
@@ -316,11 +316,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         capital,
                         dis,
                         village,
-                        detail,
-                        binding.lltAdditional.edtBankName.text.toString(),
-                        binding.lltAdditional.edtAccountNumber.text.toString(),
-                        jobType!!,
-                        binding.edtRecommend.text.toString(),
+                        detail
+//                        binding.lltAdditional.edtBankName.text.toString(),
+//                        binding.lltAdditional.edtAccountNumber.text.toString(),
+//                        jobType!!,
+//                        binding.edtRecommend.text.toString(),
                     )
                 }
 
@@ -399,11 +399,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                         capital,
                         district,
                         vil,
-                        detail!!,
-                        binding.lltAdditional.edtBankName.text.toString(),
-                        binding.lltAdditional.edtAccountNumber.text.toString(),
-                        jobType!!,
-                        binding.edtRecommend.text.toString(),
+                        detail!!
+//                        binding.lltAdditional.edtBankName.text.toString(),
+//                        binding.lltAdditional.edtAccountNumber.text.toString(),
+//                        jobType!!,
+//                        binding.edtRecommend.text.toString(),
                     )
                 }
 
@@ -454,11 +454,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                            binding.tvDob.text.toString(),
                            binding.edtIdNum.text.toString(),
                            gender!!,
-                           address,
-                           binding.lltAdditional.edtBankName.text.toString(),
-                           binding.lltAdditional.edtAccountNumber.text.toString(),
-                           jobType!!,
-                           binding.edtRecommend.text.toString(),
+                           address
+//                           binding.lltAdditional.edtBankName.text.toString(),
+//                           binding.lltAdditional.edtAccountNumber.text.toString(),
+//                           jobType!!,
+//                           binding.edtRecommend.text.toString(),
                        )
                    }else {
                        val capital = if (viewModel.addressReqObj?.state != null){
@@ -489,11 +489,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                            capital,
                            district,
                            village,
-                           detail!!,
-                           binding.lltAdditional.edtBankName.text.toString(),
-                           binding.lltAdditional.edtAccountNumber.text.toString(),
-                           jobType!!,
-                           binding.edtRecommend.text.toString(),
+                           detail!!
+//                           binding.lltAdditional.edtBankName.text.toString(),
+//                           binding.lltAdditional.edtAccountNumber.text.toString(),
+//                           jobType!!,
+//                           binding.edtRecommend.text.toString(),
                        )
                    }
                }
@@ -544,11 +544,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             binding.tvDob.text.toString(),
                             binding.edtIdNum.text.toString(),
                             gender!!,
-                            address,
-                            binding.lltAdditional.edtBankName.text.toString(),
-                            binding.lltAdditional.edtAccountNumber.text.toString(),
-                            jobType!!,
-                            binding.edtRecommend.text.toString(),
+                            address
+//                            binding.lltAdditional.edtBankName.text.toString(),
+//                            binding.lltAdditional.edtAccountNumber.text.toString(),
+//                            jobType!!,
+//                            binding.edtRecommend.text.toString(),
                         )
                     }else {
                         val capital = if (viewModel.addressReqObj?.state != null){
@@ -579,11 +579,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                             capital,
                             district,
                             village,
-                            detail!!,
-                            binding.lltAdditional.edtBankName.text.toString(),
-                            binding.lltAdditional.edtAccountNumber.text.toString(),
-                            jobType!!,
-                            binding.edtRecommend.text.toString(),
+                            detail!!
+//                            binding.lltAdditional.edtBankName.text.toString(),
+//                            binding.lltAdditional.edtAccountNumber.text.toString(),
+//                            jobType!!,
+//                            binding.edtRecommend.text.toString(),
                         )
                     }
                }
@@ -773,11 +773,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    address,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    address
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }else {
                 val capital = if (viewModel.addressReqObj?.state != null){
@@ -808,11 +808,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     capital,
                     district,
                     village,
-                    detail,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    detail
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }
         }
@@ -848,11 +848,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    address,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    address
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }else {
                 val capital = if (viewModel.addressReqObj?.state != null){
@@ -882,11 +882,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     gender!!,
                     capital,
                     district,
-                    village,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    village
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }
         }
@@ -942,11 +942,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 capital,
                 district,
                 village,
-                detail.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
+                detail.toString()
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
             )
         }
 
@@ -977,11 +977,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 binding.tvDob.text.toString(),
                 binding.edtIdNum.text.toString(),
                 gender!!,
-                s.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType!!,
-                binding.edtRecommend.text.toString(),
+                s.toString()
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType!!,
+//                binding.edtRecommend.text.toString(),
             )
         }
 
@@ -1015,11 +1015,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    address!!,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    address!!
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }else {
                 val capital = if (viewModel.addressReqObj?.state != null){
@@ -1050,11 +1050,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     capital,
                     district,
                     village,
-                    detail.toString(),
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    detail.toString()
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }
         }
@@ -1089,11 +1089,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    address!!,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    address!!
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }else {
                 val capital = if (viewModel.addressReqObj?.state != null){
@@ -1124,11 +1124,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     capital,
                     district,
                     village,
-                    detail.toString(),
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    detail.toString()
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }
         }
@@ -1163,11 +1163,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     binding.tvDob.text.toString(),
                     binding.edtIdNum.text.toString(),
                     gender!!,
-                    address!!,
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    address!!
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }else {
                 val capital = if (viewModel.addressReqObj?.state != null){
@@ -1198,11 +1198,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                     capital,
                     district,
                     village,
-                    detail.toString(),
-                    binding.lltAdditional.edtBankName.text.toString(),
-                    binding.lltAdditional.edtAccountNumber.text.toString(),
-                    jobType!!,
-                    binding.edtRecommend.text.toString(),
+                    detail.toString()
+//                    binding.lltAdditional.edtBankName.text.toString(),
+//                    binding.lltAdditional.edtAccountNumber.text.toString(),
+//                    jobType!!,
+//                    binding.edtRecommend.text.toString(),
                 )
             }
 
@@ -1296,11 +1296,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 binding.tvDob.text.toString(),
                 binding.edtIdNum.text.toString(),
                 gender,
-                address!!,
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType,
-                binding.edtRecommend.text.toString(),
+                address!!
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType,
+//                binding.edtRecommend.text.toString(),
             )
 
         }else{
@@ -1343,11 +1343,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() , View.OnClickListe
                 capital,
                 district,
                 village,
-                detail.toString(),
-                binding.lltAdditional.edtBankName.text.toString(),
-                binding.lltAdditional.edtAccountNumber.text.toString(),
-                jobType,
-                binding.edtRecommend.text.toString(),
+                detail.toString()
+//                binding.lltAdditional.edtBankName.text.toString(),
+//                binding.lltAdditional.edtAccountNumber.text.toString(),
+//                jobType,
+//                binding.edtRecommend.text.toString(),
             )
 
         }
