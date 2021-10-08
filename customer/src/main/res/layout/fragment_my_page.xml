@@ -168,14 +168,6 @@
                         app:layoutManager="com.bnkc.library.custom.cardview.CardModeLayoutManager"
                         tools:listitem="@layout/item_lease_layout" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_empty_lease_indicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:layout_height="@dimen/height_21dp"
-                        android:gravity="center"
-                        android:orientation="horizontal" />
-
                     <!-- Lease Item Indicator -->
                     <LinearLayout
                         android:id="@+id/ll_lease_indicator"

@@ -142,7 +142,7 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
         setUpLeaseAdapter()
 
         addIndicator(
-            pageBinding!!.llEmptyLeaseIndicator,
+            pageBinding!!.llLeaseIndicator,
             1,
             0
         )
@@ -320,11 +320,6 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         pageBinding!!.tvLeaseInUseCnt.isEnabled = count != 0
         pageBinding!!.tvLeaseInUseCnt.text = java.lang.String.valueOf(count)
-
-        pageBinding!!.llEmptyLeaseIndicator.visibility =
-            if (leaseAdapter.itemCount == 1) View.VISIBLE else View.GONE
-        pageBinding!!.llLeaseIndicator.visibility =
-            if (leaseAdapter.itemCount != 1) View.VISIBLE else View.GONE
     }
 
     private fun setUpBanner() {
