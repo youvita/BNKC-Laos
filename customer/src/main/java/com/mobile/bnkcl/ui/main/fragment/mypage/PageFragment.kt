@@ -323,6 +323,8 @@ class PageFragment : BaseFragment<FragmentMyPageBinding>(),
 
         pageBinding!!.llEmptyLeaseIndicator.visibility =
             if (leaseAdapter.itemCount == 1) View.VISIBLE else View.GONE
+        pageBinding!!.llLeaseIndicator.visibility =
+            if (leaseAdapter.itemCount != 1) View.VISIBLE else View.GONE
     }
 
     private fun setUpBanner() {
